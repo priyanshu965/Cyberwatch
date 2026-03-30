@@ -4,10 +4,11 @@
  * No external dependencies — pure vanilla JavaScript.
  *
  * Loading strategy (in order):
- *  1. Try fetch(`data/intel.json?v=${Date.now()}`)  — works on GitHub Pages & local server
+ *  1. Try fetch('data/intel.json')  — works on GitHub Pages & local server
  *  2. Fall back to window.INTEL_DATA — embedded in index.html, works when
  *     opening the file directly (file:// protocol, no server needed)
  */
+
 
 // ─── State ───────────────────────────────────────────────────────────────────
 let allItems = [];        // All intel items loaded from JSON
@@ -20,10 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initFilters();
   initSearch();
   loadIntelData();
+  document.getElementById("refresh-btn").onclick = () => loadIntelData(true);
 });
 
 // ─── Load Data ────────────────────────────────────────────────────────────────
-async function loadIntelData() {
+async function loadIntelData(force = false) {
   try {
     let data;
 
@@ -31,7 +33,11 @@ async function loadIntelData() {
     // This is the primary path. It works on GitHub Pages and when you run
     // `python -m http.server 8080` locally.
     if (window.location.protocol !== 'file:') {
-      const response = await fetch(`data/intel.json?v=${Date.now()}`);
+      const url = force
+         ? `data/intel.json?v=${Date.now()}`
+         : 'data/intel.json';
+
+      const response = await fetch(url);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       data = await response.json();
     } else {
@@ -58,7 +64,18 @@ async function loadIntelData() {
     if (data.last_updated) {
       const date = new Date(data.last_updated);
       document.getElementById('last-updated').textContent =
-        `Last updated: ${date.toUTCString()}`;
+        `Last updated: ${const date = new Date(data.last_updated);
+
+const utc = date.toUTCString();
+
+const ist = date.toLocaleString('en-IN', {
+  timeZone: 'Asia/Kolkata',
+  dateStyle: 'medium',
+  timeStyle: 'medium'
+});
+
+document.getElementById('last-updated').textContent =
+  `Last updated: ${utc} | IST: ${ist}`;}`;
     }
 
     // Render everything
