@@ -53,25 +53,23 @@ async function loadIntelData() {
 
     // Store all items
     allItems = data.items || [];
-	const summary = generateSummary(allItems);
-	document.getElementById("feed-count").textContent = summary;
+
     // Update the "last updated" header
     if (data.last_updated) {
       const date = new Date(data.last_updated);
       const utc = date.toUTCString();
-
-	const ist = date.toLocaleString('en-IN', {
-  	timeZone: 'Asia/Kolkata',
-  	dateStyle: 'medium',
-  	timeStyle: 'medium'
-		});
-
-document.getElementById('last-updated').textContent =
-  `Last updated: ${utc} | IST: ${ist}`;
+      const ist = date.toLocaleString('en-IN', {
+        timeZone: 'Asia/Kolkata',
+        dateStyle: 'medium',
+        timeStyle: 'medium'
+      });
+      document.getElementById('last-updated').textContent =
+        `Last updated: ${utc} | IST: ${ist}`;
     }
 
     // Render everything
     renderSidebar();
+    renderDailySummary();   // ← dedicated summary bar (not feed-count)
     applyFilters();
     showContent();
 
@@ -165,20 +163,25 @@ function renderCards() {
 
 function buildCard(item, index) {
   const card = document.createElement('div');
-	const isNew =
-	  item.published &&
- 	 (Date.now() - new Date(item.published)) < (24 * 60 * 60 * 1000);
 
-	if (isNew) {
-  	card.classList.add('new-item');
-		}
+  // Check if item is newer than 24 hours
+  const isNew =
+    item.published &&
+    (Date.now() - new Date(item.published)) < (24 * 60 * 60 * 1000);
+
+  // IMPORTANT: set className BEFORE adding extra classes
   card.className = 'intel-card';
+  if (isNew) card.classList.add('new-item');
+
   card.dataset.category = item.category || 'news';
   card.style.animationDelay = `${index * 0.04}s`;
 
   const badgeHTML = item.severity
     ? `<span class="badge ${item.severity.toLowerCase()}">${item.severity.toUpperCase()}</span>`
     : `<span class="badge info">${(item.category || 'INFO').toUpperCase()}</span>`;
+
+  // NEW badge shown inline in the title for fresh items
+  const newBadgeHTML = isNew ? `<span class="new-item-badge">NEW</span>` : '';
 
   const cveIdHTML = item.cve_id
     ? `<span class="cve-id">${item.cve_id}</span> · `
@@ -192,6 +195,11 @@ function buildCard(item, index) {
     ? timeAgo(new Date(item.published))
     : '';
 
+  // CVSS score display for CVEs
+  const cvssHTML = item.cvss_score
+    ? `<span class="meta-tag meta-cvss">CVSS ${item.cvss_score.toFixed(1)}</span>`
+    : '';
+
   card.innerHTML = `
     <div class="card-top">
       <p class="card-title">
@@ -199,6 +207,7 @@ function buildCard(item, index) {
           ? `<a href="${escapeHTML(item.url)}" target="_blank" rel="noopener">${escapeHTML(item.title)}</a>`
           : escapeHTML(item.title)
         }
+        ${newBadgeHTML}
       </p>
       ${badgeHTML}
     </div>
@@ -207,6 +216,7 @@ function buildCard(item, index) {
       ${cveIdHTML}
       <span class="meta-tag meta-source">${escapeHTML(item.source || 'unknown')}</span>
       <span class="meta-tag meta-cat">${escapeHTML(item.category || 'general')}</span>
+      ${cvssHTML}
       <span class="meta-date">${dateStr}</span>
     </div>
   `;
@@ -343,12 +353,75 @@ function escapeHTML(str) {
     .replace(/'/g,  '&#039;');
 }
 
-function generateSummary(items) {
-  const critical = items.filter(i => i.severity === 'critical').length;
-  const high = items.filter(i => i.severity === 'high').length;
+// ─── Daily Summary Bar ────────────────────────────────────────────────────────
 
-  const incidents = items.filter(i => i.category === 'incident').length;
-  const cves = items.filter(i => i.category === 'cve').length;
+function renderDailySummary() {
+  const bar   = document.getElementById('daily-summary');
+  const stats = document.getElementById('summary-stats');
+  const top   = document.getElementById('summary-top-threat');
 
-  return `🚨 ${critical} critical, ⚠️ ${high} high threats | ${incidents} incidents | ${cves} CVEs`;
+  if (!bar || !stats) return;
+
+  const critical  = allItems.filter(i => i.severity === 'critical').length;
+  const high      = allItems.filter(i => i.severity === 'high').length;
+  const medium    = allItems.filter(i => i.severity === 'medium').length;
+  const newItems  = allItems.filter(i =>
+    i.published && (Date.now() - new Date(i.published)) < 86400000
+  ).length;
+  const incidents = allItems.filter(i => i.category === 'incident').length;
+  const cves      = allItems.filter(i => i.category === 'cve').length;
+  const advisories= allItems.filter(i => i.category === 'advisory').length;
+
+  stats.innerHTML = `
+    <span class="summary-stat">
+      <span class="summary-stat-val c">${critical}</span>
+      <span class="summary-stat-lbl">CRITICAL</span>
+    </span>
+    <span class="summary-stat">
+      <span class="summary-stat-val h">${high}</span>
+      <span class="summary-stat-lbl">HIGH</span>
+    </span>
+    <span class="summary-stat">
+      <span class="summary-stat-val m">${medium}</span>
+      <span class="summary-stat-lbl">MEDIUM</span>
+    </span>
+    <span class="summary-divider">·</span>
+    <span class="summary-stat">
+      <span class="summary-stat-val n">${cves}</span>
+      <span class="summary-stat-lbl">CVEs</span>
+    </span>
+    <span class="summary-stat">
+      <span class="summary-stat-val n">${incidents}</span>
+      <span class="summary-stat-lbl">INCIDENTS</span>
+    </span>
+    <span class="summary-stat">
+      <span class="summary-stat-val n">${advisories}</span>
+      <span class="summary-stat-lbl">ADVISORIES</span>
+    </span>
+    <span class="summary-divider">·</span>
+    <span class="summary-stat">
+      <span class="summary-stat-val" style="color:var(--accent-cyan)">${newItems}</span>
+      <span class="summary-stat-lbl">NEW TODAY</span>
+    </span>
+  `;
+
+  // Top threat: first critical item
+  const topThreat = allItems.find(i => i.severity === 'critical') ||
+                    allItems.find(i => i.severity === 'high');
+  if (top && topThreat) {
+    top.innerHTML = `🔴 Top threat: <strong>${escapeHTML(topThreat.title.substring(0, 80))}${topThreat.title.length > 80 ? '…' : ''}</strong>`;
+  }
+
+  bar.style.display = 'block';
 }
+
+// ─── Mobile Sidebar Toggle ────────────────────────────────────────────────────
+
+window.toggleMobileSidebar = function() {
+  const sidebar = document.querySelector('.sidebar');
+  const label   = document.getElementById('toggle-label');
+  if (!sidebar) return;
+
+  const isOpen = sidebar.classList.toggle('mobile-open');
+  label.textContent = isOpen ? '▲ HIDE STATS' : '▼ SHOW STATS';
+};
