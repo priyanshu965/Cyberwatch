@@ -45,13 +45,13 @@ log = logging.getLogger("cyberwatch")
 OUTPUT_PATH = Path("data/intel.json")
 
 # How many items to keep per source (to keep JSON file manageable)
-MAX_ITEMS_PER_SOURCE = 15
+MAX_ITEMS_PER_SOURCE = 25
 
 # NVD API: fetch CVEs published in the last N days
-NVD_LOOKBACK_DAYS = 7
+NVD_LOOKBACK_DAYS = 15
 
 # Request timeout in seconds
-REQUEST_TIMEOUT = 15
+REQUEST_TIMEOUT = 30
 
 # Optional: Set these as GitHub Actions Secrets in your repo
 # Settings → Secrets and variables → Actions → New repository secret
@@ -59,7 +59,7 @@ OTX_API_KEY = os.environ.get("OTX_API_KEY", "")
 
 # User-Agent header (be polite to RSS servers)
 HEADERS = {
-    "User-Agent": "CyberWatch-Dashboard/1.0 (GitHub Pages personal project)"
+    "User-Agent": "CyberWatch/1.0 (GitHub personal project)"
 }
 
 # ─── RSS Feed Sources ─────────────────────────────────────────────────────────
