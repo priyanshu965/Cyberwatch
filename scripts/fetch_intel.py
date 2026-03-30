@@ -137,7 +137,7 @@ def clean_html(text: str) -> str:
     import re
     text = re.sub(r"<[^>]+>", "", text)           # Remove HTML tags
     text = re.sub(r"\s+", " ", text).strip()       # Collapse whitespace
-    return text[:400]                               # Truncate to 400 chars
+    return text[:999]                               # Truncate to 999 chars
 
 
 def make_request(url: str, headers: dict = None, params: dict = None) -> dict | None:
@@ -190,9 +190,11 @@ def fetch_rss(source: dict) -> list[dict]:
             # Description: try summary, then content
             description = ""
             if hasattr(entry, "summary"):
-                description = clean_html(entry.summary)
+                description += clean_html(entry.summary)
             elif hasattr(entry, "content"):
-                description = clean_html(entry.content[0].get("value", ""))
+                description += " " + clean_html(entry.content[0].get("value", ""))
+		
+		description = description.strip()[:999]
 
             # Published date
             pub_date = parse_date(entry.get("published_parsed") or entry.get("updated_parsed"))

@@ -31,7 +31,7 @@ async function loadIntelData() {
     // This is the primary path. It works on GitHub Pages and when you run
     // `python -m http.server 8080` locally.
     if (window.location.protocol !== 'file:') {
-      const response = await fetch('data/intel.json?v=${Date.now()}');
+      const response = await fetch(`data/intel.json?v=${Date.now()}`);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       data = await response.json();
     } else {
@@ -53,12 +53,21 @@ async function loadIntelData() {
 
     // Store all items
     allItems = data.items || [];
-
+	const summary = generateSummary(allItems);
+	document.getElementById("feed-count").textContent = summary;
     // Update the "last updated" header
     if (data.last_updated) {
       const date = new Date(data.last_updated);
-      document.getElementById('last-updated').textContent =
-        `Last updated: ${date.toUTCString()}`;
+      const utc = date.toUTCString();
+
+	const ist = date.toLocaleString('en-IN', {
+  	timeZone: 'Asia/Kolkata',
+  	dateStyle: 'medium',
+  	timeStyle: 'medium'
+		});
+
+document.getElementById('last-updated').textContent =
+  `Last updated: ${utc} | IST: ${ist}`;
     }
 
     // Render everything
@@ -156,6 +165,13 @@ function renderCards() {
 
 function buildCard(item, index) {
   const card = document.createElement('div');
+	const isNew =
+	  item.published &&
+ 	 (Date.now() - new Date(item.published)) < (24 * 60 * 60 * 1000);
+
+	if (isNew) {
+  	card.classList.add('new-item');
+		}
   card.className = 'intel-card';
   card.dataset.category = item.category || 'news';
   card.style.animationDelay = `${index * 0.04}s`;
@@ -325,4 +341,14 @@ function escapeHTML(str) {
     .replace(/>/g,  '&gt;')
     .replace(/"/g,  '&quot;')
     .replace(/'/g,  '&#039;');
+}
+
+function generateSummary(items) {
+  const critical = items.filter(i => i.severity === 'critical').length;
+  const high = items.filter(i => i.severity === 'high').length;
+
+  const incidents = items.filter(i => i.category === 'incident').length;
+  const cves = items.filter(i => i.category === 'cve').length;
+
+  return `🚨 ${critical} critical, ⚠️ ${high} high threats | ${incidents} incidents | ${cves} CVEs`;
 }
