@@ -193,8 +193,7 @@ def fetch_rss(source: dict) -> list[dict]:
                 description += clean_html(entry.summary)
             elif hasattr(entry, "content"):
                 description += " " + clean_html(entry.content[0].get("value", ""))
-		
-		description = description.strip()[:999]
+			description = description.strip()[:999]
 
             # Published date
             pub_date = parse_date(entry.get("published_parsed") or entry.get("updated_parsed"))
