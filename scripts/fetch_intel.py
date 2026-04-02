@@ -62,10 +62,10 @@ log = logging.getLogger("cyberwatch")
 OUTPUT_PATH = Path("data/intel.json")
 
 # How many items to keep per source (to keep JSON file manageable)
-MAX_ITEMS_PER_SOURCE = 25
+MAX_ITEMS_PER_SOURCE = 10
 
 # NVD API: fetch CVEs published in the last N days
-NVD_LOOKBACK_DAYS = 15
+NVD_LOOKBACK_DAYS = 10
 
 # Request timeout in seconds
 REQUEST_TIMEOUT = 30
@@ -111,6 +111,12 @@ RSS_SOURCES = [
         "url":      "https://isc.sans.edu/rssfeed_full.xml",
         "category": "news",
         "severity": "low",
+    },
+    {
+        "name":     "TheRecord Media",
+        "url":      "https://therecord.media/feed",
+        "category": "news",
+        "severity": "high",
     },
 ]
 

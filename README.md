@@ -18,6 +18,7 @@ interface. Updates itself every day via GitHub Actions.
 | SANS ISC | Threat Diaries | No |
 | Reddit r/netsec | Community Intel | No |
 | AlienVault OTX | Threat Pulses | Yes |
+| TheRecord Media | New | No |
 
 ---
 
@@ -27,14 +28,15 @@ interface. Updates itself every day via GitHub Actions.
 .
 ├── .github/
 │   └── workflows/
-│       └── update.yml        # GitHub Actions: runs daily at 06:00 UTC
+│       └── update.yml          ← GitHub Actions: runs daily at 06:00 UTC
 ├── scripts/
-│   └── fetch_intel.py        # Python script: fetches all sources → intel.json
+│   ├── fetch_intel.py          ← Fetches all sources → data/intel.json
+│   └── mitre_ttps.py           ← Full MITRE ATT&CK database (504 entries)
 ├── data/
-│   └── intel.json            # Auto-generated daily data file
-├── index.html                # Dashboard HTML
-├── style.css                 # Dark cyber theme
-├── app.js                    # JavaScript: renders intel.json into the dashboard
+│   └── intel.json              ← Auto-generated daily (committed by bot)
+├── index.html                  ← Dashboard UI
+├── style.css                   ← Dark terminal theme
+├── app.js                      ← Renders feed, matrix, search/filter
 └── README.md
 ```
 
@@ -58,6 +60,18 @@ interface. Updates itself every day via GitHub Actions.
 - cron: '0 */6 * * *' # every 6 hours
 - cron: '0 6 * * 1'   # every Monday
 ```
+
+🗺️ MITRE ATT&CK Coverage
+The scripts/mitre_ttps.py module contains:
+
+14 tactics (full Enterprise matrix)
+191 parent techniques
+313 sub-techniques
+~2,800 keywords for automatic detection
+
+Every article is scanned at fetch time. Matched techniques appear as
+blue T#### pills on each card. Click any pill to filter the feed.
+The ⬛ ATT&CK MATRIX tab shows a heatmap across all 14 tactics.
 
 ---
 
