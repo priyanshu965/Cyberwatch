@@ -1,6 +1,5 @@
 const DATA_URL = "data/intel.json";
 
-// LOAD DATA
 async function loadData() {
   const res = await fetch(DATA_URL + "?t=" + Date.now());
   const data = await res.json();
@@ -11,37 +10,29 @@ async function loadData() {
   render(data.items);
 }
 
-// =====================
-// ATTACK FLOW
-// =====================
+// ================= ATTACK FLOW =================
 function buildAttackFlow(item) {
   if (!item.ttps) return "";
   const tactics = item.ttps.map(t => t.tactic);
   return [...new Set(tactics)].join(" → ");
 }
 
-// =====================
-// TTP CLUSTER
-// =====================
+// ================= TTP CLUSTERS =================
 function getTTPClusters(items) {
   const map = {};
+
   items.forEach(item => {
     (item.ttps || []).forEach(t => {
-      map[t.id] = {
-        name: t.name,
-        count: (map[t.id]?.count || 0) + 1
-      };
+      map[t.id] = (map[t.id] || 0) + 1;
     });
   });
 
   return Object.entries(map)
-    .sort((a, b) => b[1].count - a[1].count)
+    .sort((a, b) => b[1] - a[1])
     .slice(0, 5);
 }
 
-// =====================
-// PATTERNS
-// =====================
+// ================= PATTERNS =================
 function detectPatterns(items) {
   const keys = ["phishing", "ransomware", "supply chain", "backdoor"];
   const result = {};
@@ -55,9 +46,7 @@ function detectPatterns(items) {
   return result;
 }
 
-// =====================
-// GRAPH
-// =====================
+// ================= GRAPH =================
 function renderGraph(item) {
   if (!item.ttps) return;
 
@@ -76,53 +65,58 @@ function renderGraph(item) {
     edges: new vis.DataSet(edges)
   };
 
-  new vis.Network(container, data, {});
+  new vis.Network(container, data, {
+    nodes: { color: "#00ffe1" },
+    edges: { color: "#3b9eff" }
+  });
 }
 
-// =====================
-// MAIN RENDER
-// =====================
+// ================= MAIN RENDER =================
 function render(items) {
-  const feed = document.getElementById("feed");
-  feed.innerHTML = "";
+
+  const container = document.getElementById("cards-container");
+  container.innerHTML = "";
 
   // SUMMARY
   const critical = items.filter(i => i.severity === "critical").length;
   const high = items.filter(i => i.severity === "high").length;
 
   document.getElementById("summary").innerHTML =
-    `🚨 ${critical} Critical | ⚠️ ${high} High threats`;
+    `🚨 ${critical} Critical<br>⚠️ ${high} High`;
 
-  // TTP CLUSTERS
+  // TTP
   const clusters = getTTPClusters(items);
   document.getElementById("ttp-clusters").innerHTML =
-    clusters.map(([id, d]) => `<div>${id} (${d.count})</div>`).join("");
+    clusters.map(([id, count]) => `<div>${id} (${count})</div>`).join("");
 
   // PATTERNS
   const patterns = detectPatterns(items);
   let html = "";
   for (let k in patterns) {
-    if (patterns[k] > 2) html += `<div>${k}: ${patterns[k]}</div>`;
+    if (patterns[k] > 2) {
+      html += `<div>${k}: ${patterns[k]}</div>`;
+    }
   }
   document.getElementById("pattern-box").innerHTML = html;
 
   // CARDS
   items.forEach(item => {
-    const div = document.createElement("div");
-    div.className = "card";
 
     const flow = buildAttackFlow(item);
 
-    div.innerHTML = `
+    const card = document.createElement("div");
+    card.className = "intel-card";
+
+    card.innerHTML = `
       <h3>${item.title}</h3>
       <p>${item.description}</p>
       <div class="meta">${item.source} | ${item.severity}</div>
-      <div class="flow">${flow}</div>
+      <div class="flow">⚡ ${flow}</div>
     `;
 
-    div.onclick = () => renderGraph(item);
+    card.onclick = () => renderGraph(item);
 
-    feed.appendChild(div);
+    container.appendChild(card);
   });
 }
 
