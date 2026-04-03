@@ -1,0 +1,198 @@
+
+/* ═══════════════════════════════════════════════════════════════════
+   CYBERWATCH — VISUAL INTELLIGENCE additions to style.css
+   Append this block to the END of your existing style.css file.
+   Uses only existing variables: --accent-cyan, --border,
+   --text-secondary, --text-muted, --bg-card, --bg-surface, etc.
+   No existing selectors are modified.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Card: Expandable State ─────────────────────────────────────── */
+
+/* Cards with AI data get a pointer cursor to hint interactivity */
+.intel-card:has(.analysis-section) {
+  cursor: pointer;
+}
+
+/* When expanded: lock the cyan glow border, suppress the translateX nudge */
+.intel-card.expanded {
+  border-color: var(--accent-cyan);
+  box-shadow:   0 0 0 1px var(--accent-cyan-dim), 0 4px 24px rgba(0, 255, 225, 0.07);
+  transform:    none !important;
+  background:   var(--bg-card-hover);
+}
+
+/* ── AI Indicator Badge (collapsed state) ───────────────────────── */
+
+.ai-indicator {
+  font-size:      9px;
+  font-weight:    700;
+  letter-spacing: 0.1em;
+  padding:        1px 6px;
+  border-radius:  2px;
+  border:         1px solid var(--accent-cyan-dim);
+  color:          var(--accent-cyan);
+  background:     rgba(0, 255, 225, 0.04);
+  transition:     all var(--transition);
+}
+
+.intel-card:hover .ai-indicator,
+.intel-card.expanded .ai-indicator {
+  background:  rgba(0, 255, 225, 0.10);
+  border-color: var(--accent-cyan);
+}
+
+/* ── Analysis Section Container ─────────────────────────────────── */
+
+.analysis-section {
+  max-height:  0;
+  overflow:    hidden;
+  opacity:     0;
+  transition:  max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+               opacity    0.30s ease;
+  margin-top:  0;
+}
+
+.intel-card.expanded .analysis-section {
+  max-height: 800px;   /* generous ceiling — actual height is content-driven */
+  opacity:    1;
+  margin-top: 12px;
+}
+
+/* ── Analysis Header ────────────────────────────────────────────── */
+
+.analysis-header {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  padding:         8px 0 10px;
+  border-top:      1px solid var(--border);
+  margin-bottom:   10px;
+}
+
+.analysis-tag {
+  font-size:      9px;
+  font-weight:    700;
+  letter-spacing: 0.14em;
+  color:          var(--accent-cyan);
+}
+
+.analysis-collapse-hint {
+  font-size:  9px;
+  color:      var(--text-muted);
+  transition: color var(--transition);
+}
+
+.intel-card.expanded .analysis-collapse-hint { color: var(--text-secondary); }
+
+/* ── Individual Analysis Blocks ─────────────────────────────────── */
+
+.analysis-block {
+  margin-bottom: 12px;
+}
+
+.analysis-block:last-child {
+  margin-bottom: 0;
+}
+
+.analysis-label {
+  font-size:      9px;
+  font-weight:    700;
+  letter-spacing: 0.12em;
+  color:          var(--text-secondary);
+  margin-bottom:  6px;
+  display:        flex;
+  align-items:    center;
+  gap:            8px;
+}
+
+.analysis-model-tag {
+  font-size:      8px;
+  font-weight:    400;
+  letter-spacing: 0.05em;
+  color:          var(--text-muted);
+  border:         1px solid var(--border);
+  border-radius:  2px;
+  padding:        0 4px;
+}
+
+/* ── AI Summary Text ────────────────────────────────────────────── */
+
+.analysis-summary-text {
+  font-size:    11px;
+  line-height:  1.7;
+  color:        var(--text-secondary);
+  border-left:  2px solid var(--accent-cyan-dim);
+  padding-left: 10px;
+  margin:       0;
+  /* Allow the text to wrap normally within the card */
+  word-break:   break-word;
+  overflow-wrap: break-word;
+}
+
+/* ── Severity Score Meter ───────────────────────────────────────── */
+
+.severity-meter {
+  position:      relative;
+  height:        6px;
+  background:    var(--bg-surface);
+  border:        1px solid var(--border);
+  border-radius: 3px;
+  overflow:      hidden;
+  margin-bottom: 5px;
+}
+
+.severity-meter-fill {
+  height:        100%;
+  border-radius: 3px;
+  transition:    width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Glow is applied inline via style="" using the colour token */
+}
+
+.severity-score-val {
+  font-size:      11px;
+  font-weight:    700;
+  letter-spacing: 0.06em;
+}
+
+/* ── Mermaid Graph Container ────────────────────────────────────── */
+
+.analysis-mermaid {
+  background:    var(--bg-surface);
+  border:        1px solid var(--border);
+  border-radius: var(--radius);
+  padding:       12px;
+  overflow-x:    auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+/* Override Mermaid SVG colours to blend with terminal theme */
+.analysis-mermaid svg {
+  max-width:  100%;
+  height:     auto;
+  background: transparent !important;
+}
+
+.analysis-graph-loading {
+  font-size:  10px;
+  color:      var(--text-muted);
+  font-style: italic;
+}
+
+.analysis-error {
+  font-size: 10px;
+  color:     var(--high);
+}
+
+/* ── Daily Summary Bar — AI-Enriched count ──────────────────────── */
+
+.summary-val.ai {
+  color: var(--accent-cyan);
+}
+
+/* ─── Responsive: stack analysis blocks on narrow feeds ─────────── */
+@media (max-width: 600px) {
+  .analysis-mermaid { padding: 8px; }
+  .analysis-summary-text { font-size: 10px; }
+}

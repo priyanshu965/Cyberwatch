@@ -1,32 +1,29 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 # CYBERWATCH DASHBOARD — .github/workflows/update.yml
 #
-# This GitHub Actions workflow runs every day at 06:00 UTC.
-# It fetches fresh threat intel, saves it to data/intel.json,
-# and commits + pushes the updated file back to the repo.
-# GitHub Pages then automatically serves the updated dashboard.
-#
-# No manual intervention needed after initial setup!
+# Runs every hour. Fetches threat intel, enriches the top 15 items with
+# Gemini AI (ai_summary, workflow_graph, severity_score), saves intel.json,
+# and commits it back so GitHub Pages serves the latest dashboard.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 name: Daily Intel Update
 
 on:
-  # ── Scheduled trigger: every day at 06:00 UTC ──────────────────────────────
+  # ── Scheduled trigger: every hour ─────────────────────────────────────────
   schedule:
     - cron: '0 */1 * * *'
 
-  # ── Manual trigger: run from the Actions tab anytime ──────────────────────
+  # ── Manual trigger: run from the Actions tab anytime ─────────────────────
   workflow_dispatch:
+
+# ── Top-level permissions: allow the workflow to push commits ─────────────────
+permissions:
+  contents: write
 
 jobs:
   fetch-and-update:
     name: Fetch Threat Intelligence
     runs-on: ubuntu-latest
-
-    # Give the workflow permission to push commits back to the repo
-    permissions:
-      contents: write
 
     steps:
 
@@ -34,7 +31,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          # Fetch full history so git push works correctly
           fetch-depth: 0
 
       # ── Step 2: Set up Python ─────────────────────────────────────────────
@@ -43,7 +39,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      # ── Step 3: Cache pip dependencies (speeds up subsequent runs) ─────────
+      # ── Step 3: Cache pip dependencies ────────────────────────────────────
       - name: Cache pip packages
         uses: actions/cache@v4
         with:
@@ -58,12 +54,13 @@ jobs:
           pip install --upgrade pip
           pip install requests feedparser
 
-      # ── Step 5: Run the fetch script ──────────────────────────────────────
+      # ── Step 5: Fetch + AI-enrich threat intelligence ─────────────────────
       - name: Fetch threat intelligence
         env:
-          # Optional API keys — set these in GitHub repo Settings → Secrets
-          # Settings → Secrets and variables → Actions → New repository secret
-          OTX_API_KEY: ${{ secrets.OTX_API_KEY }}
+          # Optional API keys — set in:
+          # GitHub repo → Settings → Secrets and variables → Actions → New secret
+          OTX_API_KEY:    ${{ secrets.OTX_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python scripts/fetch_intel.py
 
@@ -73,21 +70,24 @@ jobs:
           git config user.name  "CyberWatch Bot"
           git config user.email "cyberwatch-bot@users.noreply.github.com"
 
-          # Only commit if intel.json actually changed
           if git diff --quiet data/intel.json; then
             echo "No changes detected in intel.json — skipping commit."
           else
             git add data/intel.json
-            git commit -m "chore: daily intel update [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+            git commit -m "chore: intel update + AI enrichment [$(date -u '+%Y-%m-%d %H:%M UTC')]"
             git push
             echo "Successfully committed and pushed updated intel.json"
           fi
 
-      # ── Step 7: Print summary ─────────────────────────────────────────────
+      # ── Step 7: Print workflow summary ────────────────────────────────────
       - name: Print summary
         run: |
           echo "### CyberWatch Update Complete" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "- **Run time:** $(date -u)" >> $GITHUB_STEP_SUMMARY
-          echo "- **Items fetched:** $(python -c "import json; d=json.load(open('data/intel.json')); print(d['total_items'])")" >> $GITHUB_STEP_SUMMARY
+          TOTAL=$(python -c "import json; d=json.load(open('data/intel.json')); print(d['total_items'])")
+          AI_ENRICHED=$(python -c "import json; d=json.load(open('data/intel.json')); print(sum(1 for i in d['items'] if i.get('ai_summary')))")
+          echo "- **Items fetched:** $TOTAL" >> $GITHUB_STEP_SUMMARY
+          echo "- **AI-enriched items:** $AI_ENRICHED" >> $GITHUB_STEP_SUMMARY
           echo "- **Last updated:** $(python -c "import json; d=json.load(open('data/intel.json')); print(d['last_updated'])")" >> $GITHUB_STEP_SUMMARY
+          echo "- **GEMINI_API_KEY set:** ${{ secrets.GEMINI_API_KEY != '' }}" >> $GITHUB_STEP_SUMMARY
