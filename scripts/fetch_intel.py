@@ -8,10 +8,8 @@ Fetches threat intelligence from multiple free sources:
   - Bleeping Computer RSS     → Incidents & breaches
   - Krebs on Security RSS     → Investigative news
   - SANS ISC RSS              → Threat diaries
-  - TheRecord Media RSS       → Cybersecurity news
   - Reddit r/netsec JSON      → Community intel
-  - AlienVault OTX API        → Threat pulses (optional)
-  - Gemini AI                 → AI summary, attack workflow, severity (optional)
+  - AlienVault OTX API        → Threat pulse (if API key set)
 
 Output: data/intel.json
 
@@ -24,7 +22,6 @@ Run via GitHub Actions: automatically on schedule (see update.yml)
 
 import json
 import os
-import re
 import sys
 import time
 import logging
@@ -34,10 +31,12 @@ from pathlib import Path
 import requests
 import feedparser
 
-# MITRE ATT&CK full database
+# MITRE ATT&CK full database (246 techniques + 445 sub-techniques)
+# Imported from the companion module in the same directory
 try:
     from mitre_ttps import MITRE_TECHNIQUES, TACTIC_ORDER, map_ttps
 except ImportError:
+    # Fallback if run from a different working directory
     import importlib.util, pathlib
     _spec = importlib.util.spec_from_file_location(
         "mitre_ttps",
@@ -59,20 +58,23 @@ log = logging.getLogger("cyberwatch")
 
 # ─── Configuration ───────────────────────────────────────────────────────────
 
-OUTPUT_PATH         = Path("data/intel.json")
+# Output path (relative to repo root)
+OUTPUT_PATH = Path("data/intel.json")
+
+# How many items to keep per source (to keep JSON file manageable)
 MAX_ITEMS_PER_SOURCE = 10
-NVD_LOOKBACK_DAYS   = 10
-REQUEST_TIMEOUT     = 30
 
-# API Keys — set as GitHub Actions Secrets
-OTX_API_KEY    = os.environ.get("OTX_API_KEY", "")
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+# NVD API: fetch CVEs published in the last N days
+NVD_LOOKBACK_DAYS = 10
 
-# How many items to enrich with Gemini (most recent first)
-# Free tier: 15 RPM, so 15 items with 5s sleep = ~75s total
-AI_ENRICH_LIMIT = 15
-AI_SLEEP_SECS   = 4   # Sleep between Gemini calls to avoid rate limits
+# Request timeout in seconds
+REQUEST_TIMEOUT = 30
 
+# Optional: Set these as GitHub Actions Secrets in your repo
+# Settings → Secrets and variables → Actions → New repository secret
+OTX_API_KEY = os.environ.get("OTX_API_KEY", "")
+
+# User-Agent header (be polite to RSS servers)
 HEADERS = {
     "User-Agent": "CyberWatch/1.0 (GitHub personal project)"
 }
@@ -122,16 +124,23 @@ RSS_SOURCES = [
 # ─── Helpers ─────────────────────────────────────────────────────────────────
 
 def now_utc() -> str:
+    """Return current UTC time as ISO 8601 string."""
     return datetime.now(timezone.utc).isoformat()
 
 
 def parse_date(date_str: str) -> str:
+    """
+    Try to parse a date string into ISO 8601 format.
+    Falls back to current time if parsing fails.
+    """
     if not date_str:
         return now_utc()
     try:
+        # feedparser returns a time.struct_time
         if hasattr(date_str, 'tm_year'):
             dt = datetime(*date_str[:6], tzinfo=timezone.utc)
             return dt.isoformat()
+        # Try common ISO formats
         for fmt in ("%Y-%m-%dT%H:%M:%SZ", "%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%d"):
             try:
                 return datetime.strptime(date_str, fmt).replace(
@@ -145,50 +154,54 @@ def parse_date(date_str: str) -> str:
 
 
 def clean_html(text: str) -> str:
+    """Rudimentary HTML tag stripper for RSS descriptions."""
     if not text:
         return ""
-    text = re.sub(r"<[^>]+>", "", text)
-    text = re.sub(r"\s+", " ", text).strip()
-    return text[:999]
+    import re
+    text = re.sub(r"<[^>]+>", "", text)           # Remove HTML tags
+    text = re.sub(r"\s+", " ", text).strip()       # Collapse whitespace
+    return text[:999]                               # Truncate to 999 chars
 
 
-def make_request(url: str, headers: dict = None, params: dict = None,
-                 method: str = "GET", json_body: dict = None) -> dict | None:
+def make_request(url: str, headers: dict = None, params: dict = None) -> dict | None:
+    """
+    Make an HTTP GET request with error handling.
+    Returns the JSON response dict or None on failure.
+    """
     try:
-        if method == "POST":
-            resp = requests.post(
-                url,
-                headers=headers or {"Content-Type": "application/json"},
-                json=json_body,
-                timeout=REQUEST_TIMEOUT
-            )
-        else:
-            resp = requests.get(
-                url,
-                headers=headers or HEADERS,
-                params=params,
-                timeout=REQUEST_TIMEOUT
-            )
+        resp = requests.get(
+            url,
+            headers=headers or HEADERS,
+            params=params,
+            timeout=REQUEST_TIMEOUT
+        )
         resp.raise_for_status()
         return resp.json()
     except requests.exceptions.Timeout:
-        log.warning(f"Timeout: {url}")
+        log.warning(f"Timeout fetching: {url}")
     except requests.exceptions.HTTPError as e:
-        log.warning(f"HTTP {e.response.status_code}: {url}")
+        log.warning(f"HTTP error {e.response.status_code} for: {url}")
     except requests.exceptions.RequestException as e:
-        log.warning(f"Request failed {url}: {e}")
+        log.warning(f"Request failed for {url}: {e}")
     except json.JSONDecodeError:
         log.warning(f"Invalid JSON from: {url}")
     return None
 
 
-# ─── Fetchers ─────────────────────────────────────────────────────────────────
+# ─── Fetchers ────────────────────────────────────────────────────────────────
 
 def fetch_rss(source: dict) -> list[dict]:
+    """
+    Fetch and parse an RSS/Atom feed.
+    Returns a list of intel item dicts.
+    """
     log.info(f"Fetching RSS: {source['name']} ({source['url']})")
     items = []
+
     try:
+        # feedparser handles fetching and parsing in one call
         feed = feedparser.parse(source["url"])
+
         if feed.bozo and not feed.entries:
             log.warning(f"Feed parse error for {source['name']}: {feed.bozo_exception}")
             return items
@@ -197,6 +210,7 @@ def fetch_rss(source: dict) -> list[dict]:
             title = entry.get("title", "Untitled")
             link  = entry.get("link", "")
 
+            # Description: try summary, then content
             description = ""
             if hasattr(entry, "summary"):
                 description += clean_html(entry.summary)
@@ -204,23 +218,25 @@ def fetch_rss(source: dict) -> list[dict]:
                 description += " " + clean_html(entry.content[0].get("value", ""))
             description = description.strip()[:999]
 
+            # Published date
             pub_date = parse_date(entry.get("published_parsed") or entry.get("updated_parsed"))
+
+            # Guess severity from title/description keywords
             severity = infer_severity(title + " " + description, source["severity"])
+
+            # Guess category from title keywords
             category = infer_category(title + " " + description, source["category"])
 
             items.append({
-                "title":          title,
-                "description":    description,
-                "url":            link,
-                "cve_id":         extract_cve_id(title + " " + description),
-                "source":         source["name"],
-                "category":       category,
-                "severity":       severity,
-                "cvss_score":     None,
-                "published":      pub_date,
-                "ai_summary":     "",
-                "workflow_graph": "",
-                "severity_score": None,
+                "title":       title,
+                "description": description,
+                "url":         link,
+                "cve_id":      extract_cve_id(title + " " + description),
+                "source":      source["name"],
+                "category":    category,
+                "severity":    severity,
+                "cvss_score":  None,
+                "published":   pub_date,
             })
 
     except Exception as e:
@@ -231,9 +247,14 @@ def fetch_rss(source: dict) -> list[dict]:
 
 
 def fetch_nvd_cves() -> list[dict]:
+    """
+    Fetch recent CVEs from the NIST NVD API (free, no key needed).
+    API docs: https://nvd.nist.gov/developers/vulnerabilities
+    """
     log.info("Fetching CVEs from NVD API...")
     items = []
 
+    # Calculate date range: last N days
     end_date   = datetime.now(timezone.utc)
     start_date = end_date - timedelta(days=NVD_LOOKBACK_DAYS)
 
@@ -243,22 +264,29 @@ def fetch_nvd_cves() -> list[dict]:
         "resultsPerPage": MAX_ITEMS_PER_SOURCE,
     }
 
-    data = make_request("https://services.nvd.nist.gov/rest/json/cves/2.0", params=params)
+    data = make_request(
+        "https://services.nvd.nist.gov/rest/json/cves/2.0",
+        params=params
+    )
 
     if not data:
         log.warning("NVD API returned no data")
         return items
 
-    for vuln in data.get("vulnerabilities", []):
+    vulnerabilities = data.get("vulnerabilities", [])
+
+    for vuln in vulnerabilities:
         cve = vuln.get("cve", {})
         cve_id = cve.get("id", "")
 
+        # Get English description
         descriptions = cve.get("descriptions", [])
         description  = next(
             (d["value"] for d in descriptions if d.get("lang") == "en"),
             "No description available."
         )[:400]
 
+        # Get CVSS score (try v3.1 first, then v3.0, then v2)
         cvss_score = None
         severity   = "medium"
         metrics    = cve.get("metrics", {})
@@ -271,21 +299,19 @@ def fetch_nvd_cves() -> list[dict]:
                 severity   = cvss_to_severity(cvss_score)
                 break
 
+        # Published date
         published = parse_date(cve.get("published", ""))
 
         items.append({
-            "title":          f"{cve_id}: {description[:80]}...",
-            "description":    description,
-            "url":            f"https://nvd.nist.gov/vuln/detail/{cve_id}",
-            "cve_id":         cve_id,
-            "source":         "NVD",
-            "category":       "cve",
-            "severity":       severity,
-            "cvss_score":     cvss_score,
-            "published":      published,
-            "ai_summary":     "",
-            "workflow_graph": "",
-            "severity_score": None,
+            "title":       f"{cve_id}: {description[:80]}...",
+            "description": description,
+            "url":         f"https://nvd.nist.gov/vuln/detail/{cve_id}",
+            "cve_id":      cve_id,
+            "source":      "NVD",
+            "category":    "cve",
+            "severity":    severity,
+            "cvss_score":  cvss_score,
+            "published":   published,
         })
 
     log.info(f"  Got {len(items)} CVEs from NVD")
@@ -293,6 +319,10 @@ def fetch_nvd_cves() -> list[dict]:
 
 
 def fetch_reddit_netsec() -> list[dict]:
+    """
+    Fetch top posts from r/netsec using Reddit's public JSON endpoint.
+    No API key required.
+    """
     log.info("Fetching Reddit r/netsec...")
     items = []
 
@@ -307,6 +337,8 @@ def fetch_reddit_netsec() -> list[dict]:
 
     for post in posts:
         p = post.get("data", {})
+
+        # Skip stickied mod posts
         if p.get("stickied"):
             continue
 
@@ -318,18 +350,15 @@ def fetch_reddit_netsec() -> list[dict]:
         score     = p.get("score", 0)
 
         items.append({
-            "title":          title,
-            "description":    selftext or f"Reddit discussion (score: {score})",
-            "url":            url,
-            "cve_id":         extract_cve_id(title),
-            "source":         "Reddit/netsec",
-            "category":       infer_category(title, "news"),
-            "severity":       infer_severity(title, "low"),
-            "cvss_score":     None,
-            "published":      published,
-            "ai_summary":     "",
-            "workflow_graph": "",
-            "severity_score": None,
+            "title":       title,
+            "description": selftext or f"Reddit discussion (score: {score})",
+            "url":         url,
+            "cve_id":      extract_cve_id(title),
+            "source":      "Reddit/netsec",
+            "category":    infer_category(title, "news"),
+            "severity":    infer_severity(title, "low"),
+            "cvss_score":  None,
+            "published":   published,
         })
 
     log.info(f"  Got {len(items)} posts from Reddit r/netsec")
@@ -337,6 +366,11 @@ def fetch_reddit_netsec() -> list[dict]:
 
 
 def fetch_otx_pulse(api_key: str) -> list[dict]:
+    """
+    Fetch recent threat pulses from AlienVault OTX (free account needed).
+    Sign up at: https://otx.alienvault.com
+    Set OTX_API_KEY as a GitHub Actions Secret.
+    """
     if not api_key:
         log.info("OTX_API_KEY not set — skipping AlienVault OTX")
         return []
@@ -358,116 +392,46 @@ def fetch_otx_pulse(api_key: str) -> list[dict]:
     for pulse in data.get("results", []):
         name        = pulse.get("name", "Untitled")
         description = (pulse.get("description") or "")[:400]
+        tags        = pulse.get("tags", [])
         created     = pulse.get("created", now_utc())
         pulse_id    = pulse.get("id", "")
 
         items.append({
-            "title":          name,
-            "description":    description,
-            "url":            f"https://otx.alienvault.com/pulse/{pulse_id}",
-            "cve_id":         None,
-            "source":         "AlienVault OTX",
-            "category":       "incident",
-            "severity":       infer_severity(name + " " + description, "medium"),
-            "cvss_score":     None,
-            "published":      parse_date(created),
-            "ai_summary":     "",
-            "workflow_graph": "",
-            "severity_score": None,
+            "title":       name,
+            "description": description,
+            "url":         f"https://otx.alienvault.com/pulse/{pulse_id}",
+            "cve_id":      None,
+            "source":      "AlienVault OTX",
+            "category":    "incident",
+            "severity":    infer_severity(name + " " + description, "medium"),
+            "cvss_score":  None,
+            "published":   parse_date(created),
         })
 
     log.info(f"  Got {len(items)} pulses from AlienVault OTX")
     return items
 
 
-# ─── Gemini AI Enrichment ─────────────────────────────────────────────────────
-
-GEMINI_PROMPT_TEMPLATE = """You are a cybersecurity analyst. Analyze this threat intelligence item and respond with ONLY a valid JSON object — no markdown, no code blocks, no preamble.
-
-Title: {title}
-Description: {description}
-
-Return exactly this JSON structure:
-{{
-  "ai_summary": "Two-sentence BLUF (Bottom Line Up Front): sentence 1 states what happened technically, sentence 2 states the risk and who should act.",
-  "workflow_graph": "graph TD\\n    A[Initial Access] -->|method| B[Execution]\\n    B --> C[Impact]",
-  "severity_score": 7.5
-}}
-
-Rules:
-- ai_summary: EXACTLY 2 sentences. Technical. Actionable. No fluff.
-- workflow_graph: Valid Mermaid.js graph TD. Use ATT&CK tactic names as node labels. Use --> arrows. Use |label| for edge labels where helpful. Minimum 3 nodes, maximum 7 nodes. No quotes inside node brackets.
-- severity_score: Float 0.0–10.0. Base on actual impact: 9-10=critical/RCE/0day, 7-8=high/PrivEsc/DataBreach, 4-6=medium, 1-3=low/info.
-- Return ONLY the JSON object."""
-
-
-def enrich_with_gemini(item: dict) -> dict:
-    """
-    Call Gemini 2.5 Flash to add ai_summary, workflow_graph, severity_score.
-    Returns the item dict with new fields populated (or empty strings on failure).
-    """
-    if not GEMINI_API_KEY:
-        return item
-
-    prompt = GEMINI_PROMPT_TEMPLATE.format(
-        title=item.get("title", "")[:200],
-        description=item.get("description", "")[:500],
-    )
-
-    url = (
-        "https://generativelanguage.googleapis.com/v1beta/models/"
-        f"gemini-2.5-flash:generateContent?key={GEMINI_API_KEY}"
-    )
-
-    body = {
-        "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {
-            "temperature":     0.1,
-            "maxOutputTokens": 512,
-            "responseMimeType": "application/json",
-        },
-    }
-
-    try:
-        resp = requests.post(url, json=body,
-                             headers={"Content-Type": "application/json"},
-                             timeout=REQUEST_TIMEOUT)
-        resp.raise_for_status()
-        data = resp.json()
-
-        raw = data["candidates"][0]["content"]["parts"][0]["text"]
-
-        # Strip markdown fences just in case model ignores responseMimeType
-        raw = re.sub(r"```(?:json)?\s*", "", raw).strip().rstrip("```").strip()
-
-        parsed = json.loads(raw)
-
-        item["ai_summary"]     = str(parsed.get("ai_summary", "")).strip()
-        item["workflow_graph"] = str(parsed.get("workflow_graph", "")).strip()
-        raw_score = parsed.get("severity_score", None)
-        if raw_score is not None:
-            item["severity_score"] = round(float(raw_score), 1)
-
-        log.info(f"  ✓ AI enriched: {item['title'][:60]}")
-
-    except Exception as e:
-        log.warning(f"  ✗ Gemini failed for '{item['title'][:50]}': {e}")
-        # Fields already defaulted to "" / None in the item dict
-
-    return item
-
-
 # ─── Intel Inference Helpers ─────────────────────────────────────────────────
 
 def cvss_to_severity(score: float | None) -> str:
-    if score is None: return "medium"
-    if score >= 9.0:  return "critical"
-    if score >= 7.0:  return "high"
-    if score >= 4.0:  return "medium"
+    """Convert a CVSS numeric score to a severity label."""
+    if score is None:
+        return "medium"
+    if score >= 9.0:
+        return "critical"
+    if score >= 7.0:
+        return "high"
+    if score >= 4.0:
+        return "medium"
     return "low"
 
 
 def infer_severity(text: str, default: str = "medium") -> str:
+    """
+    Guess severity from keywords in the text.
+    Used for RSS items that don't have a numeric CVSS score.
+    """
     t = text.lower()
     if any(kw in t for kw in [
         "critical", "zero-day", "0-day", "actively exploited",
@@ -491,6 +455,10 @@ def infer_severity(text: str, default: str = "medium") -> str:
 
 
 def infer_category(text: str, default: str = "news") -> str:
+    """
+    Guess the item category from keywords.
+    Categories: cve, advisory, incident, news
+    """
     t = text.lower()
     if any(kw in t for kw in ["cve-", "vulnerability", "patch", "exploit", "nvd"]):
         return "cve"
@@ -508,18 +476,31 @@ def infer_category(text: str, default: str = "news") -> str:
 
 
 def extract_cve_id(text: str) -> str | None:
+    """
+    Extract the first CVE ID found in text (e.g. CVE-2024-12345).
+    Returns None if not found.
+    """
+    import re
     match = re.search(r"CVE-\d{4}-\d{4,7}", text, re.IGNORECASE)
     return match.group(0).upper() if match else None
 
 
+
 def deduplicate(items: list[dict]) -> list[dict]:
+    """
+    Remove duplicate items by title similarity.
+    Keeps the first occurrence (usually most authoritative source).
+    """
     seen_titles = set()
     unique      = []
+
     for item in items:
+        # Normalize title for comparison
         title_key = item["title"].lower().strip()[:80]
         if title_key not in seen_titles:
             seen_titles.add(title_key)
             unique.append(item)
+
     return unique
 
 
@@ -539,13 +520,14 @@ def main():
             all_items.extend(items)
         except Exception as e:
             log.error(f"Failed fetching {source['name']}: {e}")
-        time.sleep(1)
+        time.sleep(1)  # Be polite between requests
 
     # 2. NVD CVE API
     try:
         all_items.extend(fetch_nvd_cves())
     except Exception as e:
         log.error(f"NVD fetch failed: {e}")
+
     time.sleep(1)
 
     # 3. Reddit r/netsec
@@ -554,7 +536,7 @@ def main():
     except Exception as e:
         log.error(f"Reddit fetch failed: {e}")
 
-    # 4. AlienVault OTX (optional)
+    # 4. AlienVault OTX (only if API key is set)
     try:
         all_items.extend(fetch_otx_pulse(OTX_API_KEY))
     except Exception as e:
@@ -563,37 +545,34 @@ def main():
     # Deduplicate
     all_items = deduplicate(all_items)
 
-    # 5. Sort by date (newest first)
-    all_items.sort(key=lambda x: x.get("published", ""), reverse=True)
-
-    # 6. Map MITRE ATT&CK TTPs
+    # ── Map MITRE ATT&CK TTPs ─────────────────────────────────────────────────
+    # Runs keyword matching on every item's title + description.
+    # Adds a "ttps" list of matched technique dicts to each item.
     log.info("Mapping MITRE ATT&CK TTPs...")
     for item in all_items:
-        text       = item.get("title", "") + " " + item.get("description", "")
+        text = (item.get("title", "") + " " + item.get("description", ""))
         item["ttps"] = map_ttps(text)
+
     ttp_total = sum(len(i["ttps"]) for i in all_items)
     log.info(f"  Mapped {ttp_total} TTP associations across {len(all_items)} items")
 
-    # 7. Gemini AI enrichment (top N most recent items)
-    if GEMINI_API_KEY:
-        log.info(f"Starting Gemini AI enrichment (top {AI_ENRICH_LIMIT} items)...")
-        for i, item in enumerate(all_items[:AI_ENRICH_LIMIT]):
-            enrich_with_gemini(item)
-            if i < AI_ENRICH_LIMIT - 1:
-                time.sleep(AI_SLEEP_SECS)  # Rate limit respect
-        enriched = sum(1 for i in all_items[:AI_ENRICH_LIMIT] if i.get("ai_summary"))
-        log.info(f"  AI enriched {enriched}/{min(AI_ENRICH_LIMIT, len(all_items))} items")
-    else:
-        log.info("GEMINI_API_KEY not set — skipping AI enrichment")
+    # Sort by published date descending
+    all_items.sort(
+        key=lambda x: x.get("published", ""),
+        reverse=True
+    )
 
-    # 8. Write output
+    # Build final output
     output = {
         "last_updated": now_utc(),
         "total_items":  len(all_items),
         "items":        all_items,
     }
 
+    # Ensure the data/ directory exists
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    # Write JSON
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
