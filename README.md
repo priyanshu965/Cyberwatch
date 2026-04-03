@@ -18,7 +18,7 @@ interface. Updates itself every day via GitHub Actions.
 | SANS ISC | Threat Diaries | No |
 | Reddit r/netsec | Community Intel | No |
 | AlienVault OTX | Threat Pulses | Yes |
-| TheRecord Media | News | No |
+| TheRecord Media | New | No |
 
 ---
 
