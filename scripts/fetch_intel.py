@@ -403,7 +403,7 @@ Rules:
 
 def enrich_with_gemini(item: dict) -> dict:
     """
-    Call Gemini 1.5 Flash to add ai_summary, workflow_graph, severity_score.
+    Call Gemini 2.5 Flash to add ai_summary, workflow_graph, severity_score.
     Returns the item dict with new fields populated (or empty strings on failure).
     """
     if not GEMINI_API_KEY:
@@ -416,7 +416,7 @@ def enrich_with_gemini(item: dict) -> dict:
 
     url = (
         "https://generativelanguage.googleapis.com/v1beta/models/"
-        f"gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
+        f"gemini-2.5-flash:generateContent?key={GEMINI_API_KEY}"
     )
 
     body = {
