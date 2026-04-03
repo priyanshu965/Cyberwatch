@@ -1,93 +1,29 @@
-# ═══════════════════════════════════════════════════════════════════════════════
-# CYBERWATCH DASHBOARD — .github/workflows/update.yml
-#
-# This GitHub Actions workflow runs every day at 06:00 UTC.
-# It fetches fresh threat intel, saves it to data/intel.json,
-# and commits + pushes the updated file back to the repo.
-# GitHub Pages then automatically serves the updated dashboard.
-#
-# No manual intervention needed after initial setup!
-# ═══════════════════════════════════════════════════════════════════════════════
-
-name: Daily Intel Update
-
+name: CyberWatch AI Update
 on:
-  # ── Scheduled trigger: every day at 06:00 UTC ──────────────────────────────
   schedule:
-    - cron: '0 */1 * * *'
-
-  # ── Manual trigger: run from the Actions tab anytime ──────────────────────
+    - cron: '0 */6 * * *' # Every 6 hours
   workflow_dispatch:
 
 jobs:
-  fetch-and-update:
-    name: Fetch Threat Intelligence
+  update:
     runs-on: ubuntu-latest
-
-    # Give the workflow permission to push commits back to the repo
-    permissions:
-      contents: write
-
     steps:
-
-      # ── Step 1: Check out the repository ──────────────────────────────────
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          # Fetch full history so git push works correctly
-          fetch-depth: 0
-
-      # ── Step 2: Set up Python ─────────────────────────────────────────────
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      # ── Step 3: Cache pip dependencies (speeds up subsequent runs) ─────────
-      - name: Cache pip packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('scripts/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
-      # ── Step 4: Install Python dependencies ───────────────────────────────
+          python-version: '3.10'
       - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install requests feedparser
-
-      # ── Step 5: Run the fetch script ──────────────────────────────────────
-      - name: Fetch threat intelligence
+        run: pip install requests feedparser
+      - name: Run Pipeline
         env:
-          # Optional API keys — set these in GitHub repo Settings → Secrets
-          # Settings → Secrets and variables → Actions → New repository secret
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           OTX_API_KEY: ${{ secrets.OTX_API_KEY }}
+        run: python scripts/fetch_intel.py
+      - name: Commit & Push
         run: |
-          python scripts/fetch_intel.py
-
-      # ── Step 6: Commit and push the updated intel.json ────────────────────
-      - name: Commit updated intel data
-        run: |
-          git config user.name  "CyberWatch Bot"
-          git config user.email "cyberwatch-bot@users.noreply.github.com"
-
-          # Only commit if intel.json actually changed
-          if git diff --quiet data/intel.json; then
-            echo "No changes detected in intel.json — skipping commit."
-          else
-            git add data/intel.json
-            git commit -m "chore: daily intel update [$(date -u '+%Y-%m-%d %H:%M UTC')]"
-            git push
-            echo "Successfully committed and pushed updated intel.json"
-          fi
-
-      # ── Step 7: Print summary ─────────────────────────────────────────────
-      - name: Print summary
-        run: |
-          echo "### CyberWatch Update Complete" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- **Run time:** $(date -u)" >> $GITHUB_STEP_SUMMARY
-          echo "- **Items fetched:** $(python -c "import json; d=json.load(open('data/intel.json')); print(d['total_items'])")" >> $GITHUB_STEP_SUMMARY
-          echo "- **Last updated:** $(python -c "import json; d=json.load(open('data/intel.json')); print(d['last_updated'])")" >> $GITHUB_STEP_SUMMARY
+          git config user.name "CyberWatch Bot"
+          git config user.email "bot@cyberwatch.io"
+          git add data/
+          git commit -m "Update intel with AI enrichment [skip ci]" || echo "No changes"
+          git push
