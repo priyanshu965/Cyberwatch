@@ -134,7 +134,7 @@ def make_request(url: str, headers: dict = None, params: dict = None) -> dict | 
 
 def call_gemini(title: str, description: str, api_key: str) -> dict | None:
     """
-    Call Gemini 1.5 Flash to produce AI analysis for a threat intel item.
+    Call Gemini 2.0 Flash to produce AI analysis for a threat intel item.
     Returns a dict with keys: ai_summary, workflow_graph, severity_score.
     Returns None on any failure so the caller can gracefully skip enrichment.
     """
@@ -160,7 +160,7 @@ def call_gemini(title: str, description: str, api_key: str) -> dict | None:
 
     url = (
         "https://generativelanguage.googleapis.com/v1beta/models/"
-        f"gemini-1.5-flash:generateContent?key={api_key}"
+        f"gemini-2.0-flash:generateContent?key={api_key}"
     )
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
