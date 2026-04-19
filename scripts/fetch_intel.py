@@ -106,6 +106,9 @@ RSS_SOURCES = [
     {"name": "Krebs on Security","url": "https://krebsonsecurity.com/feed/",                "category": "news",     "severity": "medium"},
     {"name": "SANS ISC",         "url": "https://isc.sans.edu/rssfeed_full.xml",            "category": "news",     "severity": "low"},
     {"name": "TheRecord Media",  "url": "https://therecord.media/feed",                     "category": "news",     "severity": "high"},
+    {"name": "Dark Reading",     "url": "https://www.darkreading.com/rss.xml",              "category": "news",     "severity": "medium"},
+    {"name": "SecurityWeek",     "url": "https://www.securityweek.com/feed/",               "category": "news",     "severity": "medium"},
+    {"name": "Threatpost",       "url": "https://threatpost.com/feed/",                     "category": "news",     "severity": "medium"},
 ]
 
 
@@ -581,6 +584,104 @@ def fetch_reddit_netsec() -> list[dict]:
     return items
 
 
+def fetch_epss_scores(cve_ids: list[str]) -> dict[str, float]:
+    """Fetch EPSS scores from FIRST.org for given CVE IDs."""
+    if not cve_ids:
+        return {}
+    log.info(f"Fetching EPSS scores for {len(cve_ids)} CVEs...")
+    try:
+        resp = requests.post(
+            "https://api.first.org/epss/v1/epss",
+            data={"cve": cve_ids},
+            headers={**HEADERS, "Content-Type": "application/x-www-form-urlencoded"},
+            timeout=REQUEST_TIMEOUT
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        scores = {}
+        for entry in data.get("data", []):
+            cve = entry.get("cve", "")
+            epss = entry.get("epss")
+            if cve and epss is not None:
+                scores[cve.upper()] = float(epss)
+        log.info(f"  Got EPSS scores for {len(scores)} CVEs")
+        return scores
+    except Exception as e:
+        log.warning(f"EPSS fetch failed: {e}")
+        return {}
+
+
+def fetch_cisa_kev() -> set[str]:
+    """Fetch CISA Known Exploited Vulnerabilities catalog."""
+    log.info("Fetching CISA KEV catalog...")
+    try:
+        resp = requests.get(
+            "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+            timeout=REQUEST_TIMEOUT
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        cve_ids = set()
+        for vuln in data.get("vulnerabilities", []):
+            cve_id = vuln.get("cveID", "")
+            if cve_id:
+                cve_ids.add(cve_id.upper())
+        log.info(f"  Got {len(cve_ids)} CVEs in CISA KEV")
+        return cve_ids
+    except Exception as e:
+        log.warning(f"CISA KEV fetch failed: {e}")
+        return {}
+
+
+# Threat actor detection
+THREAT_ACTORS = {
+    "Lazarus": ["lazarus", "hidden cobra", "zinc", "guardians of peace", "labyrinth chollima"],
+    "APT29": ["apt29", "cozy bear", "the duke", "cozy duke", "yttrium"],
+    "APT28": ["apt28", "fancy bear", "sednit", "pawn storm", "strontium"],
+    "APT41": ["apt41", "barium", "winnti", "wicked panda", "lead"],
+    "APT1": ["apt1", "comment crew", "comment groupe", "shanghai group"],
+    "APT17": ["apt17", "tailgator team", "austin group"],
+    "APT32": ["apt32", "oceanlotus", "fin6", "gold dragon"],
+    "APT33": ["apt33", "elfin", "refined kit", "shamoon"],
+    "APT34": ["apt34", "oilrig", "helix kit", "parsimonious"],
+    "APT38": ["apt38", "lazarus", "hidden cobra", "zinc"],
+    "FIN7": ["fin7", "carbanak", "navigator"],
+    "FIN4": ["fin4", "promethium"],
+    "Cozy Bear": ["cozy bear", "apt29"],
+    "DarkSide": ["darkside", "blackmatter"],
+    "REvil": ["revil", "sodinokibi"],
+    "LockBit": ["lockbit"],
+    "BlackCat": ["blackcat", "alphv"],
+    "Clop": ["clop", "cl0p"],
+    "Conti": ["conti", "wizard spider"],
+    "TrickBot": ["trickbot", "trickster"],
+    "Emotet": ["emotet", "heodo"],
+    "Tauri": ["tauri", "mint sandstorm"],
+    "Moses Staff": ["moses staff"],
+    "MSTIC": ["mstic", "microsoft threat intelligence"],
+    "Sandworm": ["sandworm", "voodoo bear", "electrum"],
+    "Carbanak": ["carbanak", "fin7"],
+    "Nobelium": ["nobelium", "solarwinds"],
+    "Kaseya": ["kaseya"],
+    "Log4j": ["log4shell", "log4j"],
+    "FunkSec": ["funksec"],
+    "MirrorFace": ["mirrorface"],
+    "Salt Typhoon": ["salt typhoon"],
+    "EAGERBEE": ["eagerbee"],
+}
+
+def detect_threat_actors(text: str) -> list[str]:
+    """Detect threat actors mentioned in text."""
+    text_lower = text.lower()
+    actors = []
+    for actor, keywords in THREAT_ACTORS.items():
+        for kw in keywords:
+            if kw in text_lower:
+                actors.append(actor)
+                break
+    return list(set(actors))
+
+
 def fetch_otx_pulse(api_key: str) -> list[dict]:
     if not api_key:
         log.info("OTX_API_KEY not set — skipping AlienVault OTX")
@@ -710,7 +811,37 @@ def main():
     ttp_total = sum(len(i["ttps"]) for i in all_items)
     log.info(f"  Mapped {ttp_total} TTP associations across {len(all_items)} items")
 
-    # 6. AI Enrichment (Groq primary → Gemini fallback)
+    # 6. Fetch EPSS scores for CVEs
+    cve_ids = [item["cve_id"] for item in all_items if item.get("cve_id")]
+    if cve_ids:
+        epss_scores = fetch_epss_scores(cve_ids)
+        for item in all_items:
+            if item.get("cve_id"):
+                item["epss_score"] = epss_scores.get(item["cve_id"].upper())
+        log.info(f"  Applied EPSS scores to {len([i for i in all_items if i.get('epss_score')])} items")
+
+    # 7. Fetch CISA KEV and mark known exploited CVEs
+    cisa_kev = fetch_cisa_kev()
+    if cisa_kev:
+        kev_count = 0
+        for item in all_items:
+            if item.get("cve_id") and item["cve_id"].upper() in cisa_kev:
+                item["cisa_kev"] = True
+                kev_count += 1
+        log.info(f"  Marked {kev_count} CVEs from CISA KEV catalog")
+
+    # 8. Detect threat actors
+    log.info("Detecting threat actors...")
+    actor_count = 0
+    for item in all_items:
+        text = item.get("title", "") + " " + item.get("description", "")
+        actors = detect_threat_actors(text)
+        if actors:
+            item["threat_actors"] = actors
+            actor_count += 1
+    log.info(f"  Detected threat actors in {actor_count} items")
+
+    # 9. AI Enrichment (Groq primary → Gemini fallback)
     try:
         all_items = enrich_with_ai(all_items)
     except Exception as e:

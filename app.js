@@ -103,6 +103,10 @@ function applyFilters() {
     showMatrixView();
     return;
   }
+  if (activeFilter === 'timeline') {
+    showTimelineView();
+    return;
+  }
 
   filteredItems = allItems.filter(item => {
     const catMatch = activeFilter === 'all' || item.category === activeFilter;
@@ -205,7 +209,19 @@ function buildCard(item, index) {
     ? `<span class="ai-badge" title="Enriched by ${escapeHTML(providerLabel)}: ${escapeHTML(modelLabel)}">${escapeHTML(providerLabel)}</span>`
     : '';
 
-  const cveIdHTML  = item.cve_id ? `<span class="cve-id">${item.cve_id}</span> · ` : '';
+  // Threat actor badges
+  const threatActorHTML = (item.threat_actors && item.threat_actors.length > 0)
+    ? item.threat_actors.slice(0, 2).map(actor => 
+        `<span class="threat-actor-badge" onclick="event.stopPropagation();filterByThreatActor('${escapeHTML(actor)}')" title="Filter by ${escapeHTML(actor)}">${escapeHTML(actor)}</span>`
+      ).join('')
+    : '';
+
+  // CISA KEV badge
+  const cisaKevHTML = item.cisa_kev
+    ? `<span class="cisa-kev-badge" title="Known Exploited Vulnerability (CISA KEV)">KEV</span>`
+    : '';
+
+  const cveIdHTML  = item.cve_id ? `<span class="cve-id" onclick="event.stopPropagation();openCveModal('${escapeHTML(item.cve_id)}')" title="Click for CVE details">${escapeHTML(item.cve_id)}</span> · ` : '';
   const descHTML   = item.description
     ? `<p class="card-description">${escapeHTML(item.description)}</p>` : '';
   const dateStr    = item.published ? timeAgo(new Date(item.published)) : '';
@@ -213,6 +229,10 @@ function buildCard(item, index) {
     ? `<span class="meta-tag meta-cvss">CVSS ${item.cvss_score.toFixed(1)}</span>` : '';
   const aiScoreHTML = (item.severity_score != null)
     ? `<span class="meta-tag meta-ai-score" title="AI severity score: ${escapeHTML(modelLabel)}">✦ AI ${item.severity_score.toFixed(1)}</span>`
+    : '';
+
+  const epssHTML = (item.epss_score != null)
+    ? `<span class="meta-tag meta-epss" title="EPSS: ${(item.epss_score * 100).toFixed(2)}% probability of exploit in 30 days">✦ EPSS ${(item.epss_score * 100).toFixed(1)}%</span>`
     : '';
 
   // TTP pills
@@ -273,16 +293,17 @@ function buildCard(item, index) {
                onclick="event.stopPropagation()">${escapeHTML(item.title)}</a>`
           : escapeHTML(item.title)
         }
-        ${newBadgeHTML}${aiBadgeHTML}
+        ${newBadgeHTML}${aiBadgeHTML}${cisaKevHTML}
       </p>
       ${badgeHTML}
     </div>
+    ${threatActorHTML ? `<div class="card-actors">${threatActorHTML}</div>` : ''}
     ${descHTML}
     <div class="card-meta">
       ${cveIdHTML}
       <span class="meta-tag meta-source">${escapeHTML(item.source || 'unknown')}</span>
       <span class="meta-tag meta-cat">${escapeHTML(item.category || 'general')}</span>
-      ${cvssHTML}${aiScoreHTML}
+      ${cvssHTML}${aiScoreHTML}${epssHTML}
       <span class="meta-date">${dateStr}</span>
     </div>
     ${ttpHTML}
@@ -544,6 +565,18 @@ window.filterByCategory = function(cat) {
   applyFilters();
 };
 
+window.filterByThreatActor = function(actor) {
+  activeFilter = 'all';
+  searchQuery = actor;
+  document.querySelectorAll('.filter-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.filter === 'all')
+  );
+  const si = document.getElementById('search-input');
+  if (si) si.value = actor;
+  showContent();
+  applyFilters();
+};
+
 // ─── Header Stats ─────────────────────────────────────────────────────────────
 function updateHeaderStats() {
   const critical = filteredItems.filter(i => (i.severity||'').toLowerCase() === 'critical').length;
@@ -625,6 +658,178 @@ window.toggleMobileSidebar = function() {
   const isOpen = sidebar.classList.toggle('mobile-open');
   if (label) label.textContent = isOpen ? '▲ HIDE STATS' : '▼ SHOW STATS';
 };
+
+// ─── CVE Deep-Dive Modal ─────────────────────────────────────────────────────
+window.openCveModal = function(cveId) {
+  const modal = document.getElementById('cve-modal');
+  const modalTitle = document.getElementById('modal-cve-id');
+  const modalBody = document.getElementById('modal-body');
+  
+  if (!modal || !modalTitle || !modalBody) return;
+  
+  modalTitle.textContent = cveId;
+  modalBody.innerHTML = `
+    <div class="modal-loading">
+      <div class="loader-ring"></div>
+      <span>Fetching NVD details...</span>
+    </div>
+  `;
+  modal.style.display = 'flex';
+  
+  fetchCveDetails(cveId);
+};
+
+window.closeCveModal = function() {
+  const modal = document.getElementById('cve-modal');
+  if (modal) modal.style.display = 'none';
+};
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeCveModal();
+});
+
+document.getElementById('cve-modal')?.addEventListener('click', e => {
+  if (e.target.classList.contains('modal-overlay')) closeCveModal();
+});
+
+async function fetchCveDetails(cveId) {
+  const modalBody = document.getElementById('modal-body');
+  if (!modalBody) return;
+  
+  // Validate CVE ID format
+  if (!/^CVE-\d{4}-\d{4,7}$/i.test(cveId)) {
+    modalBody.innerHTML = '<div class="modal-error">Invalid CVE ID format</div>';
+    return;
+  }
+  
+  // Rate limiting: retry with exponential backoff
+  const maxRetries = 3;
+  let lastError = null;
+  
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      const resp = await fetch(`https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=${encodeURIComponent(cveId)}`);
+      
+      if (resp.status === 429) {
+        // Rate limited - wait and retry
+        const waitTime = Math.pow(2, attempt) * 1000;
+        console.warn(`Rate limited, retrying in ${waitTime}ms...`);
+        await new Promise(r => setTimeout(r, waitTime));
+        continue;
+      }
+      
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const data = await resp.json();
+      
+      const vuln = data?.vulnerabilities?.[0]?.cve;
+      if (!vuln) throw new Error('CVE not found');
+      
+      const descriptions = vuln.descriptions || [];
+      const description = descriptions.find(d => d.lang === 'en')?.value || 'No description available.';
+      
+      let cvssScore = null, cvssVector = null, severity = 'UNKNOWN';
+      for (const metric of ['cvssMetricV31', 'cvssMetricV30', 'cvssMetricV2']) {
+        const m = vuln.metrics?.[metric];
+        if (m?.length) {
+          cvssScore = m[0].cvssData?.baseScore;
+          cvssVector = m[0].cvssData?.vectorString;
+          severity = m[0].cvssData?.baseSeverity || severity;
+          break;
+        }
+      }
+      
+      const references = (vuln.references || []).slice(0, 8).map(ref => 
+        `<a class="modal-ref-link" href="${escapeHTML(ref.url)}" target="_blank" rel="noopener">${escapeHTML(ref.url)}</a>`
+      ).join('');
+      
+      const published = vuln.published ? new Date(vuln.published).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'N/A';
+      const lastModified = vuln.lastModified ? new Date(vuln.lastModified).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'N/A';
+      
+      const item = allItems.find(i => i.cve_id?.toUpperCase() === cveId.toUpperCase());
+      const epssScore = item?.epss_score != null ? item.epss_score : null;
+      const epssPercentile = epssScore != null ? (epssScore * 100).toFixed(2) : 'N/A';
+      
+      const severityClass = severity.toLowerCase();
+      
+      modalBody.innerHTML = `
+        <div class="modal-section">
+          <div class="modal-section-title">Overview</div>
+          <div class="modal-grid">
+            <div class="modal-stat">
+              <div class="modal-stat-label">Published</div>
+              <div class="modal-stat-value">${published}</div>
+            </div>
+            <div class="modal-stat">
+              <div class="modal-stat-label">Last Modified</div>
+              <div class="modal-stat-value">${lastModified}</div>
+            </div>
+            <div class="modal-stat">
+              <div class="modal-stat-label">CVSS Score</div>
+              <div class="modal-stat-value ${severityClass}">${cvssScore ?? 'N/A'}</div>
+            </div>
+            <div class="modal-stat">
+              <div class="modal-stat-label">Severity</div>
+              <div class="modal-stat-value ${severityClass}">${escapeHTML(severity)}</div>
+            </div>
+            ${epssScore != null ? `
+            <div class="modal-stat">
+              <div class="modal-stat-label">EPSS Score</div>
+              <div class="modal-stat-value">${epssScore.toFixed(4)}</div>
+            </div>
+            <div class="modal-stat">
+              <div class="modal-stat-label">EPSS Percentile</div>
+              <div class="modal-stat-value">${epssPercentile}%</div>
+            </div>
+            ` : ''}
+          </div>
+          ${epssScore != null ? `
+          <div class="modal-section" style="margin-top:12px;">
+            <div class="modal-section-title">Exploit Prediction (EPSS)</div>
+            <div class="modal-epss-bar">
+              <div class="modal-epss-fill" style="width:${epssPercentile}%"></div>
+            </div>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">Percentile: ${epssPercentile}% — This CVE is predicted to have exploit activity within the next 30 days.</div>
+          </div>
+          ` : ''}
+        </div>
+        
+        <div class="modal-section">
+          <div class="modal-section-title">Description</div>
+          <div class="modal-description">${escapeHTML(description)}</div>
+        </div>
+        
+        ${cvssVector ? `
+        <div class="modal-section">
+          <div class="modal-section-title">CVSS Vector</div>
+          <div class="modal-description" style="font-family:var(--font-mono);font-size:11px;word-break:break-all;">${escapeHTML(cvssVector)}</div>
+        </div>
+        ` : ''}
+        
+        ${references ? `
+        <div class="modal-section">
+          <div class="modal-section-title">References</div>
+          <div class="modal-refs">${references}</div>
+        </div>
+        ` : ''}
+      `;
+      
+      return; // Success - exit the retry loop
+      
+    } catch (err) {
+      lastError = err;
+      console.error('CVE fetch error:', err);
+      
+      // If it's a 429, the outer loop will handle retry
+      // Otherwise, don't retry on other errors
+      if (err.message !== 'HTTP 429') {
+        break;
+      }
+    }
+  }
+  
+  // All retries failed
+  modalBody.innerHTML = `<div class="modal-error">Failed to load CVE details: ${escapeHTML(lastError?.message || 'Unknown error')}</div>`;
+}
 
 // ─── MITRE ATT&CK Matrix ─────────────────────────────────────────────────────
 const TACTIC_ORDER = [
@@ -725,4 +930,217 @@ function escapeHTML(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
+}
+
+// ─── Timeline View ─────────────────────────────────────────────────────────
+function renderTimelineView() {
+  const grid = document.getElementById('timeline-view-grid');
+  if (!grid) return;
+
+  const timelineData = {};
+  allItems.forEach(item => {
+    if (!item.published) return;
+    const date = new Date(item.published).toISOString().split('T')[0];
+    if (!timelineData[date]) {
+      timelineData[date] = { critical: 0, high: 0, medium: 0, low: 0, total: 0 };
+    }
+    const sev = (item.severity || 'medium').toLowerCase();
+    if (sev in timelineData[date]) {
+      timelineData[date][sev]++;
+    }
+    timelineData[date].total++;
+  });
+
+  const sortedDates = Object.keys(timelineData).sort().reverse().slice(0, 14);
+  
+  if (sortedDates.length === 0) {
+    grid.innerHTML = '<div class="no-results">No timeline data available</div>';
+    return;
+  }
+
+  const maxTotal = Math.max(...Object.values(timelineData).map(d => d.total), 1);
+  
+  grid.innerHTML = sortedDates.map(date => {
+    const d = timelineData[date];
+    const heightPct = (d.total / maxTotal) * 100;
+    return `
+      <div class="timeline-day">
+        <div class="timeline-bar-wrap">
+          <div class="timeline-bar" style="height:${heightPct}%">
+            <div class="timeline-segments">
+              ${d.critical > 0 ? `<div class="segment critical" style="height:${(d.critical/d.total)*100}%"></div>` : ''}
+              ${d.high > 0 ? `<div class="segment high" style="height:${(d.high/d.total)*100}%"></div>` : ''}
+              ${d.medium > 0 ? `<div class="segment medium" style="height:${(d.medium/d.total)*100}%"></div>` : ''}
+              ${d.low > 0 ? `<div class="segment low" style="height:${(d.low/d.total)*100}%"></div>` : ''}
+            </div>
+          </div>
+        </div>
+        <div class="timeline-date">${new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</div>
+        <div class="timeline-count">${d.total}</div>
+        <div class="timeline-tooltip">
+          <span class="critical">${d.critical} Critical</span>
+          <span class="high">${d.high} High</span>
+          <span class="medium">${d.medium} Medium</span>
+          <span class="low">${d.low} Low</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function showTimelineView() {
+  document.getElementById('loading-state').style.display = 'none';
+  document.getElementById('error-state').style.display = 'none';
+  document.getElementById('cards-container').style.display = 'none';
+  document.getElementById('matrix-view').style.display = 'none';
+  document.getElementById('timeline-view').style.display = 'flex';
+  document.getElementById('no-results').style.display = 'none';
+  renderTimelineView();
+  document.getElementById('feed-count').textContent = 'Timeline — CVE activity over last 14 days';
+}
+
+// ─── Keyboard Shortcuts ─────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  
+  switch(e.key) {
+    case '/':
+      e.preventDefault();
+      document.getElementById('search-input')?.focus();
+      break;
+    case 'Escape':
+      closeCveModal();
+      const matrixView = document.getElementById('matrix-view');
+      const timelineView = document.getElementById('timeline-view');
+      if (matrixView?.style.display === 'block' || timelineView?.style.display === 'flex') {
+        showContent();
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
+        activeFilter = 'all';
+        applyFilters();
+      }
+      break;
+    case 'c':
+      activeFilter = 'cve';
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'cve'));
+      showContent();
+      applyFilters();
+      break;
+    case 'n':
+      activeFilter = 'news';
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'news'));
+      showContent();
+      applyFilters();
+      break;
+    case 'a':
+      activeFilter = 'advisory';
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'advisory'));
+      showContent();
+      applyFilters();
+      break;
+    case 'i':
+      activeFilter = 'incident';
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'incident'));
+      showContent();
+      applyFilters();
+      break;
+    case 'm':
+      activeFilter = 'matrix';
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'matrix'));
+      applyFilters();
+      break;
+    case 't':
+      activeFilter = 'timeline';
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'timeline'));
+      showTimelineView();
+      break;
+  }
+});
+
+// ─── Error Boundary ──────────────────────────────────────────────────────
+window.onerror = function(msg, url, line, col, error) {
+  console.error('Global error:', msg, 'at', url, ':', line);
+  const errorDiv = document.getElementById('error-state');
+  if (errorDiv) {
+    errorDiv.innerHTML = `
+      <p class="error-icon">⚠</p>
+      <p>An unexpected error occurred.</p>
+      <p class="error-detail">${escapeHTML(msg)}</p>
+      <button onclick="location.reload()" class="retry-btn">Retry</button>
+    `;
+    errorDiv.style.display = 'block';
+  }
+  document.getElementById('loading-state').style.display = 'none';
+  return true;
+};
+
+window.onunhandledrejection = function(event) {
+  console.error('Unhandled rejection:', event.reason);
+};
+
+// ─── Resizable Sidebar ───────────────────────────────────────────────────
+function initResizableSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  const dashboard = document.querySelector('.dashboard');
+  if (!sidebar || !dashboard) return;
+  
+  const handle = document.createElement('div');
+  handle.className = 'resize-handle';
+  sidebar.appendChild(handle);
+  
+  let isResizing = false;
+  let startX = 0;
+  let startWidth = 0;
+  
+  handle.addEventListener('mousedown', (e) => {
+    isResizing = true;
+    startX = e.clientX;
+    startWidth = sidebar.offsetWidth;
+    handle.classList.add('active');
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+  });
+  
+  document.addEventListener('mousemove', (e) => {
+    if (!isResizing) return;
+    const diff = e.clientX - startX;
+    const newWidth = Math.max(200, Math.min(500, startWidth + diff));
+    sidebar.style.width = newWidth + 'px';
+    sidebar.style.flex = 'none';
+  });
+  
+  document.addEventListener('mouseup', () => {
+    if (isResizing) {
+      isResizing = false;
+      handle.classList.remove('active');
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+      localStorage.setItem('sidebarWidth', sidebar.offsetWidth);
+    }
+  });
+  
+  // Restore saved width
+  const savedWidth = localStorage.getItem('sidebarWidth');
+  if (savedWidth) {
+    sidebar.style.width = savedWidth + 'px';
+    sidebar.style.flex = 'none';
+  }
+}
+
+// Initialize resizable sidebar when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  initResizableSidebar();
+});
+
+// ─── Service Worker Registration (Offline Mode) ─────────────────────────
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').then(
+      (registration) => {
+        console.log('SW registered:', registration.scope);
+      },
+      (err) => {
+        console.log('SW registration failed:', err);
+      }
+    );
+  });
 }
