@@ -8,9 +8,6 @@
  * AI Features:
  *  - Cards expand on click → AI analysis panel (summary + severity + graph)
  *  - Mermaid attack-flow diagram lazily rendered via mermaid.render()
- *  - TTP Detail Cards: parsed from graph edge labels + item ttps[]
- *    Each card shows tactic phase, technique name, and all feed items
- *    that share that TTP. Clicking any item scrolls to it in the feed.
  */
 
 // ─── Mermaid Config (dark terminal theme) ─────────────────────────────────────
@@ -262,24 +259,6 @@ function buildCard(item, index) {
     ? `<span class="meta-tag meta-epss" title="EPSS: ${(item.epss_score * 100).toFixed(2)}% probability of exploit in 30 days">✦ EPSS ${(item.epss_score * 100).toFixed(1)}%</span>`
     : '';
 
-  // TTP pills
-  const ttps   = item.ttps || [];
-  let ttpHTML  = '';
-  if (ttps.length > 0) {
-    const shown  = ttps.slice(0, 4);
-    const hidden = ttps.length - shown.length;
-    const pills  = shown.map(t =>
-      `<span class="ttp-pill"
-             title="${escapeHTML(t.tactic)}: ${escapeHTML(t.name)}"
-             onclick="event.stopPropagation();filterByTechnique('${t.id}')"
-       >${escapeHTML(t.id)}</span>`
-    ).join('');
-    const more = hidden > 0
-      ? `<span class="ttp-more" title="${ttps.slice(4).map(t=>t.id).join(', ')}">+${hidden}</span>`
-      : '';
-    ttpHTML = `<div class="card-ttps">${pills}${more}</div>`;
-  }
-
   // Analysis section — graph source is unescaped for Mermaid
   const graphSource    = (item.workflow_graph || '').replace(/\\n/g, '\n');
   const aiSummaryText  = item.ai_summary || '';
@@ -293,15 +272,12 @@ function buildCard(item, index) {
       <p class="analysis-summary">${escapeHTML(aiSummaryText)}</p>
       ${graphSource ? `
       <div class="analysis-graph-wrap">
-        <div class="analysis-graph-label">ATTACK FLOW — click any TTP node for related items</div>
+        <div class="analysis-graph-label">ATTACK FLOW</div>
         <div class="mermaid-container" id="mermaid-${mySeq}" data-graph="${escapeHTML(graphSource)}" data-rendered="false">
           <div class="mermaid-spinner">
             <div class="mermaid-spinner-ring"></div>
             <span>Rendering diagram…</span>
           </div>
-        </div>
-        <div class="ttp-detail-cards" id="ttp-cards-${mySeq}">
-          <!-- populated after mermaid renders -->
         </div>
       </div>` : ''}
     </div>
@@ -333,19 +309,13 @@ function buildCard(item, index) {
       ${cvssHTML}${aiScoreHTML}${epssHTML}
       <span class="meta-date">${dateStr}</span>
     </div>
-    ${ttpHTML}
     ${analysisHTML}
     ${expandHintHTML}
   `;
 
   // ── Card click → toggle expand + lazy-render Mermaid ────────────────────────
   card.addEventListener('click', e => {
-    if (
-      e.target.closest('a') ||
-      e.target.closest('.ttp-pill') ||
-      e.target.closest('.ttp-more') ||
-      e.target.closest('.ttp-detail-card')
-    ) return;
+    if (e.target.closest('a')) return;
 
     const wasExpanded = card.classList.contains('expanded');
     card.classList.toggle('expanded');
@@ -374,7 +344,6 @@ async function renderMermaidAsync(container, graphSource, seqId, item) {
 
     container.innerHTML = svg;
 
-    // Make SVG scale properly
     const svgEl = container.querySelector('svg');
     if (svgEl) {
       svgEl.style.maxWidth  = '100%';
@@ -382,12 +351,6 @@ async function renderMermaidAsync(container, graphSource, seqId, item) {
       svgEl.style.display   = 'block';
       svgEl.removeAttribute('width');
       svgEl.removeAttribute('height');
-    }
-
-    // Build TTP detail cards after diagram renders
-    const ttpCardContainer = document.getElementById(`ttp-cards-${seqId}`);
-    if (ttpCardContainer) {
-      buildTtpDetailCards(ttpCardContainer, graphSource, item);
     }
 
   } catch (err) {
@@ -398,126 +361,7 @@ async function renderMermaidAsync(container, graphSource, seqId, item) {
     pre.textContent = graphSource;
     container.innerHTML = '';
     container.appendChild(pre);
-
-    // Still build TTP detail cards even if graph fails
-    const ttpCardContainer = document.getElementById(`ttp-cards-${seqId}`);
-    if (ttpCardContainer) {
-      buildTtpDetailCards(ttpCardContainer, graphSource, item);
-    }
   }
-}
-
-// ─── TTP Detail Cards ─────────────────────────────────────────────────────────
-/**
- * Parses TTP IDs from the graph edge labels (e.g. |T1566.001| → "T1566.001")
- * and the item's own ttps[] array, then builds interactive detail cards for each.
- *
- * Each card shows:
- *  - TTP ID badge  (clickable → filters feed)
- *  - Technique name + tactic phase
- *  - Count of OTHER feed items sharing this TTP
- *  - Scrollable list of those items (clickable → filters feed to that item)
- */
-function buildTtpDetailCards(container, graphSource, sourceItem) {
-  // 1. Extract TTP IDs from graph edge labels like |T1566|, |T1059.001|
-  const edgeTtpIds = new Set();
-  const edgeMatches = graphSource.matchAll(/\|([^|\n]{1,20})\|/g);
-  for (const m of edgeMatches) {
-    const candidate = m[1].trim();
-    if (/^T\d{4}(\.\d{3})?$/.test(candidate)) {
-      edgeTtpIds.add(candidate);
-    }
-  }
-
-  // 2. Merge with item's mapped ttps[]
-  const ttpMap = {};
-  (sourceItem.ttps || []).forEach(t => {
-    ttpMap[t.id] = { id: t.id, name: t.name, tactic: t.tactic, tactic_id: t.tactic_id };
-  });
-  // Add any graph-only TTP IDs (may not be in the mapped list)
-  edgeTtpIds.forEach(id => {
-    if (!ttpMap[id]) ttpMap[id] = { id, name: id, tactic: '—', tactic_id: '—' };
-  });
-
-  const allTtps = Object.values(ttpMap);
-  if (allTtps.length === 0) return;
-
-  // 3. Sort: graph-referenced first, then by id
-  allTtps.sort((a, b) => {
-    const aInGraph = edgeTtpIds.has(a.id) ? 0 : 1;
-    const bInGraph = edgeTtpIds.has(b.id) ? 0 : 1;
-    return aInGraph - bInGraph || a.id.localeCompare(b.id);
-  });
-
-  // 4. Build the section
-  const sectionHeader = document.createElement('div');
-  sectionHeader.className = 'ttp-detail-section-header';
-  sectionHeader.innerHTML = `
-    <span class="ttp-detail-section-label">TTP BREAKDOWN</span>
-    <span class="ttp-detail-section-hint">Click any technique to filter the feed</span>
-  `;
-  container.appendChild(sectionHeader);
-
-  allTtps.forEach(ttp => {
-    // Find feed items that share this TTP (excluding the source item itself)
-    const relatedItems = allItems.filter(other =>
-      other !== sourceItem &&
-      (other.ttps || []).some(t => t.id === ttp.id)
-    );
-
-    const card = document.createElement('div');
-    card.className    = 'ttp-detail-card';
-    card.dataset.ttpId = ttp.id;
-
-    // Tactic badge colour
-    const tacticColor = tacticColor_forId(ttp.tactic_id);
-
-    // Related items list (max 4 shown)
-    const relatedHTML = relatedItems.length > 0
-      ? `<div class="ttp-related-list">
-           ${relatedItems.slice(0, 4).map(other => `
-             <div class="ttp-related-item"
-                  onclick="event.stopPropagation();jumpToItem(${JSON.stringify(other.title.substring(0,40))})"
-                  title="${escapeHTML(other.title)}">
-               <span class="ttp-related-cat" style="background:${catColor(other.category)}"></span>
-               <span class="ttp-related-title">${escapeHTML(other.title.substring(0,72))}${other.title.length>72?'…':''}</span>
-             </div>`
-           ).join('')}
-           ${relatedItems.length > 4 ? `<div class="ttp-related-more">+${relatedItems.length-4} more items</div>` : ''}
-         </div>`
-      : `<div class="ttp-related-empty">No other items in feed share this technique</div>`;
-
-    card.innerHTML = `
-      <div class="ttp-detail-header">
-        <button class="ttp-detail-id" onclick="event.stopPropagation();filterByTechnique('${ttp.id}')"
-                title="Filter feed by ${escapeHTML(ttp.id)}">${escapeHTML(ttp.id)}</button>
-        <div class="ttp-detail-info">
-          <span class="ttp-detail-name">${escapeHTML(ttp.name)}</span>
-          <span class="ttp-detail-tactic" style="color:${tacticColor}">${escapeHTML(ttp.tactic)}</span>
-        </div>
-        <span class="ttp-detail-count">${relatedItems.length} match${relatedItems.length!==1?'es':''}</span>
-      </div>
-      ${relatedHTML}
-    `;
-
-    container.appendChild(card);
-  });
-}
-
-// Colour helpers for TTP cards
-function tacticColor_forId(tacticId) {
-  const map = {
-    'TA0043': '#5f7a94', 'TA0042': '#a78bfa', 'TA0001': '#ff3b5c',
-    'TA0002': '#ff8c42', 'TA0003': '#f5c518', 'TA0004': '#ff8c42',
-    'TA0005': '#00ffe1', 'TA0006': '#ff3b5c', 'TA0007': '#3b9eff',
-    'TA0008': '#a78bfa', 'TA0009': '#3b9eff', 'TA0011': '#00ffe1',
-    'TA0010': '#ff8c42', 'TA0040': '#ff3b5c',
-  };
-  return map[tacticId] || '#4da6ff';
-}
-
-function catColor(cat) {
-  return { cve: '#ff3b5c', incident: '#ff8c42', advisory: '#f5c518', news: '#3b9eff' }[cat] || '#5f7a94';
 }
 
 // Jump to a card in the feed by title fragment

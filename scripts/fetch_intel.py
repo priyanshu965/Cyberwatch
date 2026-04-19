@@ -184,23 +184,27 @@ def build_prompt(item: dict) -> str:
         f"{t['id']} ({t['name']})" for t in item.get("ttps", [])[:6]
     ) or "None detected"
 
-    return f"""You are a senior threat intelligence analyst. Analyze this cybersecurity item and respond with ONLY a valid JSON object — no markdown, no code fences, no preamble.
+return f"""You are a senior threat intelligence analyst. Analyze this cybersecurity threat and respond with ONLY a valid JSON object — no markdown, no code fences, no preamble.
 
 Return exactly this structure:
 {{
-  "ai_summary": "2-3 sentences: what the threat is technically, its real-world impact, and the single most important defender action.",
+  "ai_summary": "4-5 sentences: detailed technical breakdown of the vulnerability/exploit, affected systems/versions, real-world impact with specific examples, threat actor attribution if mentioned, and specific actionable remediation steps for defenders.",
   "severity_score": 7.5,
-  "workflow_graph": "graph LR\\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\\n    B -->|T1059.001| C[Execution]:::tactic\\n    C -->|T1041| D[Command and Control]:::tactic\\n    D -->|T1486| E[Impact]:::tactic\\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8\\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8"
+  "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8"
 }}
 
 RULES:
-- ai_summary: 2-3 sentences max. Technical. Actionable. No fluff.
+- ai_summary: 4-5 sentences.Be DETAILED and SPECIFIC. Include:
+    * Technical details: CVE number, affected product/version, attack vector
+    * Real-world impact: What happens if exploited, who is affected
+    * Specific remediation: Exact steps, version numbers, configuration changes needed
+    * Avoid generic advice like "update software" — be specific
 - severity_score: 0.0 to 10.0 float. Base on actual impact:
-    9-10 = critical/RCE/0-day/wormable
+    9-10 = critical/RCE/0-day/wormable/active exploitation
     7-8  = high/privilege escalation/data breach/ransomware
     4-6  = medium/limited scope
     1-3  = low/informational
-- workflow_graph: valid Mermaid "graph LR" string with \\n for newlines:
+- workflow_graph: valid Mermaid "graph LR" string with \n for newlines:
     * Use 4-6 nodes only. Node labels = ATT&CK tactic phase names.
     * IMPORTANT: edge labels must be REAL TTP IDs from the item (e.g. |T1566|, |T1059.001|)
     * First node must be A([Threat Actor]):::actor
@@ -376,7 +380,7 @@ def set_fallback(item: dict) -> None:
 
 def enrich_with_ai(items: list[dict]) -> list[dict]:
     """
-    Enrich the top AI_ENRICH_LIMIT items with AI analysis.
+    Enrich items that don't already have AI summary.
 
     Provider priority:
       1. Groq  (llama-3.3-70b-versatile → llama-3.1-8b-instant)
@@ -401,9 +405,22 @@ def enrich_with_ai(items: list[dict]) -> list[dict]:
         f"{'Groq ✓' if groq_available else 'Groq ✗'}  "
         f"{'Gemini ✓' if gemini_available else 'Gemini ✗'}"
     )
-    log.info(f"Enriching top {min(AI_ENRICH_LIMIT, len(items))} items...")
 
-    for i, item in enumerate(items[:AI_ENRICH_LIMIT]):
+    # Filter items that need AI enrichment (don't have summary yet)
+    items_to_enrich = [
+        item for item in items
+        if item.get("ai_summary", "") in ("", "AI analysis pending")
+    ]
+    items_to_process = items_to_enrich[:AI_ENRICH_LIMIT]
+    items_already_enriched = items_to_enrich[AI_ENRICH_LIMIT:]
+
+    log.info(
+        f"Items needing AI: {len(items_to_enrich)}, "
+        f"will process: {len(items_to_process)}, "
+        f"already enriched (skipped): {len(items_already_enriched)}"
+    )
+
+    for i, item in enumerate(items_to_process):
         prompt = build_prompt(item)
         enriched = False
 
@@ -415,7 +432,7 @@ def enrich_with_ai(items: list[dict]) -> list[dict]:
                     parsed = parse_ai_response(raw)
                     apply_parsed(item, parsed, "groq", model)
                     log.info(
-                        f"  ✓ Groq [{i+1:02d}/{min(AI_ENRICH_LIMIT,len(items))}]"
+                        f"  ✓ Groq [{i+1:02d}/{len(items_to_process)}]"
                         f" score={item['severity_score']} sev={item['severity']}"
                         f" | {item['title'][:55]}"
                     )
@@ -433,7 +450,7 @@ def enrich_with_ai(items: list[dict]) -> list[dict]:
                     parsed = parse_ai_response(raw)
                     apply_parsed(item, parsed, "gemini", model)
                     log.info(
-                        f"  ✓ Gemini [{i+1:02d}/{min(AI_ENRICH_LIMIT,len(items))}]"
+                        f"  ✓ Gemini [{i+1:02d}/{len(items_to_process)}]"
                         f" score={item['severity_score']} sev={item['severity']}"
                         f" | {item['title'][:55]}"
                     )
@@ -447,17 +464,17 @@ def enrich_with_ai(items: list[dict]) -> list[dict]:
             set_fallback(item)
 
         # Rate-limit sleep between items (skip after last one)
-        if i < min(AI_ENRICH_LIMIT, len(items)) - 1:
+        if i < len(items_to_process) - 1:
             time.sleep(GROQ_SLEEP_SECS)
 
-    # Fill defaults for items beyond the enrichment limit
-    for item in items[AI_ENRICH_LIMIT:]:
-        set_fallback(item)
-
-    enriched_count = sum(
-        1 for item in items[:AI_ENRICH_LIMIT]
-        if item.get("ai_summary", "") not in ("", "AI analysis pending")
+    enriched_count = len(items_to_process) - sum(
+        1 for item in items_to_process
+        if item.get("ai_summary", "") in ("", "AI analysis pending")
     )
+    still_pending = [
+        item["title"][:40] for item in items_to_process
+        if item.get("ai_summary", "") in ("", "AI analysis pending")
+    ]
     log.info(
         f"AI enrichment complete — "
         f"{enriched_count}/{min(AI_ENRICH_LIMIT, len(items))} items enriched"
