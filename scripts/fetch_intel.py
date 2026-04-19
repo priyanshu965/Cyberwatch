@@ -172,7 +172,7 @@ def ai_score_to_severity(score: float) -> str:
 def build_prompt(item: dict) -> str:
     """
     Build a prompt that asks the AI to produce:
-      - ai_summary: 2-3 sentence BLUF
+      - ai_summary: 4-5 sentence detailed threat analysis
       - severity_score: float 0-10
       - workflow_graph: Mermaid LR diagram with TTP IDs on edge labels
 
@@ -184,17 +184,17 @@ def build_prompt(item: dict) -> str:
         f"{t['id']} ({t['name']})" for t in item.get("ttps", [])[:6]
     ) or "None detected"
 
-return f"""You are a senior threat intelligence analyst. Analyze this cybersecurity threat and respond with ONLY a valid JSON object — no markdown, no code fences, no preamble.
+    return f"""You are a senior threat intelligence analyst. Analyze this cybersecurity threat and respond with ONLY a valid JSON object — no markdown, no code fences, no preamble.
 
 Return exactly this structure:
 {{
   "ai_summary": "4-5 sentences: detailed technical breakdown of the vulnerability/exploit, affected systems/versions, real-world impact with specific examples, threat actor attribution if mentioned, and specific actionable remediation steps for defenders.",
   "severity_score": 7.5,
-  "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8"
+  "workflow_graph": "graph LR\\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\\n    B -->|T1059.001| C[Execution]:::tactic\\n    C -->|T1041| D[Command and Control]:::tactic\\n    D -->|T1486| E[Impact]:::tactic\\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8\\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8"
 }}
 
 RULES:
-- ai_summary: 4-5 sentences.Be DETAILED and SPECIFIC. Include:
+- ai_summary: 4-5 sentences. Be DETAILED and SPECIFIC. Include:
     * Technical details: CVE number, affected product/version, attack vector
     * Real-world impact: What happens if exploited, who is affected
     * Specific remediation: Exact steps, version numbers, configuration changes needed
@@ -204,7 +204,7 @@ RULES:
     7-8  = high/privilege escalation/data breach/ransomware
     4-6  = medium/limited scope
     1-3  = low/informational
-- workflow_graph: valid Mermaid "graph LR" string with \n for newlines:
+- workflow_graph: valid Mermaid "graph LR" string with \\n for newlines:
     * Use 4-6 nodes only. Node labels = ATT&CK tactic phase names.
     * IMPORTANT: edge labels must be REAL TTP IDs from the item (e.g. |T1566|, |T1059.001|)
     * First node must be A([Threat Actor]):::actor
