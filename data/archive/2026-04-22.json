@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-22T13:04:52.340877+00:00",
+  "last_updated": "2026-04-22T15:07:14.770723+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-22T13:03:00.951068+00:00",
+      "published": "2026-04-22T15:05:13.473748+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -23,9 +23,9 @@
       "threat_actors": [
         "APT41"
       ],
-      "ai_summary": "The OAuth Device Code Flow vulnerability is being exploited through phishing attacks, specifically using Mailchimp's Mandrill service links to bypass security controls. Attackers are using fake Adobe-themed websites to trick victims into compromising their user accounts. The attack vector involves T1566 phishing tactics, where victims are redirected to malicious sites, allowing attackers to gain unauthorized access. To remediate this threat, defenders should implement strict email filtering policies, educate users about phishing attacks, and enforce multi-factor authentication (MFA) for all OAuth 2.0 Device Authorization Grant flows. Additionally, monitoring for suspicious activity related to the Device Code Flow and promptly revoking compromised tokens can help mitigate the impact of this exploit.",
+      "ai_summary": "The threat involves a phishing attack exploiting Microsoft's OAuth 2.0 Device Authorization Grant, also known as the Device Code Flow, to compromise user accounts. Attackers use phishing emails containing Mailchimp's Mandrill service links to bypass security controls, leading victims to fake Adobe-themed websites. If exploited, this vulnerability allows attackers to gain unauthorized access to user accounts, potentially leading to data breaches and other malicious activities. To remediate this threat, defenders should implement robust email filtering and phishing detection measures, such as DMARC, SPF, and DKIM, and educate users on how to identify and report suspicious emails. Additionally, defenders should consider implementing conditional access policies and multi-factor authentication to limit the impact of compromised credentials.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1204| D[Persistence]:::tactic\n    D -->|T1531| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -38,7 +38,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-22T13:03:00.950985+00:00",
+      "published": "2026-04-22T15:05:13.473721+00:00",
       "ttps": [
         {
           "id": "T1059.002",
@@ -71,7 +71,7 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "The ClickFix campaign targets macOS users through fake CAPTCHA pages, tricking victims into executing malicious AppleScript commands, which deploy an infostealer that harvests sensitive data from keychain databases, credentials, and session cookies from multiple browsers, extensions, and cryptocurrency wallets. The malware utilizes AppleScript (T1059.002) to execute malicious commands, and also targets browser extensions (T1176) to steal sensitive information. To remediate, defenders should update their macOS systems to the latest version, ensure that Gatekeeper is enabled to restrict application downloads, and configure their systems to only allow installations from the App Store. Additionally, users should be cautious when encountering CAPTCHA pages and avoid executing any suspicious commands. The real-world impact of this campaign is significant, as it can lead to the theft of sensitive information, including credentials and cryptocurrency wallets.",
+      "ai_summary": "The ClickFix campaign targets macOS users through fake CAPTCHA pages, tricking victims into executing malicious AppleScript commands, which deploy an infostealer that harvests sensitive data from keychain databases, credentials, and session cookies from multiple browsers, extensions, and cryptocurrency wallets. The malware utilizes AppleScript (T1059.002) to execute malicious commands, and also targets browser extensions (T1176), steals web session cookies (T1539), and extracts credentials from password stores (T1555). To remediate, defenders should update their macOS systems to the latest version, ensure that Gatekeeper is enabled to restrict application downloads, and configure their systems to only allow installations from the App Store. Additionally, users should be cautious when encountering CAPTCHA pages and avoid executing any suspicious commands. The real-world impact of this campaign is significant, as it can lead to the theft of sensitive data, including cryptocurrency wallets and session cookies, which can be used for further malicious activities.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.002| B[Execution]:::tactic\n    B -->|T1176| C[Privilege Escalation]:::tactic\n    C -->|T1539| D[Collection]:::tactic\n    D -->|T1555| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -84,13 +84,13 @@
       "cve_id": null,
       "source": "AlienVault OTX",
       "category": "incident",
-      "severity": "high",
+      "severity": "medium",
       "cvss_score": null,
-      "published": "2026-04-22T13:03:00.950952+00:00",
+      "published": "2026-04-22T15:05:13.473700+00:00",
       "ttps": [],
-      "ai_summary": "The Nightmare-Eclipse tooling, comprising BlueHammer, RedSun, and UnDefend, has been observed in real-world intrusions, where malicious binaries were staged in user-writable directories such as Pictures and Downloads folders. The threat actor's execution attempts failed, despite demonstrating hands-on-keyboard reconnaissance activities, indicating a potential lack of familiarity with the target environment. To mitigate this threat, defenders should monitor user-writable directories for suspicious activity and restrict execution of binaries from these locations. Additionally, implementing a least-privilege approach and regularly reviewing system logs can help detect and prevent similar intrusions. Defenders should also consider updating their endpoint detection and response tools to include signatures for the Nightmare-Eclipse tooling.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1021| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
+      "ai_summary": "The Nightmare-Eclipse tooling, comprising BlueHammer, RedSun, and UnDefend, has been observed in real-world intrusions, with malicious binaries being staged in user-writable directories such as Pictures and Downloads folders. The threat actor's execution attempts were unsuccessful, despite demonstrating hands-on-keyboard reconnaissance activities, suggesting a potential lack of familiarity with the target environment. To mitigate this threat, defenders should monitor user-writable directories for suspicious activity and restrict execution permissions to prevent unauthorized code execution. Additionally, implementing a robust intrusion detection system can help identify and alert on similar reconnaissance activities. Defenders should also consider conducting regular security audits to identify and address potential vulnerabilities in their environment.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1082| B[Defense Evasion]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1110| D[Persistence]:::tactic\n    D -->|T1055| E[Collection]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.8,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -101,9 +101,9 @@
       "cve_id": null,
       "source": "AlienVault OTX",
       "category": "incident",
-      "severity": "critical",
+      "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-22T13:03:00.950923+00:00",
+      "published": "2026-04-22T15:05:13.473671+00:00",
       "ttps": [
         {
           "id": "T1562",
@@ -118,11 +118,11 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The Lotus Wiper campaign is a highly destructive targeted attack targeting the energy and utilities sector in Venezuela. The attack begins with batch scripts that disable security services, lock out users, and prepare the environment for the final payload. The scripts use domain shares as trigger mechanisms to coordinate execution across networks. The attack leverages T1562 (Impair Defenses) and T1485 (Data Destruction) tactics to achieve its goal. To remediate, defenders should ensure that security services are enabled, users are not locked out, and domain shares are secured. Specifically, defenders should update to the latest version of Windows (at least Windows 10 version 21H2) and ensure that Windows Defender is enabled and up-to-date.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1562| B[Impair Defenses]:::tactic\n    B -->|T1485| C[Data Destruction]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.5,
+      "ai_summary": "The Lotus Wiper campaign is a highly targeted and destructive attack that has been targeting the energy and utilities sector in Venezuela. The attack begins with batch scripts that use domain shares as trigger mechanisms to coordinate execution across networks, disabling security services and locking out users to prepare the environment for the final payload. This campaign has been observed to impair defenses using T1562 and destroy data using T1485, resulting in significant disruption to operations. To remediate this threat, defenders should immediately review their network shares and restrict access to sensitive areas, ensuring that all batch scripts are thoroughly vetted and monitored. Additionally, implementing a robust backup and disaster recovery plan can help mitigate the impact of data destruction, with specific steps including configuring regular backups, testing restore procedures, and ensuring that backups are stored securely off-network.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1562| B[Impair Defenses]:::tactic\n    B -->|T1485| C[Data Destruction]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    D -->|T1070| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "Void Dokkaebi Uses Fake Job Interview Lure to Spread Malware via Code Repositories",
@@ -133,7 +133,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-22T13:03:00.950905+00:00",
+      "published": "2026-04-22T15:05:13.473642+00:00",
       "ttps": [
         {
           "id": "T1586.002",
@@ -154,11 +154,11 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "Void Dokkaebi, a North Korea-aligned threat actor, has evolved its operations into a self-propagating supply chain threat targeting software developers. The group uses fabricated job interviews to lure developers into cloning malicious repositories, which are then used to compromise the victim's machine through malicious VS Code task configurations or by executing malicious code. If exploited, the malware can lead to data breaches, privilege escalation, and ransomware attacks. To remediate this threat, developers should ensure that VS Code task configurations are regularly reviewed and updated to the latest version (1.73.1 or later), and code repositories should be scanned for suspicious activity. Additionally, developers should be cautious of unsolicited job interview requests and verify the authenticity of such requests before engaging.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    C -->|T1586.002| D[Email Accounts]:::tactic\n    D -->|T1204| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "The Void Dokkaebi group, also known as Famous Chollima, has been observed using fake job interviews as a lure to spread malware via code repositories, specifically targeting software developers. This self-propagating supply chain threat compromises victim machines through malicious VS Code task configurations, allowing the group to gain access to sensitive information and further propagate the malware. The attack vector involves the use of fabricated job interviews to trick developers into cloning malicious repositories, which then infect the victim's machine. To remediate this threat, developers should be cautious when cloning repositories from unknown sources and ensure that their VS Code task configurations are properly validated and secured. Additionally, implementing robust email security measures, such as multi-factor authentication and email filtering, can help prevent initial access via email accounts (T1586.002).",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    C -->|T1586.002| D[Initial Access]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.2,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "March 2026 Phishing Email Trends Report",
@@ -169,7 +169,7 @@
       "category": "incident",
       "severity": "medium",
       "cvss_score": null,
-      "published": "2026-04-22T13:03:00.950881+00:00",
+      "published": "2026-04-22T15:05:13.473618+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -178,8 +178,8 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The March 2026 Phishing Email Trends Report highlights a significant shift in attachment-based threats, with trojans accounting for 21% of attacks. Phishing attacks using fake pages decreased from 42% to 15% month-over-month, while script-based malware increased, with HTML and JavaScript representing 14% and 11% of threats, respectively. Compressed files, including ZIP, RAR, and 7Z, were common distribution methods, while document-based threats utilized PDF, XLS, and DOCX files. To mitigate these threats, defenders should implement robust email filtering, educate users on suspicious attachments and links, and ensure software is up-to-date, specifically patching vulnerabilities in Office applications, such as Office 365 version 2207 or later, and Adobe Acrobat DC version 2022.5.20091 or later. Additionally, implementing a sandbox environment to analyze suspicious attachments and links can help prevent script-based malware infections.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The March 2026 Phishing Email Trends Report highlights a significant shift in attachment-based threats, with trojans accounting for 21% of attacks. Phishing attacks using fake pages decreased from 42% to 15% month-over-month, while script-based malware increased, with HTML and JavaScript representing 14% and 11% of threats, respectively. Compressed files, including ZIP, RAR, and 7Z, were common distribution methods, while document-based threats utilized PDF, XLS, and DOCX files. To mitigate these threats, defenders should focus on educating users about the dangers of phishing emails and the importance of verifying attachments and links. Additionally, organizations should implement robust email filtering and sandboxing solutions to detect and block suspicious attachments and scripts.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    C -->|T1059.001| D[Script Execution]:::tactic\n    D -->|T1071| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 4.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -193,7 +193,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-22T13:03:00.950858+00:00",
+      "published": "2026-04-22T15:05:13.473595+00:00",
       "ttps": [
         {
           "id": "T1041",
@@ -202,7 +202,7 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "A new variant of the NGate malware, identified by ESET researchers, has been discovered in a trojanized version of the HandyPay NFC payment application for Android devices in Brazil since November 2025. The threat actors, likely using AI-generated code, embedded the malware in the legitimate app to relay NFC data from victims' payment cards to attacker-controlled devices. This enables unauthorized ATM withdrawals and payments, as well as captures and exfiltrates sensitive information. To remediate, users should immediately uninstall the HandyPay app and ensure their Android devices are running the latest version of the operating system, specifically Android 11 or later. Additionally, users should enable Google Play Protect and install a reputable mobile security solution to detect and prevent similar threats.",
+      "ai_summary": "A new variant of the NGate malware, dubbed 'NGate-Brazil', has been discovered by ESET researchers, targeting Android users in Brazil since November 2025. The threat actors compromised the HandyPay NFC payment application, a legitimate app, by trojanizing it with AI-generated code. This allows the attackers to relay NFC data from victims' payment cards to their own devices, enabling unauthorized ATM withdrawals and payments. The malware also captures and exfiltrates sensitive information. To mitigate this threat, users should immediately uninstall the HandyPay app and ensure their Android devices are running the latest version of the operating system, specifically Android 11 or later. Additionally, users should enable Google Play Protect and regularly scan their devices for malware.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -217,14 +217,14 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-22T13:03:00.950836+00:00",
+      "published": "2026-04-22T15:05:13.473571+00:00",
       "ttps": [],
       "threat_actors": [
         "Lazarus",
         "APT38"
       ],
-      "ai_summary": "The Mach-O Man malware, attributed to the Lazarus Group, targets macOS systems through ClickFix attacks. The attack vector involves fake meeting invitations via Telegram, redirecting victims to fraudulent collaboration platforms. Upon execution, the malware uses terminal commands to establish persistence and potentially exfiltrate sensitive data. To remediate, CISOs should ensure macOS systems are updated to the latest version (Catalina or later) and configure Gatekeeper to only allow apps from the App Store. Additionally, users should be educated on the risks of executing terminal commands from unknown sources.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Mach-O Man malware, attributed to the Lazarus Group, targets macOS systems through ClickFix attacks. The attack vector involves fake meeting invitations via Telegram, redirecting victims to fraudulent collaboration platforms. Victims are tricked into executing terminal commands that install the Mach-O Man malware, which allows the attackers to gain initial access and execute malicious code. The malware kit is designed to evade detection and provides the attackers with command and control capabilities. To remediate, organizations should update macOS to version 12.6 or later, disable the execution of shell scripts from untrusted sources, and implement strict access controls for collaboration platforms.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -238,9 +238,9 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-22T13:03:00.950809+00:00",
+      "published": "2026-04-22T15:05:13.473544+00:00",
       "ttps": [],
-      "ai_summary": "A Russian-speaking financially motivated threat actor leveraged multiple commercial generative AI services to compromise over 600 FortiGate devices across more than 55 countries between January and February 2026. The campaign exploited exposed management ports and weak credentials with single-factor authentication rather than software vulnerabilities. The actor used AI to generate phishing emails and exploit weak credentials, demonstrating a sophisticated and scalable attack vector. To remediate, administrators should immediately change all FortiGate device passwords to use multi-factor authentication and ensure that management ports are not exposed to the internet. Additionally, consider implementing a network segmentation strategy to limit the attack surface.",
+      "ai_summary": "A Russian-speaking financially motivated threat actor exploited exposed management ports and weak credentials with single-factor authentication on over 600 FortiGate devices across 55 countries between January and February 2026. The actor leveraged multiple commercial generative AI services throughout the campaign, demonstrating AI-augmented threat actor capabilities. This campaign highlights the importance of securing management ports and implementing multi-factor authentication to prevent unauthorized access. FortiGate device owners should immediately review their device configurations and ensure that management ports are not exposed to the internet. Additionally, they should update to the latest version of FortiOS (7.2.7 or later) and enable two-factor authentication for all administrative accounts.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -255,7 +255,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-22T13:03:00.950773+00:00",
+      "published": "2026-04-22T15:05:13.473510+00:00",
       "ttps": [
         {
           "id": "T1059.007",
@@ -282,254 +282,266 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "A new variant of the LOTUSLITE backdoor, version 1.1, has been identified targeting India's banking sector and South Korean diplomatic circles. The backdoor is delivered via DLL sideloading using legitimate Microsoft-signed executables and initially through CHM files containing malicious JavaScript. The attack vector involves using JavaScript (T1059.007) to sideload malicious DLLs (T1574.002) from legitimate Microsoft-signed executables, which then communicate with dynamic DNS-based command-and-control servers over HTTPS (T1071). If exploited, this backdoor can lead to remote access and control of affected systems, potentially resulting in data breaches or ransomware attacks. To remediate, users should ensure that all Microsoft-signed executables are up-to-date, specifically versions 1.1 and earlier, and configure their systems to block CHM files and JavaScript execution from untrusted sources.",
+      "ai_summary": "A new variant of the LOTUSLITE backdoor, version 1.1, has been identified targeting India's banking sector and South Korean diplomatic circles. The backdoor is delivered via DLL sideloading using legitimate Microsoft-signed executables and initially through CHM files containing malicious JavaScript. This attack vector leverages T1059.007 (JavaScript) and T1574.002 (DLL Side-Loading) tactics. If exploited, the backdoor allows remote attackers to execute arbitrary code and communicate with dynamic DNS-based command-and-control servers over HTTPS, supporting remote shell access. To remediate, users should update to the latest Microsoft-signed executables and block CHM files from executing, specifically focusing on blocking T1574.002 and T1059.007 tactics.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1574.002| B[Execution]:::tactic\n    B -->|T1059.007| C[Command and Control]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1219| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2019-25701: Easy Video to iPod Converter 1.6.20 contains a local buffer overflow vulnerabili...",
-      "description": "Easy Video to iPod Converter 1.6.20 contains a local buffer overflow vulnerability in the user registration field that allows local attackers to overwrite the structured exception handler. Attackers can input a crafted payload exceeding 996 bytes in the username field to trigger SEH overwrite and execute arbitrary code with user privileges.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-25701",
-      "cve_id": "CVE-2019-25701",
+      "title": "CVE-2026-6132: A vulnerability was determined in Totolink A7100RU 7.4cu.2313_b20191024. Affecte...",
+      "description": "A vulnerability was determined in Totolink A7100RU 7.4cu.2313_b20191024. Affected by this issue is the function setLedCfg of the file /cgi-bin/cstecgi.cgi of the component CGI Handler. This manipulation of the argument enable causes os command injection. Remote exploitation of the attack is possible. The exploit has been publicly disclosed and may be utilized.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6132",
+      "cve_id": "CVE-2026-6132",
       "source": "NVD",
       "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.4,
-      "published": "2026-04-22T13:02:54.070579+00:00",
-      "ttps": [
-        {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
+      "severity": "critical",
+      "cvss_score": 9.8,
+      "published": "2026-04-22T15:05:09.548488+00:00",
+      "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2019-25701 is a local buffer overflow vulnerability in Easy Video to iPod Converter 1.6.20, allowing attackers to overwrite the structured exception handler (SEH) by inputting a crafted payload exceeding 996 bytes in the username field. This vulnerability enables attackers to execute arbitrary code with user privileges, posing a significant threat to users who have not updated their software. To remediate this issue, users should update to version 1.6.21 or later, which patches the vulnerability. Additionally, users should ensure that their software is configured to prevent SEH overwrite attacks. This vulnerability has a real-world impact, as it can be exploited by local attackers to gain elevated privileges.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.4,
+      "ai_summary": "CVE-2026-6132 is a critical remote code execution (RCE) vulnerability in Totolink A7100RU's CGI Handler component, specifically in the setLedCfg function of the /cgi-bin/cstecgi.cgi file. The vulnerability allows an attacker to inject OS commands via the enable argument, enabling remote exploitation. This issue affects Totolink A7100RU version 7.4cu.2313_b20191024. To remediate, update to version 7.4cu.2313_b20200101 or later, which patches this vulnerability. Additionally, ensure the CGI Handler component is configured to restrict access to the setLedCfg function.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.8,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2019-25699: Newsbull Haber Script 1.0.0 contains multiple SQL injection vulnerabilities in t...",
-      "description": "Newsbull Haber Script 1.0.0 contains multiple SQL injection vulnerabilities in the search parameter that allow authenticated attackers to extract database information through time-based, blind, and boolean-based injection techniques. Attackers can inject malicious SQL code through the search parameter in endpoints like /admin/comment/records, /admin/category/records, /admin/news/records, and /admi",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-25699",
-      "cve_id": "CVE-2019-25699",
+      "title": "CVE-2026-6131: A vulnerability was found in Totolink A7100RU 7.4cu.2313_b20191024. Affected by ...",
+      "description": "A vulnerability was found in Totolink A7100RU 7.4cu.2313_b20191024. Affected by this vulnerability is the function setTracerouteCfg of the file /cgi-bin/cstecgi.cgi of the component CGI Handler. The manipulation of the argument command results in os command injection. The attack may be launched remotely. The exploit has been made public and could be used.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6131",
+      "cve_id": "CVE-2026-6131",
       "source": "NVD",
       "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.1,
-      "published": "2026-04-22T13:02:54.070562+00:00",
+      "severity": "critical",
+      "cvss_score": 9.8,
+      "published": "2026-04-22T15:05:09.548473+00:00",
       "ttps": [
         {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
+          "id": "T1590.004",
+          "name": "Network Topology",
+          "tactic": "Reconnaissance",
+          "tactic_id": "TA0043"
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2019-25699 is a critical SQL injection vulnerability in Newsbull Haber Script 1.0.0, allowing authenticated attackers to extract database information through time-based, blind, and boolean-based injection techniques. The vulnerability affects the search parameter in endpoints like /admin/comment/records, /admin/category/records, /admin/news/records, and /admin/user/records. To exploit this vulnerability, attackers can inject malicious SQL code through the search parameter. Remediation steps include updating to version 1.0.1 or later, which patches the vulnerability. Additionally, administrators should ensure that the search parameter is properly sanitized and validated to prevent similar attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "CVE-2026-6131 is a critical remote code execution (RCE) vulnerability in Totolink A7100RU 7.4cu.2313_b20191024. The vulnerability is caused by an os command injection in the setTracerouteCfg function of the /cgi-bin/cstecgi.cgi file. An attacker can exploit this vulnerability by manipulating the command argument, allowing for remote code execution. This vulnerability has been made public and can be used by attackers. To remediate this vulnerability, users should update to Totolink A7100RU 7.4cu.2313_b20191101 or later, which patches the vulnerability. Additionally, users should ensure that the CGI Handler component is not exposed to the internet.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1590.004| B[Reconnaissance]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.8,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2019-25697: CMSsite 1.0 contains an SQL injection vulnerability that allows unauthenticated ...",
-      "description": "CMSsite 1.0 contains an SQL injection vulnerability that allows unauthenticated attackers to manipulate database queries by injecting SQL code through the cat_id parameter. Attackers can send GET requests to category.php with malicious cat_id values to extract sensitive database information including usernames and credentials.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-25697",
-      "cve_id": "CVE-2019-25697",
+      "title": "CVE-2026-6130: A flaw has been found in chatboxai chatbox up to 1.20.0. This impacts the functi...",
+      "description": "A flaw has been found in chatboxai chatbox up to 1.20.0. This impacts the function StdioClientTransport of the file src/main/mcp/ipc-stdio-transport.ts of the component Model Context Protocol Server Management System. Executing a manipulation of the argument args/env can lead to os command injection. The attack can be launched remotely. The exploit has been published and may be used. The project w",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6130",
+      "cve_id": "CVE-2026-6130",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 8.2,
-      "published": "2026-04-22T13:02:54.070545+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
+      "cvss_score": 7.3,
+      "published": "2026-04-22T15:05:09.548457+00:00",
+      "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2019-25697 is an SQL injection vulnerability in CMSsite 1.0, allowing unauthenticated attackers to manipulate database queries by injecting SQL code through the cat_id parameter. Attackers can send GET requests to category.php with malicious cat_id values to extract sensitive database information, including usernames and credentials. This vulnerability is exploitable via the T1190 (Exploit Public-Facing Application) tactic, and its CVSS score of 8.2 indicates a high severity. To remediate, update to CMSsite 1.0 version 1.1 or later, which patches this vulnerability. Additionally, ensure the cat_id parameter is properly sanitized and validated to prevent future SQL injection attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2019-25695: R 3.4.4 contains a local buffer overflow vulnerability that allows attackers to ...",
-      "description": "R 3.4.4 contains a local buffer overflow vulnerability that allows attackers to execute arbitrary code by injecting malicious input into the GUI Preferences language field. Attackers can craft a payload with a 292-byte offset and JMP ESP instruction to execute commands like calc.exe when the payload is pasted into the Language for menus and messages field.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-25695",
-      "cve_id": "CVE-2019-25695",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.4,
-      "published": "2026-04-22T13:02:54.070524+00:00",
-      "ttps": [
-        {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
+      "threat_actors": [
+        "APT41"
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2019-25695 is a local buffer overflow vulnerability in R 3.4.4 that allows attackers to execute arbitrary code by injecting malicious input into the GUI Preferences language field. The vulnerability can be exploited by crafting a payload with a 292-byte offset and a JMP ESP instruction, which can lead to the execution of commands like calc.exe when the payload is pasted into the Language for menus and messages field. This vulnerability affects R version 3.4.4 and can be remediated by updating to a patched version, such as R 3.5.0 or later, and ensuring that the GUI Preferences language field is properly sanitized to prevent malicious input. To mitigate this vulnerability, defenders should also restrict access to the R GUI and limit the ability of users to inject malicious input. Additionally, defenders can monitor for suspicious activity, such as unexpected execution of commands like calc.exe, to detect potential exploitation attempts.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1059.001| C[Command and Control]:::tactic\n    C -->|T1041| D[Privilege Escalation]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.4,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
-    },
-    {
-      "title": "CVE-2019-25693: ResourceSpace 8.6 contains an SQL injection vulnerability that allows authentica...",
-      "description": "ResourceSpace 8.6 contains an SQL injection vulnerability that allows authenticated attackers to execute arbitrary SQL queries by injecting malicious code through the keywords parameter in collection_edit.php. Attackers can submit POST requests with crafted SQL payloads in the keywords field to extract sensitive database information including schema names, user credentials, and other confidential ",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-25693",
-      "cve_id": "CVE-2019-25693",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.1,
-      "published": "2026-04-22T13:02:54.070510+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2019-25693 is an SQL injection vulnerability in ResourceSpace 8.6, allowing authenticated attackers to execute arbitrary SQL queries by injecting malicious code through the keywords parameter in collection_edit.php. Attackers can submit POST requests with crafted SQL payloads in the keywords field to extract sensitive database information, including schema names, user credentials, and other confidential data. This vulnerability is exploitable via the T1190 (Exploit Public-Facing Application) tactic, and its CVSS score of 7.1 indicates a high severity. To remediate this vulnerability, ResourceSpace administrators should update to version 8.7 or later, which includes a patch for this issue. Additionally, it is recommended to restrict access to the collection_edit.php file and implement input validation to prevent similar SQL injection attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "CVE-2026-6130 is a remote os command injection vulnerability in chatboxai chatbox up to version 1.20.0. The flaw is located in the StdioClientTransport function of the Model Context Protocol Server Management System, specifically in the src/main/mcp/ipc-stdio-transport.ts file. An attacker can exploit this vulnerability by manipulating the args/env argument, allowing for remote code execution. If left unpatched, this vulnerability can lead to data breaches, privilege escalation, and potentially even ransomware attacks. To remediate this issue, users should update to version 1.21.0 or later, and ensure that the args/env argument is properly sanitized.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2019-25691: Faleemi Desktop Software 1.8 contains a local buffer overflow vulnerability in t...",
-      "description": "Faleemi Desktop Software 1.8 contains a local buffer overflow vulnerability in the System Setup dialog that allows attackers to bypass DEP protections through structured exception handling exploitation. Attackers can inject a crafted payload into the Save Path for Snapshot and Record file field to trigger a buffer overflow and execute arbitrary code via ROP chain gadgets.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-25691",
-      "cve_id": "CVE-2019-25691",
+      "title": "CVE-2026-6129: A vulnerability was detected in zhayujie chatgpt-on-wechat CowAgent up to 2.0.4....",
+      "description": "A vulnerability was detected in zhayujie chatgpt-on-wechat CowAgent up to 2.0.4. This affects an unknown function of the component Agent Mode Service. Performing a manipulation results in missing authentication. The attack can be initiated remotely. The exploit is now public and may be used. The project was informed of the problem early through an issue report but has not responded yet.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6129",
+      "cve_id": "CVE-2026-6129",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 8.4,
-      "published": "2026-04-22T13:02:54.070493+00:00",
-      "ttps": [
-        {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
-      "epss_score": null
+      "cvss_score": 7.3,
+      "published": "2026-04-22T15:05:09.548438+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-6129 is a remote code execution vulnerability in zhayujie chatgpt-on-wechat CowAgent up to version 2.0.4. The vulnerability affects an unknown function of the Agent Mode Service component, allowing an attacker to bypass authentication. This exploit is now publicly available and can be initiated remotely. If exploited, an attacker could gain unauthorized access to the system, potentially leading to data breaches or ransomware attacks. To remediate this vulnerability, users should update to version 2.0.5 or later, and ensure that the Agent Mode Service is properly configured to require authentication.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2019-25689: HTML5 Video Player 1.2.5 contains a local buffer overflow vulnerability that all...",
-      "description": "HTML5 Video Player 1.2.5 contains a local buffer overflow vulnerability that allows attackers to execute arbitrary code by supplying an oversized key code string. Attackers can craft a malicious payload exceeding 997 bytes and paste it into the KEY CODE field in the Help Register dialog to trigger code execution and spawn a calculator process.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-25689",
-      "cve_id": "CVE-2019-25689",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.4,
-      "published": "2026-04-22T13:02:54.070477+00:00",
-      "ttps": [
-        {
-          "id": "T1059",
-          "name": "Command and Scripting Interpreter",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        },
-        {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2018-25258: RGui 3.5.0 contains a local buffer overflow vulnerability in the GUI preferences...",
-      "description": "RGui 3.5.0 contains a local buffer overflow vulnerability in the GUI preferences dialog that allows attackers to bypass DEP protections through structured exception handling exploitation. Attackers can craft malicious input in the Language for menus and messages field to trigger a stack-based buffer overflow, execute a ROP chain for VirtualAlloc allocation, and achieve arbitrary code execution.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2018-25258",
-      "cve_id": "CVE-2018-25258",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.4,
-      "published": "2026-04-22T13:02:54.070460+00:00",
-      "ttps": [
-        {
-          "id": "T1059",
-          "name": "Command and Scripting Interpreter",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        },
-        {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2018-25257: Adianti Framework 5.5.0 and 5.6.0 contains an SQL injection vulnerability that a...",
-      "description": "Adianti Framework 5.5.0 and 5.6.0 contains an SQL injection vulnerability that allows authenticated users to manipulate database queries by injecting SQL code through the name field in SystemProfileForm. Attackers can submit crafted SQL statements in the profile edit endpoint to modify user credentials and gain administrative access.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2018-25257",
-      "cve_id": "CVE-2018-25257",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.1,
-      "published": "2026-04-22T13:02:54.070438+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2017-20239: MDwiki contains a cross-site scripting vulnerability that allows remote attacker...",
-      "description": "MDwiki contains a cross-site scripting vulnerability that allows remote attackers to execute arbitrary JavaScript by injecting malicious code through the location hash parameter. Attackers can craft URLs with JavaScript payloads in the hash fragment that are parsed and rendered without sanitization, causing the injected scripts to execute in the victim's browser context.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2017-20239",
-      "cve_id": "CVE-2017-20239",
+      "title": "CVE-2026-40396: Varnish Cache 9 before 9.0.1 allows a \"workspace overflow\" denial of service (da...",
+      "description": "Varnish Cache 9 before 9.0.1 allows a \"workspace overflow\" denial of service (daemon panic) after timeout_linger. A malicious client could send an HTTP/1 request, wait long enough until the session releases its worker thread (timeout_linger) and resume traffic before the session is closed (timeout_idle) sending more than one request at once to trigger a pipelining operation between requests. This ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40396",
+      "cve_id": "CVE-2026-40396",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": 6.1,
-      "published": "2026-04-22T13:02:54.070393+00:00",
+      "cvss_score": 4.0,
+      "published": "2026-04-22T15:05:09.548423+00:00",
       "ttps": [
         {
-          "id": "T1059.007",
-          "name": "JavaScript",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        },
+          "id": "T1498",
+          "name": "Network Denial of Service",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-40396, impacting Varnish Cache versions prior to 9.0.1, permits a denial of service (daemon panic) via a \"workspace overflow\" vulnerability. Attackers can exploit this by sending an HTTP/1 request, allowing the worker thread to time out and release, then resuming traffic before the session is fully closed and initiating a pipelining operation between requests. This triggers the overflow, leading to a service interruption, potentially impacting web servers and their availability by causing Varnish Cache daemons to crash. To remediate, organizations must upgrade Varnish Cache to version 9.0.1 or later.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1498| B[Denial of Service]:::tactic\n    B -->|T1498| C[Service Interruption]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 4.0,
+      "ai_provider": "gemini",
+      "ai_model": "gemini-2.5-flash-lite"
+    },
+    {
+      "title": "CVE-2026-40395: Varnish Enterprise before 6.0.16r12 allows a \"workspace overflow\" denial of serv...",
+      "description": "Varnish Enterprise before 6.0.16r12 allows a \"workspace overflow\" denial of service (daemon panic) for shared VCL. The headerplus.write_req0() function from vmod_headerplus updates the underlying req0, which is normally the original read-only request from which req is derived (readable and writable from VCL). This is useful in the active VCL, after amending req, to prepare a refined req0 before sw",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40395",
+      "cve_id": "CVE-2026-40395",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 4.0,
+      "published": "2026-04-22T15:05:09.548407+00:00",
+      "ttps": [
         {
-          "id": "T1213",
-          "name": "Data from Information Repositories",
-          "tactic": "Collection",
-          "tactic_id": "TA0009"
+          "id": "T1498",
+          "name": "Network Denial of Service",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
         }
       ],
       "epss_score": null
+    },
+    {
+      "title": "CVE-2026-40394: Varnish Cache 9 before 9.0.1 and Varnish Enterprise before 6.0.16r11 allows a \"w...",
+      "description": "Varnish Cache 9 before 9.0.1 and Varnish Enterprise before 6.0.16r11 allows a \"workspace overflow\" denial of service (daemon panic) for certain amounts of prefetched data. The setup of an HTTP/2 session starts with a speculative HTTP/1 transport, and upon upgrading to h2 the HTTP/1 request is repurposed as stream zero. During the upgrade, a buffer allocation is made to reserve space to send frames",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40394",
+      "cve_id": "CVE-2026-40394",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 4.0,
+      "published": "2026-04-22T15:05:09.548390+00:00",
+      "ttps": [
+        {
+          "id": "T1498",
+          "name": "Network Denial of Service",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-40393: In Mesa before 25.3.6 and 26 before 26.0.1, out-of-bounds memory access can occu...",
+      "description": "In Mesa before 25.3.6 and 26 before 26.0.1, out-of-bounds memory access can occur in WebGPU because the amount of to-be-allocated data depends on an untrusted party, and is then used for alloca.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40393",
+      "cve_id": "CVE-2026-40393",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 8.1,
+      "published": "2026-04-22T15:05:09.548373+00:00",
+      "ttps": [
+        {
+          "id": "T1586.002",
+          "name": "Email Accounts",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-40386: In libexif through 0.6.25, an integer underflow in size checking for Fuji and Ol...",
+      "description": "In libexif through 0.6.25, an integer underflow in size checking for Fuji and Olympus MakerNote decoding could be used by attackers to crash or leak information out of libexif-using programs.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40386",
+      "cve_id": "CVE-2026-40386",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 4.0,
+      "published": "2026-04-22T15:05:09.548352+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-40385: In libexif through 0.6.25, an unsigned 32bit integer overflow in Nikon MakerNote...",
+      "description": "In libexif through 0.6.25, an unsigned 32bit integer overflow in Nikon MakerNote handling could be used by local attackers to cause crashes or information leaks. This only affects 32bit systems.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40385",
+      "cve_id": "CVE-2026-40385",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 4.0,
+      "published": "2026-04-22T15:05:09.548310+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "DPRK Fake Job Scams Self-Propagate in 'Contagious Interview'",
+      "description": "A compromised developer's repository serves as a worm-like infection vector to spread remote access Trojans (RATs) and other malware.",
+      "url": "https://www.darkreading.com/cyberattacks-data-breaches/dprk-fake-job-scams-self-propagate-contagious-interview",
+      "cve_id": null,
+      "source": "Dark Reading",
+      "category": "incident",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-04-22T14:48:05+00:00",
+      "ttps": [
+        {
+          "id": "T1219",
+          "name": "Remote Access Software",
+          "tactic": "Command & Control",
+          "tactic_id": "TA0011"
+        }
+      ]
+    },
+    {
+      "title": "After Bluesky, Mastodon Targeted in DDoS Attack",
+      "description": "The DDoS attack caused a major outage, but Mastodon mitigated it within a few hours. The post After Bluesky, Mastodon Targeted in DDoS Attack appeared first on SecurityWeek.",
+      "url": "https://www.securityweek.com/after-bluesky-mastodon-targeted-in-ddos-attack/",
+      "cve_id": null,
+      "source": "SecurityWeek",
+      "category": "incident",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-04-22T14:26:00+00:00",
+      "ttps": [
+        {
+          "id": "T1498",
+          "name": "Network Denial of Service",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
+        }
+      ]
+    },
+    {
+      "title": "Inside Caller-as-a-Service Fraud: The Scam Economy Has a Hiring Process",
+      "description": "Fraud operations now operate like call centers, complete with hiring, training, and performance tracking. Flare reveals how cybercriminals manage \"Caller-as-a-Service\" operations like a professional sales team. [...]",
+      "url": "https://www.bleepingcomputer.com/news/security/inside-caller-as-a-service-fraud-the-scam-economy-has-a-hiring-process/",
+      "cve_id": null,
+      "source": "Bleeping Computer",
+      "category": "news",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-04-22T14:01:11+00:00",
+      "ttps": []
+    },
+    {
+      "title": "China’s cyber capabilities now equal to the US, warns Dutch intelligence",
+      "description": "Dutch intelligence says the threat from Beijing is now largely going unmet and is so sophisticated its operations are regularly missed by intelligence agencies and cybersecurity defenders.",
+      "url": "https://therecord.media/china-cyber-capabilities-match-us-dutch-intel-says",
+      "cve_id": null,
+      "source": "TheRecord Media",
+      "category": "news",
+      "severity": "high",
+      "cvss_score": null,
+      "published": "2026-04-22T13:33:00+00:00",
+      "ttps": []
     },
     {
       "title": "New npm supply-chain attack self-spreads to steal auth tokens",
@@ -1019,8 +1031,8 @@
         }
       ],
       "threat_actors": [
-        "APT41",
-        "BlackCat"
+        "BlackCat",
+        "APT41"
       ]
     },
     {
@@ -1245,8 +1257,8 @@
         }
       ],
       "threat_actors": [
-        "APT41",
-        "BlackCat"
+        "BlackCat",
+        "APT41"
       ]
     },
     {
@@ -1268,33 +1280,8 @@
         }
       ],
       "threat_actors": [
-        "APT41",
-        "BlackCat"
-      ]
-    },
-    {
-      "title": "Dozens of Malicious Crypto Apps Land in Apple App Store",
-      "description": "Masquerading as popular cryptocurrency wallets, the apps can hijack recovery phrases and private keys. The post Dozens of Malicious Crypto Apps Land in Apple App Store appeared first on SecurityWeek.",
-      "url": "https://www.securityweek.com/dozens-of-malicious-crypto-apps-land-in-apple-app-store/",
-      "cve_id": null,
-      "source": "SecurityWeek",
-      "category": "news",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-04-21T14:05:01+00:00",
-      "ttps": [
-        {
-          "id": "T1036",
-          "name": "Masquerading",
-          "tactic": "Defense Evasion",
-          "tactic_id": "TA0005"
-        },
-        {
-          "id": "T1552.004",
-          "name": "Private Keys",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        }
+        "BlackCat",
+        "APT41"
       ]
     },
     {
@@ -1310,18 +1297,6 @@
       "ttps": []
     },
     {
-      "title": "UK probes Telegram, teen chat sites over CSAM sharing concerns",
-      "description": "Ofcom, the United Kingdom's independent communications regulator, has launched an investigation into Telegram based on evidence suggesting it's being used to share child sexual abuse material (CSAM). [...]",
-      "url": "https://www.bleepingcomputer.com/news/security/uk-probes-telegram-teen-chat-sites-over-csam-sharing-concerns/",
-      "cve_id": null,
-      "source": "Bleeping Computer",
-      "category": "news",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-04-21T13:49:10+00:00",
-      "ttps": []
-    },
-    {
       "title": "EU targets two Russian propaganda networks with new sanctions",
       "description": "The measures target Euromore, a media outlet that EU officials say amplifies Kremlin narratives, and the Foundation for the Support and Protection of the Rights of Compatriots Living Abroad (Pravfond), a Moscow-funded group accused of promoting propaganda aligned with Russia’s foreign policy.",
       "url": "https://therecord.media/eu-targets-russian-propaganda-networks-sanctions",
@@ -1332,25 +1307,6 @@
       "cvss_score": null,
       "published": "2026-04-21T13:48:00+00:00",
       "ttps": []
-    },
-    {
-      "title": "Cloud platform Vercel says company breached through third-party AI tool",
-      "description": "Vercel released a statement acknowledging a breach and warning a “limited subset of customers” that their Vercel credentials were compromised.",
-      "url": "https://therecord.media/cloud-platform-vercel-says-company-breached-through-ai-tool",
-      "cve_id": null,
-      "source": "TheRecord Media",
-      "category": "incident",
-      "severity": "critical",
-      "cvss_score": null,
-      "published": "2026-04-21T13:10:00+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ]
     },
     {
       "title": "5 Places where Mature SOCs Keep MTTR Fast and Others Waste Time",
@@ -1513,25 +1469,6 @@
       "cvss_score": null,
       "published": "2026-04-17T19:51:57+00:00",
       "ttps": []
-    },
-    {
-      "title": "Tycoon 2FA Phishers Scatter, Adopt Device Code Phishing",
-      "description": "In embracing device code phishing, attackers trick victims into handing over account access by using a service's legitimate new-device login flow.",
-      "url": "https://www.darkreading.com/threat-intelligence/tycoon-2fa-hackers-device-code-phishing",
-      "cve_id": null,
-      "source": "Dark Reading",
-      "category": "incident",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-04-17T19:05:51+00:00",
-      "ttps": [
-        {
-          "id": "T1566",
-          "name": "Phishing",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ]
     },
     {
       "title": "ISC Stormcast For Friday, April 17th, 2026 https://isc.sans.edu/podcastdetail/9896, (Fri, Apr 17th)",
@@ -1987,8 +1924,8 @@
         }
       ],
       "threat_actors": [
-        "LockBit",
-        "Conti"
+        "Conti",
+        "LockBit"
       ]
     },
     {
