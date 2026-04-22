@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-22T10:13:50.868526+00:00",
+  "last_updated": "2026-04-22T11:55:04.803406+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-22T10:12:04.474080+00:00",
+      "published": "2026-04-22T11:53:18.966718+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -23,7 +23,7 @@
       "threat_actors": [
         "APT41"
       ],
-      "ai_summary": "The OAuth Device Code Flow abuse involves phishing attacks using Mailchimp's Mandrill service links to bypass security controls, leading victims to fake Adobe-themed websites. This novel attack method exploits Microsoft's OAuth 2.0 Device Authorization Grant, compromising user accounts without requiring explicit password entry. The real-world impact includes unauthorized access to sensitive information and potential lateral movement within an organization. To remediate, defenders should implement conditional access policies, such as requiring multi-factor authentication for all OAuth flows, and educate users about the risks of phishing attacks. Additionally, monitoring for suspicious activity, such as unusual login locations or devices, can help detect and respond to these types of attacks.",
+      "ai_summary": "The threat involves a phishing attack exploiting Microsoft's OAuth 2.0 Device Authorization Grant, also known as the Device Code Flow, to compromise user accounts. Attackers use phishing emails containing links from Mailchimp's Mandrill service, which redirect victims to fake Adobe-themed websites. These websites abuse the Device Code Flow to gain unauthorized access to user accounts, potentially leading to data breaches and further malicious activities. To remediate this threat, defenders should implement strict email filtering, educate users about phishing attacks, and consider implementing additional security controls such as multi-factor authentication. Additionally, defenders should monitor for suspicious activity related to the Device Code Flow and update their OAuth 2.0 implementations to the latest version, ensuring that all security patches are applied.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1204| D[Persistence]:::tactic\n    D -->|T1531| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -38,7 +38,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-22T10:12:04.474057+00:00",
+      "published": "2026-04-22T11:53:18.966694+00:00",
       "ttps": [
         {
           "id": "T1059.002",
@@ -71,7 +71,7 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "The ClickFix campaign targets macOS users through fake CAPTCHA pages, tricking victims into executing malicious AppleScript commands, which deploy an infostealer that harvests sensitive data from keychain databases, credentials, and session cookies from multiple browsers, extensions, and cryptocurrency wallets. The malware utilizes AppleScript (T1059.002) to execute malicious commands, and also targets browser extensions (T1176) to steal sensitive information. To remediate, defenders should update their macOS systems to the latest version, ensure that Gatekeeper is enabled to restrict application downloads, and configure their systems to only allow installations from the App Store. Additionally, users should be cautious when encountering CAPTCHA pages and avoid executing any suspicious commands. The real-world impact of this campaign is significant, as it can lead to the theft of sensitive information, including credentials and cryptocurrency wallets.",
+      "ai_summary": "The ClickFix campaign targets macOS users through fake CAPTCHA pages, tricking them into executing malicious AppleScript commands, which deploy an infostealer that harvests sensitive data from keychain databases, credentials, and session cookies from multiple browsers, extensions, and cryptocurrency wallets. The malware utilizes AppleScript (T1059.002) to execute malicious commands, and also targets browser extensions (T1176), steals web session cookies (T1539), and extracts credentials from password stores (T1555). To remediate, defenders should update their macOS systems to the latest version, ensure that Gatekeeper is enabled to restrict application downloads, and configure their systems to only allow installations from the App Store. Additionally, users should be cautious when encountering CAPTCHA pages and avoid executing any suspicious commands. The real-world impact of this campaign is significant, as it can lead to the theft of sensitive data, including cryptocurrency wallets and session cookies, which can be used for further malicious activities.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.002| B[Execution]:::tactic\n    B -->|T1176| C[Privilege Escalation]:::tactic\n    C -->|T1539| D[Collection]:::tactic\n    D -->|T1555| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -86,10 +86,10 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-22T10:12:04.474035+00:00",
+      "published": "2026-04-22T11:53:18.966652+00:00",
       "ttps": [],
-      "ai_summary": "The Nightmare-Eclipse tooling has been observed in real-world intrusions, with threat actors utilizing BlueHammer, RedSun, and UnDefend tooling from the proof-of-concept repository. The malicious binaries were staged in user-writable directories such as Pictures and Downloads folders, indicating a potential vulnerability in access control mechanisms. Although execution attempts failed, the threat actor's hands-on-keyboard reconnaissance activities suggest a high level of intent and potential for future exploitation. To remediate, defenders should implement strict access controls, monitor user-writable directories for suspicious activity, and update their incident response plans to include scenarios involving unfamiliar threat actor tooling. Additionally, defenders should prioritize user education and awareness training to prevent initial access via social engineering or phishing attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Nightmare-Eclipse tooling, comprising BlueHammer, RedSun, and UnDefend, has been observed in real-world intrusions, where malicious binaries were staged in user-writable directories such as Pictures and Downloads folders. The threat actor attempted to execute these binaries but was unsuccessful, despite demonstrating hands-on-keyboard reconnaissance activities. The lack of detected TTPs and absence of a CVE ID or CVSS score suggests that this threat may be leveraging unknown or unpatched vulnerabilities. To remediate, defenders should monitor user-writable directories for suspicious activity and restrict execution of binaries from these locations by implementing application whitelisting, such as Windows Defender Application Control, and configuring it to only allow trusted applications to run. Additionally, defenders should implement robust monitoring and detection capabilities to identify potential hands-on-keyboard activities, such as unusual login attempts or suspicious system calls.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1059| C[Execution]:::tactic\n    C -->|T1021| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -103,7 +103,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-22T10:12:04.473995+00:00",
+      "published": "2026-04-22T11:53:18.966623+00:00",
       "ttps": [
         {
           "id": "T1562",
@@ -118,8 +118,8 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The Lotus Wiper campaign is a highly targeted and destructive attack that has been targeting the energy and utilities sector in Venezuela. The attack begins with batch scripts that use domain shares as trigger mechanisms to coordinate execution across networks, disabling security services and locking out users to prepare the environment for the final payload. This campaign has been observed to impair defenses using T1562 and destroy data using T1485, resulting in significant disruption to operations. To remediate this threat, defenders should immediately review their network shares and restrict access to sensitive areas, ensuring that all batch scripts are thoroughly vetted and monitored. Additionally, implementing a robust backup and disaster recovery plan can help mitigate the impact of data destruction, with specific steps including configuring regular backups, testing restore procedures, and ensuring that backups are stored securely off-network.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1562| B[Impair Defenses]:::tactic\n    B -->|T1485| C[Data Destruction]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    D -->|T1070| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Lotus Wiper campaign is a highly targeted and destructive attack that has been targeting the energy and utilities sector in Venezuela. The attack begins with batch scripts that use domain shares as trigger mechanisms to coordinate execution across networks, disabling security services and locking out users to prepare the environment for the final payload. This campaign has been observed to impair defenses, as indicated by the use of TTP T1562, and ultimately leads to data destruction, aligning with TTP T1485. To defend against such attacks, organizations should ensure that all domain shares are properly secured, and access to them is strictly controlled, with regular audits to detect any unauthorized changes. Additionally, implementing a robust backup and recovery system is crucial to mitigate the impact of data destruction attacks like Lotus Wiper.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1562| B[Impair Defenses]:::tactic\n    B -->|T1485| C[Data Destruction]:::tactic\n    C -->|T1059| D[Command and Control]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -133,7 +133,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-22T10:12:04.473976+00:00",
+      "published": "2026-04-22T11:53:18.966605+00:00",
       "ttps": [
         {
           "id": "T1586.002",
@@ -154,8 +154,8 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "The Void Dokkaebi threat actor, also known as Famous Chollima, has been observed using fake job interviews as a lure to spread malware via code repositories, specifically targeting software developers. This self-propagating supply chain threat compromises victim machines through malicious VS Code task configurations, allowing the attackers to gain control and use the infected machine as an infection vector. The attack vector involves the use of T1586.002 (Email Accounts) for initial contact, followed by T1195 (Supply Chain Compromise) and T1204 (User Execution) to establish a foothold. To remediate this threat, developers should be cautious when cloning repositories from unknown sources and verify the authenticity of job interview invitations, ensuring they do not execute malicious code. Additionally, implementing security measures such as code signing and regular repository audits can help prevent the spread of malware.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1586.002| B[Initial Access]:::tactic\n    B -->|T1195| C[Execution]:::tactic\n    C -->|T1204| D[Privilege Escalation]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Void Dokkaebi threat actor has been observed using fake job interviews as a lure to spread malware via code repositories, specifically targeting software developers. This self-propagating supply chain threat compromises victim machines through malicious VS Code task configurations, allowing the attackers to gain control and potentially spread further. The attack vector involves the use of T1586.002 (Email Accounts) for initial contact, followed by T1195 (Supply Chain Compromise) and T1204 (User Execution) to establish a foothold. To remediate this threat, developers should be cautious of unsolicited job offers and verify the authenticity of code repositories before cloning them, and ensure their VS Code configurations are up-to-date and secure. Additionally, implementing robust email filtering and user education on safe coding practices can help mitigate the risk of compromise.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1586.002| B[Initial Access]:::tactic\n    B -->|T1195| C[Execution]:::tactic\n    C -->|T1204| D[Persistence]:::tactic\n    D -->|T1055| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -169,7 +169,7 @@
       "category": "incident",
       "severity": "medium",
       "cvss_score": null,
-      "published": "2026-04-22T10:12:04.473953+00:00",
+      "published": "2026-04-22T11:53:18.966581+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -178,7 +178,7 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The March 2026 Phishing Email Trends Report highlights a significant shift in attachment-based threats, with trojans accounting for 21% of attacks. Phishing attacks using fake pages decreased from 42% to 15% month-over-month, while script-based malware increased, with HTML and JavaScript representing 14% and 11% of threats, respectively. Compressed files, including ZIP, RAR, and 7Z, were common distribution methods, while document-based threats utilized PDF, XLS, and DOCX files. To mitigate these threats, defenders should implement strict email filtering, educate users on suspicious attachments and links, and ensure software is up-to-date, particularly for Office and Adobe products. Specifically, users should be cautious of ZIP files, which were used in 14% of attacks, and ensure they are using the latest version of Office, such as Office 2022 or later, which includes improved security features.",
+      "ai_summary": "The March 2026 Phishing Email Trends Report highlights a significant shift in attachment-based threats, with trojans increasing to 21% and script-based malware, particularly HTML and JavaScript, rising to 14% and 11% respectively. This trend indicates a potential increase in phishing attacks using fake pages, which dropped from 42% to 15% month-over-month. Compressed files, including ZIP, RAR, and 7Z, were common distribution methods, while document-based threats utilized PDF, XLS, and DOCX files. To mitigate this threat, defenders should focus on educating users about the risks of opening compressed files and suspicious documents, and implement robust email filtering and sandboxing techniques. Specifically, organizations should update their email security software to the latest version, configure their email clients to block suspicious attachments, and implement a content filtering solution to block malicious URLs.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 5.5,
       "ai_provider": "groq",
@@ -193,7 +193,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-22T10:12:04.473929+00:00",
+      "published": "2026-04-22T11:53:18.966558+00:00",
       "ttps": [
         {
           "id": "T1041",
@@ -202,8 +202,8 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "A new variant of the NGate malware, dubbed 'NGate-Brazil', has been discovered by ESET researchers, targeting Android users in Brazil since November 2025. The threat actors compromised the HandyPay NFC payment application, a legitimate app, by trojanizing it with AI-generated code. This allows the attackers to relay NFC data from victims' payment cards to their own devices, enabling unauthorized ATM withdrawals and payments. The malware also captures and exfiltrates sensitive information. To mitigate this threat, users should immediately uninstall the HandyPay app and ensure their Android devices are running the latest version of the operating system, specifically Android 11 or later. Additionally, users should enable Google Play Protect and install a reputable mobile security solution to detect and prevent similar threats.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Exfiltration Over C2 Channel]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "A new variant of the NGate malware, identified by ESET researchers, has been discovered in a trojanized version of the HandyPay NFC payment application for Android devices in Brazil since November 2025. The threat actors, likely using AI-generated code, embedded the malware in the legitimate app to relay NFC data from victims' payment cards to attacker-controlled devices. This enables unauthorized ATM withdrawals and payments, as well as captures and exfiltrates sensitive information. To remediate, users should immediately uninstall the HandyPay app and ensure their Android devices are running the latest version of the operating system, specifically Android 11 or later. Additionally, users should enable Google Play Protect and install a reputable mobile security solution to detect and prevent similar threats.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -217,15 +217,15 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-22T10:12:04.473906+00:00",
+      "published": "2026-04-22T11:53:18.966535+00:00",
       "ttps": [],
       "threat_actors": [
-        "APT38",
-        "Lazarus"
+        "Lazarus",
+        "APT38"
       ],
-      "ai_summary": "The Mach-O Man malware is a macOS-specific threat distributed by the Lazarus Group via ClickFix attacks. The attack vector involves fake meeting invitations via Telegram, redirecting victims to fraudulent collaboration platforms impersonating Zoom, Microsoft Teams, or Google Meet. Victims are tricked into executing terminal commands that install the Mach-O Man malware kit. If exploited, the malware can lead to data theft, privilege escalation, and potentially even ransomware attacks. To remediate, CISOs should ensure that macOS systems are running the latest version of the operating system (at least macOS High Sierra 10.13.6) and that the Terminal application is configured to display the full path of executed commands. Additionally, CISOs should educate employees on the dangers of ClickFix attacks and the importance of verifying meeting invitations via phone calls or emails.",
+      "ai_summary": "The Mach-O Man malware is a macOS-specific threat delivered via ClickFix attacks by the Lazarus Group. The attack vector involves fake meeting invitations via Telegram, redirecting victims to fraudulent collaboration platforms impersonating Zoom, Microsoft Teams, or Google Meet. Upon execution, the malware uses terminal commands to establish persistence and command and control (C2) communication. To remediate, CISOs should ensure macOS systems are updated to the latest version (at least macOS 12.6) and configure the Terminal application to disable the execution of arbitrary shell commands. Additionally, administrators should monitor system logs for suspicious activity and implement a robust threat detection solution to identify and block potential Mach-O Man malware infections.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -238,9 +238,9 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-22T10:12:04.473879+00:00",
+      "published": "2026-04-22T11:53:18.966508+00:00",
       "ttps": [],
-      "ai_summary": "A Russian-speaking financially motivated threat actor exploited exposed management ports and weak credentials with single-factor authentication on over 600 FortiGate devices across 55 countries between January and February 2026. The actor leveraged multiple commercial generative AI services throughout the campaign, demonstrating AI-augmented threat actor capabilities. The compromised devices were accessed at scale, highlighting the potential for widespread impact. To remediate, administrators should immediately change passwords, enable multi-factor authentication, and restrict access to management ports. Additionally, consider implementing AI-powered threat detection and response solutions to enhance security posture.",
+      "ai_summary": "A Russian-speaking financially motivated threat actor exploited exposed management ports and weak credentials with single-factor authentication on over 600 FortiGate devices across 55 countries between January and February 2026. The actor leveraged multiple commercial generative AI services throughout the campaign, demonstrating AI-augmented threat actor capabilities. The compromised devices were accessed at scale, highlighting the potential for widespread impact. To remediate, administrators should immediately change single-factor authentication to multi-factor authentication and restrict access to management ports. FortiGate administrators should also review and update their device configurations to ensure secure management practices.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -255,7 +255,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-22T10:12:04.473845+00:00",
+      "published": "2026-04-22T11:53:18.966473+00:00",
       "ttps": [
         {
           "id": "T1059.007",
@@ -282,9 +282,59 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "A new variant of the LOTUSLITE backdoor, version 1.1, has been identified targeting India's banking sector and South Korean diplomatic circles. The backdoor is delivered via DLL sideloading using legitimate Microsoft-signed executables and initially through CHM files containing malicious JavaScript. The attack vector involves using JavaScript (T1059.007) to load a malicious DLL (T1574.002) from a legitimate Microsoft-signed executable, which then communicates with dynamic DNS-based command-and-control servers over HTTPS (T1071). If exploited, this backdoor could allow threat actors to gain remote access (T1219) to sensitive systems, potentially leading to data breaches or ransomware attacks. To remediate, users should ensure that all Microsoft-signed executables are up-to-date, specifically version 1.1 or later, and configure their systems to block CHM files from executing.",
+      "ai_summary": "A new variant of the LOTUSLITE backdoor, version 1.1, has been identified targeting India's banking sector and South Korean diplomatic circles. The backdoor is delivered via DLL sideloading using legitimate Microsoft-signed executables and initially through CHM files containing malicious JavaScript. This attack vector leverages T1059.007 (JavaScript) and T1574.002 (DLL Side-Loading) tactics. If exploited, the backdoor allows remote attackers to access sensitive information and potentially disrupt critical infrastructure. To remediate, users should update to the latest Microsoft-signed executables and block CHM files from executing, specifically focusing on versions 1.1 of the LOTUSLITE backdoor.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1574.002| B[Execution]:::tactic\n    B -->|T1059.007| C[Command and Control]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1219| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2019-25701: Easy Video to iPod Converter 1.6.20 contains a local buffer overflow vulnerabili...",
+      "description": "Easy Video to iPod Converter 1.6.20 contains a local buffer overflow vulnerability in the user registration field that allows local attackers to overwrite the structured exception handler. Attackers can input a crafted payload exceeding 996 bytes in the username field to trigger SEH overwrite and execute arbitrary code with user privileges.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-25701",
+      "cve_id": "CVE-2019-25701",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 8.4,
+      "published": "2026-04-22T11:53:15.583601+00:00",
+      "ttps": [
+        {
+          "id": "T1203",
+          "name": "Exploitation for Client Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2019-25701 is a local buffer overflow vulnerability in Easy Video to iPod Converter 1.6.20, allowing attackers to overwrite the structured exception handler (SEH) by inputting a crafted payload exceeding 996 bytes in the username field. This vulnerability can be exploited to execute arbitrary code with user privileges, posing a significant risk to users who have not updated their software. To remediate this issue, users should update to Easy Video to iPod Converter 1.6.21 or later, which patches the vulnerability. Additionally, users should ensure that their system is configured to prevent the execution of arbitrary code from untrusted sources. This can be achieved by disabling the execution of scripts in the user registration field or by implementing a robust input validation mechanism.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.4,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2019-25699: Newsbull Haber Script 1.0.0 contains multiple SQL injection vulnerabilities in t...",
+      "description": "Newsbull Haber Script 1.0.0 contains multiple SQL injection vulnerabilities in the search parameter that allow authenticated attackers to extract database information through time-based, blind, and boolean-based injection techniques. Attackers can inject malicious SQL code through the search parameter in endpoints like /admin/comment/records, /admin/category/records, /admin/news/records, and /admi",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2019-25699",
+      "cve_id": "CVE-2019-25699",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.1,
+      "published": "2026-04-22T11:53:15.583586+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2019-25699 is a critical SQL injection vulnerability in Newsbull Haber Script 1.0.0, allowing authenticated attackers to extract database information through time-based, blind, and boolean-based injection techniques. The vulnerability affects the search parameter in endpoints like /admin/comment/records, /admin/category/records, /admin/news/records, and /admin/user/records. To exploit this vulnerability, attackers can inject malicious SQL code through the search parameter. Remediation steps include updating to Newsbull Haber Script 1.1.0 or later, which patches the vulnerability. Additionally, administrators should ensure that the search parameter is properly sanitized and validated to prevent similar attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -297,7 +347,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 8.2,
-      "published": "2026-04-22T10:12:01.039863+00:00",
+      "published": "2026-04-22T11:53:15.583569+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -307,7 +357,7 @@
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2019-25697 is an SQL injection vulnerability in CMSsite 1.0, allowing unauthenticated attackers to manipulate database queries by injecting SQL code through the cat_id parameter. This can be achieved by sending GET requests to category.php with malicious cat_id values, enabling attackers to extract sensitive database information including usernames and credentials. The vulnerability is exploitable via the T1190 (Exploit Public-Facing Application) tactic, and its CVSS score of 8.2 indicates a high severity. To remediate this issue, update CMSsite to version 1.1 or later, and ensure the cat_id parameter is properly sanitized to prevent SQL injection attacks. Additionally, consider implementing a Web Application Firewall (WAF) to detect and block malicious requests.",
+      "ai_summary": "CVE-2019-25697 is an SQL injection vulnerability in CMSsite 1.0, allowing unauthenticated attackers to manipulate database queries by injecting SQL code through the cat_id parameter. Attackers can send GET requests to category.php with malicious cat_id values to extract sensitive database information, including usernames and credentials. This vulnerability is exploitable via the T1190 (Exploit Public-Facing Application) tactic, and its CVSS score of 8.2 indicates a high severity. To remediate this issue, update CMSsite to version 1.1 or later, which patches this vulnerability. Additionally, ensure that the cat_id parameter is properly sanitized and validated to prevent similar attacks in the future.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
@@ -322,7 +372,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 8.4,
-      "published": "2026-04-22T10:12:01.039848+00:00",
+      "published": "2026-04-22T11:53:15.583547+00:00",
       "ttps": [
         {
           "id": "T1203",
@@ -332,7 +382,7 @@
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2019-25695 is a local buffer overflow vulnerability in R 3.4.4, allowing attackers to execute arbitrary code by injecting malicious input into the GUI Preferences language field. Attackers can craft a 292-byte payload with a JMP ESP instruction to execute commands like calc.exe when pasted into the Language for menus and messages field. This vulnerability is exploitable via the GUI, posing a significant risk to users who interact with the R GUI. To remediate, users should update to R version 3.4.5 or later, which patches this vulnerability. Additionally, users should ensure that the R GUI is not accessible to untrusted users.",
+      "ai_summary": "CVE-2019-25695 is a local buffer overflow vulnerability in R 3.4.4, allowing attackers to execute arbitrary code by injecting malicious input into the GUI Preferences language field. Attackers can craft a 292-byte payload with a JMP ESP instruction to execute commands like calc.exe. This vulnerability is exploitable through the GUI, posing a significant risk to users who interact with the R GUI. To remediate, users should update to R 3.4.5 or later, which patches this vulnerability. Additionally, users should ensure they are running the latest version of R and apply any available security patches.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.4,
       "ai_provider": "groq",
@@ -347,7 +397,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 7.1,
-      "published": "2026-04-22T10:12:01.039831+00:00",
+      "published": "2026-04-22T11:53:15.583532+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -357,7 +407,7 @@
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2019-25693 is an SQL injection vulnerability in ResourceSpace 8.6, allowing authenticated attackers to execute arbitrary SQL queries by injecting malicious code through the keywords parameter in collection_edit.php. Attackers can submit POST requests with crafted SQL payloads in the keywords field to extract sensitive database information, including schema names, user credentials, and other confidential data. This vulnerability is exploitable via the T1190 (Exploit Public-Facing Application) tactic, and its CVSS score of 7.1 indicates a high severity. To remediate this issue, ResourceSpace administrators should update to version 8.7 or later, which patches this vulnerability. Additionally, ensure that the keywords parameter is properly sanitized and validated to prevent similar attacks in the future.",
+      "ai_summary": "CVE-2019-25693 is an SQL injection vulnerability in ResourceSpace 8.6, allowing authenticated attackers to execute arbitrary SQL queries by injecting malicious code through the keywords parameter in collection_edit.php. Attackers can submit POST requests with crafted SQL payloads in the keywords field to extract sensitive database information, including schema names, user credentials, and other confidential data. This vulnerability was detected in the wild and has a CVSS score of 7.1. To remediate, update to ResourceSpace 8.7 or later, which patches this vulnerability. Additionally, ensure that the keywords parameter is properly sanitized and validated to prevent similar attacks. This vulnerability is exploitable via the T1190 (Exploit Public-Facing Application) tactic.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
@@ -372,7 +422,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 8.4,
-      "published": "2026-04-22T10:12:01.039807+00:00",
+      "published": "2026-04-22T11:53:15.583516+00:00",
       "ttps": [
         {
           "id": "T1203",
@@ -381,12 +431,7 @@
           "tactic_id": "TA0002"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2019-25691 is a local buffer overflow vulnerability in Faleemi Desktop Software 1.8, specifically in the System Setup dialog's Save Path for Snapshot and Record file field. Attackers can exploit this vulnerability by injecting a crafted payload to bypass DEP protections and execute arbitrary code via ROP chain gadgets. If exploited, this vulnerability allows for remote code execution (RCE), posing a significant threat to users who have not patched their software. To remediate this vulnerability, users should update to Faleemi Desktop Software version 1.9 or later, which addresses this issue. Additionally, users should ensure that their system's DEP protections are enabled to prevent exploitation.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.4,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2019-25689: HTML5 Video Player 1.2.5 contains a local buffer overflow vulnerability that all...",
@@ -397,7 +442,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 8.4,
-      "published": "2026-04-22T10:12:01.039792+00:00",
+      "published": "2026-04-22T11:53:15.583500+00:00",
       "ttps": [
         {
           "id": "T1059",
@@ -412,12 +457,7 @@
           "tactic_id": "TA0002"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "The CVE-2019-25689 vulnerability in HTML5 Video Player 1.2.5 is a local buffer overflow issue that allows attackers to execute arbitrary code by supplying an oversized key code string. Attackers can craft a malicious payload exceeding 997 bytes and paste it into the KEY CODE field in the Help Register dialog to trigger code execution and spawn a calculator process. This vulnerability is exploitable through the Help Register dialog, which is accessible to authenticated users. To remediate this issue, users should update to version 1.2.6 or later, which addresses the vulnerability. Additionally, administrators should ensure that the KEY CODE field is not accessible to unauthenticated users.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1059| C[Command and Scripting Interpreter]:::tactic\n    C -->|T121| D[Code Injection]:::tactic\n    D -->|T1074| E[Process Creation]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.4,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2018-25258: RGui 3.5.0 contains a local buffer overflow vulnerability in the GUI preferences...",
@@ -428,7 +468,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 8.4,
-      "published": "2026-04-22T10:12:01.039777+00:00",
+      "published": "2026-04-22T11:53:15.583483+00:00",
       "ttps": [
         {
           "id": "T1059",
@@ -454,7 +494,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 7.1,
-      "published": "2026-04-22T10:12:01.039762+00:00",
+      "published": "2026-04-22T11:53:15.583461+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -474,7 +514,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.1,
-      "published": "2026-04-22T10:12:01.039746+00:00",
+      "published": "2026-04-22T11:53:15.583423+00:00",
       "ttps": [
         {
           "id": "T1059.007",
@@ -492,37 +532,131 @@
       "epss_score": null
     },
     {
-      "title": "CVE-2026-6126: A weakness has been identified in zhayujie chatgpt-on-wechat CowAgent 2.0.4. The...",
-      "description": "A weakness has been identified in zhayujie chatgpt-on-wechat CowAgent 2.0.4. The affected element is an unknown function of the component Administrative HTTP Endpoint. This manipulation causes missing authentication. It is possible to initiate the attack remotely. The exploit has been made available to the public and could be used for attacks. The project was informed of the problem early through ",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6126",
-      "cve_id": "CVE-2026-6126",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.3,
-      "published": "2026-04-22T10:12:01.039716+00:00",
-      "ttps": [],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-6125: A security flaw has been discovered in Dromara warm-flow up to 1.8.4. Impacted i...",
-      "description": "A security flaw has been discovered in Dromara warm-flow up to 1.8.4. Impacted is the function SpelHelper.parseExpression of the file /warm-flow/save-json of the component Workflow Definition Handler. The manipulation of the argument listenerPath/skipCondition/permissionFlag results in code injection. The attack may be performed from remote. The exploit has been released to the public and may be u",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6125",
-      "cve_id": "CVE-2026-6125",
-      "source": "NVD",
+      "title": "Mirai Botnet Targets Flaw in Discontinued D-Link Routers",
+      "description": "The exploitation of the command injection vulnerability started one year after public disclosure and PoC exploit code publication. The post Mirai Botnet Targets Flaw in Discontinued D-Link Routers appeared first on SecurityWeek.",
+      "url": "https://www.securityweek.com/mirai-botnet-targets-flaw-in-discontinued-d-link-routers/",
+      "cve_id": null,
+      "source": "SecurityWeek",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": 6.3,
-      "published": "2026-04-22T10:12:01.039677+00:00",
+      "cvss_score": null,
+      "published": "2026-04-22T11:44:07+00:00",
       "ttps": [
         {
-          "id": "T1055",
-          "name": "Process Injection",
-          "tactic": "Privilege Escalation",
-          "tactic_id": "TA0004"
+          "id": "T1583.005",
+          "name": "Botnet",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        },
+        {
+          "id": "T1486",
+          "name": "Data Encrypted for Impact",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
         }
       ],
-      "epss_score": null
+      "threat_actors": [
+        "Conti"
+      ]
+    },
+    {
+      "title": "Are SBOMs Failing? Supply Chain Attacks Rise as Security Teams Struggle With SBOM Data",
+      "description": "Researcher says the missing piece is a governance-driven intelligence layer that turns SBOM and VEX data into explainable security decisions. The post Are SBOMs Failing? Supply Chain Attacks Rise as Security Teams Struggle With SBOM Data appeared first on SecurityWeek.",
+      "url": "https://www.securityweek.com/are-sboms-failing-supply-chain-attacks-rise-as-security-teams-struggle-with-sbom-data/",
+      "cve_id": null,
+      "source": "SecurityWeek",
+      "category": "incident",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-04-22T11:30:00+00:00",
+      "ttps": [
+        {
+          "id": "T1195",
+          "name": "Supply Chain Compromise",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ]
+    },
+    {
+      "title": "Claude Mythos Finds 271 Firefox Vulnerabilities",
+      "description": "All the flaws could have also been found by an elite human researcher, according to Mozilla. The post Claude Mythos Finds 271 Firefox Vulnerabilities appeared first on SecurityWeek.",
+      "url": "https://www.securityweek.com/claude-mythos-finds-271-firefox-vulnerabilities/",
+      "cve_id": null,
+      "source": "SecurityWeek",
+      "category": "news",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-04-22T11:27:46+00:00",
+      "ttps": []
+    },
+    {
+      "title": "Lotus Wiper Malware Targets Venezuelan Energy Systems in Destructive Attack",
+      "description": "Cybersecurity researchers have discovered a previously undocumented data wiper that has been used in attacks targeting Venezuela at the end of last year and the start of 2026. Dubbed Lotus Wiper, the novel file wiper has been used in a destructive campaign targeting the energy and utilities sector in Venezuela, per findings from Kaspersky. \"Two batch scripts are responsible for initiating the",
+      "url": "https://thehackernews.com/2026/04/lotus-wiper-malware-targets-venezuelan.html",
+      "cve_id": null,
+      "source": "The Hacker News",
+      "category": "incident",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-04-22T10:55:00+00:00",
+      "ttps": [
+        {
+          "id": "T1485",
+          "name": "Data Destruction",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
+        }
+      ]
+    },
+    {
+      "title": "North Korean Hackers Use AppleScript, ClickFix in Fresh macOS Attacks",
+      "description": "The campaigns focus on financial organizations, including cryptocurrency, venture capital, and blockchain entities. The post North Korean Hackers Use AppleScript, ClickFix in Fresh macOS Attacks appeared first on SecurityWeek.",
+      "url": "https://www.securityweek.com/north-korean-hackers-use-applescript-clickfix-in-fresh-macos-attacks/",
+      "cve_id": null,
+      "source": "SecurityWeek",
+      "category": "incident",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-04-22T10:49:52+00:00",
+      "ttps": [
+        {
+          "id": "T1059.002",
+          "name": "AppleScript",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        }
+      ]
+    },
+    {
+      "title": "Toxic Combinations: When Cross-App Permissions Stack into Risk",
+      "description": "On January 31, 2026, researchers disclosed that Moltbook, a social network built for AI agents, had left its database wide open, exposing 35,000 email addresses and 1.5 million agent API tokens across 770,000 active agents. The more worrying part sat inside the private messages. Some of those conversations held plaintext third-party credentials, including OpenAI API keys shared between agents,",
+      "url": "https://thehackernews.com/2026/04/toxic-combinations-when-cross-app.html",
+      "cve_id": null,
+      "source": "The Hacker News",
+      "category": "news",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-04-22T10:41:36+00:00",
+      "ttps": []
+    },
+    {
+      "title": "Microsoft traces Universal Print issues to Graph API code change",
+      "description": "Microsoft says that an ongoing Universal Print sharing issue that prevents users from creating some printer shares is due to a Microsoft Graph API code change. [...]",
+      "url": "https://www.bleepingcomputer.com/news/microsoft/microsoft-graph-api-code-change-causes-universal-print-share-issues/",
+      "cve_id": null,
+      "source": "Bleeping Computer",
+      "category": "news",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-04-22T10:15:09+00:00",
+      "ttps": []
     },
     {
       "title": "New GoGra malware for Linux uses Microsoft Graph API for comms",
@@ -785,8 +919,8 @@
         }
       ],
       "threat_actors": [
-        "BlackCat",
-        "APT41"
+        "APT41",
+        "BlackCat"
       ]
     },
     {
@@ -1011,8 +1145,8 @@
         }
       ],
       "threat_actors": [
-        "BlackCat",
-        "APT41"
+        "APT41",
+        "BlackCat"
       ]
     },
     {
@@ -1034,8 +1168,8 @@
         }
       ],
       "threat_actors": [
-        "BlackCat",
-        "APT41"
+        "APT41",
+        "BlackCat"
       ]
     },
     {
@@ -1227,49 +1361,6 @@
       "ttps": []
     },
     {
-      "title": "No Exploit Needed: How Attackers Walk Through the Front Door via Identity-Based Attacks",
-      "description": "The cybersecurity industry has spent the last several years chasing sophisticated threats like zero-days, supply chain compromises, and AI-generated exploits. However, the most reliable entry point for attackers still hasn't changed: stolen credentials. Identity-based attacks remain a dominant initial access vector in breaches today. Attackers obtain valid credentials through credential stuffing",
-      "url": "https://thehackernews.com/2026/04/no-exploit-needed-how-attackers-walk.html",
-      "cve_id": null,
-      "source": "The Hacker News",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": null,
-      "published": "2026-04-21T11:30:00+00:00",
-      "ttps": [
-        {
-          "id": "T1078",
-          "name": "Valid Accounts",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1195",
-          "name": "Supply Chain Compromise",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1110",
-          "name": "Brute Force",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        }
-      ]
-    },
-    {
-      "title": "Organizations Warned of Exploited Cisco, Kentico, Zimbra Vulnerabilities",
-      "description": "CISA expanded the KEV catalog with eight flaws, but five of them have been flagged as exploited before. The post Organizations Warned of Exploited Cisco, Kentico, Zimbra Vulnerabilities appeared first on SecurityWeek.",
-      "url": "https://www.securityweek.com/organizations-warned-of-exploited-cisco-kentico-zimbra-vulnerabilities/",
-      "cve_id": null,
-      "source": "SecurityWeek",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-04-21T11:19:45+00:00",
-      "ttps": []
-    },
-    {
       "title": "Actively exploited Apache ActiveMQ flaw impacts 6,400 servers",
       "description": "Nonprofit security organization Shadowserver found that over 6,400 Apache ActiveMQ servers exposed online are vulnerable to ongoing attacks exploiting a high-severity code injection vulnerability. [...]",
       "url": "https://www.bleepingcomputer.com/news/security/actively-exploited-apache-activemq-flaw-impacts-6-400-servers/",
@@ -1285,85 +1376,6 @@
           "name": "Process Injection",
           "tactic": "Privilege Escalation",
           "tactic_id": "TA0004"
-        }
-      ]
-    },
-    {
-      "title": "Data Breaches at Healthcare Organizations in Illinois and Texas Affect 600,000",
-      "description": "Data breaches were disclosed by Southern Illinois Dermatology, Saint Anthony Hospital, and North Texas Behavioral Health Authority. The post Data Breaches at Healthcare Organizations in Illinois and Texas Affect 600,000 appeared first on SecurityWeek.",
-      "url": "https://www.securityweek.com/data-breaches-at-healthcare-organizations-in-illinois-and-texas-affect-600000/",
-      "cve_id": null,
-      "source": "SecurityWeek",
-      "category": "incident",
-      "severity": "high",
-      "cvss_score": null,
-      "published": "2026-04-21T11:02:29+00:00",
-      "ttps": []
-    },
-    {
-      "title": "Google Patches Antigravity IDE Flaw Enabling Prompt Injection Code Execution",
-      "description": "Cybersecurity researchers have discovered a vulnerability in Google's agentic integrated development environment (IDE), Antigravity, that could be exploited to achieve code execution. The flaw, since patched, combines Antigravity's permitted file-creation capabilities with an insufficient input sanitization in Antigravity's native file-searching tool, find_by_name, to bypass the program's Strict",
-      "url": "https://thehackernews.com/2026/04/google-patches-antigravity-ide-flaw.html",
-      "cve_id": null,
-      "source": "The Hacker News",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-04-21T10:22:00+00:00",
-      "ttps": [
-        {
-          "id": "T1059",
-          "name": "Command and Scripting Interpreter",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ]
-    },
-    {
-      "title": "Former ransomware negotiator pleads guilty to BlackCat attacks",
-      "description": "41-year-old Angelo Martino, a former employee of cybersecurity incident response company DigitalMint, has pleaded guilty to targeting U.S. companies in BlackCat (ALPHV) ransomware attacks in 2023. [...]",
-      "url": "https://www.bleepingcomputer.com/news/security/former-ransomware-negotiator-pleads-guilty-to-blackcat-attacks/",
-      "cve_id": null,
-      "source": "Bleeping Computer",
-      "category": "incident",
-      "severity": "high",
-      "cvss_score": null,
-      "published": "2026-04-21T10:12:21+00:00",
-      "ttps": [
-        {
-          "id": "T1486",
-          "name": "Data Encrypted for Impact",
-          "tactic": "Impact",
-          "tactic_id": "TA0040"
-        }
-      ],
-      "threat_actors": [
-        "BlackCat",
-        "APT41"
-      ]
-    },
-    {
-      "title": "$290 Million Kelp DAO Crypto Heist Blamed on North Korea",
-      "description": "The hackers targeted LayerZero’s DVN, compromising certain RPCs and DDoSing others to trigger failover to the poisoned infrastructure. The post $290 Million Kelp DAO Crypto Heist Blamed on North Korea appeared first on SecurityWeek.",
-      "url": "https://www.securityweek.com/290-million-kelp-dao-crypto-heist-blamed-on-north-korea/",
-      "cve_id": null,
-      "source": "SecurityWeek",
-      "category": "incident",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-04-21T10:02:09+00:00",
-      "ttps": [
-        {
-          "id": "T1498",
-          "name": "Network Denial of Service",
-          "tactic": "Impact",
-          "tactic_id": "TA0040"
-        },
-        {
-          "id": "T1657",
-          "name": "Financial Theft",
-          "tactic": "Impact",
-          "tactic_id": "TA0040"
         }
       ]
     },
@@ -1458,25 +1470,6 @@
       "cvss_score": null,
       "published": "2026-04-20T16:51:00+00:00",
       "ttps": []
-    },
-    {
-      "title": "Serial-to-IP Converter Flaws Expose OT and Healthcare Systems to Hacking",
-      "description": "Forescout researchers discovered 20 new vulnerabilities in Lantronix and Silex products and described theoretical attack scenarios. The post Serial-to-IP Converter Flaws Expose OT and Healthcare Systems to Hacking appeared first on SecurityWeek.",
-      "url": "https://www.securityweek.com/serial-to-ip-converter-flaws-expose-ot-and-healthcare-systems-to-hacking/",
-      "cve_id": null,
-      "source": "SecurityWeek",
-      "category": "incident",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-04-20T15:42:22+00:00",
-      "ttps": [
-        {
-          "id": "T1649",
-          "name": "Steal or Forge Authentication Certificates",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        }
-      ]
     },
     {
       "title": "WhatsApp Leaks User Metadata to Attackers",
@@ -2006,8 +1999,8 @@
         }
       ],
       "threat_actors": [
-        "LockBit",
-        "Conti"
+        "Conti",
+        "LockBit"
       ]
     },
     {
