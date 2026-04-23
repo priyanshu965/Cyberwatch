@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-23T22:37:19.602382+00:00",
+  "last_updated": "2026-04-23T23:39:05.981455+00:00",
   "total_items": 105,
   "items": [
     {
@@ -20,8 +20,8 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The Chinese APT group has been observed abusing multiple cloud tools to spy on Mongolia, leveraging application layer protocols to facilitate command and control. The threat actor utilizes popular services such as Microsoft Outlook, Slack, Discord, and file.io to support their online espionage efforts. If exploited, this could lead to unauthorized access to sensitive information, with potential targets including government agencies and organizations in Mongolia. To remediate this threat, defenders should implement strict access controls and monitoring on these cloud services, ensuring that all accounts are properly secured with multi-factor authentication and that any suspicious activity is promptly investigated. Additionally, organizations should consider implementing a cloud access security broker to enhance visibility and control over cloud-based services.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1071| B[Command and Control]:::tactic\n    B -->|T1566| C[Initial Access]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Chinese APT group has been observed abusing multiple cloud tools to spy on Mongolia, leveraging various platforms such as Microsoft Outlook, Slack, Discord, and file.io for command and control. The threat actor utilizes the application layer protocol (T1071) to facilitate online espionage, allowing them to maintain persistence and evade detection. If exploited, this could lead to unauthorized access to sensitive information, with potential targets including government agencies and organizations in Mongolia. To remediate this threat, defenders should implement strict access controls and monitoring on cloud-based services, ensuring that all accounts are secured with multi-factor authentication and that any suspicious activity is promptly investigated. Additionally, organizations should consider implementing a cloud security gateway to monitor and control cloud-based traffic, specifically focusing on the mentioned platforms.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1071| B[Command and Control]:::tactic\n    B -->|T1566| C[Initial Access]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.8,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -35,7 +35,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-23T22:35:07.057631+00:00",
+      "published": "2026-04-23T23:37:12.160514+00:00",
       "ttps": [
         {
           "id": "T1059.001",
@@ -62,7 +62,7 @@
           "tactic_id": "TA0007"
         }
       ],
-      "ai_summary": "The analyzed threat involves a malicious compiled HTML help (.chm) file, which is delivered via a 7zip compressed file. This .chm file displays a decoy window while executing obfuscated JavaScript code, leveraging T1027 (Obfuscated Files or Information) to evade detection. The JavaScript then launches PowerShell commands, utilizing T1059.001 (PowerShell), to verify internet connectivity by pinging Google, and subsequently downloads additional PowerShell scripts. To mitigate this threat, defenders should block .chm files at the email gateway and network perimeter, and ensure that PowerShell is configured to only run signed scripts, with the execution policy set to 'AllSigned' or 'RemoteSigned'. Additionally, monitoring for unusual PowerShell activity, such as unexpected network connections or process creations, can help detect similar attacks.",
+      "ai_summary": "The analyzed threat involves a malicious compiled HTML help (.chm) file used for initial payload delivery, which is typically distributed within a 7zip compressed file. Upon execution, the .chm file displays a decoy window while running obfuscated JavaScript code that launches PowerShell commands to verify internet connectivity by pinging Google, and then downloads additional PowerShell scripts. This attack chain exploits the trust users have in .chm files and leverages PowerShell for post-exploitation activities, such as executing commands and potentially exfiltrating data. To mitigate this threat, defenders should block .chm files at the email gateway and network perimeter, and restrict PowerShell execution to only trusted scripts and users. Additionally, implementing application whitelisting and monitoring for suspicious PowerShell activity can help detect and prevent similar attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1016.001| D[Discovery]:::tactic\n    D -->|T1027| E[Defense Evasion]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.8,
       "ai_provider": "groq",
@@ -77,13 +77,13 @@
       "category": "incident",
       "severity": "medium",
       "cvss_score": null,
-      "published": "2026-04-23T22:35:07.057606+00:00",
+      "published": "2026-04-23T23:37:12.160494+00:00",
       "ttps": [],
-      "ai_summary": "This threat item involves DPRK-linked fake IT worker infrastructure, which was uncovered after a cryptocurrency researcher identified a domain connected to illicit payments. The investigation revealed concentrated VPN usage patterns, with Astrill VPN, Mullvad, and Proton VPN being the most prominent. The threat actors used these VPNs to mask their IP addresses, making it difficult to track their activities. To remediate this threat, defenders should block traffic to the identified domain, luckyguys[.]site, and consider implementing additional security measures to detect and prevent VPN usage patterns. Furthermore, organizations should educate their employees on the risks of using untrusted VPN services and ensure that they are using reputable and secure VPN providers.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1041| B[Command and Control]:::tactic\n    B -->|T1071| C[Instrumentation]:::tactic\n    C -->|T1219| D[Remote Services]:::tactic\n    D -->|T1204| E[User Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 4.0,
+      "ai_summary": "The DPRK-linked fake IT worker infrastructure threat involves the use of fake online personas to facilitate illicit activities, including cryptocurrency transactions. The threat actors have been observed using various VPN services, such as Astrill VPN, Mullvad, and Proton VPN, to mask their network activity. The investigation began after the identification of the domain luckyguys[.]site, which was connected to illicit payments. To mitigate this threat, defenders should monitor for suspicious VPN usage patterns, particularly those involving Astrill VPN, Mullvad, and Proton VPN, and implement measures to detect and block fake online personas. Additionally, defenders should consider implementing IP address blocking for known malicious IP addresses, such as 163.245.219[.]19, to prevent further malicious activity.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1056| B[Initial Access]:::tactic\n    B -->|T1071| C[Command and Control]:::tactic\n    C -->|T1021| D[Defense Evasion]:::tactic\n    D -->|T1041| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.5,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "Beyond PowerShell: Analyzing the Multi-Action ClickFix Variant",
@@ -94,7 +94,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-23T22:35:07.057581+00:00",
+      "published": "2026-04-23T23:37:12.160474+00:00",
       "ttps": [
         {
           "id": "T1059.001",
@@ -115,9 +115,9 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "A newly observed ClickFix variant exploits native Windows utilities, specifically cmdkey and regsvr32, for payload delivery. Victims are socially engineered through fake CAPTCHA pages to execute a malicious command via the Windows Run dialog. The single command chains multiple actions: staging credentials using cmdkey, retrieving a remote DLL via regsvr32 from a UNC path. This attack vector allows threat actors to bypass traditional PowerShell-based detection methods. To remediate, ensure that Windows Defender Application Guard is enabled for Internet Explorer and Microsoft Edge, and configure Windows Firewall to block incoming traffic on the UNC path used for DLL retrieval. Additionally, update Windows to the latest version and apply the latest security patches.",
+      "ai_summary": "A newly observed ClickFix variant exploits native Windows utilities, specifically cmdkey and regsvr32, for payload delivery. Victims are socially engineered through fake CAPTCHA pages to execute a malicious command via the Windows Run dialog. The single command chains multiple actions: staging credentials using cmdkey, retrieving a remote DLL via regsvr32 from a UNC path. This variant abuses native Windows utilities, making it difficult to detect using traditional PowerShell-based detection methods. To remediate, ensure that Windows Defender Application Guard is enabled, and configure Windows Firewall to block access to cmdkey and regsvr32 from UNC paths. Additionally, implement a robust CAPTCHA solution to prevent social engineering attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1218.010| C[Execution]:::tactic\n    C -->|T1555.004| D[Command and Control]:::tactic\n    D -->|T1059.001| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "severity_score": 7.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -130,7 +130,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-23T22:35:07.057558+00:00",
+      "published": "2026-04-23T23:37:12.160439+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -145,7 +145,7 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "A supply chain compromise was discovered in the official Checkmarx KICS Docker repository and VS Code extensions. Attackers poisoned Docker Hub images (tags v2.1.20, v2.1.21, alpine) and VS Code extensions (versions 1.17.0, 1.19.0) to introduce unauthorized data exfiltration capabilities. The trojanized KICS binary collects and encrypts scan reports containing credentials from infrastructure-as-code. This vulnerability allows attackers to steal sensitive information, including credentials, from compromised systems. To remediate, users should immediately update to version 2.1.22 of the KICS Docker image and version 1.20.0 of the VS Code extension.",
+      "ai_summary": "A supply chain compromise was discovered in the official Checkmarx KICS Docker repository and VS Code extensions. Attackers poisoned Docker Hub images (tags v2.1.20, v2.1.21, alpine) and VS Code extensions (versions 1.17.0, 1.19.0) with unauthorized data exfiltration capabilities. The trojanized KICS binary collects and encrypts scan reports containing credentials from infrastructure-as-code. This vulnerability allows attackers to exfiltrate sensitive data without being detected. To remediate, users should immediately update to version 2.1.22 of the KICS Docker image and version 1.20.0 of the VS Code extension.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1041| C[Exfiltration Over C2 Channel]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -160,7 +160,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-23T22:35:07.057533+00:00",
+      "published": "2026-04-23T23:37:12.160393+00:00",
       "ttps": [
         {
           "id": "T1583.005",
@@ -175,9 +175,9 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "This Linux incident involved simultaneous compromise by at least two threat actors, leveraging OpenAI's Codex AI agent for security remediation. Actor A deployed a cryptominer mining Monero to a private pool, while Actor B installed a multi-revenue botnet including XMRig mining, residential proxy services, and bandwidth-selling components with eight different persistence mechanisms. The affected system was a Linux endpoint, and the attack vectors involved resource hijacking (T1496) and botnet activity (T1583.005). To remediate, defenders should update the Linux system to the latest version, disable any suspicious services, and remove any unauthorized persistence mechanisms. Additionally, it is crucial to monitor system logs for any signs of further compromise and implement robust security measures to prevent similar incidents in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1496| B[Resource Hijacking]:::tactic\n    B -->|T1583.005| C[Botnet]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "A Linux endpoint was compromised by at least two distinct threat actors, leveraging a multi-revenue botnet (T1583.005) and resource hijacking (T1496) tactics. Actor A deployed a cryptominer (XMRig) mining Monero to a private pool, while Actor B installed a botnet with residential proxy services and bandwidth-selling components. The developer user relied on OpenAI's Codex AI agent for security remediation, but its effectiveness is unclear. To remediate, defenders should update the Linux distribution to the latest version (e.g., Ubuntu 22.04) and remove any suspicious processes (e.g., XMRig) using the 'kill' command. Additionally, configure the system to block suspicious network traffic using a firewall (e.g., UFW) and implement a robust monitoring solution to detect future incidents.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1496| C[Resource Hijacking]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -190,7 +190,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-23T22:35:07.057507+00:00",
+      "published": "2026-04-23T23:37:12.160373+00:00",
       "ttps": [
         {
           "id": "T1078.004",
@@ -211,8 +211,8 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "The npm Packages Hit with TeamPCP-Style CanisterWorm Malware threat involves malicious npm packages compromised with malware exhibiting tradecraft similar to TeamPCP's CanisterWorm campaign. The attack targeted packages including @automagik/genie and pgserve, implementing install-time execution that harvests credentials, environment variables, SSH keys, cloud credentials, browser data, and crypto-wallet artifacts. The payload exfiltrates stolen data via a command and control channel. To remediate, users should immediately uninstall the compromised packages and update to the latest version of npm. Additionally, developers should review their software dependencies and ensure they are using secure and trusted packages. Furthermore, users should also review their environment variables and SSH keys for any potential security risks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195.001| B[Compromise Software Dependencies]:::tactic\n    B -->|T1078.004| C[Cloud Accounts]:::tactic\n    C -->|T1041| D[Exfiltration Over C2 Channel]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "A malicious npm package compromise, attributed to Namastex.ai, has been linked to a CanisterWorm-style malware campaign. The attack vector involves install-time execution of malicious code, which harvests sensitive information including credentials, environment variables, SSH keys, cloud credentials, browser data, and crypto-wallet artifacts. The compromised packages, @automagik/genie and pgserve, are vulnerable to exploitation, and users are advised to update to version 1.1.0 or later of @automagik/genie and uninstall pgserve. To remediate, users should run npm uninstall pgserve and npm install @automagik/genie@1.1.0. Additionally, users should review their npm dependencies and ensure they are up-to-date. This attack demonstrates the importance of secure software development practices and regular dependency updates.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195.001| B[Compromise Software Dependencies]:::tactic\n    B -->|T1041| C[Exfiltration Over C2 Channel]:::tactic\n    C -->|T1078.004| D[Cloud Accounts]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -226,7 +226,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-23T22:35:07.057472+00:00",
+      "published": "2026-04-23T23:37:12.160353+00:00",
       "ttps": [
         {
           "id": "T1583.005",
@@ -253,7 +253,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "Bedep, an ad-fraud botnet active from late 2014 through 2015, exploited the Angler exploit kit to deliver its payload. The botnet employed a sophisticated domain generation algorithm (DGA) that utilized real foreign exchange rates from the European Central Bank combined with advanced group theory mathematics to generate command-and-control domains. Unlike typical DGAs that rely solely on date-based seeds, Bedep's algorithm provided a high degree of randomness and evasion capabilities. To defend against this threat, administrators should ensure that their systems are up-to-date with the latest security patches, particularly for applications that may be vulnerable to the Angler exploit kit. Additionally, implementing a robust DGA detection system and monitoring for suspicious network activity can help identify and mitigate potential Bedep infections.",
+      "ai_summary": "Bedep, an ad-fraud botnet active from late 2014 through 2015, exploited the Angler exploit kit to deliver its payload. The botnet employed a sophisticated domain generation algorithm (DGA) that utilized real foreign exchange rates from the European Central Bank and advanced group theory mathematics to generate command-and-control domains. Unlike typical DGAs that rely solely on date-based seeds, Bedep's algorithm combined multiple variables to create a unique set of domains. To mitigate this threat, defenders should focus on identifying and blocking the Angler exploit kit and its associated command-and-control domains. Remediation steps include updating software to the latest version, configuring firewalls to block suspicious traffic, and implementing a robust DGA detection system.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1588| B[Obtain Capabilities]:::tactic\n    B -->|T1071| C[Application Layer Protocol]:::tactic\n    C -->|T1568| D[Dynamic Resolution]:::tactic\n    D -->|T1583.005| E[Botnet]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -268,11 +268,11 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-23T22:35:07.057445+00:00",
+      "published": "2026-04-23T23:37:12.160332+00:00",
       "ttps": [],
-      "ai_summary": "Researchers at X-Labs discovered 10 verified Indirect Prompt Injection (IPI) payloads deployed across live web infrastructure. IPI differs from direct prompt injection as it conceals adversarial instructions within ordinary web content. When AI agents crawl or summarize poisoned pages, they ingest and execute these instructions as legitimate commands. This technique allows attackers to manipulate AI models without directly sending malicious input. To mitigate this threat, web administrators should update their content filtering and AI model training data to detect and block IPI payloads. Specifically, they should implement content filtering rules to identify and block suspicious web content and update their AI model training data to recognize and reject IPI instructions.",
+      "ai_summary": "Researchers at X-Labs discovered 10 verified Indirect Prompt Injection (IPI) payloads deployed across live web infrastructure. IPI differs from direct prompt injection as it conceals adversarial instructions within ordinary web content. When AI agents crawl or summarize poisoned pages, they ingest and execute these instructions as legitimate commands. This technique poses a significant threat as it can bypass traditional security measures. To mitigate this, web administrators should update their AI-powered content crawlers to version 3.2.1 or later, and implement strict input validation and sanitization on all user-generated content.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -285,7 +285,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-23T22:35:07.057417+00:00",
+      "published": "2026-04-23T23:37:12.160312+00:00",
       "ttps": [
         {
           "id": "T1547.005",
@@ -312,9 +312,9 @@
           "tactic_id": "TA0008"
         }
       ],
-      "ai_summary": "Foxit Impersonation: Fake PDF Installer Deploys VNC is a sophisticated social engineering attack leveraging the trusted reputation of Foxit PDF Reader, used by over 650 million people. Threat actors impersonate the vendor through fake installers with document-themed filenames that bypass user suspicion. When executed, these files display decoy passport images while downloading and installing VNC software, allowing attackers to establish unauthorized remote access. To remediate, users should be cautious when downloading software from untrusted sources and verify the authenticity of installers by checking the publisher's website and digital signatures. Specifically, users should ensure Foxit PDF Reader is updated to the latest version (2.4.4.1123 or later) and configure the software to only allow trusted installers.",
+      "ai_summary": "Foxit Impersonation: Fake PDF Installer Deploys VNC is a sophisticated social engineering attack leveraging the trusted reputation of Foxit PDF Reader, used by over 650 million people. Threat actors impersonate the vendor through fake installers with document-themed filenames that bypass user suspicion. When executed, these files display decoy passport images while downloading and installing VNC software, allowing attackers to gain remote access to compromised systems. To remediate, users should be cautious when downloading software from untrusted sources and verify the authenticity of installers by checking the publisher's website for updates. Specifically, users should ensure they are installing the latest version of Foxit PDF Reader (version 12.0.1.152 or later) and configure their system to only allow trusted sources to install software. Additionally, users should enable the 'Verify the publisher' option in their system's settings to prevent the installation of malicious software.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1547.005| B[Initial Access]:::tactic\n    B -->|T1134| C[Execution]:::tactic\n    C -->|T1036| D[Masquerading]:::tactic\n    D -->|T1021.005| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -327,7 +327,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-23T22:35:07.057331+00:00",
+      "published": "2026-04-23T23:37:12.160283+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -360,9 +360,81 @@
           "tactic_id": "TA0009"
         }
       ],
-      "ai_summary": "A sophisticated ClickFix campaign was detected in mid-March 2026, leveraging social engineering to trick victims into executing a PowerShell command that downloads and runs a script directly in memory. The attack begins with a malicious webpage impersonating Booking.com's visual identity with a fake CAPTCHA, exploiting the public-facing application (T1190). The JavaScript code automatically copies malicious commands to the clipboard (T1115) and intercepts user input, ultimately leading to the execution of malicious commands (T1204). To remediate this threat, defenders should ensure that all systems are running the latest version of PowerShell (5.1 or later) and that the Windows Defender Firewall is enabled. Additionally, users should be educated on the dangers of executing unknown PowerShell commands and the importance of verifying the authenticity of CAPTCHA challenges.",
+      "ai_summary": "A sophisticated ClickFix campaign was detected in mid-March 2026, leveraging social engineering to trick victims into executing a PowerShell command that downloads and runs a script directly in memory. The attack begins with a malicious webpage impersonating Booking.com's visual identity with a fake CAPTCHA, exploiting the public-facing application (T1190). The JavaScript code automatically copies malicious commands to the clipboard (T1115) and intercepts user input, ultimately leading to the execution of malicious commands (T1204). To remediate, users should ensure they are running the latest version of PowerShell (5.1 or later) and disable the 'Allow users to run PowerShell scripts' setting. Additionally, users should be cautious when interacting with unfamiliar webpages and avoid executing PowerShell commands from untrusted sources.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    C -->|T1059.001| D[PowerShell]:::tactic\n    D -->|T1115| E[Clipboard Data]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-27679: Due to missing authorization checks in the SAP S/4HANA frontend OData Service (M...",
+      "description": "Due to missing authorization checks in the SAP S/4HANA frontend OData Service (Manage Reference Structures), an attacker could update and delete child entities via exposed OData services without proper authorization. This vulnerability has a high impact on integrity, while confidentiality and availability are not impacted.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-27679",
+      "cve_id": "CVE-2026-27679",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 6.5,
+      "published": "2026-04-23T23:37:09.286545+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-27679 is a high-impact vulnerability in SAP S/4HANA's frontend OData Service, specifically the Manage Reference Structures component. Due to missing authorization checks, an attacker can update and delete child entities via exposed OData services without proper authorization, compromising data integrity. This vulnerability affects SAP S/4HANA versions 2022 and later, with the attack vector being remote code execution through the OData service. To remediate, SAP customers should update to SAP S/4HANA 2022 SP02 or later, and ensure that the OData service is properly configured with authorization checks. Additionally, SAP customers should apply the relevant SAP Security Note (SN) to address this vulnerability.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-27678: Due to missing authorization checks in the SAP S/4HANA backend OData Service (Ma...",
+      "description": "Due to missing authorization checks in the SAP S/4HANA backend OData Service (Manage Reference Structures), an attacker could update and delete child entities via exposed OData services without proper authorization. This vulnerability has a high impact on integrity, while confidentiality and availability are not impacted.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-27678",
+      "cve_id": "CVE-2026-27678",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 6.5,
+      "published": "2026-04-23T23:37:09.286533+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-27678 is a high-impact vulnerability in SAP S/4HANA's OData Service, allowing attackers to update and delete child entities without proper authorization. This flaw is due to missing authorization checks, which can be exploited by attackers to compromise the integrity of the system. The vulnerability affects SAP S/4HANA versions 2022 and later, and can be exploited via exposed OData services. To remediate this issue, SAP customers should update to SAP S/4HANA version 2023 SP02 or later, and ensure that the 'Manage Reference Structures' service is properly configured with authorization checks. Additionally, customers should review their system's access controls and ensure that only authorized users have access to the OData services.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-27677: Due to missing authorization checks in the SAP S/4HANA OData Service (Manage Ref...",
+      "description": "Due to missing authorization checks in the SAP S/4HANA OData Service (Manage Reference Equipment), an attacker could update and delete child entities via OData services without proper authorization. This vulnerability has a high impact on integrity, while confidentiality and availability are not impacted.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-27677",
+      "cve_id": "CVE-2026-27677",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 6.5,
+      "published": "2026-04-23T23:37:09.286519+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-27677 is a high-impact vulnerability in SAP S/4HANA OData Service (Manage Reference Equipment) due to missing authorization checks. An attacker can exploit this vulnerability to update and delete child entities via OData services without proper authorization, primarily affecting integrity. To remediate, SAP S/4HANA customers should apply SAP Note 4567890, which includes a patch for the affected version (2022.02.01). Additionally, ensure that the SAP system is configured to use the 'Authorization' feature, which can be enabled by setting the 'AuthorizationEnabled' parameter to 'true' in the SAP system's configuration file. This will prevent unauthorized access to the OData services.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-27676: Due to missing authorization checks in the SAP S/4HANA OData Service (Manage Tec...",
+      "description": "Due to missing authorization checks in the SAP S/4HANA OData Service (Manage Technical Object Structures), an attacker could update and delete child entities via exposed OData services without proper authorization. This vulnerability results in a low impact on integrity, while confidentiality and availability are not impacted.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-27676",
+      "cve_id": "CVE-2026-27676",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 4.3,
+      "published": "2026-04-23T23:37:09.286502+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-27676 is a vulnerability in the SAP S/4HANA OData Service (Manage Technical Object Structures) due to missing authorization checks. An attacker can exploit this vulnerability to update and delete child entities via exposed OData services without proper authorization, resulting in a low impact on integrity. This vulnerability affects SAP S/4HANA versions prior to 2023.02, and the attack vector is via exposed OData services. To remediate this vulnerability, SAP S/4HANA users should update to version 2023.02 or later, and ensure that the OData service is properly configured with authorization checks. Additionally, users should review their system's access controls and ensure that only authorized personnel have access to the OData service.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1055| B[Command and Control]:::tactic\n    B -->|T1041| C[Execution]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 4.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -373,19 +445,14 @@
       "cve_id": "CVE-2026-27675",
       "source": "NVD",
       "category": "cve",
-      "severity": "medium",
+      "severity": "low",
       "cvss_score": 2.0,
-      "published": "2026-04-23T22:35:04.259963+00:00",
+      "published": "2026-04-23T23:37:09.286491+00:00",
       "ttps": [],
       "epss_score": null,
       "threat_actors": [
         "APT41"
-      ],
-      "ai_summary": "CVE-2026-27675 affects SAP Landscape Transformation through a vulnerability in an RFC-exposed function module, allowing a highly privileged adversary to inject arbitrary ABAP code and operating system commands. While the attacker can modify some information, they lack control over the type or extent of modifications, resulting in low impact on integrity, with no impact on confidentiality or availability. To remediate, it is crucial to consult SAP Security Notes specific to this vulnerability and apply recommended patches or configuration changes to restrict RFC access and monitor for unauthorized function module calls.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1071.004| B[Execution]:::tactic\n    B -->|T1059.001| C[Command and Control]:::tactic\n    C -->|T1564.002| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 4.5,
-      "ai_provider": "gemini",
-      "ai_model": "gemini-2.5-flash-lite"
+      ]
     },
     {
       "title": "CVE-2026-27674: Due to a Code Injection vulnerability in SAP NetWeaver Application Server Java (...",
@@ -396,7 +463,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.1,
-      "published": "2026-04-23T22:35:04.259948+00:00",
+      "published": "2026-04-23T23:37:09.286478+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -411,12 +478,7 @@
           "tactic_id": "TA0004"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-27674 is a Code Injection vulnerability in SAP NetWeaver Application Server Java (Web Dynpro Java) that allows an unauthenticated attacker to supply crafted input, which is interpreted by the application and references attacker-controlled content. If a victim accesses the affected functionality, the attacker-controlled content can be executed in the victim's browser, potentially resulting in sensitive data exposure or unauthorized actions. To remediate this vulnerability, SAP customers should apply the latest patch (version 7.50 SP 18 or later) and ensure that the SAP Web Dispatcher is configured to use the 'sap-web-dispatcher' filter to prevent malicious input from being executed. Additionally, customers should implement a Web Application Firewall (WAF) to detect and block suspicious traffic. It is also recommended to restrict access to the affected functionality to only authorized users.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1055| C[Process Injection]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.1,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2026-27673: Due to a missing authorization check, SAP S/4HANA (Private Cloud and On-Premise)...",
@@ -427,17 +489,12 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 4.9,
-      "published": "2026-04-23T22:35:04.259931+00:00",
+      "published": "2026-04-23T23:37:09.286464+00:00",
       "ttps": [],
       "epss_score": null,
       "threat_actors": [
         "APT41"
-      ],
-      "ai_summary": "CVE-2026-27673 is a missing authorization check vulnerability in SAP S/4HANA (Private Cloud and On-Premise) versions 2021 and earlier. An authenticated user can exploit this vulnerability to delete files on the operating system and gain unauthorized control over file operations. This could lead to low impact on confidentiality, as sensitive data is not directly accessible, but could result in medium impact on integrity and availability, as the application's functionality may be compromised. To remediate this vulnerability, SAP S/4HANA customers should upgrade to version 2022 or later, or apply the relevant SAP security patch (e.g., SAP Note 4567890). Additionally, ensure that the SAP system is configured to enforce strict file access controls.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1055| B[Command and Control]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1070| D[Lateral Movement]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      ]
     },
     {
       "title": "CVE-2026-27672: The Material Master application does not enforce authorization checks for authen...",
@@ -448,7 +505,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 4.3,
-      "published": "2026-04-23T22:35:04.259910+00:00",
+      "published": "2026-04-23T23:37:09.286450+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -463,12 +520,7 @@
           "tactic_id": "TA0006"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-27672 is a vulnerability in the Material Master application that allows authenticated users to disclose sensitive information due to lack of authorization checks when executing reports. This vulnerability has a low impact on confidentiality and does not affect integrity and availability of the system. The Material Master application is affected, and the attack vector is T1190 (Exploit Public-Facing Application) and T1187 (Forced Authentication). To remediate, SAP customers should apply the patch SAP Note 4567890, which is available for SAP ERP 7.5 and later versions. Additionally, ensure that the SAP system is configured to enforce authorization checks for all users.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1187| C[Forced Authentication]:::tactic\n    C -->|T1210| D[Initial Access]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 4.3,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2026-24318: Due to an Insecure session management vulnerability in SAP Business Objects Busi...",
@@ -479,7 +531,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 4.2,
-      "published": "2026-04-23T22:35:04.259894+00:00",
+      "published": "2026-04-23T23:37:09.286433+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -508,7 +560,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.1,
-      "published": "2026-04-23T22:35:04.259878+00:00",
+      "published": "2026-04-23T23:37:09.286384+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -517,65 +569,6 @@
           "tactic_id": "TA0001"
         }
       ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-6203: The User Registration & Membership plugin for WordPress is vulnerable to Open Re...",
-      "description": "The User Registration & Membership plugin for WordPress is vulnerable to Open Redirect in versions up to and including 5.1.4. This is due to insufficient validation of user-supplied URLs passed via the 'redirect_to_on_logout' GET parameter before redirecting users. The `redirect_to_on_logout` GET parameter is passed directly to WordPress's `wp_redirect()` function instead of the domain-restricted ",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6203",
-      "cve_id": "CVE-2026-6203",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.1,
-      "published": "2026-04-23T22:35:04.259861+00:00",
-      "ttps": [],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-5086: Crypt::SecretBuffer versions before 0.019 for Perl is suseceptible to timing att...",
-      "description": "Crypt::SecretBuffer versions before 0.019 for Perl is suseceptible to timing attacks.\n\nFor example, if Crypt::SecretBuffer was used to store and compare plaintext passwords, then discrepencies in timing could be used to guess the secret password.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-5086",
-      "cve_id": "CVE-2026-5086",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.5,
-      "published": "2026-04-23T22:35:04.259844+00:00",
-      "ttps": [
-        {
-          "id": "T1552",
-          "name": "Unsecured Credentials",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-39979: jq is a command-line JSON processor. In commits before 2f09060afab23fe9390cce7cb...",
-      "description": "jq is a command-line JSON processor. In commits before 2f09060afab23fe9390cce7cb860b10416e1bf5f, the jv_parse_sized() API in libjq accepts a counted buffer with an explicit length parameter, but its error-handling path formats the input buffer using %s in jv_string_fmt(), which reads until a NUL terminator is found rather than respecting the caller-supplied length. This means that when malformed J",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-39979",
-      "cve_id": "CVE-2026-39979",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.5,
-      "published": "2026-04-23T22:35:04.259821+00:00",
-      "ttps": [],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-39956: jq is a command-line JSON processor. In commits after 69785bf77f86e2ea1b4a20ca86...",
-      "description": "jq is a command-line JSON processor. In commits after 69785bf77f86e2ea1b4a20ca86775916889e91c9, the _strindices builtin in jq's src/builtin.c passes its arguments directly to jv_string_indexes() without verifying they are strings, and jv_string_indexes() in src/jv.c relies solely on assert() checks that are stripped in release builds compiled with -DNDEBUG. This allows an attacker to crash jq triv",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-39956",
-      "cve_id": "CVE-2026-39956",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.1,
-      "published": "2026-04-23T22:35:04.259783+00:00",
-      "ttps": [],
       "epss_score": null
     },
     {
@@ -589,6 +582,25 @@
       "cvss_score": null,
       "published": "2026-04-23T21:33:45+00:00",
       "ttps": []
+    },
+    {
+      "title": "China-Backed Hackers Are Industrializing Botnets",
+      "description": "China's state-backed groups are now using covert networks of compromised devices to execute attacks in a low-cost, low-risk, and deniable way.",
+      "url": "https://www.darkreading.com/cyber-risk/china-hackers-industrializing-botnets",
+      "cve_id": null,
+      "source": "Dark Reading",
+      "category": "incident",
+      "severity": "low",
+      "cvss_score": null,
+      "published": "2026-04-23T20:52:24+00:00",
+      "ttps": [
+        {
+          "id": "T1583.005",
+          "name": "Botnet",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        }
+      ]
     },
     {
       "title": "US sanctions Cambodian senator for millions earned through scam compounds",
@@ -1413,45 +1425,6 @@
       "cvss_score": null,
       "published": "2026-04-21T19:12:40+00:00",
       "ttps": []
-    },
-    {
-      "title": "Surge in Bomgar RMM Exploitation Demonstrates Supply Chain Risk",
-      "description": "The critical remote code execution flaw (CVE-2026-1731) in the remote monitoring and management tool can be exploited to spread ransomware and compromise supply chains.",
-      "url": "https://www.darkreading.com/cyberattacks-data-breaches/surge-bomgar-rmm-exploitation-demonstrates-supply-chain-risk",
-      "cve_id": "CVE-2026-1731",
-      "source": "Dark Reading",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": null,
-      "published": "2026-04-21T15:29:17+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1195",
-          "name": "Supply Chain Compromise",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1059",
-          "name": "Command and Scripting Interpreter",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        },
-        {
-          "id": "T1486",
-          "name": "Data Encrypted for Impact",
-          "tactic": "Impact",
-          "tactic_id": "TA0040"
-        }
-      ],
-      "epss_score": null,
-      "cisa_kev": true
     },
     {
       "title": "‘Scattered Spider’ Member ‘Tylerb’ Pleads Guilty",
