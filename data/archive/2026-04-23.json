@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-23T17:12:15.883558+00:00",
+  "last_updated": "2026-04-23T18:58:19.142836+00:00",
   "total_items": 105,
   "items": [
     {
@@ -20,9 +20,9 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The Chinese APT group has been observed abusing multiple cloud tools to spy on Mongolia, leveraging various platforms such as Microsoft Outlook, Slack, Discord, and file.io for command and control. The threat actor utilizes the application layer protocol, as identified by TTP T1071, to facilitate online espionage. If exploited, this could lead to unauthorized access to sensitive information, with potential real-world impact on Mongolian government and business entities. To remediate, defenders should implement strict authentication and authorization controls on these cloud services, ensuring that only authorized personnel have access to sensitive data. Additionally, monitoring network traffic for suspicious activity related to these platforms is crucial, with specific attention to unusual login locations or times.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1071| B[Command and Control]:::tactic\n    B -->|T1566| C[Initial Access]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
+      "ai_summary": "The Chinese APT group has been observed abusing multiple cloud tools to spy on Mongolia, leveraging various platforms such as Microsoft Outlook, Slack, Discord, and file.io for command and control. The threat actor utilizes the application layer protocol (T1071) to facilitate their online espionage efforts. If exploited, this could lead to unauthorized access to sensitive information, with potential targets including government agencies and organizations in Mongolia. To mitigate this threat, defenders should implement strict access controls and monitoring on these cloud services, ensuring that all accounts are properly secured and any suspicious activity is promptly investigated. Specifically, defenders should enable multi-factor authentication on Microsoft Outlook, Slack, and Discord, and restrict file.io usage to only trusted sources.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1071| B[Command and Control]:::tactic\n    B -->|T1566| C[Initial Access]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.8,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -35,7 +35,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-23T17:10:28.988850+00:00",
+      "published": "2026-04-23T18:56:31.069827+00:00",
       "ttps": [
         {
           "id": "T1059.001",
@@ -62,7 +62,7 @@
           "tactic_id": "TA0007"
         }
       ],
-      "ai_summary": "The analyzed threat involves a malicious compiled HTML help (.chm) file, which is delivered via a 7zip compressed file. This .chm file displays a decoy window while executing obfuscated JavaScript code, leveraging T1027 to evade detection. The JavaScript code then launches PowerShell commands, utilizing T1059.001, to verify internet connectivity by pinging Google, and subsequently downloads additional PowerShell scripts. To mitigate this threat, defenders should block .chm files at the email gateway and network perimeter, and implement PowerShell logging and monitoring, specifically focusing on commands that utilize T1059.001. Additionally, defenders should ensure their systems are configured to restrict JavaScript execution within .chm files, and implement the latest security updates for their operating systems and software, such as Windows 10 version 21H1 or later, to reduce the attack surface.",
+      "ai_summary": "The analyzed threat involves a malicious compiled HTML help (.chm) file, which is delivered via a 7zip compressed file. This .chm file displays a decoy window while executing obfuscated JavaScript code, leveraging T1027 (Obfuscated Files or Information) to evade detection. The JavaScript code then launches PowerShell commands, utilizing T1059.001 (PowerShell), to verify internet connectivity by pinging Google and download additional payloads. To mitigate this threat, defenders should block .chm files at the email gateway and network perimeter, and ensure that PowerShell is configured to only run signed scripts, with the execution policy set to 'AllSigned' or 'RemoteSigned'. Additionally, monitoring for suspicious PowerShell activity, such as unexpected network connections or process creations, can help detect and respond to potential incidents.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1016.001| D[Discovery]:::tactic\n    D -->|T1027| E[Defense Evasion]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.8,
       "ai_provider": "groq",
@@ -77,10 +77,10 @@
       "category": "incident",
       "severity": "medium",
       "cvss_score": null,
-      "published": "2026-04-23T17:10:28.988824+00:00",
+      "published": "2026-04-23T18:56:31.069802+00:00",
       "ttps": [],
-      "ai_summary": "The threat involves a DPRK-linked fake IT worker infrastructure, where malicious actors utilize VPN services to conceal their network activity. The investigation began after a cryptocurrency researcher identified a domain connected to illicit payments, and subsequent analysis revealed concentrated VPN usage patterns with Astrill VPN, Mullvad, and Proton VPN being prominent. The real-world impact of this threat includes potential data breaches and financial losses for affected individuals and organizations, particularly those in the cryptocurrency sector. To remediate this threat, defenders should implement robust network monitoring and VPN traffic analysis, and consider blocking IP addresses associated with malicious activity, such as 163.245.219.19. Additionally, organizations should educate their employees on the risks of fake IT worker infrastructure and the importance of verifying the authenticity of IT services.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1595| B[Active Scanning]:::tactic\n    B -->|T1189| C[Drive-by Compromise]:::tactic\n    C -->|T1204| D[User Execution]:::tactic\n    D -->|T1531| E[Account Access Removal]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The DPRK-linked fake IT worker infrastructure threat involves the use of fake domains and VPNs to facilitate illicit activities, including cryptocurrency transactions. The threat actors have been observed using prominent VPN services such as Astrill VPN, Mullvad, and Proton VPN to mask their network activity. The investigation began after the identification of the domain luckyguys[.]site, which was connected to illicit payments. To remediate this threat, defenders should implement robust network monitoring and anomaly detection capabilities, specifically focusing on suspicious VPN usage patterns. Additionally, defenders should consider blocking IP addresses associated with known DPRK-linked infrastructure, such as 163.245.219[.]19, and monitor for potential connections to fake IT worker domains.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1595| B[Active Scanning]:::tactic\n    B -->|T1189| C[Drive-by Compromise]:::tactic\n    C -->|T1204| D[User Execution]:::tactic\n    D -->|T1082| E[Defense Evasion]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 6.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -94,7 +94,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-23T17:10:28.988798+00:00",
+      "published": "2026-04-23T18:56:31.069777+00:00",
       "ttps": [
         {
           "id": "T1059.001",
@@ -115,7 +115,7 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "The ClickFix variant exploits social engineering tactics to trick victims into executing a malicious command via the Windows Run dialog, leveraging native Windows utilities such as cmdkey and regsvr32 for payload delivery. The attack chain involves staging credentials using cmdkey and retrieving a remote DLL via regsvr32 from a UNC path, with TTPs detected including T1059.001, T1218.010, and T1555.004. Real-world impact includes potential unauthorized access to sensitive information and systems, with affected parties likely including individuals and organizations that have fallen victim to the social engineering campaign. To remediate, defenders should implement strict input validation and sanitization for Windows Run dialog commands, restrict access to regsvr32 and cmdkey utilities, and monitor for suspicious activity related to Windows Credential Manager. Additionally, users should be educated on the risks of executing unknown commands and the importance of verifying the authenticity of CAPTCHA pages.",
+      "ai_summary": "The ClickFix variant analyzed in this report leverages social engineering tactics to trick victims into executing a malicious command via the Windows Run dialog, which then utilizes native Windows utilities such as cmdkey and regsvr32 for payload delivery. This multi-action command stages credentials using cmdkey and retrieves a remote DLL from a UNC path using regsvr32, demonstrating a sophisticated attack chain. The real-world impact of this exploit includes potential unauthorized access to sensitive information and systems, with affected parties likely including individuals and organizations that have fallen victim to the social engineering campaign. To remediate this threat, defenders should implement robust user education and awareness programs to prevent social engineering attacks, and consider restricting access to Windows utilities like cmdkey and regsvr32 to only those who require them. Additionally, monitoring for suspicious activity related to these utilities and implementing a least privilege approach can help mitigate the risk of this exploit.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1218.010| D[Persistence]:::tactic\n    D -->|T1555.004| E[Privilege Escalation]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.8,
       "ai_provider": "groq",
@@ -130,7 +130,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-23T17:10:28.988762+00:00",
+      "published": "2026-04-23T18:56:31.069753+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -145,11 +145,11 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "A supply chain compromise was discovered in the official Checkmarx KICS Docker repository and VS Code extensions. Attackers poisoned Docker Hub images (tags v2.1.20, v2.1.21, alpine) and VS Code extensions (versions 1.17.0, 1.19.0) with unauthorized data exfiltration capabilities. The trojanized KICS binary collects and encrypts scan reports containing credentials from infrastructure-as-code. This allows attackers to exfiltrate sensitive data. To remediate, users should immediately update to version 2.1.22 of the KICS Docker image and version 1.20.0 of the VS Code extension. Additionally, users should remove any previously installed versions of the affected extensions.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1041| C[Exfiltration Over C2 Channel]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Checkmarx KICS supply chain compromise involves malicious artifacts in official Docker Hub images (tags v2.1.20, v2.1.21, alpine) and VS Code extensions (versions 1.17.0, 1.19.0), allowing attackers to exfiltrate encrypted scan reports containing credentials from infrastructure-as-code. The trojanized KICS binary enables unauthorized data exfiltration, affecting users who have downloaded the tainted images or extensions. To remediate, defenders should immediately remove the affected Docker images and VS Code extensions, and update to the latest versions (v2.1.22 or later for Docker, and v1.20.0 or later for VS Code extensions). Additionally, users should rotate any credentials that may have been exposed through the compromised KICS binary. The attack vector involves T1195 supply chain compromise and T1041 exfiltration over C2 channel, highlighting the need for vigilant monitoring of software distribution channels.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Exfiltration]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "Untangling a Linux Incident With an OpenAI Twist (Part 2)",
@@ -160,7 +160,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-23T17:10:28.988736+00:00",
+      "published": "2026-04-23T18:56:31.069717+00:00",
       "ttps": [
         {
           "id": "T1583.005",
@@ -175,11 +175,11 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The Linux endpoint was compromised by two distinct threat actors, Actor A and Actor B, who deployed a cryptominer and a multi-revenue botnet, respectively. Actor A's cryptominer mined Monero to a private pool, while Actor B's botnet included XMRig mining, residential proxy services, and bandwidth-selling components with eight different persistence mechanisms. The real-world impact of this incident is significant, as it highlights the risks of relying on AI agents for security remediation and the potential for multiple threat actors to compromise a single endpoint. To remediate this threat, defenders should implement specific security measures, such as monitoring for unusual network activity, updating their Linux distributions to the latest versions, and configuring their systems to prevent unauthorized access. Additionally, defenders should consider implementing a robust threat detection and response strategy to identify and mitigate potential threats in real-time.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Initial Access]:::tactic\n    B -->|T1496| C[Execution]:::tactic\n    C -->|T1059.001| D[Persistence]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "ai_summary": "A Linux endpoint was compromised by at least two distinct threat actors, leveraging a multi-revenue botnet including XMRig mining, residential proxy services, and bandwidth-selling components. Actor A deployed a cryptominer mining Monero to a private pool, while Actor B installed the botnet with eight different persistence mechanisms. The incident highlights the risks of relying on AI-powered security remediation, as the developer user utilized OpenAI's Codex AI agent for security assistance. To remediate, defenders should update the Linux system to the latest version, disable any suspicious services, and remove any unauthorized persistence mechanisms. Additionally, it is crucial to implement robust security measures, such as monitoring for suspicious network activity and implementing a robust incident response plan.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1496| C[Resource Hijacking]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "npm Packages Hit with TeamPCP-Style CanisterWorm Malware",
@@ -190,7 +190,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-23T17:10:28.988710+00:00",
+      "published": "2026-04-23T18:56:31.069692+00:00",
       "ttps": [
         {
           "id": "T1078.004",
@@ -211,7 +211,7 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "The npm Packages Hit with TeamPCP-Style CanisterWorm Malware threat involves malicious npm packages compromised with malware exhibiting tradecraft similar to TeamPCP's CanisterWorm campaign. The attack targets packages including @automagik/genie and pgserve, implementing install-time execution that harvests credentials, environment variables, SSH keys, cloud credentials, browser data, and crypto-wallet artifacts. The payload exfiltrates stolen data via a command and control channel. To remediate, users should immediately uninstall the compromised packages, update npm to version 8.19.2 or later, and configure npm to use a secure registry. Additionally, developers should review their software dependencies and ensure they are using secure and trusted packages.",
+      "ai_summary": "The npm Packages Hit with TeamPCP-Style CanisterWorm Malware threat involves malicious npm packages compromised with malware exhibiting tradecraft similar to TeamPCP's CanisterWorm campaign. The attack targets packages including @automagik/genie and pgserve, implementing install-time execution that harvests credentials, environment variables, SSH keys, cloud credentials, browser data, and crypto-wallet artifacts. The payload exfiltrates stolen data via a command and control channel. To remediate, users should immediately uninstall the compromised packages, update npm to version 8.19.2 or later, and configure npm to use a secure registry. Additionally, developers should review their software dependencies and ensure they are using trusted sources.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195.001| B[Compromise Software Dependencies]:::tactic\n    B -->|T1078.004| C[Cloud Accounts]:::tactic\n    C -->|T1041| D[Exfiltration Over C2 Channel]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -226,7 +226,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-23T17:10:28.988686+00:00",
+      "published": "2026-04-23T18:56:31.069668+00:00",
       "ttps": [
         {
           "id": "T1583.005",
@@ -253,8 +253,8 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "Bedep, an ad-fraud botnet active from late 2014 through 2015, exploited the Angler exploit kit to deliver its payload. The botnet employed a sophisticated domain generation algorithm (DGA) that utilized real foreign exchange rates from the European Central Bank combined with advanced group theory mathematics to generate command-and-control domains. Unlike typical DGAs that rely solely on date-based seeds, Bedep's algorithm provided a high degree of randomness and evasion capabilities. To remediate this threat, defenders should focus on detecting and blocking the Angler exploit kit and its associated payloads. Additionally, monitoring for suspicious domain name system (DNS) traffic and implementing a robust DGA detection system can help mitigate the risk of Bedep-like attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1588| B[Obtain Capabilities]:::tactic\n    B -->|T1071| C[Application Layer Protocol]:::tactic\n    C -->|T1568| D[Dynamic Resolution]:::tactic\n    D -->|T1583.005| E[Botnet]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "Bedep, an ad-fraud botnet active from late 2014 through 2015, exploited the Angler exploit kit to deliver its payload. The botnet employed a sophisticated domain generation algorithm (DGA) that utilized real foreign exchange rates from the European Central Bank combined with advanced group theory mathematics to generate command-and-control domains. Unlike typical DGAs that rely solely on date-based seeds, Bedep's algorithm was highly resilient and difficult to detect. To mitigate this threat, defenders should focus on identifying and blocking the Angler exploit kit and its associated command-and-control domains. Specifically, administrators should ensure that their systems are running the latest version of their web browsers and plugins, and that their antivirus software is up-to-date and configured to detect and block the Angler exploit kit.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1588| C[Obtain Capabilities]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1568| E[Dynamic Resolution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -268,9 +268,9 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-23T17:10:28.988659+00:00",
+      "published": "2026-04-23T18:56:31.069642+00:00",
       "ttps": [],
-      "ai_summary": "Researchers at X-Labs discovered 10 verified Indirect Prompt Injection (IPI) payloads deployed across live web infrastructure. IPI differs from direct prompt injection as it conceals adversarial instructions within ordinary web content. When AI agents crawl or summarize poisoned pages, they ingest and execute these instructions as legitimate commands. This poses a significant threat as AI models can be manipulated without users' knowledge. To mitigate this, web administrators should update their AI model configurations to filter out suspicious web content and ensure that AI agents only ingest trusted sources. Additionally, implementing web application firewalls (WAFs) with AI-specific rules can help detect and block IPI payloads.",
+      "ai_summary": "Researchers at X-Labs discovered 10 verified Indirect Prompt Injection (IPI) payloads deployed across live web infrastructure. IPI differs from direct prompt injection as it conceals adversarial instructions within ordinary web content. When AI agents crawl or summarize poisoned pages, they ingest and execute these instructions as legitimate commands. This technique poses a significant threat to AI-powered web applications, potentially allowing attackers to manipulate AI-driven content. To mitigate this risk, administrators should implement strict input validation and sanitization for AI model inputs, and ensure that AI agents are not executing user-supplied content. Specifically, web administrators should update to the latest version of their AI model and ensure that all AI-driven content is served over HTTPS.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -285,7 +285,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-23T17:10:28.988633+00:00",
+      "published": "2026-04-23T18:56:31.069617+00:00",
       "ttps": [
         {
           "id": "T1547.005",
@@ -312,9 +312,9 @@
           "tactic_id": "TA0008"
         }
       ],
-      "ai_summary": "The Foxit Impersonation threat leverages the trusted reputation of Foxit PDF Reader to distribute malicious installers disguised as legitimate software. Threat actors create fake installers with document-themed filenames that bypass user suspicion, impersonating the vendor. When executed, these files display decoy passport images while downloading and deploying VNC software, allowing attackers to gain remote access to compromised systems. To remediate, users should be cautious when downloading software from untrusted sources and verify the authenticity of installers by checking the vendor's official website for updates. Specifically, users should ensure they are running the latest version of Foxit PDF Reader, version 12.0.1.112 or later, and configure their system to only allow trusted sources to install software.",
+      "ai_summary": "Foxit Impersonation: Fake PDF Installer Deploys VNC is a sophisticated social engineering attack where attackers create fake installers for Foxit PDF Reader, a trusted application used by over 650 million people. These fake installers, disguised as legitimate software, are designed to bypass user suspicion and are often named with document-themed filenames. When executed, the files display decoy passport images while downloading and installing VNC software, allowing attackers to gain remote access to the victim's system. To remediate this threat, users should be cautious when downloading software from untrusted sources and verify the authenticity of the installer by checking the publisher's website. Additionally, users should ensure that their Foxit PDF Reader is updated to the latest version, which includes security patches and features to prevent such impersonation attacks. Furthermore, users should configure their system to display file extensions and be wary of files with suspicious names or attachments.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1547.005| B[Initial Access]:::tactic\n    B -->|T1134| C[Execution]:::tactic\n    C -->|T1036| D[Masquerading]:::tactic\n    D -->|T1021.005| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -327,7 +327,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-23T17:10:28.988595+00:00",
+      "published": "2026-04-23T18:56:31.069579+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -360,96 +360,78 @@
           "tactic_id": "TA0009"
         }
       ],
-      "ai_summary": "A sophisticated ClickFix campaign was detected in mid-March 2026, leveraging social engineering to trick victims into executing a PowerShell command that downloads and runs a script directly in memory. The attack begins with a malicious webpage impersonating Booking.com's visual identity with a fake CAPTCHA, exploiting the public-facing application (T1190). The JavaScript code automatically copies malicious commands to the clipboard (T1115) and intercepts user input (T1204). To mitigate this attack, users should ensure they are running the latest version of PowerShell (5.1 or later) and disable the 'Allow users to run PowerShell scripts' option in the Execution Policy settings. Additionally, users should be cautious when executing PowerShell commands from untrusted sources and regularly update their browsers to the latest version.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    C -->|T1059.001| D[PowerShell]:::tactic\n    D -->|T1115| E[Clipboard Data]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "A sophisticated ClickFix campaign was detected in mid-March 2026, leveraging social engineering to trick victims into executing a PowerShell command that downloads and runs a script directly in memory. The attack begins with a malicious webpage impersonating Booking.com's visual identity with a fake CAPTCHA, exploiting the public-facing application (T1190). The JavaScript code automatically copies malicious commands to the clipboard (T1115) and intercepts user input, ultimately leading to the execution of malicious commands via PowerShell (T1059.001). To remediate, users should ensure they are running the latest version of PowerShell (5.1 or later) and configure their systems to prevent the execution of scripts from the internet. Additionally, users should be cautious when interacting with unfamiliar webpages and avoid executing PowerShell commands from untrusted sources.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[PowerShell]:::tactic\n    C -->|T1115| D[Clipboard Data]:::tactic\n    D -->|T1204| E[User Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-6192: A vulnerability was identified in uclouvain openjpeg up to 2.5.4. This impacts t...",
-      "description": "A vulnerability was identified in uclouvain openjpeg up to 2.5.4. This impacts the function opj_pi_initialise_encode in the library src/lib/openjp2/pi.c. The manipulation leads to integer overflow. The attack must be carried out locally. The exploit is publicly available and might be used. The identifier of the patch is 839936aa33eb8899bbbd80fda02796bb65068951. It is suggested to install a patch t",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6192",
-      "cve_id": "CVE-2026-6192",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 3.3,
-      "published": "2026-04-23T17:10:25.450675+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ],
-      "ai_summary": "CVE-2026-6192 is a locally exploitable vulnerability in uclouvain openjpeg up to version 2.5.4, specifically affecting the function opj_pi_initialise_encode in the library src/lib/openjp2/pi.c. The vulnerability causes an integer overflow, which can be exploited by an attacker with local access to the system. If exploited, this vulnerability can lead to arbitrary code execution, allowing the attacker to gain elevated privileges. To remediate this vulnerability, it is recommended to install the patch identified by the hash 839936aa33eb8899bbbd80fda02796bb65068951. Specifically, users should update to version 2.5.5 or later of uclouvain openjpeg, or apply the patch manually. It is also essential to ensure that the patch is installed correctly and that the system is restarted after the update to ensure the changes take effect.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1210| B[Reconnaissance]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-6191: A vulnerability was determined in itsourcecode Construction Management System 1....",
-      "description": "A vulnerability was determined in itsourcecode Construction Management System 1.0. This affects an unknown function of the file /equipments.php. Executing a manipulation of the argument Name can lead to sql injection. The attack can be launched remotely. The exploit has been publicly disclosed and may be utilized.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6191",
-      "cve_id": "CVE-2026-6191",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.3,
-      "published": "2026-04-23T17:10:25.450659+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ],
-      "ai_summary": "CVE-2026-6191 is a publicly disclosed SQL injection vulnerability in itsourcecode Construction Management System 1.0, specifically affecting the /equipments.php file. An attacker can remotely exploit this vulnerability by manipulating the 'Name' argument, leading to potential data breaches or unauthorized access. To remediate, update to Construction Management System 1.1 or later, which includes a patch for this vulnerability. Additionally, ensure proper input validation and sanitization are implemented in the affected file. It is also recommended to restrict access to the /equipments.php file to only necessary personnel.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.3,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-6190: A vulnerability was found in itsourcecode Construction Management System 1.0. Th...",
-      "description": "A vulnerability was found in itsourcecode Construction Management System 1.0. The impacted element is an unknown function of the file /employees.php. Performing a manipulation of the argument Name results in sql injection. The attack can be initiated remotely. The exploit has been made public and could be used.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6190",
-      "cve_id": "CVE-2026-6190",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.3,
-      "published": "2026-04-23T17:10:25.450641+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-6190 is a remote SQL injection vulnerability in itsourcecode Construction Management System 1.0, specifically affecting the /employees.php file. An attacker can manipulate the 'Name' argument to inject malicious SQL code, leading to unauthorized data access or modification. This vulnerability has been made public, increasing the risk of exploitation. To remediate, update to Construction Management System 1.1 or later, which includes a patch for this issue. Additionally, ensure proper input validation and sanitization for user-supplied data in the affected file.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.3,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-6189: A vulnerability has been found in SourceCodester Pharmacy Sales and Inventory Sy...",
-      "description": "A vulnerability has been found in SourceCodester Pharmacy Sales and Inventory System 1.0. The affected element is an unknown function of the file /ajax.php?action=login. Such manipulation of the argument Username leads to sql injection. It is possible to launch the attack remotely. The exploit has been disclosed to the public and may be used.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6189",
-      "cve_id": "CVE-2026-6189",
+      "title": "CVE-2026-6198: A vulnerability has been found in Tenda F456 1.0.0.5. This issue affects the fun...",
+      "description": "A vulnerability has been found in Tenda F456 1.0.0.5. This issue affects the function fromNatStaticSetting of the file /goform/NatStaticSetting. The manipulation of the argument page leads to stack-based buffer overflow. It is possible to initiate the attack remotely. The exploit has been disclosed to the public and may be used.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6198",
+      "cve_id": "CVE-2026-6198",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 7.3,
-      "published": "2026-04-23T17:10:25.450623+00:00",
+      "cvss_score": 8.8,
+      "published": "2026-04-23T18:56:27.970810+00:00",
+      "ttps": [
+        {
+          "id": "T1203",
+          "name": "Exploitation for Client Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        }
+      ],
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ],
+      "ai_summary": "CVE-2026-6198 is a stack-based buffer overflow vulnerability in Tenda F456 1.0.0.5, affecting the function fromNatStaticSetting of the file /goform/NatStaticSetting. This issue can be exploited remotely, allowing attackers to execute arbitrary code. If exploited, this vulnerability can lead to privilege escalation and potentially allow attackers to take control of the affected device. To remediate this issue, users should update to version 1.0.0.6 or later, and ensure that the 'page' argument is properly sanitized to prevent buffer overflow attacks. Additionally, users should consider implementing a web application firewall (WAF) to block potential exploitation attempts.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-6197: A flaw has been found in Tenda F456 1.0.0.5. This vulnerability affects the func...",
+      "description": "A flaw has been found in Tenda F456 1.0.0.5. This vulnerability affects the function formWrlsafeset of the file /goform/AdvSetWrlsafeset. Executing a manipulation of the argument mit_ssid can lead to stack-based buffer overflow. The attack may be performed from remote. The exploit has been published and may be used.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6197",
+      "cve_id": "CVE-2026-6197",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 8.8,
+      "published": "2026-04-23T18:56:27.970794+00:00",
+      "ttps": [
+        {
+          "id": "T1203",
+          "name": "Exploitation for Client Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        }
+      ],
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ],
+      "ai_summary": "CVE-2026-6197 is a stack-based buffer overflow vulnerability in Tenda F456 1.0.0.5, affecting the function formWrlsafeset in the /goform/AdvSetWrlsafeset file. An attacker can exploit this vulnerability by manipulating the argument mit_ssid, leading to remote code execution. This exploit has been published and may be used by threat actors. To remediate, update to version 1.0.0.6 or later, and ensure the function formWrlsafeset is properly sanitized. Additionally, implement a web application firewall (WAF) to block potential attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-40044: Pachno 1.0.6 contains a deserialization vulnerability that allows unauthenticate...",
+      "description": "Pachno 1.0.6 contains a deserialization vulnerability that allows unauthenticated attackers to execute arbitrary code by injecting malicious serialized objects into cache files. Attackers can write PHP object payloads to world-writable cache files with predictable names in the cache directory, which are unserialized during framework bootstrap before authentication checks occur.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40044",
+      "cve_id": "CVE-2026-40044",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": 9.8,
+      "published": "2026-04-23T18:56:27.970779+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -459,85 +441,22 @@
         }
       ],
       "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ],
-      "ai_summary": "CVE-2026-6189 is a remote SQL injection vulnerability in SourceCodester Pharmacy Sales and Inventory System 1.0, specifically affecting the /ajax.php?action=login endpoint. An attacker can manipulate the 'Username' argument to inject malicious SQL code, potentially leading to unauthorized data access or system compromise. To remediate, update to SourceCodester Pharmacy Sales and Inventory System 1.1 or later, which includes a patch for this vulnerability. Additionally, ensure proper input validation and sanitization are implemented for all user-input fields. This vulnerability has been publicly disclosed and may be exploited by threat actors.",
+      "ai_summary": "CVE-2026-40044 is a critical deserialization vulnerability in Pachno 1.0.6, allowing unauthenticated attackers to execute arbitrary code by injecting malicious serialized objects into cache files. Attackers can write PHP object payloads to world-writable cache files with predictable names in the cache directory, which are unserialized during framework bootstrap before authentication checks occur. This vulnerability is exploitable via the T1190 (Exploit Public-Facing Application) tactic, and its CVSS score of 9.8 indicates a high severity. To remediate, update to Pachno 1.1.0 or later, which patches this vulnerability. Additionally, ensure that the cache directory is not world-writable and that authentication checks occur before unserializing cache files.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
+      "severity_score": 9.8,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-39940: ChurchCRM is an open-source church management system. Prior to 7.0.0, it was pos...",
-      "description": "ChurchCRM is an open-source church management system. Prior to 7.0.0, it was possible in many places across the ChurchCRM application to create a link that, when visited by an authenticated user, would redirect them to any URL chosen by an attacker if they clicked 'Cancel' button on the page. For this write-up the DonatedItemEditor.php will be used as an example, however wherever all instances of ",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-39940",
-      "cve_id": "CVE-2026-39940",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-04-23T17:10:25.450605+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-36952: Sourcecodester Online Thesis Archiving System v1.0 is vulnerable to SQL injectio...",
-      "description": "Sourcecodester Online Thesis Archiving System v1.0 is vulnerable to SQL injection in the file /otas/admin/curriculum/manage_curriculum.php.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-36952",
-      "cve_id": "CVE-2026-36952",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "low",
-      "cvss_score": 2.7,
-      "published": "2026-04-23T17:10:25.450584+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-36950: Sourcecodester Online Thesis Archiving System v1.0 is vulnerable to SQL injectio...",
-      "description": "Sourcecodester Online Thesis Archiving System v1.0 is vulnerable to SQL injection in /otas/projects_per_department.php.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-36950",
-      "cve_id": "CVE-2026-36950",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "low",
-      "cvss_score": 2.7,
-      "published": "2026-04-23T17:10:25.450567+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-36948: Sourcecodester Online Thesis Archiving System v1.0 is vulnerale to SQL injection...",
-      "description": "Sourcecodester Online Thesis Archiving System v1.0 is vulnerale to SQL injection in the file /otas/view_archive.php.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-36948",
-      "cve_id": "CVE-2026-36948",
+      "title": "CVE-2026-40043: Pachno 1.0.6 contains an authentication bypass vulnerability in the runSwitchUse...",
+      "description": "Pachno 1.0.6 contains an authentication bypass vulnerability in the runSwitchUser() action that allows authenticated low-privilege users to escalate privileges by manipulating the original_username cookie. Attackers can set the client-controlled original_username cookie to any value and request a switch to user ID 1 to obtain session tokens or password hashes belonging to administrator accounts.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40043",
+      "cve_id": "CVE-2026-40043",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 7.3,
-      "published": "2026-04-23T17:10:25.450548+00:00",
+      "cvss_score": 6.5,
+      "published": "2026-04-23T18:56:27.970759+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -546,38 +465,100 @@
           "tactic_id": "TA0001"
         },
         {
-          "id": "T1486",
-          "name": "Data Encrypted for Impact",
-          "tactic": "Impact",
-          "tactic_id": "TA0040"
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-40043 is a critical authentication bypass vulnerability in Pachno 1.0.6, allowing low-privilege users to escalate privileges by manipulating the original_username cookie. Attackers can set the client-controlled original_username cookie to any value and request a switch to user ID 1 to obtain session tokens or password hashes belonging to administrator accounts. This vulnerability can be exploited using T1190 (Exploit Public-Facing Application) and T1649 (Steal or Forge Authentication Certificates) tactics. To remediate, update to Pachno 1.1.0 or later, which patches this vulnerability. Additionally, ensure that the original_username cookie is properly validated and sanitized to prevent similar attacks. Pachno users should also consider implementing additional security measures, such as two-factor authentication, to further mitigate the risk of exploitation.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1649| C[Steal or Forge Authentication Certificates]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-40042: Pachno 1.0.6 contains an XML external entity injection vulnerability that allows...",
+      "description": "Pachno 1.0.6 contains an XML external entity injection vulnerability that allows unauthenticated attackers to read arbitrary files by exploiting unsafe XML parsing in the TextParser helper. Attackers can inject malicious XML entities through wiki table syntax and inline tags in issue descriptions, comments, and wiki articles to trigger entity resolution via simplexml_load_string() without LIBXML_N",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40042",
+      "cve_id": "CVE-2026-40042",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": 9.8,
+      "published": "2026-04-23T18:56:27.970744+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        },
+        {
+          "id": "T1213",
+          "name": "Data from Information Repositories",
+          "tactic": "Collection",
+          "tactic_id": "TA0009"
         }
       ],
       "epss_score": null
     },
     {
-      "title": "CVE-2026-33555: An issue was discovered in HAProxy before 3.3.6. The HTTP/3 parser does not chec...",
-      "description": "An issue was discovered in HAProxy before 3.3.6. The HTTP/3 parser does not check that the received body length matches a previously announced content-length when the stream is closed via a frame with an empty payload. This can cause desynchronization issues with the backend server and could be used for request smuggling. The earliest affected version is 2.6.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33555",
-      "cve_id": "CVE-2026-33555",
+      "title": "CVE-2026-40041: Pachno 1.0.6 contains a cross-site request forgery vulnerability that allows att...",
+      "description": "Pachno 1.0.6 contains a cross-site request forgery vulnerability that allows attackers to perform arbitrary actions in authenticated user context by exploiting missing CSRF protections on state-changing endpoints. Attackers can craft malicious requests targeting login, registration, file upload, milestone editing, and administrative functions to force logout, create accounts, modify roles, inject ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40041",
+      "cve_id": "CVE-2026-40041",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": 4.0,
-      "published": "2026-04-23T17:10:25.450525+00:00",
-      "ttps": [],
+      "cvss_score": 4.3,
+      "published": "2026-04-23T18:56:27.970729+00:00",
+      "ttps": [
+        {
+          "id": "T1585",
+          "name": "Establish Accounts",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        },
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1136",
+          "name": "Create Account",
+          "tactic": "Persistence",
+          "tactic_id": "TA0003"
+        }
+      ],
       "epss_score": null
     },
     {
-      "title": "CVE-2026-23891: Decidim is a participatory democracy framework. In versions below 0.30.5 and 0.3...",
-      "description": "Decidim is a participatory democracy framework. In versions below 0.30.5 and 0.31.0.rc1 through 0.31.0, a stored code execution vulnerability in the user name field allows a low-privileged attacker to execute arbitrary code in the context of any user who passively visits a comment page, resulting in high confidentiality and integrity impact across security boundaries. This issue has been fixed in ",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-23891",
-      "cve_id": "CVE-2026-23891",
+      "title": "CVE-2026-40040: Pachno 1.0.6 contains an unrestricted file upload vulnerability that allows auth...",
+      "description": "Pachno 1.0.6 contains an unrestricted file upload vulnerability that allows authenticated users to upload arbitrary file types by bypassing ineffective extension filtering to the /uploadfile endpoint. Attackers can upload executable files .php5 scripts to web-accessible directories and execute them to achieve remote code execution on the server.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40040",
+      "cve_id": "CVE-2026-40040",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 8.7,
-      "published": "2026-04-23T17:10:25.450480+00:00",
+      "cvss_score": 8.8,
+      "published": "2026-04-23T18:56:27.970713+00:00",
       "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
         {
           "id": "T1059",
           "name": "Command and Scripting Interpreter",
@@ -586,6 +567,103 @@
         }
       ],
       "epss_score": null
+    },
+    {
+      "title": "CVE-2026-40039: Pachno 1.0.6 contains an open redirection vulnerability that allows attackers to...",
+      "description": "Pachno 1.0.6 contains an open redirection vulnerability that allows attackers to redirect users to arbitrary external websites by manipulating the return_to parameter. Attackers can craft malicious login URLs with unvalidated return_to values to conduct phishing attacks and steal user credentials.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40039",
+      "cve_id": "CVE-2026-40039",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 6.5,
+      "published": "2026-04-23T18:56:27.970696+00:00",
+      "ttps": [
+        {
+          "id": "T1566",
+          "name": "Phishing",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-40038: Pachno 1.0.6 contains a stored cross-site scripting vulnerability that allows at...",
+      "description": "Pachno 1.0.6 contains a stored cross-site scripting vulnerability that allows attackers to execute arbitrary HTML and script code by injecting malicious payloads into POST parameters. Attackers can inject scripts through the value, comment_body, article_content, description, and message parameters across multiple controllers, which are stored in the database and executed in users' browser sessions",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40038",
+      "cve_id": "CVE-2026-40038",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.2,
+      "published": "2026-04-23T18:56:27.970675+00:00",
+      "ttps": [
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-29955: The `/registercrd` endpoint in KubePlus 4.14 in the kubeconfiggenerator componen...",
+      "description": "The `/registercrd` endpoint in KubePlus 4.14 in the kubeconfiggenerator component is vulnerable to command injection. The component uses `subprocess.Popen()` with `shell=True` parameter to execute shell commands, and the user-supplied `chartName` parameter is directly concatenated into the command string without any sanitization or validation. An attacker can inject arbitrary shell commands by cra",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-29955",
+      "cve_id": "CVE-2026-29955",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 8.8,
+      "published": "2026-04-23T18:56:27.970634+00:00",
+      "ttps": [
+        {
+          "id": "T1059.004",
+          "name": "Unix Shell",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "Surveillance companies exploiting telecom system to spy on targets’ locations, research shows",
+      "description": "The campaigns exploited a weakness in telecom infrastructure to allow the unnamed vendors to secretly pose as real cellular providers and pinpoint victims’ locations.",
+      "url": "https://therecord.media/surveillance-companies-exploiting-telecom-systems-to-track-location",
+      "cve_id": null,
+      "source": "TheRecord Media",
+      "category": "cve",
+      "severity": "low",
+      "cvss_score": null,
+      "published": "2026-04-23T18:43:00+00:00",
+      "ttps": []
+    },
+    {
+      "title": "UNC6692 Impersonates IT Helpdesk via Microsoft Teams to Deploy SNOW Malware",
+      "description": "A previously undocumented threat activity cluster known as UNC6692 has been observed leveraging social engineering tactics via Microsoft Teams to deploy a custom malware suite on compromised hosts. \"As with many other intrusions in recent years, UNC6692 relied heavily on impersonating IT helpdesk employees, convincing their victim to accept a Microsoft Teams chat invitation from an account",
+      "url": "https://thehackernews.com/2026/04/unc6692-impersonates-it-helpdesk-via.html",
+      "cve_id": null,
+      "source": "The Hacker News",
+      "category": "incident",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-04-23T18:16:00+00:00",
+      "ttps": [
+        {
+          "id": "T1587",
+          "name": "Develop Capabilities",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        },
+        {
+          "id": "T1204",
+          "name": "User Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        }
+      ]
     },
     {
       "title": "New Checkmarx supply-chain breach affects KICS analysis tool",
@@ -1164,18 +1242,6 @@
       ]
     },
     {
-      "title": "North Korean hackers siphon more than $12 million from crypto users in sprawling campaign",
-      "description": "Researchers said the group stole up to $12 million in cryptocurrency in the first three months of 2026 through malware attacks on personal devices.",
-      "url": "https://therecord.media/north-korean-hackers-siphon-12-million-from-crypto-users",
-      "cve_id": null,
-      "source": "TheRecord Media",
-      "category": "incident",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-04-22T20:48:00+00:00",
-      "ttps": []
-    },
-    {
       "title": "New Mirai campaign exploits RCE flaw in EoL D-Link routers",
       "description": "A new Mirai-based malware campaign is actively exploiting CVE-2025-29635, a high-severity command-injection vulnerability affecting D-Link DIR-823X routers, to enlist devices into the botnet. [...]",
       "url": "https://www.bleepingcomputer.com/news/security/new-mirai-campaign-exploits-rce-flaw-in-eol-d-link-routers/",
@@ -1261,31 +1327,6 @@
           "name": "Exfiltration Over C2 Channel",
           "tactic": "Exfiltration",
           "tactic_id": "TA0010"
-        }
-      ]
-    },
-    {
-      "title": "Harvester Deploys Linux GoGra Backdoor in South Asia Using Microsoft Graph API",
-      "description": "The threat actor known as Harvester has been attributed to a new Linux version of its GoGra backdoor deployed as part of attacks likely targeting entities in South Asia. \"The malware uses the legitimate Microsoft Graph API and Outlook mailboxes as a covert command-and-control (C2) channel, allowing it to bypass traditional perimeter network defenses,\" the Symantec and Carbon Black Threat Hunter",
-      "url": "https://thehackernews.com/2026/04/harvester-deploys-linux-gogra-backdoor.html",
-      "cve_id": null,
-      "source": "The Hacker News",
-      "category": "incident",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-04-22T15:28:00+00:00",
-      "ttps": [
-        {
-          "id": "T1071",
-          "name": "Application Layer Protocol",
-          "tactic": "Command & Control",
-          "tactic_id": "TA0011"
-        },
-        {
-          "id": "T1219",
-          "name": "Remote Access Software",
-          "tactic": "Command & Control",
-          "tactic_id": "TA0011"
         }
       ]
     },
@@ -1952,8 +1993,8 @@
         }
       ],
       "threat_actors": [
-        "Conti",
-        "LockBit"
+        "LockBit",
+        "Conti"
       ]
     },
     {
