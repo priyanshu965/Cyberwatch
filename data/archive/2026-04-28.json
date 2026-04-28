@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-28T21:01:46.006439+00:00",
+  "last_updated": "2026-04-28T22:01:35.906056+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-28T20:59:33.485417+00:00",
+      "published": "2026-04-28T21:59:41.495405+00:00",
       "ttps": [
         {
           "id": "T1059.002",
@@ -50,8 +50,8 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "The AMOS Stealer malware is delivered through a novel technique exploiting Cursor AI agent sessions running Claude Code, leveraging social engineering to manipulate operators into prompting the AI agent to download and execute malicious AppleScript loaders. The attack utilizes heavily obfuscated scripts to perform sandbox evasion checks and collect sensitive data, with TTPs detected including T1059.002 for AppleScript execution, T1204 for user execution, and T1027 for obfuscated files or information. To mitigate this threat, defenders should implement strict controls on AI agent sessions, ensuring that only authorized scripts are executed, and monitor for suspicious AppleScript activity. Additionally, defenders should prioritize user education on social engineering tactics and implement robust sandbox evasion detection mechanisms. Specific remediation steps include updating AI agent software to the latest version, configuring AppleScript execution policies to restrict unauthorized scripts, and deploying endpoint detection and response tools to identify and block malicious activity.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[Initial Access]:::tactic\n    B -->|T1059.002| C[Execution]:::tactic\n    C -->|T1027| D[Persistence]:::tactic\n    D -->|T1562| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The AMOS Stealer malware is delivered through a novel technique exploiting Cursor AI agent sessions running Claude Code, leveraging social engineering to manipulate operators into prompting the AI agent to download and execute malicious AppleScript loaders. The attack utilizes AppleScript (T1059.002) to execute the malware, which then performs sandbox evasion checks (T1497) and collects sensitive data. If exploited, this vulnerability can lead to the theft of sensitive information and authentication certificates (T1649), affecting individuals and organizations relying on Cursor AI agent sessions. To remediate, defenders should update their Cursor AI agent sessions to the latest version, ensure that all AppleScript loaders are verified and trusted, and implement strict access controls to prevent unauthorized execution of scripts. Additionally, monitoring for suspicious activity related to T1027 (Obfuscated Files or Information) and T1562 (Impair Defenses) can help detect potential attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[Initial Access]:::tactic\n    B -->|T1059.002| C[Execution]:::tactic\n    C -->|T1497| D[Persistence]:::tactic\n    D -->|T1649| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -65,7 +65,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-28T20:59:33.485394+00:00",
+      "published": "2026-04-28T21:59:41.495382+00:00",
       "ttps": [
         {
           "id": "T1608",
@@ -92,8 +92,8 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The npm ecosystem has been targeted by a coordinated campaign launched by TeamPCP, leveraging a malicious @bitwarden/cli package to compromise multiple distribution channels, including Docker Hub, GitHub Actions, and VS Code extensions. This multi-stage payload exploits the supply chain, utilizing tactics such as T1195 to compromise the software supply chain and T1555.005 to target password managers. The real-world impact of this exploit includes the potential for widespread data breaches and unauthorized access to sensitive information, affecting developers and organizations relying on the compromised packages. To remediate, defenders should immediately remove the malicious @bitwarden/cli package and update their dependencies to the latest versions, ensuring that all packages are verified through trusted sources. Additionally, implementing robust security measures, such as multi-factor authentication and regular security audits, can help mitigate the risk of similar attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1608| C[Execution]:::tactic\n    C -->|T1104| D[Persistence]:::tactic\n    D -->|T1555.005| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The npm ecosystem has been targeted by a coordinated campaign launched by TeamPCP, leveraging a malicious @bitwarden/cli package to compromise multiple distribution channels, including Docker Hub, GitHub Actions, and VS Code extensions. This multi-stage payload exploits the trust in the npm supply chain, allowing attackers to gain access to sensitive information, including passwords stored in password managers like Bitwarden. The attack utilizes T1195 supply chain compromise tactics, followed by T1608 stage capabilities and T1555.005 password manager exploitation. To remediate, defenders should immediately update their @bitwarden/cli packages to the latest version, ensure all dependencies are up-to-date, and implement strict access controls for GitHub Actions and Docker Hub. Additionally, users should monitor their VS Code extensions for any suspicious activity and consider implementing a Web Application Firewall (WAF) to detect and prevent similar attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1608| C[Stage Capabilities]:::tactic\n    C -->|T1555.005| D[Password Managers]:::tactic\n    D -->|T1104| E[Multi-Stage Channels]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -107,7 +107,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-28T20:59:33.485377+00:00",
+      "published": "2026-04-28T21:59:41.495364+00:00",
       "ttps": [
         {
           "id": "T1078.004",
@@ -128,8 +128,8 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The Xinference open-source distributed AI model inference framework suffered a supply chain attack when attackers compromised PyPI release credentials of maintainers and published three malicious versions (2.6.0, 2.6.1, 2.6.2) on April 22, 2026. The malicious code, encoded in Base64 layers within __init__.py, executes automatically upon library installation or import, collecting cloud credentials. This attack affects users who have installed or imported the malicious versions of the library, potentially leading to unauthorized access to cloud accounts. To remediate, defenders should immediately remove the affected versions and update to a secure version, such as 2.5.9 or later, and rotate any potentially compromised cloud credentials. Additionally, defenders should monitor their cloud accounts for suspicious activity and consider implementing additional security controls, such as multi-factor authentication and least privilege access.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1078.004| C[Collection]:::tactic\n    C -->|T1190| D[Exploitation]:::tactic\n    D -->|T1059.001| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Xinference open-source distributed AI model inference framework suffered a supply chain attack when attackers compromised PyPI release credentials of maintainers and published three malicious versions (2.6.0, 2.6.1, 2.6.2) on April 22, 2026. The malicious code, encoded in Base64 layers within __init__.py, executes automatically upon library installation or import, collecting cloud credentials. This attack is attributed to the exploitation of public-facing applications (T1190) and supply chain compromise (T1195), with the attackers targeting cloud accounts (T1078.004). To remediate, defenders should immediately remove any installed versions of Xinference 2.6.0, 2.6.1, or 2.6.2 and update to a secure version, while also rotating any potentially exposed cloud credentials. Additionally, developers should verify the authenticity of dependencies and libraries before integrating them into their projects.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1190| C[Execution]:::tactic\n    C -->|T1078.004| D[Privilege Escalation]:::tactic\n    D -->|T1078.004| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -143,7 +143,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-28T20:59:33.485358+00:00",
+      "published": "2026-04-28T21:59:41.495344+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -152,11 +152,11 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "Silver Fox, a sophisticated threat actor, is conducting a targeted spearphishing campaign against Japanese businesses, exploiting the country's tax filing and organizational change season. The group sends convincing phishing emails related to tax compliance, salary adjustments, and HR matters, tricking recipients into opening malicious links or attachments, which is classified as T1566 (Phishing). If exploited, this could lead to unauthorized access to sensitive financial information, potentially affecting multiple organizations. To remediate, defenders should implement robust email filtering, educate employees on identifying phishing attempts, and enforce multi-factor authentication for all users. Additionally, monitoring network traffic for suspicious activity and keeping all software up-to-date, specifically email clients and security software, is crucial.",
+      "ai_summary": "Silver Fox, a threat actor, is exploiting Japan's tax filing and organizational change season with a targeted spearphishing campaign against Japanese businesses. The group sends convincing phishing emails related to tax compliance, salary adjustments, and HR matters, tricking recipients into opening malicious links or attachments. The campaign capitalizes on the high volume of legitimate financial communications during this time, making it difficult for recipients to distinguish between genuine and malicious messages. If exploited, the phishing campaign can lead to initial access and execution of malicious code, potentially resulting in data breaches or ransomware attacks. To remediate, Japanese businesses should implement robust email filtering and verification processes, educate employees on phishing tactics, and ensure timely software updates for email clients and security software.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.8,
+      "severity_score": 7.5,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "Extortion in the Enterprise: Defending Against BlackFile Attacks",
@@ -167,7 +167,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-28T20:59:33.485339+00:00",
+      "published": "2026-04-28T21:59:41.495324+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -182,8 +182,8 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "The BlackFile attackers, associated with 'The Com' collective, employ voice-based phishing (T1566) to gain initial access to enterprise networks. They then impersonate IT support staff to trick victims into visiting fraudulent login pages, harvesting credentials in the process. Once inside, they exfiltrate stolen data over a command and control channel (T1041), using it as leverage for extortion. To defend against this threat, enterprises should implement robust phishing detection and prevention measures, such as AI-powered email filters and user education campaigns. Additionally, organizations should ensure that all login pages are properly secured and that multi-factor authentication is enabled for all users.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1041| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "BlackFile attackers, linked to 'The Com' collective, have been conducting financially-motivated data theft and extortion since February 2026. They use voice-based phishing (T1566) to trick victims into divulging credentials, which are then harvested through fake login pages. The attackers exfiltrate stolen data over a command and control (C2) channel (T1041). To defend against this threat, enterprises should implement robust voice phishing detection and prevention systems, and ensure that employees are trained to recognize and report suspicious IT support calls. Additionally, organizations should implement multi-factor authentication and regularly update their login page security configurations to prevent credential harvesting.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Phishing]:::tactic\n    B -->|T1059.001| C[Initial Access]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -197,7 +197,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-28T20:59:33.485305+00:00",
+      "published": "2026-04-28T21:59:41.495248+00:00",
       "ttps": [
         {
           "id": "T1134",
@@ -212,7 +212,7 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "The GlassWorm campaign targeting Open VSX has escalated with 73 newly identified impersonation extensions. These sleeper extensions were initially published without malicious payloads by newly created GitHub accounts, appearing benign to build trust and credibility. The extensions clone popular legitimate extensions, allowing them to bypass security checks and evade detection. At least six extensions have been activated to deliver malware through normal update mechanisms, posing a significant risk to users who have installed these extensions. To remediate, users should immediately uninstall any Open VSX extensions from unknown publishers and update to the latest version of Open VSX (1.18.0 or later). Additionally, users should enable two-factor authentication on their GitHub accounts to prevent further impersonation attacks.",
+      "ai_summary": "The GlassWorm campaign targeting Open VSX has escalated with 73 newly identified impersonation extensions. These sleeper extensions were initially published without malicious payloads by newly created GitHub accounts, appearing benign to build trust and credibility. The extensions clone popular legitimate extensions, allowing them to bypass security checks and evade detection. At least six extensions have been activated to deliver malware through normal update mechanisms, posing a significant risk to users who have installed these extensions. To remediate, users should immediately uninstall any Open VSX extensions from unknown publishers and update to the latest version of Open VSX (1.22.0 or later). Additionally, developers should verify the authenticity of extensions before publishing them to the Open VSX marketplace.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1134| B[Initial Access]:::tactic\n    B -->|T1649| C[Execution]:::tactic\n    C -->|T1218| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -227,7 +227,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-28T20:59:33.485281+00:00",
+      "published": "2026-04-28T21:59:41.495224+00:00",
       "ttps": [
         {
           "id": "T1583.003",
@@ -242,8 +242,8 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The Fibergrid bulletproof hosting network exploits stolen African IPv4 address space worth $20-25 million, hosting 16,700 active fraudulent e-commerce sites. The network utilizes T1583.003 (Virtual Private Server) and T1190 (Exploit Public-Facing Application) tactics to facilitate its operations. If exploited, this network can lead to data breaches, financial losses, and compromised user trust. To remediate, defenders should focus on identifying and blocking suspicious VPS activity, monitoring public-facing application vulnerabilities, and implementing robust IP address validation. Specifically, organizations should update their IP address validation tools to include the stolen African IPv4 address space and implement regular security audits to detect potential VPS exploitation.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.003| B[Virtual Private Server]:::tactic\n    B -->|T1190| C[Exploit Public-Facing Application]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Fibergrid bulletproof hosting network exploits stolen African IPv4 address space worth $20-25 million, originally acquired through improper AFRINIC registrations. This network hosts 16,700 active fraudulent e-commerce sites, utilizing virtual private servers (VPS) to facilitate malicious activities. Threat actors leverage this infrastructure to operate fake shops, compromising the integrity of the e-commerce ecosystem. To mitigate this threat, defenders should monitor for suspicious VPS activity, particularly those utilizing stolen IP address space. Remediation steps include verifying AFRINIC registrations and implementing IP address validation to prevent similar exploitation.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.003| B[Initial Access]:::tactic\n    B -->|T1190| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -257,10 +257,10 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-28T20:59:33.485257+00:00",
+      "published": "2026-04-28T21:59:41.495206+00:00",
       "ttps": [],
-      "ai_summary": "ZionSiphon is a highly targeted OT-focused malware specifically designed to target water treatment and desalination facilities in Israel. The malware demonstrates ICS-awareness through interaction with industrial protocols such as Modbus, DNP3, and S7comm, indicating a sophisticated understanding of operational technology systems. If exploited, ZionSiphon could potentially disrupt or compromise the operation of critical water infrastructure, posing a significant risk to public health and safety. To remediate this threat, defenders should prioritize updating industrial control systems to the latest versions, implementing robust network segmentation, and conducting regular vulnerability assessments to identify and address any potential weaknesses. Additionally, organizations should consider implementing geographic and environmental validation controls to restrict execution to authorized systems and locations.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1041| B[Execution]:::tactic\n    B -->|T1059.001| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "ZionSiphon is OT-focused malware targeting water treatment and desalination facilities in Israel. The malware demonstrates ICS-awareness through interaction with industrial protocols such as Modbus, DNP3, and S7comm. If exploited, ZionSiphon could allow threat actors to disrupt or manipulate water treatment processes, posing a significant risk to public health and safety. To remediate this threat, water infrastructure operators should ensure that all industrial control systems (ICS) are running the latest patched versions of Modbus, DNP3, and S7comm protocols. Additionally, implement robust network segmentation and monitoring to detect and prevent lateral movement.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -274,7 +274,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-28T20:59:33.485234+00:00",
+      "published": "2026-04-28T21:59:41.495184+00:00",
       "ttps": [
         {
           "id": "T1583.003",
@@ -283,7 +283,7 @@
           "tactic_id": "TA0042"
         }
       ],
-      "ai_summary": "This threat item involves a Kimsuky operation utilizing a Vultr Seoul VPS (158.247.210.58) for credential harvesting. The actor has maintained the same backend VPS since at least September 2020, rotating through seven DDNS providers to evade blocklisting over an 18-month period. Over 60 domains have been used across this infrastructure, indicating a systematic effort to evade detection. If exploited, this infrastructure could be used for further malicious activities such as data exfiltration or ransomware attacks. To remediate, defenders should monitor for suspicious DDNS activity and blocklisting evasion tactics, and ensure that all VPS instances are regularly updated and configured with strong security settings.",
+      "ai_summary": "This threat item involves a Kimsuky operation utilizing a Vultr Seoul VPS (158.247.210.58) for credential harvesting. The actor has maintained the same backend VPS since at least September 2020, rotating through seven DDNS providers to evade blocklisting. Over 60 domains have been used across an 18-month period, indicating a systematic and deliberate approach. If exploited, this infrastructure could be used for further malicious activities, such as data exfiltration or ransomware attacks. To remediate, defenders should monitor for suspicious DDNS activity and blocklisted domains, and consider implementing IP blocking or rate limiting for the affected VPS. Additionally, organizations should ensure their credential harvesting infrastructure is secure and up-to-date, with regular monitoring for suspicious activity.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.003| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
@@ -298,7 +298,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-28T20:59:33.485199+00:00",
+      "published": "2026-04-28T21:59:41.495148+00:00",
       "ttps": [
         {
           "id": "T1134",
@@ -307,7 +307,7 @@
           "tactic_id": "TA0004"
         }
       ],
-      "ai_summary": "This threat involves Chinese actors using impersonation and stolen narratives to target journalists and civil society members. The actors, identified as part of two distinct clusters aligned with the People's Republic of China, conducted widespread credential harvesting campaigns using T1134 (Access Token Manipulation). The campaigns targeted Uyghur, Tibetan, Taiwanese, and Hong Kong diaspora activists, as well as journalists covering these communities. To mitigate this threat, defenders should implement multi-factor authentication, monitor for suspicious login attempts, and educate users on the dangers of phishing and social engineering attacks. Additionally, organizations should consider implementing access controls and limiting the use of access tokens.",
+      "ai_summary": "This threat involves Chinese actors using impersonation and stolen narratives to target journalists and civil society members. The actors, identified as GLITTER CARP, conducted credential harvesting campaigns against Uyghur, Tibetan, Taiwanese, and Hong Kong diaspora activists, as well as journalists covering these communities. The actors used T1134 (Access Token Manipulation) to gain unauthorized access to sensitive information. To remediate, organizations should implement multi-factor authentication, monitor for suspicious login activity, and educate users on the risks of phishing and social engineering attacks. Additionally, organizations should regularly review and update their access controls to prevent unauthorized access.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1134| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -322,13 +322,13 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 7.3,
-      "published": "2026-04-28T20:59:31.856654+00:00",
+      "published": "2026-04-28T21:59:39.992228+00:00",
       "ttps": [],
       "epss_score": null,
       "threat_actors": [
         "APT41"
       ],
-      "ai_summary": "CVE-2026-6569 is a remote code execution vulnerability in kodcloud KodExplorer up to version 4.52. The vulnerability is caused by improper authentication in the fileGet function of the /app/controller/share.class.php component, which can be manipulated by an attacker through the fileUrl argument. If exploited, this vulnerability allows an attacker to execute arbitrary code on the affected system, potentially leading to data breaches or ransomware attacks. To remediate this vulnerability, users should update to version 4.53 or later, and ensure that the fileGet function is properly configured to validate user input. Specifically, users should check the fileUrl argument for any suspicious characters or patterns, and ensure that the fileGet function is not accessible to unauthorized users.",
+      "ai_summary": "CVE-2026-6569 is a remote code execution vulnerability in kodcloud KodExplorer up to version 4.52. The vulnerability occurs in the fileGet function of the /app/controller/share.class.php component, where an attacker can manipulate the fileUrl argument to bypass authentication. If exploited, an attacker can gain unauthorized access to sensitive data and potentially execute arbitrary code. To remediate this vulnerability, update KodExplorer to version 4.53 or later, and ensure that the fileGet function is properly validated to prevent similar attacks. Additionally, consider implementing additional security measures, such as input validation and sanitization, to further mitigate the risk of exploitation.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
@@ -343,7 +343,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 7.3,
-      "published": "2026-04-28T20:59:31.856637+00:00",
+      "published": "2026-04-28T21:59:39.992211+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -353,7 +353,7 @@
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-6568 is a path traversal vulnerability in kodcloud KodExplorer up to version 4.52. The vulnerability affects the function share.class.php::initShareOld in the /app/controller/share.class.php file of the Public Share Handler component. An attacker can exploit this vulnerability by manipulating the path argument remotely, potentially leading to unauthorized access to sensitive data. To remediate this vulnerability, users should update to version 4.53 or later, and ensure that the 'allow_url_include' PHP configuration option is set to 'Off'. Additionally, users should review their Public Share Handler configuration to ensure that it is not exposing sensitive data to unauthorized access.",
+      "ai_summary": "CVE-2026-6568 is a path traversal vulnerability in kodcloud KodExplorer up to version 4.52. The vulnerability affects the function share.class.php::initShareOld in the file /app/controller/share.class.php of the Public Share Handler component. An attacker can exploit this vulnerability by manipulating the path argument, which can be initiated remotely. This vulnerability has been publicly disclosed and may be used by threat actors. To remediate this vulnerability, update KodExplorer to version 4.53 or later, and ensure that the Public Share Handler component is configured to only allow trusted input. Additionally, consider implementing a web application firewall (WAF) to block potential exploit attempts.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
@@ -368,12 +368,12 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 4.3,
-      "published": "2026-04-28T20:59:31.856619+00:00",
+      "published": "2026-04-28T21:59:39.992195+00:00",
       "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2026-6564 is a vulnerability in EMQ EMQX Enterprise up to version 6.1.0, specifically affecting the Session Handling component. The issue allows for improper authorization, enabling remote attacks. Although the CVSS score is 4.3, the public disclosure of the exploit and lack of vendor response increase the risk. To mitigate this vulnerability, users should upgrade to version 6.1.1 or later, and ensure that the 'allow_anonymous' configuration option is set to 'false'. Additionally, it is recommended to implement authentication and authorization mechanisms to prevent unauthorized access.",
+      "ai_summary": "CVE-2026-6564 is a vulnerability in EMQ EMQX Enterprise up to version 6.1.0, specifically affecting the Session Handling component. The issue allows for improper authorization, enabling remote attacks. The exploit has been publicly disclosed, and the vendor was notified but did not respond. To mitigate this vulnerability, users should upgrade to version 6.2.0 or later, and ensure that the 'allow_anonymous' configuration option is set to 'false'. Additionally, it is recommended to implement authentication and authorization mechanisms to prevent unauthorized access.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.5,
+      "severity_score": 4.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -386,7 +386,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 8.8,
-      "published": "2026-04-28T20:59:31.856602+00:00",
+      "published": "2026-04-28T21:59:39.992178+00:00",
       "ttps": [
         {
           "id": "T1203",
@@ -399,11 +399,11 @@
       "threat_actors": [
         "APT41"
       ],
-      "ai_summary": "CVE-2026-6563 is a critical buffer overflow vulnerability in H3C Magic B1 routers running firmware up to version 100R004. Exploitation occurs through the SetAPWifiorLedInfoById function in the /goform/aspForm endpoint, allowing remote attackers to trigger the overflow by manipulating the 'param' argument, potentially leading to remote code execution. This vulnerability, disclosed publicly without vendor response, poses a significant risk to network integrity and data confidentiality for affected organizations. Remediation requires immediate firmware updates to a version beyond 100R004 and disabling or restricting access to the affected web interface if patching is not immediately feasible.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1071.001| C[Web Protocols]:::tactic\n    C -->|T1059.004| D[Command and Scripting Interpreter: Python]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.8,
-      "ai_provider": "gemini",
-      "ai_model": "gemini-2.5-flash-lite"
+      "ai_summary": "CVE-2026-6563 is a buffer overflow vulnerability in the H3C Magic B1 router's SetAPWifiorLedInfoById function, located in the /goform/aspForm file. This vulnerability allows remote attackers to exploit the function by manipulating the 'param' argument, leading to a buffer overflow. If exploited, this vulnerability can result in arbitrary code execution, potentially allowing attackers to gain remote access to the router. To remediate this vulnerability, users should update to version 100R005 or later, and ensure that the 'param' argument is properly sanitized. Additionally, users should consider implementing additional security measures, such as access controls and intrusion detection systems, to prevent exploitation.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "CVE-2026-6562: A flaw has been found in dameng100 muucmf 1.9.5.20260309. Impacted is the functi...",
@@ -414,7 +414,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 7.3,
-      "published": "2026-04-28T20:59:31.856584+00:00",
+      "published": "2026-04-28T21:59:39.992161+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -427,7 +427,7 @@
       "threat_actors": [
         "APT41"
       ],
-      "ai_summary": "CVE-2026-6562 is a remote SQL injection vulnerability in dameng100 muucmf 1.9.5.20260309, allowing attackers to manipulate the 'keyword' argument in the 'getListByPage' function of /index/Search/index.html. This flaw can be exploited by executing a crafted input, potentially leading to unauthorized data access or even full control of the affected system. The vulnerability has been publicly disclosed and may be used by threat actors, putting users of the affected version at risk. To mitigate this issue, administrators should update to dameng100 muucmf 1.9.6 or later, and ensure that the 'keyword' argument is properly sanitized. Additionally, consider implementing a Web Application Firewall (WAF) to block potential exploitation attempts.",
+      "ai_summary": "CVE-2026-6562 is a remote SQL injection vulnerability in dameng100 muucmf 1.9.5.20260309, specifically in the getListByPage function of /index/Search/index.html. An attacker can manipulate the keyword argument to inject malicious SQL code, potentially leading to data exposure or unauthorized access. This vulnerability has been publicly disclosed and exploited, and the vendor has not responded to the disclosure. To remediate, update to dameng100 muucmf 1.9.6.20260310 or later, and ensure the keyword argument is properly sanitized. Additionally, consider implementing a web application firewall (WAF) to detect and prevent similar attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
@@ -442,7 +442,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 4.7,
-      "published": "2026-04-28T20:59:31.856566+00:00",
+      "published": "2026-04-28T21:59:39.992142+00:00",
       "ttps": [],
       "epss_score": null
     },
@@ -455,7 +455,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 8.8,
-      "published": "2026-04-28T20:59:31.856545+00:00",
+      "published": "2026-04-28T21:59:39.992121+00:00",
       "ttps": [
         {
           "id": "T1203",
@@ -478,7 +478,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 4.3,
-      "published": "2026-04-28T20:59:31.856526+00:00",
+      "published": "2026-04-28T21:59:39.992104+00:00",
       "ttps": [
         {
           "id": "T1082",
@@ -498,7 +498,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.4,
-      "published": "2026-04-28T20:59:31.856503+00:00",
+      "published": "2026-04-28T21:59:39.992080+00:00",
       "ttps": [
         {
           "id": "T1649",
@@ -518,9 +518,88 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": null,
-      "published": "2026-04-28T20:59:31.856459+00:00",
+      "published": "2026-04-28T21:59:39.992033+00:00",
       "ttps": [],
       "epss_score": null
+    },
+    {
+      "title": "BlueNoroff Uses Fake Zoom Calls to Turn Victims Into Attack Lures",
+      "description": "The North Korean group is using stolen victim videos, AI-generated avatars, and fake Zoom calls to scale malware attacks against cryptocurrency executives.",
+      "url": "https://www.darkreading.com/cyberattacks-data-breaches/bluenoroff-turns-victims-into-new-attack-lures",
+      "cve_id": null,
+      "source": "Dark Reading",
+      "category": "incident",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-04-28T21:38:39+00:00",
+      "ttps": [
+        {
+          "id": "T1204",
+          "name": "User Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        }
+      ]
+    },
+    {
+      "title": "Broken VECT 2.0 ransomware acts as a data wiper for large files",
+      "description": "Researchers are warning that the VECT 2.0 ransomware has a problem in the way it handles encryption nonces that leads to permanently destroying larger files rather than encrypt them. [...]",
+      "url": "https://www.bleepingcomputer.com/news/security/broken-vect-20-ransomware-acts-as-a-data-wiper-for-large-files/",
+      "cve_id": null,
+      "source": "Bleeping Computer",
+      "category": "incident",
+      "severity": "high",
+      "cvss_score": null,
+      "published": "2026-04-28T21:25:57+00:00",
+      "ttps": [
+        {
+          "id": "T1485",
+          "name": "Data Destruction",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
+        },
+        {
+          "id": "T1486",
+          "name": "Data Encrypted for Impact",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
+        }
+      ],
+      "threat_actors": [
+        "APT41"
+      ]
+    },
+    {
+      "title": "Hackers are exploiting a critical LiteLLM pre-auth SQLi flaw",
+      "description": "Hackers are targeting sensitive information stored in the LiteLLM open-source large-language model (LLM) gateway by exploiting a critical vulnerability tracked as CVE-2026-42208. [...]",
+      "url": "https://www.bleepingcomputer.com/news/security/hackers-are-exploiting-a-critical-litellm-pre-auth-sqli-flaw/",
+      "cve_id": "CVE-2026-42208",
+      "source": "Bleeping Computer",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-04-28T21:07:23+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "NSA Chief During Snowden Affair Shares Regrets, Reflections 13 Years Later",
+      "description": "Chris Inglis was the head civilian in charge at the NSA when the Snowden leak exploded. He gets candid about mistakes the organization made, and what CISOs need to know about spotting potential threats, media disclosures, and &quot;enculturation.&quot;",
+      "url": "https://www.darkreading.com/cyber-risk/nsa-chief-during-snowden-affair-13-years-later",
+      "cve_id": null,
+      "source": "Dark Reading",
+      "category": "news",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-04-28T20:38:59+00:00",
+      "ttps": []
     },
     {
       "title": "Feuding Ransomware Groups Leak Each Other's Data",
@@ -1115,18 +1194,6 @@
       ]
     },
     {
-      "title": "GlassWorm malware attacks return via 73 OpenVSX \"sleeper\" extensions",
-      "description": "A new wave of the Glassworm campaign is targeting the OpenVSX ecosystem with 73 \"sleeper\" extensions that turn malicious after an update. [...]",
-      "url": "https://www.bleepingcomputer.com/news/security/glassworm-malware-attacks-return-via-73-openvsx-sleeper-extensions/",
-      "cve_id": null,
-      "source": "Bleeping Computer",
-      "category": "incident",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-04-27T21:41:01+00:00",
-      "ttps": []
-    },
-    {
       "title": "Supreme Court signals location data searches should require a warrant",
       "description": "Privacy advocates had worried that the high court would rule that geofencing does not qualify as a constitutionally protected search, opening the door to much broader use of warrantless reverse searches of all types.",
       "url": "https://therecord.media/supreme-court-signals-location-data-searches-require-warrant",
@@ -1154,25 +1221,6 @@
           "name": "User Execution",
           "tactic": "Execution",
           "tactic_id": "TA0002"
-        }
-      ]
-    },
-    {
-      "title": "Canada arrests three for operating “SMS blaster” device in Toronto",
-      "description": "Canadian authorities have arrested three men for operating an \"SMS blaster\" device that pretends to be a cellular tower to send phishing texts to nearby phones. [...]",
-      "url": "https://www.bleepingcomputer.com/news/security/canada-arrests-three-for-operating-sms-blaster-device-in-toronto/",
-      "cve_id": null,
-      "source": "Bleeping Computer",
-      "category": "news",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-04-27T20:00:31+00:00",
-      "ttps": [
-        {
-          "id": "T1566",
-          "name": "Phishing",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
         }
       ]
     },
@@ -1304,30 +1352,6 @@
           "tactic_id": "TA0001"
         }
       ]
-    },
-    {
-      "title": "US Busts Myanmar Ring Targeting US Citizens in Financial Fraud",
-      "description": "Some 29 people were charged, including a Cambodian senator, and authorities seized more than 500 Web domains tied to fake investment sites.",
-      "url": "https://www.darkreading.com/cyber-risk/us-busts-myanmar-ring-targeting-us-citizens-financial-fraud",
-      "cve_id": null,
-      "source": "Dark Reading",
-      "category": "news",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-04-24T16:48:04+00:00",
-      "ttps": []
-    },
-    {
-      "title": "Glasswing Secured the Code. The Rest of Your Stack Is Still on You",
-      "description": "Forgotten integrations, shadow IT, SaaS, and now shadow AI and agents are everywhere, and attackers don't need sophisticated AI models to take advantage.",
-      "url": "https://www.darkreading.com/cyberattacks-data-breaches/glasswing-secured-code-stack-on-you",
-      "cve_id": null,
-      "source": "Dark Reading",
-      "category": "incident",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-04-24T15:04:29+00:00",
-      "ttps": []
     },
     {
       "title": "ISC Stormcast For Friday, April 24th, 2026 https://isc.sans.edu/podcastdetail/9906, (Fri, Apr 24th)",
@@ -1848,8 +1872,8 @@
         }
       ],
       "threat_actors": [
-        "Conti",
-        "LockBit"
+        "LockBit",
+        "Conti"
       ]
     },
     {
