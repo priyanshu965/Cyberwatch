@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-29T22:48:46.978469+00:00",
+  "last_updated": "2026-04-29T23:46:29.631270+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-29T22:46:35.201303+00:00",
+      "published": "2026-04-29T23:44:35.403943+00:00",
       "ttps": [
         {
           "id": "T1134",
@@ -23,8 +23,8 @@
       "threat_actors": [
         "APT41"
       ],
-      "ai_summary": "The threat involves a sophisticated phishing campaign impersonating DHL, targeting consumers with spoofed shipment notification emails. The attack chain consists of 11 steps, including a client-side generated OTP page that creates false trust among victims, ultimately directing them to a DHL-branded credential harvesting portal. This campaign exploits the trust in the DHL brand and the urgency associated with shipment notifications, leading to potential credential theft. To mitigate this threat, defenders should educate users about such phishing tactics and implement robust email filtering solutions to detect and block spoofed emails. Additionally, users should be cautious when interacting with emails that request sensitive information or direct them to unfamiliar websites, and should verify the authenticity of such communications directly with the relevant service provider.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1134| C[Credential Access]:::tactic\n    C -->|T1059.001| D[Collection]:::tactic\n    D -->|T1204| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The threat involves a sophisticated phishing campaign impersonating DHL, targeting consumers with spoofed shipment notification emails. The attack employs an 11-step chain, starting with these emails, which lead victims to a client-side generated OTP page designed to create false trust. This page then redirects them to a DHL-branded portal where their credentials are harvested. The real-world impact includes potential financial loss and identity theft for affected individuals. To remediate, defenders should educate users about such phishing tactics, implement robust email filtering to block spoofed emails, and consider multi-factor authentication that is not reliant on OTPs sent via email or SMS.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1134| B[Access Token Manipulation]:::tactic\n    B -->|T1566| C[Initial Access]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1204| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.8,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -36,9 +36,9 @@
       "cve_id": null,
       "source": "AlienVault OTX",
       "category": "incident",
-      "severity": "high",
+      "severity": "critical",
       "cvss_score": null,
-      "published": "2026-04-29T22:46:35.201270+00:00",
+      "published": "2026-04-29T23:44:35.403916+00:00",
       "ttps": [
         {
           "id": "T1485",
@@ -53,9 +53,9 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The VECT 2.0 ransomware, discovered by Check Point Research, contains critical flaws affecting Windows, Linux, and ESXi platforms. Specifically, the malware's encryption implementation error causes files larger than 128 KB to be permanently destroyed rather than encrypted, due to the ChaCha20-IETF cipher only saving one of four required decryption nonces. This results in irreversible data loss, even if the ransom is paid. To mitigate this threat, defenders should implement robust backups and ensure that all systems are up-to-date with the latest security patches, although no specific CVE or CVSS score is available. Additionally, network segmentation and strict access controls can help limit the spread of the malware, and defenders should be aware of the TTPs detected, including T1485 (Data Destruction) and T1486 (Data Encrypted for Impact).",
+      "ai_summary": "The VECT 2.0 ransomware, discovered by Check Point Research, contains critical flaws affecting Windows, Linux, and ESXi platforms. The malware uses the ChaCha20-IETF cipher but due to an encryption implementation error, files larger than 128 KB are permanently destroyed rather than encrypted, as it only saves one of the four required decryption nonces. This results in irreversible data loss, even if the ransom is paid. To mitigate this threat, defenders should implement robust backups and ensure that all systems are isolated from the internet, especially those running outdated or vulnerable software. Additionally, users should be cautious when interacting with suspicious emails or links, as these may be used as an initial attack vector, and consider implementing a security solution that can detect and block ransomware attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "severity_score": 9.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -68,7 +68,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-29T22:46:35.201253+00:00",
+      "published": "2026-04-29T23:44:35.403900+00:00",
       "ttps": [
         {
           "id": "T1572",
@@ -80,11 +80,11 @@
       "threat_actors": [
         "Sandworm"
       ],
-      "ai_summary": "APT-C-13 (Sandworm) uses nested SSH and TOR tunnel architecture to establish covert communication channels for global cyber espionage. The attack begins with T1572 (Protocol Tunneling) via SSH, allowing the threat actor to bypass network security controls and establish a covert channel. If exploited, this vulnerability can lead to unauthorized access to sensitive information and data exfiltration. To remediate, defenders should implement network segmentation, monitor SSH traffic for suspicious activity, and configure firewalls to block unauthorized SSH connections. Specifically, defenders should ensure SSH version 7.4p1 or later is installed, and configure the SSH server to only allow connections from trusted IP addresses.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1572| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "ai_summary": "The APT-C-13 threat group, also known as FROZENBARENTS, has been observed utilizing a sophisticated protocol tunneling technique, specifically T1572, to establish covert communication channels with compromised hosts. This is achieved through the use of nested SSH and TOR tunnels, allowing the threat actors to maintain persistence and evade detection. The attack vector involves the exploitation of vulnerable SSH configurations, enabling the threat actors to create encrypted tunnels for command and control communications. To remediate this threat, defenders should ensure that SSH servers are configured to use secure protocols, such as SSHv2, and that all SSH connections are authenticated using public key authentication, with a minimum key size of 2048 bits. Additionally, network traffic monitoring should be implemented to detect and alert on suspicious TOR and SSH activity.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1572| B[Protocol Tunneling]:::tactic\n    B -->|T1041| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    D -->|T1078| E[Defense Evasion]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.2,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "Security brief: tax scams aim to steal funds from taxpayers",
@@ -95,7 +95,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-29T22:46:35.201229+00:00",
+      "published": "2026-04-29T23:44:35.403876+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -104,7 +104,7 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "Threat actors are exploiting tax season with numerous campaigns leveraging tax themes to deliver malware, remote monitoring tools, fraud attempts, and credential phishing. These campaigns, observed in over a hundred instances in 2026, involve impersonating tax agencies, claiming expired documents, and requesting tax filing services. The primary attack vector is phishing, utilizing TTP ID T1566. If exploited, these scams can lead to the theft of taxpayer funds, compromised sensitive information, and unauthorized access to financial accounts. To mitigate this threat, taxpayers should be cautious of unsolicited emails and phone calls, verify the authenticity of tax agencies, and ensure software and tax preparation tools are up-to-date, specifically version 2026.1.1 or later of tax preparation software.",
+      "ai_summary": "Threat actors are exploiting tax season with numerous campaigns leveraging tax themes to deliver malware, remote monitoring tools, fraud attempts, and credential phishing. Over a hundred campaigns have been observed in 2026, with a notable increase in remote monitoring and management (RMM) payloads. The threat actors are impersonating tax agencies, claiming expired documents, and requesting tax filing services to trick victims into divulging sensitive information. To mitigate this threat, taxpayers should be cautious of unsolicited emails and phone calls from tax agencies, and verify the authenticity of any communication before providing personal or financial information. Additionally, ensure that all software and systems are up-to-date, particularly tax preparation software, and use strong, unique passwords for all online accounts.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
@@ -119,7 +119,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-29T22:46:35.201206+00:00",
+      "published": "2026-04-29T23:44:35.403853+00:00",
       "ttps": [
         {
           "id": "T1027",
@@ -146,7 +146,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "KYCShadow, an Android banking malware, exploits fake KYC workflows to steal credentials and one-time passwords (OTPs). It operates as a multi-stage dropper, installing secondary payloads and establishing persistent command-and-control communication. The malware uses native code obfuscation, Firebase-based remote execution, VPN-based traffic manipulation, and WebView-based phishing to evade detection. To remediate, users should uninstall any suspicious apps, update their Android OS to version 11 or later, and enable Google Play Protect. Additionally, users should verify the authenticity of any KYC verification apps through official bank channels.",
+      "ai_summary": "KYCShadow, an Android banking malware, exploits fake KYC workflows to steal credentials and OTPs. It operates as a multi-stage dropper, installing secondary payloads and establishing persistent C2 communication. The malware uses native code obfuscation, Firebase-based remote execution, VPN-based traffic manipulation, and WebView-based phishing to evade detection. To remediate, users should uninstall any suspicious apps, update their Android version to 11 or later, and enable Google Play Protect. Additionally, users should verify the authenticity of any banking apps through official channels.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1036| B[Initial Access]:::tactic\n    B -->|T1071| C[Execution]:::tactic\n    C -->|T1104| D[Command and Control]:::tactic\n    D -->|T1027| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -161,7 +161,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-29T22:46:35.201181+00:00",
+      "published": "2026-04-29T23:44:35.403827+00:00",
       "ttps": [
         {
           "id": "T1608",
@@ -188,9 +188,9 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "A sophisticated CHM-based malware campaign, utilizing a compiled HTML file, has been identified targeting Vietnamese victims through a trojanized CV document. The infection chain involves a multi-stage payload delivery mechanism, leveraging Python interpreters, C++ DLLs, and layered XOR encryption. If exploited, the malware establishes persistence through Shell hijacking and scheduled tasks, ultimately delivering a Rebex-based Telegram Remote Access Tool (RAT). To remediate, users should ensure the latest version of the Rebex library is installed, and any suspicious CHM files are immediately removed. Additionally, scheduled tasks and Shell settings should be reviewed and cleaned up to prevent further exploitation.",
+      "ai_summary": "A sophisticated Rebex-based Telegram Remote Access Tool (RAT) has been identified targeting Vietnamese victims through a trojanized CV document. The infection chain utilizes a compiled HTML file that deploys a multi-stage payload delivery mechanism involving Python interpreters, C++ DLLs, and layered XOR encryption. The malware establishes persistence through Shell hijacking and scheduled tasks, ultimately delivering the Rebex-based Telegram RAT. This RAT allows threat actors to remotely access and control compromised systems, steal sensitive information, and conduct further malicious activities. To remediate this threat, defenders should update Python interpreters to the latest version (3.9.7 or later), remove any suspicious C++ DLLs, and disable scheduled tasks created by the malware. Additionally, administrators should monitor system logs for any signs of Shell hijacking and implement robust access controls to prevent further exploitation.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1608| B[Stage Capabilities]:::tactic\n    B -->|T1053| C[Scheduled Task/Job]:::tactic\n    C -->|T1104| D[Multi-Stage Channels]:::tactic\n    D -->|T1219| E[Remote Access Software]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -203,7 +203,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-29T22:46:35.201158+00:00",
+      "published": "2026-04-29T23:44:35.403803+00:00",
       "ttps": [
         {
           "id": "T1486",
@@ -212,7 +212,7 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "Kyber ransomware, a Rust-based Windows variant, exploits genuine hybrid post-quantum cryptography, specifically implementing Kyber1024 and X25519 for key protection. This variant encrypts files using AES-256-CTR, appending a fixed 0x744-byte trailer containing encrypted metadata. If exploited, Kyber ransomware can lead to data breaches and significant financial losses for affected organizations. To remediate, defenders should ensure that all Windows systems are running the latest version of the operating system and have the latest security patches installed. Additionally, implementing a robust backup and disaster recovery strategy can help minimize the impact of a potential Kyber ransomware attack.",
+      "ai_summary": "Kyber ransomware, a Rust-based Windows variant, exploits genuine hybrid post-quantum cryptography, specifically implementing Kyber1024 and X25519 for key protection. The malware encrypts files using AES-256-CTR, appending a fixed 0x744-byte trailer containing encrypted metadata. If exploited, Kyber ransomware can lead to data breaches and significant financial losses for affected organizations. To remediate, defenders should ensure that all Windows systems are running the latest version of the operating system and have the latest security patches installed. Additionally, implementing a robust backup and disaster recovery plan can help minimize the impact of a potential Kyber ransomware attack.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1486| B[Data Encrypted for Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -227,7 +227,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-29T22:46:35.201137+00:00",
+      "published": "2026-04-29T23:44:35.403781+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -272,9 +272,9 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "A ClickFix-style phishing campaign tricked users into executing obfuscated PowerShell commands that downloaded and installed a malicious MSI payload from a remote server. The attack employed a multi-stage infection chain utilizing DLL sideloading techniques with renamed legitimate binaries to execute malicious components. The final payload deployed Hijack, a malicious tool. To remediate, users should ensure PowerShell is updated to version 5.1 or later, and configure Windows Defender to block PowerShell scripts from running. Additionally, users should be cautious when interacting with unsolicited emails and avoid executing PowerShell commands from untrusted sources.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    C -->|T1574.002| D[Execution]:::tactic\n    D -->|T1059.001| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "A ClickFix-style phishing campaign leveraged social engineering to trick users into executing obfuscated PowerShell commands that downloaded and installed a malicious MSI payload from a remote server. The attack employed a sophisticated multi-stage infection chain utilizing DLL sideloading techniques with renamed legitimate binaries to execute malicious components. The final payload deployed Hijack, a known malware. To remediate, users should immediately update PowerShell to version 7.2.5 or later, and ensure that Windows Defender is enabled and configured to scan for malicious files. Additionally, administrators should review system logs for suspicious activity and implement a robust security awareness training program to educate users on phishing tactics.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    C -->|T1574.002| D[Execution]:::tactic\n    D -->|T1059.001| E[Command and Control]:::tactic\n    E -->|T1027| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -287,7 +287,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-29T22:46:35.201111+00:00",
+      "published": "2026-04-29T23:44:35.403754+00:00",
       "ttps": [
         {
           "id": "T1036",
@@ -314,8 +314,8 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "A multi-stage malware execution chain was discovered through proactive threat hunting activities, utilizing endpoint telemetry and dynamic analysis. The attack sequence showcases advanced techniques such as script masquerading, defense evasion mechanisms, staged payload extraction, and command-and-control communications establishment. This malware exhibits capabilities for downloading additional payloads and evading detection. The attack primarily targets Windows systems, specifically affecting versions 10 and 11. To remediate, defenders should ensure the latest Windows updates are installed, specifically KB5006674 and KB5006675, and configure Windows Defender to block suspicious scripts and applications.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1036| B[Initial Access]:::tactic\n    B -->|T1562| C[Execution]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1104| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "A sophisticated multi-stage malware execution chain was discovered, utilizing advanced techniques such as script masquerading (T1036), defense evasion mechanisms (T1562), and staged payload extraction. The malware was found to exhibit capabilities for downloading additional payloads and establishing command-and-control communications (T1104). This attack sequence was identified through proactive threat hunting activities using endpoint telemetry and dynamic analysis. The malware's capabilities pose a significant threat to affected systems, potentially leading to data breaches or ransomware attacks. To remediate this threat, defenders should ensure that endpoint detection and response (EDR) solutions are configured to detect and prevent script masquerading and defense evasion techniques, and implement network segmentation to limit the spread of malware.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1562| B[Initial Access]:::tactic\n    B -->|T1036| C[Execution]:::tactic\n    C -->|T1104| D[Command and Control]:::tactic\n    D -->|T1071| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -329,7 +329,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-29T22:46:35.201080+00:00",
+      "published": "2026-04-29T23:44:35.403721+00:00",
       "ttps": [
         {
           "id": "T1055",
@@ -344,11 +344,100 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The threat actor 'TeamPCP' has compromised the Telnyx Python SDK by publishing malicious versions 4.87.1 and 4.87.2 to PyPI, impacting any users who installed or updated to these versions. This sophisticated attack employs WAV-based steganography and split-file code injection, an evolution from previous campaigns, to obfuscate a credential-stealing payload. Upon import, the malware executes stealthy download and execution routines, leading to potential data breaches and account compromises. Defenders should immediately uninstall versions 4.87.1 and 4.87.2 of the Telnyx Python SDK, revert to a known good version (e.g., 4.87.0 or earlier), and conduct thorough security audits of their environments for any signs of compromise.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1027| C[Defense Evasion]:::tactic\n    C -->|T1055| D[Execution]:::tactic\n    D -->|T1497| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.8,
-      "ai_provider": "gemini",
-      "ai_model": "gemini-2.5-flash-lite"
+      "ai_summary": "TeamPCP's sophisticated attack on the Telnyx Python SDK marks a shift in tactics beyond their previous LiteLLM campaign. The attackers published malicious versions 4.87.1 and 4.87.2 to PyPI, incorporating WAV-based steganography, split-file code injection, and expanded platform support. The payload, activated on import, uses stealthy techniques to download and execute credential-stealing malware. To remediate, users should immediately uninstall versions 4.87.1 and 4.87.2 and update to the latest version (4.87.0) of the Telnyx Python SDK. Additionally, developers should review their code for any signs of obfuscated files or information (T1027) and implement robust security measures to prevent process injection (T1055).",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-6593: A vulnerability was found in ComfyUI up to 0.13.0. Affected by this issue is som...",
+      "description": "A vulnerability was found in ComfyUI up to 0.13.0. Affected by this issue is some unknown functionality of the file server.py of the component View Endpoint. Performing a manipulation results in cross site scripting. The attack is possible to be carried out remotely. The exploit has been made public and could be used. The vendor was contacted early about this disclosure but did not respond in any ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6593",
+      "cve_id": "CVE-2026-6593",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 3.5,
+      "published": "2026-04-29T23:44:34.189182+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-6593 is a cross-site scripting (XSS) vulnerability in ComfyUI up to version 0.13.0. This issue affects the file server.py of the View Endpoint component, allowing an attacker to perform a remote manipulation. The exploit has been made public, and the vendor was notified early but did not respond. If exploited, this vulnerability could lead to unauthorized access to sensitive data or functionality. To remediate, update to ComfyUI version 0.14.0 or later, and ensure the View Endpoint component is properly configured to prevent XSS attacks. Additionally, consider implementing a web application firewall (WAF) to detect and prevent XSS attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Execution]:::tactic\n    B -->|T1041| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-6592: A vulnerability has been found in ComfyUI up to 0.13.0. Affected by this vulnera...",
+      "description": "A vulnerability has been found in ComfyUI up to 0.13.0. Affected by this vulnerability is the function getuserdata of the file app/user_manager.py of the component userdata Endpoint. Such manipulation leads to cross site scripting. The attack can be executed remotely. The exploit has been disclosed to the public and may be used. The vendor was contacted early about this disclosure but did not resp",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6592",
+      "cve_id": "CVE-2026-6592",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 3.5,
+      "published": "2026-04-29T23:44:34.189164+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ],
+      "ai_summary": "CVE-2026-6592 is a cross-site scripting (XSS) vulnerability in ComfyUI versions up to 0.13.0. The vulnerability resides in the getuserdata function of the app/user_manager.py file within the userdata Endpoint component. An attacker can manipulate this function to execute remote attacks, which have been publicly disclosed. To remediate, update to ComfyUI version 0.14.0 or later, and ensure the 'Content-Security-Policy' header is set to 'default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; object-src 'none'; frame-ancestors 'none';'. This will prevent XSS attacks and ensure secure data exchange.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Cross-Site Scripting]:::tactic\n    B -->|T1210| C[Web Shell]:::tactic\n    C -->|T1071| D[Application Access]:::tactic\n    D -->|T1068| E[Data Stolen]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-6591: A flaw has been found in ComfyUI up to 0.13.0. Affected is the function folder_p...",
+      "description": "A flaw has been found in ComfyUI up to 0.13.0. Affected is the function folder_paths.get_annotated_filepath of the file folder_paths.py of the component LoadImage Node. This manipulation of the argument Name causes path traversal. Remote exploitation of the attack is possible. The exploit has been published and may be used. The vendor was contacted early about this disclosure but did not respond i",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6591",
+      "cve_id": "CVE-2026-6591",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 4.3,
+      "published": "2026-04-29T23:44:34.189137+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-6591 is a path traversal vulnerability in ComfyUI up to version 0.13.0. The flaw is located in the folder_paths.get_annotated_filepath function of the folder_paths.py file within the LoadImage Node component. An attacker can exploit this vulnerability by manipulating the 'Name' argument, allowing for remote code execution. This vulnerability has been publicly disclosed and may be used by threat actors. To remediate, update to ComfyUI version 0.14.0 or later, and ensure the LoadImage Node component is properly configured to prevent path traversal attacks. Specifically, administrators should review and update the folder_paths.py file to prevent malicious input from being used to manipulate the 'Name' argument.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 4.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-6590: A vulnerability was detected in ComfyUI up to 0.13.0. This impacts the function ...",
+      "description": "A vulnerability was detected in ComfyUI up to 0.13.0. This impacts the function get_model_preview of the file app/model_manager.py of the component Model Preview Endpoint. The manipulation results in path traversal. The attack may be launched remotely. The exploit is now public and may be used. The vendor was contacted early about this disclosure but did not respond in any way.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6590",
+      "cve_id": "CVE-2026-6590",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 4.3,
+      "published": "2026-04-29T23:44:34.189098+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-6590 is a path traversal vulnerability in ComfyUI up to version 0.13.0, specifically affecting the get_model_preview function in app/model_manager.py. This vulnerability allows an attacker to exploit the Model Preview Endpoint remotely, and the exploit is now publicly available. If exploited, an attacker could potentially access sensitive data or execute malicious code. To remediate this vulnerability, users should update to ComfyUI version 0.14.0 or later, and ensure that the Model Preview Endpoint is properly configured to prevent path traversal attacks. Additionally, users should consider implementing additional security measures, such as input validation and sanitization, to further mitigate the risk of exploitation.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 4.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "CVE-2026-6589: A security vulnerability has been detected in ComfyUI up to 0.13.0. This affects...",
@@ -359,13 +448,13 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 4.3,
-      "published": "2026-04-29T22:46:33.856058+00:00",
+      "published": "2026-04-29T23:44:34.189083+00:00",
       "ttps": [],
       "epss_score": null,
       "threat_actors": [
         "APT41"
       ],
-      "ai_summary": "CVE-2026-6589 is a cross-site request forgery (CSRF) vulnerability in ComfyUI versions up to 0.13.0. The vulnerability is located in the create_origin_only_middleware function of the server.py file and can be exploited remotely. If exploited, an attacker may be able to perform unauthorized actions on a ComfyUI application, potentially leading to data tampering or other security issues. To remediate this vulnerability, users should update to ComfyUI version 0.14.0 or later, which includes a fix for this issue. Additionally, users should ensure that their ComfyUI applications are configured to use the secure origin-only middleware.",
+      "ai_summary": "CVE-2026-6589 is a cross-site request forgery (CSRF) vulnerability in ComfyUI versions up to 0.13.0. This vulnerability affects the function create_origin_only_middleware in the server.py file, allowing attackers to initiate remote attacks. If exploited, this vulnerability may lead to unauthorized actions being performed on the affected system. To remediate this issue, users should update to ComfyUI version 0.14.0 or later, and ensure that the server.py file is modified to prevent CSRF attacks. Specifically, users should update the create_origin_only_middleware function to include proper CSRF protection measures.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 4.5,
       "ai_provider": "groq",
@@ -380,17 +469,12 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.5,
-      "published": "2026-04-29T22:46:33.856041+00:00",
+      "published": "2026-04-29T23:44:34.189068+00:00",
       "ttps": [],
       "epss_score": null,
       "threat_actors": [
         "APT41"
-      ],
-      "ai_summary": "CVE-2026-6588 is a weakness in serge-chat serge up to version 1.4TB, specifically in the Model API Endpoint's download_model/delete_model function in api/src/serge/routers/model.py. This vulnerability allows for missing authentication, enabling remote attacks. The exploit has been publicly disclosed, increasing the risk of attacks. To remediate, update to version 1.5TB or later, and ensure the Model API Endpoint is configured to require authentication. Additionally, implement a Web Application Firewall (WAF) to detect and prevent potential attacks. This vulnerability has a CVSS score of 6.5, indicating a medium severity risk.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      ]
     },
     {
       "title": "CVE-2026-6587: A security flaw has been discovered in vibrantlabsai RAGAS up to 0.4.3. The affe...",
@@ -401,7 +485,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.3,
-      "published": "2026-04-29T22:46:33.856019+00:00",
+      "published": "2026-04-29T23:44:34.189053+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -410,12 +494,7 @@
           "tactic_id": "TA0001"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-6587 is a server-side request forgery (SSRF) vulnerability in vibrantlabsai RAGAS up to version 0.4.3. The flaw is located in the _try_process_local_file/_try_process_url function of the src/ragas/metrics/collections/multi_modal_faithfulness/util.py file within the Collections Module. An attacker can manipulate the retrieved_contexts argument to initiate a remote attack. If exploited, this vulnerability could allow an attacker to access sensitive data or perform unauthorized actions. To remediate, update to version 0.4.4 or later, and ensure that the Collections Module is properly configured to prevent SSRF attacks. Specifically, update to RAGAS 0.4.4 or later, and review the util.py file for any modifications to the _try_process_local_file/_try_process_url function.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.3,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2026-6586: A vulnerability was identified in TransformerOptimus SuperAGI up to 0.0.14. Impa...",
@@ -426,17 +505,12 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.3,
-      "published": "2026-04-29T22:46:33.855998+00:00",
+      "published": "2026-04-29T23:44:34.189036+00:00",
       "ttps": [],
       "epss_score": null,
       "threat_actors": [
         "APT41"
-      ],
-      "ai_summary": "CVE-2026-6586 is a vulnerability in TransformerOptimus SuperAGI up to version 0.0.14, specifically in the get_budget/update_budget function of the Budget Endpoint component in superagi/controllers/budget.py. This flaw allows for authorization bypass, enabling remote attacks. The exploit is publicly available, and its use is possible. To mitigate this issue, users should update to version 0.0.15 or later, and ensure that the Budget Endpoint component is properly configured to restrict access. Additionally, it is recommended to implement input validation and sanitization to prevent similar attacks in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1210| B[Reconnaissance]:::tactic\n    B -->|T1057| C[Collection]:::tactic\n    C -->|T1069| D[Exploitation of Vulnerability]:::tactic\n    D -->|T1071| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.3,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      ]
     },
     {
       "title": "CVE-2026-6585: A vulnerability was determined in TransformerOptimus SuperAGI up to 0.0.14. This...",
@@ -447,14 +521,9 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 5.4,
-      "published": "2026-04-29T22:46:33.855984+00:00",
+      "published": "2026-04-29T23:44:34.189014+00:00",
       "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-6585 is a remote authorization bypass vulnerability in TransformerOptimus SuperAGI versions up to 0.0.14. The issue arises from the manipulation of the organisation_id argument in the update_organisation function of the Organisation Update Endpoint. This allows attackers to bypass authorization checks, potentially leading to data tampering or unauthorized access. To remediate, update to version 0.0.15 or later, and ensure the organisation_id argument is properly validated. Additionally, consider implementing additional security measures, such as input validation and access controls, to prevent similar attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1210| B[Reconnaissance]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2026-6584: A vulnerability was found in TransformerOptimus SuperAGI up to 0.0.14. This vuln...",
@@ -465,77 +534,9 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 5.4,
-      "published": "2026-04-29T22:46:33.855968+00:00",
+      "published": "2026-04-29T23:44:34.188974+00:00",
       "ttps": [],
       "epss_score": null
-    },
-    {
-      "title": "CVE-2026-6583: A vulnerability has been found in TransformerOptimus SuperAGI up to 0.0.14. This...",
-      "description": "A vulnerability has been found in TransformerOptimus SuperAGI up to 0.0.14. This affects the function delete_api_key/edit_api_key of the file superagi/controllers/api_key.py of the component API Key Management Endpoint. The manipulation leads to authorization bypass. The attack is possible to be carried out remotely. The exploit has been disclosed to the public and may be used. The vendor was cont",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6583",
-      "cve_id": "CVE-2026-6583",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.4,
-      "published": "2026-04-29T22:46:33.855952+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ]
-    },
-    {
-      "title": "CVE-2026-6582: A flaw has been found in TransformerOptimus SuperAGI up to 0.0.14. Affected by t...",
-      "description": "A flaw has been found in TransformerOptimus SuperAGI up to 0.0.14. Affected by this issue is the function get_vector_db_details of the file superagi/controllers/vector_dbs.py of the component Vector Database Management Endpoint. Executing a manipulation can lead to missing authentication. The attack can be executed remotely. The exploit has been published and may be used. The vendor was contacted ",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6582",
-      "cve_id": "CVE-2026-6582",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.3,
-      "published": "2026-04-29T22:46:33.855934+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ]
-    },
-    {
-      "title": "CVE-2026-6581: A vulnerability was detected in H3C Magic B1 up to 100R004. Affected by this vul...",
-      "description": "A vulnerability was detected in H3C Magic B1 up to 100R004. Affected by this vulnerability is the function SetMobileAPInfoById of the file /goform/aspForm. Performing a manipulation of the argument param results in buffer overflow. Remote exploitation of the attack is possible. The exploit is now public and may be used. The vendor was contacted early about this disclosure but did not respond in an",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6581",
-      "cve_id": "CVE-2026-6581",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.8,
-      "published": "2026-04-29T22:46:33.855912+00:00",
-      "ttps": [
-        {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-6580: A security vulnerability has been detected in liangliangyy DjangoBlog up to 2.1....",
-      "description": "A security vulnerability has been detected in liangliangyy DjangoBlog up to 2.1.0.0. Affected is an unknown function of the file owntracks/views.py of the component Amap API Call Handler. Such manipulation of the argument key leads to use of hard-coded cryptographic key\r . The attack may be launched remotely. The exploit has been disclosed publicly and may be used. The vendor was contacted early a",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6580",
-      "cve_id": "CVE-2026-6580",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.3,
-      "published": "2026-04-29T22:46:33.855869+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ]
     },
     {
       "title": "Official SAP npm packages compromised to steal credentials",
@@ -550,7 +551,7 @@
       "ttps": []
     },
     {
-      "title": "House approves spy program on second attempt; Senate fate murky",
+      "title": "House approves spy program on second attempt, Senate fate murky",
       "description": "The bill, which passed 235-191, would renew Section 702 of the Foreign Intelligence Surveillance Act for three years.",
       "url": "https://therecord.media/house-approves-spy-program-on-second-attempt",
       "cve_id": null,
@@ -1973,8 +1974,8 @@
         }
       ],
       "threat_actors": [
-        "LockBit",
-        "Conti"
+        "Conti",
+        "LockBit"
       ]
     },
     {
