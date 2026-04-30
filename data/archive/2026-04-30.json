@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-04-30T20:07:17.979397+00:00",
-  "total_items": 105,
+  "last_updated": "2026-04-30T21:50:26.945167+00:00",
+  "total_items": 100,
   "items": [
     {
       "title": "Komari Red: The Monitoring Tool with a Built-in Reverse Shell",
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-30T20:05:36.804498+00:00",
+      "published": "2026-04-30T21:48:39.116441+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -38,7 +38,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The Komari Red threat involves a threat actor leveraging stolen VPN credentials to access a Windows workstation and deploy a SYSTEM-level backdoor using the Komari agent, an open-source monitoring tool with built-in command-and-control capabilities. The attack vector involves exploiting public-facing applications, as indicated by T1190, and utilizing application layer protocols, as seen in T1071. Real-world impact includes enabling RDP on the target system, allowing for further lateral movement and potential data breaches. To remediate, defenders should immediately terminate any suspicious SSLVPN sessions, particularly those originating from IP 45.153.34[.]132, and disable RDP on all systems unless explicitly required. Additionally, defenders should monitor for and block Impacket smbexec.py and the Komari agent, ensuring all systems are up-to-date and that strong VPN credential management practices are in place.",
+      "ai_summary": "The Komari Red incident involves a threat actor leveraging stolen VPN credentials to access a Windows workstation and deploy a SYSTEM-level backdoor using the Komari agent, an open-source monitoring tool with built-in command-and-control capabilities. The attacker exploited the target system through an SSLVPN session from IP 45.153.34[.]132 and used Impacket smbexec.py to enable RDP, demonstrating the use of T1190 and T1570 tactics. To mitigate this threat, defenders should immediately review and rotate all VPN credentials, ensure RDP is disabled on all systems where it is not necessary, and implement a network access control system to monitor and restrict incoming SSLVPN sessions. Additionally, defenders should apply the latest security patches to their Windows workstations and implement a robust monitoring system to detect and respond to potential security incidents. By taking these specific remediation steps, defenders can reduce the risk of similar incidents occurring in the future.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1570| C[Lateral Movement]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1219| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -53,7 +53,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-30T20:05:36.804469+00:00",
+      "published": "2026-04-30T21:48:39.116419+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -68,7 +68,7 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The supply chain attack targets SAP CAP and Cloud MTA npm packages, specifically versions mbt@1.2.48, @cap-js/db-service@2.10.1, @cap-js/postgres@2.2.2, and @cap-js/sqlite@2.2.2, by introducing malicious preinstall scripts that download and execute Bun binaries from GitHub. These scripts are heavily obfuscated, making them difficult to detect. If exploited, this vulnerability could lead to unauthorized access and execution of malicious code, potentially affecting SAP customers who have installed the compromised packages. To remediate, defenders should immediately update to the latest versions of the affected packages, remove any existing malicious scripts, and monitor their systems for suspicious activity. Additionally, defenders should consider implementing a Content Security Policy (CSP) to restrict the execution of scripts from untrusted sources.",
+      "ai_summary": "The supply chain attack targets SAP CAP and Cloud MTA npm packages, including mbt@1.2.48, @cap-js/db-service@2.10.1, @cap-js/postgres@2.2.2, and @cap-js/sqlite@2.2.2, by introducing malicious preinstall scripts that download and execute Bun binaries from GitHub. These scripts are heavily obfuscated, making them difficult to detect. If exploited, this vulnerability could lead to unauthorized access and execution of malicious code, potentially affecting SAP customers who use these packages. To remediate, defenders should update to the latest versions of the affected packages, such as mbt@1.2.49 or later, @cap-js/db-service@2.10.2 or later, @cap-js/postgres@2.2.3 or later, and @cap-js/sqlite@2.2.3 or later, and monitor their systems for suspicious activity. Additionally, defenders should consider implementing security measures such as code signing and validation to prevent similar attacks in the future.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1027| C[Execution]:::tactic\n    C -->|T1204| D[Persistence]:::tactic\n    D -->|T1531| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -83,7 +83,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-30T20:05:36.804444+00:00",
+      "published": "2026-04-30T21:48:39.116393+00:00",
       "ttps": [
         {
           "id": "T1608",
@@ -110,9 +110,9 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "The Mini Shai Hulud supply chain campaign targets SAP-related npm packages by injecting malicious preinstall scripts, which execute during installation and leverage multi-stage payloads to harvest developer and CI/CD secrets from GitHub, npm, and major cloud providers. The attackers use these stolen credentials to exfiltrate data via attacker-controlled GitHub repositories, posing a significant threat to organizations relying on these packages. To mitigate this threat, developers should verify the integrity of npm packages before installation, and organizations should implement robust secrets management and monitoring for suspicious activity. Specifically, developers can use tools like `npm audit` to identify vulnerable dependencies and update to the latest versions of SAP-related packages. Additionally, implementing a Web Application Firewall (WAF) and regularly reviewing GitHub repository access controls can help prevent similar attacks.",
+      "ai_summary": "The Mini Shai Hulud supply chain campaign targets SAP-related npm packages by injecting malicious preinstall scripts, which execute during installation and harvest developer and CI/CD secrets from GitHub, npm, and major cloud providers. The campaign leverages multi-stage payloads and exfiltrates data via attacker-controlled GitHub repositories. Affected systems include those using compromised SAP npm packages, with real-world impact including the potential for widespread credential theft and unauthorized access to sensitive data. To remediate, defenders should immediately remove and replace compromised packages with known good versions, and rotate all secrets and credentials potentially exposed. Additionally, defenders should monitor for suspicious activity related to the TTPs detected, including supply chain compromise and exfiltration over C2 channels.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1104| C[Execution]:::tactic\n    C -->|T1608| D[Persistence]:::tactic\n    D -->|T1041| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -125,7 +125,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-30T20:05:36.804417+00:00",
+      "published": "2026-04-30T21:48:39.116366+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -134,9 +134,9 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The Kuse web application was exploited by threat actors to host a phishing document, leveraging a Vendor Email Compromise (VEC) to establish initial trust with targets. The attackers utilized Kuse's file-sharing features to host a fake blurred document with a Markdown file extension (.md) under the legitimate domain, increasing the likelihood of successful phishing. If exploited, this could lead to unauthorized access to sensitive information, with real-world impact including potential data breaches and financial loss for affected organizations. To remediate, defenders should implement email filtering rules to detect and block suspicious emails from compromised vendor mailboxes, and educate users to be cautious when interacting with files shared through Kuse, especially those with .md extensions. Additionally, monitoring Kuse file-sharing activity for unusual patterns can help detect similar phishing attempts.",
+      "ai_summary": "The Kuse web application was exploited by threat actors to host a phishing document, leveraging a Vendor Email Compromise (VEC) to establish initial trust with targets. The attackers utilized Kuse's file-sharing features to host a fake blurred document with a Markdown file extension (.md) under the legitimate domain, increasing the likelihood of successful phishing. If exploited, this could lead to unauthorized access to sensitive information, with real-world impact including potential data breaches and financial loss for affected organizations. To remediate, defenders should implement email filtering rules to detect and block suspicious emails from compromised vendor mailboxes, and educate users to be cautious when interacting with files shared through Kuse, especially those with .md extensions. Additionally, monitoring for unusual file-sharing activity within Kuse can help detect similar phishing attempts.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
+      "severity_score": 7.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -149,7 +149,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-30T20:05:36.804395+00:00",
+      "published": "2026-04-30T21:48:39.116344+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -179,11 +179,11 @@
       "threat_actors": [
         "Sandworm"
       ],
-      "ai_summary": "The APT-C-13 threat group, also known as FROZENBARENTS, has been conducting cyber espionage operations using SSH and TOR tunnels to establish covert remote access channels. The attackers distribute malicious ZIP archives containing weaponized LNK files via spearphishing emails, exploiting the T1566 phishing tactic to gain initial access. Once inside, they utilize T1572 protocol tunneling to maintain persistence and evade detection. To remediate this threat, defenders should implement robust email filtering and inspect incoming ZIP archives for suspicious LNK files, while also monitoring for unusual SSH and TOR activity. Additionally, defenders should ensure all systems are configured to block incoming SSH connections from unknown sources and restrict access to the TOR network.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1560.001| C[Defense Evasion]:::tactic\n    C -->|T1572| D[Persistence]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "ai_summary": "APT-C-13 (Sandworm) uses nested SSH and TOR tunnel infrastructure to establish covert remote access channels. Attackers distribute ZIP archives containing weaponized LNK files via spearphishing emails, which exploit the Windows LNK vulnerability (CVE-2021-41379). If exploited, the attacker gains remote access to the compromised system, allowing for data exfiltration and potential lateral movement. To remediate, users should update to Windows 10 version 21H1 or later, disable LNK file execution, and implement a robust email filtering system to block spearphishing emails. Additionally, organizations should implement a network segmentation strategy to limit the spread of malware.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1572| C[Command and Control]:::tactic\n    C -->|T1486| D[Data Encrypted for Impact]:::tactic\n    D -->|T1560.001| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "LofyStealer: Malware targeting Minecraft players.",
@@ -194,7 +194,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-30T20:05:36.804374+00:00",
+      "published": "2026-04-30T21:48:39.116309+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -209,11 +209,11 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "LofyStealer, also known as GrabBot/Slinky, is a sophisticated two-stage infostealer that targets Minecraft players through social engineering tactics, exploiting user execution (T1204) to gain initial access. The malware is composed of a 53.5MB Node.js-based loader and a 1.4MB native C++ payload that executes directly in memory, masquerading (T1036) as legitimate libraries to evade detection. If exploited, LofyStealer can extract sensitive information such as cookies, passwords, tokens, credit cards, and IBANs from eight different browsers, potentially affecting millions of Minecraft players worldwide. To remediate, defenders should implement robust browser extensions and password managers, and ensure that all software is up-to-date, particularly focusing on Node.js and C++ libraries. Additionally, users should be cautious when clicking on links or downloading files from untrusted sources, and consider using anti-malware software that can detect and block LofyStealer's execution in memory.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[Initial Access]:::tactic\n    B -->|T1036| C[Persistence]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1021| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "LofyStealer, a sophisticated two-stage infostealer, targets Minecraft players through social engineering. The malware consists of a 53.5MB Node.js-based loader disguised within legitimate libraries and a 1.4MB native C++ payload that executes directly in memory. It extracts cookies, passwords, tokens, credit cards, and IBANs from eight different browsers, including Google Chrome, Mozilla Firefox, and Microsoft Edge. To remediate this threat, Minecraft players should avoid downloading files from untrusted sources and ensure that their browsers are updated to the latest version. Additionally, users should be cautious of emails and messages that prompt them to download suspicious attachments or visit malicious websites.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1059.001| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "DDoS-for-Hire Operation Exposed: How an Operator's Debug Build Unraveled a Commercial Game-Server Botnet",
@@ -224,7 +224,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-30T20:05:36.804351+00:00",
+      "published": "2026-04-30T21:48:39.116285+00:00",
       "ttps": [
         {
           "id": "T1583.005",
@@ -239,9 +239,9 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "A Mirai-derived IoT botnet, xlabs_v1, operated by Tadashi, was exposed through an open directory on a Netherlands-hosted server. The botnet exploits Android Debug Bridge (ADB) on TCP/5555 to compromise Android devices, specifically targeting game servers and Minecraft hosts. The operation provides DDoS-for-hire services through 21 distinct flood attack variants. To remediate, defenders should ensure that Android Debug Bridge (ADB) is not exposed on TCP/5555 and implement a network segmentation strategy to isolate game servers and Minecraft hosts. Additionally, updating to the latest version of the commercial game-server software and configuring firewalls to block incoming traffic on TCP/5555 can help prevent exploitation.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1498| C[Network Denial of Service]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "ai_summary": "A Mirai-derived IoT botnet, xlabs_v1, operated by Tadashi, was exposed through an open directory on a Netherlands-hosted server. The botnet provides DDoS-for-hire services targeting game servers and Minecraft hosts via 21 distinct flood attack variants. The botnet exploits Android Debug Bridge (ADB) on TCP/5555, compromising Android devices. To remediate, defenders should ensure that ADB is not exposed on TCP/5555 and implement a network segmentation strategy to isolate game servers and Minecraft hosts. Additionally, consider implementing a botnet detection and mitigation solution to identify and block suspicious traffic.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1498| C[Network Denial of Service]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -254,7 +254,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-04-30T20:05:36.804323+00:00",
+      "published": "2026-04-30T21:48:39.116257+00:00",
       "ttps": [
         {
           "id": "T1078",
@@ -269,8 +269,8 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "The Energy Sector Incident Report details a coordinated destructive cyberattack on Poland's energy infrastructure on December 29, 2025. Attackers exploited vulnerable FortiGate perimeter devices using stolen credentials and default passwords, accessing industrial control systems. This allowed them to disrupt operations at approximately 30 wind and solar farms, a manufacturing company, and a combined heat and power plant serving nearly 500,000 customers. To prevent similar incidents, defenders should immediately update FortiGate devices to version 7.2.5 or later, change default passwords, and implement multi-factor authentication. Additionally, organizations should conduct regular vulnerability assessments and penetration testing to identify and remediate potential weaknesses.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1078| B[Initial Access]:::tactic\n    B -->|T1110.001| C[Execution]:::tactic\n    C -->|T1491| D[Privilege Escalation]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Energy Sector Incident Report describes a coordinated destructive cyberattack on Poland's energy infrastructure on December 29, 2025. Attackers exploited vulnerable FortiGate perimeter devices using stolen credentials and default passwords, accessing industrial control systems. This allowed them to disrupt operations at 30 wind and solar farms, a manufacturing company, and a combined heat and power plant serving nearly 500,000 customers. To prevent similar attacks, defenders should immediately update FortiGate devices to version 7.2.5 or later, change default passwords, and implement multi-factor authentication. Additionally, organizations should conduct regular vulnerability scans and penetration testing to identify and remediate potential weaknesses.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1078| B[Initial Access]:::tactic\n    B -->|T1110.001| C[Execution]:::tactic\n    C -->|T1491| D[Privilege Escalation]:::tactic\n    D -->|T1216| E[Data Destruction]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -284,7 +284,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-30T20:05:36.804295+00:00",
+      "published": "2026-04-30T21:48:39.116229+00:00",
       "ttps": [
         {
           "id": "T1608",
@@ -299,7 +299,7 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "TeamPCP exploited the Telnyx Python SDK on PyPI by uploading malicious versions with 750,000 monthly downloads. The attack involves a three-stage architecture: a trojanized package triggers a platform-specific loader, which downloads a second-stage payload hidden in a WAV file using steganography. This payload deploys a credential harvester that steals various credentials, encrypts them, and sends them to the attackers. To remediate, users should immediately uninstall any Telnyx Python SDK packages and update to the latest version (v2.0.0 or later) from a trusted source. Additionally, developers should verify the integrity of their dependencies using tools like pip-audit or safety.",
+      "ai_summary": "TeamPCP exploited the Telnyx Python SDK on PyPI by uploading malicious versions with 750,000 monthly downloads. The attack consists of a three-stage architecture: a trojanized package triggers a platform-specific loader, which downloads a second-stage payload hidden in a WAV file using steganography. This payload deploys a credential harvester that steals various credentials, encrypts them, and sends them to the attackers. To remediate, users should immediately uninstall any Telnyx Python SDK packages and update to the latest version (v2.2.0 or later). Additionally, developers should verify the integrity of their dependencies using tools like pip-audit or safety.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1608| B[Stage Capabilities]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -314,7 +314,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-04-30T20:05:36.804261+00:00",
+      "published": "2026-04-30T21:48:39.116192+00:00",
       "ttps": [
         {
           "id": "T1597",
@@ -335,68 +335,47 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The Phantom Footprints threat involves the GhostSocks malware, which turns compromised devices into residential proxy nodes to evade detection. This malware, written in GoLang, utilizes the SOCKS5 proxy protocol and TLS encryption to blend malicious traffic into normal network activity. Originally marketed as Malware-as-a-Service on Russian underground forums, GhostSocks has gained popularity due to its partnership with Lumma Stealer. To remediate this threat, defenders should update their systems to the latest version of their operating system and ensure that all software is up-to-date, particularly GoLang. Additionally, implementing a network intrusion detection system (NIDS) and configuring it to monitor for suspicious SOCKS5 proxy protocol activity can help detect and prevent GhostSocks infections.",
+      "ai_summary": "GhostSocks, also known as Malware-as-a-Service, is a GoLang-based malware that turns compromised devices into residential proxy nodes. It uses the SOCKS5 proxy protocol and TLS encryption to blend malicious traffic into normal network activity, evading detection. Originally marketed on Russian underground forums, GhostSocks has gained popularity due to its partnership with Lumma Stealer. To remediate, defenders should update their systems to the latest version of their operating system and ensure that all software is up-to-date, particularly GoLang. Additionally, implementing a network traffic monitoring system to detect and block suspicious SOCKS5 proxy protocol activity is crucial.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1597| B[Search Closed Sources]:::tactic\n    B -->|T1588| C[Obtain Capabilities]:::tactic\n    C -->|T1562| D[Impair Defenses]:::tactic\n    D -->|T1566| E[Initial Access]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-29646: In OpenXiangShan NEMU prior to 55295c4, when running with RVH (Hypervisor extens...",
-      "description": "In OpenXiangShan NEMU prior to 55295c4, when running with RVH (Hypervisor extension) enabled, a VS-mode guest write to the supervisor interrupt-enable CSR (sie) may be handled incorrectly and can influence machine-level interrupt enable state (mie). This breaks privilege/virtualization isolation and can lead to denial of service or privilege-boundary violation in environments relying on NEMU for c",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-29646",
-      "cve_id": "CVE-2026-29646",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.8,
-      "published": "2026-04-30T20:05:35.416895+00:00",
-      "ttps": [
-        {
-          "id": "T1498",
-          "name": "Network Denial of Service",
-          "tactic": "Impact",
-          "tactic_id": "TA0040"
-        }
-      ],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ],
-      "ai_summary": "CVE-2026-29646 is a critical vulnerability in OpenXiangShan NEMU prior to version 55295c4, affecting systems running with RVH (Hypervisor extension) enabled. An attacker can exploit this vulnerability by inducing a VS-mode guest write to the supervisor interrupt-enable CSR (sie), potentially leading to denial of service or privilege-boundary violation in environments relying on NEMU for cloud services. To remediate, update to version 55295c4 or later, and ensure that RVH is disabled in environments where it is not necessary. Additionally, implement network segmentation and monitoring to detect and prevent potential network denial of service attacks. This vulnerability has a high potential for exploitation due to its critical CVSS score of 9.8.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1498| B[Network Denial of Service]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.8,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-29642: A local attacker who can execute privileged CSR operations (or can induce firmwa...",
-      "description": "A local attacker who can execute privileged CSR operations (or can induce firmware to do so) performs carefully crafted reads/writes to menvcfg (e.g., csrrs in M-mode). On affected XiangShan versions (commit aecf601e803bfd2371667a3fb60bfcd83c333027, 2024-11-19), these menvcfg accesses can unexpectedly set WPRI (reserved) bits in the status view (xstatus) to 1. RISC-V defines WPRI fields as \"writes",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-29642",
-      "cve_id": "CVE-2026-29642",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.8,
-      "published": "2026-04-30T20:05:35.416871+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-29642 is a local privilege escalation vulnerability affecting XiangShan RISC-V processor versions with commit aecf601e803bfd2371667a3fb60bfcd83c333027 and later, up to 2024-11-19. An attacker with local access can exploit this vulnerability by performing carefully crafted reads/writes to menvcfg, which can unexpectedly set WPRI bits in the status view to 1. This allows the attacker to gain elevated privileges, potentially leading to arbitrary code execution. To remediate, update to XiangShan RISC-V processor versions prior to commit aecf601e803bfd2371667a3fb60bfcd83c333027 or apply a firmware patch. Additionally, ensure that the WPRI bits in the status view are properly validated and sanitized to prevent unexpected changes.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1210| B[Exploitation of Vulnerability]:::tactic\n    B -->|T1055| C[Command and Control]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.8,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-6550: Cryptographic algorithm downgrade in the caching layer of Amazon AWS Encryption ...",
-      "description": "Cryptographic algorithm downgrade in the caching layer of Amazon AWS Encryption SDK for Python before version 3.3.1 and before version  4.0.5 might allow an authenticated local threat actor to bypass key commitment policy enforcement via a shared key cache, resulting in ciphertext that can be decrypted to multiple different plaintexts.\n\nTo remediate this issue, users should upgrade to version 3.3.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6550",
-      "cve_id": "CVE-2026-6550",
+      "title": "CVE-2026-35588: Glances is an open-source system cross-platform monitoring tool. Prior to versio...",
+      "description": "Glances is an open-source system cross-platform monitoring tool. Prior to version 4.5.4, the Cassandra export module (`glances/exports/glances_cassandra/__init__.py`) interpolates `keyspace`, `table`, and `replication_factor` configuration values directly into CQL statements without validation. A user with write access to `glances.conf` can redirect all monitoring data to an attacker-controlled Ca",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-35588",
+      "cve_id": "CVE-2026-35588",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": 4.7,
-      "published": "2026-04-30T20:05:35.416854+00:00",
+      "cvss_score": 6.3,
+      "published": "2026-04-30T21:48:37.801843+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-35588 is a vulnerability in Glances, an open-source system monitoring tool, affecting versions prior to 4.5.4. The issue lies in the Cassandra export module, which directly interpolates configuration values into CQL statements without validation, allowing a user with write access to `glances.conf` to redirect monitoring data to an attacker-controlled Cassandra instance. This can lead to unauthorized data exfiltration and potential data breaches. To remediate, update Glances to version 4.5.4 or later, and ensure that only trusted users have write access to `glances.conf`. Additionally, consider implementing additional security measures, such as validating user input and configuring Cassandra access controls.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.3,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-35587: Glances is an open-source system cross-platform monitoring tool. Prior to versio...",
+      "description": "Glances is an open-source system cross-platform monitoring tool. Prior to version 4.5.4, a Server-Side Request Forgery (SSRF) vulnerability exists in the Glances IP plugin due to improper validation of the public_api configuration parameter. The value of public_api is used directly in outbound HTTP requests without any scheme restriction or hostname/IP validation. An attacker who can modify the Gl",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-35587",
+      "cve_id": "CVE-2026-35587",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 8.8,
+      "published": "2026-04-30T21:48:37.801829+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -405,103 +384,122 @@
           "tactic_id": "TA0001"
         },
         {
-          "id": "T1557",
-          "name": "Adversary-in-the-Middle",
+          "id": "T1082",
+          "name": "System Information Discovery",
+          "tactic": "Discovery",
+          "tactic_id": "TA0007"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-35587 is a Server-Side Request Forgery (SSRF) vulnerability in the Glances IP plugin, affecting versions prior to 4.5.4. This vulnerability allows an attacker to modify the public_api configuration parameter, which is used directly in outbound HTTP requests without proper validation, potentially leading to unauthorized access to internal systems. If exploited, this vulnerability could allow an attacker to discover sensitive system information, such as network topology and service configurations, which could be used for further malicious activities. To remediate this vulnerability, defenders should update Glances to version 4.5.4 or later and ensure that the public_api configuration parameter is properly validated and restricted to trusted sources. Additionally, defenders should monitor their systems for suspicious outbound HTTP requests and implement network segmentation to limit the potential impact of a successful exploit.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1082| C[System Information Discovery]:::tactic\n    C -->|T1566| D[Initial Access]:::tactic\n    D -->|T1059.001| E[Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.8,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
+    },
+    {
+      "title": "CVE-2026-35570: OpenClaude is an open-source coding-agent command line interface for cloud and l...",
+      "description": "OpenClaude is an open-source coding-agent command line interface for cloud and local model providers. Versions prior to 0.5.1 have a logic flaw in `bashToolHasPermission()` inside `src/tools/BashTool/bashPermissions.ts`. When the sandbox auto-allow feature is active and no explicit deny rule is configured, the function returns an `allow` result immediately — before the path constraint filter (`che",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-35570",
+      "cve_id": "CVE-2026-35570",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 8.4,
+      "published": "2026-04-30T21:48:37.801815+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-35570 is a logic flaw in OpenClaude's `bashToolHasPermission()` function, affecting versions prior to 0.5.1. When the sandbox auto-allow feature is active and no explicit deny rule is configured, the function returns an `allow` result immediately, bypassing the path constraint filter. This allows an attacker to exploit the flaw by targeting the public-facing application, potentially leading to unauthorized access or data breaches. To remediate, update to version 0.5.1 or later, and ensure the sandbox auto-allow feature is disabled or configured with explicit deny rules. Additionally, consider implementing additional security measures, such as input validation and access controls, to prevent similar attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.4,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-34839: Glances is an open-source system cross-platform monitoring tool. Prior to versio...",
+      "description": "Glances is an open-source system cross-platform monitoring tool. Prior to version 4.5.4, the Glances web server exposes a REST API (`/api/4/*`) that is accessible without authentication and allows cross-origin requests from any origin due to a permissive CORS policy (`Access-Control-Allow-Origin: *`). This allows a malicious website to read sensitive system information from a running Glances insta",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34839",
+      "cve_id": "CVE-2026-34839",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 6.5,
+      "published": "2026-04-30T21:48:37.801800+00:00",
+      "ttps": [
+        {
+          "id": "T1189",
+          "name": "Drive-by Compromise",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1082",
+          "name": "System Information Discovery",
+          "tactic": "Discovery",
+          "tactic_id": "TA0007"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-34839 is a vulnerability in Glances, an open-source system monitoring tool, affecting versions prior to 4.5.4. The issue lies in the web server's REST API, which is exposed without authentication and allows cross-origin requests from any origin due to a permissive CORS policy. This allows a malicious website to read sensitive system information from a running Glances instance. To remediate, update to version 4.5.4 or later, and configure the web server to restrict CORS policies to trusted origins. Specifically, update the `Access-Control-Allow-Origin` header to only allow requests from trusted domains.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1189| C[Drive-by Compromise]:::tactic\n    C -->|T1082| D[System Information Discovery]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-5721: The wpDataTables – WordPress Data Table, Dynamic Tables & Table Charts Plugin pl...",
+      "description": "The wpDataTables – WordPress Data Table, Dynamic Tables & Table Charts Plugin plugin for WordPress is vulnerable to Stored Cross-Site Scripting in all versions up to, and including, 6.5.0.4. This is due to insufficient input sanitization and output escaping in the prepareCellOutput() method of the LinkWDTColumn, ImageWDTColumn, and EmailWDTColumn classes. This makes it possible for unauthenticated",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-5721",
+      "cve_id": "CVE-2026-5721",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 4.7,
+      "published": "2026-04-30T21:48:37.801785+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
           "tactic": "Credential Access",
           "tactic_id": "TA0006"
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-6550 is a cryptographic algorithm downgrade vulnerability in the caching layer of Amazon AWS Encryption SDK for Python, affecting versions prior to 3.3.1 and 4.0.5. An authenticated local threat actor can exploit this vulnerability to bypass key commitment policy enforcement via a shared key cache, allowing them to decrypt ciphertext to multiple different plaintexts. This could result in unauthorized access to sensitive data stored in AWS. To remediate this issue, users should upgrade to version 3.3 of the AWS Encryption SDK for Python. This will ensure that the caching layer uses the correct cryptographic algorithm and prevents the downgrade vulnerability.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1557| C[Adversary-in-the-Middle]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The wpDataTables plugin for WordPress, versions 1.0 to 6.5.0.4, is vulnerable to Stored Cross-Site Scripting (XSS) due to insufficient input sanitization and output escaping in the prepareCellOutput() method of the LinkWDTColumn, ImageWDTColumn, and EmailWDTColumn classes. An attacker can exploit this vulnerability by injecting malicious JavaScript code into the plugin, which can be executed by unauthenticated users. This can lead to the theft of sensitive information, such as user credentials, or the execution of arbitrary code on the affected system. To remediate this vulnerability, update the wpDataTables plugin to version 6.5.0.5 or later, and ensure that the 'wpDataTables' folder is writable only by the web server user. Additionally, consider implementing a Web Application Firewall (WAF) to detect and block suspicious traffic. The threat actor can use T1190 (Exploit Public-Facing Application) and T1649 (Steal or Forge Authentication Certificates) tactics to exploit this vulnerability.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1649| C[Steal or Forge Authentication Certificates]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 4.7,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-6257: Vvveb CMS v1.0.8 contains a remote code execution vulnerability in its media man...",
-      "description": "Vvveb CMS v1.0.8 contains a remote code execution vulnerability in its media management functionality where a missing return statement in the file rename handler allows authenticated attackers to rename files to blocked extensions .php or .htaccess. Attackers can exploit this logic flaw by first uploading a text file and renaming it to .htaccess to inject Apache directives that register PHP-execut",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6257",
-      "cve_id": "CVE-2026-6257",
+      "title": "CVE-2026-34082: Dify is an open-source LLM app development platform. Prior to 1.13.1, the method...",
+      "description": "Dify is an open-source LLM app development platform. Prior to 1.13.1, the method `DELETE /console/api/installed-apps/<appId>/conversations/<conversationId>` has poor authorization checking and allows any Dify-authenticated user to delete someone else's chat history. Version 1.13.1 patches the issue.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34082",
+      "cve_id": "CVE-2026-34082",
       "source": "NVD",
       "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.1,
-      "published": "2026-04-30T20:05:35.416833+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1059",
-          "name": "Command and Scripting Interpreter",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-6257 is a critical remote code execution (RCE) vulnerability in Vvveb CMS v1.0.8, affecting its media management functionality. An authenticated attacker can exploit this logic flaw by uploading a text file and renaming it to .htaccess, injecting Apache directives that register PHP-execution. This allows the attacker to execute arbitrary code on the vulnerable system. To remediate, update to Vvveb CMS v1.1.0 or later, which patches this vulnerability. Additionally, ensure that the 'AllowOverride None' directive is set in the Apache configuration to prevent attackers from modifying the .htaccess file. Furthermore, consider implementing a web application firewall (WAF) to detect and prevent such attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Command and Scripting Interpreter]:::tactic\n    C -->|T1059.001| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-6249: Vvveb CMS 1.0.8 contains a remote code execution vulnerability in its media uplo...",
-      "description": "Vvveb CMS 1.0.8 contains a remote code execution vulnerability in its media upload handler that allows authenticated attackers to execute arbitrary operating system commands by uploading a PHP webshell with a .phtml extension. Attackers can bypass the extension deny-list and upload malicious files to the publicly accessible media directory, then request the file over HTTP to achieve full server co",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6249",
-      "cve_id": "CVE-2026-6249",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.8,
-      "published": "2026-04-30T20:05:35.416819+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1059",
-          "name": "Command and Scripting Interpreter",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        },
-        {
-          "id": "T1204",
-          "name": "User Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        },
-        {
-          "id": "T1505.003",
-          "name": "Web Shell",
-          "tactic": "Persistence",
-          "tactic_id": "TA0003"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-6249 is a remote code execution (RCE) vulnerability in Vvveb CMS 1.0.8, affecting authenticated attackers who can upload a PHP webshell with a .phtml extension to the media directory. This allows attackers to execute arbitrary operating system commands, achieving full server control. To remediate, update to Vvveb CMS 1.1.0 or later, and ensure the media directory is not publicly accessible. Additionally, configure the web server to deny access to .phtml files. This vulnerability has a CVSS score of 8.8 and is exploitable via T1190 (Exploit Public-Facing Application).",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059| C[Command and Scripting Interpreter]:::tactic\n    C -->|T1204| D[User Execution]:::tactic\n    D -->|T1505.003| E[Web Shell]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.8,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-5478: The Everest Forms plugin for WordPress is vulnerable to Arbitrary File Read and ...",
-      "description": "The Everest Forms plugin for WordPress is vulnerable to Arbitrary File Read and Deletion in all versions up to, and including, 3.4.4. This is due to the plugin trusting attacker-controlled old_files data from public form submissions as legitimate server-side upload state, and converting attacker-supplied URLs into local filesystem paths using regex-based string replacement without canonicalization",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-5478",
-      "cve_id": "CVE-2026-5478",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.1,
-      "published": "2026-04-30T20:05:35.416803+00:00",
+      "severity": "medium",
+      "cvss_score": 4.3,
+      "published": "2026-04-30T21:48:37.801768+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -513,86 +511,115 @@
       "epss_score": null
     },
     {
-      "title": "CVE-2026-32311: Flowsint is an open-source OSINT graph exploration tool designed for cybersecuri...",
-      "description": "Flowsint is an open-source OSINT graph exploration tool designed for cybersecurity investigation, transparency, and verification. Flowsint allows a user to create investigations, which are used to manage sketches and analyses. Sketches have controllable graphs, which are comprised of nodes and relationships. The sketches contain information on an OSINT target (usernames, websites, etc) within thes",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-32311",
-      "cve_id": "CVE-2026-32311",
+      "title": "CVE-2026-6729: HKUDS OpenHarness prior to PR #159 remediation contains a session key derivation...",
+      "description": "HKUDS OpenHarness prior to PR #159 remediation contains a session key derivation vulnerability that allows authenticated participants in shared chats or threads to hijack other users' sessions by exploiting a shared ohmo session key that lacks sender identity verification. Attackers can reuse another user's conversation state and replace or interrupt their active tasks by colliding into the same s",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6729",
+      "cve_id": "CVE-2026-6729",
       "source": "NVD",
       "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.8,
-      "published": "2026-04-30T20:05:35.416786+00:00",
-      "ttps": [
-        {
-          "id": "T1593",
-          "name": "Search Open Websites/Domains",
-          "tactic": "Reconnaissance",
-          "tactic_id": "TA0043"
-        },
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
+      "severity": "medium",
+      "cvss_score": 6.3,
+      "published": "2026-04-30T21:48:37.801744+00:00",
+      "ttps": [],
       "epss_score": null
     },
     {
-      "title": "CVE-2026-32135: NanoMQ MQTT Broker (NanoMQ) is an all-around Edge Messaging Platform. Versions p...",
-      "description": "NanoMQ MQTT Broker (NanoMQ) is an all-around Edge Messaging Platform. Versions prior to 0.24.11 have a remotely triggerable heap buffer overflow in the `uri_param_parse` function of NanoMQ's REST API. The vulnerability occurs due to an off-by-one error when allocating memory for query parameter keys and values, allowing an attacker to write a null byte beyond the allocated buffer. This can be trig",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-32135",
-      "cve_id": "CVE-2026-32135",
+      "title": "CVE-2026-29643: XiangShan (Open-source high-performance RISC-V processor) commit edb1dfaf7d290ae...",
+      "description": "XiangShan (Open-source high-performance RISC-V processor) commit edb1dfaf7d290ae99724594507dc46c2c2125384 (2024-11-28) contains an improper exceptional-condition handling flaw in its CSR subsystem (NewCSR). On affected versions, certain sequences of CSR operations targeting non-existent/custom CSR addresses may trigger an illegal-instruction exception but fail to reliably transfer control to the c",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-29643",
+      "cve_id": "CVE-2026-29643",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 7.5,
-      "published": "2026-04-30T20:05:35.416768+00:00",
-      "ttps": [
-        {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-29649: NEMU contains an implementation flaw in its RISC-V Hypervisor CSR handling where...",
-      "description": "NEMU contains an implementation flaw in its RISC-V Hypervisor CSR handling where henvcfg[7:4] (CBIE/CBCFE/CBZE-related fields) is incorrectly masked/updated based on menvcfg[7:4], so a machine-mode write to menvcfg can implicitly modify the hypervisor's environment configuration. This can lead to incorrect enforcement of virtualization configuration and may cause unexpected traps or denial of serv",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-29649",
-      "cve_id": "CVE-2026-29649",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.8,
-      "published": "2026-04-30T20:05:35.416745+00:00",
+      "cvss_score": 7.1,
+      "published": "2026-04-30T21:48:37.801728+00:00",
       "ttps": [
         {
           "id": "T1190",
           "name": "Exploit Public-Facing Application",
           "tactic": "Initial Access",
           "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1071",
+          "name": "Application Layer Protocol",
+          "tactic": "Command & Control",
+          "tactic_id": "TA0011"
         }
       ],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-22051: StorageGRID (formerly StorageGRID Webscale) versions prior to 11.9.0.13 and 12.0...",
+      "description": "StorageGRID (formerly StorageGRID Webscale) versions prior to 11.9.0.13 and 12.0.0.6 are susceptible to a Information Disclosure vulnerability. Successful exploit could allow an authenticated attacker with low privileges to run arbitrary metrics queries, revealing metric results that they do not have access to.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-22051",
+      "cve_id": "CVE-2026-22051",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-04-30T21:48:37.801706+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-0930: Potential read out of bounds case with wolfSSHd on Windows while handling a term...",
+      "description": "Potential read out of bounds case with wolfSSHd on Windows while handling a terminal resize request. An authenticated user could trigger the out of bounds read after establishing a connection which would leak the adjacent stack memory to the pseudo-console output.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-0930",
+      "cve_id": "CVE-2026-0930",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 4.3,
+      "published": "2026-04-30T21:48:37.801664+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "TeamPCP Hits SAP Packages With 'Mini Shai-Hulud' Attack",
+      "description": "Several npm packages for SAP's cloud application development ecosystem have been compromised as TeamPCP's supply chain attacks broaden.",
+      "url": "https://www.darkreading.com/cloud-security/teampcp-sap-packages-mini-shai-hulud",
+      "cve_id": null,
+      "source": "Dark Reading",
+      "category": "incident",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-04-30T21:01:18+00:00",
+      "ttps": [
+        {
+          "id": "T1195",
+          "name": "Supply Chain Compromise",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
       ]
     },
     {
-      "title": "CVE-2026-29645: NEMU (OpenXiangShan/NEMU) before v2025.12.r2 contains an improper instruction-va...",
-      "description": "NEMU (OpenXiangShan/NEMU) before v2025.12.r2 contains an improper instruction-validation flaw in its RISC-V Vector (RVV) decoder. The decoder does not correctly validate the funct3 field when decoding vsetvli/vsetivli/vsetvl, allowing certain invalid OP-V instruction encodings to be misinterpreted and executed as vset* configuration instructions rather than raising an illegal-instruction exception",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-29645",
-      "cve_id": "CVE-2026-29645",
-      "source": "NVD",
+      "title": "Another AI-Assisted Software Scan Yields 9-Year-Old Linux Bug",
+      "description": "The proof-of-concept exploit code runs only 10 lines long, but luckily, a patch is already available.",
+      "url": "https://www.darkreading.com/vulnerabilities-threats/ai-assisted-software-scan-linux-bug",
+      "cve_id": null,
+      "source": "Dark Reading",
       "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.5,
-      "published": "2026-04-30T20:05:35.416702+00:00",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-04-30T20:41:18+00:00",
+      "ttps": []
+    },
+    {
+      "title": "Anthropic's Mythos Has Landed: Here's What Comes Next for Cyber",
+      "description": "In this latest installment of the Reporters' Notebook video series, we discuss how the new AI model threatens to completely upend cybersecurity, and what industry leaders are telling the press.",
+      "url": "https://www.darkreading.com/cybersecurity-operations/anthropic-mythos-cyber-what-comes-next",
+      "cve_id": null,
+      "source": "Dark Reading",
+      "category": "news",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-04-30T19:09:21+00:00",
       "ttps": [],
-      "epss_score": null
+      "threat_actors": [
+        "APT41"
+      ]
     },
     {
       "title": "New Bluekit phishing service includes an AI assistant, 40 templates",
@@ -653,30 +680,6 @@
       ]
     },
     {
-      "title": "Zambia cancels global digital freedoms conference days before start",
-      "description": "On Tuesday, Zambia’s Minister of Technology and Science offered the first hint that the conference would be cancelled, telling a Zambian news outlet that participants’ security clearances were incomplete and that the government has concerns about the conference’s “dialogue.”",
-      "url": "https://therecord.media/zabia-cancels-global-digital-freedoms-conference-shortly-before-start",
-      "cve_id": null,
-      "source": "TheRecord Media",
-      "category": "news",
-      "severity": "high",
-      "cvss_score": null,
-      "published": "2026-04-30T17:11:00+00:00",
-      "ttps": []
-    },
-    {
-      "title": "Trump’s cyber ambassador nominee advances to full Senate vote",
-      "description": "Adam Cassady, who was nominated last month to helm the State Department’s Bureau of Cyberspace and Digital Policy, was approved by a vote of 17-5.",
-      "url": "https://therecord.media/trump-cyber-ambassador-nominee-advances-to-senate",
-      "cve_id": null,
-      "source": "TheRecord Media",
-      "category": "news",
-      "severity": "high",
-      "cvss_score": null,
-      "published": "2026-04-30T16:34:00+00:00",
-      "ttps": []
-    },
-    {
       "title": "FBI links cybercriminals to sharp surge in cargo theft attacks",
       "description": "The U.S. Federal Bureau of Investigation (FBI) warned the transportation and logistics industry of a sharp rise in cyber-enabled cargo theft, with estimated losses in the United States and Canada reaching nearly $725 million in 2025. [...]",
       "url": "https://www.bleepingcomputer.com/news/security/fbi-links-cybercriminals-to-sharp-surge-in-cargo-theft-attacks/",
@@ -704,25 +707,6 @@
           "name": "Supply Chain Compromise",
           "tactic": "Initial Access",
           "tactic_id": "TA0001"
-        }
-      ]
-    },
-    {
-      "title": "France investigates 15-year-old over alleged hack of national ID agency",
-      "description": "The minor was taken into police custody on April 25 on suspicion of involvement in a data breach affecting the National Agency for Secure Documents (ANTS), which processes applications for passports, national identity cards, residence permits and driver’s licenses.",
-      "url": "https://therecord.media/france-investigates-teen-over-national-id-agency-hack",
-      "cve_id": null,
-      "source": "TheRecord Media",
-      "category": "incident",
-      "severity": "high",
-      "cvss_score": null,
-      "published": "2026-04-30T16:28:00+00:00",
-      "ttps": [
-        {
-          "id": "T1547.005",
-          "name": "Security Support Provider",
-          "tactic": "Persistence",
-          "tactic_id": "TA0003"
         }
       ]
     },
@@ -861,25 +845,6 @@
       "cvss_score": null,
       "published": "2026-04-30T13:45:58+00:00",
       "ttps": []
-    },
-    {
-      "title": "Moldova’s health insurance agency reports possible data leak after cyberattack",
-      "description": "The agency said the incident occurred several weeks ago and that technical assessments indicated a possible theft of limited information.",
-      "url": "https://therecord.media/moldova-health-insurance-agency-reports-possible-data-leak-cyberattack",
-      "cve_id": null,
-      "source": "TheRecord Media",
-      "category": "incident",
-      "severity": "high",
-      "cvss_score": null,
-      "published": "2026-04-30T13:37:00+00:00",
-      "ttps": [
-        {
-          "id": "T1041",
-          "name": "Exfiltration Over C2 Channel",
-          "tactic": "Exfiltration",
-          "tactic_id": "TA0010"
-        }
-      ]
     },
     {
       "title": "New Python Backdoor Uses Tunneling Service to Steal Browser and Cloud Credentials",
@@ -1169,18 +1134,6 @@
       "ttps": []
     },
     {
-      "title": "House approves spy program on second attempt, Senate fate murky",
-      "description": "The bill, which passed 235-191, would renew Section 702 of the Foreign Intelligence Surveillance Act for three years.",
-      "url": "https://therecord.media/house-approves-spy-program-on-second-attempt",
-      "cve_id": null,
-      "source": "TheRecord Media",
-      "category": "news",
-      "severity": "high",
-      "cvss_score": null,
-      "published": "2026-04-29T22:41:00+00:00",
-      "ttps": []
-    },
-    {
       "title": "Popular WordPress redirect plugin hid dormant backdoor for years",
       "description": "The Quick Page/Post Redirect plugin, installed on more than 70,000 WordPress sites, had a backdoor added five years ago that allows injecting arbitrary code into users' sites. [...]",
       "url": "https://www.bleepingcomputer.com/news/security/popular-wordpress-redirect-plugin-hid-dormant-backdoor-for-years/",
@@ -1435,56 +1388,6 @@
           "name": "User Execution",
           "tactic": "Execution",
           "tactic_id": "TA0002"
-        }
-      ]
-    },
-    {
-      "title": "NSA Chief During Snowden Affair Shares Regrets, Reflections 13 Years Later",
-      "description": "Chris Inglis was the head civilian in charge at the NSA when the Snowden leaks exploded. He gets candid about mistakes the organization made, and what CISOs need to know about spotting potential threats, media disclosures, and &quot;enculturation.&quot;",
-      "url": "https://www.darkreading.com/cyber-risk/nsa-chief-during-snowden-affair-13-years-later",
-      "cve_id": null,
-      "source": "Dark Reading",
-      "category": "news",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-04-28T20:38:59+00:00",
-      "ttps": []
-    },
-    {
-      "title": "Feuding Ransomware Groups Leak Each Other's Data",
-      "description": "When 0APT and KryBit attacked each other, they exposed infrastructure and operational data, giving defenders rare insight into ransomware operations.",
-      "url": "https://www.darkreading.com/threat-intelligence/feuding-ransomware-groups-leak-data",
-      "cve_id": null,
-      "source": "Dark Reading",
-      "category": "incident",
-      "severity": "high",
-      "cvss_score": null,
-      "published": "2026-04-28T20:13:30+00:00",
-      "ttps": [
-        {
-          "id": "T1486",
-          "name": "Data Encrypted for Impact",
-          "tactic": "Impact",
-          "tactic_id": "TA0040"
-        }
-      ]
-    },
-    {
-      "title": "Vidar Rises to Top of Chaotic Infostealer Market",
-      "description": "The malware has filled the gap created by last year's law enforcement takedowns of Lumma and Rhadamanthys.",
-      "url": "https://www.darkreading.com/vulnerabilities-threats/vidar-top-chaotic-infostealer-market",
-      "cve_id": null,
-      "source": "Dark Reading",
-      "category": "news",
-      "severity": "critical",
-      "cvss_score": null,
-      "published": "2026-04-28T19:07:16+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
         }
       ]
     },
