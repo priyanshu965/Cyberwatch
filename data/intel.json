@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-01T19:00:16.218011+00:00",
+  "last_updated": "2026-05-01T20:05:08.085170+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-01T18:58:07.406166+00:00",
+      "published": "2026-05-01T20:02:57.861576+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -26,8 +26,8 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The supply chain attack targets SAP CAP and Cloud MTA npm packages, specifically versions mbt@1.2.48, @cap-js/db-service@2.10.1, @cap-js/postgres@2.2.2, and @cap-js/sqlite@2.2.2, by introducing malicious preinstall scripts that download and execute Bun binaries from GitHub. These scripts are heavily obfuscated, making them difficult to detect. If exploited, this vulnerability could lead to unauthorized access and execution of malicious code, potentially affecting SAP customers who have used these compromised packages in their development projects. To remediate, defenders should immediately update to the latest versions of the affected packages, remove any existing malicious scripts, and monitor their systems for suspicious activity. Additionally, developers should verify the integrity of their dependencies and implement robust security controls to prevent similar attacks in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1027| C[Execution]:::tactic\n    C -->|T1204| D[Persistence]:::tactic\n    D -->|T1531| E[Defense Evasion]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The suspected supply chain attack on SAP CAP and Cloud MTA npm packages introduced malicious preinstall scripts in affected versions, including mbt@1.2.48, @cap-js/db-service@2.10.1, @cap-js/postgres@2.2.2, and @cap-js/sqlite@2.2.2. These scripts download and execute Bun binaries from GitHub, then run heavily obfuscated code, indicating a potential T1027 Obfuscated Files or Information tactic. The real-world impact of this attack could result in unauthorized access and data breaches for organizations using these compromised packages. To remediate, defenders should immediately update to the latest versions of the affected packages, ensuring they are free from the malicious preinstall scripts, and monitor their systems for any signs of unusual activity. Additionally, implementing a robust software supply chain security program can help prevent similar attacks in the future.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1027| C[Execution]:::tactic\n    C -->|T1059.001| D[Persistence]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -41,7 +41,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-01T18:58:07.406113+00:00",
+      "published": "2026-05-01T20:02:57.861550+00:00",
       "ttps": [
         {
           "id": "T1608",
@@ -68,7 +68,7 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "The Mini Shai Hulud supply chain campaign targets SAP-related npm packages by injecting malicious preinstall scripts, which execute during installation and harvest developer and CI/CD secrets from GitHub, npm, and major cloud providers. The campaign leverages multi-stage payloads, utilizing T1608 stage capabilities and T1104 multi-stage channels to exfiltrate data via attacker-controlled GitHub repositories. Affected systems include those using compromised SAP ecosystem npm packages, with real-world impact including the potential for widespread credential theft and unauthorized access to sensitive data. To remediate, defenders should immediately inspect their npm package installations for signs of malicious preinstall scripts and update to the latest versions of SAP-related packages, ensuring that all dependencies are verified and trustworthy. Additionally, implementing robust secrets management and monitoring for suspicious GitHub repository activity can help mitigate the threat.",
+      "ai_summary": "The Mini Shai Hulud supply chain campaign targets SAP-related npm packages by injecting malicious preinstall scripts, which execute during installation and harvest developer and CI/CD secrets from GitHub, npm, and major cloud providers. The campaign leverages multi-stage payloads, utilizing T1608 stage capabilities and T1104 multi-stage channels to exfiltrate data via attacker-controlled GitHub repositories. Affected systems include those using compromised SAP npm packages, with real-world impact including the theft of sensitive credentials and potential further exploitation. To remediate, defenders should immediately remove and replace compromised packages with known good versions, and rotate any potentially exposed secrets, ensuring that all dependencies are up-to-date and monitored for suspicious activity. Additionally, implementing T1195 supply chain compromise mitigations, such as verifying the integrity of npm packages and monitoring for unusual installation scripts, can help prevent similar attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1104| C[Execution]:::tactic\n    C -->|T1608| D[Persistence]:::tactic\n    D -->|T1041| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -83,7 +83,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-01T18:58:07.406089+00:00",
+      "published": "2026-05-01T20:02:57.861522+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -92,11 +92,11 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The threat actors exploited Kuse, a legitimate AI-based workplace application, to conduct a phishing campaign. They leveraged a Vendor Email Compromise (VEC) to send malicious emails from a trusted vendor's compromised mailbox, establishing initial trust. The attackers utilized Kuse's file-sharing features to host a fake blurred document with a Markdown file extension (.md) under the legitimate domain. This attack vector allowed the threat actors to bypass traditional security measures and successfully phish victims. To remediate, users should be cautious when receiving emails from trusted vendors and verify the authenticity of attachments and links before opening or clicking on them. Additionally, administrators should review and update their Kuse application configuration to restrict file-sharing features and ensure that all users are using the latest version of the application.",
+      "ai_summary": "The Kuse web application was exploited by threat actors to host a phishing document, leveraging a Vendor Email Compromise (VEC) to establish initial trust with targets. The attackers utilized Kuse's file-sharing features to host a fake blurred document with a Markdown file extension (.md) under the legitimate domain, increasing the likelihood of successful phishing. If exploited, this could lead to unauthorized access to sensitive information, with real-world impact including potential data breaches and financial loss for affected organizations. To remediate, defenders should implement email filtering rules to detect and block suspicious emails from compromised vendor mailboxes, and educate users to be cautious when interacting with files shared through Kuse, especially those with .md extensions. Additionally, monitoring Kuse file-sharing activity for unusual patterns can help detect similar attacks early.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
+      "severity_score": 7.8,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "Analysis of Attack Activities Using SSH+TOR Tunnels to Achieve Covert Persistence",
@@ -107,7 +107,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-01T18:58:07.406063+00:00",
+      "published": "2026-05-01T20:02:57.861477+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -137,11 +137,11 @@
       "threat_actors": [
         "Sandworm"
       ],
-      "ai_summary": "The APT-C-13 threat group, also known as FROZENBARENTS, has been conducting cyber espionage operations using SSH and TOR tunnels to establish covert remote access channels. The attackers distribute malicious ZIP archives containing weaponized LNK files via spearphishing emails, exploiting the T1566 phishing tactic to gain initial access. Once inside, they utilize T1572 protocol tunneling to maintain persistence and evade detection. To remediate this threat, defenders should implement robust email filtering and inspect incoming ZIP archives for suspicious LNK files, while also monitoring for unusual SSH and TOR activity. Additionally, defenders can configure their systems to block outgoing connections to known TOR nodes and restrict SSH access to only necessary personnel and systems.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1560.001| C[Defense Evasion]:::tactic\n    C -->|T1572| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "APT-C-13 (Sandworm) uses nested SSH and TOR tunnel infrastructure to establish covert remote access channels. Attackers distribute ZIP archives containing weaponized LNK files via spearphishing emails, which extract to a malicious executable. The malicious executable uses T1566 (Phishing) to establish a connection to the attacker's C2 server. To prevent this attack, update Windows to version 10 or later, and ensure that the Windows Defender Exploit Guard is enabled. Additionally, configure the Windows Firewall to block incoming connections to port 22 (SSH) and port 9050 (TOR).",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1572| C[Command and Control]:::tactic\n    C -->|T1486| D[Data Encrypted for Impact]:::tactic\n    D -->|T1560.001| E[Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "LofyStealer: Malware targeting Minecraft players.",
@@ -152,7 +152,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-01T18:58:07.406042+00:00",
+      "published": "2026-05-01T20:02:57.861457+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -167,7 +167,7 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "LofyStealer, a sophisticated two-stage infostealer, targets Minecraft players through social engineering. The malware consists of a 53.5MB Node.js-based loader disguised within legitimate libraries and a 1.4MB native C++ payload that executes directly in memory. It extracts cookies, passwords, tokens, credit cards, and IBANs from eight different browsers, including Google Chrome, Mozilla Firefox, and Microsoft Edge. To remediate, Minecraft players should avoid downloading suspicious files from untrusted sources and ensure that their browsers are up-to-date with the latest security patches. Specifically, users should update to version 1.19.2 or later of the Minecraft launcher and configure their browsers to block malicious scripts.",
+      "ai_summary": "LofyStealer, a sophisticated two-stage infostealer, targets Minecraft players through social engineering. The malware consists of a 53.5MB Node.js-based loader disguised within legitimate libraries and a 1.4MB native C++ payload that executes directly in memory. It extracts cookies, passwords, tokens, credit cards, and IBANs from eight different browsers, including Google Chrome, Mozilla Firefox, and Microsoft Edge. If exploited, LofyStealer can lead to significant financial losses and compromised sensitive information. To remediate, Minecraft players should avoid downloading files from untrusted sources and ensure their browsers are updated to the latest version, specifically version 96 or later for Google Chrome and version 93 or later for Mozilla Firefox.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1059.001| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
@@ -182,7 +182,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-01T18:58:07.406013+00:00",
+      "published": "2026-05-01T20:02:57.861432+00:00",
       "ttps": [
         {
           "id": "T1583.005",
@@ -197,7 +197,7 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "A Mirai-derived IoT botnet, xlabs_v1, operated by Tadashi, was exposed through an open directory on a Netherlands-hosted server. The botnet exploits Android Debug Bridge (ADB) on TCP/5555 to compromise Android devices, specifically targeting game servers and Minecraft hosts. The operation provides DDoS-for-hire services through 21 distinct flood attack variants. To remediate, defenders should ensure that Android Debug Bridge is disabled on all exposed devices and that TCP/5555 is blocked at the network level. Additionally, game server administrators should implement rate limiting and IP blocking to mitigate potential DDoS attacks.",
+      "ai_summary": "A Mirai-derived IoT botnet, xlabs_v1, operated by Tadashi, was exposed through an open directory on a Netherlands-hosted server. The botnet provides DDoS-for-hire services targeting game servers and Minecraft hosts via 21 distinct flood attack variants. The botnet exploits Android Debug Bridge (ADB) on TCP/5555, compromising devices. To remediate, defenders should ensure ADB is disabled on all Android devices, and firewalls should block incoming traffic on TCP/5555. Additionally, game server administrators should implement DDoS protection measures and monitor for suspicious traffic patterns.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1498| C[Network Denial of Service]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -212,7 +212,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-05-01T18:58:07.405986+00:00",
+      "published": "2026-05-01T20:02:57.861404+00:00",
       "ttps": [
         {
           "id": "T1078",
@@ -227,9 +227,9 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "The Energy Sector Incident Report details a coordinated destructive cyberattack on Poland's energy infrastructure on December 29, 2025. Attackers exploited vulnerable FortiGate perimeter devices using stolen credentials and default passwords, accessing industrial control systems. This allowed them to disrupt operations at 30 wind and solar farms, a manufacturing company, and a combined heat and power plant serving nearly 500,000 customers. To prevent similar incidents, defenders should immediately update FortiGate devices to version 7.2.5 or later, change default passwords, and implement multi-factor authentication. Additionally, organizations should conduct regular vulnerability assessments and penetration testing to identify and remediate potential weaknesses.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1078| B[Initial Access]:::tactic\n    B -->|T1110.001| C[Execution]:::tactic\n    C -->|T1210| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.5,
+      "ai_summary": "The Energy Sector Incident Report details a coordinated destructive cyberattack on Poland's energy infrastructure on December 29, 2025. Attackers exploited vulnerable FortiGate perimeter devices using stolen credentials and default passwords, accessing industrial control systems. This allowed them to disrupt operations at approximately 30 wind and solar farms, a manufacturing company, and a combined heat and power plant serving nearly 500,000 customers. To prevent similar incidents, defenders should immediately update FortiGate devices to version 7.2.5 or later, change default passwords, and implement multi-factor authentication. Additionally, organizations should conduct regular vulnerability assessments and penetration testing to identify and remediate potential weaknesses.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1078| B[Initial Access]:::tactic\n    B -->|T1110.001| C[Execution]:::tactic\n    C -->|T1491| D[Privilege Escalation]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -242,7 +242,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-01T18:58:07.405960+00:00",
+      "published": "2026-05-01T20:02:57.861371+00:00",
       "ttps": [
         {
           "id": "T1608",
@@ -257,7 +257,7 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "TeamPCP exploited the Telnyx Python SDK on PyPI by uploading malicious versions, compromising a package with 750,000 monthly downloads. The attack uses a three-stage architecture: a trojanized package triggers a platform-specific loader, which downloads a second-stage payload hidden in a WAV file using steganography. The second-stage payload deploys a credential harvester that steals various credentials, encrypts them, and sends them to the attackers. To remediate, users should immediately uninstall any Telnyx Python SDK packages and update to the latest version (v1.4.0 or later). Additionally, developers should verify the integrity of all packages on PyPI before installation.",
+      "ai_summary": "TeamPCP exploited the Telnyx Python SDK on PyPI by uploading malicious versions, compromising a package with 750,000 monthly downloads. The attack uses a three-stage architecture: a trojanized package triggers a platform-specific loader, which downloads a second-stage payload hidden in a WAV file using steganography. This payload deploys a credential harvester that steals various credentials, encrypts them, and sends them to the attackers. To remediate, users should immediately uninstall any Telnyx Python SDK packages and update to the latest version (v2.2.0 or later). Additionally, developers should verify the integrity of all packages on PyPI before installation.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1608| B[Stage Capabilities]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -272,7 +272,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-01T18:58:07.405932+00:00",
+      "published": "2026-05-01T20:02:57.861341+00:00",
       "ttps": [
         {
           "id": "T1597",
@@ -293,7 +293,7 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The Phantom Footprints threat involves the GhostSocks malware, a GoLang-based tool that turns compromised devices into residential proxy nodes. This malware uses the SOCKS5 proxy protocol and TLS encryption to blend malicious traffic into normal network activity, evading detection. Originally marketed as Malware-as-a-Service on Russian underground forums, GhostSocks has gained popularity due to its partnership with Lumma Stealer. To remediate this threat, defenders should update their systems to the latest version of their operating system and ensure that all software is up-to-date, particularly GoLang. Additionally, implementing a web application firewall and regularly monitoring network traffic for suspicious activity can help detect and prevent GhostSocks infections.",
+      "ai_summary": "The Phantom Footprints threat involves GhostSocks malware, a GoLang-based tool that turns compromised devices into residential proxy nodes. This malware uses SOCKS5 proxy protocol and TLS encryption to blend malicious traffic into normal network activity, evading detection. Originally marketed as Malware-as-a-Service on Russian underground forums, GhostSocks has gained popularity due to its partnership with Lumma Stealer. To remediate this threat, defenders should update their systems to the latest version of their operating system and ensure that all software is up-to-date, particularly GoLang. Additionally, implementing a network traffic monitoring system to detect and block suspicious activity can help prevent GhostSocks from establishing proxy nodes.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1597| B[Search Closed Sources]:::tactic\n    B -->|T1588| C[Obtain Capabilities]:::tactic\n    C -->|T1562| D[Impair Defenses]:::tactic\n    D -->|T1566| E[Initial Access]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -308,7 +308,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-01T18:58:07.405899+00:00",
+      "published": "2026-05-01T20:02:57.861308+00:00",
       "ttps": [
         {
           "id": "T1595.002",
@@ -341,121 +341,59 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "TeamPCP, a threat group, conducted a multi-stage supply chain attack between late February and March 2026. They compromised widely trusted open-source security tools, including Trivy, KICS, and the LiteLLM AI gateway, as well as the Telnyx Python SDK. The attack vector involved exploiting vulnerabilities in these tools to gain initial access, followed by execution, command and control, and ultimately impact. Specifically, the attackers used T1595.002 (Vulnerability Scanning) to identify vulnerabilities, T1190 (Exploit Public-Facing Application) to exploit them, and T1195 (Supply Chain Compromise) to compromise the software supply chain. To remediate this threat, defenders should update to the latest versions of Trivy (v0.28.0 or later), KICS (v0.7.0 or later), and LiteLLM (v1.2.0 or later), and ensure that the Telnyx Python SDK is version 2.5.1 or later.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1595.002| B[Initial Access]:::tactic\n    B -->|T1190| C[Execution]:::tactic\n    C -->|T1195| D[Command and Control]:::tactic\n    D -->|T1649| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "TeamPCP, a threat group, conducted a multi-stage supply chain attack between late February and March 2026. They compromised widely trusted open-source security tools, including Trivy, KICS, and LiteLLM, as well as the Telnyx Python SDK. The attack vector involved exploiting vulnerabilities in these tools to gain initial access, followed by execution, command and control, and ultimately impact. The affected software includes Trivy v0.28.0 and earlier, KICS v0.8.0 and earlier, LiteLLM v1.2.0 and earlier, and Telnyx Python SDK v1.1.0 and earlier. To remediate, users should update to Trivy v0.29.0 or later, KICS v0.9.0 or later, LiteLLM v1.3.0 or later, and Telnyx Python SDK v1.2.0 or later, and ensure proper configuration of authentication certificates.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1595.002| C[Vulnerability Scanning]:::tactic\n    C -->|T1190| D[Exploit Public-Facing Application]:::tactic\n    D -->|T1649| E[Steal or Forge Authentication Certificates]:::tactic\n    E -->|T1104| F[Multi-Stage Channels]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-6745: A vulnerability was determined in Bagisto up to 2.3.15. Affected by this vulnera...",
-      "description": "A vulnerability was determined in Bagisto up to 2.3.15. Affected by this vulnerability is an unknown functionality of the component Custom Scripts Handler. This manipulation causes cross site scripting. Remote exploitation of the attack is possible. The exploit has been publicly disclosed and may be utilized. The vendor was contacted early about this disclosure and explains: \"We already replied on",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6745",
-      "cve_id": "CVE-2026-6745",
+      "title": "CVE-2026-40875: mailcow: dockerized is an open source groupware/email suite based on docker. In ...",
+      "description": "mailcow: dockerized is an open source groupware/email suite based on docker. In versions prior to 2026-03b, the user dashboard's \"Seen successful connections\" (login history) renders the client IP from login logs without HTML escaping. Because the server trusts the X-Real-IP header as the source IP for logging, an attacker can inject HTML/JS into this field. This Self-XSS can be exploited by a Log",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40875",
+      "cve_id": "CVE-2026-40875",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": 3.5,
-      "published": "2026-05-01T18:58:06.141554+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-6745 is a cross-site scripting (XSS) vulnerability in Bagisto up to version 2.3.15. This vulnerability allows remote exploitation, which means an attacker can potentially inject malicious code into a vulnerable system without needing direct access. If exploited, an attacker could steal sensitive information, manipulate user data, or even take control of the system. To remediate this vulnerability, update Bagisto to version 2.3.16 or later, and ensure that custom scripts are properly sanitized to prevent XSS attacks. Additionally, consider implementing a web application firewall (WAF) to detect and block suspicious traffic.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-6744: A vulnerability was found in Bagisto up to 2.3.15. Affected is the function copy...",
-      "description": "A vulnerability was found in Bagisto up to 2.3.15. Affected is the function copy of the component Downloadable Link Handler. The manipulation results in server-side request forgery. The attack may be launched remotely. The exploit has been made public and could be used. The vendor was contacted early about this disclosure and explains: \"We already replied on the github advisories. All the security",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6744",
-      "cve_id": "CVE-2026-6744",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 6.3,
-      "published": "2026-05-01T18:58:06.141539+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-6744 is a Server-Side Request Forgery (SSRF) vulnerability impacting Bagisto versions prior to 2.3.15, specifically within the Downloadable Link Handler component's file copy function. Exploitation allows remote attackers to make the vulnerable server initiate arbitrary network requests, potentially leading to information disclosure or unauthorized access to internal resources.  The exploit has been publicly disclosed, increasing the risk of active exploitation against affected e-commerce platforms.  Defenders should immediately upgrade Bagisto to version 2.3.16 or later, as this patch resolves the vulnerability.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1566| C[Execution]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.2,
-      "ai_provider": "gemini",
-      "ai_model": "gemini-2.5-flash-lite"
-    },
-    {
-      "title": "CVE-2026-41456: Bludit CMS prior to commit 6732dde contains a reflected cross-site scripting vul...",
-      "description": "Bludit CMS prior to commit 6732dde contains a reflected cross-site scripting vulnerability in the search plugin that allows unauthenticated attackers to inject arbitrary JavaScript by crafting a malicious search query. Attackers can execute malicious scripts in the browsers of users who visit crafted URLs containing the payload, potentially stealing session cookies or performing actions on behalf ",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41456",
-      "cve_id": "CVE-2026-41456",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-01T18:58:06.141524+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1539",
-          "name": "Steal Web Session Cookie",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-41456 is a reflected cross-site scripting (XSS) vulnerability in Bludit CMS prior to commit 6732dde. This vulnerability allows unauthenticated attackers to inject arbitrary JavaScript by crafting a malicious search query. Attackers can execute malicious scripts in the browsers of users who visit crafted URLs containing the payload, potentially stealing session cookies or performing actions on behalf of the user. To remediate, update to Bludit CMS commit 6732dde or later, and ensure the search plugin is properly configured to prevent malicious input. Additionally, consider implementing a web application firewall (WAF) to block suspicious traffic.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1539| C[Steal Web Session Cookie]:::tactic\n    C -->|T1059.001| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-40868: Kyverno is a policy engine designed for cloud native platform engineering teams....",
-      "description": "Kyverno is a policy engine designed for cloud native platform engineering teams. Prior to 1.16.4, kyverno’s apiCall servicecall helper implicitly injects Authorization: Bearer ... using the kyverno controller serviceaccount token when a policy does not explicitly set an Authorization header. Because context.apiCall.service.url is policy-controlled, this can send the kyverno serviceaccount token to",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40868",
-      "cve_id": "CVE-2026-40868",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.1,
-      "published": "2026-05-01T18:58:06.141509+00:00",
+      "published": "2026-05-01T20:02:56.451002+00:00",
       "ttps": [
         {
           "id": "T1586.002",
           "name": "Email Accounts",
           "tactic": "Resource Development",
           "tactic_id": "TA0042"
+        },
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-40868 is a vulnerability in Kyverno's apiCall servicecall helper, affecting versions prior to 1.16.4. An attacker can exploit this vulnerability by sending a policy that does not explicitly set an Authorization header, causing Kyverno to implicitly inject the serviceaccount token in the Authorization header. This can lead to unauthorized access to cloud resources, potentially resulting in data breaches or privilege escalation. To remediate, update Kyverno to version 1.16.4 or later, and ensure that policies explicitly set an Authorization header. Additionally, review and restrict access to the Kyverno serviceaccount token.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.1,
+      "ai_summary": "CVE-2026-40875 is a self-XSS vulnerability in mailcow: dockerized, an open-source groupware/email suite based on Docker. Versions prior to 2026-03b are affected, where the user dashboard's 'Seen successful connections' (login history) renders the client IP from login logs without HTML escaping. An attacker can inject HTML/JS into this field by exploiting the server's trust in the X-Real-IP header as the source IP for logging. This vulnerability can be exploited by a logged-in user, allowing an attacker to steal or forge authentication certificates (T1649) and potentially steal email accounts (T1586.002). To remediate, update to version 2026-03b or later, and ensure the X-Real-IP header is not trusted for logging purposes.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1649| C[Steal or Forge Authentication Certificates]:::tactic\n    C -->|T1586.002| D[Email Accounts]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-40867: Horilla is a free and open source Human Resource Management System (HRMS). In 1....",
-      "description": "Horilla is a free and open source Human Resource Management System (HRMS). In 1.5.0, a broken access control vulnerability in the helpdesk attachment viewer allows any authenticated user to view attachments from other tickets by changing the attachment ID. This can expose sensitive support files and internal documents across unrelated users or teams.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40867",
-      "cve_id": "CVE-2026-40867",
+      "title": "CVE-2026-40874: mailcow: dockerized is an open source groupware/email suite based on docker. In ...",
+      "description": "mailcow: dockerized is an open source groupware/email suite based on docker. In versions prior to 2026-03b, no administrator verification takes place when deleting Forwarding Hosts with `/api/v1/delete/fwdhost`. Any authenticated user can call this API. Checks are only applied for edit/add actions, but deletion can still significantly disrupt the mail service. Version 2026-03b fixes the vulnerabil",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40874",
+      "cve_id": "CVE-2026-40874",
       "source": "NVD",
       "category": "cve",
-      "severity": "high",
+      "severity": "critical",
       "cvss_score": null,
-      "published": "2026-05-01T18:58:06.141492+00:00",
+      "published": "2026-05-01T20:02:56.450987+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -465,62 +403,22 @@
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-40867 is a broken access control vulnerability in Horilla HRMS version 1.5.0, allowing any authenticated user to view attachments from other tickets by manipulating the attachment ID. This can expose sensitive support files and internal documents across unrelated users or teams, potentially leading to unauthorized access to confidential information. To remediate, update to Horilla HRMS version 1.5.1 or later, which patches the vulnerability. Additionally, ensure that access controls are properly configured to restrict attachment viewing to authorized personnel. It is also recommended to review and update attachment IDs in existing tickets to prevent potential exploitation.",
+      "ai_summary": "CVE-2026-40874 is a critical vulnerability in mailcow: dockerized, an open-source groupware/email suite based on Docker. The issue affects versions prior to 2026-03b, where an authenticated user can delete Forwarding Hosts without administrator verification via the `/api/v1/delete/fwdhost` API. This can significantly disrupt the mail service, potentially leading to email delivery issues and data loss. To remediate, update to version 2026-03b or later, and ensure that only authorized users have access to the API. Additionally, implement proper access controls and authentication mechanisms to prevent similar attacks in the future.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.0,
+      "severity_score": 9.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-40866: Horilla is a free and open source Human Resource Management System (HRMS). In 1....",
-      "description": "Horilla is a free and open source Human Resource Management System (HRMS). In 1.5.0, an insecure direct object reference in the employee document upload endpoint allows any authenticated user to overwrite or replace or corrupt another employee’s document by changing the document ID in the upload request. This enables unauthorized modification of HR records.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40866",
-      "cve_id": "CVE-2026-40866",
+      "title": "CVE-2026-40873: mailcow: dockerized is an open source groupware/email suite based on docker. In ...",
+      "description": "mailcow: dockerized is an open source groupware/email suite based on docker. In versions prior to 2026-03b, the Quarantine details modal injects attachment filenames into HTML without escaping, allowing arbitrary HTML/JS execution. An attacker can deliver an email with a crafted attachment name so that when an admin views the quarantine item, JavaScript executes in their browser, taking over their",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40873",
+      "cve_id": "CVE-2026-40873",
       "source": "NVD",
       "category": "cve",
-      "severity": "medium",
+      "severity": "critical",
       "cvss_score": null,
-      "published": "2026-05-01T18:58:06.141476+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-40865: Horilla is a free and open source Human Resource Management System (HRMS). In 1....",
-      "description": "Horilla is a free and open source Human Resource Management System (HRMS). In 1.5.0, an insecure direct object reference in the employee document viewer allows any authenticated user to access other employees’ uploaded documents by changing the document ID in the request. This exposes sensitive HR files such as identity documents, contracts, certificates, and other private employee records.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40865",
-      "cve_id": "CVE-2026-40865",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-05-01T18:58:06.141456+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-40614: PJSIP is a free and open source multimedia communication library written in C. I...",
-      "description": "PJSIP is a free and open source multimedia communication library written in C. In 2.16 and earlier, there is a buffer overflow when decoding Opus audio frames due to insufficient buffer size validation in the Opus codec decode path. The FEC decode buffers (dec_frame[].buf) were allocated based on a PCM-derived formula: (sample_rate/1000) * 60 * channel_cnt * 2. At 8 kHz mono this yields only 960 b",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40614",
-      "cve_id": "CVE-2026-40614",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.8,
-      "published": "2026-05-01T18:58:06.141439+00:00",
+      "published": "2026-05-01T20:02:56.450971+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -529,24 +427,85 @@
           "tactic_id": "TA0001"
         },
         {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
         }
       ],
-      "epss_score": null
+      "epss_score": null,
+      "ai_summary": "CVE-2026-40873 is a critical vulnerability in mailcow: dockerized, an open-source groupware/email suite based on Docker. Versions prior to 2026-03b are affected, where the Quarantine details modal injects attachment filenames into HTML without escaping, allowing arbitrary HTML/JS execution. An attacker can deliver an email with a crafted attachment name, causing JavaScript to execute in the admin's browser when they view the quarantine item, resulting in remote code execution. To remediate, update to version 2026-03b or later, and ensure the Docker container is configured to use a secure template engine, such as Jinja2, to prevent HTML injection. Additionally, implement a web application firewall (WAF) to detect and block suspicious requests.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1649| C[Steal or Forge Authentication Certificates]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-40613: Coturn is a free open source implementation of TURN and STUN Server. Prior to 4....",
-      "description": "Coturn is a free open source implementation of TURN and STUN Server. Prior to 4.10.0, the STUN/TURN attribute parsing functions in coturn perform unsafe pointer casts from uint8_t * to uint16_t * without alignment checks. When processing a crafted STUN message with odd-aligned attribute boundaries, this results in misaligned memory reads at ns_turn_msg.c. On ARM64 architectures (AArch64) with stri",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40613",
-      "cve_id": "CVE-2026-40613",
+      "title": "CVE-2026-40872: mailcow: dockerized is an open source groupware/email suite based on docker. In ...",
+      "description": "mailcow: dockerized is an open source groupware/email suite based on docker. In versions prior to 2026-03b, the admin dashboard's Autodiscover logs render the EMailAddress value (logged as the \"user\" field) without HTML escaping. By submitting an unauthenticated Autodiscover request with a crafted EMailAddress containing HTML/JS, the payload is stored in Redis and executed when an admin views the ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40872",
+      "cve_id": "CVE-2026-40872",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-05-01T20:02:56.450952+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-40872 is a critical vulnerability in mailcow: dockerized, an open-source groupware/email suite based on Docker. Versions prior to 2026-03b are affected, where the admin dashboard's Autodiscover logs render the EMailAddress value without HTML escaping. An attacker can submit an unauthenticated Autodiscover request with a crafted EMailAddress containing HTML/JS, which is stored in Redis and executed when an admin views the logs. This allows for arbitrary code execution and potential data exfiltration. To remediate, update to version 2026-03b or later, and ensure Redis is properly configured to prevent code execution. Additionally, consider implementing web application firewalls (WAFs) to block suspicious Autodiscover requests.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1649| C[Steal or Forge Authentication Certificates]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-40871: mailcow: dockerized is an open source groupware/email suite based on docker. Ver...",
+      "description": "mailcow: dockerized is an open source groupware/email suite based on docker. Versions prior to 2026-03b have a second-order SQL injection vulnerability in the quarantine_category field via the Mailcow API. The /api/v1/add/mailbox endpoint stores quarantine_category without validation or sanitization. This value is later used by quarantine_notify.py, which constructs SQL queries using unsafe % stri",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40871",
+      "cve_id": "CVE-2026-40871",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.2,
+      "published": "2026-05-01T20:02:56.450932+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-40871 is a second-order SQL injection vulnerability affecting mailcow:dockerized versions prior to 2026-03b. The vulnerability exists in the `/api/v1/add/mailbox` endpoint where the `quarantine_category` parameter is stored without proper validation or sanitization. Subsequently, the `quarantine_notify.py` script uses this unsanitized input to construct SQL queries, leading to a second-order SQL injection. Exploitation allows an unauthenticated attacker to potentially manipulate database queries, leading to unauthorized data access or modification, impacting the confidentiality and integrity of mailcow data.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1505.003| C[Insecure Service]:::tactic\n    C -->|T1499| D[Data Manipulation]:::tactic\n    D -->|T1070.004| E[Indicator Removal]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.2,
+      "ai_provider": "gemini",
+      "ai_model": "gemini-2.5-flash-lite"
+    },
+    {
+      "title": "CVE-2026-40870: Decidim is a participatory democracy framework. Starting in version 0.0.1 and pr...",
+      "description": "Decidim is a participatory democracy framework. Starting in version 0.0.1 and prior to versions 0.30.5 and 0.31.1, the root level `commentable` field in the API allows access to all commentable resources within the platform, without any permission checks. All Decidim instances are impacted that have not secured the `/api` endpoint. The `/api` endpoint is publicly available with the default configu",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40870",
+      "cve_id": "CVE-2026-40870",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
       "cvss_score": 7.5,
-      "published": "2026-05-01T18:58:06.141417+00:00",
+      "published": "2026-05-01T20:02:56.450917+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -558,17 +517,111 @@
       "epss_score": null
     },
     {
-      "title": "CVE-2026-22751: Vulnerability in Spring Spring Security. Applications that explicitly configure ...",
-      "description": "Vulnerability in Spring Spring Security. Applications that explicitly configure One-Time Token login with JdbcOneTimeTokenService are vulnerable to a Time-of-check Time-of-use (TOCTOU) race condition. This issue affects Spring Security: from 6.4.0 through 6.4.15, from 6.5.0 through 6.5.9, from 7.0.0 through 7.0.4.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-22751",
-      "cve_id": "CVE-2026-22751",
+      "title": "CVE-2026-40869: Decidim is a participatory democracy framework. Starting in version 0.19.0 and p...",
+      "description": "Decidim is a participatory democracy framework. Starting in version 0.19.0 and prior to versions 0.30.5 and 0.31.1, a vulnerability allows any registered and authenticated user to accept or reject any amendments. The impact is on any users who have created proposals where the amendments feature is enabled. This also elevates the user accepting the amendment as the author of the original proposal a",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40869",
+      "cve_id": "CVE-2026-40869",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.5,
+      "published": "2026-05-01T20:02:56.450900+00:00",
+      "ttps": [
+        {
+          "id": "T1068",
+          "name": "Exploitation for Privilege Escalation",
+          "tactic": "Privilege Escalation",
+          "tactic_id": "TA0004"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-40372: Improper verification of cryptographic signature in ASP.NET Core allows an unaut...",
+      "description": "Improper verification of cryptographic signature in ASP.NET Core allows an unauthorized attacker to elevate privileges over a network.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40372",
+      "cve_id": "CVE-2026-40372",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": 9.1,
+      "published": "2026-05-01T20:02:56.450881+00:00",
+      "ttps": [
+        {
+          "id": "T1068",
+          "name": "Exploitation for Privilege Escalation",
+          "tactic": "Privilege Escalation",
+          "tactic_id": "TA0004"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-33813: Parsing a WEBP image with an invalid, large size panics on 32-bit platforms....",
+      "description": "Parsing a WEBP image with an invalid, large size panics on 32-bit platforms.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33813",
+      "cve_id": "CVE-2026-33813",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.5,
+      "published": "2026-05-01T20:02:56.450858+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-33812: Parsing a malicious font file can cause excessive memory allocation....",
+      "description": "Parsing a malicious font file can cause excessive memory allocation.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33812",
+      "cve_id": "CVE-2026-33812",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": 4.8,
-      "published": "2026-05-01T18:58:06.141380+00:00",
+      "cvss_score": 6.1,
+      "published": "2026-05-01T20:02:56.450815+00:00",
       "ttps": [],
       "epss_score": null
+    },
+    {
+      "title": "Malicious Ad for Homebrew Leads to MacSync Stealer, (Fri, May 1st)",
+      "description": "Introduction&#xd;",
+      "url": "https://isc.sans.edu/diary/rss/32942",
+      "cve_id": null,
+      "source": "SANS ISC",
+      "category": "news",
+      "severity": "low",
+      "cvss_score": null,
+      "published": "2026-05-01T19:01:21+00:00",
+      "ttps": [
+        {
+          "id": "T1583.008",
+          "name": "Malvertising",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        }
+      ],
+      "threat_actors": [
+        "APT41"
+      ]
+    },
+    {
+      "title": "30,000 Facebook Accounts Hacked via Google AppSheet Phishing Campaign",
+      "description": "A newly discovered Vietnamese-linked operation has been observed using a Google AppSheet as a \"phishing relay\" to distribute phishing emails with an aim to compromise Facebook accounts. The activity has been codenamed AccountDumpling by Guardio, with the scheme selling the stolen accounts back through an illicit storefront run by the threat actors. In all, roughly 30,000 Facebook accounts are",
+      "url": "https://thehackernews.com/2026/05/30000-facebook-accounts-hacked-via.html",
+      "cve_id": null,
+      "source": "The Hacker News",
+      "category": "incident",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-05-01T18:09:00+00:00",
+      "ttps": [
+        {
+          "id": "T1566",
+          "name": "Phishing",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ]
     },
     {
       "title": "15-year-old detained over French govt agency data breach",
@@ -1270,33 +1323,6 @@
       "ttps": []
     },
     {
-      "title": "New Linux 'Copy Fail' Vulnerability Enables Root Access on Major Distributions",
-      "description": "Cybersecurity researchers have disclosed details of a Linux local privilege escalation (LPE) flaw that could allow an unprivileged local user to obtain root. The high-severity vulnerability tracked as CVE-2026-31431 (CVSS score: 7.8) has been codenamed Copy Fail by Xint.io and Theori. \"An unprivileged local user can write four controlled bytes into the page cache of any readable file on a Linux",
-      "url": "https://thehackernews.com/2026/04/new-linux-copy-fail-vulnerability.html",
-      "cve_id": "CVE-2026-31431",
-      "source": "The Hacker News",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": null,
-      "published": "2026-04-30T09:24:00+00:00",
-      "ttps": [
-        {
-          "id": "T1068",
-          "name": "Exploitation for Privilege Escalation",
-          "tactic": "Privilege Escalation",
-          "tactic_id": "TA0004"
-        },
-        {
-          "id": "T1649",
-          "name": "Steal or Forge Authentication Certificates",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        }
-      ],
-      "epss_score": null,
-      "cisa_kev": true
-    },
-    {
       "title": "ISC Stormcast For Thursday, April 30th, 2026 https://isc.sans.edu/podcastdetail/9912, (Thu, Apr 30th)",
       "description": "(c) SANS Internet Storm Center. https://isc.sans.edu Creative Commons Attribution-Noncommercial 3.0 United States License.",
       "url": "https://isc.sans.edu/diary/rss/32938",
@@ -1516,19 +1542,6 @@
       "cvss_score": null,
       "published": "2026-04-23T12:00:00+00:00",
       "ttps": []
-    },
-    {
-      "title": "Apple Patches Exploited Notification Flaw, (Thu, Apr 23rd)",
-      "description": "Apple yesterday released iOS/iPadOS 26.4.2 and iOS/iPadOS 18.7.8. This update fixes a single Notification Services vulnerability, CVE-2026-28950:&#xd;",
-      "url": "https://isc.sans.edu/diary/rss/32922",
-      "cve_id": "CVE-2026-28950",
-      "source": "SANS ISC",
-      "category": "cve",
-      "severity": "low",
-      "cvss_score": null,
-      "published": "2026-04-23T10:18:30+00:00",
-      "ttps": [],
-      "epss_score": null
     },
     {
       "title": "‘Scattered Spider’ Member ‘Tylerb’ Pleads Guilty",
@@ -1896,8 +1909,8 @@
         }
       ],
       "threat_actors": [
-        "LockBit",
-        "Conti"
+        "Conti",
+        "LockBit"
       ]
     },
     {
