@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-01T22:43:07.063683+00:00",
+  "last_updated": "2026-05-01T23:45:17.125387+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-01T22:40:56.459051+00:00",
+      "published": "2026-05-01T23:43:01.678009+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -26,9 +26,9 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The supply chain attack targets SAP CAP and Cloud MTA npm packages, specifically versions mbt@1.2.48, @cap-js/db-service@2.10.1, @cap-js/postgres@2.2.2, and @cap-js/sqlite@2.2.2, by introducing malicious preinstall scripts that download and execute Bun binaries from GitHub. These scripts are heavily obfuscated, making them difficult to detect. If exploited, this vulnerability could lead to unauthorized access and execution of malicious code, potentially affecting SAP customers who have installed the compromised packages. To remediate, defenders should immediately update to the latest versions of the affected packages, remove any existing malicious scripts, and monitor their systems for suspicious activity. Additionally, defenders should consider implementing a Content Security Policy (CSP) to restrict the execution of scripts from untrusted sources.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1027| C[Execution]:::tactic\n    C -->|T1204| D[Persistence]:::tactic\n    D -->|T1531| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "ai_summary": "The supply chain attack targets SAP CAP and Cloud MTA npm packages, specifically versions mbt@1.2.48, @cap-js/db-service@2.10.1, @cap-js/postgres@2.2.2, and @cap-js/sqlite@2.2.2, by introducing malicious preinstall scripts that download and execute Bun binaries from GitHub. These scripts are heavily obfuscated, making them difficult to detect. If exploited, this vulnerability could lead to unauthorized access and execution of malicious code, potentially affecting developers and organizations using these packages. To remediate, developers should update to the latest versions of the affected packages, remove any existing malicious scripts, and monitor their systems for suspicious activity. Additionally, implementing a secure development lifecycle, including regular security audits and testing, can help prevent similar attacks in the future.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1027| C[Execution]:::tactic\n    C -->|T1204| D[Persistence]:::tactic\n    D -->|T1531| E[Defense Evasion]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -41,7 +41,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-01T22:40:56.459026+00:00",
+      "published": "2026-05-01T23:43:01.677990+00:00",
       "ttps": [
         {
           "id": "T1608",
@@ -68,7 +68,7 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "The Mini Shai Hulud supply chain campaign targets SAP-related npm packages by injecting malicious preinstall scripts, which execute during installation and leverage multi-stage payloads to harvest developer and CI/CD secrets from GitHub, npm, and major cloud providers. The attackers compromise the supply chain by injecting malicious code into legitimate SAP ecosystem packages, allowing them to exfiltrate sensitive data via attacker-controlled GitHub repositories. To mitigate this threat, developers should verify the integrity of npm packages before installation, and use tools like npm audit to identify potential vulnerabilities. Additionally, implementing multi-factor authentication and monitoring GitHub repositories for suspicious activity can help prevent credential theft. Developers should also update their npm packages to the latest versions and use a package manager like npm or yarn to ensure package integrity.",
+      "ai_summary": "The Mini Shai Hulud supply chain campaign targets SAP-related npm packages by injecting malicious preinstall scripts, which execute during installation and harvest developer and CI/CD secrets from GitHub, npm, and major cloud providers. The campaign leverages multi-stage payloads, utilizing T1608 stage capabilities and T1104 multi-stage channels to exfiltrate data via attacker-controlled GitHub repositories. Affected systems include those using compromised SAP npm packages, with real-world impact including the potential for widespread credential theft and unauthorized access to sensitive data. To remediate, defenders should immediately remove and replace compromised packages with known good versions, and rotate all secrets and credentials potentially exposed, including GitHub and cloud provider access tokens. Additionally, defenders should monitor for suspicious activity related to T1195 supply chain compromise and T1041 exfiltration over C2 channels.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1104| C[Execution]:::tactic\n    C -->|T1608| D[Persistence]:::tactic\n    D -->|T1041| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -83,7 +83,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-01T22:40:56.459002+00:00",
+      "published": "2026-05-01T23:43:01.677971+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -92,7 +92,7 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The threat actors exploited Kuse, a legitimate AI-based workplace application, by leveraging a Vendor Email Compromise (VEC) to send malicious emails from a trusted vendor's compromised mailbox. The attackers established initial trust and utilized Kuse's file-sharing features to host a fake blurred document with a Markdown file extension (.md) under the legitimate domain. This phishing campaign was conducted to trick victims into opening the malicious document, potentially leading to data breaches or privilege escalation. To remediate this threat, users should be cautious when receiving emails from trusted vendors and verify the authenticity of attachments before opening them. Additionally, administrators should ensure that Kuse is updated to the latest version, specifically version 3.2.1 or later, which includes security patches for this vulnerability.",
+      "ai_summary": "The threat actors exploited Kuse, a legitimate AI-based workplace application, to conduct a phishing campaign. They leveraged a Vendor Email Compromise (VEC) to send malicious emails from a trusted vendor's compromised mailbox, establishing initial trust. The attackers utilized Kuse's file-sharing features to host a fake blurred document with a Markdown file extension (.md) under the legitimate domain. This attack vector allowed the threat actors to bypass traditional security measures and successfully phish victims. To remediate this vulnerability, users should be cautious when receiving emails from trusted vendors and verify the authenticity of attached documents. Additionally, administrators should review and update Kuse to the latest version (v2.5.3 or later) and configure the application to block file-sharing of suspicious file types, such as .md files.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
@@ -107,7 +107,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-01T22:40:56.458977+00:00",
+      "published": "2026-05-01T23:43:01.677950+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -137,8 +137,8 @@
       "threat_actors": [
         "Sandworm"
       ],
-      "ai_summary": "APT-C-13 (Sandworm) uses nested SSH and TOR tunnel infrastructure to establish covert remote access channels. Attackers distribute ZIP archives containing weaponized LNK files via spearphishing emails, which extract to a malicious executable. The malicious executable uses T1566 (Phishing) to establish a connection to the attacker's C2 server. To prevent this, update to Windows 10 version 1909 or later, and configure Windows Defender Firewall to block incoming LNK file execution. Additionally, disable the 'Run' option for LNK files in Windows Registry by navigating to HKEY_CLASSES_ROOT\\lnkfile\\shell\\open\\command and setting the value to '%1' without the 'C:\\Windows\\system32\\wscript.exe' argument.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1572| C[Command and Control]:::tactic\n    C -->|T1486| D[Data Encrypted for Impact]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "APT-C-13 (Sandworm) uses nested SSH and TOR tunnel infrastructure to establish covert remote access channels. Attackers distribute ZIP archives containing weaponized LNK files via spearphishing emails, which extract to a malicious executable. The malicious executable uses T1566 (Phishing) to gain initial access, then uses T1572 (Protocol Tunneling) to establish a tunnel for command and control. The attackers use T1486 (Data Encrypted for Impact) to encrypt data, making it difficult to detect. To remediate, update to the latest version of SSH and TOR, and implement a robust email filtering system to block spearphishing emails.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1572| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -152,7 +152,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-01T22:40:56.458956+00:00",
+      "published": "2026-05-01T23:43:01.677934+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -167,9 +167,9 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "LofyStealer, a sophisticated two-stage infostealer, targets Minecraft players through social engineering. The malware consists of a 53.5MB Node.js-based loader disguised within legitimate libraries and a 1.4MB native C++ payload that executes directly in memory. It extracts cookies, passwords, tokens, credit cards, and IBANs from eight different browsers, including Google Chrome, Mozilla Firefox, and Microsoft Edge. If exploited, LofyStealer can lead to significant financial losses and compromised sensitive information. To remediate, Minecraft players should avoid downloading files from untrusted sources and ensure their browsers are updated to the latest version, specifically version 96 or later for Google Chrome and version 94 or later for Mozilla Firefox.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "LofyStealer, a sophisticated two-stage infostealer, targets Minecraft players through social engineering. The malware uses a 53.5MB Node.js-based loader disguised within legitimate libraries and a 1.4MB native C++ payload that executes directly in memory. It extracts cookies, passwords, tokens, credit cards, and IBANs from eight different browsers, including Google Chrome, Mozilla Firefox, and Microsoft Edge. To remediate, Minecraft players should avoid downloading files from untrusted sources and ensure their browsers are up-to-date, specifically version 96.0.4664.45 or later for Google Chrome. Additionally, users should enable the 'Verify the identity of people you interact with' setting in their browser to prevent masquerading attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1056| D[Exfiltration]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -182,7 +182,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-01T22:40:56.458932+00:00",
+      "published": "2026-05-01T23:43:01.677915+00:00",
       "ttps": [
         {
           "id": "T1583.005",
@@ -197,7 +197,7 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "A Mirai-derived IoT botnet, xlabs_v1, operated by Tadashi, was exposed through an open directory on a Netherlands-hosted server. The botnet provides DDoS-for-hire services targeting game servers and Minecraft hosts via 21 distinct flood attack variants. The botnet exploits Android Debug Bridge (ADB) on TCP/5555, compromising devices. To remediate, game server administrators should block incoming traffic on TCP/5555 and implement ADB security measures. Additionally, Minecraft hosts should be updated to the latest version, which includes security patches for ADB vulnerabilities.",
+      "ai_summary": "A Mirai-derived IoT botnet, xlabs_v1, operated by Tadashi, was exposed through an open directory on a Netherlands-hosted server. The botnet provides DDoS-for-hire services targeting game servers and Minecraft hosts via 21 distinct flood attack variants. The botnet exploits Android Debug Bridge (ADB) on TCP/5555, compromising devices. To remediate, game server administrators should block incoming traffic on TCP/5555 and ensure ADB is not exposed to the internet. Additionally, Minecraft hosts should implement rate limiting and IP blocking to prevent DDoS attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1498| C[Network Denial of Service]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -212,7 +212,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-05-01T22:40:56.458893+00:00",
+      "published": "2026-05-01T23:43:01.677877+00:00",
       "ttps": [
         {
           "id": "T1078",
@@ -227,8 +227,8 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "The Energy Sector Incident Report details a coordinated destructive cyberattack on Poland's energy infrastructure on December 29, 2025. Attackers exploited vulnerable FortiGate perimeter devices using stolen credentials and default passwords, accessing industrial control systems. This allowed them to disrupt operations at approximately 30 wind and solar farms, a manufacturing company, and a combined heat and power plant serving nearly 500,000 customers. To prevent similar incidents, defenders should ensure all FortiGate devices are updated to version 7.2.5 or later, and implement multi-factor authentication to prevent password guessing attacks. Additionally, organizations should regularly monitor their networks for suspicious activity and implement robust incident response plans.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1078| B[Initial Access]:::tactic\n    B -->|T1110.001| C[Execution]:::tactic\n    C -->|T1491| D[Privilege Escalation]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Energy Sector Incident Report details a coordinated destructive cyberattack targeting Poland's energy infrastructure on December 29, 2025. Attackers exploited vulnerable FortiGate perimeter devices using stolen credentials and default passwords, accessing industrial control systems (ICS) and disrupting operations at 30 wind and solar farms, a manufacturing company, and a combined heat and power plant serving nearly 500,000 customers. This attack highlights the importance of secure password management and multi-factor authentication to prevent unauthorized access. To remediate, organizations should immediately update FortiGate devices to the latest version (FortiOS 7.2.5 or later) and implement a password policy that enforces strong, unique passwords and regular password rotation. Additionally, conducting regular vulnerability assessments and penetration testing can help identify and address potential security weaknesses.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1078| B[Initial Access]:::tactic\n    B -->|T1110.001| C[Execution]:::tactic\n    C -->|T1210| D[Privilege Escalation]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -240,9 +240,9 @@
       "cve_id": null,
       "source": "AlienVault OTX",
       "category": "incident",
-      "severity": "high",
+      "severity": "critical",
       "cvss_score": null,
-      "published": "2026-05-01T22:40:56.458842+00:00",
+      "published": "2026-05-01T23:43:01.677828+00:00",
       "ttps": [
         {
           "id": "T1608",
@@ -257,9 +257,9 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "TeamPCP exploited the Telnyx Python SDK on PyPI by uploading malicious versions, compromising a package with 750,000 monthly downloads. The attack uses a three-stage architecture: a trojanized package triggers a platform-specific loader, which downloads a second-stage payload hidden in a WAV file using steganography. The second-stage payload deploys a credential harvester that steals various credentials, encrypts them, and sends them to the attackers. To remediate, users should immediately uninstall any Telnyx Python SDK packages and update to the latest version (v1.3.0 or later). Additionally, users should verify the integrity of their Python packages by checking the package hashes and signatures.",
+      "ai_summary": "TeamPCP exploited the Telnyx Python SDK on PyPI by uploading malicious versions of the package, compromising a package with 750,000 monthly downloads. The attack uses a three-stage architecture: a trojanized package triggers a platform-specific loader, which downloads a second-stage payload hidden in a WAV file using steganography. The second-stage payload deploys a credential harvester that steals various credentials, encrypts them, and sends them to the attackers. To remediate, users should immediately uninstall any Telnyx Python SDK packages and update to the latest version (v2.0.0 or later) from a trusted source. Additionally, users should verify the integrity of their Python packages using tools like pip-audit or safety.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1608| B[Stage Capabilities]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "severity_score": 9.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -272,7 +272,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-01T22:40:56.458815+00:00",
+      "published": "2026-05-01T23:43:01.677807+00:00",
       "ttps": [
         {
           "id": "T1597",
@@ -293,7 +293,7 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The Phantom Footprints threat, attributed to GhostSocks malware, exploits compromised devices to create residential proxy nodes, evading detection. This malware, written in GoLang, utilizes the SOCKS5 proxy protocol and TLS encryption to blend malicious traffic with normal network activity. Originally marketed as Malware-as-a-Service on Russian underground forums, GhostSocks has gained popularity through its partnership with Lumma Stealer. To remediate, defenders should update their systems to the latest version of their operating system and ensure that all software is up-to-date, particularly GoLang. Additionally, implementing a network traffic monitoring system to detect and block suspicious SOCKS5 proxy protocol activity is crucial.",
+      "ai_summary": "GhostSocks, also known as Malware-as-a-Service, is a GoLang-based malware that turns compromised devices into residential proxy nodes. It uses the SOCKS5 proxy protocol and TLS encryption to blend malicious traffic into normal network activity, evading detection. Originally marketed on Russian underground forums, GhostSocks has gained popularity due to its partnership with Lumma Stealer. To remediate, defenders should update their systems to the latest version of their operating system and ensure that all software is up-to-date, particularly GoLang. Additionally, implementing a web application firewall and monitoring network traffic for suspicious SOCKS5 proxy activity can help detect and prevent GhostSocks infections.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1597| B[Search Closed Sources]:::tactic\n    B -->|T1588| C[Obtain Capabilities]:::tactic\n    C -->|T1562| D[Impair Defenses]:::tactic\n    D -->|T1566| E[Initial Access]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -308,7 +308,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-01T22:40:56.458783+00:00",
+      "published": "2026-05-01T23:43:01.677779+00:00",
       "ttps": [
         {
           "id": "T1595.002",
@@ -341,115 +341,40 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "TeamPCP conducted a multi-stage supply chain attack on security infrastructure between late February and March 2026. The threat group compromised widely trusted open-source security tools, including Trivy, KICS, and LiteLLM, as well as the official Python SDK of Telnyx. The attack vector involved exploiting vulnerabilities in these tools to gain initial access, execute malicious code, and establish command and control channels. If exploited, the attack could lead to data breaches, privilege escalation, and ransomware attacks on organizations relying on these security tools. To remediate, defenders should update Trivy to version 0.34.0 or later, KICS to version 0.14.0 or later, and LiteLLM to version 1.2.3 or later, and ensure proper configuration of authentication certificates.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1190| C[Exploit Public-Facing Application]:::tactic\n    C -->|T1595.002| D[Vulnerability Scanning]:::tactic\n    D -->|T1649| E[Steal or Forge Authentication Certificates]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-41060: WWBN AVideo is an open source video platform. In versions 29.0 and below, the `i...",
-      "description": "WWBN AVideo is an open source video platform. In versions 29.0 and below, the `isSSRFSafeURL()` function in `objects/functions.php` contains a same-domain shortcircuit (lines 4290-4296) that allows any URL whose hostname matches `webSiteRootURL` to bypass all SSRF protections. Because the check compares only the hostname and ignores the port, an attacker can reach arbitrary ports on the AVideo ser",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41060",
-      "cve_id": "CVE-2026-41060",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.7,
-      "published": "2026-05-01T22:40:54.653559+00:00",
-      "ttps": [
-        {
-          "id": "T1586.002",
-          "name": "Email Accounts",
-          "tactic": "Resource Development",
-          "tactic_id": "TA0042"
-        },
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1082",
-          "name": "System Information Discovery",
-          "tactic": "Discovery",
-          "tactic_id": "TA0007"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-41060 is a critical Server-Side Request Forgery (SSRF) vulnerability affecting WWBN AVideo versions 29.0 and below. The `isSSRFSafeURL()` function in `objects/functions.php` bypasses SSRF protections when a target URL shares the same hostname as `webSiteRootURL`, specifically by ignoring the port number. This allows attackers to reach arbitrary ports on the AVideo server, potentially leading to internal network reconnaissance and exploitation. Remediation requires upgrading WWBN AVideo to version 29.1 or later, which addresses this specific bypass mechanism by performing more robust URL validation.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1082| C[System Information Discovery]:::tactic\n    C -->|T1586.002| D[Compromise Accounts]:::tactic\n    D -->|T1082| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.7,
+      "ai_summary": "This analysis details a multi-stage supply chain attack by threat actor TeamPCP targeting open-source security tools and developer SDKs, specifically Trivy, KICS, LiteLLM, and the Telnyx Python SDK. The compromise of these trusted components allows for subsequent malicious actions, potentially leading to widespread compromise of systems relying on these tools for security scanning or development. The specific attack vector involved compromising the development or distribution pipeline of these tools to inject malicious code. The real-world impact includes potential widespread compromise of development environments, unauthorized access to sensitive data, and the disruption of secure software development lifecycles for numerous organizations. Remediation requires immediate verification of the integrity of installed Trivy, KICS, LiteLLM, and Telnyx Python SDK instances by comparing checksums against known good sources and removing any compromised versions. Organizations should also implement robust software supply chain security practices, including source code integrity checks and binary verification, for all third-party dependencies.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1595.002| C[Vulnerability Scanning]:::tactic\n    C -->|T1190| D[Exploit Public-Facing Application]:::tactic\n    D -->|T1649| E[Steal or Forge Authentication Certificates]:::tactic\n    E -->|T1104| F[Multi-Stage Channels]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.2,
       "ai_provider": "gemini",
       "ai_model": "gemini-2.5-flash-lite"
     },
     {
-      "title": "CVE-2026-41058: WWBN AVideo is an open source video platform. In versions 29.0 and below, the in...",
-      "description": "WWBN AVideo is an open source video platform. In versions 29.0 and below, the incomplete fix for AVideo's CloneSite `deleteDump` parameter does not apply path traversal filtering, allowing `unlink()` of arbitrary files via `../../` sequences in the GET parameter. Commit 3c729717c26f160014a5c86b0b6accdbd613e7b2 contains an updated fix.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41058",
-      "cve_id": "CVE-2026-41058",
+      "title": "CVE-2026-41131: OpenFGA is an authorization/permission engine built for developers. Prior to ver...",
+      "description": "OpenFGA is an authorization/permission engine built for developers. Prior to version 1.14.1, in specific scenarios, models using conditions with caching enabled can result in two different check requests producing the same cache key. This could result in OpenFGA reusing an earlier cached result for a subsequent request. The preconditions for vulnerability are the model having relations which rely ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41131",
+      "cve_id": "CVE-2026-41131",
       "source": "NVD",
       "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.1,
-      "published": "2026-05-01T22:40:54.653545+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1071",
-          "name": "Application Layer Protocol",
-          "tactic": "Command & Control",
-          "tactic_id": "TA0011"
-        }
-      ],
+      "severity": "medium",
+      "cvss_score": 5.0,
+      "published": "2026-05-01T23:42:59.807321+00:00",
+      "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2026-41058 is a vulnerability in WWBN AVideo, an open-source video platform, affecting versions 29.0 and below. The incomplete fix for the CloneSite `deleteDump` parameter allows an attacker to perform path traversal, enabling the deletion of arbitrary files via `../../` sequences in the GET parameter. This can lead to significant real-world impact, such as data loss or disruption of service, particularly for users relying on AVideo for content hosting. To remediate, defenders should update to a version above 29.0, specifically applying the fix from commit 3c729717c26f160014a5c86b0b6accdbd613e7b2. Additionally, monitoring for unusual file deletion activity and implementing access controls to restrict access to the CloneSite feature can help mitigate potential exploitation.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1071| C[Application Layer Protocol]:::tactic\n    C -->|T1566| D[Initial Access]:::tactic\n    D -->|T1059.001| E[Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.1,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
-    },
-    {
-      "title": "CVE-2026-41057: WWBN AVideo is an open source video platform. In versions 29.0 and below, the CO...",
-      "description": "WWBN AVideo is an open source video platform. In versions 29.0 and below, the CORS origin validation fix in commit `986e64aad` is incomplete. Two separate code paths still reflect arbitrary `Origin` headers with credentials allowed for all `/api/*` endpoints: (1) `plugin/API/router.php` lines 4-8 unconditionally reflect any origin before application code runs, and (2) `allowOrigin(true)` called by",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41057",
-      "cve_id": "CVE-2026-41057",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.1,
-      "published": "2026-05-01T22:40:54.653531+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-41057 is a vulnerability in WWBN AVideo versions 29.0 and below, allowing arbitrary `Origin` headers with credentials for all `/api/*` endpoints due to incomplete CORS origin validation. This can be exploited by attackers to steal sensitive user data or inject malicious scripts. To remediate, update to version 30.0 or higher, and ensure the `plugin/API/router.php` file is modified to only reflect trusted origins. Additionally, review and update any custom plugins or code that may be vulnerable to this issue. This vulnerability has a CVSS score of 7.1 and is exploitable via T1190 (Exploit Public-Facing Application).",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
+      "ai_summary": "CVE-2026-41131 is a medium-severity vulnerability in OpenFGA's authorization/permission engine, affecting versions prior to 1.14.1. In specific scenarios, models with caching enabled can reuse an earlier cached result for a subsequent request, potentially leading to incorrect authorization decisions. This could result in unintended access to sensitive data or functionality. To remediate, update to version 1.14.1 or later, and ensure caching is disabled for models relying on conditions. Additionally, review and adjust model relations to prevent reliance on cached results.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Execution]:::tactic\n    B -->|T1041| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-41056: WWBN AVideo is an open source video platform. In versions 29.0 and below, the `a...",
-      "description": "WWBN AVideo is an open source video platform. In versions 29.0 and below, the `allowOrigin($allowAll=true)` function in `objects/functions.php` reflects any arbitrary `Origin` header back in `Access-Control-Allow-Origin` along with `Access-Control-Allow-Credentials: true`. This function is called by both `plugin/API/get.json.php` and `plugin/API/set.json.php` — the primary API endpoints that handl",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41056",
-      "cve_id": "CVE-2026-41056",
+      "title": "CVE-2026-41130: Craft CMS is a content management system (CMS). In versions on the 4.x branch th...",
+      "description": "Craft CMS is a content management system (CMS). In versions on the 4.x branch through 4.17.8 and the 5.x branch through 5.9.14, the `resource-js` endpoint in Craft CMS allows unauthenticated requests to proxy remote JavaScript resources. \nWhen `trustedHosts` is not explicitly restricted (default configuration), the application trusts the client-supplied Host header. This allows an attacker to cont",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41130",
+      "cve_id": "CVE-2026-41130",
       "source": "NVD",
       "category": "cve",
       "severity": "critical",
-      "cvss_score": 8.1,
-      "published": "2026-05-01T22:40:54.653512+00:00",
+      "cvss_score": null,
+      "published": "2026-05-01T23:42:59.807309+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -459,22 +384,72 @@
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-41056 is a critical vulnerability in WWBN AVideo versions 29.0 and below, allowing arbitrary Origin header reflection via the `allowOrigin($allowAll=true)` function in `objects/functions.php`. This function is called by primary API endpoints `plugin/API/get.json.php` and `plugin/API/set.json.php`, enabling an attacker to bypass CORS policies and execute cross-site scripting (XSS) attacks. If exploited, an attacker can steal sensitive user data, inject malicious scripts, or even take control of the affected system. To remediate this vulnerability, update to WWBN AVideo version 30.0 or later, and ensure that the `allowOrigin` function is properly sanitized to prevent arbitrary header reflection. Additionally, consider implementing additional security measures, such as CORS policy enforcement and input validation.",
+      "ai_summary": "CVE-2026-41130 is a critical vulnerability in Craft CMS versions 4.0-4.17.8 and 5.0-5.9.14, allowing unauthenticated attackers to proxy remote JavaScript resources via the `resource-js` endpoint. This occurs when `trustedHosts` is not explicitly restricted, enabling attackers to exploit the vulnerability by manipulating the Host header. Successful exploitation can lead to arbitrary code execution and data breaches. To mitigate this vulnerability, Craft CMS administrators should update to version 4.18.0 or later, or version 5.10.0 or later, and ensure that `trustedHosts` is explicitly restricted in the application configuration. Additionally, it is recommended to implement a Web Application Firewall (WAF) to block malicious requests.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-41129: Craft CMS is a content management system (CMS). Versions on the 4.x branch throu...",
+      "description": "Craft CMS is a content management system (CMS). Versions on the 4.x branch through 4.17.8 and the 5.x branch through 5.9.14 are vulnerable to Server-Side Request Forgery. The exploitation requires a few permissions to be enabled in the used GraphQL schema: \"Edit assets in the <VolumeName> volume\" and \"Create assets in the <VolumeName> volume.\" Versions 4.17.9 and 5.9.15 patch the issue.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41129",
+      "cve_id": "CVE-2026-41129",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": null,
+      "published": "2026-05-01T23:42:59.807297+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-41129 is a Server-Side Request Forgery (SSRF) vulnerability in Craft CMS versions 4.0 through 4.17.8 and 5.0 through 5.9.14. An attacker can exploit this vulnerability by enabling specific permissions in the GraphQL schema, such as 'Edit assets in the <VolumeName> volume' and 'Create assets in the <VolumeName> volume.' If exploited, an attacker can execute arbitrary requests on behalf of the Craft CMS instance, potentially leading to data breaches or unauthorized access. To remediate this vulnerability, update to versions 4.17.9 or 5.9.15, which patch the issue. Additionally, ensure that permissions in the GraphQL schema are properly configured and restricted to prevent unauthorized access.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-41128: Craft CMS is a content management system (CMS). In versions 5.6.0 through 5.9.14...",
+      "description": "Craft CMS is a content management system (CMS). In versions 5.6.0 through 5.9.14, the `actionSavePermissions()` endpoint allows a user with only `viewUsers` permission to remove arbitrary users from all user groups. While `_saveUserGroups()` enforces per-group authorization for additions, it performs no equivalent authorization check for removals, so submitting an empty `groups` value removes all ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41128",
+      "cve_id": "CVE-2026-41128",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-05-01T23:42:59.807284+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-41128 is a critical vulnerability in Craft CMS versions 5.6.0 through 5.9.14, allowing an attacker with only 'viewUsers' permission to remove arbitrary users from all user groups via the 'actionSavePermissions()' endpoint. This occurs due to a lack of authorization checks for user removals, unlike the 'additions' which are enforced by '_saveUserGroups()'. If exploited, an attacker could gain elevated privileges, potentially leading to data breaches or ransomware attacks. To remediate, update to Craft CMS version 5.9.15 or later, and ensure the 'actionSavePermissions()' endpoint is properly secured. Additionally, consider implementing additional security measures, such as user permission reviews and access controls.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-41055: WWBN AVideo is an open source video platform. In versions 29.0 and below, an inc...",
-      "description": "WWBN AVideo is an open source video platform. In versions 29.0 and below, an incomplete SSRF fix in AVideo's LiveLinks proxy adds `isSSRFSafeURL()` validation but leaves DNS TOCTOU vulnerabilities where DNS rebinding between validation and the actual HTTP request redirects traffic to internal endpoints. Commit 8d8fc0cadb425835b4861036d589abcea4d78ee8 contains an updated fix.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41055",
-      "cve_id": "CVE-2026-41055",
+      "title": "CVE-2026-41127: BigBlueButton is an open-source virtual classroom. Versions prior to 3.0.24 have...",
+      "description": "BigBlueButton is an open-source virtual classroom. Versions prior to 3.0.24 have a missing authorization that allows viewers to inject/overwrite captions Version 3.0.24 tightened the permissions on who is able to submit captions. No known workarounds are available.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41127",
+      "cve_id": "CVE-2026-41127",
       "source": "NVD",
       "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.6,
-      "published": "2026-05-01T22:40:54.653498+00:00",
+      "severity": "medium",
+      "cvss_score": 6.5,
+      "published": "2026-05-01T23:42:59.807269+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -484,22 +459,22 @@
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-41055 is a high-severity vulnerability in WWBN AVideo versions 29.0 and below, allowing attackers to exploit DNS rebinding between validation and actual HTTP requests. This enables them to redirect traffic to internal endpoints, potentially leading to data breaches or privilege escalation. To remediate, update to version 30.0 or later, ensuring the fix in commit 8d8fc0cadb425835b4861036d589abcea4d78ee8 is applied. Specifically, administrators should check the LiveLinks proxy configuration and validate that the `isSSRFSafeURL()` function is correctly implemented. This will prevent attackers from exploiting the DNS TOCTOU vulnerability.",
+      "ai_summary": "CVE-2026-41127 is a missing authorization vulnerability in BigBlueButton versions prior to 3.0.24, allowing viewers to inject or overwrite captions. This vulnerability can be exploited by an attacker using T1190 (Exploit Public-Facing Application) to gain unauthorized access to the virtual classroom. If exploited, this vulnerability can lead to data tampering and potential disruption of online classes. To remediate this issue, administrators should update to BigBlueButton version 3.0.24 or later, as no workarounds are available. Additionally, it is recommended to implement strict access controls and monitor user activity to prevent potential abuse.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "severity_score": 6.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-40935: WWBN AVideo is an open source video platform. In versions 29.0 and prior, `objec...",
-      "description": "WWBN AVideo is an open source video platform. In versions 29.0 and prior, `objects/getCaptcha.php` accepts the CAPTCHA length (`ql`) directly from the query string with no clamping or sanitization, letting any unauthenticated client force the server to generate a 1-character CAPTCHA word. Combined with a case-insensitive `strcasecmp` comparison over a ~33-character alphabet and the fact that faile",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40935",
-      "cve_id": "CVE-2026-40935",
+      "title": "CVE-2026-41126: BigBlueButton is an open-source virtual classroom. Versions prior to 3.0.24 have...",
+      "description": "BigBlueButton is an open-source virtual classroom. Versions prior to 3.0.24 have an Open Redirect through bigbluebutton/api/join via get-parameter \"logoutURL.\" Version 3.0.24 has adjusted the handling of requests with incorrect checksum so that the default logoutURL is used. No known workarounds are available.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41126",
+      "cve_id": "CVE-2026-41126",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": 5.3,
-      "published": "2026-05-01T22:40:54.653485+00:00",
+      "cvss_score": 4.3,
+      "published": "2026-05-01T23:42:59.807256+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -511,61 +486,15 @@
       "epss_score": null
     },
     {
-      "title": "CVE-2026-40929: WWBN AVideo is an open source video platform. In versions 29.0 and prior, `objec...",
-      "description": "WWBN AVideo is an open source video platform. In versions 29.0 and prior, `objects/commentDelete.json.php` is a state-mutating JSON endpoint that deletes comments but performs no CSRF validation. It does not call `forbidIfIsUntrustedRequest()`, does not verify a CSRF/global token, and does not check `Origin`/`Referer`. Because AVideo intentionally sets `session.cookie_samesite=None` (to support cr",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40929",
-      "cve_id": "CVE-2026-40929",
+      "title": "CVE-2026-41064: WWBN AVideo is an open source video platform. In versions up to and including 29...",
+      "description": "WWBN AVideo is an open source video platform. In versions up to and including 29.0, an incomplete fix for AVideo's `test.php` adds `escapeshellarg` for wget but leaves the `file_get_contents` and `curl` code paths unsanitized, and the URL validation regex `/^http/` accepts strings like `httpevil[.]com`. Commit 78bccae74634ead68aa6528d631c9ec4fd7aa536 contains an updated fix.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41064",
+      "cve_id": "CVE-2026-41064",
       "source": "NVD",
       "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.4,
-      "published": "2026-05-01T22:40:54.653471+00:00",
-      "ttps": [
-        {
-          "id": "T1586.002",
-          "name": "Email Accounts",
-          "tactic": "Resource Development",
-          "tactic_id": "TA0042"
-        },
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-40928: WWBN AVideo is an open source video platform. In versions 29.0 and prior, multip...",
-      "description": "WWBN AVideo is an open source video platform. In versions 29.0 and prior, multiple AVideo JSON endpoints under `objects/` accept state-changing requests via `$_REQUEST`/`$_GET` and persist changes tied to the caller's session user, without any anti-CSRF token, origin check, or referer check. A malicious page visited by a logged-in victim can silently cast/flip the victim's like/dislike on any comm",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40928",
-      "cve_id": "CVE-2026-40928",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.4,
-      "published": "2026-05-01T22:40:54.653455+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-40926: WWBN AVideo is an open source video platform. In versions 29.0 and prior, three ...",
-      "description": "WWBN AVideo is an open source video platform. In versions 29.0 and prior, three admin-only JSON endpoints — `objects/categoryAddNew.json.php`, `objects/categoryDelete.json.php`, and `objects/pluginRunUpdateScript.json.php` — enforce only a role check (`Category::canCreateCategory()` / `User::isAdmin()`) and perform state-changing actions against the database without calling `isGlobalTokenValid()` ",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40926",
-      "cve_id": "CVE-2026-40926",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.1,
-      "published": "2026-05-01T22:40:54.653436+00:00",
+      "severity": "critical",
+      "cvss_score": 9.3,
+      "published": "2026-05-01T23:42:59.807244+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -583,17 +512,66 @@
       "epss_score": null
     },
     {
-      "title": "CVE-2026-3307: An authorization bypass vulnerability was identified in GitHub Enterprise Server...",
-      "description": "An authorization bypass vulnerability was identified in GitHub Enterprise Server that allowed an attacker with admin access on one repository to modify the secret scanning push protection delegated bypass reviewer list on another repository by manipulating the owner_id parameter in the request body. Authorization was verified against the repository in the URL, but the action was applied to a diffe",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-3307",
-      "cve_id": "CVE-2026-3307",
+      "title": "CVE-2026-41059: OAuth2 Proxy is a reverse proxy that provides authentication using OAuth2 provid...",
+      "description": "OAuth2 Proxy is a reverse proxy that provides authentication using OAuth2 providers. Versions 7.5.0 through 7.15.1 have a configuration-dependent authentication bypass. Deployments are affected when all of the following are true: Use of `skip_auth_routes` or the legacy `skip_auth_regex`; use of patterns that can be widened by attacker-controlled suffixes, such as `^/foo/.*/bar$` causing potential ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41059",
+      "cve_id": "CVE-2026-41059",
       "source": "NVD",
       "category": "cve",
-      "severity": "low",
-      "cvss_score": 2.7,
-      "published": "2026-05-01T22:40:54.653393+00:00",
+      "severity": "high",
+      "cvss_score": 8.2,
+      "published": "2026-05-01T23:42:59.807230+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-40575: OAuth2 Proxy is a reverse proxy that provides authentication using OAuth2 provid...",
+      "description": "OAuth2 Proxy is a reverse proxy that provides authentication using OAuth2 providers. Versions 7.5.0 through 7.15.1 may trust a client-supplied `X-Forwarded-Uri` header when `--reverse-proxy` is enabled and `--skip-auth-regex` or `--skip-auth-route` is configured. An attacker can spoof this header so OAuth2 Proxy evaluates authentication and skip-auth rules against a different path than the one act",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40575",
+      "cve_id": "CVE-2026-40575",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": 9.1,
+      "published": "2026-05-01T23:42:59.807213+00:00",
       "ttps": [],
       "epss_score": null
+    },
+    {
+      "title": "CVE-2026-40343: free5GC UDR is the user data repository (UDR) for free5GC, an an open-source pro...",
+      "description": "free5GC UDR is the user data repository (UDR) for free5GC, an an open-source project for 5th generation (5G) mobile core networks. In versions up to and including 1.4.2, a fail-open request handling flaw in the UDR service causes the `/nudr-dr/v2/policy-data/subs-to-notify` POST handler to continue processing requests even after request body retrieval or deserialization errors. This may allow unin",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40343",
+      "cve_id": "CVE-2026-40343",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.8,
+      "published": "2026-05-01T23:42:59.807180+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1486",
+          "name": "Data Encrypted for Impact",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
+        }
+      ],
+      "epss_score": null,
+      "threat_actors": [
+        "Conti"
+      ]
     },
     {
       "title": "76% of All Crypto Stolen in 2026 Is Now in North Korea",
@@ -1903,8 +1881,8 @@
         }
       ],
       "threat_actors": [
-        "Conti",
-        "LockBit"
+        "LockBit",
+        "Conti"
       ]
     },
     {
