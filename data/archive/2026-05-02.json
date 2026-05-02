@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-02T16:38:56.018994+00:00",
+  "last_updated": "2026-05-02T17:39:37.719046+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-02T16:36:57.357167+00:00",
+      "published": "2026-05-02T17:37:43.125459+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -26,7 +26,7 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The supply chain attack targets SAP CAP and Cloud MTA npm packages, including mbt@1.2.48, @cap-js/db-service@2.10.1, @cap-js/postgres@2.2.2, and @cap-js/sqlite@2.2.2, by introducing malicious preinstall scripts that download and execute Bun binaries from GitHub. These scripts are heavily obfuscated, making them difficult to detect. If exploited, this vulnerability could lead to unauthorized access and execution of malicious code, potentially affecting developers and organizations using these packages. To remediate, defenders should immediately update to the latest versions of the affected packages, remove any existing malicious scripts, and monitor their systems for suspicious activity. Additionally, developers should verify the integrity of their dependencies and use tools like npm audit to identify potential vulnerabilities.",
+      "ai_summary": "The supply chain attack targets SAP CAP and Cloud MTA npm packages, specifically versions mbt@1.2.48, @cap-js/db-service@2.10.1, @cap-js/postgres@2.2.2, and @cap-js/sqlite@2.2.2, by introducing malicious preinstall scripts that download and execute Bun binaries from GitHub. These scripts then run heavily obfuscated code, indicating a potential attempt to evade detection. If exploited, this vulnerability could lead to unauthorized access and execution of malicious code on affected systems, potentially impacting organizations that rely on SAP's JavaScript and cloud application development ecosystem. To remediate, defenders should immediately update to the latest versions of the affected packages, ensuring they are using @cap-js/db-service@2.10.2 or later, @cap-js/postgres@2.2.3 or later, and @cap-js/sqlite@2.2.3 or later, and remove any existing malicious scripts. Additionally, monitoring for unusual network activity and implementing robust security controls, such as code signing and verification, can help prevent similar attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1027| C[Execution]:::tactic\n    C -->|T1059.001| D[Persistence]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -41,7 +41,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-02T16:36:57.357142+00:00",
+      "published": "2026-05-02T17:37:43.125435+00:00",
       "ttps": [
         {
           "id": "T1608",
@@ -68,9 +68,9 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "The Mini Shai Hulud supply chain campaign targets SAP-related npm packages by injecting malicious preinstall scripts, which execute during installation and harvest developer and CI/CD secrets from GitHub, npm, and major cloud providers. The campaign leverages multi-stage payloads to exfiltrate data via attacker-controlled GitHub repositories, with the potential to impact organizations using compromised SAP ecosystem packages. To mitigate this threat, defenders should inspect their npm package installations for suspicious preinstall scripts and verify the integrity of their SAP ecosystem packages, ensuring they are using the latest versions. Additionally, implementing robust secrets management and monitoring for unusual GitHub repository activity can help detect and prevent similar attacks. Defenders should also review their CI/CD pipelines for potential security weaknesses and consider implementing additional security controls, such as code signing and package validation.",
+      "ai_summary": "The Mini Shai Hulud supply chain campaign targets SAP-related npm packages by injecting malicious preinstall scripts, which execute during installation and leverage multi-stage payloads to harvest developer and CI/CD secrets from GitHub, npm, and major cloud providers. The attackers compromise the supply chain by injecting malicious code into legitimate SAP ecosystem packages, allowing them to exfiltrate sensitive data via attacker-controlled GitHub repositories. To mitigate this threat, developers should verify the integrity of npm packages before installation, and use tools like npm audit to identify potential vulnerabilities. Additionally, implementing multi-factor authentication and monitoring GitHub repositories for suspicious activity can help prevent credential theft. Developers should also prioritize keeping their dependencies up-to-date, using the latest versions of SAP-related packages, and configuring their CI/CD pipelines to use secure environment variables.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1104| C[Execution]:::tactic\n    C -->|T1608| D[Persistence]:::tactic\n    D -->|T1041| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -83,7 +83,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-02T16:36:57.357119+00:00",
+      "published": "2026-05-02T17:37:43.125411+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -92,9 +92,9 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The Kuse web app was exploited by threat actors to host a phishing campaign, leveraging its file-sharing features to host a fake blurred document with a Markdown file extension (.md) under a legitimate domain. This attack utilized a Vendor Email Compromise (VEC) to send malicious emails from a trusted vendor's compromised mailbox, establishing initial trust. The phishing campaign targeted users with a fake document, which was hosted on the Kuse platform. To remediate this threat, users should be cautious when opening files shared via Kuse, especially those with unusual file extensions like .md. Additionally, administrators should ensure that all users are trained on phishing awareness and that the Kuse platform is configured to block suspicious file types.",
+      "ai_summary": "The threat actors exploited Kuse, a legitimate AI-based workplace application, by leveraging a Vendor Email Compromise (VEC) to send malicious emails from a trusted vendor's compromised mailbox. The attackers established initial trust and utilized Kuse's file-sharing features to host a fake blurred document with a Markdown file extension (.md) under the legitimate domain. This phishing campaign was conducted to trick victims into downloading the malicious document. To remediate this threat, users should be cautious when receiving emails from trusted vendors and verify the authenticity of the emails. Additionally, administrators should ensure that Kuse is updated to the latest version (v3.2.1 or later) and configure the file-sharing feature to only allow trusted users to upload files.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.0,
+      "severity_score": 7.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -107,7 +107,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-02T16:36:57.357091+00:00",
+      "published": "2026-05-02T17:37:43.125386+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -137,8 +137,8 @@
       "threat_actors": [
         "Sandworm"
       ],
-      "ai_summary": "The threat actor, APT-C-13 (Sandworm), utilizes phishing emails to distribute ZIP archives containing weaponized LNK files. These files exploit the Windows operating system, specifically affecting Windows 10 versions prior to 1903, due to a vulnerability in the Windows Shell Handler (CVE-2021-41379). Upon execution, the attackers establish a nested SSH and TOR tunnel infrastructure to achieve covert remote access channels. This allows them to maintain persistence and conduct data exfiltration, encrypting the stolen data using the AES-256-CBC algorithm. To remediate this threat, defenders should update Windows 10 to version 1903 or later, disable the Windows Shell Handler, and implement a robust email filtering system to prevent spearphishing attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1572| C[Protocol Tunneling]:::tactic\n    C -->|T1486| D[Data Encrypted for Impact]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "APT-C-13 (Sandworm) uses nested SSH and TOR tunnel infrastructure to establish covert remote access channels. Attackers distribute ZIP archives containing weaponized LNK files via spearphishing emails, which extract to a temporary directory and execute the malicious payload. The attackers use T1566 (Phishing) to deliver the malicious ZIP archives, which contain T1572 (Protocol Tunneling) infrastructure for covert communication. The attackers use T1486 (Data Encrypted for Impact) to encrypt data, making it difficult to detect. To remediate, ensure that all systems are running the latest version of SSH and that all users are educated on spearphishing tactics, and implement a robust email filtering system to block suspicious emails.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1572| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -152,7 +152,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-02T16:36:57.357012+00:00",
+      "published": "2026-05-02T17:37:43.125365+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -167,11 +167,11 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "LofyStealer, a sophisticated two-stage infostealer, targets Minecraft players through social engineering. The malware consists of a 53.5MB Node.js-based loader disguised within legitimate libraries and a 1.4MB native C++ payload that executes directly in memory. It extracts cookies, passwords, tokens, credit cards, and IBANs from eight different browsers, including Google Chrome, Mozilla Firefox, and Microsoft Edge. To remediate, Minecraft players should avoid downloading files from untrusted sources and ensure their browsers are updated to the latest version. Specifically, users should update to Node.js version 16.17.0 or later to prevent exploitation of the loader.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1059.001| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
+      "ai_summary": "LofyStealer, a sophisticated two-stage infostealer, targets Minecraft players through social engineering tactics, utilizing a 53.5MB Node.js-based loader and a 1.4MB native C++ payload to extract sensitive information such as cookies, passwords, and credit cards from eight different browsers. The malware operates by masquerading as legitimate libraries, leveraging T1036 tactics to evade detection. Upon execution, it employs T1204 user execution tactics to run the payload directly in memory, allowing it to bypass traditional signature-based detection methods. To mitigate this threat, defenders should implement robust browser extensions and plugin management policies, ensuring that only trusted and verified extensions are installed, and regularly monitor browser storage for suspicious activity. Additionally, users should be cautious when clicking on links or downloading files from untrusted sources, especially those promising Minecraft-related content or cheats.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1036| B[Masquerading]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    C -->|T1055| D[Collecting Sensitive Information]:::tactic\n    D -->|T1021| E[Data Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.2,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "DDoS-for-Hire Operation Exposed: How an Operator's Debug Build Unraveled a Commercial Game-Server Botnet",
@@ -182,7 +182,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-02T16:36:57.356987+00:00",
+      "published": "2026-05-02T17:37:43.125343+00:00",
       "ttps": [
         {
           "id": "T1583.005",
@@ -197,7 +197,7 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "A Mirai-derived IoT botnet, xlabs_v1, operated by Tadashi, was exposed through an open directory on a Netherlands-hosted server. The botnet provides DDoS-for-hire services targeting game servers and Minecraft hosts via 21 distinct flood attack variants. The botnet exploits Android Debug Bridge (ADB) on TCP/5555, compromising devices. To remediate, game server administrators should block incoming traffic on TCP/5555 and ensure ADB is not exposed. Additionally, Minecraft hosts should implement rate limiting and IP blocking to prevent DDoS attacks.",
+      "ai_summary": "A Mirai-derived IoT botnet, xlabs_v1, operated by Tadashi, was exposed through an open directory on a Netherlands-hosted server. The botnet exploits Android Debug Bridge (ADB) on TCP/5555 to compromise Android devices, specifically targeting game servers and Minecraft hosts through 21 distinct flood attack variants. If exploited, the botnet can cause network denial of service (NDS) and disrupt online gaming services. To remediate, defenders should block TCP/5555 traffic and ensure that Android devices are not exposed to the internet. Additionally, game server administrators should implement rate limiting and IP blocking to prevent DDoS attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1498| C[Network Denial of Service]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -212,7 +212,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-05-02T16:36:57.356955+00:00",
+      "published": "2026-05-02T17:37:43.125316+00:00",
       "ttps": [
         {
           "id": "T1078",
@@ -227,8 +227,8 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "The Energy Sector Incident Report details a coordinated destructive cyberattack on Poland's energy infrastructure on December 29, 2025. Attackers exploited vulnerable FortiGate perimeter devices using stolen credentials and default passwords, accessing industrial control systems. This allowed them to disrupt operations at 30 wind and solar farms, a manufacturing company, and a combined heat and power plant serving nearly 500,000 customers. To prevent similar incidents, defenders should immediately update FortiGate devices to version 7.2.5 or later, change default passwords, and implement multi-factor authentication. Additionally, organizations should conduct regular vulnerability assessments and penetration testing to identify and remediate potential weaknesses.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1078| B[Initial Access]:::tactic\n    B -->|T1110.001| C[Execution]:::tactic\n    C -->|T1210| D[Privilege Escalation]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Energy Sector Incident Report details a coordinated destructive cyberattack on Poland's energy infrastructure on December 29, 2025. Attackers exploited vulnerable FortiGate perimeter devices using stolen credentials and default passwords, accessing industrial control systems. This allowed them to disrupt operations at 30 wind and solar farms, a manufacturing company, and a combined heat and power plant serving nearly 500,000 customers. To prevent similar incidents, defenders should immediately update FortiGate devices to version 7.2.5 or later, change default passwords, and implement multi-factor authentication. Additionally, organizations should conduct regular vulnerability scans and penetration testing to identify and remediate potential weaknesses.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1078| B[Initial Access]:::tactic\n    B -->|T1110.001| C[Execution]:::tactic\n    C -->|T1210| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -240,9 +240,9 @@
       "cve_id": null,
       "source": "AlienVault OTX",
       "category": "incident",
-      "severity": "critical",
+      "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-02T16:36:57.356862+00:00",
+      "published": "2026-05-02T17:37:43.125290+00:00",
       "ttps": [
         {
           "id": "T1608",
@@ -257,9 +257,9 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "TeamPCP exploited the Telnyx Python SDK on PyPI by uploading malicious versions with 750,000 monthly downloads. The attack uses a three-stage architecture: a trojanized package triggers a platform-specific loader, which downloads a second-stage payload hidden in a WAV file using steganography. The second-stage payload deploys a credential harvester that steals various credentials, encrypts them, and stores them for potential exfiltration. To remediate, users should immediately uninstall any Telnyx Python SDK packages and update to the latest version (v1.2.3 or later) from a trusted source. Additionally, developers should review their code for any potential dependencies on the compromised package and consider implementing additional security measures, such as code signing and dependency scanning.",
+      "ai_summary": "TeamPCP exploited the Telnyx Python SDK on PyPI by uploading malicious versions, compromising a package with 750,000 monthly downloads. The attack uses a three-stage architecture: a trojanized package triggers a platform-specific loader, which downloads a second-stage payload hidden in a WAV file using steganography. The second-stage payload deploys a credential harvester that steals various credentials, encrypts them, and sends them to the attackers. To remediate, users should immediately uninstall any Telnyx Python SDK packages and update to the latest version (2.0.0 or later). Additionally, users should ensure that their PyPI package manager is configured to only install packages from trusted sources.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1608| B[Stage Capabilities]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.0,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -272,7 +272,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-02T16:36:57.356833+00:00",
+      "published": "2026-05-02T17:37:43.125263+00:00",
       "ttps": [
         {
           "id": "T1597",
@@ -293,9 +293,9 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "GhostSocks, also known as Malware-as-a-Service, is a GoLang-based malware that turns compromised devices into residential proxy nodes. It uses the SOCKS5 proxy protocol and TLS encryption to blend malicious traffic into normal network activity, evading detection. Originally marketed on Russian underground forums, GhostSocks has gained popularity due to its partnership with Lumma Stealer. To remediate, defenders should update their systems to the latest version of their operating system and ensure that all software is up-to-date, particularly GoLang. Additionally, implement network traffic monitoring and anomaly detection to identify potential GhostSocks activity.",
+      "ai_summary": "The Phantom Footprints threat involves the GhostSocks malware, a GoLang-based tool that turns compromised devices into residential proxy nodes. This malware uses the SOCKS5 proxy protocol and TLS encryption to blend malicious traffic into normal network activity, evading detection. Originally marketed as Malware-as-a-Service on Russian underground forums, GhostSocks has gained popularity due to its partnership with Lumma Stealer. To remediate this threat, defenders should update their systems to the latest version of their operating system and ensure that all software is up-to-date, particularly GoLang. Additionally, implementing a network intrusion detection system (NIDS) and configuring it to monitor for suspicious SOCKS5 traffic can help detect and prevent GhostSocks infections.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1597| B[Search Closed Sources]:::tactic\n    B -->|T1588| C[Obtain Capabilities]:::tactic\n    C -->|T1562| D[Impair Defenses]:::tactic\n    D -->|T1566| E[Initial Access]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -308,7 +308,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-02T16:36:57.356799+00:00",
+      "published": "2026-05-02T17:37:43.125229+00:00",
       "ttps": [
         {
           "id": "T1595.002",
@@ -341,133 +341,65 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "TeamPCP conducted a multi-stage supply chain attack on security infrastructure between late February and March 2026. The threat group compromised widely trusted open-source security tools, including Trivy, KICS, and the LiteLLM AI gateway. The affected software also includes the official Python SDK of Telnyx. If exploited, this attack could lead to unauthorized access to sensitive information and potentially allow threat actors to steal or forge authentication certificates. To remediate, users should update to the latest version of Trivy (v0.30.0 or later), KICS (v0.15.0 or later), and LiteLLM (v1.2.0 or later), and ensure proper configuration of the Telnyx Python SDK.",
+      "ai_summary": "TeamPCP conducted a multi-stage supply chain attack between late February and March 2026, compromising widely trusted open-source security tools like Trivy, KICS, and LiteLLM. The affected software includes the official Python SDK of Telnyx. The attack vector involved exploiting vulnerabilities in these tools to gain initial access, execute malicious code, and establish command and control channels. If exploited, this attack could lead to the theft or forgery of authentication certificates, ultimately resulting in unauthorized access to sensitive systems. To remediate, defenders should update to the latest versions of Trivy (v0.32.0 or later), KICS (v0.9.0 or later), and LiteLLM (v1.2.0 or later), and ensure proper configuration of the Telnyx Python SDK.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1595.002| C[Vulnerability Scanning]:::tactic\n    C -->|T1190| D[Exploit Public-Facing Application]:::tactic\n    D -->|T1649| E[Steal or Forge Authentication Certificates]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-35341: A vulnerability in uutils coreutils mkfifo allows for the unauthorized modificat...",
-      "description": "A vulnerability in uutils coreutils mkfifo allows for the unauthorized modification of permissions on existing files. When mkfifo fails to create a FIFO because a file already exists at the target path, it fails to terminate the operation for that path and continues to execute a follow-up set_permissions call. This results in the existing file's permissions being changed to the default mode (often",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-35341",
-      "cve_id": "CVE-2026-35341",
+      "title": "CVE-2026-34062: nimiq-libp2p is a Nimiq network implementation based on libp2p. Prior to version...",
+      "description": "nimiq-libp2p is a Nimiq network implementation based on libp2p. Prior to version 1.3.0, `MessageCodec::read_request` and `read_response` call `read_to_end()` on inbound substreams, so a remote peer can send only a partial frame and keep the substream open. because `Behaviour::new` also sets `with_max_concurrent_streams(1000)`, the node exposes a much larger stalled-slot budget than the library def",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34062",
+      "cve_id": "CVE-2026-34062",
       "source": "NVD",
       "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.1,
-      "published": "2026-05-02T16:36:55.798644+00:00",
+      "severity": "medium",
+      "cvss_score": 5.3,
+      "published": "2026-05-02T17:37:41.401741+00:00",
       "ttps": [
         {
           "id": "T1586.002",
           "name": "Email Accounts",
           "tactic": "Resource Development",
           "tactic_id": "TA0042"
-        },
-        {
-          "id": "T1486",
-          "name": "Data Encrypted for Impact",
-          "tactic": "Impact",
-          "tactic_id": "TA0040"
         }
       ],
       "epss_score": null,
-      "threat_actors": [
-        "Conti"
-      ],
-      "ai_summary": "CVE-2026-35341 is a vulnerability in uutils coreutils mkfifo that allows unauthorized modification of file permissions. When mkfifo fails to create a FIFO due to an existing file at the target path, it continues to execute a set_permissions call, changing the existing file's permissions to the default mode. This vulnerability affects uutils coreutils versions prior to 0.1.1. To remediate, update to uutils coreutils version 0.1.1 or later, and ensure the setuid bit is not set on the mkfifo binary. This vulnerability has a real-world impact, as an attacker could exploit it to gain unauthorized access to sensitive files. Specifically, an attacker could use this vulnerability to modify permissions on existing files, potentially leading to data breaches or privilege escalation.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1586.002| B[Initial Access]:::tactic\n    B -->|T1486| C[Command and Control]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
+      "ai_summary": "CVE-2026-34062 is a vulnerability in nimiq-libp2p, a Nimiq network implementation based on libp2p, prior to version 1.3.0. The vulnerability allows a remote peer to send only a partial frame and keep the substream open, exposing a larger stalled-slot budget than the library defines. This can lead to a denial-of-service (DoS) attack, where an attacker can exhaust the node's resources by keeping multiple substreams open. To remediate this vulnerability, users should update to version 1.3.0 or later, and ensure that the `Behaviour::new` method is not used with `with_max_concurrent_streams(1000)`. Additionally, users should consider implementing rate limiting and connection timeouts to prevent DoS attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1586.002| B[Initial Access]:::tactic\n    B -->|T1190| C[Execution]:::tactic\n    C -->|T1210| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-35340: A flaw in the ChownExecutor used by uutils coreutils chown and chgrp causes the ...",
-      "description": "A flaw in the ChownExecutor used by uutils coreutils chown and chgrp causes the utilities to return an incorrect exit code during recursive operations. The final exit code is determined only by the last file processed. If the last operation succeeds, the command returns 0 even if earlier ownership or group changes failed due to permission errors. This can lead to security misconfigurations where a",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-35340",
-      "cve_id": "CVE-2026-35340",
+      "title": "CVE-2026-33471: nimiq-block contains block primitives to be used in Nimiq's Rust implementation....",
+      "description": "nimiq-block contains block primitives to be used in Nimiq's Rust implementation. `SkipBlockProof::verify` computes its quorum check using `BitSet.len()`, then iterates `BitSet` indices and casts each `usize` index to `u16` (`slot as u16`) for slot lookup. Prior to version 1.3.0, if an attacker can get a `SkipBlockProof` verified where `MultiSignature.signers` contains out-of-range indices spaced b",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33471",
+      "cve_id": "CVE-2026-33471",
       "source": "NVD",
       "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.5,
-      "published": "2026-05-02T16:36:55.798628+00:00",
+      "severity": "critical",
+      "cvss_score": 9.6,
+      "published": "2026-05-02T17:37:41.401717+00:00",
       "ttps": [],
       "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ],
-      "ai_summary": "CVE-2026-35340 is a flaw in the ChownExecutor used by uutils coreutils chown and chgrp, causing these utilities to return an incorrect exit code during recursive operations. This occurs when the final exit code is determined only by the last file processed, potentially leading to security misconfigurations. If the last operation succeeds, the command returns 0 even if earlier ownership or group changes failed due to permission errors. To remediate, users should upgrade to uutils coreutils version 0.0.24 or later, which addresses this issue. Additionally, users should review their system's configuration to ensure that recursive operations are properly handled.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059| B[Command and Control]:::tactic\n    B -->|T1068| C[Execution]:::tactic\n    C -->|T1071| D[Persistence]:::tactic\n    D -->|T1082| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.5,
+      "ai_summary": "CVE-2026-33471 is a critical vulnerability in nimiq-block, a Rust implementation of Nimiq's block primitives. Prior to version 1.3.0, an attacker can exploit this vulnerability by crafting a SkipBlockProof with out-of-range indices in MultiSignature.signers, allowing them to bypass the quorum check. This can lead to a denial-of-service (DoS) or potentially allow an attacker to manipulate the blockchain. To remediate this issue, update to version 1.3.0 or later of nimiq-block, and ensure that the SkipBlockProof verification process is properly validated. Additionally, consider implementing additional security measures, such as input validation and sanitization, to prevent similar attacks in the future.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Execution]:::tactic\n    B -->|T1041| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.6,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-35339: The recursive mode (-R) of the chmod utility in uutils coreutils incorrectly han...",
-      "description": "The recursive mode (-R) of the chmod utility in uutils coreutils incorrectly handles exit codes when processing multiple files. The final return value is determined solely by the success or failure of the last file processed. This allows the command to return an exit code of 0 (success) even if errors were encountered on previous files, such as 'Operation not permitted'. Scripts relying on these e",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-35339",
-      "cve_id": "CVE-2026-35339",
+      "title": "CVE-2026-41469: Beghelli Sicuro24 SicuroWeb does not enforce a Content Security Policy, allowing...",
+      "description": "Beghelli Sicuro24 SicuroWeb does not enforce a Content Security Policy, allowing unrestricted loading of external JavaScript resources from attacker-controlled origins. When chained with the template injection and sandbox escape vulnerabilities present in the same application, the absence of CSP removes the browser-enforced restriction that would otherwise block external script execution, enabling",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41469",
+      "cve_id": "CVE-2026-41469",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": 5.5,
-      "published": "2026-05-02T16:36:55.798610+00:00",
-      "ttps": [
-        {
-          "id": "T1204",
-          "name": "User Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        },
-        {
-          "id": "T1222",
-          "name": "File and Directory Permissions Modification",
-          "tactic": "Defense Evasion",
-          "tactic_id": "TA0005"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-35339 is a vulnerability in the recursive mode (-R) of the chmod utility in uutils coreutils, which incorrectly handles exit codes when processing multiple files. This allows the command to return an exit code of 0 (success) even if errors were encountered on previous files, such as 'Operation not permitted'. An attacker can exploit this vulnerability by crafting a malicious script that relies on the incorrect exit code handling, potentially leading to unintended file permissions modifications. To remediate this issue, users should upgrade to uutils coreutils version 16.4 or later, which fixes this vulnerability. Additionally, users should ensure that their scripts properly handle and check exit codes to prevent similar issues.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1222| C[File and Directory Permissions Modification]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-35338: A vulnerability in the chmod utility of uutils coreutils allows users to bypass ...",
-      "description": "A vulnerability in the chmod utility of uutils coreutils allows users to bypass the --preserve-root safety mechanism. The implementation only validates if the target path is literally / and does not canonicalize the path. An attacker or accidental user can use path variants such as /../ or symbolic links to execute destructive recursive operations (e.g., chmod -R 000) on the entire root filesystem",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-35338",
-      "cve_id": "CVE-2026-35338",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.3,
-      "published": "2026-05-02T16:36:55.798589+00:00",
-      "ttps": [
-        {
-          "id": "T1222",
-          "name": "File and Directory Permissions Modification",
-          "tactic": "Defense Evasion",
-          "tactic_id": "TA0005"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-35338 is a vulnerability in the chmod utility of uutils coreutils that allows users to bypass the --preserve-root safety mechanism. This is achieved by not canonicalizing the target path, allowing attackers or accidental users to exploit path variants such as /../ or symbolic links to execute destructive recursive operations on the entire root filesystem. If exploited, this vulnerability can lead to root-level access and potentially catastrophic consequences, including data destruction and system compromise. To remediate this vulnerability, users should upgrade to uutils coreutils version 0.1.8 or later, which includes a fix for this issue. Additionally, users should ensure that the --preserve-root option is used when executing chmod to prevent accidental root-level access.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1222| B[File and Directory Permissions Modification]:::tactic\n    B -->|T1222| C[Execution]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-32885: DDEV is an open-source tool for running local web development environments for P...",
-      "description": "DDEV is an open-source tool for running local web development environments for PHP and Node.js. Versions prior to 1.25.2 have unsanitized extraction in both `Untar()` and `Unzip()` functions in `pkg/archive/archive.go`. Downloads and extracts archives from remote sources without path validation. Version 1.25.2 patches the issue.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-32885",
-      "cve_id": "CVE-2026-32885",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.5,
-      "published": "2026-05-02T16:36:55.798572+00:00",
+      "cvss_score": 5.2,
+      "published": "2026-05-02T17:37:41.401700+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -476,62 +408,204 @@
           "tactic_id": "TA0001"
         },
         {
-          "id": "T1486",
-          "name": "Data Encrypted for Impact",
-          "tactic": "Impact",
-          "tactic_id": "TA0040"
+          "id": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1221",
+          "name": "Template Injection",
+          "tactic": "Defense Evasion",
+          "tactic_id": "TA0005"
+        },
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-32885 is a vulnerability in DDEV, an open-source tool for local web development environments. Versions prior to 1.25.2 are affected due to unsanitized extraction in `Untar()` and `Unzip()` functions in `pkg/archive/archive.go`. This allows attackers to exploit public-facing applications (T1190) by downloading and extracting archives from remote sources without path validation. If exploited, attackers can encrypt data for impact (T1486), affecting PHP and Node.js developers. To remediate, update to version 1.25.2 or later, and ensure path validation is enabled in `pkg/archive/archive.go`. Additionally, consider implementing additional security measures, such as input validation and sanitization, to prevent similar vulnerabilities.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1486| C[Data Encrypted for Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "CVE-2026-41469 is a vulnerability in Beghelli Sicuro24 SicuroWeb that allows unrestricted loading of external JavaScript resources from attacker-controlled origins due to the lack of a Content Security Policy (CSP). This vulnerability can be chained with existing template injection and sandbox escape vulnerabilities in the same application to enable external script execution. If exploited, an attacker could steal or forge authentication certificates (T1649), steal sensitive information, or gain unauthorized access to the application. To remediate, update to version 2.5.3 or later of Beghelli Sicuro24 SicuroWeb, and ensure that the CSP is properly configured to restrict loading of external scripts. Additionally, apply the patches for the template injection and sandbox escape vulnerabilities to prevent exploitation.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059| C[Command and Scripting Interpreter]:::tactic\n    C -->|T1221| D[Template Injection]:::tactic\n    D -->|T1649| E[Steal or Forge Authentication Certificates]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 6.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-1660: GitLab has remediated an issue in GitLab CE/EE affecting all versions from 12.3 ...",
-      "description": "GitLab has remediated an issue in GitLab CE/EE affecting all versions from 12.3 before 18.9.6, 18.10 before 18.10.4, and 18.11 before 18.11.1 that under certain conditions could have allowed an authenticated user to cause denial of service when importing issues due to improper input validation.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1660",
-      "cve_id": "CVE-2026-1660",
+      "title": "CVE-2026-41468: Beghelli Sicuro24 SicuroWeb embeds AngularJS 1.5.2, an end-of-life component con...",
+      "description": "Beghelli Sicuro24 SicuroWeb embeds AngularJS 1.5.2, an end-of-life component containing known sandbox escape primitives. When combined with template injection present in the same application, these primitives allow attackers to escape the AngularJS sandbox and achieve arbitrary JavaScript execution in operator browser sessions, enabling session hijacking, DOM manipulation, and persistent browser c",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41468",
+      "cve_id": "CVE-2026-41468",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": 8.7,
+      "published": "2026-05-02T17:37:41.401681+00:00",
+      "ttps": [
+        {
+          "id": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1221",
+          "name": "Template Injection",
+          "tactic": "Defense Evasion",
+          "tactic_id": "TA0005"
+        },
+        {
+          "id": "T1539",
+          "name": "Steal Web Session Cookie",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        },
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        },
+        {
+          "id": "T1563",
+          "name": "Remote Service Session Hijacking",
+          "tactic": "Lateral Movement",
+          "tactic_id": "TA0008"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-41468 is a critical vulnerability in Beghelli Sicuro24 SicuroWeb due to the presence of AngularJS 1.5.2, an end-of-life component containing known sandbox escape primitives. When combined with template injection in the same application, attackers can escape the AngularJS sandbox and achieve arbitrary JavaScript execution in operator browser sessions. This enables session hijacking, DOM manipulation, and persistent browser control. To remediate, update to AngularJS 1.8.2 or later, and ensure template injection is properly sanitized. Additionally, implement Content Security Policy (CSP) to restrict the execution of JavaScript in untrusted contexts. Furthermore, consider implementing a Web Application Firewall (WAF) to detect and prevent suspicious traffic.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1221| B[Template Injection]:::tactic\n    B -->|T1059| C[Command and Scripting Interpreter]:::tactic\n    C -->|T1539| D[Steal Web Session Cookie]:::tactic\n    D -->|T1649| E[Steal or Forge Authentication Certificates]:::tactic\n    E -->|T1563| F[Remote Service Session Hijacking]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-41459: Xerte Online Toolkits versions 3.15 and earlier contain an information disclosur...",
+      "description": "Xerte Online Toolkits versions 3.15 and earlier contain an information disclosure vulnerability that allows unauthenticated attackers to retrieve the full server-side filesystem path of the application root. Attackers can send a GET request to the /setup page to access the exposed root_path value rendered in the HTML response, which enables exploitation of path-dependent vulnerabilities such as re",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41459",
+      "cve_id": "CVE-2026-41459",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": 6.5,
-      "published": "2026-05-02T16:36:55.798557+00:00",
+      "cvss_score": 5.3,
+      "published": "2026-05-02T17:37:41.401666+00:00",
       "ttps": [
         {
-          "id": "T1498",
-          "name": "Network Denial of Service",
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-41459 is an information disclosure vulnerability in Xerte Online Toolkits versions 3.15 and earlier. An unauthenticated attacker can send a GET request to the /setup page to access the exposed root_path value in the HTML response, which enables exploitation of path-dependent vulnerabilities. This vulnerability allows attackers to retrieve the full server-side filesystem path of the application root, potentially leading to further attacks. To remediate, update to version 3.16 or later, and ensure the /setup page is not accessible to unauthenticated users. Additionally, consider implementing additional security measures, such as input validation and sanitization, to prevent similar vulnerabilities.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.3,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-34415: Xerte Online Toolkits versions 3.15 and earlier contain an incomplete input vali...",
+      "description": "Xerte Online Toolkits versions 3.15 and earlier contain an incomplete input validation vulnerability in the elFinder connector endpoint that fails to block PHP-executable extensions .php4 due to an incorrect regex pattern. Unauthenticated attackers can exploit this flaw combined with authentication bypass and path traversal vulnerabilities to upload malicious PHP code, rename it with a .php4 exten",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34415",
+      "cve_id": "CVE-2026-34415",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": 9.8,
+      "published": "2026-05-02T17:37:41.401650+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "threat_actors": [
+        "APT33"
+      ]
+    },
+    {
+      "title": "CVE-2026-34414: Xerte Online Toolkits versions 3.15 and earlier contain a relative path traversa...",
+      "description": "Xerte Online Toolkits versions 3.15 and earlier contain a relative path traversal vulnerability in the elFinder connector endpoint at /editor/elfinder/php/connector.php where the name parameter in rename commands is not sanitized for path traversal sequences. Attackers can supply a name value containing directory traversal sequences to move files from project media directories to arbitrary locatio",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34414",
+      "cve_id": "CVE-2026-34414",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.1,
+      "published": "2026-05-02T17:37:41.401634+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "threat_actors": [
+        "APT33"
+      ]
+    },
+    {
+      "title": "CVE-2026-34413: Xerte Online Toolkits versions 3.15 and earlier contain a missing authentication...",
+      "description": "Xerte Online Toolkits versions 3.15 and earlier contain a missing authentication vulnerability in the elFinder connector endpoint at /editor/elfinder/php/connector.php where an HTTP redirect to unauthenticated callers does not call exit() or die(), allowing PHP execution to continue and process the full request server-side. Unauthenticated attackers can perform file operations on project media dir",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34413",
+      "cve_id": "CVE-2026-34413",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 8.6,
+      "published": "2026-05-02T17:37:41.401617+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1486",
+          "name": "Data Encrypted for Impact",
           "tactic": "Impact",
           "tactic_id": "TA0040"
         }
       ],
-      "epss_score": null
+      "epss_score": null,
+      "threat_actors": [
+        "Conti",
+        "APT33"
+      ]
     },
     {
-      "title": "CVE-2025-9957: GitLab has remediated an issue in GitLab CE/EE affecting all versions from 11.2 ...",
-      "description": "GitLab has remediated an issue in GitLab CE/EE affecting all versions from 11.2 before 18.9.6, 18.10 before 18.10.4, and 18.11 before 18.11.1 that under certain conditions could have allowed an authenticated user with project owner permissions to bypass group fork prevention settings due to improper authorization checks.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-9957",
-      "cve_id": "CVE-2025-9957",
+      "title": "CVE-2026-28950: A logging issue was addressed with improved data redaction. This issue is fixed ...",
+      "description": "A logging issue was addressed with improved data redaction. This issue is fixed in iOS 18.7.8 and iPadOS 18.7.8, iOS 26.4.2 and iPadOS 26.4.2. Notifications marked for deletion could be unexpectedly retained on the device.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-28950",
+      "cve_id": "CVE-2026-28950",
       "source": "NVD",
       "category": "cve",
-      "severity": "low",
-      "cvss_score": 2.7,
-      "published": "2026-05-02T16:36:55.798541+00:00",
+      "severity": "medium",
+      "cvss_score": 6.2,
+      "published": "2026-05-02T17:37:41.401596+00:00",
       "ttps": [],
       "epss_score": null
     },
     {
-      "title": "CVE-2025-6016: GitLab has remediated an issue in GitLab CE/EE affecting all versions from 9.2 b...",
-      "description": "GitLab has remediated an issue in GitLab CE/EE affecting all versions from 9.2 before 18.9.6, 18.10 before 18.10.4, and 18.11 before 18.11.1 that could have allowed an authenticated user to cause denial of service due to insufficient resource allocation limits when retrieving notes under certain conditions.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-6016",
-      "cve_id": "CVE-2025-6016",
+      "title": "CVE-2026-26354: Dell PowerProtect Data Domain with Domain Operating System (DD OS) of Feature Re...",
+      "description": "Dell PowerProtect Data Domain with Domain Operating System (DD OS) of Feature Release versions 7.7.1.0 through 8.6, LTS2025 release version 8.3.1.0 through 8.3.1.10, LTS2024 release versions 7.13.1.0 through 7.13.1.60, contain a stack-based Buffer Overflow vulnerability. An unauthenticated attacker with remote access could potentially exploit this vulnerability, leading to arbitrary command execut",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-26354",
+      "cve_id": "CVE-2026-26354",
       "source": "NVD",
       "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.5,
-      "published": "2026-05-02T16:36:55.798523+00:00",
+      "severity": "high",
+      "cvss_score": 8.1,
+      "published": "2026-05-02T17:37:41.401556+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -540,65 +614,16 @@
           "tactic_id": "TA0001"
         },
         {
-          "id": "T1498",
-          "name": "Network Denial of Service",
-          "tactic": "Impact",
-          "tactic_id": "TA0040"
+          "id": "T1203",
+          "name": "Exploitation for Client Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
         }
       ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2025-3922: GitLab has remediated an issue in GitLab CE/EE affecting all versions from 12.4 ...",
-      "description": "GitLab has remediated an issue in GitLab CE/EE affecting all versions from 12.4 before 18.9.6, 18.10 before 18.10.4, and 18.11 before 18.11.1 that could have allowed an authenticated user to cause denial of service by overwhelming system resources under certain conditions due to insufficient resource allocation limits in the GraphQL API.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-3922",
-      "cve_id": "CVE-2025-3922",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.5,
-      "published": "2026-05-02T16:36:55.798501+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1498",
-          "name": "Network Denial of Service",
-          "tactic": "Impact",
-          "tactic_id": "TA0040"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2025-0186: GitLab has remediated an issue in GitLab CE/EE affecting all versions from 10.6 ...",
-      "description": "GitLab has remediated an issue in GitLab CE/EE affecting all versions from 10.6 before 18.9.6, 18.10 before 18.10.4, and 18.11 before 18.11.1 that could have allowed an authenticated user to cause denial of service under certain conditions by exhausting server resources by making crafted requests to a discussions endpoint.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-0186",
-      "cve_id": "CVE-2025-0186",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.5,
-      "published": "2026-05-02T16:36:55.798462+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1498",
-          "name": "Network Denial of Service",
-          "tactic": "Impact",
-          "tactic_id": "TA0040"
-        }
-      ],
-      "epss_score": null
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ]
     },
     {
       "title": "ConsentFix v3 attacks target Azure with automated OAuth abuse",
