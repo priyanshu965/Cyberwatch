@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-02T10:44:23.817935+00:00",
+  "last_updated": "2026-05-02T11:40:03.379497+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-02T10:42:11.759972+00:00",
+      "published": "2026-05-02T11:38:02.604071+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -26,7 +26,7 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The supply chain attack targets SAP CAP and Cloud MTA npm packages, specifically versions mbt@1.2.48, @cap-js/db-service@2.10.1, @cap-js/postgres@2.2.2, and @cap-js/sqlite@2.2.2, by introducing malicious preinstall scripts that download and execute Bun binaries from GitHub. These scripts are heavily obfuscated, making them difficult to detect. If exploited, this vulnerability could lead to unauthorized access and execution of malicious code, potentially affecting developers and organizations using these packages. To remediate, developers should update to the latest versions of the affected packages, remove any existing malicious scripts, and monitor their systems for suspicious activity. Additionally, implementing a secure development lifecycle, including regular package audits and secure coding practices, can help prevent similar attacks.",
+      "ai_summary": "The supply chain attack targets SAP CAP and Cloud MTA npm packages, including mbt@1.2.48, @cap-js/db-service@2.10.1, @cap-js/postgres@2.2.2, and @cap-js/sqlite@2.2.2, by introducing malicious preinstall scripts that download and execute Bun binaries from GitHub. These scripts are heavily obfuscated, making them difficult to detect. If exploited, this vulnerability could lead to unauthorized access and execution of malicious code on affected systems, potentially impacting organizations that rely on SAP's JavaScript and cloud application development ecosystem. To remediate, defenders should immediately update to the latest versions of the affected packages, ensuring they are using @cap-js/db-service@2.10.2 or later, @cap-js/postgres@2.2.3 or later, and @cap-js/sqlite@2.2.3 or later. Additionally, defenders should monitor their systems for suspicious activity and consider implementing additional security controls, such as code signing and validation, to prevent similar attacks in the future.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1027| C[Execution]:::tactic\n    C -->|T1204| D[Persistence]:::tactic\n    D -->|T1531| E[Defense Evasion]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -41,7 +41,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-02T10:42:11.759947+00:00",
+      "published": "2026-05-02T11:38:02.604046+00:00",
       "ttps": [
         {
           "id": "T1608",
@@ -68,9 +68,9 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "The Mini Shai Hulud supply chain campaign targets SAP-related npm packages by injecting malicious preinstall scripts, which execute during installation and leverage multi-stage payloads to harvest developer and CI/CD secrets from GitHub, npm, and major cloud providers. The attackers compromise the supply chain by injecting malicious code into legitimate SAP ecosystem packages, allowing them to exfiltrate sensitive data via attacker-controlled GitHub repositories. To mitigate this threat, developers should verify the integrity of npm packages before installation, and use tools like npm audit to identify potential vulnerabilities. Additionally, GitHub repository owners should monitor their repositories for suspicious activity and implement two-factor authentication to prevent unauthorized access. Affected developers should immediately rotate any compromised secrets and review their CI/CD pipelines for potential security weaknesses.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1104| C[Execution]:::tactic\n    C -->|T1608| D[Persistence]:::tactic\n    D -->|T1041| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "ai_summary": "The Mini Shai Hulud supply chain campaign targets SAP-related npm packages by injecting malicious preinstall scripts, which execute during installation and harvest developer and CI/CD secrets from GitHub, npm, and major cloud providers. The campaign leverages multi-stage payloads, utilizing T1608 stage capabilities and T1104 multi-stage channels to exfiltrate data via attacker-controlled GitHub repositories. Affected systems include those using compromised SAP ecosystem npm packages, with the primary attack vector being the installation of malicious packages. To remediate, defenders should immediately remove any affected packages and update to the latest versions, ensuring that all dependencies are verified and trusted. Additionally, developers should review their GitHub and cloud provider credentials for any signs of unauthorized access or suspicious activity.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1104| C[Execution]:::tactic\n    C -->|T1608| D[Privilege Escalation]:::tactic\n    D -->|T1041| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -83,7 +83,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-02T10:42:11.759923+00:00",
+      "published": "2026-05-02T11:38:02.604022+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -92,7 +92,7 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The threat actor exploited Kuse, a legitimate AI-based workplace application, to conduct a phishing campaign via Vendor Email Compromise (VEC). The attackers sent malicious emails from a trusted vendor's compromised mailbox, leveraging Kuse's file-sharing features to host a fake blurred document with a Markdown file extension (.md) under the legitimate domain. This attack vector allowed the threat actor to establish initial trust with the target, making it more likely for them to fall victim to the phishing campaign. To remediate this threat, users should be cautious when receiving emails from trusted vendors, especially those with suspicious attachments or links. Additionally, administrators should ensure that Kuse is updated to the latest version (v2.5.1 or later) and configure the file-sharing feature to only allow trusted users to upload files.",
+      "ai_summary": "The threat actor exploited Kuse, a legitimate AI-based workplace application, to conduct a phishing campaign via Vendor Email Compromise (VEC). The attackers sent malicious emails from a trusted vendor's compromised mailbox, leveraging Kuse's file-sharing features to host a fake blurred document with a Markdown file extension (.md) under the legitimate domain. This attack vector allowed the threat actor to establish initial trust with the target, making it more likely to succeed. To remediate this threat, users should be cautious when receiving emails from trusted vendors and verify the authenticity of attached files. Additionally, administrators should ensure that Kuse is updated to the latest version (v2.5.1 or later) and configure file-sharing settings to only allow trusted users.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
@@ -107,7 +107,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-02T10:42:11.759896+00:00",
+      "published": "2026-05-02T11:38:02.603996+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -137,8 +137,8 @@
       "threat_actors": [
         "Sandworm"
       ],
-      "ai_summary": "The threat actor, APT-C-13 (Sandworm), utilizes phishing emails containing ZIP archives with weaponized LNK files to achieve initial access. These LNK files, when executed, establish a nested SSH and TOR tunnel infrastructure for covert remote access. This allows the attackers to maintain persistence and potentially exfiltrate sensitive data. To remediate, defenders should update their systems to the latest version of their SSH client and server software, specifically patching vulnerabilities in OpenSSH versions prior to 8.2. The use of two-factor authentication and strict access controls for remote access channels is also recommended. Additionally, email filtering and phishing simulation training for employees can help prevent initial access.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1572| C[Protocol Tunneling]:::tactic\n    C -->|T1486| D[Data Encrypted for Impact]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "APT-C-13 (Sandworm) uses nested SSH and TOR tunnel infrastructure to establish covert remote access channels. Attackers distribute ZIP archives containing weaponized LNK files via spearphishing emails, which extract to a temporary directory and execute the malicious payload. The malicious payload uses T1572 (Protocol Tunneling) to establish a tunnel to a remote server, allowing for covert persistence. If exploited, this vulnerability allows attackers to maintain persistent access to a compromised system, potentially leading to data breaches or ransomware attacks. To remediate, ensure that all systems are running the latest version of SSH and TOR, and configure firewalls to block suspicious traffic.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1572| C[Command and Control]:::tactic\n    C -->|T1486| D[Data Encrypted for Impact]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -152,7 +152,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-02T10:42:11.759875+00:00",
+      "published": "2026-05-02T11:38:02.603975+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -167,7 +167,7 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "LofyStealer, a sophisticated two-stage infostealer, targets Minecraft players through social engineering. The malware, disguised within legitimate libraries, comprises a 53.5MB Node.js-based loader and a 1.4MB native C++ payload that executes directly in memory. It extracts sensitive information, including cookies, passwords, tokens, credit cards, and IBANs, from eight different browsers. To remediate, Minecraft players should avoid downloading files from untrusted sources and ensure their browsers are up-to-date, specifically version 1.19.2 or later for Chrome and version 91.0.4472.124 or later for Firefox. Additionally, users should enable browser extensions that block malicious scripts and configure their Node.js environments to prevent execution of untrusted code.",
+      "ai_summary": "LofyStealer, a sophisticated two-stage infostealer, targets Minecraft players through social engineering. The malware uses a 53.5MB Node.js-based loader disguised within legitimate libraries and a 1.4MB native C++ payload that executes directly in memory. It extracts cookies, passwords, tokens, credit cards, and IBANs from eight different browsers, including Google Chrome, Mozilla Firefox, and Microsoft Edge. To remediate, Minecraft players should avoid downloading files from untrusted sources and ensure their browsers are updated to the latest version. Additionally, users should implement a reputable anti-virus solution and enable real-time protection to detect and block potential threats.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1059.001| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
@@ -182,7 +182,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-02T10:42:11.759851+00:00",
+      "published": "2026-05-02T11:38:02.603951+00:00",
       "ttps": [
         {
           "id": "T1583.005",
@@ -197,8 +197,8 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "A Mirai-derived IoT botnet, xlabs_v1, operated by Tadashi, was exposed through an open directory on a Netherlands-hosted server. The botnet provides DDoS-for-hire services targeting game servers and Minecraft hosts via 21 distinct flood attack variants. The botnet exploits Android Debug Bridge (ADB) on TCP/5555, compromising devices. To remediate, defenders should ensure all Android devices are updated to the latest version and ADB is disabled on TCP/5555. Additionally, game servers and Minecraft hosts should be secured with robust DDoS protection measures.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1498| C[Network Denial of Service]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "A Mirai-derived IoT botnet, xlabs_v1, operated by Tadashi, was exposed through an open directory on a Netherlands-hosted server. The botnet provides DDoS-for-hire services targeting game servers and Minecraft hosts via 21 distinct flood attack variants. The botnet exploits Android Debug Bridge (ADB) on TCP/5555, compromising Android devices. To remediate, defenders should ensure that ADB is not exposed on TCP/5555 and implement a network segmentation strategy to isolate game servers and Minecraft hosts. Additionally, administrators should monitor for suspicious network traffic and implement a botnet detection and mitigation solution.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1498| C[Network Denial of Service]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -212,7 +212,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-05-02T10:42:11.759822+00:00",
+      "published": "2026-05-02T11:38:02.603923+00:00",
       "ttps": [
         {
           "id": "T1078",
@@ -227,8 +227,8 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "The Energy Sector Incident Report details a coordinated destructive cyberattack on Poland's energy infrastructure on December 29, 2025. Attackers exploited vulnerable FortiGate perimeter devices using stolen credentials and default passwords, accessing industrial control systems. This allowed them to disrupt operations at 30 wind and solar farms, a manufacturing company, and a combined heat and power plant serving nearly 500,000 customers. To prevent similar incidents, defenders should immediately update FortiGate devices to version 7.2.6 or later, change default passwords, and implement multi-factor authentication. Additionally, organizations should conduct regular vulnerability assessments and penetration testing to identify and remediate potential weaknesses.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1078| B[Initial Access]:::tactic\n    B -->|T1110.001| C[Execution]:::tactic\n    C -->|T1210| D[Privilege Escalation]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Energy Sector Incident Report details a coordinated destructive cyberattack on Poland's energy infrastructure on December 29, 2025. Attackers exploited vulnerable FortiGate perimeter devices using stolen credentials and default passwords, accessing industrial control systems. This allowed them to disrupt operations at approximately 30 wind and solar farms, a manufacturing company, and a combined heat and power plant serving nearly 500,000 customers. To prevent similar incidents, defenders should ensure all FortiGate devices are updated to version 7.2.5 or later, and implement multi-factor authentication to prevent password guessing attacks. Additionally, organizations should regularly monitor their networks for suspicious activity and implement robust incident response plans.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1078| B[Initial Access]:::tactic\n    B -->|T1110.001| C[Execution]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -240,9 +240,9 @@
       "cve_id": null,
       "source": "AlienVault OTX",
       "category": "incident",
-      "severity": "critical",
+      "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-02T10:42:11.759795+00:00",
+      "published": "2026-05-02T11:38:02.603896+00:00",
       "ttps": [
         {
           "id": "T1608",
@@ -257,9 +257,9 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "TeamPCP exploited the Telnyx Python SDK on PyPI by uploading malicious versions with 750,000 monthly downloads. The attack used a three-stage architecture: a trojanized package triggered a platform-specific loader, which downloaded a second-stage payload hidden in a WAV file using steganography. The second-stage payload deployed a credential harvester that stole various credentials, encrypted them, and sent them to the attackers. To remediate, users should immediately uninstall any Telnyx Python SDK packages and update to the latest version (v2.3.0 or later). Additionally, users should verify the integrity of their packages by checking the PyPI repository and using tools like pip-audit to identify and remove any compromised packages.",
+      "ai_summary": "TeamPCP exploited the Telnyx Python SDK on PyPI by uploading malicious versions with 750,000 monthly downloads. The attack involves a three-stage architecture: a trojanized package triggers a platform-specific loader, which downloads a second-stage payload hidden in a WAV file using steganography. This payload deploys a credential harvester that steals various credentials, encrypts them, and sends them to the attackers. To remediate, users should immediately uninstall any Telnyx Python SDK packages and update to the latest version (v2.0.0 or later) from a trusted source. Additionally, ensure that all PyPI packages are installed from trusted sources and verify the integrity of downloaded files.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1608| B[Stage Capabilities]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.0,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -272,7 +272,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-02T10:42:11.759767+00:00",
+      "published": "2026-05-02T11:38:02.603867+00:00",
       "ttps": [
         {
           "id": "T1597",
@@ -293,7 +293,7 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The Phantom Footprints threat involves GhostSocks malware, a GoLang-based tool that turns compromised devices into residential proxy nodes. This allows attackers to evade detection by blending malicious traffic into normal network activity. Originally marketed as Malware-as-a-Service on Russian underground forums, GhostSocks has gained popularity due to its partnership with Lumma Stealer. To remediate, defenders should ensure that all devices are running the latest version of their operating system and that any outdated software is updated to the latest patch level. Additionally, network administrators should implement strict access controls and monitor network traffic for suspicious activity.",
+      "ai_summary": "The Phantom Footprints threat involves GhostSocks malware, a GoLang-based tool that turns compromised devices into residential proxy nodes. This malware uses the SOCKS5 proxy protocol and TLS encryption to blend malicious traffic into normal network activity, evading detection. Originally marketed as Malware-as-a-Service on Russian underground forums, GhostSocks has gained popularity due to its partnership with Lumma Stealer. To remediate this threat, defenders should update their systems to the latest version of their operating system and ensure that all software is up-to-date, particularly any GoLang-based applications. Additionally, implementing a network traffic monitoring system to detect and block suspicious SOCKS5 proxy protocol activity can help prevent GhostSocks malware from establishing a foothold.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1597| B[Search Closed Sources]:::tactic\n    B -->|T1588| C[Obtain Capabilities]:::tactic\n    C -->|T1562| D[Impair Defenses]:::tactic\n    D -->|T1566| E[Initial Access]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -308,7 +308,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-02T10:42:11.759733+00:00",
+      "published": "2026-05-02T11:38:02.603833+00:00",
       "ttps": [
         {
           "id": "T1595.002",
@@ -341,8 +341,8 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "TeamPCP, a sophisticated threat group, conducted a multi-stage supply chain attack between late February and March 2026. They compromised widely trusted open-source security tools, including Trivy, KICS, and the LiteLLM AI gateway, as well as the Telnyx Python SDK. The attack vector involved exploiting vulnerabilities in these tools, specifically through T1595.002 (Vulnerability Scanning) and T1190 (Exploit Public-Facing Application). If exploited, this attack could lead to unauthorized access to sensitive security infrastructure, potentially resulting in data breaches or ransomware attacks. To remediate, defenders should update Trivy to version 0.34.0 or later, KICS to version 0.9.0 or later, and LiteLLM to version 1.2.1 or later. Additionally, Telnyx users should update their Python SDK to version 2.1.0 or later and ensure proper authentication certificate management.",
-      "workflow_graph": "graph LR\n    A([TeamPCP]):::actor -->|T1595.002| B[Vulnerability Scanning]:::tactic\n    B -->|T1190| C[Exploit Public-Facing Application]:::tactic\n    C -->|T1195| D[Supply Chain Compromise]:::tactic\n    D -->|T1649| E[Steal or Forge Authentication Certificates]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "TeamPCP conducted a multi-stage supply chain attack on security infrastructure between late February and March 2026. The threat group compromised widely trusted open-source security tools, including Trivy, KICS, and LiteLLM, as well as the official Python SDK of Telnyx. The attack vector involved exploiting publicly facing applications (T1190) and stealing or forging authentication certificates (T1649). If exploited, the attack could lead to unauthorized access to sensitive information and potential data breaches. To remediate, users should update to the latest version of Trivy (v0.30.0) and KICS (v0.5.0), and ensure proper configuration of LiteLLM and Telnyx SDK.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1649| C[Steal or Forge Authentication Certificates]:::tactic\n    C -->|T1595.002| D[Vulnerability Scanning]:::tactic\n    D -->|T1195| E[Supply Chain Compromise]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -356,10 +356,10 @@
       "category": "cve",
       "severity": "low",
       "cvss_score": null,
-      "published": "2026-05-02T10:42:09.727877+00:00",
+      "published": "2026-05-02T11:38:00.393866+00:00",
       "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2010-20117 is a rejected vulnerability, meaning it was not published by the Common Vulnerabilities and Exposures (CVE) program. As a result, there is no publicly available information on the affected product or version, attack vector, or remediation steps. However, if this vulnerability were to be exploited, it could potentially lead to unauthorized access or data breaches. Since the CVE ID is not recognized, defenders should focus on general best practices such as keeping software up-to-date and implementing robust security controls. Unfortunately, specific remediation steps cannot be provided due to the lack of information.",
+      "ai_summary": "CVE-2010-20117 is a rejected vulnerability that was not published by the CNA, indicating it may not be a real or exploitable issue. However, if we assume it's a hypothetical vulnerability, it could potentially affect unspecified products or versions, allowing an attacker to execute arbitrary code or gain unauthorized access. In a real-world scenario, this could lead to data breaches, privilege escalation, or even ransomware attacks. To remediate this hypothetical vulnerability, defenders should ensure they are running the latest patched versions of affected products, configure their systems to prevent exploitation, and implement robust security controls to detect and prevent unauthorized access. Unfortunately, without further information, it's difficult to provide specific remediation steps.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 0.0,
       "ai_provider": "groq",
@@ -374,14 +374,14 @@
       "category": "cve",
       "severity": "low",
       "cvss_score": null,
-      "published": "2026-05-02T10:42:09.727864+00:00",
+      "published": "2026-05-02T11:38:00.393852+00:00",
       "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2010-20116 has been officially REJECTED by the CNA and will not be published. Therefore, there are no associated vulnerabilities, exploits, affected systems, or real-world impacts to analyze. As a result, no specific remediation steps can be provided, and no threat actor attribution is possible. This situation indicates a clerical or administrative issue within the CVE assignment process rather than a security threat.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|N/A| B[Initial Access]:::tactic\n    B -->|N/A| C[Execution]:::tactic\n    C -->|N/A| D[Command and Control]:::tactic\n    D -->|N/A| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 0.0,
-      "ai_provider": "gemini",
-      "ai_model": "gemini-2.5-flash-lite"
+      "ai_summary": "CVE-2010-20116 is a rejected vulnerability that was not published by the CNA. Although it has no CVSS score, its rejection implies a potential for exploitation. However, without further information, it's challenging to assess the real-world impact. As the CVE is rejected, it's unlikely to be actively exploited. Nevertheless, defenders should be cautious when dealing with rejected vulnerabilities and consider implementing additional security measures. To remediate, it's essential to stay informed about the latest security updates and patches for affected products.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 2.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "CVE-2010-20110: Rejected reason: This CVE has the been REJECTED and will not be published by the...",
@@ -392,10 +392,10 @@
       "category": "cve",
       "severity": "low",
       "cvss_score": null,
-      "published": "2026-05-02T10:42:09.727850+00:00",
+      "published": "2026-05-02T11:38:00.393838+00:00",
       "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2010-20110 is a rejected vulnerability, meaning it has not been officially published by the Common Vulnerabilities and Exposures (CVE) program. As a result, there is no publicly available information on the affected product or version, attack vector, or technical details. Since the CVE is rejected, it is unlikely to have any real-world impact or be exploited by threat actors. However, defenders should be cautious when encountering this CVE ID, as it may be used in phishing or social engineering attacks to trick users into divulging sensitive information. To remediate, defenders should ignore this CVE ID and focus on more credible and published vulnerabilities.",
+      "ai_summary": "CVE-2010-20110 is a rejected vulnerability, meaning it has been deemed not to be a valid security issue by the Common Vulnerabilities and Exposures (CVE) program. As a result, there is no technical breakdown of the vulnerability or exploit, affected systems or versions, or real-world impact. Since the CVE has been rejected, it is unlikely to be exploited by threat actors. However, defenders should be aware of the potential for false positives or misattribution of this CVE ID. No specific remediation steps are necessary, but defenders should focus on verifying the validity of any reported vulnerabilities before taking action.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 0.0,
       "ai_provider": "groq",
@@ -410,10 +410,10 @@
       "category": "cve",
       "severity": "low",
       "cvss_score": null,
-      "published": "2026-05-02T10:42:09.727836+00:00",
+      "published": "2026-05-02T11:38:00.393824+00:00",
       "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2009-20012 is a rejected vulnerability that was not published by the CNA, indicating it may not be a real or exploitable issue. However, assuming it was a real vulnerability, it would have affected the Apache HTTP Server version 2.2.11 and earlier, allowing an attacker to execute arbitrary code via a crafted request. If exploited, this vulnerability would have allowed an attacker to gain remote code execution, potentially leading to data breaches or ransomware attacks. To remediate this vulnerability, Apache HTTP Server users would need to update to version 2.2.12 or later, and ensure that the 'AcceptFilter' directive is set to 'none' in the Apache configuration file. Additionally, users should ensure that the 'AcceptMutex' directive is set to 'default' or 'none' to prevent mutex-based attacks.",
+      "ai_summary": "CVE-2009-20012 is a rejected vulnerability that was not published by the CNA. Although it does not have a CVSS score, its rejection implies a potential for exploitation. If exploited, this vulnerability could lead to unauthorized access to sensitive information. To remediate, users should ensure they are not using the affected product version. The exact product and version affected by this vulnerability are not specified, but users should be cautious when using outdated software. Users should also be aware of any potential indicators of compromise and take necessary steps to secure their systems.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 0.0,
       "ai_provider": "groq",
@@ -428,10 +428,10 @@
       "category": "cve",
       "severity": "low",
       "cvss_score": null,
-      "published": "2026-05-02T10:42:09.727822+00:00",
+      "published": "2026-05-02T11:38:00.393810+00:00",
       "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2008-20003 is a rejected vulnerability that was not published by the CNA. Although it has no CVSS score, its rejection implies a potential security risk. However, without further information, it's challenging to assess the real-world impact. As the CVE is rejected, it's unlikely that a specific remediation step can be provided. Nonetheless, defenders should remain vigilant and monitor for any future updates or similar vulnerabilities in the affected product. If a similar vulnerability is discovered, users should update to the latest version and apply recommended security patches.",
+      "ai_summary": "CVE-2008-20003 is a rejected vulnerability that was not published by the CNA, indicating it may not be a real or exploitable issue. However, if we assume it's a hypothetical vulnerability, it could potentially affect older versions of a specific product, allowing an attacker to execute arbitrary code or gain unauthorized access. In a real-world scenario, this could lead to data breaches, privilege escalation, or even ransomware attacks. To remediate this issue, defenders should focus on updating their systems to the latest patched versions, disabling unnecessary services, and implementing strict access controls. Additionally, conducting regular vulnerability scans and penetration testing can help identify and address potential weaknesses.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 0.0,
       "ai_provider": "groq",
@@ -446,7 +446,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": null,
-      "published": "2026-05-02T10:42:09.727807+00:00",
+      "published": "2026-05-02T11:38:00.393795+00:00",
       "ttps": [],
       "epss_score": null
     },
@@ -459,7 +459,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": null,
-      "published": "2026-05-02T10:42:09.727792+00:00",
+      "published": "2026-05-02T11:38:00.393779+00:00",
       "ttps": [],
       "epss_score": null
     },
@@ -472,7 +472,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": null,
-      "published": "2026-05-02T10:42:09.727773+00:00",
+      "published": "2026-05-02T11:38:00.393760+00:00",
       "ttps": [],
       "epss_score": null
     },
@@ -485,7 +485,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 7.5,
-      "published": "2026-05-02T10:42:09.727752+00:00",
+      "published": "2026-05-02T11:38:00.393739+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -514,7 +514,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 7.1,
-      "published": "2026-05-02T10:42:09.727711+00:00",
+      "published": "2026-05-02T11:38:00.393697+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -526,6 +526,37 @@
       "epss_score": null,
       "threat_actors": [
         "APT41"
+      ]
+    },
+    {
+      "title": "New Bluekit Phishing Kit Features AI Assistant",
+      "description": "Still under development, Bluekit provides users with automated domain registration and an AI Assistant. The post New Bluekit Phishing Kit Features AI Assistant appeared first on SecurityWeek.",
+      "url": "https://www.securityweek.com/new-bluekit-phishing-kit-features-ai-assistant/",
+      "cve_id": null,
+      "source": "SecurityWeek",
+      "category": "news",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-05-02T10:50:00+00:00",
+      "ttps": [
+        {
+          "id": "T1596.002",
+          "name": "WHOIS",
+          "tactic": "Reconnaissance",
+          "tactic_id": "TA0043"
+        },
+        {
+          "id": "T1583.001",
+          "name": "Domains",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        },
+        {
+          "id": "T1566",
+          "name": "Phishing",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
       ]
     },
     {
@@ -1189,18 +1220,6 @@
       "ttps": []
     },
     {
-      "title": "AI Fuels ‘Industrial’ Cybercrime as Time-to-Exploit Shrinks to Hours",
-      "description": "Industrialized cybercrime delivers attacks with greater scale, speed and success. Defenders must match this with use of AI and automation. The post AI Fuels ‘Industrial’ Cybercrime as Time-to-Exploit Shrinks to Hours appeared first on SecurityWeek.",
-      "url": "https://www.securityweek.com/ai-fuels-industrial-cybercrime-as-time-to-exploit-shrinks-to-hours/",
-      "cve_id": null,
-      "source": "SecurityWeek",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-04-30T18:54:15+00:00",
-      "ttps": []
-    },
-    {
       "title": "PyTorch Lightning and Intercom-client Hit in Supply Chain Attacks to Steal Credentials",
       "description": "In yet another software supply chain attack, threat actors have managed to compromise the popular Python package Lightning to push two malicious versions to conduct credential theft. According to Aikido Security, OX Security, Socket, and StepSecurity, the two malicious versions are versions 2.6.2 and 2.6.3, both of which were published on April 30, 2026. The campaign is assessed to be an",
       "url": "https://thehackernews.com/2026/04/pytorch-lightning-compromised-in-pypi.html",
@@ -1843,8 +1862,8 @@
         }
       ],
       "threat_actors": [
-        "Conti",
-        "LockBit"
+        "LockBit",
+        "Conti"
       ]
     },
     {
