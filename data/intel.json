@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-03T16:40:28.137012+00:00",
+  "last_updated": "2026-05-03T17:41:04.506174+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-03T16:38:05.416198+00:00",
+      "published": "2026-05-03T17:39:10.202726+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -26,8 +26,8 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The supply chain attack targets SAP CAP and Cloud MTA npm packages, specifically versions mbt@1.2.48, @cap-js/db-service@2.10.1, @cap-js/postgres@2.2.2, and @cap-js/sqlite@2.2.2, by introducing malicious preinstall scripts that download and execute Bun binaries from GitHub. These scripts are heavily obfuscated, making them difficult to detect. If exploited, this vulnerability could lead to unauthorized access and execution of malicious code, potentially affecting SAP customers who use these packages. To remediate, defenders should immediately update to the latest versions of the affected packages, ensuring they are using @cap-js/db-service@2.10.2 or later, @cap-js/postgres@2.2.3 or later, and @cap-js/sqlite@2.2.3 or later, and remove any existing malicious scripts. Additionally, monitoring for unusual GitHub downloads and executions can help detect similar attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1027| C[Defense Evasion]:::tactic\n    C -->|T1204| D[Execution]:::tactic\n    D -->|T1543| E[Privilege Escalation]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The supply chain attack targets SAP CAP and Cloud MTA npm packages, including mbt@1.2.48, @cap-js/db-service@2.10.1, @cap-js/postgres@2.2.2, and @cap-js/sqlite@2.2.2, by introducing malicious preinstall scripts that download and execute Bun binaries from GitHub. These scripts are heavily obfuscated, making them difficult to detect. If exploited, this vulnerability could lead to unauthorized access and execution of malicious code, potentially affecting SAP customers who use these packages. To remediate, defenders should update to the latest versions of the affected packages, remove any existing malicious scripts, and monitor their systems for suspicious activity. Additionally, defenders should consider implementing security measures such as code signing and verification to prevent similar attacks in the future.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1027| C[Execution]:::tactic\n    C -->|T1204| D[Persistence]:::tactic\n    D -->|T1531| E[Defense Evasion]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -41,7 +41,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-03T16:38:05.416172+00:00",
+      "published": "2026-05-03T17:39:10.202700+00:00",
       "ttps": [
         {
           "id": "T1608",
@@ -68,7 +68,7 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "The Mini Shai Hulud supply chain campaign targets SAP-related npm packages by injecting malicious preinstall scripts, which execute during installation and leverage multi-stage payloads to harvest developer and CI/CD secrets from GitHub, npm, and major cloud providers. The attackers compromise the supply chain by injecting malicious code into legitimate SAP ecosystem packages, allowing them to exfiltrate sensitive data via attacker-controlled GitHub repositories. To mitigate this threat, developers should verify the integrity of npm packages before installation, and ensure that their GitHub and cloud provider accounts have multi-factor authentication enabled. Additionally, developers should monitor their CI/CD pipelines for suspicious activity and implement strict access controls to prevent unauthorized access. Affected users should update their npm packages to the latest versions and rotate any potentially compromised credentials.",
+      "ai_summary": "The Mini Shai Hulud supply chain campaign targets SAP-related npm packages by injecting malicious preinstall scripts, which execute during installation and harvest developer and CI/CD secrets from GitHub, npm, and major cloud providers. The campaign leverages multi-stage payloads, utilizing T1608 stage capabilities and T1104 multi-stage channels to exfiltrate data via attacker-controlled GitHub repositories. Affected systems include those using compromised SAP npm packages, with real-world impact including the theft of sensitive credentials and potential further exploitation. To remediate, defenders should immediately remove and replace compromised packages with known good versions, and rotate any potentially exposed secrets, ensuring that all dependencies are up-to-date and monitored for suspicious activity. Additionally, implementing T1195 supply chain compromise mitigations, such as verifying the integrity of npm packages and monitoring for unusual preinstall script behavior, can help prevent similar attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1104| C[Execution]:::tactic\n    C -->|T1608| D[Persistence]:::tactic\n    D -->|T1041| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -83,7 +83,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-03T16:38:05.416149+00:00",
+      "published": "2026-05-03T17:39:10.202677+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -92,7 +92,7 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The Kuse web app was exploited by threat actors to host a phishing campaign, leveraging its file-sharing features to host a fake blurred document with a Markdown file extension (.md) under a legitimate domain. This attack utilized a Vendor Email Compromise (VEC) to send malicious emails from a trusted vendor's compromised mailbox, establishing initial trust. The phishing campaign targeted users with a fake document, which was hosted on the Kuse platform. To remediate this threat, users should be cautious when opening files from unknown sources and ensure that their email clients are configured to block suspicious emails. Additionally, administrators should review and update their Kuse application to the latest version, specifically 3.2.1 or later, which includes security patches for this vulnerability.",
+      "ai_summary": "The threat actors exploited Kuse, a legitimate AI-based workplace application, to conduct a phishing campaign. They leveraged a Vendor Email Compromise (VEC) to send malicious emails from a trusted vendor's compromised mailbox, establishing initial trust. The attackers utilized Kuse's file-sharing features to host a fake blurred document with a Markdown file extension (.md) under the legitimate domain. This attack vector allowed the threat actors to bypass traditional security measures and successfully phish victims. To remediate this threat, defenders should ensure that all employees are trained to identify and report suspicious emails, and that Kuse's file-sharing features are configured to only allow trusted users to upload files.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
@@ -107,7 +107,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-03T16:38:05.416124+00:00",
+      "published": "2026-05-03T17:39:10.202651+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -137,8 +137,8 @@
       "threat_actors": [
         "Sandworm"
       ],
-      "ai_summary": "The threat actor, APT-C-13 (Sandworm), uses phishing emails to distribute ZIP archives containing weaponized LNK files. These files exploit the Windows LNK vulnerability, allowing attackers to execute malicious code and establish a remote access channel. The attackers use nested SSH and TOR tunnel infrastructure to create a covert persistence mechanism, enabling them to maintain access to compromised systems. To remediate this threat, defenders should update Windows systems to version 10 or later, which includes patches for the LNK vulnerability (CVE-2021-31166). Additionally, organizations should implement strict email filtering and user education to prevent spearphishing attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1572| C[Command and Control]:::tactic\n    C -->|T1486| D[Data Encrypted for Impact]:::tactic\n    D -->|T1560.001| E[Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The threat actor, APT-C-13 (Sandworm), utilizes phishing emails to distribute ZIP archives containing weaponized LNK files. These files exploit the Windows operating system, specifically affecting Windows 10 versions prior to 1903, via the T1566 (Phishing) tactic. Upon execution, the attackers establish a covert remote access channel using nested SSH and TOR tunnel infrastructure, implementing the T1572 (Protocol Tunneling) tactic. This allows them to achieve covert persistence, leveraging the T1486 (Data Encrypted for Impact) tactic to encrypt data for impact. To remediate, defenders should update Windows 10 to version 1903 or later, disable the execution of LNK files, and implement strict access controls for SSH and TOR tunnel infrastructure.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1572| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -152,7 +152,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-03T16:38:05.416103+00:00",
+      "published": "2026-05-03T17:39:10.202631+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -168,8 +168,8 @@
         }
       ],
       "ai_summary": "LofyStealer, a sophisticated two-stage infostealer, targets Minecraft players through social engineering. The malware consists of a 53.5MB Node.js-based loader disguised within legitimate libraries and a 1.4MB native C++ payload that executes directly in memory. It extracts cookies, passwords, tokens, credit cards, and IBANs from eight different browsers, including Google Chrome, Mozilla Firefox, and Microsoft Edge. If exploited, LofyStealer can lead to sensitive information theft, financial loss, and compromised online accounts. To remediate, Minecraft players should avoid downloading suspicious files, use reputable antivirus software, and keep their browsers and Node.js up-to-date, specifically version 16.17.0 or later.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1059.001| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -182,7 +182,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-03T16:38:05.416080+00:00",
+      "published": "2026-05-03T17:39:10.202608+00:00",
       "ttps": [
         {
           "id": "T1583.005",
@@ -197,8 +197,8 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "A Mirai-derived IoT botnet, xlabs_v1, operated by Tadashi, was exposed through an open directory on a Netherlands-hosted server. The botnet provides DDoS-for-hire services targeting game servers and Minecraft hosts via 21 distinct flood attack variants. The operation exploits Android Debug Bridge (ADB) on TCP/5555, compromising Android devices. To remediate, defenders should restrict access to ADB on TCP/5555, update Android devices to the latest version, and implement a network-based intrusion detection system to monitor for suspicious traffic. Additionally, game server administrators should monitor for unusual traffic patterns and implement rate limiting to prevent DDoS attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1498| C[Network Denial of Service]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "A Mirai-derived IoT botnet, xlabs_v1, operated by Tadashi, was exposed through an open directory on a Netherlands-hosted server. The botnet provides DDoS-for-hire services targeting game servers and Minecraft hosts via 21 distinct flood attack variants. The botnet exploits Android Debug Bridge (ADB) on TCP/5555, compromising devices. To remediate, game server administrators should block incoming traffic on TCP/5555 and ensure ADB is not exposed. Additionally, Minecraft hosts should implement rate limiting and IP blocking to prevent DDoS attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1498| C[Network Denial of Service]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -212,7 +212,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-05-03T16:38:05.416052+00:00",
+      "published": "2026-05-03T17:39:10.202580+00:00",
       "ttps": [
         {
           "id": "T1078",
@@ -227,9 +227,9 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "The Energy Sector Incident Report details a coordinated destructive cyberattack on Poland's energy infrastructure on December 29, 2025. Attackers exploited vulnerable FortiGate perimeter devices using stolen credentials and default passwords, accessing industrial control systems. This allowed them to disrupt operations at approximately 30 wind and solar farms, a manufacturing company, and a combined heat and power plant serving nearly 500,000 customers. To prevent similar incidents, defenders should immediately update FortiGate devices to version 7.2.5 or later, change default passwords, and implement multi-factor authentication. Additionally, organizations should conduct regular vulnerability assessments and penetration testing to identify and remediate potential weaknesses.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1078| B[Initial Access]:::tactic\n    B -->|T1110.001| C[Execution]:::tactic\n    C -->|T1491| D[Privilege Escalation]:::tactic\n    D -->|T1216| E[Data Destruction]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.0,
+      "ai_summary": "The Energy Sector Incident Report details a coordinated destructive cyberattack on Poland's energy infrastructure on December 29, 2025. Attackers exploited vulnerable FortiGate perimeter devices using stolen credentials and default passwords, accessing industrial control systems (ICS) and disrupting operations at 30 wind and solar farms, a manufacturing company, and a combined heat and power plant serving nearly 500,000 customers. This attack demonstrates the potential for devastating consequences when critical infrastructure is targeted. To prevent similar incidents, defenders should ensure that all FortiGate devices are updated to the latest version (FortiOS 7.2.3 or later) and configure strong passwords with multi-factor authentication. Additionally, organizations should implement regular vulnerability scans and penetration testing to identify and remediate potential weaknesses.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1078| B[Initial Access]:::tactic\n    B -->|T1110.001| C[Execution]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -240,9 +240,9 @@
       "cve_id": null,
       "source": "AlienVault OTX",
       "category": "incident",
-      "severity": "critical",
+      "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-03T16:38:05.416025+00:00",
+      "published": "2026-05-03T17:39:10.202554+00:00",
       "ttps": [
         {
           "id": "T1608",
@@ -257,11 +257,11 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "TeamPCP exploited the Telnyx Python SDK on PyPI by uploading malicious versions with 750,000 monthly downloads. The attack involves a three-stage architecture: a trojanized package triggers a platform-specific loader, which downloads a second-stage payload hidden in a WAV file using steganography. This payload deploys a credential harvester that steals various credentials, encrypts them, and sends them to the attackers. To remediate, users should immediately uninstall any Telnyx Python SDK packages and update to the latest version (v1.2.3 or later). Additionally, developers should verify the integrity of all packages using tools like pip-audit and ensure that their systems are running the latest Python versions (3.9.7 or later).",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1608| B[Stage Capabilities]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.0,
+      "ai_summary": "The TeamPCP threat actor has compromised the Telnyx Python SDK, a package with 750,000 monthly downloads, by uploading malicious versions to PyPI. The attack utilizes a three-stage architecture, starting with a trojanized package that triggers a platform-specific loader, which then downloads a second-stage payload hidden in a WAV file using steganography. This payload deploys a credential harvester that steals various credentials, encrypts them, and exfiltrates the data. To remediate this threat, defenders should immediately remove any recently installed or updated versions of the Telnyx Python SDK and replace them with a known good version, ideally by reinstalling from a trusted source. Additionally, defenders should monitor for suspicious activity related to the TTPs detected, including stage capabilities and obfuscated files or information, specifically looking for signs of T1608 and T1027.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1608| B[Stage Capabilities]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1204| D[User Execution]:::tactic\n    D -->|T1005| E[Defense Evasion]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "Phantom Footprints: Tracking GhostSocks Malware",
@@ -272,7 +272,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-03T16:38:05.415998+00:00",
+      "published": "2026-05-03T17:39:10.202527+00:00",
       "ttps": [
         {
           "id": "T1597",
@@ -293,7 +293,7 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "GhostSocks, also known as Malware-as-a-Service, is a GoLang-based malware that turns compromised devices into residential proxy nodes. It uses the SOCKS5 proxy protocol and TLS encryption to blend malicious traffic into normal network activity, evading detection. Originally marketed on Russian underground forums, GhostSocks has gained popularity due to its partnership with Lumma Stealer. To remediate, defenders should update their systems to the latest version of their operating system and ensure that all software is up-to-date, particularly GoLang. Additionally, implementing a network traffic monitoring system to detect and block suspicious SOCKS5 proxy protocol activity is crucial.",
+      "ai_summary": "The Phantom Footprints threat, attributed to GhostSocks malware, exploits compromised devices to create residential proxy nodes, evading detection. This malware, written in GoLang, utilizes the SOCKS5 proxy protocol and TLS encryption to blend malicious traffic with normal network activity. Originally marketed as Malware-as-a-Service on Russian underground forums, GhostSocks has gained popularity through its partnership with Lumma Stealer. To remediate, defenders should update their systems to the latest version of their operating system and ensure that all software is up-to-date, particularly GoLang. Additionally, implementing a robust network monitoring system to detect and block suspicious SOCKS5 proxy protocol traffic is crucial.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1597| B[Search Closed Sources]:::tactic\n    B -->|T1588| C[Obtain Capabilities]:::tactic\n    C -->|T1562| D[Impair Defenses]:::tactic\n    D -->|T1566| E[Initial Access]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -308,7 +308,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-03T16:38:05.415964+00:00",
+      "published": "2026-05-03T17:39:10.202493+00:00",
       "ttps": [
         {
           "id": "T1595.002",
@@ -341,7 +341,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "TeamPCP conducted a multi-stage supply chain attack between late February and March 2026, compromising widely trusted open-source security tools such as Trivy, KICS, and LiteLLM. The attack vector involved exploiting vulnerabilities in these tools to gain initial access, followed by execution of malicious code, and eventual command and control. The affected software includes the official Python SDK of Telnyx, which was used to steal or forge authentication certificates. If exploited, this attack could lead to a data breach or ransomware, affecting organizations that rely on these security tools. To remediate, defenders should update to the latest version of Trivy (v0.30.0) and KICS (v0.7.0), and ensure that LiteLLM is configured to use a secure AI model.",
+      "ai_summary": "TeamPCP conducted a multi-stage supply chain attack between late February and March 2026, compromising widely trusted open-source security tools like Trivy, KICS, and LiteLLM. The attack vector involved exploiting vulnerabilities in these tools to gain initial access, followed by execution of malicious code and establishment of command and control channels. The affected software includes the official Python SDK of Telnyx, which was used to steal or forge authentication certificates. If exploited, this attack could lead to a data breach or ransomware attack on security infrastructure, compromising the integrity of the entire system. To remediate, defenders should update Trivy to version 0.34.0 or later, KICS to version 0.14.0 or later, and LiteLLM to version 1.2.3 or later, and ensure proper configuration of the Telnyx Python SDK.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1595.002| C[Vulnerability Scanning]:::tactic\n    C -->|T1190| D[Exploit Public-Facing Application]:::tactic\n    D -->|T1649| E[Steal or Forge Authentication Certificates]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -356,11 +356,11 @@
       "category": "cve",
       "severity": "critical",
       "cvss_score": 9.8,
-      "published": "2026-05-03T16:38:03.687600+00:00",
+      "published": "2026-05-03T17:39:08.588337+00:00",
       "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2026-31177 is a critical vulnerability in ToToLink A3300R firmware v17.0.0cu.557_B20221024, allowing attackers to execute arbitrary commands via the stunMinAlive parameter to /cgi-bin/cstecgi.cgi. This attack vector is a classic example of a command injection vulnerability, where an attacker can inject malicious commands to execute arbitrary code. If exploited, this vulnerability can lead to remote code execution (RCE), allowing attackers to gain full control over the affected device. To remediate this issue, users should update to the latest firmware version, v17.0.0cu.558_B20230215, which patches this vulnerability. Additionally, administrators should ensure that the stunMinAlive parameter is not exposed to untrusted users and should implement proper input validation and sanitization to prevent similar attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Command and Control]:::tactic\n    B -->|T1486| C[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "CVE-2026-31177 is a critical vulnerability in ToToLink A3300R firmware v17.0.0cu.557_B20221024, allowing attackers to execute arbitrary commands via the stunMinAlive parameter to /cgi-bin/cstecgi.cgi. This attack vector is a classic example of a command injection vulnerability, where an attacker can inject malicious commands to execute arbitrary code. If exploited, this vulnerability can lead to remote code execution (RCE), allowing attackers to gain full control over the affected device. To remediate this issue, users should update to the latest firmware version, v17.0.0cu.558_B20230215, which patches this vulnerability. Additionally, administrators should ensure that the stunMinAlive parameter is properly validated and sanitized to prevent similar attacks in the future.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.8,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -372,16 +372,16 @@
       "cve_id": "CVE-2026-31176",
       "source": "NVD",
       "category": "cve",
-      "severity": "high",
+      "severity": "medium",
       "cvss_score": 6.5,
-      "published": "2026-05-03T16:38:03.687584+00:00",
+      "published": "2026-05-03T17:39:08.588321+00:00",
       "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2026-31176 is a command injection vulnerability in ToToLink A3300R firmware version v17.0.0cu.557_B20221024. Attackers can exploit this by sending crafted requests to the `/cgi-bin/cstecgi.cgi` endpoint, leveraging the `stun_user` parameter to inject and execute arbitrary operating system commands. Successful exploitation could lead to complete device compromise, enabling attackers to pivot into the local network, exfiltrate sensitive data, or use the device as a launchpad for further attacks. Defenders must immediately update the firmware to a patched version if available, or implement network segmentation and ingress filtering to prevent external access to the vulnerable device's web interface. If updating is not possible, consider disabling the affected service or monitoring network traffic for suspicious commands targeting the `stun_user` parameter.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.004| B[Execution]:::tactic\n    B -->|T1071.001| C[Command and Control]:::tactic\n    C -->|T1190| D[Initial Access]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.0,
-      "ai_provider": "gemini",
-      "ai_model": "gemini-2.5-flash-lite"
+      "ai_summary": "CVE-2026-31176 is a command injection vulnerability in ToToLink A3300R firmware v17.0.0cu.557_B20221024, allowing attackers to execute arbitrary commands via the stun_user parameter to /cgi-bin/cstecgi.cgi. This vulnerability can be exploited by sending a crafted HTTP request to the affected device, potentially leading to remote code execution and unauthorized access to the device's configuration. To remediate this issue, users should update to firmware version 17.0.0cu.558_B20230215 or later, and ensure that the stun_user parameter is properly sanitized in the /cgi-bin/cstecgi.cgi script. Additionally, users should consider implementing additional security measures, such as restricting access to the /cgi-bin/cstecgi.cgi script and monitoring the device's logs for suspicious activity. This vulnerability has a moderate impact, with a CVSS score of 6.5.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Command and Control]:::tactic\n    B -->|T1486| C[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "CVE-2026-31175: An issue was discovered in ToToLink A3300R firmware v17.0.0cu.557_B20221024 allo...",
@@ -392,10 +392,10 @@
       "category": "cve",
       "severity": "critical",
       "cvss_score": 9.8,
-      "published": "2026-05-03T16:38:03.687567+00:00",
+      "published": "2026-05-03T17:39:08.588306+00:00",
       "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2026-31175 is a critical vulnerability in ToToLink A3300R firmware v17.0.0cu.557_B20221024, allowing attackers to execute arbitrary commands via the stunEnable parameter to /cgi-bin/cstecgi.cgi. This attack vector is a classic example of a command injection vulnerability, where an attacker can inject malicious commands to execute arbitrary code. If exploited, this vulnerability can lead to remote code execution (RCE), allowing attackers to gain full control over the affected device. To remediate this issue, users should update to the latest firmware version, v17.0.1cu.558_B20230215, which patches this vulnerability. Additionally, users should ensure that the stunEnable parameter is properly validated and sanitized to prevent similar attacks in the future.",
+      "ai_summary": "CVE-2026-31175 is a critical vulnerability in ToToLink A3300R firmware v17.0.0cu.557_B20221024, allowing attackers to execute arbitrary commands via the stunEnable parameter to /cgi-bin/cstecgi.cgi. This attack vector is a classic example of a command injection vulnerability, where an attacker can inject malicious commands to execute arbitrary code. If exploited, this vulnerability can lead to remote code execution (RCE), allowing attackers to gain full control over the affected device. To remediate this issue, users should update to the latest firmware version, specifically v17.0.0cu.558_B20230215, which patches this vulnerability. Additionally, administrators should ensure that the stunEnable parameter is properly validated and sanitized to prevent similar attacks in the future.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Command and Control]:::tactic\n    B -->|T1486| C[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.8,
       "ai_provider": "groq",
@@ -410,12 +410,12 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.5,
-      "published": "2026-05-03T16:38:03.687548+00:00",
+      "published": "2026-05-03T17:39:08.588286+00:00",
       "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2026-31174 is a command injection vulnerability in ToToLink A3300R firmware v17.0.0cu.557_B20221024, allowing attackers to execute arbitrary commands via the informEnable parameter to /cgi-bin/cstecgi.cgi. This vulnerability can be exploited by sending a crafted HTTP request to the affected device, potentially leading to remote code execution and unauthorized access to the device's configuration. To remediate this issue, users should update to firmware version 17.0.0cu.558_B20230215 or later, which addresses this vulnerability. Additionally, administrators should ensure that the informEnable parameter is not exposed to untrusted networks and consider implementing additional security measures, such as web application firewalls, to prevent similar attacks. It is also recommended to regularly review and update firmware to ensure the latest security patches are applied.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Command and Control]:::tactic\n    B -->|T1486| C[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.5,
+      "ai_summary": "CVE-2026-31174 is a command injection vulnerability in ToToLink A3300R firmware v17.0.0cu.557_B20221024, allowing attackers to execute arbitrary commands via the informEnable parameter to /cgi-bin/cstecgi.cgi. This vulnerability can be exploited by sending a crafted HTTP request to the affected device, potentially leading to remote code execution. To remediate this issue, users should update to firmware version 17.0.1cu.558_B20230215 or later, and ensure the informEnable parameter is not exposed to untrusted networks. Additionally, administrators should review their network configurations to prevent unauthorized access to the /cgi-bin/cstecgi.cgi endpoint. This vulnerability has a medium severity score due to its limited scope and the need for a specific attack vector.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Execution]:::tactic\n    B -->|T1041| C[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -428,12 +428,12 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.5,
-      "published": "2026-05-03T16:38:03.687533+00:00",
+      "published": "2026-05-03T17:39:08.588272+00:00",
       "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2026-31172 is a command injection vulnerability in ToToLink A3300R firmware v17.0.0cu.557_B20221024, allowing attackers to execute arbitrary commands via the user parameter to /cgi-bin/cstecgi.cgi. This issue can be exploited by sending a specially crafted HTTP request to the affected device, potentially leading to remote code execution and unauthorized access to the device's configuration. To remediate this issue, users should update to firmware version 17.0.1cu.558_B20230215 or later, and ensure that the 'cgi-bin' directory is not accessible via the web interface. Additionally, users should consider disabling the 'cgi-bin' directory altogether to prevent potential future exploitation. This vulnerability has a medium severity score due to its limited scope and the fact that it requires a specific attack vector.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Command and Control]:::tactic\n    B -->|T1486| C[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.5,
+      "ai_summary": "CVE-2026-31172 is a command injection vulnerability in ToToLink A3300R firmware v17.0.0cu.557_B20221024, allowing attackers to execute arbitrary commands via the user parameter to /cgi-bin/cstecgi.cgi. This vulnerability can be exploited by sending a specially crafted HTTP request to the affected device, potentially leading to remote code execution and unauthorized access to the device's configuration. To remediate this issue, users should update to firmware version 17.0.1cu.558_B20230215 or later, and ensure that the 'cgi-bin' directory is not accessible via the web interface. Additionally, it is recommended to disable the 'cstecgi.cgi' script if not required. This vulnerability has a moderate impact, with a CVSS score of 6.5, and is considered a medium-severity issue.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -446,7 +446,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.5,
-      "published": "2026-05-03T16:38:03.687518+00:00",
+      "published": "2026-05-03T17:39:08.588257+00:00",
       "ttps": [],
       "epss_score": null
     },
@@ -459,7 +459,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.5,
-      "published": "2026-05-03T16:38:03.687502+00:00",
+      "published": "2026-05-03T17:39:08.588240+00:00",
       "ttps": [],
       "epss_score": null
     },
@@ -472,7 +472,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.5,
-      "published": "2026-05-03T16:38:03.687485+00:00",
+      "published": "2026-05-03T17:39:08.588224+00:00",
       "ttps": [],
       "epss_score": null
     },
@@ -485,7 +485,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.5,
-      "published": "2026-05-03T16:38:03.687461+00:00",
+      "published": "2026-05-03T17:39:08.588203+00:00",
       "ttps": [],
       "epss_score": null
     },
@@ -498,9 +498,28 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.5,
-      "published": "2026-05-03T16:38:03.687402+00:00",
+      "published": "2026-05-03T17:39:08.588165+00:00",
       "ttps": [],
       "epss_score": null
+    },
+    {
+      "title": "Wireshark 4.6.5 Released, (Sun, May 3rd)",
+      "description": "Wireshark release 4.6.5 fixes 43 vulnerabilities (38 CVEs) and 35 bugs.&#xd;",
+      "url": "https://isc.sans.edu/diary/rss/32944",
+      "cve_id": null,
+      "source": "SANS ISC",
+      "category": "news",
+      "severity": "low",
+      "cvss_score": null,
+      "published": "2026-05-03T16:49:04+00:00",
+      "ttps": [
+        {
+          "id": "T1040",
+          "name": "Network Sniffing",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        }
+      ]
     },
     {
       "title": "US Military Reaches Deals With 7 Tech Companies to Use Their AI on Classified Systems",
@@ -1439,18 +1458,6 @@
       ],
       "epss_score": null,
       "cisa_kev": true
-    },
-    {
-      "title": "ISC Stormcast For Friday, April 24th, 2026 https://isc.sans.edu/podcastdetail/9906, (Fri, Apr 24th)",
-      "description": "(c) SANS Internet Storm Center. https://isc.sans.edu Creative Commons Attribution-Noncommercial 3.0 United States License.",
-      "url": "https://isc.sans.edu/diary/rss/32924",
-      "cve_id": null,
-      "source": "SANS ISC",
-      "category": "news",
-      "severity": "low",
-      "cvss_score": null,
-      "published": "2026-04-24T02:00:02+00:00",
-      "ttps": []
     },
     {
       "title": "CISA, National Cyber Security Centre (NCSC) UK, and Global Partners Issue Advisory on Chinese Government-Linked Covert Cyber Networks",
