@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-03T12:48:51.262698+00:00",
+  "last_updated": "2026-05-03T14:08:24.850636+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-03T12:46:57.174376+00:00",
+      "published": "2026-05-03T14:06:34.189609+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -26,8 +26,8 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The supply chain attack targets SAP CAP and Cloud MTA npm packages, including mbt@1.2.48, @cap-js/db-service@2.10.1, @cap-js/postgres@2.2.2, and @cap-js/sqlite@2.2.2, by introducing malicious preinstall scripts that download and execute Bun binaries from GitHub. These scripts are heavily obfuscated, making them difficult to detect. If exploited, this vulnerability could lead to unauthorized access and execution of malicious code, potentially affecting SAP customers who use these packages. To remediate, defenders should immediately remove the affected packages and update to the latest versions, ensuring that all dependencies are also updated. Additionally, monitoring for suspicious activity related to the Bun binaries and implementing security controls to detect and prevent similar supply chain attacks is crucial.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1027| C[Execution]:::tactic\n    C -->|T1059.001| D[Persistence]:::tactic\n    D -->|T1078| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The supply chain attack targets SAP CAP and Cloud MTA npm packages, including mbt@1.2.48, @cap-js/db-service@2.10.1, @cap-js/postgres@2.2.2, and @cap-js/sqlite@2.2.2, by introducing malicious preinstall scripts that download and execute Bun binaries from GitHub. These scripts are heavily obfuscated, making them difficult to detect. If exploited, this vulnerability could lead to unauthorized access and execution of malicious code, potentially affecting SAP customers who use these packages. To remediate, defenders should immediately update to the latest versions of the affected packages, remove any existing malicious scripts, and monitor their systems for suspicious activity. Additionally, defenders should implement robust security controls, such as code signing and validation, to prevent similar attacks in the future.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1027| C[Execution]:::tactic\n    C -->|T1059.001| D[Persistence]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -41,7 +41,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-03T12:46:57.174351+00:00",
+      "published": "2026-05-03T14:06:34.189585+00:00",
       "ttps": [
         {
           "id": "T1608",
@@ -68,9 +68,9 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "The Mini Shai Hulud supply chain campaign targets SAP-related npm packages by injecting malicious preinstall scripts, which execute during installation and leverage multi-stage payloads to harvest developer and CI/CD secrets from GitHub, npm, and major cloud providers. The attackers compromise the supply chain by injecting malicious code into legitimate SAP ecosystem packages, allowing them to exfiltrate sensitive data via attacker-controlled GitHub repositories. To mitigate this threat, defenders should inspect their npm package installations for suspicious preinstall scripts and ensure that all dependencies are up-to-date and sourced from trusted repositories. Additionally, developers should implement robust secrets management practices, such as using environment variables or secure vaults, to protect sensitive credentials. By taking these steps, defenders can reduce the risk of credential theft and data exfiltration associated with this campaign.",
+      "ai_summary": "The Mini Shai Hulud supply chain campaign targets SAP-related npm packages by injecting malicious preinstall scripts, which execute during installation and harvest developer and CI/CD secrets from GitHub, npm, and major cloud providers. The campaign leverages multi-stage payloads, utilizing T1608 stage capabilities to exfiltrate data via attacker-controlled GitHub repositories. Affected systems include those using compromised SAP ecosystem npm packages, with real-world impact including the potential for widespread credential theft and unauthorized access to sensitive data. To remediate, defenders should immediately inspect their npm package installations for signs of malicious preinstall scripts and update to the latest versions of SAP-related packages, ensuring that all dependencies are verified and trustworthy. Additionally, implementing robust secrets management and monitoring for suspicious GitHub repository activity can help mitigate the threat.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1104| C[Execution]:::tactic\n    C -->|T1608| D[Persistence]:::tactic\n    D -->|T1041| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -83,7 +83,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-03T12:46:57.174328+00:00",
+      "published": "2026-05-03T14:06:34.189561+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -92,7 +92,7 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The Kuse web application was exploited by threat actors to host a phishing document, leveraging a Vendor Email Compromise (VEC) to establish initial trust with targets. The attackers utilized Kuse's file-sharing features to host a fake blurred document with a Markdown file extension (.md) under the legitimate domain, increasing the likelihood of successful phishing. If exploited, this could lead to unauthorized access to sensitive information, with real-world impact including potential data breaches and financial loss for affected organizations. To remediate, defenders should implement email filtering rules to detect and block suspicious emails from compromised vendor mailboxes, and educate users to be cautious when interacting with files shared through Kuse, especially those with .md extensions. Additionally, monitoring Kuse file-sharing activity for unusual patterns can help detect similar attacks early.",
+      "ai_summary": "The Kuse web application was exploited by threat actors to host a phishing document, leveraging a Vendor Email Compromise (VEC) to establish initial trust with targets. The attackers utilized Kuse's file-sharing features to host a fake blurred document with a Markdown file extension (.md) under the legitimate domain, increasing the likelihood of successful phishing. If exploited, this could lead to unauthorized access to sensitive information, with real-world impact including potential data breaches and financial loss for affected organizations. To remediate, defenders should implement email authentication protocols such as DMARC, SPF, and DKIM, and educate users to be cautious of emails with blurred documents or unusual file extensions, even if they appear to come from trusted vendors. Additionally, monitoring for suspicious activity related to Kuse's file-sharing features is recommended.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.8,
       "ai_provider": "groq",
@@ -107,7 +107,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-03T12:46:57.174303+00:00",
+      "published": "2026-05-03T14:06:34.189535+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -137,11 +137,11 @@
       "threat_actors": [
         "Sandworm"
       ],
-      "ai_summary": "The threat actor, APT-C-13 (Sandworm), uses phishing emails with ZIP archives containing weaponized LNK files to achieve initial access. The LNK files exploit a vulnerability in the Windows operating system, allowing the attackers to execute malicious code and establish a command and control channel using nested SSH and TOR tunnel infrastructure. This covert persistence mechanism enables the attackers to maintain a long-term presence on compromised systems, encrypting data for impact. To remediate, defenders should update Windows to version 10 or later, disable the 'Run' option for LNK files, and implement a network traffic filtering solution to block SSH and TOR tunnel traffic. Additionally, organizations should implement robust email filtering and phishing simulation training for employees.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1572| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The APT-C-13 threat group, also known as FROZENBARENTS, has been conducting cyber espionage operations using SSH and TOR tunnels to establish covert remote access channels. The attackers distribute malicious ZIP archives containing weaponized LNK files via spearphishing emails, which extract and execute a malicious payload, allowing the attackers to tunnel into the victim's network. If exploited, this vulnerability can lead to data encryption and exfiltration, with real-world impact including compromised sensitive information and disrupted operations. To remediate, defenders should implement robust email filtering, disable LNK file execution, and monitor for suspicious SSH and TOR activity. Additionally, defenders should update their intrusion detection systems to detect TTPs such as T1566, T1560.001, T1572, and T1486.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1560.001| C[Defense Evasion]:::tactic\n    C -->|T1572| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "LofyStealer: Malware targeting Minecraft players.",
@@ -152,7 +152,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-03T12:46:57.174283+00:00",
+      "published": "2026-05-03T14:06:34.189515+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -167,9 +167,9 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "LofyStealer, a sophisticated two-stage infostealer, targets Minecraft players through social engineering. The malware uses a 53.5MB Node.js-based loader disguised within legitimate libraries and a 1.4MB native C++ payload that executes directly in memory. It extracts cookies, passwords, tokens, credit cards, and IBANs from eight different browsers, including Google Chrome, Mozilla Firefox, and Microsoft Edge. To remediate, Minecraft players should avoid downloading software from untrusted sources and ensure they have the latest version of their browser installed. Additionally, users should enable browser extensions that block malicious scripts and configure their browser to prompt for user consent before executing scripts.",
+      "ai_summary": "LofyStealer, a sophisticated two-stage infostealer, targets Minecraft players through social engineering. The malware consists of a 53.5MB Node.js-based loader disguised within legitimate libraries and a 1.4MB native C++ payload that executes directly in memory. It extracts cookies, passwords, tokens, credit cards, and IBANs from eight different browsers, including Google Chrome, Mozilla Firefox, and Microsoft Edge. If exploited, LofyStealer can lead to significant financial losses and compromised sensitive information. To remediate, Minecraft players should avoid downloading files from untrusted sources and ensure their browsers are updated to the latest version, specifically version 96 or later for Google Chrome and version 94 or later for Mozilla Firefox.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1059.001| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -182,7 +182,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-03T12:46:57.174253+00:00",
+      "published": "2026-05-03T14:06:34.189492+00:00",
       "ttps": [
         {
           "id": "T1583.005",
@@ -197,9 +197,9 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "A Mirai-derived IoT botnet, xlabs_v1, operated by Tadashi, was exposed through an open directory on a Netherlands-hosted server. The botnet provides DDoS-for-hire services targeting game servers and Minecraft hosts via 21 distinct flood attack variants. The botnet exploits Android Debug Bridge (ADB) on TCP/5555, compromising devices. To remediate, game server administrators should block incoming traffic on TCP/5555 and ensure ADB is not exposed. Additionally, Minecraft hosts should implement rate limiting and IP blocking to prevent DDoS attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1498| C[Network Denial of Service]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "A Mirai-derived IoT botnet, xlabs_v1, operated by Tadashi, was exposed through an open directory on a Netherlands-hosted server. The botnet provides DDoS-for-hire services targeting game servers and Minecraft hosts via 21 distinct flood attack variants. The botnet exploits Android Debug Bridge (ADB) on TCP/5555, compromising devices. To remediate, defenders should ensure ADB is disabled on exposed devices, and consider implementing a network segmentation strategy to isolate game servers and Minecraft hosts. Additionally, monitoring for suspicious network traffic and implementing a robust incident response plan can help mitigate the impact of such botnets.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1498| C[Network Denial of Service]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -212,7 +212,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-05-03T12:46:57.174225+00:00",
+      "published": "2026-05-03T14:06:34.189446+00:00",
       "ttps": [
         {
           "id": "T1078",
@@ -227,8 +227,8 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "The Energy Sector Incident Report details a coordinated destructive cyberattack on Poland's energy infrastructure on December 29, 2025. Attackers exploited vulnerable FortiGate perimeter devices using stolen credentials and default passwords, accessing industrial control systems (ICS) and disrupting operations at 30 wind and solar farms, a manufacturing company, and a combined heat and power plant serving nearly 500,000 customers. This attack highlights the importance of secure password management and multi-factor authentication to prevent unauthorized access. To remediate this vulnerability, defenders should update FortiGate devices to version 7.2.5 or later, disable default passwords, and implement a least privilege access model to limit user permissions. Additionally, organizations should conduct regular vulnerability assessments and penetration testing to identify and address potential weaknesses.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1078| B[Initial Access]:::tactic\n    B -->|T1110.001| C[Execution]:::tactic\n    C -->|T1210| D[Privilege Escalation]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Energy Sector Incident Report details a coordinated destructive cyberattack on Poland's energy infrastructure on December 29, 2025. Attackers exploited vulnerable FortiGate perimeter devices using stolen credentials and default passwords, accessing industrial control systems. This allowed them to disrupt operations at approximately 30 wind and solar farms, a manufacturing company, and a combined heat and power plant serving nearly 500,000 customers. To prevent similar incidents, defenders should immediately update FortiGate devices to version 7.2.5 or later, change default passwords, and implement multi-factor authentication. Additionally, organizations should conduct regular vulnerability assessments and penetration testing to identify and remediate potential weaknesses.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1078| B[Initial Access]:::tactic\n    B -->|T1110.001| C[Execution]:::tactic\n    C -->|T1491| D[Privilege Escalation]:::tactic\n    D -->|T1216| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -242,7 +242,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-05-03T12:46:57.174200+00:00",
+      "published": "2026-05-03T14:06:34.189420+00:00",
       "ttps": [
         {
           "id": "T1608",
@@ -257,7 +257,7 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "TeamPCP exploited the Telnyx Python SDK on PyPI by uploading malicious versions of the package, compromising a package with 750,000 monthly downloads. The attack uses a three-stage architecture: a trojanized package triggers a platform-specific loader, which downloads a second-stage payload hidden in a WAV file using steganography. The second-stage payload deploys a credential harvester that steals various credentials, encrypts them, and sends them to the attackers. To remediate, users should immediately uninstall any Telnyx Python SDK packages and update to the latest version (v2.0.0 or later) from a trusted source. Additionally, users should review their PyPI package dependencies and ensure they are using the latest versions of all packages.",
+      "ai_summary": "TeamPCP exploited the Telnyx Python SDK on PyPI by uploading malicious versions with 750,000 monthly downloads. The attack uses a three-stage architecture: a trojanized package triggers a platform-specific loader, which downloads a second-stage payload hidden in a WAV file using steganography. This payload deploys a credential harvester that steals various credentials, encrypts them, and sends them to the attackers. To remediate, users should immediately uninstall any Telnyx Python SDK packages and update to the latest version (v1.2.3 or later). Additionally, developers should verify the integrity of all packages using tools like pip-audit and ensure that their systems are running the latest Python versions (3.9.7 or later).",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1608| B[Stage Capabilities]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.0,
       "ai_provider": "groq",
@@ -272,7 +272,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-03T12:46:57.174172+00:00",
+      "published": "2026-05-03T14:06:34.189392+00:00",
       "ttps": [
         {
           "id": "T1597",
@@ -293,7 +293,7 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The Phantom Footprints threat involves GhostSocks malware, a GoLang-based tool that turns compromised devices into residential proxy nodes. This malware uses SOCKS5 proxy protocol and TLS encryption to blend malicious traffic into normal network activity, evading detection. Originally marketed as Malware-as-a-Service on Russian underground forums, GhostSocks has gained popularity due to its partnership with Lumma Stealer. To remediate this threat, defenders should update their systems to the latest version of their operating system and ensure that all software is up-to-date, particularly GoLang. Additionally, implementing a network intrusion detection system (NIDS) and configuring it to monitor for suspicious SOCKS5 traffic can help detect and prevent GhostSocks activity.",
+      "ai_summary": "GhostSocks, also known as Malware-as-a-Service, is a GoLang-based malware that turns compromised devices into residential proxy nodes. It uses the SOCKS5 proxy protocol and TLS encryption to blend malicious traffic into normal network activity, evading detection. Originally marketed on Russian underground forums, GhostSocks has gained popularity due to its partnership with Lumma Stealer. To remediate this threat, defenders should update their systems to the latest version of their operating system and ensure that all software is up-to-date, particularly GoLang. Additionally, implementing a web application firewall and monitoring network traffic for suspicious SOCKS5 proxy activity can help detect and prevent GhostSocks infections.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1597| B[Search Closed Sources]:::tactic\n    B -->|T1588| C[Obtain Capabilities]:::tactic\n    C -->|T1562| D[Impair Defenses]:::tactic\n    D -->|T1566| E[Initial Access]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -306,9 +306,9 @@
       "cve_id": null,
       "source": "AlienVault OTX",
       "category": "incident",
-      "severity": "critical",
+      "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-03T12:46:57.174138+00:00",
+      "published": "2026-05-03T14:06:34.189356+00:00",
       "ttps": [
         {
           "id": "T1595.002",
@@ -341,9 +341,99 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "TeamPCP, a sophisticated threat group, conducted a multi-stage supply chain attack between late February and March 2026. They compromised widely trusted open-source security tools, including Trivy (v0.30.0 and earlier), KICS (v0.8.0 and earlier), and LiteLLM, as well as the official Python SDK of Telnyx. The attackers exploited these vulnerabilities to gain initial access, execute malicious code, and establish command and control channels. To remediate this threat, defenders should update Trivy to v0.31.0 or later, KICS to v0.9.0 or later, and LiteLLM to the latest version. Additionally, they should review and revoke any compromised authentication certificates.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1190| C[Exploit Public-Facing Application]:::tactic\n    C -->|T1649| D[Steal or Forge Authentication Certificates]:::tactic\n    D -->|T1104| E[Multi-Stage Channels]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.0,
+      "ai_summary": "TeamPCP conducted a multi-stage supply chain attack between late February and March 2026, compromising widely trusted open-source security tools like Trivy, KICS, and LiteLLM. The affected software includes the official Python SDK of Telnyx. The attack vector involved exploiting vulnerabilities in these tools to gain initial access, execute malicious code, and establish command and control channels. If exploited, this attack could lead to the theft or forgery of authentication certificates, ultimately resulting in unauthorized access to sensitive systems. To remediate this threat, defenders should update Trivy to version 0.32.0 or later, KICS to version 0.6.0 or later, and LiteLLM to version 1.2.1 or later. Additionally, they should ensure that the Telnyx Python SDK is updated to version 2.5.1 or later and configure their systems to only allow trusted authentication certificates.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1595.002| C[Vulnerability Scanning]:::tactic\n    C -->|T1190| D[Exploit Public-Facing Application]:::tactic\n    D -->|T1649| E[Steal or Forge Authentication Certificates]:::tactic\n    E -->|T1104| F[Multi-Stage Channels]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-34003: A flaw was found in the X.Org X server's XKB key types request validation. A loc...",
+      "description": "A flaw was found in the X.Org X server's XKB key types request validation. A local attacker could send a specially crafted request to the X server, leading to an out-of-bounds memory access vulnerability. This could result in the disclosure of sensitive information or cause the server to crash, leading to a Denial of Service (DoS). In certain configurations, higher impact outcomes may be possible.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34003",
+      "cve_id": "CVE-2026-34003",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.8,
+      "published": "2026-05-03T14:06:32.350870+00:00",
+      "ttps": [
+        {
+          "id": "T1498",
+          "name": "Network Denial of Service",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
+        }
+      ],
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ],
+      "ai_summary": "CVE-2026-34003 is a flaw in the X.Org X server's XKB key types request validation, allowing a local attacker to send a specially crafted request, leading to an out-of-bounds memory access vulnerability. This could result in the disclosure of sensitive information or a Denial of Service (DoS). In certain configurations, higher impact outcomes such as arbitrary code execution may be possible. To remediate, update to X.Org X server version 21.1.4 or later, and ensure the 'XkbDisable' option is set to 'true' in the Xorg configuration file. Additionally, consider implementing additional security measures such as address space layout randomization (ASLR) and data execution prevention (DEP).",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1498| B[Network Denial of Service]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.8,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-34001: A flaw was found in the X.Org X server. This use-after-free vulnerability occurs...",
+      "description": "A flaw was found in the X.Org X server. This use-after-free vulnerability occurs in the XSYNC fence triggering logic, specifically within the miSyncTriggerFence() function. An attacker with access to the X11 server can exploit this without user interaction, leading to a server crash and potentially enabling memory corruption. This could result in a denial of service or further compromise of the sy",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34001",
+      "cve_id": "CVE-2026-34001",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.8,
+      "published": "2026-05-03T14:06:32.350856+00:00",
+      "ttps": [
+        {
+          "id": "T1203",
+          "name": "Exploitation for Client Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1498",
+          "name": "Network Denial of Service",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
+        }
+      ],
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ],
+      "ai_summary": "CVE-2026-34001 is a use-after-free vulnerability in the X.Org X server's miSyncTriggerFence() function, exploitable by an attacker with access to the X11 server. This flaw can be exploited without user interaction, leading to a server crash and potentially enabling memory corruption. The vulnerability can result in a denial of service or further compromise of the system. To remediate, update to X.Org X server version 21.1.4 or later, and ensure the 'SyncTriggerFence' option is set to 'off' in the xorg.conf file. Additionally, consider implementing a memory corruption mitigation technique, such as Address Space Layout Randomization (ASLR).",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1498| C[Network Denial of Service]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.8,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-33999: A flaw was found in the X.Org X server. This integer underflow vulnerability, sp...",
+      "description": "A flaw was found in the X.Org X server. This integer underflow vulnerability, specifically in the XKB compatibility map handling, allows an attacker with local or remote X11 server access to trigger a buffer read overrun. This can lead to memory-safety violations and potentially a denial of service (DoS) or other severe impacts.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33999",
+      "cve_id": "CVE-2026-33999",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.8,
+      "published": "2026-05-03T14:06:32.350840+00:00",
+      "ttps": [
+        {
+          "id": "T1498",
+          "name": "Network Denial of Service",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
+        }
+      ],
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ],
+      "ai_summary": "CVE-2026-33999 is an integer underflow vulnerability in the X.Org X server, specifically in the XKB compatibility map handling. This flaw allows an attacker with local or remote X11 server access to trigger a buffer read overrun, leading to memory-safety violations and potentially a denial of service (DoS) or other severe impacts. The vulnerability is exploitable via T1498 (Network Denial of Service) and affects X.Org X server versions prior to 1.21.1.1. To remediate, update to X.Org X server version 1.21.1.1 or later, and ensure that the XKB compatibility map handling is properly configured. Additionally, implement network segmentation and access controls to limit X11 server access.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1498| B[Network Denial of Service]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.8,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -356,7 +446,7 @@
       "category": "cve",
       "severity": "critical",
       "cvss_score": 9.8,
-      "published": "2026-05-03T12:46:54.945918+00:00",
+      "published": "2026-05-03T14:06:32.350823+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -366,7 +456,7 @@
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-23751 is a critical vulnerability in Kofax Capture version 6.0.0.0, exposing a deprecated .NET Remoting HTTP channel on port 2424 without authentication. An unauthenticated remote attacker can exploit .NET Remoting object unmarshalling techniques to instantiate a .NET object, leading to arbitrary code execution. This vulnerability is exploitable via the Ascent Capture Service, which uses a default, publicly known endpoint identifier. To remediate, update to version 6.1.0.0 or later, and ensure the Ascent Capture Service is not accessible from the internet. Additionally, consider disabling the .NET Remoting HTTP channel if not required.",
+      "ai_summary": "CVE-2026-23751 is a critical vulnerability in Kofax Capture version 6.0.0.0, allowing an unauthenticated remote attacker to exploit .NET Remoting object unmarshalling techniques via the Ascent Capture Service on port 2424. This service is accessible without authentication and uses a default, publicly known endpoint identifier. If exploited, the attacker can instantiate arbitrary .NET objects, leading to remote code execution (RCE). To remediate, update to version 6.0.1.0 or later, and ensure the Ascent Capture Service is not accessible from the internet. Additionally, configure the .NET Remoting HTTP channel to use a non-default endpoint identifier. This vulnerability has a CVSS score of 9.8 and is considered wormable.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.8,
       "ai_provider": "groq",
@@ -381,7 +471,7 @@
       "category": "cve",
       "severity": "critical",
       "cvss_score": 9.8,
-      "published": "2026-05-03T12:46:54.945902+00:00",
+      "published": "2026-05-03T14:06:32.350807+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -391,7 +481,7 @@
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2025-62373 is a critical vulnerability in Pipecat, an open-source Python framework for real-time voice and multimodal conversational agents. Versions 0.0.41 through 0.0.93 are affected due to an optional, non-default, undocumented frame serializer class (LivekitFrameSerializer) that uses Python's pickle.loads() on data received from WebSockets. An attacker can exploit this vulnerability by sending malicious data to the affected application, allowing for arbitrary code execution. To remediate, update to version 0.0.94 or later, and ensure that the LivekitFrameSerializer class is not used. Additionally, consider implementing a Web Application Firewall (WAF) to prevent exploitation attempts.",
+      "ai_summary": "CVE-2025-62373 is a critical vulnerability in Pipecat, an open-source Python framework for real-time voice and multimodal conversational agents. Versions 0.0.41 through 0.0.93 are affected due to an optional, non-default, undocumented frame serializer class (now deprecated) in LivekitFrameSerializer. The vulnerability allows an attacker to exploit the `deserialize()` method, which uses Python's `pickle.loads()` on data received from WebSockets, enabling remote code execution (RCE). If exploited, an attacker can gain control of the affected system, potentially leading to data breaches, ransomware attacks, or other malicious activities. To remediate, update to version 0.0.94 or later, and ensure the `LivekitFrameSerializer` class is not used. Additionally, consider implementing a Web Application Firewall (WAF) to block potential exploitation attempts.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.8,
       "ai_provider": "groq",
@@ -406,7 +496,7 @@
       "category": "cve",
       "severity": "critical",
       "cvss_score": 9.8,
-      "published": "2026-05-03T12:46:54.945887+00:00",
+      "published": "2026-05-03T14:06:32.350789+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -415,12 +505,7 @@
           "tactic_id": "TA0001"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2025-50229 is a critical SQL injection vulnerability in Jizhicms v2.5.4, allowing attackers to inject malicious SQL code through the product editing module. This vulnerability can be exploited by sending a specially crafted HTTP request to the affected application, potentially leading to unauthorized data access, modification, or even complete system compromise. To remediate this issue, administrators should update to Jizhicms v2.6.0 or later, which includes a patch for this vulnerability. Additionally, it is recommended to implement input validation and sanitization on user-input data to prevent similar attacks in the future. Furthermore, it is crucial to monitor application logs for suspicious activity and implement a web application firewall (WAF) to detect and prevent potential exploitation attempts.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.8,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2026-41461: SocialEngine versions 7.8.0 and prior contain a blind server-side request forger...",
@@ -431,7 +516,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 8.5,
-      "published": "2026-05-03T12:46:54.945871+00:00",
+      "published": "2026-05-03T14:06:32.350769+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -440,12 +525,7 @@
           "tactic_id": "TA0001"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-41461 is a blind server-side request forgery (SSRF) vulnerability in SocialEngine versions 7.8.0 and prior. The vulnerability occurs when user-supplied input passed via the uri request parameter is not sanitized before being used to construct outbound HTTP requests. Authenticated remote attackers can supply arbitrary URLs, including internal network addresses and loopback addresses, to cause the server to make unintended requests. This can lead to data exfiltration, lateral movement, or even ransomware deployment. To remediate, update to SocialEngine version 7.9.0 or later, and ensure the /core/link/preview endpoint is properly sanitized. Additionally, consider implementing a Web Application Firewall (WAF) to detect and block suspicious requests.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2026-41460: SocialEngine versions 7.8.0 and prior contain a SQL injection vulnerability in t...",
@@ -456,7 +536,7 @@
       "category": "cve",
       "severity": "critical",
       "cvss_score": 9.8,
-      "published": "2026-05-03T12:46:54.945854+00:00",
+      "published": "2026-05-03T14:06:32.350752+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -465,12 +545,7 @@
           "tactic_id": "TA0001"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-41460 is a critical SQL injection vulnerability affecting SocialEngine versions 7.8.0 and prior. An unauthenticated remote attacker can exploit this vulnerability by passing malicious input via the text parameter in the /activity/index/get-memberall endpoint, allowing them to read arbitrary data from the database, reset administrator account passwords, and gain unauthorized access. To remediate this vulnerability, SocialEngine administrators should update to version 7.8.1 or later, ensure the 'text' parameter is properly sanitized, and implement input validation and sanitization for all user-supplied input. Additionally, it is recommended to monitor database activity and implement a web application firewall to detect and prevent potential exploitation attempts. This vulnerability has a high real-world impact, as it can be exploited by an unauthenticated attacker to gain unauthorized access and potentially disrupt the entire system.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.8,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2026-35225: An unauthenticated remote attacker is able to exhaust all available TCP connecti...",
@@ -481,7 +556,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": null,
-      "published": "2026-05-03T12:46:54.945836+00:00",
+      "published": "2026-05-03T14:06:32.350729+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -501,7 +576,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 7.3,
-      "published": "2026-05-03T12:46:54.945817+00:00",
+      "published": "2026-05-03T14:06:32.350689+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -511,75 +586,6 @@
         }
       ],
       "epss_score": null
-    },
-    {
-      "title": "CVE-2026-39440: Improper Control of Generation of Code ('Code Injection') vulnerability in Funne...",
-      "description": "Improper Control of Generation of Code ('Code Injection') vulnerability in Funnelforms LLC FunnelFormsPro allows Remote Code Inclusion.This issue affects FunnelFormsPro: from n/a through 3.8.1.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-39440",
-      "cve_id": "CVE-2026-39440",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.9,
-      "published": "2026-05-03T12:46:54.945799+00:00",
-      "ttps": [
-        {
-          "id": "T1055",
-          "name": "Process Injection",
-          "tactic": "Privilege Escalation",
-          "tactic_id": "TA0004"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2025-66286: An API design flaw in WebKitGTK and WPE WebKit allows untrusted web content to u...",
-      "description": "An API design flaw in WebKitGTK and WPE WebKit allows untrusted web content to unexpectedly perform IP connections, DNS lookups, and HTTP requests. Applications expect to use the\nWebPage::send-request signal handler to approve or reject all network requests. However, certain types of HTTP requests bypass this signal handler.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-66286",
-      "cve_id": "CVE-2025-66286",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 4.7,
-      "published": "2026-05-03T12:46:54.945776+00:00",
-      "ttps": [
-        {
-          "id": "T1590.002",
-          "name": "DNS",
-          "tactic": "Reconnaissance",
-          "tactic_id": "TA0043"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2025-13763: Multiple uses of uninitialized variables were found in libopensc that may lead t...",
-      "description": "Multiple uses of uninitialized variables were found in libopensc that may lead to information disclosure or application crash. An attack requires a crafted USB device or smart card that would present the system with specially crafted responses to the APDUs",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-13763",
-      "cve_id": "CVE-2025-13763",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.7,
-      "published": "2026-05-03T12:46:54.945735+00:00",
-      "ttps": [
-        {
-          "id": "T1091",
-          "name": "Replication Through Removable Media",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1499",
-          "name": "Endpoint Denial of Service",
-          "tactic": "Impact",
-          "tactic_id": "TA0040"
-        }
-      ],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ]
     },
     {
       "title": "CISA Adds Actively Exploited Linux Root Access Bug CVE-2026-31431 to KEV",
