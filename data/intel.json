@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-04T17:24:23.966392+00:00",
+  "last_updated": "2026-05-04T19:16:32.801615+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,10 +11,10 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-04T17:22:41.509567+00:00",
+      "published": "2026-05-04T19:14:47.001553+00:00",
       "ttps": [],
-      "ai_summary": "The SHADOW-EARTH-053 threat group has been conducting cyberespionage operations against government entities and critical infrastructure in Asia, exploiting unpatched Microsoft Exchange vulnerabilities, particularly the ProxyLogon chain, to gain initial access. The attack vector involves exploiting these vulnerabilities to compromise email servers, allowing the threat actors to steal sensitive information and gain a foothold in the targeted networks. If exploited, this vulnerability can lead to unauthorized access to sensitive data, disruption of critical services, and potential lateral movement within the network. To remediate this threat, defenders should immediately apply the latest security patches to their Microsoft Exchange servers, specifically updating to Exchange Server 2013 CU23, Exchange Server 2016 CU22, or Exchange Server 2019 CU11, and ensure that all related configuration changes are implemented. Additionally, defenders should monitor their email servers for suspicious activity and implement robust security measures, such as multi-factor authentication and intrusion detection systems, to prevent similar attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1078| C[Privilege Escalation]:::tactic\n    C -->|T1021| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The SHADOW-EARTH-053 threat group has been conducting cyberespionage operations against government entities and critical infrastructure in Asia, exploiting unpatched Microsoft Exchange vulnerabilities, particularly the ProxyLogon chain, to gain initial access. The group's attacks have real-world impact, allowing them to steal sensitive information and disrupt operations. To remediate, defenders should immediately apply the latest Microsoft Exchange security updates, specifically cumulative update CU23 or later for Exchange 2013, CU12 or later for Exchange 2016, and CU7 or later for Exchange 2019. Additionally, defenders should implement a web application firewall and restrict access to the Exchange server to only necessary personnel. The threat actor's use of ProxyLogon exploits suggests a high level of sophistication and intent to target high-value assets.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1210| C[Execution]:::tactic\n    C -->|T1082| D[Persistence]:::tactic\n    D -->|T1531| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -28,7 +28,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-04T17:22:41.509551+00:00",
+      "published": "2026-05-04T19:14:47.001541+00:00",
       "ttps": [
         {
           "id": "T1078.004",
@@ -49,7 +49,7 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The PyPI package 'lightning' versions 2.6.2 and 2.6.3 were compromised in a supply chain attack, introducing malicious code that executes upon module import, downloading and executing an obfuscated payload. This payload harvests sensitive credentials including GitHub tokens, npm tokens, and cloud credentials from AWS and Azure, posing a significant threat to developers and organizations relying on the package. The attack vector involves the exploitation of the package's auto-execution feature, allowing the malicious code to run without user interaction. To remediate, developers should immediately update to a version outside the affected range (e.g., 2.6.1 or later) and review their credential management practices, ensuring that all potentially exposed credentials are rotated and secured. Additionally, monitoring for unusual activity related to cloud accounts and package imports is crucial to detect and respond to potential breaches.",
+      "ai_summary": "The PyPI package 'lightning' versions 2.6.2 and 2.6.3 were compromised in a supply chain attack, introducing malicious code that executes upon module import, downloading the Bun JavaScript runtime and an 11MB obfuscated payload. This payload harvests sensitive credentials including GitHub tokens, npm tokens, and cloud credentials from AWS and Azure. The attack vector involves the exploitation of the software supply chain, leveraging the trust in the compromised package to gain access to sensitive information. To remediate, defenders should immediately remove affected versions of the 'lightning' package and update to a version outside the affected range, while also monitoring for suspicious activity related to the harvested credentials. Additionally, rotating and securing all potentially exposed credentials is crucial to prevent further exploitation.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1078.004| C[Privilege Escalation]:::tactic\n    C -->|T1027| D[Defense Evasion]:::tactic\n    D -->|T1055| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -64,7 +64,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-04T17:22:41.509525+00:00",
+      "published": "2026-05-04T19:14:47.001521+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -91,9 +91,9 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The malicious AI browser extensions exploit the rise of generative AI to target user prompts, behavior, and browser sessions through API interception, passive DOM observation, traffic proxying, and HTTPS response decryption. These extensions, masquerading as productivity tools, deliver remote access trojans, man-in-the-middle attacks, and infostealers, allowing attackers to intercept sensitive information. The real-world impact includes compromised user data, potential financial loss, and unauthorized access to sensitive information. To remediate, users should uninstall any recently installed browser extensions, update their browser to the latest version, and enable extension verification, such as Google Chrome's extension verification feature, to prevent malicious extensions from being installed. Additionally, users should monitor their browser's API requests and HTTPS responses for any suspicious activity.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1176| B[Initial Access]:::tactic\n    B -->|T1036| C[Defense Evasion]:::tactic\n    C -->|T1190| D[Execution]:::tactic\n    D -->|T1219| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "ai_summary": "The malicious AI browser extensions exploit the rise of generative AI to target user prompts, behavior, and browser sessions through API interception, passive DOM observation, traffic proxying, and HTTPS response decryption. These extensions, masquerading as productivity tools, deliver remote access trojans, man-in-the-middle attacks, and infostealers, affecting users who have installed them. To remediate, defenders should immediately remove any suspicious browser extensions, update their browser to the latest version, and configure their browser settings to only allow extensions from trusted sources, such as the Chrome Web Store or Mozilla Add-ons. Additionally, users should be cautious when installing extensions and only grant necessary permissions. The real-world impact of this threat includes compromised user data and potential remote access to user systems, highlighting the need for vigilance in the face of increasingly sophisticated threats.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1176| B[Initial Access]:::tactic\n    B -->|T1036| C[Execution]:::tactic\n    C -->|T1190| D[Persistence]:::tactic\n    D -->|T1219| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -106,7 +106,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-04T17:22:41.509505+00:00",
+      "published": "2026-05-04T19:14:47.001505+00:00",
       "ttps": [
         {
           "id": "T1588",
@@ -127,8 +127,8 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "Vect ransomware is a Ransomware-as-a-Service program that emerged in January 2026, leveraging strategic partnerships to expand its reach. The group has partnered with TeamPCP, known for supply chain attacks on security tools like Trivy, KICS, and LiteLLM, and BreachForums, distributing affiliate keys to forum members. This ransomware primarily targets organizations with 25 published victims, using tactics like obtaining capabilities through T1588 and supply chain compromise via T1195, ultimately leading to data encryption for impact through T1486. To remediate, defenders should implement robust supply chain risk management, monitor for suspicious activity, and ensure all security tools are up-to-date, specifically checking for any potential compromises in tools like Trivy, KICS, and LiteLLM. Defenders should also prioritize network segmentation and ensure backups are in place and regularly updated to mitigate the impact of potential ransomware attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1588| B[Obtain Capabilities]:::tactic\n    B -->|T1195| C[Supply Chain Compromise]:::tactic\n    C -->|T1486| D[Data Encrypted for Impact]:::tactic\n    D -->|T1059.001| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "Vect ransomware is a Ransomware-as-a-Service program that emerged in January 2026, leveraging strategic partnerships to expand its reach. The group has partnered with TeamPCP, known for supply chain attacks on security tools like Trivy, KICS, and LiteLLM, and BreachForums, distributing affiliate keys to forum members. This ransomware primarily targets organizations with 25 published victims, using tactics like obtaining capabilities through T1588 and supply chain compromise via T1195, ultimately leading to data encryption for impact through T1486. To remediate, defenders should implement robust supply chain risk management, monitor for suspicious activity, and ensure all security tools are up-to-date. Specifically, defenders should review and update their Trivy, KICS, and LiteLLM configurations to prevent potential supply chain attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1588| B[Obtain Capabilities]:::tactic\n    B -->|T1195| C[Supply Chain Compromise]:::tactic\n    C -->|T1486| D[Data Encrypted for Impact]:::tactic\n    D -->|T1059.001| E[Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -142,7 +142,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-04T17:22:41.509485+00:00",
+      "published": "2026-05-04T19:14:47.001490+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -157,8 +157,8 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The intercom-client npm package version 7.0.4 was compromised through a malicious GitHub account, introducing credential-stealing malware into a widely used Node.js SDK. This malware is part of an ongoing Mini Shai-Hulud worm attack, which has the potential to affect approximately 360,000 weekly downloads. The attack vector involves the execution of two malicious files: setup.mjs, which is executed via a preinstall hook to download an unverified Bun binary, and router_runtime.js, an obfuscated 11.7 MB script targeting Kubernetes environments. To remediate this threat, defenders should immediately remove the compromised intercom-client package and update to a version prior to 7.0.4, and also monitor their systems for suspicious activity related to the T1204 and T1027 tactics. Additionally, defenders should verify the integrity of their Kubernetes environments and ensure that all dependencies are up-to-date and sourced from trusted repositories.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1059.001| D[Command and Control]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The intercom-client npm package version 7.0.4 was compromised through a malicious GitHub account, introducing credential-stealing malware into a widely used Node.js SDK. This malware is part of an ongoing Mini Shai-Hulud worm attack, which has the potential to affect approximately 360,000 weekly downloads. The attack vector involves the execution of two malicious files: setup.mjs and router_runtime.js, with the latter being an obfuscated 11.7 MB script targeting Kubernetes. To remediate this threat, defenders should immediately remove the compromised intercom-client package and update to a version prior to 7.0.4, while also monitoring for suspicious activity related to the T1027 and T1204 tactics. Additionally, defenders should verify the integrity of their GitHub accounts and ensure that all dependencies are from trusted sources.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1027| C[Defense Evasion]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -172,7 +172,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-04T17:22:41.509453+00:00",
+      "published": "2026-05-04T19:14:47.001465+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -187,11 +187,11 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The Mini Shai-Hulud supply chain attack has expanded to the PHP ecosystem via a compromised intercom/intercom-php package version 5.0.2 on Packagist. This malicious package exploits Composer plugin execution to download the Bun runtime and execute an obfuscated credential-stealing payload during installation, leveraging T1027 obfuscation techniques. The real-world impact includes potential credential theft for users who have installed the compromised package, affecting developers and organizations relying on the intercom/intercom-php package. To remediate, defenders should immediately remove the compromised package and update to a secure version, ensuring that Composer plugins are properly validated and monitored. Additionally, implementing robust supply chain security measures, such as verifying package integrity and monitoring for suspicious activity, can help prevent similar attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1027| C[Execution]:::tactic\n    C -->|T1055| D[Persistence]:::tactic\n    D -->|T1530| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "ai_summary": "A malicious Intercom PHP package version 5.0.2 was discovered on Packagist, expanding the Mini Shai-Hulud supply chain attack from npm into the PHP ecosystem. The compromised package exploits Composer plugin execution to download Bun runtime and execute an obfuscated credential-stealing payload during installation. This allows the threat actor to harvest credentials, posing a significant risk to developers and organizations using the package. To remediate, users should update to version 5.0.3 or higher, and consider implementing additional security measures such as code signing and validation. Developers should also review their dependencies and update any vulnerable packages.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1218| D[Command and Control]:::tactic\n    D -->|T1204| E[Exfiltration Over Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "Trigona Affiliates Deploy Custom Exfiltration Tool to Streamline Data Theft",
@@ -202,7 +202,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-04T17:22:41.509427+00:00",
+      "published": "2026-05-04T19:14:47.001445+00:00",
       "ttps": [
         {
           "id": "T1041",
@@ -217,9 +217,9 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "Trigona ransomware affiliates have deployed a custom exfiltration tool, uploader_client.exe, to streamline data theft during attacks in March 2026. This tool features parallel streams with five default connections, connection rotation after 2,048 MB transfers to evade network monitoring, and granular filtering to exclude low-value files. The custom tool marks a tactical shift from relying on off-the-shelf utilities like Rclone. If exploited, this tool can lead to significant data breaches, compromising sensitive information. To remediate, defenders should update their network monitoring systems to detect connection rotation and implement granular filtering to exclude low-value files. Additionally, organizations should restrict access to sensitive data and implement robust encryption to prevent data exfiltration.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Exfiltration Over C2 Channel]:::tactic\n    D -->|T1486| E[Data Encrypted for Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "ai_summary": "Trigona ransomware affiliates have deployed a custom exfiltration tool called uploader_client.exe to streamline data theft during attacks in March 2026. The tool features parallel streams with five default connections, connection rotation after 2,048 MB transfers to evade network monitoring, and granular filtering to exclude low-value files. This custom tool marks a tactical shift from relying on off-the-shelf utilities like Rclone. If exploited, the tool can lead to significant data breaches, compromising sensitive information. To remediate, defenders should update their systems to the latest version of their security software and configure network monitoring to detect and block connection rotation after large file transfers. Additionally, they should implement granular filtering to exclude low-value files and monitor for suspicious activity related to uploader_client.exe.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1041| C[Exfiltration Over C2 Channel]:::tactic\n    C -->|T1486| D[Data Encrypted for Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -232,7 +232,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-04T17:22:41.509406+00:00",
+      "published": "2026-05-04T19:14:47.001429+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -259,9 +259,9 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The Harvester APT group has developed a new Linux version of its GoGra backdoor, leveraging the legitimate Microsoft Graph API and Outlook mailboxes as a covert command-and-control channel. This malware employs social engineering lures with tailored decoy documents, masquerading malicious ELF files as standard documents. Initial VirusTotal submissions originated from India and Afghanistan, indicating potential targets in these regions. To remediate, defenders should ensure that Microsoft Graph API access is restricted to authorized users and services, and implement strict access controls for Outlook mailboxes. Additionally, organizations should update their Linux systems to the latest version and configure their systems to detect and block suspicious ELF files.",
+      "ai_summary": "The Harvester APT group has developed a new Linux version of its GoGra backdoor, leveraging the legitimate Microsoft Graph API and Outlook mailboxes as a covert command-and-control channel. This backdoor employs social engineering lures with tailored decoy documents, masquerading malicious ELF files as standard documents. Initial VirusTotal submissions originated from India and Afghanistan, indicating potential targets in these regions. To remediate, defenders should ensure Microsoft Graph API access is restricted to trusted users and services, and implement robust email filtering to detect and block suspicious mail attachments. Additionally, systems should be updated to the latest version of Linux and all software dependencies to prevent exploitation of known vulnerabilities.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1219| E[Remote Access Software]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -274,7 +274,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-04T17:22:41.509369+00:00",
+      "published": "2026-05-04T19:14:47.001397+00:00",
       "ttps": [
         {
           "id": "T1219",
@@ -283,7 +283,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The Gleaming Pisces Poisoned Python Packages Campaign delivers Linux and macOS backdoors through poisoned Python packages uploaded to the PyPI repository. This campaign is attributed to Gleaming Pisces, a North Korean financially motivated threat actor affiliated with the Reconnaissance General Bureau. The threat actor exploits the trust in PyPI repository to distribute poisoned packages, which are then installed by unsuspecting users. Once installed, the poisoned packages deliver PondRAT, a lightweight remote access tool (RAT) that allows the threat actor to gain unauthorized access to the compromised systems. To remediate this threat, users should immediately update their Python packages to the latest version (3.10.8 or later) and remove any suspicious packages from their systems. Additionally, users should verify the integrity of their packages by checking the digital signatures and hashes.",
+      "ai_summary": "The Gleaming Pisces Poisoned Python Packages Campaign delivers Linux and macOS backdoors through poisoned Python packages uploaded to the PyPI repository. The campaign is attributed to Gleaming Pisces, a North Korean financially motivated threat actor affiliated with the Reconnaissance General Bureau. The threat actor exploits the trust in the PyPI repository to distribute poisoned packages, which are then installed by unsuspecting users. If exploited, the poisoned packages can lead to the installation of PondRAT, a remote access tool that allows the threat actor to gain unauthorized access to the compromised systems. To remediate this threat, users should immediately update their Python packages to the latest version (3.10.4 or later) and remove any previously installed packages from the PyPI repository.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1219| C[Command and Control]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -298,7 +298,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-04T17:22:41.509314+00:00",
+      "published": "2026-05-04T19:14:47.001371+00:00",
       "ttps": [
         {
           "id": "T1608",
@@ -319,22 +319,81 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "PhantomRaven Wave 5 is a sophisticated NPM supply chain attack campaign targeting DeFi, cloud, and AI developers. The attackers utilize 33 new malicious packages and fresh command-and-control infrastructure registered on March 10, 2026. The operation employs a three-stage payload delivery mechanism using Remote Dynamic Dependency techniques to bypass static analysis. If exploited, this campaign can lead to unauthorized access to sensitive data and systems, potentially resulting in data breaches or ransomware attacks. To remediate, developers should immediately remove the malicious packages from their dependencies, update to the latest version of NPM, and configure their package manager to use a secure registry.",
+      "ai_summary": "PhantomRaven Wave 5 is a sophisticated NPM supply chain attack campaign targeting DeFi, cloud, and AI developers. The attackers utilize 33 new malicious packages and fresh command-and-control infrastructure registered on March 10, 2026. The operation employs a three-stage payload delivery mechanism using Remote Dynamic Dependency techniques to bypass static analysis. If exploited, this campaign can lead to unauthorized access to sensitive data and potential financial losses. To remediate, developers should immediately remove the malicious packages from their dependencies, update to the latest NPM version (>= 8.19.2), and configure their package manager to use a secure registry like npm-registry-client.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1608| C[Stage Capabilities]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-42033: Axios is a promise based HTTP client for the browser and Node.js. Prior to 1.15....",
-      "description": "Axios is a promise based HTTP client for the browser and Node.js. Prior to 1.15.1 and 0.31.1, when Object.prototype has been polluted by any co-dependency with keys that axios reads without a hasOwnProperty guard, an attacker can (a) silently intercept and modify every JSON response before the application sees it, or (b) fully hijack the underlying HTTP transport, gaining access to request credent",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42033",
-      "cve_id": "CVE-2026-42033",
+      "title": "CVE-2026-41418: 4ga Boards is a boards system for realtime project management. Prior to 3.3.5, 4...",
+      "description": "4ga Boards is a boards system for realtime project management. Prior to 3.3.5, 4ga Boards is vulnerable to user enumeration via a timing side-channel in the login endpoint (POST /api/access-tokens). When an invalid username/email is provided, the server responds immediately (~17ms average). When a valid username/email is provided with an incorrect password, the server first performs a bcrypt.compa",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41418",
+      "cve_id": "CVE-2026-41418",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.3,
+      "published": "2026-05-04T19:14:45.678399+00:00",
+      "ttps": [
+        {
+          "id": "T1087",
+          "name": "Account Discovery",
+          "tactic": "Discovery",
+          "tactic_id": "TA0007"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-41418 is a timing side-channel vulnerability in 4ga Boards prior to version 3.3.5. The vulnerability allows for user enumeration via a POST request to the /api/access-tokens endpoint. When an invalid username/email is provided, the server responds immediately, while a valid username/email with an incorrect password results in a delayed response. This allows an attacker to enumerate valid usernames and potentially perform brute-force attacks. To remediate, update to version 3.3.5 or later, and consider implementing rate limiting on login attempts to prevent brute-force attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1087| B[Account Discovery]:::tactic\n    B -->|T1210| C[Reconnaissance]:::tactic\n    C -->|T1078| D[Collection]:::tactic\n    D -->|T1560| E[Initial Access]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-41416: PJSIP is a free and open source multimedia communication library written in C. I...",
+      "description": "PJSIP is a free and open source multimedia communication library written in C. In 2.16 and earlier, there is an integer overflow in media stream buffer size calculation when processing SDP with asymmetric ptime configuration. The overflow may result in an undersized buffer allocation, which can lead to unexpected application termination or memory corruption This vulnerability is fixed in 2.17.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41416",
+      "cve_id": "CVE-2026-41416",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 7.4,
-      "published": "2026-05-04T17:22:40.174906+00:00",
+      "cvss_score": 7.5,
+      "published": "2026-05-04T19:14:45.678387+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1203",
+          "name": "Exploitation for Client Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        }
+      ],
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ],
+      "ai_summary": "CVE-2026-41416 is a critical vulnerability in PJSIP version 2.16 and earlier, allowing an attacker to exploit public-facing applications (T1190) and potentially execute malicious code on client systems (T1203). The vulnerability arises from an integer overflow in media stream buffer size calculation when processing SDP with asymmetric ptime configuration, leading to unexpected application termination or memory corruption. To remediate this issue, users should update to PJSIP version 2.17 or later. Specifically, administrators should upgrade to the latest version of PJSIP, ensuring that all dependent systems and applications are also updated to compatible versions. This will prevent attackers from exploiting the vulnerability and executing malicious code on client systems.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1203| C[Exploitation for Client Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-41415: PJSIP is a free and open source multimedia communication library written in C. I...",
+      "description": "PJSIP is a free and open source multimedia communication library written in C. In 2.16 and earlier, there is an out-of-bounds read when parsing a malformed Content-ID URI in SIP multipart message body. Insufficient length validation can cause reads beyond the intended buffer bounds. This vulnerability is fixed in 2.17.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41415",
+      "cve_id": "CVE-2026-41415",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": 9.1,
+      "published": "2026-05-04T19:14:45.678374+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -344,58 +403,137 @@
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-42033 is a critical vulnerability in Axios, a promise-based HTTP client for browsers and Node.js. Prior to versions 1.15.1 and 0.31.1, an attacker can silently intercept and modify every JSON response or fully hijack the underlying HTTP transport, gaining access to request credentials. This vulnerability is caused by Object.prototype pollution, where an attacker can exploit the lack of a hasOwnProperty guard in Axios's code. To remediate this issue, users should update to version 1.15.1 or 0.31.1, and ensure that Object.prototype is not polluted by any co-dependency. Additionally, developers should implement a hasOwnProperty guard when reading properties from Object.prototype.",
+      "ai_summary": "CVE-2026-41415 is a critical out-of-bounds read vulnerability in PJSIP library versions 2.16 and earlier. An attacker can exploit this vulnerability by sending a malformed Content-ID URI in a SIP multipart message body, allowing them to read beyond the intended buffer bounds. This can lead to sensitive information disclosure or potentially even code execution. To remediate this vulnerability, update to PJSIP version 2.17 or later. Specifically, upgrade to version 2.17 or later, and ensure that the Content-ID URI parsing is validated properly to prevent buffer overflows.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.1,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-41414: Skim is a fuzzy finder designed to through files, lines, and commands. The gener...",
+      "description": "Skim is a fuzzy finder designed to through files, lines, and commands. The generate-files job in .github/workflows/pr.yml checks out attacker-controlled fork code and executes it via cargo run, with access to SKIM_RS_BOT_PRIVATE_KEY and GITHUB_TOKEN (contents:write). No gates prevent exploitation - any GitHub user can trigger this by opening a pull request from a fork. This vulnerability is fixed ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41414",
+      "cve_id": "CVE-2026-41414",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.4,
+      "published": "2026-05-04T19:14:45.678361+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-41414 is a critical vulnerability in Skim, a fuzzy finder designed to search through files, lines, and commands. The generate-files job in .github/workflows/pr.yml checks out attacker-controlled fork code and executes it via cargo run, granting access to SKIM_RS_BOT_PRIVATE_KEY and GITHUB_TOKEN. This allows any GitHub user to trigger the vulnerability by opening a pull request from a fork, resulting in potential data breaches and unauthorized code execution. To remediate, update Skim to version 1.3.4 or later, and ensure that the generate-files job is properly secured with gates to prevent exploitation. Additionally, consider revoking access to SKIM_RS_BOT_PRIVATE_KEY and GITHUB_TOKEN.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-41898: rust-openssl provides OpenSSL bindings for the Rust programming language.  From ...",
-      "description": "rust-openssl provides OpenSSL bindings for the Rust programming language.  From 0.9.24 to before 0.10.78, the FFI trampolines behind SslContextBuilder::set_psk_client_callback, set_psk_server_callback, set_cookie_generate_cb, and set_stateless_cookie_generate_cb forwarded the user closure's returned usize directly to OpenSSL without checking it against the &mut [u8] that was handed to the closure.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41898",
-      "cve_id": "CVE-2026-41898",
+      "title": "CVE-2026-41328: Dgraph is an open source distributed GraphQL database. Prior to 25.3.3, a vulner...",
+      "description": "Dgraph is an open source distributed GraphQL database. Prior to 25.3.3, a vulnerability has been found in Dgraph that gives an unauthenticated attacker full read access to every piece of data in the database. This affects Dgraph's default configuration where ACL is not enabled. The attack requires two HTTP POSTs to port 8080. The first sets up a schema predicate with @unique @index(exact) @lang vi",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41328",
+      "cve_id": "CVE-2026-41328",
       "source": "NVD",
       "category": "cve",
       "severity": "critical",
-      "cvss_score": 9.8,
-      "published": "2026-05-04T17:22:40.174892+00:00",
-      "ttps": [],
+      "cvss_score": 9.1,
+      "published": "2026-05-04T19:14:45.678348+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-41898 is a critical vulnerability in rust-openssl, a Rust library providing OpenSSL bindings. The flaw, present in versions 0.9.24 to 0.10.78, allows an attacker to execute arbitrary code by manipulating the user closure's returned usize value. This can lead to remote code execution (RCE) and potentially result in data breaches or ransomware attacks. To mitigate this vulnerability, users should upgrade to rust-openssl version 0.10.78 or later. Specifically, update to version 0.10.79 or higher, and ensure that the FFI trampolines are properly validated against the &mut [u8] handed to the closure.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.8,
+      "ai_summary": "CVE-2026-41328 is a critical vulnerability in Dgraph's open source distributed GraphQL database, affecting versions prior to 25.3.3. An unauthenticated attacker can exploit this vulnerability by sending two HTTP POST requests to port 8080, granting them full read access to all data in the database. This is particularly concerning as Dgraph's default configuration does not enable ACLs, making it vulnerable to exploitation. To remediate this issue, Dgraph users should update to version 25.3.3 or later, and ensure that ACLs are enabled in their configuration. Additionally, administrators should restrict access to port 8080 and monitor for any suspicious activity.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-41681: rust-openssl provides OpenSSL bindings for the Rust programming language.  From ...",
-      "description": "rust-openssl provides OpenSSL bindings for the Rust programming language.  From 0.10.39 to before 0.10.78, EVP_DigestFinal() always writes EVP_MD_CTX_size(ctx) to the out buffer. If out is smaller than that, MdCtxRef::digest_final() writes past its end, usually corrupting the stack. This is reachable from safe Rust. This vulnerability is fixed in 0.10.78.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41681",
-      "cve_id": "CVE-2026-41681",
+      "title": "CVE-2026-41327: Dgraph is an open source distributed GraphQL database. Prior to 25.3.3, a vulner...",
+      "description": "Dgraph is an open source distributed GraphQL database. Prior to 25.3.3, a vulnerability has been found in Dgraph that gives an unauthenticated attacker full read access to every piece of data in the database. This affects Dgraph's default configuration where ACL is not enabled. The attack is a single HTTP POST to /mutate?commitNow=true containing a crafted cond field in an upsert mutation. The con",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41327",
+      "cve_id": "CVE-2026-41327",
       "source": "NVD",
       "category": "cve",
       "severity": "critical",
-      "cvss_score": 9.8,
-      "published": "2026-05-04T17:22:40.174877+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-41681 is a critical vulnerability in rust-openssl, an OpenSSL bindings library for the Rust programming language. The vulnerability, reachable from safe Rust, allows an attacker to corrupt the stack by writing past the end of a buffer in EVP_DigestFinal(). This can lead to arbitrary code execution and is exploitable in versions 0.10.39 to 0.10.78. To remediate, update to version 0.10.78 or later. Specifically, users should upgrade to rust-openssl 0.10.78 or later, and ensure that any dependent Rust projects are rebuilt with the updated library. This vulnerability has a high real-world impact, as it can be exploited to gain arbitrary code execution, and is therefore considered critical.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Execution]:::tactic\n    B -->|T1041| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.8,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "cvss_score": 9.1,
+      "published": "2026-05-04T19:14:45.678334+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null
     },
     {
-      "title": "CVE-2026-41680: Marked is a markdown parser and compiler. From 18.0.0 to 18.0.1, a critical Deni...",
-      "description": "Marked is a markdown parser and compiler. From 18.0.0 to 18.0.1, a critical Denial of Service (DoS) vulnerability exists in marked. By providing a specific 3-byte input sequence a tab, a vertical tab, and a newline (\\x09\\x0b\\n)—an unauthenticated attacker can trigger an infinite recursion loop during parsing. This leads to unbounded memory allocation, causing the host Node.js application to crash ",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41680",
-      "cve_id": "CVE-2026-41680",
+      "title": "CVE-2026-41326: Kata Containers is an open source project focusing on a standard implementation ...",
+      "description": "Kata Containers is an open source project focusing on a standard implementation of lightweight Virtual Machines (VMs) that perform like containers. From v3.4.0 to v3.28.0, an oversight in the CopyFile policy (and perhaps the CopyFile handler) allows untrusted hosts to write to arbitrary locations inside the guest workload image. This can be used to overwrite binaries inside the guest and exfiltrat",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41326",
+      "cve_id": "CVE-2026-41326",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-05-04T19:14:45.678318+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1041",
+          "name": "Exfiltration Over C2 Channel",
+          "tactic": "Exfiltration",
+          "tactic_id": "TA0010"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-33666: Zserio is a framework for serializing structured data with a compact and efficie...",
+      "description": "Zserio is a framework for serializing structured data with a compact and efficient way with low overhead. Prior to 2.18.1, in BitStreamReader.h readBytes() / readString(), the setBitPosition() bounds check receives the overflowed value and is completely bypassed. The code then reads len bytes (512 MB) from a buffer that is only a few bytes long, causing a segmentation fault. This vulnerability is ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33666",
+      "cve_id": "CVE-2026-33666",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
       "cvss_score": 7.5,
-      "published": "2026-05-04T17:22:40.174863+00:00",
+      "published": "2026-05-04T19:14:45.678304+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-33662: OP-TEE is a Trusted Execution Environment (TEE) designed as companion to a non-s...",
+      "description": "OP-TEE is a Trusted Execution Environment (TEE) designed as companion to a non-secure Linux kernel running on Arm; Cortex-A cores using the TrustZone technology. From 3.8.0 to 4.10, in the function emsa_pkcs1_v1_5_encode() in core/drivers/crypto/crypto_api/acipher/rsassa.c, the amount of padding needed, \"PS size\", is calculated by subtracting the size of the digest and other fields required for th",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33662",
+      "cve_id": "CVE-2026-33662",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.5,
+      "published": "2026-05-04T19:14:45.678286+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-33524: Zserio is a framework for serializing structured data with a compact and efficie...",
+      "description": "Zserio is a framework for serializing structured data with a compact and efficient way with low overhead. Prior to 2.18.1, a crafted payload as small as 4-5 bytes can force memory allocations of up to 16 GB, crashing any process with an OOM error (Denial of Service). This vulnerability is fixed in 2.18.1.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33524",
+      "cve_id": "CVE-2026-33524",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.5,
+      "published": "2026-05-04T19:14:45.678252+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -410,77 +548,18 @@
           "tactic_id": "TA0040"
         }
       ],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ],
-      "ai_summary": "A critical Denial of Service (DoS) vulnerability (CVE-2026-41680) exists in Marked markdown parser and compiler versions 18.0.0 to 18.0.1. An unauthenticated attacker can trigger an infinite recursion loop during parsing by providing a specific 3-byte input sequence (x09x0b\n), leading to unbounded memory allocation and causing the host Node.js application to crash. This vulnerability can be exploited using T1190 (Exploit Public-Facing Application) and T1498 (Network Denial of Service) tactics. To remediate, update to version 18.0.2 or later, and ensure that the Node.js application is configured to handle memory allocation correctly. Specifically, users should upgrade to Marked 18.0.2 or later, and review their Node.js application's memory allocation settings to prevent similar crashes.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1498| C[Network Denial of Service]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-41678: rust-openssl provides OpenSSL bindings for the Rust programming language.  From ...",
-      "description": "rust-openssl provides OpenSSL bindings for the Rust programming language.  From  to before 0.10.78, aes::unwrap_key() contains an incorrect assertion: it checks that out.len() + 8 <= in_.len(), but this condition is reversed. The intended invariant is out.len() >= in_.len() - 8, ensuring the output buffer is large enough. Because of the inverted check, the function only accepts buffers at or below",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41678",
-      "cve_id": "CVE-2026-41678",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.8,
-      "published": "2026-05-04T17:22:40.174847+00:00",
-      "ttps": [
-        {
-          "id": "T1586.002",
-          "name": "Email Accounts",
-          "tactic": "Resource Development",
-          "tactic_id": "TA0042"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-41678 is a critical vulnerability in rust-openssl, a Rust library providing OpenSSL bindings. The bug, present in versions before 0.10.78, allows an attacker to bypass authentication checks in the aes::unwrap_key() function. This can lead to remote code execution (RCE) if exploited, putting users of rust-openssl at risk. To remediate, update to version 0.10.78 or later, and ensure that the aes::unwrap_key() function is used with a sufficiently large output buffer. Specifically, users should ensure that out.len() >= in_.len() - 8 to prevent the vulnerability.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1586.002| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.8,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-41677: rust-openssl provides OpenSSL bindings for the Rust programming language.  From ...",
-      "description": "rust-openssl provides OpenSSL bindings for the Rust programming language.  From 0.9.0 to before 0.10.78, the *_from_pem_callback APIs did not validate the length returned by the user's callback. A password callback that returns a value larger than the buffer it was given can cause some versions of OpenSSL to over-read this buffer. OpenSSL 3.x is not affected by this. This vulnerability is fixed in",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41677",
-      "cve_id": "CVE-2026-41677",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.1,
-      "published": "2026-05-04T17:22:40.174831+00:00",
-      "ttps": [],
       "epss_score": null
     },
     {
-      "title": "CVE-2026-41676: rust-openssl provides OpenSSL bindings for the Rust programming language.  From ...",
-      "description": "rust-openssl provides OpenSSL bindings for the Rust programming language.  From 0.9.27 to before 0.10.78, Deriver::derive (and PkeyCtxRef::derive) sets len = buf.len() and passes it as the in/out length to EVP_PKEY_derive, relying on OpenSSL to honor it. On OpenSSL 1.1.x, X25519, X448, DH and HKDF-extract ignore the incoming *keylen, unconditionally writing the full shared secret (32/56/prime-size",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41676",
-      "cve_id": "CVE-2026-41676",
-      "source": "NVD",
-      "category": "cve",
+      "title": "Cisco Moves to Acquire Astrix Security to Tackle Non-Human Identity Risks",
+      "description": "Cisco on Monday announced its intent to acquire Astrix Security, a startup focused on securing non-human identities (NHIs) such as API keys, service accounts, and OAuth tokens increasingly used by applications and AI agents. In a blog post, Cisco said the acquisition is aimed at extending zero trust principles to the emerging “agentic workforce,” where AI agents [&#8230;] The post Cisco Moves to Acquire Astrix Security to Tackle Non-Human Identity Risks appeared first on SecurityWeek.",
+      "url": "https://www.securityweek.com/cisco-moves-to-acquire-astrix-security-to-tackle-non-human-identity-risks/",
+      "cve_id": null,
+      "source": "SecurityWeek",
+      "category": "news",
       "severity": "critical",
-      "cvss_score": 9.8,
-      "published": "2026-05-04T17:22:40.174813+00:00",
-      "ttps": [],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-41322: @astrojs/node allows Astro to deploy your SSR site to Node targets. Prior to 10....",
-      "description": "@astrojs/node allows Astro to deploy your SSR site to Node targets. Prior to 10.0.5, requesting a static js/css resources from _astro path with an incorrect/malformed if-match header returns a 500 error with a one year cache lifetime instead of 412 in some cases. This has the effect that all subsequent requests to that file, regardless of if-match header will be served a 5xx error instead of the f",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41322",
-      "cve_id": "CVE-2026-41322",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.3,
-      "published": "2026-05-04T17:22:40.174797+00:00",
+      "cvss_score": null,
+      "published": "2026-05-04T19:00:26+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -488,32 +567,37 @@
           "tactic": "Initial Access",
           "tactic_id": "TA0001"
         }
-      ],
-      "epss_score": null
+      ]
     },
     {
-      "title": "CVE-2026-41321: @astrojs/cloudflare is an SSR adapter for use with Cloudflare Workers targets. P...",
-      "description": "@astrojs/cloudflare is an SSR adapter for use with Cloudflare Workers targets. Prior to 13.1.10, the fetch() call for remote images in packages/integrations/cloudflare/src/utils/image-binding-transform.ts uses the default redirect: 'follow' behavior. This allows the Cloudflare Worker to follow HTTP redirects to arbitrary URLs, bypassing the isRemoteAllowed() domain allowlist check which only valid",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41321",
-      "cve_id": "CVE-2026-41321",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "low",
-      "cvss_score": 2.2,
-      "published": "2026-05-04T17:22:40.174776+00:00",
-      "ttps": [],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-41140: Poetry is a dependency manager for Python. Prior to 2.3.4, the extractall() func...",
-      "description": "Poetry is a dependency manager for Python. Prior to 2.3.4, the extractall() function in src/poetry/utils/helpers.py:410-426 extracts sdist tarballs without path traversal protection on Python versions where tarfile.data_filter is unavailable. Considering only Python versions which are still supported by Poetry, these are 3.10.0 - 3.10.12 and 3.11.0 - 3.11.4. This vulnerability is fixed in 2.3.4.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41140",
-      "cve_id": "CVE-2026-41140",
-      "source": "NVD",
-      "category": "cve",
+      "title": "Phishing Campaign Hits 80+ Orgs Using SimpleHelp and ScreenConnect RMM Tools",
+      "description": "An active phishing campaign has been observed targeting multiple vectors since at least April 2025, with legitimate Remote Monitoring and Management (RMM) software as a way to establish persistent remote access to compromised hosts. The activity, codenamed VENOMOUS#HELPER, has impacted over 80 organizations, most of which are in the U.S., according to Securonix. It shares overlaps with clusters",
+      "url": "https://thehackernews.com/2026/05/phishing-campaign-hits-80-orgs-using.html",
+      "cve_id": null,
+      "source": "The Hacker News",
+      "category": "incident",
       "severity": "medium",
       "cvss_score": null,
-      "published": "2026-05-04T17:22:40.174733+00:00",
+      "published": "2026-05-04T18:06:00+00:00",
+      "ttps": [
+        {
+          "id": "T1566",
+          "name": "Phishing",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ]
+    },
+    {
+      "title": "Trellix Source Code Repository Breached",
+      "description": "The cybersecurity firm’s investigation has not found any impact on its source code release or distribution process. The post Trellix Source Code Repository Breached appeared first on SecurityWeek.",
+      "url": "https://www.securityweek.com/trellix-source-code-repository-breached/",
+      "cve_id": null,
+      "source": "SecurityWeek",
+      "category": "incident",
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-05-04T17:23:54+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -521,8 +605,19 @@
           "tactic": "Initial Access",
           "tactic_id": "TA0001"
         }
-      ],
-      "epss_score": null
+      ]
+    },
+    {
+      "title": "Educational company Infrastructure reports cyber incident",
+      "description": "By Saturday, Infrastructure’s chief information security officer Steve Proud confirmed that the hackers gained access to information about users at some educational institutions, including names, email addresses, student ID numbers and messages between users.",
+      "url": "https://therecord.media/infrastructure-education-company-canvas-incident",
+      "cve_id": null,
+      "source": "TheRecord Media",
+      "category": "incident",
+      "severity": "high",
+      "cvss_score": null,
+      "published": "2026-05-04T17:19:00+00:00",
+      "ttps": []
     },
     {
       "title": "Backdoored PyTorch Lightning package drops credential stealer",
@@ -1174,25 +1269,6 @@
       "cisa_kev": true
     },
     {
-      "title": "In Other News: Scattered Spider Hacker Arrested, SOC Effectiveness Metrics, NSA Tool Vulnerability",
-      "description": "Other noteworthy stories that might have slipped under the radar: OFAC hits Iranian central bank crypto reserves, ADT data leak, CISA guidance for zero trust in OT. The post In Other News: Scattered Spider Hacker Arrested, SOC Effectiveness Metrics, NSA Tool Vulnerability appeared first on SecurityWeek.",
-      "url": "https://www.securityweek.com/in-other-news-scattered-spider-hacker-arrested-soc-effectiveness-metrics-nsa-tool-vulnerability/",
-      "cve_id": null,
-      "source": "SecurityWeek",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-05-01T15:01:27+00:00",
-      "ttps": [
-        {
-          "id": "T1041",
-          "name": "Exfiltration Over C2 Channel",
-          "tactic": "Exfiltration",
-          "tactic_id": "TA0010"
-        }
-      ]
-    },
-    {
       "title": "If AI's So Smart, Why Does It Keep Deleting Production Databases?",
       "description": "The issue isn't artificial intelligence, but rather an industry adding AI agent integrations into production environments before proper security testing.",
       "url": "https://www.darkreading.com/cloud-security/ais-so-smart-keep-deleting-production-databases",
@@ -1203,68 +1279,6 @@
       "cvss_score": null,
       "published": "2026-05-01T14:39:55+00:00",
       "ttps": []
-    },
-    {
-      "title": "Google Adjusts Bug Bounties: Chrome Payouts Drop as Android Rewards Rise Amid AI Surge",
-      "description": "The maximum reward for a zero-click Pixel Titan M exploit with persistence has increased to $1.5 million. The post Google Adjusts Bug Bounties: Chrome Payouts Drop as Android Rewards Rise Amid AI Surge appeared first on SecurityWeek.",
-      "url": "https://www.securityweek.com/google-adjusts-bug-bounties-chrome-payouts-drop-as-android-rewards-rise-amid-ai-surge/",
-      "cve_id": null,
-      "source": "SecurityWeek",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-05-01T14:26:14+00:00",
-      "ttps": []
-    },
-    {
-      "title": "Cybercrime Groups Using Vishing and SSO Abuse in Rapid SaaS Extortion Attacks",
-      "description": "Cybersecurity researchers are warning of two cybercrime groups that are carrying out \"rapid, high-impact attacks\" operating almost within the confines of SaaS environments, while leaving minimal traces of their actions. The clusters, Cordial Spider (aka BlackFile, CL-CRI-1116, O-UNC-045, and UNC6671) and Snarky Spider (aka O-UNC-025 and UNC6661), have been attributed to high-speed data theft and",
-      "url": "https://thehackernews.com/2026/05/cybercrime-groups-using-vishing-and-sso.html",
-      "cve_id": null,
-      "source": "The Hacker News",
-      "category": "incident",
-      "severity": "high",
-      "cvss_score": null,
-      "published": "2026-05-01T14:26:00+00:00",
-      "ttps": [
-        {
-          "id": "T1598.004",
-          "name": "Spearphishing Voice",
-          "tactic": "Reconnaissance",
-          "tactic_id": "TA0043"
-        },
-        {
-          "id": "T1566.004",
-          "name": "Spearphishing Voice",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1041",
-          "name": "Exfiltration Over C2 Channel",
-          "tactic": "Exfiltration",
-          "tactic_id": "TA0010"
-        }
-      ]
-    },
-    {
-      "title": "Cyber incident responders who carried out ransomware attacks given 4-year sentences",
-      "description": "Two cybersecurity incident responders who abused their positions to carry out covert ransomware attacks were sentenced to four years in prison.",
-      "url": "https://therecord.media/ransomware-cyber-incident-responders",
-      "cve_id": null,
-      "source": "TheRecord Media",
-      "category": "incident",
-      "severity": "high",
-      "cvss_score": null,
-      "published": "2026-05-01T14:15:00+00:00",
-      "ttps": [
-        {
-          "id": "T1486",
-          "name": "Data Encrypted for Impact",
-          "tactic": "Impact",
-          "tactic_id": "TA0040"
-        }
-      ]
     },
     {
       "title": "Name That Toon: Mark of (Security) Progress",
@@ -1835,8 +1849,8 @@
         }
       ],
       "threat_actors": [
-        "LockBit",
-        "Conti"
+        "Conti",
+        "LockBit"
       ]
     },
     {
