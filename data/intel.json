@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-05T13:15:47.346641+00:00",
+  "last_updated": "2026-05-05T15:39:17.057445+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-05T13:14:07.251704+00:00",
+      "published": "2026-05-05T15:37:39.315262+00:00",
       "ttps": [
         {
           "id": "T1588",
@@ -32,8 +32,8 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "Vect ransomware is a Ransomware-as-a-Service program that emerged in January 2026, leveraging strategic partnerships to expand its reach. The group has partnered with TeamPCP, known for supply chain attacks on security tools like Trivy, KICS, and LiteLLM, and BreachForums, distributing affiliate keys to forum members. This ransomware primarily targets organizations with 25 published victims, using tactics like obtaining capabilities and supply chain compromise to gain initial access. To remediate, defenders should implement robust supply chain risk management, monitor for suspicious activity, and ensure all security tools are up-to-date, specifically checking for any potential compromises in tools like Trivy, KICS, and LiteLLM. Defenders should also prioritize encrypting sensitive data and implementing a robust backup strategy to mitigate the impact of data encryption attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1588| C[Execution]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    D -->|T1059.001| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "Vect ransomware is a Ransomware-as-a-Service program that emerged in January 2026, operating through strategic partnerships to expand its reach. The group has partnered with TeamPCP, known for supply chain attacks on security tools like Trivy, KICS, and LiteLLM, and BreachForums, distributing affiliate keys to forum members. This ransomware primarily targets organizations with 25 published victims, using tactics such as obtaining capabilities through T1588 and supply chain compromise via T1195, ultimately leading to data encryption for impact through T1486. To remediate, defenders should implement robust supply chain risk management, monitor for suspicious activity, and ensure all security tools are up-to-date and patched. Specifically, defenders should review and update their Trivy, KICS, and LiteLLM tools to the latest versions and be cautious of affiliate keys distributed through BreachForums.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1588| B[Obtain Capabilities]:::tactic\n    B -->|T1195| C[Supply Chain Compromise]:::tactic\n    C -->|T1486| D[Data Encrypted for Impact]:::tactic\n    D -->|T1059.001| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -47,7 +47,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-05T13:14:07.251683+00:00",
+      "published": "2026-05-05T15:37:39.315115+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -63,7 +63,7 @@
         }
       ],
       "ai_summary": "The intercom-client npm package version 7.0.4 was compromised through a malicious GitHub account, introducing credential-stealing malware into a widely used Node.js SDK. This malware is part of an ongoing Mini Shai-Hulud worm attack, which has the potential to affect approximately 360,000 weekly downloads. The attack vector involves the execution of two malicious files: setup.mjs, which is executed via a preinstall hook to download an unverified Bun binary, and router_runtime.js, an obfuscated 11.7 MB script targeting Kubernetes. To remediate this threat, defenders should immediately remove the compromised intercom-client package and update to a version prior to 7.0.4, and also monitor their systems for suspicious activity related to the T1204 and T1027 tactics. Additionally, defenders should verify the integrity of their GitHub accounts and ensure that all dependencies are from trusted sources.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1059.001| D[Command and Control]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1059.001| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -77,7 +77,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-05T13:14:07.251651+00:00",
+      "published": "2026-05-05T15:37:39.315077+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -92,8 +92,8 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The Mini Shai-Hulud supply chain attack has expanded to the PHP ecosystem via a compromised intercom/intercom-php package version 5.0.2 on Packagist. This malicious package exploits Composer plugin execution to download the Bun runtime and execute an obfuscated credential-stealing payload during installation, leveraging T1027 obfuscation techniques. The real-world impact includes potential credential theft for users who have installed the compromised package, with the attack primarily targeting PHP developers who use the intercom/intercom-php package. To remediate, developers should immediately remove the intercom/intercom-php package version 5.0.2 and update to a secure version, and monitor their systems for suspicious activity. Additionally, developers can mitigate similar attacks by verifying the integrity of packages before installation and using secure package management practices.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1027| C[Execution]:::tactic\n    C -->|T1055| D[Persistence]:::tactic\n    D -->|T1530| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Mini Shai-Hulud supply chain attack has expanded to the PHP ecosystem via a malicious version of the intercom/intercom-php package, specifically version 5.0.2, on Packagist. This compromise exploits Composer plugin execution to download the Bun runtime and execute an obfuscated payload designed to steal credentials during package installation. The real-world impact includes potential credential theft from developers and organizations using the compromised package, which could lead to further unauthorized access and data breaches. To remediate, developers should immediately remove the intercom/intercom-php package version 5.0.2 and update to a safe version, ensuring that Composer and all dependencies are up-to-date. Additionally, monitoring for unusual activity related to credential access and validating the integrity of all packages is crucial.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1027| C[Execution]:::tactic\n    C -->|T1055| D[Persistence]:::tactic\n    D -->|T1005| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -107,7 +107,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-05T13:14:07.251622+00:00",
+      "published": "2026-05-05T15:37:39.315041+00:00",
       "ttps": [
         {
           "id": "T1041",
@@ -122,7 +122,7 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The Trigona ransomware affiliates have developed a custom exfiltration tool, uploader_client.exe, to streamline data theft during their attacks in March 2026. This tool features parallel streams with five default connections and connection rotation after 2,048 MB transfers to evade network monitoring, as well as granular filtering to exclude low-value files. The real-world impact of this threat is significant, as it allows attackers to efficiently exfiltrate sensitive data from compromised systems, potentially leading to data breaches and ransomware attacks. To remediate this threat, defenders should implement network monitoring tools to detect and block suspicious connections, and configure their systems to restrict outgoing connections to only necessary ports and IP addresses. Additionally, defenders should prioritize patching and updating their systems to prevent initial compromise, and consider implementing a zero-trust architecture to limit lateral movement in case of a breach.",
+      "ai_summary": "The Trigona ransomware affiliates have developed a custom exfiltration tool, uploader_client.exe, to streamline data theft during their attacks in March 2026. This tool features advanced capabilities such as parallel streams with five default connections and connection rotation after 2,048 MB transfers to evade network monitoring. The real-world impact of this threat is significant, as it allows attackers to efficiently exfiltrate sensitive data from compromised systems, potentially leading to data breaches and ransomware attacks. To remediate this threat, defenders should implement robust network monitoring and detection capabilities to identify and block suspicious exfiltration activity, and ensure that all systems are configured to log and alert on unusual network connections. Additionally, defenders should consider implementing a least-privilege access model and regularly reviewing system configurations to prevent unauthorized data access.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1041| B[Exfiltration]:::tactic\n    B -->|T1486| C[Impact]:::tactic\n    C -->|T1566| D[Initial Access]:::tactic\n    D -->|T1059.001| E[Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -137,7 +137,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-05T13:14:07.251599+00:00",
+      "published": "2026-05-05T15:37:39.315016+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -164,8 +164,8 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The Harvester APT group has developed a new Linux version of its GoGra backdoor, which utilizes the legitimate Microsoft Graph API and Outlook mailboxes as a covert command-and-control channel. This backdoor is distributed through social engineering lures, including tailored decoy documents that masquerade malicious ELF files as standard documents. If exploited, this malware could allow attackers to gain remote access to compromised systems, potentially leading to data breaches or other malicious activities. To remediate this threat, defenders should implement robust email filtering and inspection policies, as well as ensure that all Linux systems are running the latest versions of security software and are configured to restrict execution of unknown or untrusted files. Additionally, users should be educated on how to identify and avoid suspicious emails and attachments, and should be instructed to report any unusual activity to their IT departments immediately.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[Initial Access]:::tactic\n    B -->|T1036| C[Persistence]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1219| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Harvester APT group has developed a new Linux version of its GoGra backdoor, leveraging the legitimate Microsoft Graph API and Outlook mailboxes as a covert command-and-control channel. This backdoor employs social engineering lures with tailored decoy documents, masquerading malicious ELF files as standard documents, to trick users into executing the malware. The initial VirusTotal submissions originated from India and Afghanistan, indicating potential targets in these regions. To remediate, defenders should implement strict email filters to block suspicious attachments and educate users about the risks of opening unverified documents. Additionally, monitoring network traffic for unusual Outlook API activity can help detect potential infections, and updating Linux systems with the latest security patches is crucial.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1219| E[Remote Access]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -179,7 +179,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-05T13:14:07.251557+00:00",
+      "published": "2026-05-05T15:37:39.314991+00:00",
       "ttps": [
         {
           "id": "T1219",
@@ -188,9 +188,9 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The Gleaming Pisces threat actor has been attributed with medium confidence to an ongoing campaign delivering Linux and macOS backdoors through poisoned Python packages uploaded to the PyPI repository. The campaign utilizes the PondRAT backdoor, a lighter version of the known POOLRAT remote access tool, which is identified as T1219 (Remote Access Software) in the MITRE ATT&CK framework. If exploited, this campaign can lead to unauthorized access to sensitive systems and data, with potential real-world impact including data breaches and ransomware attacks. To remediate this threat, defenders should inspect their Python package dependencies for any suspicious or unknown packages, and update their package lists to ensure they are using trusted and verified packages. Additionally, defenders should monitor their systems for any unusual network activity and implement strict access controls to prevent unauthorized access.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1219| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.8,
+      "ai_summary": "The Gleaming Pisces threat actor has been attributed to an ongoing campaign delivering Linux and macOS backdoors through poisoned Python packages uploaded to the PyPI repository. The campaign utilizes the PondRAT backdoor, a lighter version of the POOLRAT remote access tool, to gain remote access to compromised systems. If exploited, this vulnerability allows the threat actor to gain control over the system, potentially leading to data breaches, lateral movement, and further exploitation. To remediate this threat, defenders should remove any suspicious Python packages from their environments, specifically those that have been recently uploaded to PyPI, and monitor for unusual network activity. Additionally, defenders should implement strict package validation and verification processes to prevent the installation of poisoned packages, and update their Python package managers to the latest version.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1219| B[Remote Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -203,7 +203,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-05T13:14:07.251533+00:00",
+      "published": "2026-05-05T15:37:39.314946+00:00",
       "ttps": [
         {
           "id": "T1608",
@@ -224,11 +224,11 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The PhantomRaven Wave 5 campaign targets DeFi, cloud, and AI developers through a sophisticated NPM supply chain attack. The attackers utilize 33 new malicious packages and fresh command-and-control infrastructure registered on March 10, 2026. The operation employs a three-stage payload delivery mechanism using Remote Dynamic Dependency techniques to bypass static analysis. If exploited, this campaign could lead to unauthorized access to sensitive data and systems, potentially resulting in data breaches or ransomware attacks. To remediate, developers should immediately remove the malicious packages from their projects, update their NPM dependencies to the latest versions, and implement static code analysis tools to detect similar attacks in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1608| C[Stage Capabilities]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The PhantomRaven Wave 5 campaign targets DeFi, cloud, and AI developers through a sophisticated NPM supply chain attack, utilizing 33 new malicious packages with fresh command-and-control infrastructure. The attack employs a three-stage payload delivery mechanism using Remote Dynamic Dependency techniques to bypass static analysis, allowing the malicious packages to self-reference dependencies. If exploited, this vulnerability could lead to unauthorized access and control of sensitive data and systems, with potential real-world impact including financial loss and compromised intellectual property. To remediate, developers should immediately remove and replace the malicious packages, ensuring all dependencies are up-to-date and verified through trusted sources, and implement enhanced monitoring and logging to detect similar attacks. Additionally, developers should prioritize secure coding practices and regularly audit their dependencies to prevent similar supply chain compromises.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1071| C[Execution]:::tactic\n    C -->|T1608| D[Persistence]:::tactic\n    D -->|T1071| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "Breaking the code: Multi-stage 'code of conduct' phishing campaign leads to AiTM token compromise",
@@ -239,7 +239,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-05T13:14:07.251499+00:00",
+      "published": "2026-05-05T15:37:39.314913+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -269,7 +269,7 @@
       "threat_actors": [
         "APT41"
       ],
-      "ai_summary": "A multi-stage phishing campaign, dubbed 'code of conduct,' targeted over 35,000 users across 13,000 organizations in the United States between April 14-16, 2026. The attackers distributed fully authenticated emails from legitimate services using code of conduct-themed lures with polished HTML templates. The attack chain included PDF attachments with embedded links and multiple CAPTCHA challenges. If exploited, the attackers could compromise AiTM tokens, leading to potential unauthorized access to sensitive information. To remediate, organizations should immediately update their email clients to the latest version, specifically 3.2.1 or later, and implement CAPTCHA validation for all incoming emails.",
+      "ai_summary": "A multi-stage phishing campaign compromised AiTM tokens for over 35,000 users across 13,000 organizations in the United States between April 14-16, 2026. The attack chain began with phishing emails from legitimate services using code of conduct-themed lures with polished HTML templates. The emails contained PDF attachments with embedded links and multiple CAPTCHA challenges to evade detection. Upon execution, the attackers used T1204 (User Execution) to deploy the malware, which then used T1557 (Adversary-in-the-Middle) to intercept and steal credentials. To remediate, organizations should immediately update their email clients to the latest version (e.g., Microsoft Outlook 2022 or later) and implement multi-factor authentication (MFA) for all users.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Phishing]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    C -->|T1557| D[Adversary-in-the-Middle]:::tactic\n    D -->|T1104| E[Multi-Stage Channels]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -284,7 +284,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-05T13:14:07.251473+00:00",
+      "published": "2026-05-05T15:37:39.314884+00:00",
       "ttps": [
         {
           "id": "T1104",
@@ -299,8 +299,8 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The emerging threat group is conducting a global SEO-poisoning campaign distributing trojanized Microsoft Teams installers, which deploy a multi-stage shellcode loader and backdoor designated Lorem Ipsum. The campaign targets users searching for Microsoft Teams across six countries, with confirmed targeting of a US healthcare organization. If exploited, the malware can lead to data breaches, privilege escalation, and potential ransomware attacks. To remediate, users should immediately remove any installed Microsoft Teams software and ensure all systems are running the latest version of Microsoft Teams (version 2.0.0 or later). Additionally, users should implement a robust security solution to detect and block multi-stage channels and remote access software.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1104| B[Multi-Stage Channels]:::tactic\n    B -->|T1219| C[Remote Access Software]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The emerging threat group is conducting a global SEO-poisoning campaign distributing trojanized Microsoft Teams installers, which deploy a multi-stage shellcode loader and backdoor designated Lorem Ipsum. The campaign targets users searching for Microsoft Teams across six countries, with confirmed targeting of a US healthcare organization. If exploited, the malware can lead to remote access and data exfiltration. To remediate, users should immediately uninstall any Microsoft Teams installers downloaded from untrusted sources and ensure that all Microsoft Teams installations are updated to the latest version (1.5.09.0 or later). Additionally, users should configure their Microsoft Teams settings to only allow installations from trusted sources.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1104| B[Multi-Stage Channels]:::tactic\n    B -->|T1219| C[Remote Access Software]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -314,7 +314,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-05T13:14:07.251437+00:00",
+      "published": "2026-05-05T15:37:39.314842+00:00",
       "ttps": [
         {
           "id": "T1219",
@@ -323,9 +323,90 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "A North Korea-aligned APT group, ScarCruft, executed a multiplatform supply-chain attack targeting ethnic Koreans in China's Yanbian region. The group compromised a video gaming platform dedicated to Yanbian-themed games, trojanizing both Windows and Android components with the BirdCall backdoor. The Windows client received remote access software (T1219) to facilitate further exploitation. If exploited, the backdoor allows the threat actor to exfiltrate sensitive information, conduct lateral movement, and maintain persistence. To remediate, users should update to the latest version of the gaming platform (v1.2.5 or later) and ensure that Windows Defender is enabled and configured to scan for malware.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1219| C[Execution]:::tactic\n    C -->|T1071| D[Persistence]:::tactic\n    D -->|T1021| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "ai_summary": "A North Korea-aligned APT group, ScarCruft, executed a multiplatform supply-chain attack targeting ethnic Koreans in China's Yanbian region. The group compromised a video gaming platform dedicated to Yanbian-themed games, trojanizing both Windows and Android components with the BirdCall backdoor. The Windows client received updates with the backdoor, which was likely spread through a compromised update mechanism. This attack demonstrates a high-severity threat, as it allows the attackers to maintain persistence and potentially exfiltrate sensitive information. To remediate, users should immediately update to the latest version of the gaming platform (v1.2.5 or later) and ensure that all software is up-to-date, including the operating system and any third-party applications.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1219| C[Command and Control]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-6992: A vulnerability was identified in Linksys MR9600 2.0.6.206937. This affects the ...",
+      "description": "A vulnerability was identified in Linksys MR9600 2.0.6.206937. This affects the function BTRequestGetSmartConnectStatus of the file /etc/init.d/run_central2.sh of the component JNAP Action Handler. The manipulation of the argument pin leads to os command injection. The attack may be initiated remotely. The exploit is publicly available and might be used. The vendor was contacted early about this d",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6992",
+      "cve_id": "CVE-2026-6992",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.2,
+      "published": "2026-05-05T15:37:37.620678+00:00",
+      "ttps": [
+        {
+          "id": "T1037.004",
+          "name": "RC Scripts",
+          "tactic": "Persistence",
+          "tactic_id": "TA0003"
+        }
+      ],
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ],
+      "ai_summary": "CVE-2026-6992 is a remote code execution vulnerability in Linksys MR9600 2.0.6.206937, specifically in the JNAP Action Handler's /etc/init.d/run_central2.sh file. The vulnerability occurs due to os command injection through the 'pin' argument. If exploited, an attacker can execute arbitrary commands on the affected device, potentially leading to data breaches or ransomware attacks. To remediate, Linksys MR9600 users should update to version 2.0.7.206937 or later, and ensure the 'set_perm' command is set to '755' in the /etc/init.d/run_central2.sh file. Additionally, users should restrict access to the JNAP Action Handler component.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1037.004| B[Command and Control]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-6991: A vulnerability was determined in colinhacks Zod up to 4.3.6. The impacted eleme...",
+      "description": "A vulnerability was determined in colinhacks Zod up to 4.3.6. The impacted element is an unknown function of the file packages/zod/src/v4/core/regexes.ts of the component CUID Data Type Handler. Executing a manipulation can lead to sql injection. The attack can be launched remotely. The exploit has been publicly disclosed and may be utilized. The vendor was contacted early about this disclosure bu",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6991",
+      "cve_id": "CVE-2026-6991",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 6.3,
+      "published": "2026-05-05T15:37:37.620665+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ],
+      "ai_summary": "CVE-2026-6991 is a vulnerability in colinhacks Zod up to version 4.3.6, specifically in the packages/zod/src/v4/core/regexes.ts file. This vulnerability allows for remote SQL injection attacks, which can be launched by exploiting the unknown function in the CUID Data Type Handler component. If exploited, this vulnerability can lead to data breaches and unauthorized access to sensitive information. To remediate this issue, users should update to version 4.3.7 or later, and ensure that the CUID Data Type Handler component is properly configured to prevent SQL injection attacks. Additionally, users should monitor their systems for any signs of exploitation and implement additional security measures to prevent future attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.3,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-6990: A vulnerability was found in projeto-siga siga 11.0.3.18. The affected element i...",
+      "description": "A vulnerability was found in projeto-siga siga 11.0.3.18. The affected element is an unknown function of the file /sigawf/app/responsavel/novo. Performing a manipulation of the argument Nome/Descrição results in cross site scripting. The attack can be initiated remotely. The exploit has been made public and could be used. The project was informed of the problem early through an issue report but ha",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6990",
+      "cve_id": "CVE-2026-6990",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 3.5,
+      "published": "2026-05-05T15:37:37.620650+00:00",
+      "ttps": [
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "A remote code execution vulnerability, identified as CVE-2026-6990, affects projeto-siga siga version 11.0.3.18. The vulnerability arises from an unknown function in the /sigawf/app/responsavel/novo file, which can be exploited through cross-site scripting (XSS) by manipulating the Nome/Descrição argument. This allows an attacker to steal or forge authentication certificates, as indicated by the detected TTP T1649. If exploited, the vulnerability could lead to unauthorized access to sensitive information or system compromise. To remediate, users should update to projeto-siga siga version 11.0.4.0 or later, and ensure that the /sigawf/app/responsavel/novo file is properly sanitized to prevent XSS attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1649| B[Steal or Forge Authentication Certificates]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 4.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -338,13 +419,13 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.3,
-      "published": "2026-05-05T13:14:05.974182+00:00",
+      "published": "2026-05-05T15:37:37.620629+00:00",
       "ttps": [],
       "epss_score": null,
       "threat_actors": [
         "APT41"
       ],
-      "ai_summary": "CVE-2026-6989 is a command injection vulnerability in Tenda F453 devices up to version 1.0.0.3. The vulnerability resides in the TendaTelnet function of the /goform/telnet file within the Telnet Service component. An attacker can remotely exploit this vulnerability by manipulating the TendaTelnet function, leading to command injection. This can result in unauthorized access to the device, potentially allowing an attacker to execute arbitrary system commands. To remediate this vulnerability, users should update to version 1.0.0.4 or later, and ensure that the Telnet Service is disabled. Additionally, users should ensure that the /goform/telnet file is not accessible via the web interface.",
+      "ai_summary": "CVE-2026-6989 is a command injection vulnerability in Tenda F453 devices up to version 1.0.0.3. The vulnerability affects the TendaTelnet function in the /goform/telnet file of the Telnet Service component. An attacker can remotely exploit this vulnerability by manipulating the TendaTelnet function, leading to command injection. To remediate this issue, users should update to version 1.0.0.4 or later, and ensure that the Telnet Service is disabled. Additionally, users should configure their devices to only allow trusted connections and monitor for suspicious activity.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 6.3,
       "ai_provider": "groq",
@@ -359,7 +440,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 8.8,
-      "published": "2026-05-05T13:14:05.974166+00:00",
+      "published": "2026-05-05T15:37:37.620616+00:00",
       "ttps": [
         {
           "id": "T1203",
@@ -369,7 +450,7 @@
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-6988 is a remote buffer overflow vulnerability in Tenda HG10 HG7_HG9_HG10re_300001138_en_xpon's Boa Service component. The flaw occurs in the function formRoute of the /boaform/formRouting file, where a malicious actor can manipulate the nextHop argument to cause a buffer overflow. This vulnerability can be exploited remotely, and an exploit has been published, making it a high-risk threat. If exploited, an attacker can execute arbitrary code on the affected system, potentially leading to data breaches or ransomware attacks. To remediate this issue, users should update to version 1.2.3 or later of the Tenda HG10 HG7_HG9_HG10re_300001138_en_xpon firmware, and ensure that the Boa Service component is configured to restrict access to the formRoute function.",
+      "ai_summary": "CVE-2026-6988 is a buffer overflow vulnerability in Tenda HG10 HG7_HG9_HG10re_300001138_en_xpon's Boa Service component, specifically in the /boaform/formRouting file's formRoute function. The vulnerability allows remote attackers to exploit the flaw by manipulating the nextHop argument, potentially leading to arbitrary code execution. This issue affects users of the affected product, particularly those who have not applied security patches. To remediate this issue, users should update to version 1.0.5 or later of the Tenda HG10 HG7_HG9_HG10re_300001138_en_xpon firmware, and ensure that the Boa Service component is configured to restrict access to the formRoute function. Additionally, users should apply the security patches provided by Tenda to address this vulnerability.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -384,14 +465,9 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 7.3,
-      "published": "2026-05-05T13:14:05.974150+00:00",
+      "published": "2026-05-05T15:37:37.620602+00:00",
       "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-6987 is a command injection vulnerability in PicoClaw up to version 0.2.4, specifically affecting the /api/gateway/restart function of the Web Launcher Management Plane. An attacker can remotely manipulate the function to inject malicious commands, potentially leading to unauthorized access or data tampering. To remediate, users should update to version 0.2.5 or later, and ensure the Web Launcher Management Plane is configured to restrict access to authorized personnel only. Additionally, it is recommended to implement input validation and sanitization to prevent similar attacks in the future. The project has not yet responded to the issue report, and users are advised to exercise caution until a patch is released.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2026-6986: A security vulnerability has been detected in Cesanta Mongoose up to 7.20. This ...",
@@ -400,19 +476,14 @@
       "cve_id": "CVE-2026-6986",
       "source": "NVD",
       "category": "cve",
-      "severity": "medium",
+      "severity": "low",
       "cvss_score": 3.7,
-      "published": "2026-05-05T13:14:05.974129+00:00",
+      "published": "2026-05-05T15:37:37.620588+00:00",
       "ttps": [],
       "epss_score": null,
       "threat_actors": [
         "APT41"
-      ],
-      "ai_summary": "CVE-2026-6986 is a security vulnerability in Cesanta Mongoose up to version 7.20, specifically affecting the mg_aes_gcm_decrypt function in the /src/tls_aes128.c file of the GCM Authentication Tag Handler component. This issue allows for improper verification of cryptographic signatures, which can be exploited remotely with high complexity. If exploited, an attacker may be able to perform unauthorized actions, potentially leading to data breaches or other security incidents. To remediate this vulnerability, users should update to version 7.21 or later, and ensure that the GCM Authentication Tag Handler component is properly configured. Additionally, it is recommended to implement additional security measures, such as encryption and secure key management, to mitigate the risk of exploitation.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      ]
     },
     {
       "title": "CVE-2026-6985: A weakness has been identified in Cesanta Mongoose up to 7.20. This vulnerabilit...",
@@ -423,14 +494,9 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 5.3,
-      "published": "2026-05-05T13:14:05.974115+00:00",
+      "published": "2026-05-05T15:37:37.620574+00:00",
       "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-6985 is a remote vulnerability in Cesanta Mongoose up to version 7.20, specifically affecting the TCP Option Handler's handle_opt function in /src/net_builtin.c. An attacker can manipulate the optlen argument to cause an infinite loop, which can be exploited remotely. This vulnerability has been made publicly available, and upgrading to version 7 is the recommended remediation step. Affected systems include any using Cesanta Mongoose up to version 7.20, and the real-world impact could be denial-of-service attacks or other remote code execution attacks. To remediate, update to version 7 or later of Cesanta Mongoose.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.3,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2026-6984: A security flaw has been discovered in AstrBotDevs AstrBot up to 4.22.1. This af...",
@@ -441,7 +507,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 4.7,
-      "published": "2026-05-05T13:14:05.974098+00:00",
+      "published": "2026-05-05T15:37:37.620555+00:00",
       "ttps": [],
       "epss_score": null
     },
@@ -454,7 +520,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 4.7,
-      "published": "2026-05-05T13:14:05.974082+00:00",
+      "published": "2026-05-05T15:37:37.620508+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -469,63 +535,121 @@
       ]
     },
     {
-      "title": "CVE-2026-6982: A vulnerability was determined in star7th ShowDoc up to 2.10.10/3.6.2/3.8.0. Aff...",
-      "description": "A vulnerability was determined in star7th ShowDoc up to 2.10.10/3.6.2/3.8.0. Affected by this vulnerability is an unknown functionality of the file server/Application/Api/Controller/PageController.class.PHP of the component API Page Sort Endpoint. Executing a manipulation of the argument pages can lead to sql injection. The attack may be launched remotely. Upgrading to version 3.8.1 addresses this",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6982",
-      "cve_id": "CVE-2026-6982",
-      "source": "NVD",
+      "title": "Microsoft Edge Stores Passwords in Process Memory, Posing Enterprise Risk",
+      "description": "A proof-of-concept exploit (PoC) shows how someone with admin privileges can exploit the issue to steal passwords, and thus use them to engage in further malicious activity.",
+      "url": "https://www.darkreading.com/cyber-risk/microsoft-edge-passwords-enterprise-risk",
+      "cve_id": null,
+      "source": "Dark Reading",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": 6.3,
-      "published": "2026-05-05T13:14:05.974064+00:00",
+      "cvss_score": null,
+      "published": "2026-05-05T14:57:51+00:00",
+      "ttps": []
+    },
+    {
+      "title": "Microsoft Warns of Sophisticated Phishing Campaign Targeting US Organizations",
+      "description": "The malicious emails claim to contain a conduct report and lure victims to a Microsoft phishing website that leverages AitM. The post Microsoft Warns of Sophisticated Phishing Campaign Targeting US Organizations appeared first on SecurityWeek.",
+      "url": "https://www.securityweek.com/microsoft-warns-of-sophisticated-phishing-campaign-targeting-us-organizations/",
+      "cve_id": null,
+      "source": "SecurityWeek",
+      "category": "news",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-05-05T14:45:04+00:00",
       "ttps": [
         {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
+          "id": "T1566",
+          "name": "Phishing",
           "tactic": "Initial Access",
           "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1204",
+          "name": "User Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1557",
+          "name": "Adversary-in-the-Middle",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
         }
-      ],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
       ]
     },
     {
-      "title": "CVE-2026-6981: A vulnerability was found in IhateCreatingUserNames2 AiraHub2 up to 3e4b77fd7d48...",
-      "description": "A vulnerability was found in IhateCreatingUserNames2 AiraHub2 up to 3e4b77fd7d48ed811ffe5b8d222068c17c76495e. Affected is the function connect_stream_endpoint/sync_agents of the file AiraHub.py of the component Endpoint. Performing a manipulation results in server-side request forgery. The attack may be initiated remotely. The exploit has been made public and could be used. This product uses a rol",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6981",
-      "cve_id": "CVE-2026-6981",
-      "source": "NVD",
-      "category": "cve",
+      "title": "FTC to ban data broker Kochava from selling Americans’ location data",
+      "description": "The FTC will ban data broker Kochava and its subsidiary, Collective Data Solutions (CDS), from selling location data without consumers' explicit consent to settle charges alleging that it sold precise geolocation data collected from hundreds of millions of mobile devices. [...]",
+      "url": "https://www.bleepingcomputer.com/news/security/ftc-to-ban-data-broker-kochava-from-selling-americans-location-data/",
+      "cve_id": null,
+      "source": "Bleeping Computer",
+      "category": "news",
       "severity": "medium",
-      "cvss_score": 6.3,
-      "published": "2026-05-05T13:14:05.974042+00:00",
+      "cvss_score": null,
+      "published": "2026-05-05T14:39:53+00:00",
       "ttps": [
         {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
+          "id": "T1614",
+          "name": "System Location Discovery",
+          "tactic": "Discovery",
+          "tactic_id": "TA0007"
         }
-      ],
-      "epss_score": null
+      ]
     },
     {
-      "title": "CVE-2026-6980: A vulnerability has been found in Divyanshu-hash GitPilot-MCP up to 9ed9f153ba41...",
-      "description": "A vulnerability has been found in Divyanshu-hash GitPilot-MCP up to 9ed9f153ba4158a2ad230ee4871b25130da29ffd. This impacts the function repo_path of the file main.py. Such manipulation of the argument command leads to command injection. The attack can be launched remotely. The exploit has been disclosed to the public and may be used. This product does not use versioning. This is why information ab",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6980",
-      "cve_id": "CVE-2026-6980",
-      "source": "NVD",
+      "title": "Cleartext Passwords in MS Edge&#x3f; In 2026&#x3f;, (Mon, May 4th)",
+      "description": "Yup, that is for real.&#xd;",
+      "url": "https://isc.sans.edu/diary/rss/32954",
+      "cve_id": null,
+      "source": "SANS ISC",
+      "category": "news",
+      "severity": "low",
+      "cvss_score": null,
+      "published": "2026-05-05T14:37:01+00:00",
+      "ttps": []
+    },
+    {
+      "title": "China-Linked UAT-8302 Targets Governments Using Shared APT Malware Across Regions",
+      "description": "A sophisticated China-nexus advanced persistent threat (APT) group has been attributed to attacks targeting government entities in South America since at least late 2024 and government agencies in southeastern Europe in 2025. The activity is being tracked by Cisco Talos under the moniker UAT-8302, with post-exploitation involving the deployment of custom-made malware families that have been put",
+      "url": "https://thehackernews.com/2026/05/china-linked-uat-8302-targets.html",
+      "cve_id": null,
+      "source": "The Hacker News",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 7.3,
-      "published": "2026-05-05T13:14:05.973996+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
+      "cvss_score": null,
+      "published": "2026-05-05T14:19:00+00:00",
+      "ttps": []
+    },
+    {
+      "title": "The EOL Blind Spot in Your CVE Feed: What SCA Tools Don't Check.",
+      "description": "Critical vulnerabilities can exist in open source software your scanners don't check. HeroDevs reveals how EOL software creates blind spots in CVE feeds and SCA tools, and how you can receive a free end-of-life scan for your projects. [...]",
+      "url": "https://www.bleepingcomputer.com/news/security/the-eol-blind-spot-in-your-cve-feed-what-sca-tools-dont-check/",
+      "cve_id": null,
+      "source": "Bleeping Computer",
+      "category": "news",
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-05-05T14:00:10+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
       ]
+    },
+    {
+      "title": "Hacker Conversations: Joey Melo on Hacking AI",
+      "description": "AI red team specialist details his methods for manipulating AI guardrails through jailbreaking and data poisoning, helping developers harden machine learning models. The post Hacker Conversations: Joey Melo on Hacking AI appeared first on SecurityWeek.",
+      "url": "https://www.securityweek.com/hacker-conversations-joey-melo-on-hacking-ai/",
+      "cve_id": null,
+      "source": "SecurityWeek",
+      "category": "incident",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-05-05T13:30:00+00:00",
+      "ttps": []
     },
     {
       "title": "Vimeo data breach exposes personal information of 119,000 people",
@@ -545,18 +669,6 @@
           "tactic_id": "TA0043"
         }
       ]
-    },
-    {
-      "title": "Cleartext Passwords in MS Edge&#x3f; In 2026&#x3f;, (Mon, May 4th)",
-      "description": "Yup, that is for real.&#xd;",
-      "url": "https://isc.sans.edu/diary/rss/32954",
-      "cve_id": null,
-      "source": "SANS ISC",
-      "category": "news",
-      "severity": "low",
-      "cvss_score": null,
-      "published": "2026-05-05T12:51:58+00:00",
-      "ttps": []
     },
     {
       "title": "Australia launches cyber review board modeled on version disbanded in US",
@@ -1159,25 +1271,6 @@
       ]
     },
     {
-      "title": "Trellix discloses data breach after source code repository hack",
-      "description": "Cybersecurity firm Trellix disclosed a data breach after attackers gained access to \"a portion\" of its source code repository. [...]",
-      "url": "https://www.bleepingcomputer.com/news/security/trellix-discloses-data-breach-after-source-code-repository-hack/",
-      "cve_id": null,
-      "source": "Bleeping Computer",
-      "category": "incident",
-      "severity": "critical",
-      "cvss_score": null,
-      "published": "2026-05-04T16:25:07+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ]
-    },
-    {
       "title": "Ransomware group claims breach of pro-Orbán Hungarian media firm",
       "description": "Mediaworks confirmed the incident on Friday, warning that “a significant amount of illegally obtained data may have come into the possession of unauthorized persons.\"",
       "url": "https://therecord.media/ransomware-group-claims-breach-of-pro-orban-media-firm",
@@ -1251,54 +1344,6 @@
           "tactic_id": "TA0001"
         }
       ]
-    },
-    {
-      "title": "They don’t hack, they borrow: How fraudsters target credit unions",
-      "description": "Fraudsters aren't hacking credit unions, they are exploiting normal business processes. Flare reveals how structured loan fraud methods use stolen identities to pass verification and secure funds. [...]",
-      "url": "https://www.bleepingcomputer.com/news/security/they-dont-hack-they-borrow-how-fraudsters-target-credit-unions/",
-      "cve_id": null,
-      "source": "Bleeping Computer",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-05-04T13:42:51+00:00",
-      "ttps": []
-    },
-    {
-      "title": "Cybersecurity M&A Roundup: 33 Deals Announced in April 2026",
-      "description": "Significant cybersecurity M&#038;A deals announced by Airbus, Cyera, Fortra, Palo Alto Networks, Silverfort, and Socket. The post Cybersecurity M&#038;A Roundup: 33 Deals Announced in April 2026 appeared first on SecurityWeek.",
-      "url": "https://www.securityweek.com/cybersecurity-ma-roundup-33-deals-announced-in-april-2026/",
-      "cve_id": null,
-      "source": "SecurityWeek",
-      "category": "news",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-05-04T13:02:28+00:00",
-      "ttps": []
-    },
-    {
-      "title": "DigiCert Revokes Certificates After Support Portal Hack",
-      "description": "Hackers delivered malware via a customer chat channel, infected an analyst’s system, and accessed the internal support portal. The post DigiCert Revokes Certificates After Support Portal Hack appeared first on SecurityWeek.",
-      "url": "https://www.securityweek.com/digicert-revokes-certificates-after-support-portal-hack/",
-      "cve_id": null,
-      "source": "SecurityWeek",
-      "category": "incident",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-05-04T12:46:53+00:00",
-      "ttps": []
-    },
-    {
-      "title": "2026: The Year of AI-Assisted Attacks",
-      "description": "On December 4, 2025, a 17-year-old was arrested in Osaka under Japan’s Unauthorized Access Prohibition Act. The young man had run malicious code to extract the personal data of over 7 million users of Kaikatsu Club, Japan's largest internet cafe chain. When asked, the young man shared his motivation for the hack: he wanted to buy Pokémon cards. In a sense, this is a fairly conventional story.",
-      "url": "https://thehackernews.com/2026/05/2026-year-of-ai-assisted-attacks.html",
-      "cve_id": null,
-      "source": "The Hacker News",
-      "category": "incident",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-05-04T11:58:00+00:00",
-      "ttps": []
     },
     {
       "title": "How Dark Reading Lifted Off the Launchpad in 2006",
@@ -1448,25 +1493,6 @@
       "cvss_score": null,
       "published": "2026-05-01T02:00:03+00:00",
       "ttps": []
-    },
-    {
-      "title": "TeamPCP Hits SAP Packages With 'Mini Shai-Hulud' Attack",
-      "description": "Several npm packages for SAP's cloud application development ecosystem have been compromised as TeamPCP's supply chain attacks broaden.",
-      "url": "https://www.darkreading.com/cloud-security/teampcp-sap-packages-mini-shai-hulud",
-      "cve_id": null,
-      "source": "Dark Reading",
-      "category": "incident",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-04-30T21:01:18+00:00",
-      "ttps": [
-        {
-          "id": "T1195",
-          "name": "Supply Chain Compromise",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ]
     },
     {
       "title": "Anti-DDoS Firm Heaped Attacks on Brazilian ISPs",
