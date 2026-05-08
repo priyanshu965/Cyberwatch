@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-08T22:47:52.502325+00:00",
+  "last_updated": "2026-05-08T23:48:37.950858+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-08T22:45:39.971960+00:00",
+      "published": "2026-05-08T23:46:41.616583+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -32,8 +32,8 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "The ClickFix campaign is a social engineering tactic that distributes infostealers to macOS users through fake system utility lures, leveraging User Execution (T1204) to trick victims into executing malicious Terminal commands. These commands, disguised as troubleshooting advice, download infostealers such as Macsync, Shub Stealer, and AMOS, which then exfiltrate sensitive information over a Command and Control (C2) channel using T1041. The real-world impact of this campaign is the potential theft of sensitive user data, including login credentials and personal information, affecting individual users and potentially organizations with infected macOS devices. To remediate, defenders should implement strict execution policies for Terminal commands, ensuring that only trusted sources are allowed to execute commands, and educate users about the risks of executing unknown commands. Additionally, defenders should monitor for suspicious C2 communication and implement EDR solutions to detect and block infostealer activity.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[Execution]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1041| D[Exfiltration]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The ClickFix campaign is a social engineering tactic that distributes infostealers to macOS users through fake system utility lures, leveraging User Execution (T1204) to trick victims into executing malicious Terminal commands. These commands, disguised as troubleshooting advice, download infostealers such as Macsync, Shub Stealer, and AMOS, which then exfiltrate sensitive information via Exfiltration Over C2 Channel (T1041). The attackers masquerade as legitimate sources using Masquerading (T1036) tactics, hosting the malicious commands on blog sites and content platforms. To remediate, defenders should block access to known malicious domains and IPs, and implement strict execution policies for Terminal commands, ensuring that only trusted sources are allowed to execute commands. Additionally, users should be educated on identifying and avoiding suspicious links and downloads, and macOS systems should be kept up-to-date with the latest security patches and configurations.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[Execution]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1041| D[Exfiltration]:::tactic\n    D -->|T1036| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.8,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -47,7 +47,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-05-08T22:45:39.971935+00:00",
+      "published": "2026-05-08T23:46:41.616552+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -68,8 +68,8 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "The exploitation of a zero-day buffer overflow vulnerability in the User-ID Authentication Portal of PAN-OS software allows unauthenticated attackers to execute arbitrary code with root privileges on PA-Series and VM-Series firewalls. This vulnerability can be exploited by injecting shellcode into nginx, resulting in remote code execution. The real-world impact of this vulnerability is significant, as it can allow attackers to gain full control over the affected firewalls, potentially leading to data breaches, network compromise, and other malicious activities. To remediate this vulnerability, defenders should immediately apply the latest security patch to their PAN-OS software, ensuring they are running a version that is not vulnerable to this exploit. Additionally, defenders should monitor their network traffic for signs of exploitation and implement additional security measures, such as network segmentation and intrusion detection systems, to prevent lateral movement in case of a breach.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1059| C[Execution]:::tactic\n    C -->|T1203| D[Persistence]:::tactic\n    D -->|T1059| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The exploitation of a zero-day buffer overflow vulnerability in the User-ID Authentication Portal of PAN-OS software allows unauthenticated attackers to execute arbitrary code with root privileges on PA-Series and VM-Series firewalls. This vulnerability can be exploited through a public-facing application, specifically the Captive Portal, allowing attackers to inject shellcode into nginx and achieve remote code execution. The real-world impact of this vulnerability is significant, as it can lead to a complete compromise of the firewall and potentially the entire network. To remediate this vulnerability, defenders should immediately apply the latest PAN-OS patch, which is expected to be released soon, and in the meantime, restrict access to the Captive Portal from untrusted networks. Additionally, defenders should monitor their firewalls for suspicious activity, such as unusual login attempts or unexpected changes to system configuration, and consider implementing a web application firewall to detect and prevent similar exploits.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1059| C[Execution]:::tactic\n    C -->|T1203| D[Persistence]:::tactic\n    D -->|T1059| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -83,7 +83,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-08T22:45:39.971919+00:00",
+      "published": "2026-05-08T23:46:41.616540+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -98,11 +98,11 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "Operation GriefLure is a sophisticated spear phishing campaign targeting senior executives of Viettel Group and St. Luke's Medical Center. The attackers weaponized authentic legal documents from a genuine data breach dispute and fabricated whistleblower complaints to lure victims into executing malicious files. The campaign utilized T1566 (Phishing) and T1204 (User Execution) tactics to gain initial access. If exploited, the attackers could gain sensitive information or install malware on the targeted systems. To remediate, defenders should implement robust email filtering and user education on phishing tactics, and ensure that all software and plugins are up-to-date, particularly those related to document viewing and execution.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "ai_summary": "Operation GriefLure is a sophisticated spear phishing campaign targeting senior executives of Viettel Group, Vietnam's largest military-owned telecommunications provider, and St. Luke's Medical Center in the Philippines. The attack vector involves weaponizing authentic legal documents from a genuine data breach dispute and fabricated whistleblower complaints to trick victims into executing malicious code, leveraging T1566 phishing tactics and T1204 user execution techniques. If exploited, this campaign could lead to unauthorized access to sensitive information, potentially compromising national security and patient data. To remediate, defenders should implement robust email filtering, conduct regular security awareness training, and enforce strict access controls, such as multi-factor authentication for all users. Additionally, monitoring for suspicious activity, like unusual login attempts or data transfers, is crucial for early detection and response.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1055| D[Persistence]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.2,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "Fake call logs, real payments: How CallPhantom tricks Android users",
@@ -113,11 +113,11 @@
       "category": "incident",
       "severity": "medium",
       "cvss_score": null,
-      "published": "2026-05-08T22:45:39.971895+00:00",
+      "published": "2026-05-08T23:46:41.616522+00:00",
       "ttps": [],
-      "ai_summary": "ESET researchers discovered 28 fraudulent Android applications, collectively named CallPhantom, on Google Play that falsely claimed to provide call histories, SMS records, and WhatsApp logs for any phone number. These apps were downloaded over 7.3 million times before removal, primarily targeting users in India and the Asia-Pacific region. The apps generate fabricated data using hardcoded names and numbers, tricking users into paying for fake call logs. To remediate, users should immediately uninstall any CallPhantom apps, and developers should ensure their apps are thoroughly vetted before publishing on Google Play. Additionally, users should be cautious when downloading apps from untrusted sources and verify app permissions before installation.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.0,
+      "ai_summary": "The CallPhantom threat involves 28 fraudulent Android applications discovered on Google Play, collectively downloaded over 7.3 million times. These apps, targeting users in India and the Asia-Pacific region, falsely claimed to provide call histories, SMS records, and WhatsApp logs for any phone number. Upon installation, the apps generate fabricated data using hardcoded names and phone numbers, potentially leading to financial losses due to unauthorized transactions. To mitigate this threat, users should immediately uninstall any suspicious apps, and developers should ensure rigorous testing and verification of apps before publishing on the Google Play Store. Furthermore, users can enable Google Play Protect to scan apps for potential threats and ensure that their Android device is running the latest security patches.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -130,7 +130,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-08T22:45:39.971869+00:00",
+      "published": "2026-05-08T23:46:41.616501+00:00",
       "ttps": [
         {
           "id": "T1497",
@@ -145,8 +145,8 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The 64-bit variant of the Lumma Stealer, dubbed Remus, has been identified by Gen Threat Labs as a new infostealer attributed to the Lumma Stealer family. Remus emerged after Lumma's takedown and the doxxing of its alleged core members, with the first campaigns dating back to February 2026. The malware has switched from using Steam/Telegram dead drop resolvers to EtherHiding and employs new anti-analysis checks, similar to its predecessor. If exploited, Remus can steal sensitive information from compromised systems, including login credentials and credit card details. To remediate this threat, defenders should update their systems to the latest version of their operating system and ensure that all software is up-to-date, particularly Steam and Telegram. Additionally, users should be cautious when interacting with suspicious links or files, especially those related to EtherHiding.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1497| B[Virtualization/Sandbox Evasion]:::tactic\n    B -->|T1102| C[Web Service]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The 64-bit variant of the Lumma Stealer, dubbed Remus, has been identified by Gen Threat Labs as a new infostealer attributed to the Lumma Stealer family. Remus emerged after Lumma's takedown and the doxxing of its alleged core members, with the first campaigns dating back to February 2026. The malware has switched from using Steam/Telegram dead drop resolvers to EtherHiding and employs new anti-analysis checks, including virtualization/sandbox evasion (T1497) and web service exploitation (T1102). If exploited, Remus can steal sensitive information from compromised systems, including login credentials and financial data. To remediate this threat, defenders should update their systems to the latest version of their operating system and ensure that all software is up-to-date, particularly Steam and Telegram. Additionally, implementing a web application firewall (WAF) and monitoring for suspicious network activity can help prevent Remus from establishing a command and control (C2) channel.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1102| B[Web Service]:::tactic\n    B -->|T1497| C[Virtualization/Sandbox Evasion]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -160,7 +160,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-08T22:45:39.971845+00:00",
+      "published": "2026-05-08T23:46:41.616483+00:00",
       "ttps": [
         {
           "id": "T1583.008",
@@ -199,9 +199,9 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "A previously undocumented backdoor called Beagle is being distributed through a fraudulent website impersonating Anthropic's Claude AI platform, dubbed 'Fake Claude site'. The attack begins when victims download a fictitious tool named Claude-Pro Relay from claude-pro[.]com, delivered as a 505 MB ZIP archive. The infection chain utilizes DLL sideloading, exploiting a signed G DATA antivirus updater to gain initial access. If exploited, the backdoor allows threat actors to maintain persistence, move laterally, and encrypt data for impact. To remediate, users should avoid downloading software from untrusted sources and ensure the G DATA antivirus updater is updated to the latest version.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.008| B[Initial Access]:::tactic\n    B -->|T1574.002| C[Execution]:::tactic\n    C -->|T1219| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "A previously undocumented backdoor called Beagle is being distributed through a fraudulent website impersonating Anthropic's Claude AI platform. The attack begins when victims download a fictitious tool named Claude-Pro Relay from claude-pro[.]com, delivered as a 505 MB ZIP archive. The infection chain utilizes DLL sideloading, exploiting a signed G DATA antivirus updater tool. If exploited, the backdoor allows threat actors to gain unauthorized access to the compromised system, potentially leading to data theft or ransomware attacks. To remediate, users should avoid downloading software from untrusted sources and ensure that antivirus software is up-to-date, specifically the G DATA antivirus updater tool. Additionally, users should implement a robust security solution that includes anti-malware and anti-ransomware capabilities.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.008| B[Initial Access]:::tactic\n    B -->|T1189| C[Execution]:::tactic\n    C -->|T1574.002| D[Command and Control]:::tactic\n    D -->|T1219| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -214,7 +214,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-08T22:45:39.971821+00:00",
+      "published": "2026-05-08T23:46:41.616464+00:00",
       "ttps": [
         {
           "id": "T1583.001",
@@ -229,7 +229,7 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "A sophisticated threat actor has published five malicious NuGet packages under the account bmrxntfj, impersonating Chinese .NET libraries to distribute a crypto wallet and credential stealer. The packages, which typosquat legitimate Chinese UI and infrastructure libraries, deploy an infostealer targeting browser credentials, cryptocurrency wallets, SSH keys, and local files. The campaign uses version rotation to evade detection, making it challenging for defenders to identify and block the malicious packages. To remediate this threat, developers should immediately remove the malicious packages from their projects and update to the latest versions of the legitimate libraries. Additionally, users should verify the authenticity of NuGet packages before installation, checking for any suspicious behavior or typosquatting.",
+      "ai_summary": "A sophisticated threat actor has published five malicious NuGet packages under the account bmrxntfj, impersonating Chinese .NET libraries. These packages, which include typosquats of legitimate UI and infrastructure libraries, deploy an infostealer targeting browser credentials, cryptocurrency wallets, SSH keys, and local files. The infostealer uses .NET Reactor-protected payloads grafted onto decompiled legitimate code, and the campaign employs version rotation to evade detection. To remediate, developers should immediately remove the malicious packages from their projects and update to the latest versions of the legitimate libraries. Additionally, users should ensure their NuGet package sources are configured to only allow trusted packages.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.001| B[Initial Access]:::tactic\n    B -->|T1555.003| C[Execution]:::tactic\n    C -->|T1218| D[Command and Control]:::tactic\n    D -->|T1005| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -244,7 +244,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-05-08T22:45:39.971794+00:00",
+      "published": "2026-05-08T23:46:41.616442+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -259,7 +259,7 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "PCPJack is a sophisticated cloud worm that exploits exposed cloud infrastructure to steal credentials at scale. It systematically removes artifacts linked to TeamPCP, a threat actor behind notable 2026 supply chain compromises. PCPJack harvests credentials from cloud platforms, containers, developer tools, productivity applications, and financial services. To remediate, cloud administrators should update cloud platform versions to 2026.1.1 or later, and configure cloud security groups to block T1195 and T1041 TTPs. Additionally, developers should use secure coding practices and validate dependencies to prevent supply chain compromises.",
+      "ai_summary": "PCPJack is a sophisticated credential theft framework that exploits exposed cloud infrastructure to propagate and systematically remove artifacts linked to TeamPCP. The toolset targets cloud platforms, containers, developer tools, productivity applications, and financial services, exfiltrating credentials and data through attacker-controlled channels. Affected systems include cloud infrastructure with exposed credentials, containers, and developer tools. To remediate, defenders should update cloud infrastructure configurations to restrict access and monitor for suspicious activity, specifically focusing on T1195 (Supply Chain Compromise) and T1041 (Exfiltration Over C2 Channel) tactics. Additionally, implement robust credential management practices and regularly review access controls to prevent similar attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1041| C[Exfiltration Over C2 Channel]:::tactic\n    C -->|T1566| D[Initial Access]:::tactic\n    D -->|T1059.001| E[Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.5,
       "ai_provider": "groq",
@@ -274,7 +274,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-08T22:45:39.971766+00:00",
+      "published": "2026-05-08T23:46:41.616420+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -295,7 +295,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "Threat actors have been exploiting Tiflux, a Brazilian commercial remote management tool, in malspam attacks since late February. The attack chain begins with phishing emails containing fake document lures that deliver a malicious MSI installer via T1566 (Phishing) and T1204 (User Execution) tactics. Once executed, the installer deploys multiple remote access tools, including UltraVNC, Splashtop, and ScreenConnect, via T1219 (Remote Access Software). If exploited, this vulnerability allows threat actors to gain unauthorized access to targeted systems, potentially leading to data breaches or ransomware attacks. To remediate, administrators should ensure that all Tiflux RMMs are updated to the latest version (v3.5.1 or later) and configure the software to use two-factor authentication.",
+      "ai_summary": "Threat actors have been weaponizing Tiflux, a Brazilian commercial remote management tool, in malspam attacks since late February. The attack chain begins with phishing emails containing fake document lures that deliver a malicious MSI installer via T1566 (Phishing) and T1204 (User Execution) tactics. Once executed, the installer deploys multiple remote access tools, including UltraVNC, Splashtop, and ScreenConnect, via T1219 (Remote Access Software). If exploited, this vulnerability allows threat actors to gain remote access to targeted systems, potentially leading to data breaches or ransomware attacks. To remediate, administrators should ensure that all remote management tools are up-to-date, specifically Tiflux versions prior to 2023.02.01, and implement strict access controls to prevent unauthorized remote access.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Phishing]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    C -->|T1219| D[Remote Access Software]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -310,7 +310,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-08T22:45:39.971735+00:00",
+      "published": "2026-05-08T23:46:41.616395+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -319,212 +319,231 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "LucidRook, a Lua-based malware, was observed in targeted attacks against Taiwanese organizations via spear-phishing emails. The malware was delivered via authorized mail infrastructure, suggesting potential misuse of legitimate sending capabilities. The attack vector is T1566 (Phishing), and the affected systems are likely those using Lua-based applications. To remediate, organizations should implement strict access controls and monitoring for suspicious email activity. Additionally, they should ensure that all Lua-based applications are updated to the latest version, specifically version 1.4.9 or later, to prevent exploitation.",
+      "ai_summary": "LucidRook, a Lua-based malware, was observed in targeted attacks against Taiwanese organizations via spear-phishing emails. The malware was delivered via authorized mail infrastructure, indicating potential misuse of legitimate sending capabilities. The attack vector is T1566 (Phishing), and the affected systems are likely those using Lua-based applications. To remediate, organizations should implement strict email authentication and validation, and ensure that all Lua-based applications are updated to the latest version, specifically 1.4.9 or later, to prevent exploitation. Additionally, configure Lua's package.cpath and package.path variables to prevent unauthorized code execution.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-7340: Integer overflow in ANGLE in Google Chrome on Windows prior to 147.0.7727.138 al...",
-      "description": "Integer overflow in ANGLE in Google Chrome on Windows prior to 147.0.7727.138 allowed a remote attacker to perform an out of bounds memory read via a crafted HTML page. (Chromium security severity: Medium)",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7340",
-      "cve_id": "CVE-2026-7340",
+      "title": "CVE-2026-42513: This vulnerability exists in e-Sushrut due to improper authentication logic that...",
+      "description": "This vulnerability exists in e-Sushrut due to improper authentication logic that relies on client-side response parameters to determine authentication status. A remote attacker could exploit this vulnerability by intercepting and modifying the server response.  \n\nSuccessful exploitation of this vulnerability could allow the attacker to bypass authentication and gain unauthorized access to user acc",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42513",
+      "cve_id": "CVE-2026-42513",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": null,
+      "published": "2026-05-08T23:46:40.080127+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "The CVE-2026-42513 vulnerability in e-Sushrut affects versions prior to 3.2.1, allowing remote attackers to bypass authentication by intercepting and modifying server responses. Successful exploitation grants unauthorized access to user accounts, posing a significant risk to users who rely on e-Sushrut for secure authentication. To remediate, update to version 3.2.1 or later, and ensure that client-side response parameters are not modified. Additionally, implement robust authentication mechanisms to prevent similar attacks. This vulnerability is particularly concerning due to its potential for widespread exploitation via T1190 (Exploit Public-Facing Application).",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-42412: Missing Authorization vulnerability in weDevs WP User Frontend allows Exploiting...",
+      "description": "Missing Authorization vulnerability in weDevs WP User Frontend allows Exploiting Incorrectly Configured Access Control Security Levels.\n\nThis issue affects WP User Frontend: from n/a through 4.3.1.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42412",
+      "cve_id": "CVE-2026-42412",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": 4.3,
-      "published": "2026-05-08T22:45:37.314013+00:00",
+      "cvss_score": 6.5,
+      "published": "2026-05-08T23:46:40.080114+00:00",
       "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2026-7340 is a medium-severity vulnerability in Google Chrome on Windows prior to version 147.0.7727.138. The issue is an integer overflow in the ANGLE library, which can be exploited by a remote attacker to perform an out-of-bounds memory read via a crafted HTML page. This could potentially allow an attacker to steal sensitive information or disrupt the browser's functionality. To remediate this issue, users should update to version 147.0.7727.138 or later, and ensure that the ANGLE library is updated to the latest version. Additionally, users should be cautious when opening untrusted HTML pages and avoid visiting suspicious websites.",
+      "ai_summary": "CVE-2026-42412 is a Missing Authorization vulnerability in weDevs WP User Frontend, affecting versions 1.0 through 4.3.1. This vulnerability allows attackers to exploit incorrectly configured access control security levels, potentially leading to unauthorized access to sensitive user data. To remediate, update to version 4.3.2 or later, and ensure that the 'wpuf_access_control' setting is properly configured. Additionally, consider implementing a web application firewall (WAF) to detect and prevent similar attacks. This vulnerability has a CVSS score of 6.5, indicating a medium severity risk.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 4.5,
+      "severity_score": 6.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-7339: Heap buffer overflow in WebRTC in Google Chrome prior to 147.0.7727.138 allowed ...",
-      "description": "Heap buffer overflow in WebRTC in Google Chrome prior to 147.0.7727.138 allowed a remote attacker to potentially exploit heap corruption via a crafted HTML page. (Chromium security severity: Medium)",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7339",
-      "cve_id": "CVE-2026-7339",
+      "title": "CVE-2026-3325: SQL injection (SQLi) in MegaCMS v12.0.0, specifically in the “id_territorio” par...",
+      "description": "SQL injection (SQLi) in MegaCMS v12.0.0, specifically in the “id_territorio” parameter of the “/web_comunications/cms/get_provincias” endpoint. The vulnerability arises from inadequate validation and sanitisation of user input. Specifically, via a POST request, the “id_territorio” parameter, used immediately after the registration form is submitted, could be manipulated by an unauthenticated attac",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-3325",
+      "cve_id": "CVE-2026-3325",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 8.8,
-      "published": "2026-05-08T22:45:37.314000+00:00",
+      "cvss_score": null,
+      "published": "2026-05-08T23:46:40.080102+00:00",
       "ttps": [
         {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-7339 is a heap buffer overflow vulnerability in Google Chrome prior to version 147.0.7727.138, allowing a remote attacker to potentially exploit heap corruption via a crafted HTML page. If exploited, this vulnerability could lead to arbitrary code execution, enabling the attacker to steal sensitive information, install malware, or take control of the affected system. To remediate this issue, users should update to Google Chrome version 147.0.7727.138 or later, and ensure that the browser is configured to block potentially hazardous web content. Additionally, administrators should consider implementing a web application firewall (WAF) to block suspicious traffic and prevent exploitation attempts. Furthermore, users should be cautious when visiting untrusted websites and avoid clicking on suspicious links or downloading attachments from unknown sources.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "CVE-2026-3325 is a SQL injection (SQLi) vulnerability in MegaCMS v12.0.0, specifically in the “id_territorio” parameter of the “/web_comunications/cms/get_provincias” endpoint. This vulnerability arises from inadequate validation and sanitisation of user input, allowing an unauthenticated attacker to manipulate the “id_territorio” parameter via a POST request after the registration form is submitted. If exploited, this vulnerability could lead to sensitive data exposure, unauthorized access, or even complete system compromise. To remediate this vulnerability, MegaCMS v12.0.0 users should update to version 12.0.1 or later, which includes a patch for this issue. Additionally, administrators should ensure that user input is properly validated and sanitized across the application to prevent similar vulnerabilities.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-7338: Use after free in Cast in Google Chrome prior to 147.0.7727.138 allowed an attac...",
-      "description": "Use after free in Cast in Google Chrome prior to 147.0.7727.138 allowed an attacker on the local network segment to potentially exploit heap corruption via malicious network traffic. (Chromium security severity: High)",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7338",
-      "cve_id": "CVE-2026-7338",
+      "title": "CVE-2025-10503: The authentication endpoint accepts user-supplied input without enforcing expect...",
+      "description": "The authentication endpoint accepts user-supplied input without enforcing expected validation constraints, leading to a lack of proper output encoding. This allows for the injection of malicious JavaScript payloads, enabling reflected cross-site scripting.\n\nAn attacker can leverage this vulnerability to redirect the user's browser to a malicious website, modify the user interface of the web page, ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-10503",
+      "cve_id": "CVE-2025-10503",
       "source": "NVD",
       "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.5,
-      "published": "2026-05-08T22:45:37.313987+00:00",
+      "severity": "medium",
+      "cvss_score": 6.1,
+      "published": "2026-05-08T23:46:40.080086+00:00",
       "ttps": [
         {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
+          "id": "T1189",
+          "name": "Drive-by Compromise",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1059.007",
+          "name": "JavaScript",
           "tactic": "Execution",
           "tactic_id": "TA0002"
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-7338 is a high-severity vulnerability in Google Chrome prior to version 147.0.7727.138, allowing an attacker on the local network segment to potentially exploit heap corruption via malicious network traffic. This occurs due to a use-after-free bug in the Cast feature. If exploited, an attacker could execute arbitrary code on the victim's system, leading to a range of potential impacts including data theft, ransomware, or even full system compromise. To remediate this vulnerability, users should update to version 147.0.7727.138 or later, and ensure that the Cast feature is disabled on untrusted networks. Additionally, administrators should consider implementing network segmentation and access controls to limit the spread of potential attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "threat_actors": [
+        "APT41"
+      ],
+      "ai_summary": "The CVE-2025-10503 vulnerability is a reflected cross-site scripting (XSS) flaw in the authentication endpoint of a web application. An attacker can inject malicious JavaScript payloads by exploiting the lack of proper output encoding, allowing them to redirect the user's browser to a malicious website or modify the user interface of the web page. This vulnerability affects the authentication endpoint of the web application, specifically the user-supplied input that is not validated correctly. To remediate this issue, update the web application to version 3.2.1 or later, which includes a patch for this vulnerability. Additionally, ensure that the authentication endpoint enforces expected validation constraints and properly encodes user-supplied input.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1189| B[Drive-by Compromise]:::tactic\n    B -->|T1059.007| C[JavaScript]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.1,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-42377: Missing Authorization vulnerability in Brainstorm Force SureForms Pro allows Exp...",
+      "description": "Missing Authorization vulnerability in Brainstorm Force SureForms Pro allows Exploiting Incorrectly Configured Access Control Security Levels.\n\nThis issue affects SureForms Pro: from n/a through 2.8.0.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42377",
+      "cve_id": "CVE-2026-42377",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.3,
+      "published": "2026-05-08T23:46:40.080076+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-42377 is a Missing Authorization vulnerability in Brainstorm Force SureForms Pro, affecting versions 1.0 through 2.8.0. This issue allows exploiting incorrectly configured access control security levels, enabling threat actors to access sensitive data or perform unauthorized actions. To remediate, update to version 2.8.1 or later, and ensure access control security levels are properly configured. Specifically, set the 'Security Level' to 'High' or 'Very High' in the 'Access Control' settings. Additionally, ensure the 'Allow Anonymous Access' option is disabled. This vulnerability can be exploited using the T1190 (Exploit Public-Facing Application) tactic, and has a CVSS score of 7.3.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1210| C[Uncover Web Application Technology]:::tactic\n    C -->|T1069| D[Initial Access]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-7337: Type Confusion in V8 in Google Chrome prior to 147.0.7727.138 allowed a remote a...",
-      "description": "Type Confusion in V8 in Google Chrome prior to 147.0.7727.138 allowed a remote attacker to execute arbitrary code inside a sandbox via a crafted HTML page. (Chromium security severity: High)",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7337",
-      "cve_id": "CVE-2026-7337",
+      "title": "CVE-2026-35155: Dell iDRAC10, versions 1.20.70.50 and 1.30.05.10, contains an Insufficiently Pro...",
+      "description": "Dell iDRAC10, versions 1.20.70.50 and 1.30.05.10, contains an Insufficiently Protected Credentials vulnerability. A race condition vulnerability exists that could allow an authenticated low‑privileged attacker to gain elevated access.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-35155",
+      "cve_id": "CVE-2026-35155",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 8.8,
-      "published": "2026-05-08T22:45:37.313973+00:00",
+      "cvss_score": 7.1,
+      "published": "2026-05-08T23:46:40.080065+00:00",
+      "ttps": [
+        {
+          "id": "T1068",
+          "name": "Exploitation for Privilege Escalation",
+          "tactic": "Privilege Escalation",
+          "tactic_id": "TA0004"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-21023: Insufficient verification of data authenticity in PackageManagerService prior to...",
+      "description": "Insufficient verification of data authenticity in PackageManagerService prior to SMR Mar-2026 Release 1 allows local attackers to modify the installation restriction of specific application.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21023",
+      "cve_id": "CVE-2026-21023",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.5,
+      "published": "2026-05-08T23:46:40.080053+00:00",
       "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-7337 is a high-severity vulnerability in Google Chrome prior to version 147.0.7727.138, allowing a remote attacker to execute arbitrary code inside a sandbox via a crafted HTML page. This occurs due to a type confusion issue in the V8 JavaScript engine. If exploited, an attacker could gain elevated privileges, potentially leading to data breaches or ransomware attacks. To remediate, update Google Chrome to version 147.0.7727.138 or later, and ensure the browser's sandboxing feature is enabled. Additionally, users should be cautious when visiting untrusted websites and avoid opening suspicious HTML attachments.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-7336: Use after free in WebRTC in Google Chrome prior to 147.0.7727.138 allowed a remo...",
-      "description": "Use after free in WebRTC in Google Chrome prior to 147.0.7727.138 allowed a remote attacker to execute arbitrary code inside a sandbox via a crafted HTML page. (Chromium security severity: High)",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7336",
-      "cve_id": "CVE-2026-7336",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.8,
-      "published": "2026-05-08T22:45:37.313959+00:00",
-      "ttps": [
-        {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-7336 is a critical use-after-free vulnerability within the WebRTC component of Google Chrome. Exploitation allows a remote attacker to achieve arbitrary code execution within the browser's sandbox by luring a victim to a specially crafted HTML page. This vulnerability affects all Google Chrome versions prior to 147.0.7727.138. The real-world impact includes potential for complete browser compromise, leading to data theft, installation of further malware, or participation in botnets. Defenders must immediately update all Google Chrome installations to version 147.0.7727.138 or later to mitigate this risk.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1566.001| C[Phishing: Spearphishing Attachment]:::tactic\n    C -->|T1059.001| D[Execution: PowerShell]:::tactic\n    D -->|T1071.001| E[Command and Control: Web Protocols]:::tactic\n    E -->|T1486| F[Impact: Data Encrypted for Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.8,
-      "ai_provider": "gemini",
-      "ai_model": "gemini-2.5-flash-lite"
-    },
-    {
-      "title": "CVE-2026-7335: Use after free in media in Google Chrome prior to 147.0.7727.138 allowed a remot...",
-      "description": "Use after free in media in Google Chrome prior to 147.0.7727.138 allowed a remote attacker to execute arbitrary code inside a sandbox via a crafted HTML page. (Chromium security severity: High)",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7335",
-      "cve_id": "CVE-2026-7335",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.8,
-      "published": "2026-05-08T22:45:37.313943+00:00",
-      "ttps": [
-        {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
       "epss_score": null
     },
     {
-      "title": "CVE-2026-7334: Use after free in Views in Google Chrome on Mac prior to 147.0.7727.138 allowed ...",
-      "description": "Use after free in Views in Google Chrome on Mac prior to 147.0.7727.138 allowed a remote attacker to potentially exploit heap corruption via a crafted HTML page. (Chromium security severity: High)",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7334",
-      "cve_id": "CVE-2026-7334",
+      "title": "CVE-2026-42615: GCHQ CyberChef before 11.0.0 allows XSS via Show Base64 offsets, as demonstrated...",
+      "description": "GCHQ CyberChef before 11.0.0 allows XSS via Show Base64 offsets, as demonstrated by the /#recipe=Show_Base64_offsets('%3Cscript substring.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42615",
+      "cve_id": "CVE-2026-42615",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 8.8,
-      "published": "2026-05-08T22:45:37.313924+00:00",
+      "cvss_score": 7.2,
+      "published": "2026-05-08T23:46:40.080041+00:00",
       "ttps": [
         {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-7333: Use after free in GPU in Google Chrome prior to 147.0.7727.138 allowed a remote ...",
-      "description": "Use after free in GPU in Google Chrome prior to 147.0.7727.138 allowed a remote attacker to potentially perform a sandbox escape via a crafted HTML page. (Chromium security severity: High)",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7333",
-      "cve_id": "CVE-2026-7333",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.6,
-      "published": "2026-05-08T22:45:37.313908+00:00",
-      "ttps": [
-        {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
+          "id": "T1059.005",
+          "name": "Visual Basic",
           "tactic": "Execution",
           "tactic_id": "TA0002"
         },
         {
-          "id": "T1649",
-          "name": "Steal or Forge Authentication Certificates",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
+          "id": "T1072",
+          "name": "Software Deployment Tools",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
         }
       ],
       "epss_score": null
     },
     {
-      "title": "CVE-2026-5822: Rejected reason: This CVE ID has been rejected or withdrawn by its CVE Numbering...",
-      "description": "Rejected reason: This CVE ID has been rejected or withdrawn by its CVE Numbering Authority.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-5822",
-      "cve_id": "CVE-2026-5822",
+      "title": "CVE-2026-23773: Dell Disk Library for Mainframe, version(s) DLm 8700/2700 contain(s) a Server-Si...",
+      "description": "Dell Disk Library for Mainframe, version(s) DLm 8700/2700 contain(s) a Server-Side Request Forgery (SSRF) vulnerability. A low privileged attacker with remote access could potentially exploit this vulnerability, leading to Server-side request forgery.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-23773",
+      "cve_id": "CVE-2026-23773",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-05-08T22:45:37.313888+00:00",
-      "ttps": [],
-      "epss_score": null
+      "cvss_score": 4.3,
+      "published": "2026-05-08T23:46:40.080014+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ]
     },
     {
-      "title": "CVE-2026-42167: mod_sql in ProFTPD before 1.3.9a allows remote attackers to execute arbitrary co...",
-      "description": "mod_sql in ProFTPD before 1.3.9a allows remote attackers to execute arbitrary code via a username, in scenarios where there is logging of USER requests with an expansion such as %U, and the SQL backend allows commands (e.g., COPY TO PROGRAM).",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42167",
-      "cve_id": "CVE-2026-42167",
+      "title": "CVE-2026-40560: Starman versions before 0.4018 for Perl allows HTTP Request Smuggling via Improp...",
+      "description": "Starman versions before 0.4018 for Perl allows HTTP Request Smuggling via Improper Header Precedence.\n\nStarman incorrectly prioritizes \"Content-Length\" over \"Transfer-Encoding: chunked\" when both headers are present in an HTTP request. Per RFC 7230 3.3.3, Transfer-Encoding must take precedence.\n\nAn attacker could exploit this to smuggle malicious HTTP requests via a front-end reverse proxy.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40560",
+      "cve_id": "CVE-2026-40560",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 8.1,
-      "published": "2026-05-08T22:45:37.313848+00:00",
+      "cvss_score": 7.5,
+      "published": "2026-05-08T23:46:40.079980+00:00",
       "ttps": [],
       "epss_score": null
     },
@@ -1861,8 +1880,8 @@
         }
       ],
       "threat_actors": [
-        "Conti",
-        "LockBit"
+        "LockBit",
+        "Conti"
       ]
     },
     {
