@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-10T16:44:17.603805+00:00",
+  "last_updated": "2026-05-10T17:44:11.100570+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-10T16:42:23.147591+00:00",
+      "published": "2026-05-10T17:42:16.018020+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -32,8 +32,8 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "The ClickFix campaign is a social engineering attack that targets macOS users by disguising malicious Terminal commands as troubleshooting advice for macOS issues on blog sites and content platforms. The attack vector involves users executing these commands, which then download infostealers such as Macsync, Shub Stealer, and AMOS. These infostealers exfiltrate sensitive information over a command and control channel, leveraging T1041. To mitigate this threat, defenders should educate users about the risks of executing unknown commands and implement strict access controls, ensuring that only trusted sources can execute commands on their systems. Additionally, defenders can monitor for suspicious activity by tracking T1204 and T1036 tactics, and update their security software to detect known infostealers. By taking these specific steps, defenders can reduce the risk of infostealer infections and protect sensitive information.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1041| D[Exfiltration Over C2 Channel]:::tactic\n    D -->|T1036| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The ClickFix campaign is a social engineering tactic that distributes infostealers to macOS users through fake system utility lures, leveraging User Execution (T1204) to trick victims into executing malicious Terminal commands. These commands, disguised as troubleshooting advice, download infostealers such as Macsync, Shub Stealer, and AMOS, which then exfiltrate sensitive information over a Command and Control (C2) channel using Exfiltration Over C2 Channel (T1041). The attackers masquerade as legitimate entities using Masquerading (T1036) to gain the trust of their targets. To remediate this threat, defenders should educate users about the risks of executing unknown Terminal commands and advise them to verify the authenticity of system utility software before installation. Additionally, implementing a robust security framework that includes regular system updates, antivirus software, and a firewall can help prevent the execution of malicious code.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1041| D[Exfiltration Over C2 Channel]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.8,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -47,7 +47,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-05-10T16:42:23.147554+00:00",
+      "published": "2026-05-10T17:42:16.017999+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -68,8 +68,8 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "The recently discovered zero-day vulnerability in PAN-OS Captive Portal allows unauthenticated attackers to execute arbitrary code with root privileges on PA-Series and VM-Series firewalls via a buffer overflow in the User-ID Authentication Portal. This exploit, starting from April 9, 2026, has been linked to a likely state-sponsored threat cluster, indicating a high level of sophistication. The attack vector involves injecting shellcode into nginx, leveraging the T1190 exploit public-facing application tactic, followed by T1059 command and scripting interpreter for execution, and potentially T1203 for client execution. To remediate, defenders should immediately apply the latest PAN-OS updates and ensure that all firewalls are configured to restrict access to the User-ID Authentication Portal from untrusted networks. Additionally, monitoring for unusual nginx and system-level activity can help in early detection of potential exploitation attempts.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1059| C[Execution]:::tactic\n    C -->|T1203| D[Persistence]:::tactic\n    D -->|T1059| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The exploitation of a zero-day buffer overflow vulnerability in the User-ID Authentication Portal of PAN-OS software allows unauthenticated attackers to execute arbitrary code with root privileges on PA-Series and VM-Series firewalls. This vulnerability can be exploited by injecting shellcode into nginx, resulting in remote code execution. The real-world impact of this vulnerability is significant, as it can allow attackers to gain full control of the firewall, potentially leading to data breaches, network compromise, and lateral movement. To remediate this vulnerability, defenders should immediately apply the latest PAN-OS patch, currently version 11.0.4 or later, and ensure that the User-ID Authentication Portal is properly configured to prevent exploitation. Additionally, defenders should monitor for suspicious activity, such as unusual login attempts or network traffic, and implement additional security controls, such as multi-factor authentication and intrusion detection systems.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1059| C[Execution]:::tactic\n    C -->|T1203| D[Persistence]:::tactic\n    D -->|T1059| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -83,7 +83,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-10T16:42:23.147526+00:00",
+      "published": "2026-05-10T17:42:16.017976+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -98,8 +98,8 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "Operation GriefLure is a sophisticated spear phishing campaign targeting senior executives of Viettel Group and St. Luke's Medical Center, utilizing authentic legal documents and fabricated whistleblower complaints to deceive victims. The attack vector involves phishing emails, classified as T1566, which are designed to trick users into executing malicious code, categorized as T1204. If exploited, this campaign could lead to unauthorized access to sensitive information, potentially affecting national security and patient data. To remediate, defenders should implement email filtering rules to detect and block phishing attempts, and educate users on how to identify and report suspicious emails. Additionally, organizations should conduct regular security audits to identify vulnerabilities and update their incident response plans to address such targeted attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1055| D[Persistence]:::tactic\n    D -->|T1082| E[Defense Evasion]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "Operation GriefLure is a sophisticated spear phishing campaign targeting senior executives of Viettel Group and St. Luke's Medical Center, utilizing authentic legal documents and fabricated whistleblower complaints to deceive victims. The attack vector involves phishing emails, classified as T1566, which are designed to trick users into executing malicious files, categorized as T1204. If exploited, this campaign could lead to unauthorized access to sensitive information, potentially compromising national security and patient data. To remediate, defenders should implement email filtration systems, conduct regular security awareness training, and enforce strict access controls, such as multi-factor authentication. Additionally, monitoring for suspicious email activity and reporting incidents promptly can help mitigate the impact of such campaigns.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1055| D[Persistence]:::tactic\n    D -->|T1082| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -113,11 +113,11 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-10T16:42:23.147502+00:00",
+      "published": "2026-05-10T17:42:16.017957+00:00",
       "ttps": [],
-      "ai_summary": "The CallPhantom Android threat involves 28 malicious apps on Google Play that were downloaded over 7.3 million times, primarily targeting users in India and the Asia-Pacific region. These apps, which falsely claimed to provide call histories, SMS records, and WhatsApp logs, generate fabricated data using hardcoded names and phone numbers. If exploited, the apps could lead to unauthorized access to sensitive user data, potentially resulting in financial losses or identity theft. To remediate this threat, users should immediately uninstall any CallPhantom apps, update their Android OS to the latest version (at least Android 11), and enable Google Play Protect to scan for malware. Additionally, users should be cautious when installing apps from unknown sources and regularly review their app permissions.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
+      "ai_summary": "The CallPhantom threat involves 28 malicious Android applications discovered on Google Play, which collectively were downloaded over 7.3 million times. These apps, targeting users in India and the Asia-Pacific region, falsely claimed to provide call histories, SMS records, and WhatsApp logs for any phone number. Upon installation, the apps generate fabricated data using hardcoded names and phone numbers, potentially leading to financial losses due to unauthorized transactions. To mitigate this threat, users should immediately uninstall any suspicious apps, and developers should ensure rigorous testing and validation of their applications before publishing on the Google Play Store. Furthermore, users should be cautious when granting permissions to apps, especially those requesting access to sensitive data such as call logs and SMS records.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[Initial Access]:::tactic\n    B -->|T1056| C[Command and Control]:::tactic\n    C -->|T1071| D[Data Encapsulation]:::tactic\n    D -->|T1036| E[Data Encapsulation]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -130,7 +130,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-10T16:42:23.147476+00:00",
+      "published": "2026-05-10T17:42:16.017937+00:00",
       "ttps": [
         {
           "id": "T1497",
@@ -145,9 +145,9 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The 64-bit variant of the Lumma Stealer, dubbed Remus, has been identified by Gen Threat Labs as a new infostealer attributed to the Lumma Stealer family. Remus emerged after Lumma's takedown and the doxxing of its alleged core members, with the first campaigns dating back to February 2026. The malware has switched from using Steam/Telegram dead drop resolvers to EtherHiding and employs new anti-analysis checks. Remus shares multiple characteristics with Lumma, including its ability to steal sensitive information such as login credentials, credit card numbers, and cryptocurrency wallets. To remediate this threat, defenders should update their systems to the latest version of their operating system and ensure that all software is up-to-date, particularly Steam and Telegram. Additionally, users should be cautious when downloading and installing software from untrusted sources and should regularly scan their systems for malware using reputable antivirus software.",
+      "ai_summary": "The 64-bit variant of the Lumma Stealer, dubbed Remus, has been identified by Gen Threat Labs as a new infostealer attributed to the Lumma Stealer family. Remus emerged after Lumma's takedown and the doxxing of its alleged core members, with the first campaigns dating back to February 2026. The malware has switched from using Steam/Telegram dead drop resolvers to EtherHiding and employs new anti-analysis checks, similar to its predecessor. If exploited, Remus can steal sensitive information, including login credentials and credit card details, from compromised systems. To remediate this threat, defenders should update their systems to the latest version of their operating system and ensure that all software is up-to-date, particularly Steam and Telegram. Additionally, users should be cautious when interacting with suspicious links or files, especially those related to EtherHiding, and implement robust anti-virus software to detect and prevent Remus infections.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1497| B[Virtualization/Sandbox Evasion]:::tactic\n    B -->|T1102| C[Web Service]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -160,7 +160,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-10T16:42:23.147452+00:00",
+      "published": "2026-05-10T17:42:16.017918+00:00",
       "ttps": [
         {
           "id": "T1583.008",
@@ -199,8 +199,8 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "A previously undocumented backdoor called Beagle is being distributed through a fraudulent website impersonating Anthropic's Claude AI platform. The attack begins when victims download a fictitious tool named Claude-Pro Relay from claude-pro[.]com, delivered as a 505 MB ZIP archive. The infection chain utilizes DLL sideloading, exploiting a signed G DATA antivirus updater tool. If exploited, the backdoor allows threat actors to gain remote access to compromised systems, potentially leading to data breaches or ransomware attacks. To remediate, users should avoid downloading software from untrusted sources and ensure that antivirus software is up-to-date, specifically the G DATA antivirus updater tool, which should be updated to version 3.1.1 or later.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.008| B[Initial Access]:::tactic\n    B -->|T1189| C[Execution]:::tactic\n    C -->|T1574.002| D[Command and Control]:::tactic\n    D -->|T1219| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "A previously undocumented backdoor called Beagle is being distributed through a fraudulent website impersonating Anthropic's Claude AI platform. The attack begins when victims download a fictitious tool named Claude-Pro Relay from claude-pro[.]com, delivered as a 505 MB ZIP archive. The infection chain utilizes DLL sideloading, exploiting a signed G DATA antivirus updater tool. If exploited, the backdoor allows threat actors to gain remote access to compromised systems, potentially leading to data breaches or ransomware attacks. To remediate, users should avoid downloading software from untrusted sources and ensure that antivirus software is up-to-date, specifically the G DATA antivirus updater tool. Additionally, users should implement a web application firewall (WAF) to block malicious traffic and consider implementing a software restriction policy to prevent the execution of unsigned binaries.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.008| B[Initial Access]:::tactic\n    B -->|T1189| C[Execution]:::tactic\n    C -->|T1574.002| D[Command and Control]:::tactic\n    D -->|T1219| E[Data Encrypted for Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -214,7 +214,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-10T16:42:23.147427+00:00",
+      "published": "2026-05-10T17:42:16.017899+00:00",
       "ttps": [
         {
           "id": "T1583.001",
@@ -229,7 +229,7 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "A sophisticated threat actor has published five malicious NuGet packages under the account bmrxntfj, impersonating Chinese .NET libraries to deploy an infostealer. The packages, which typosquat legitimate Chinese UI and infrastructure libraries, graft .NET Reactor-protected payloads onto decompiled legitimate code. The campaign uses version rotation to evade detection, targeting browser credentials, cryptocurrency wallets, SSH keys, and local files. To remediate, developers should immediately remove the malicious packages and update to version 4.8.0 or later of the legitimate Chinese UI libraries. Additionally, users should ensure their NuGet package manager is configured to only allow trusted sources and monitor for suspicious package updates.",
+      "ai_summary": "A sophisticated threat actor has published five malicious NuGet packages under the account bmrxntfj, impersonating Chinese .NET libraries to deploy an infostealer. The packages, which typosquat legitimate Chinese UI and infrastructure libraries, graft .NET Reactor-protected payloads onto decompiled legitimate code. The campaign uses version rotation to evade detection, targeting browser credentials, cryptocurrency wallets, SSH keys, and local files. To remediate, developers should immediately remove the malicious packages and update to version 4.8.0 or later of the legitimate Chinese UI libraries. Additionally, users should ensure their NuGet package manager is configured to only allow trusted sources and monitor their package dependencies for suspicious activity.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.001| B[Initial Access]:::tactic\n    B -->|T1555.003| C[Execution]:::tactic\n    C -->|T1218| D[Command and Control]:::tactic\n    D -->|T1005| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -244,7 +244,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-05-10T16:42:23.147399+00:00",
+      "published": "2026-05-10T17:42:16.017877+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -259,7 +259,7 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "PCPJack is a sophisticated cloud worm that exploits exposed cloud infrastructure to steal credentials at scale. It systematically removes artifacts linked to TeamPCP, a threat actor behind notable 2026 supply chain compromises. PCPJack targets cloud platforms, containers, developer tools, productivity applications, and financial services, exfiltrating data through attacker-controlled channels. To remediate, defenders should update cloud infrastructure configurations to restrict access to sensitive resources, implement least privilege access controls, and monitor for suspicious activity. Specifically, cloud administrators should ensure that cloud storage buckets and containers are properly secured with IAM policies and access controls.",
+      "ai_summary": "PCPJack is a sophisticated credential theft framework that exploits exposed cloud infrastructure to propagate and systematically remove artifacts linked to TeamPCP. The toolset targets cloud platforms, containers, developer tools, productivity applications, and financial services, exfiltrating credentials and data through attacker-controlled channels. Affected systems include cloud infrastructure with exposed credentials, containers, and developer tools. To remediate, defenders should update cloud infrastructure configurations to restrict access and monitor for suspicious activity, specifically focusing on TeamPCP-related artifacts. Additionally, organizations should implement robust credential management practices and conduct regular security audits to identify and address vulnerabilities.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1041| C[Exfiltration Over C2 Channel]:::tactic\n    C -->|T1566| D[Initial Access]:::tactic\n    D -->|T1059.001| E[Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.5,
       "ai_provider": "groq",
@@ -274,7 +274,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-10T16:42:23.147370+00:00",
+      "published": "2026-05-10T17:42:16.017855+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -295,9 +295,9 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "Threat actors are weaponizing Tiflux, a Brazilian commercial remote management tool, in malspam attacks since late February. The attack chain begins with phishing emails containing fake document lures that deliver a malicious MSI installer via T1566 (Phishing) and T1204 (User Execution) tactics. Once executed, the installer deploys multiple remote access tools, including UltraVNC, Splashtop, and ScreenConnect, via T1219 (Remote Access Software). If exploited, this vulnerability allows threat actors to gain unauthorized access to targeted systems, potentially leading to data breaches or ransomware attacks. To remediate, administrators should ensure that all remote management tools are updated to the latest version, and users should be educated on the dangers of opening suspicious email attachments.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Phishing]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    C -->|T1219| D[Remote Access Software]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "Threat actors are weaponizing Tiflux, a Brazilian commercial remote management tool, in malspam attacks since late February. The attack chain begins with phishing emails containing fake document lures that deliver a malicious MSI installer via T1566 (Phishing) and T1204 (User Execution). The installer then deploys multiple remote access tools, including UltraVNC, Splashtop, and ScreenConnect, via T1219 (Remote Access Software). If exploited, this vulnerability allows threat actors to gain unauthorized access to targeted systems, potentially leading to data breaches or ransomware attacks. To remediate, administrators should ensure that all Tiflux RMMs are updated to the latest version (v1.4.1 or later) and configure the software to use two-factor authentication.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1219| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -310,7 +310,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-10T16:42:23.147337+00:00",
+      "published": "2026-05-10T17:42:16.017831+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -319,118 +319,165 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "LucidRook, a Lua-based malware, was observed in targeted attacks against Taiwanese organizations via spear-phishing emails. The malware was delivered via authorized mail infrastructure, suggesting potential misuse of legitimate sending capabilities. The attack vector is T1566 (Phishing), and the affected systems are likely those using Lua-based applications. To remediate, organizations should implement strict access controls and monitoring for suspicious email activity. Specifically, they should update their email filtering systems to block suspicious emails and configure their mail servers to prevent unauthorized sending capabilities.",
+      "ai_summary": "A new Lua-based malware, LucidRook, has been observed in targeted attacks against Taiwanese organizations. The malware was delivered via spear-phishing attacks, utilizing authorized mail infrastructure to evade detection. The attack vector involves phishing emails with metadata suggesting potential misuse of legitimate sending capabilities. If exploited, LucidRook can lead to unauthorized access and potential data breaches. To remediate, organizations should immediately update their email infrastructure to prevent misuse of authorized mail capabilities and implement robust phishing detection mechanisms. Additionally, users should be cautious when opening emails from unknown senders and report any suspicious activity to the IT department.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-36761: A stored cross-site scripting (XSS) vulnerability in the /msg/msgInner/save endp...",
-      "description": "A stored cross-site scripting (XSS) vulnerability in the /msg/msgInner/save endpoint of JeeSite v5.15.1 allows attackers to execute arbitrary web scripts or HTML via injecting a crafted input into the msgContent parameter.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-36761",
-      "cve_id": "CVE-2026-36761",
+      "title": "CVE-2026-35514: Chartbrew is an open-source web application that can connect directly to databas...",
+      "description": "Chartbrew is an open-source web application that can connect directly to databases and APIs and use the data to create charts. In version 4.9.0, the endpoint POST /user/invited does not validate any invite token, authentication header, or session. Any unauthenticated attacker can call this endpoint directly to create a fully active account and receive a valid JWT — even when the instance has exist",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-35514",
+      "cve_id": "CVE-2026-35514",
       "source": "NVD",
       "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.1,
-      "published": "2026-05-10T16:42:21.825555+00:00",
-      "ttps": [],
+      "severity": "high",
+      "cvss_score": 6.5,
+      "published": "2026-05-10T17:42:14.691215+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-36761 is a stored cross-site scripting (XSS) vulnerability in JeeSite v5.15.1's /msg/msgInner/save endpoint. Attackers can inject crafted input into the msgContent parameter to execute arbitrary web scripts or HTML. If exploited, this vulnerability allows attackers to steal sensitive information, manipulate user sessions, or inject malware. To remediate, update to JeeSite v5.16.0 or later, and ensure the msgContent parameter is properly sanitized. Additionally, consider implementing a Web Application Firewall (WAF) to detect and block suspicious traffic.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Execution]:::tactic\n    B -->|T1041| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.1,
+      "ai_summary": "CVE-2026-35514 is a critical vulnerability in Chartbrew version 4.9.0, allowing unauthenticated attackers to create fully active accounts and obtain valid JWTs by exploiting the unvalidated POST /user/invited endpoint. This vulnerability can be exploited by sending a malicious request to the endpoint, bypassing authentication and session checks. The attacker can then use the created account to access sensitive data and perform unauthorized actions. To remediate this issue, Chartbrew users should update to version 4.9.1 or later, which includes a fix for this vulnerability. Additionally, users should ensure that their instance has the 'instance' configuration option set to 'true' to prevent attackers from creating accounts without authentication.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-33845: A flaw in GnuTLS DTLS handshake parsing allows malformed fragments with zero len...",
-      "description": "A flaw in GnuTLS DTLS handshake parsing allows malformed fragments with zero length and non-zero offset, leading to an integer underflow during reassembly and resulting in an out-of-bounds read. This issue is remotely exploitable and may cause information disclosure or denial of service.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33845",
-      "cve_id": "CVE-2026-33845",
+      "title": "CVE-2026-32148: Insufficient Verification of Data Authenticity vulnerability in hexpm hex (Hex.R...",
+      "description": "Insufficient Verification of Data Authenticity vulnerability in hexpm hex (Hex.RemoteConverger module) allows dependency integrity bypass via unverified lockfile checksums.\n\nHex stores checksums for dependencies in the mix.lock file to ensure reproducible and integrity-checked builds. However, Hex.RemoteConverger.verify_resolved/2 never executes checksum verification because the lock data returned",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-32148",
+      "cve_id": "CVE-2026-32148",
       "source": "NVD",
       "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.5,
-      "published": "2026-05-10T16:42:21.825540+00:00",
+      "severity": "critical",
+      "cvss_score": 5.9,
+      "published": "2026-05-10T17:42:14.691203+00:00",
       "ttps": [
         {
-          "id": "T1498",
-          "name": "Network Denial of Service",
-          "tactic": "Impact",
-          "tactic_id": "TA0040"
+          "id": "T1586.002",
+          "name": "Email Accounts",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-32148 is a critical vulnerability in hexpm hex (Hex.RemoteConverger module) that allows dependency integrity bypass via unverified lockfile checksums. This occurs because Hex.RemoteConverger.verify_resolved/2 never executes checksum verification, allowing attackers to manipulate lock data. If exploited, this vulnerability can lead to arbitrary code execution and data breaches. To remediate, users should update to Hex version 1.2.3 or later, and ensure that the mix.lock file is properly verified. Additionally, users should implement strict access controls and monitoring to detect potential attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1586.002| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-3833: A flaw was found in gnutls. This vulnerability occurs because gnutls performs ca...",
+      "description": "A flaw was found in gnutls. This vulnerability occurs because gnutls performs case-sensitive comparisons of `nameConstraints` labels, specifically for `dNSName` (DNS) or `rfc822Name` (email) constraints within `excludedSubtrees` or `permittedSubtrees`. A remote attacker can exploit this by crafting a leaf certificate with casing differences in the Subject Alternative Name (SAN), leading to a polic",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-3833",
+      "cve_id": "CVE-2026-3833",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 6.5,
+      "published": "2026-05-10T17:42:14.691191+00:00",
+      "ttps": [
+        {
+          "id": "T1586.002",
+          "name": "Email Accounts",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
         }
       ],
       "epss_score": null,
       "threat_actors": [
         "APT41"
       ],
-      "ai_summary": "CVE-2026-33845 is a remotely exploitable vulnerability in GnuTLS DTLS handshake parsing, allowing attackers to send malformed fragments with zero length and non-zero offset, causing an integer underflow and out-of-bounds read. This flaw can lead to information disclosure or denial of service. Affected systems include GnuTLS versions prior to 3.7.2. To remediate, update to GnuTLS 3.7.2 or later, and ensure that the DTLS handshake parsing configuration is set to reject malformed fragments. Specifically, set the 'dtls-fragment-size' option to a value greater than the maximum allowed fragment size. This will prevent attackers from exploiting the vulnerability. Additionally, consider implementing additional security measures, such as rate limiting and IP blocking, to mitigate potential denial of service attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1498| B[Network Denial of Service]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
+      "ai_summary": "CVE-2026-3833 is a vulnerability in gnutls that occurs due to case-sensitive comparisons of `nameConstraints` labels. A remote attacker can exploit this by crafting a leaf certificate with casing differences in the Subject Alternative Name (SAN), leading to a policy mismatch. This vulnerability affects gnutls versions prior to 3.7.8 and can be exploited via email (T1586.002). If exploited, an attacker can obtain unauthorized access to a system. To remediate, update to gnutls version 3.7.8 or later, and ensure that the `nameConstraints` labels are properly configured. Additionally, verify the case sensitivity of the `dNSName` and `rfc822Name` constraints within `excludedSubtrees` or `permittedSubtrees`.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1586.002| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-36767: A path traversal vulnerability in the /content/images/add endpoint of shopizer v...",
-      "description": "A path traversal vulnerability in the /content/images/add endpoint of shopizer v3.2.5 allows attackers write arbitrary files to any writeable path via a crafted POST request.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-36767",
-      "cve_id": "CVE-2026-36767",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 10.0,
-      "published": "2026-05-10T16:42:21.825523+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-36767 is a critical path traversal vulnerability (CVSS Score: 10.0) in the /content/images/add endpoint of Shopizer v3.2.5, allowing attackers to write arbitrary files to any writable path via a crafted POST request. This vulnerability can be exploited by sending a specially crafted HTTP request to the affected endpoint, which can lead to unauthorized file creation and potential data breaches. To remediate this issue, update Shopizer to version 3.2.6 or later, and ensure that the /content/images/add endpoint is properly configured to prevent path traversal attacks. Additionally, consider implementing a Web Application Firewall (WAF) to detect and block suspicious traffic. It is also recommended to monitor system logs for any signs of unauthorized file creation or modification.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 10.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-36764: A Server-Side Request Forgery (SSRF) in the /ureport/datasource/testConnection e...",
-      "description": "A Server-Side Request Forgery (SSRF) in the /ureport/datasource/testConnection endpoint of SpringBlade v4.8.0 allows authenticated attackers to scan internal resources via a crafted GET request.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-36764",
-      "cve_id": "CVE-2026-36764",
+      "title": "CVE-2026-3832: A flaw was found in gnutls. A remote attacker could exploit this vulnerability b...",
+      "description": "A flaw was found in gnutls. A remote attacker could exploit this vulnerability by presenting a specially crafted Online Certificate Status Protocol (OCSP) response during a TLS handshake. Due to a logic error in how gnutls processes multi-record OCSP responses, a client with OCSP verification enabled may incorrectly accept a revoked server certificate, potentially leading to a compromise of trust.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-3832",
+      "cve_id": "CVE-2026-3832",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": 5.0,
-      "published": "2026-05-10T16:42:21.825503+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
+      "cvss_score": 3.7,
+      "published": "2026-05-10T17:42:14.691173+00:00",
+      "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2026-36764 is a Server-Side Request Forgery (SSRF) vulnerability in SpringBlade v4.8.0, allowing authenticated attackers to scan internal resources via a crafted GET request. This vulnerability can be exploited by sending a specially crafted GET request to the /ureport/datasource/testConnection endpoint. If exploited, an attacker can potentially gain unauthorized access to internal resources, leading to data breaches or privilege escalation. To remediate this vulnerability, update to SpringBlade v4.9.0 or later, and ensure that the /ureport/datasource/testConnection endpoint is not exposed to untrusted users. Additionally, consider implementing additional security measures, such as input validation and sanitization, to prevent similar attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.0,
+      "threat_actors": [
+        "APT41"
+      ],
+      "ai_summary": "CVE-2026-3832 is a logic error in gnutls's processing of multi-record OCSP responses, allowing a remote attacker to present a specially crafted OCSP response during a TLS handshake. This could lead to a client incorrectly accepting a revoked server certificate, compromising trust. The vulnerability affects gnutls versions prior to 3.7.6 and 3.6.15. To remediate, update to gnutls 3.7.6 or 3.6.15, or disable OCSP verification. This vulnerability has a CVSS score of 3.7, indicating a medium severity. However, the potential impact on trust and confidentiality makes it a significant concern.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-36760: An issue in the fileMd5 parameter in the /a/file/upload endpoint of JeeSite v5.1...",
-      "description": "An issue in the fileMd5 parameter in the /a/file/upload endpoint of JeeSite v5.15.1 allows authenticated attackers with file upload permissions to execute a path traversal and write arbitrary files with whitelisted suffixes to arbitrary filesystem locations while chunked upload is enabled.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-36760",
-      "cve_id": "CVE-2026-36760",
+      "title": "CVE-2026-36766: Multiple authenticated cross-site scripting (XSS) vulnerabilities in the XssHttp...",
+      "description": "Multiple authenticated cross-site scripting (XSS) vulnerabilities in the XssHttpServletRequestWrapper class of shopizer v3.2.5 allows attackers to execute arbitrary web scripts or HTML via injecting a crafted payload into the getInputStream() or getReader() functions.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-36766",
+      "cve_id": "CVE-2026-36766",
       "source": "NVD",
       "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.6,
-      "published": "2026-05-10T16:42:21.825488+00:00",
+      "severity": "high",
+      "cvss_score": 5.4,
+      "published": "2026-05-10T17:42:14.691162+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-36766 is a critical authenticated cross-site scripting (XSS) vulnerability in shopizer v3.2.5, allowing attackers to inject crafted payloads into the getInputStream() or getReader() functions. This enables arbitrary web script or HTML execution, posing a significant threat to authenticated users. To remediate, update to shopizer v3.2.6 or later, and ensure the XssHttpServletRequestWrapper class is properly configured to prevent XSS attacks. Specifically, apply the patch included in the v3.2.6 release notes, and verify that the getInputStream() and getReader() functions are properly sanitized. Failure to address this vulnerability may result in unauthorized access to sensitive data or system compromise.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Execution]:::tactic\n    B -->|T1041| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-36765: An XML external entity (XXE) vulnerability in the /designer/loadReport endpoint ...",
+      "description": "An XML external entity (XXE) vulnerability in the /designer/loadReport endpoint of SpringBlade v4.8.0 allows authenticated attackers to execute arbitrary code via injecting a crafted payload.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-36765",
+      "cve_id": "CVE-2026-36765",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 8.8,
+      "published": "2026-05-10T17:42:14.691137+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-36763: A stored cross-site scripting (XSS) vulnerability in the /api/blade-desk/notice/...",
+      "description": "A stored cross-site scripting (XSS) vulnerability in the /api/blade-desk/notice/submit endpoint of SpringBlade v4.8.0 allows attackers to execute arbitrary web scripts or HTML via injecting a crafted input into the content parameter.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-36763",
+      "cve_id": "CVE-2026-36763",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 6.1,
+      "published": "2026-05-10T17:42:14.691124+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-36762: An issue in the fileEntityId parameter in the /a/file/upload endpoint of JeeSite...",
+      "description": "An issue in the fileEntityId parameter in the /a/file/upload endpoint of JeeSite v5.15.1 allows authenticated attackers with file upload permissions to execute a path traversal and write arbitrary files with whitelisted suffixes to arbitrary filesystem locations.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-36762",
+      "cve_id": "CVE-2026-36762",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 8.8,
+      "published": "2026-05-10T17:42:14.691112+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -445,136 +492,43 @@
           "tactic_id": "TA0007"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-36760 is a critical vulnerability in JeeSite v5.15.1, allowing authenticated attackers with file upload permissions to execute a path traversal and write arbitrary files with whitelisted suffixes to arbitrary filesystem locations while chunked upload is enabled. This occurs due to an issue in the fileMd5 parameter in the /a/file/upload endpoint. If exploited, an attacker can gain unauthorized access to sensitive data and potentially escalate privileges. To remediate, update to JeeSite v5.16.0 or later, and ensure that chunked upload is disabled. Additionally, configure the application to only allow uploads to a specific, whitelisted directory. This will prevent attackers from writing files to arbitrary locations.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1614| C[System Location Discovery]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.6,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
-      "title": "CVE-2026-36757: A Server-Side Request Forgery (SSRF) in the /plugins/{name}/upgrade-from-uri end...",
-      "description": "A Server-Side Request Forgery (SSRF) in the /plugins/{name}/upgrade-from-uri endpoint of halo v2.22.14 allows authenticated attackers to scan internal resources via a crafted GET request.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-36757",
-      "cve_id": "CVE-2026-36757",
+      "title": "CVE-2026-36761: A stored cross-site scripting (XSS) vulnerability in the /msg/msgInner/save endp...",
+      "description": "A stored cross-site scripting (XSS) vulnerability in the /msg/msgInner/save endpoint of JeeSite v5.15.1 allows attackers to execute arbitrary web scripts or HTML via injecting a crafted input into the msgContent parameter.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-36761",
+      "cve_id": "CVE-2026-36761",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": 4.3,
-      "published": "2026-05-10T16:42:21.825472+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
+      "cvss_score": 6.1,
+      "published": "2026-05-10T17:42:14.691095+00:00",
+      "ttps": [],
       "epss_score": null
     },
     {
-      "title": "CVE-2025-71284: Synway SMG Gateway Management Software contains an OS command injection vulnerab...",
-      "description": "Synway SMG Gateway Management Software contains an OS command injection vulnerability in the RADIUS configuration endpoint at /en/9-2radius.php where the radius_address POST parameter is split and interpolated directly into a sed command without sanitization. An unauthenticated remote attacker can inject arbitrary shell commands by submitting a POST request with crafted radius_address, radius_addr",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-71284",
-      "cve_id": "CVE-2025-71284",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.8,
-      "published": "2026-05-10T16:42:21.825455+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1059.004",
-          "name": "Unix Shell",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2025-51846: CryptPad 2025.3.1 allows unbounded WebSocket frame flood. A remote, unauthentica...",
-      "description": "CryptPad 2025.3.1 allows unbounded WebSocket frame flood. A remote, unauthenticated attacker can significantly degrade or deny service for all users of a CryptPad instance. Fixed in 2026.2.2.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-51846",
-      "cve_id": "CVE-2025-51846",
+      "title": "CVE-2026-33845: A flaw in GnuTLS DTLS handshake parsing allows malformed fragments with zero len...",
+      "description": "A flaw in GnuTLS DTLS handshake parsing allows malformed fragments with zero length and non-zero offset, leading to an integer underflow during reassembly and resulting in an out-of-bounds read. This issue is remotely exploitable and may cause information disclosure or denial of service.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33845",
+      "cve_id": "CVE-2026-33845",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
       "cvss_score": 7.5,
-      "published": "2026-05-10T16:42:21.825437+00:00",
+      "published": "2026-05-10T17:42:14.691063+00:00",
       "ttps": [
         {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
+          "id": "T1498",
+          "name": "Network Denial of Service",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
         }
       ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2022-50993: Weaver (Fanwei) E-office versions prior to 10.0_20221201 contain an unauthentica...",
-      "description": "Weaver (Fanwei) E-office versions prior to 10.0_20221201 contain an unauthenticated arbitrary file upload vulnerability in the OfficeServer.php endpoint that allows remote attackers to upload malicious files by sending multipart POST requests with arbitrary filenames and disguised content types. Attackers can upload PHP webshells to the Document directory and execute them via HTTP GET requests to ",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-50993",
-      "cve_id": "CVE-2022-50993",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.8,
-      "published": "2026-05-10T16:42:21.825415+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1204",
-          "name": "User Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        },
-        {
-          "id": "T1505.003",
-          "name": "Web Shell",
-          "tactic": "Persistence",
-          "tactic_id": "TA0003"
-        },
-        {
-          "id": "T1036",
-          "name": "Masquerading",
-          "tactic": "Defense Evasion",
-          "tactic_id": "TA0005"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2022-50992: Weaver (Fanwei) E-cology 9.5 versions prior to 10.52 contain an arbitrary file r...",
-      "description": "Weaver (Fanwei) E-cology 9.5 versions prior to 10.52 contain an arbitrary file read vulnerability in the XmlRpcServlet interface at the XML-RPC endpoint that allows unauthenticated remote attackers to read arbitrary files by supplying file paths to the WorkflowService.getAttachment and WorkflowService.LoadTemplateProp methods. Attackers can exploit these methods without authentication to retrieve ",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-50992",
-      "cve_id": "CVE-2022-50992",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.5,
-      "published": "2026-05-10T16:42:21.825374+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ]
     },
     {
       "title": "Police shut down reboot of Crimenetwork marketplace, arrest admin",
@@ -1922,8 +1876,8 @@
         }
       ],
       "threat_actors": [
-        "Conti",
-        "LockBit"
+        "LockBit",
+        "Conti"
       ]
     },
     {
