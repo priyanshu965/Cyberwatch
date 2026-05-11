@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-11T21:59:53.178619+00:00",
+  "last_updated": "2026-05-11T22:54:13.922199+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-11T21:58:01.711392+00:00",
+      "published": "2026-05-11T22:51:59.604566+00:00",
       "ttps": [
         {
           "id": "T1588",
@@ -32,8 +32,8 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The Needle malware campaign is a modular crypto-stealing platform that targets cryptocurrency wallets through two primary attack vectors: a browser extension spoofer and a Rust-based desktop agent. The browser extension spoofer targets popular wallets such as MetaMask, Phantom, and Trust Wallet, while the desktop agent impersonates well-known applications like Exodus, Trezor, and Ledger. To mitigate this threat, defenders should implement strict browser extension validation, ensuring that only trusted extensions are installed, and verify the authenticity of desktop applications by checking digital signatures and verifying the publisher. Additionally, users should be cautious when installing browser extensions and desktop applications, and monitor their cryptocurrency wallets for suspicious activity. The campaign has already compromised 1,932 victims, including 111 browser extension users, highlighting the need for immediate action to prevent further exploitation.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1176| B[Initial Access]:::tactic\n    B -->|T1071| C[Execution]:::tactic\n    C -->|T1588| D[Persistence]:::tactic\n    D -->|T1071| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Needle malware campaign is a modular crypto-stealing platform that targets cryptocurrency wallets through two primary attack vectors: a browser extension spoofer and a Rust-based desktop agent. The browser extension spoofer targets MetaMask, Phantom, and Trust Wallet, while the desktop agent impersonates Exodus, Trezor, and Ledger applications. To mitigate this threat, defenders should immediately remove any suspicious browser extensions and update their desktop applications to the latest versions, specifically ensuring that MetaMask is updated to version 10.11.0 or later, Phantom to version 1.6.1 or later, and Trust Wallet to version 1.18.0 or later. Additionally, users should be cautious when installing new browser extensions or desktop applications, verifying the authenticity of the software and its publisher. The campaign has already compromised 1,932 victims, including 111 browser extension users, highlighting the need for swift and targeted remediation efforts.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1176| B[Browser Extension]:::tactic\n    B -->|T1071| C[Application Layer Protocol]:::tactic\n    C -->|T1588| D[Obtain Capabilities]:::tactic\n    D -->|T1059.001| E[Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -47,7 +47,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-05-11T21:58:01.711368+00:00",
+      "published": "2026-05-11T22:51:59.604543+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -74,8 +74,8 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The Mr_Rot13 threat group has been exploiting CVE-2026-41940, a critical authentication bypass vulnerability in cPanel & WHM, to compromise Linux servers globally since at least 2020. This vulnerability allows attackers to bypass authentication and gain unauthorized access to cPanel & WHM instances, which can lead to the deployment of backdoor trojans, including SSH keys, PHP webshells, and malicious JavaScript for credential harvesting. The group's payload installer is written in Go and also installs a cross-platform remote access tool called F, enabling the threat actors to maintain persistence and control over the compromised systems. To remediate this vulnerability, defenders should immediately update their cPanel & WHM instances to the latest version, which includes the patch for CVE-2026-41940, and monitor their systems for suspicious activity, such as unusual login attempts or unfamiliar SSH keys. Additionally, defenders should consider implementing a web application firewall (WAF) to detect and prevent exploitation attempts.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.007| C[Execution]:::tactic\n    C -->|T1505.003| D[Web Shell]:::tactic\n    D -->|T1219| E[Remote Access]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Mr_Rot13 threat group has been exploiting CVE-2026-41940, a critical authentication bypass vulnerability in cPanel & WHM, to compromise Linux servers globally since at least 2020. This vulnerability allows attackers to bypass authentication and gain unauthorized access to cPanel accounts, which can lead to the deployment of backdoor trojans, including SSH keys, PHP webshells, and malicious JavaScript for credential harvesting. The group's Go-based payload installer enables the installation of a cross-platform remote access tool called F, allowing for persistent access to compromised systems. To remediate this vulnerability, defenders should update their cPanel & WHM installations to the latest version, which includes the patch for CVE-2026-41940, and monitor their systems for suspicious activity, such as unusual login attempts or unfamiliar SSH keys. Additionally, defenders should consider implementing multi-factor authentication and regularly reviewing their system logs to detect potential security incidents.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1059.007| C[Execution]:::tactic\n    C -->|T1505.003| D[Persistence]:::tactic\n    D -->|T1219| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -87,9 +87,9 @@
       "cve_id": null,
       "source": "AlienVault OTX",
       "category": "incident",
-      "severity": "high",
+      "severity": "critical",
       "cvss_score": null,
-      "published": "2026-05-11T21:58:01.711352+00:00",
+      "published": "2026-05-11T22:51:59.604528+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -122,11 +122,11 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The OPERATION SILENTCANVAS campaign involves a sophisticated multi-stage intrusion leveraging a weaponized PowerShell payload disguised as a JPEG image file, specifically 'sysupdate.jpeg', to deploy a trojanized ConnectWise ScreenConnect instance for covert remote access. This attack likely originates through social engineering techniques, including phishing emails or malicious attachments, utilizing T1566 phishing tactics. Upon execution, the malware establishes a connection, potentially using T1059.001 PowerShell for execution and T1204 user execution for persistence. To remediate, defenders should immediately block any suspicious JPEG files, particularly those named 'sysupdate.jpeg', and update their ConnectWise ScreenConnect instances to the latest version, ensuring all patches are applied. Additionally, implementing robust email filters to detect phishing attempts and educating users about the dangers of opening unsolicited attachments can significantly reduce the risk of exploitation.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1204| D[Persistence]:::tactic\n    D -->|T1036| E[Defense Evasion]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "ai_summary": "OPERATION SILENTCANVAS is a sophisticated multi-stage intrusion campaign leveraging a weaponized PowerShell payload disguised as a JPEG image file (sysupdate.jpeg) to deploy a trojanized ConnectWise ScreenConnect instance for covert remote access. The attack likely originates through social engineering techniques including phishing emails or malicious attachments. Upon execution, the malware establishes a persistent connection to a remote server, allowing the threat actor to maintain control and execute arbitrary commands. To remediate this threat, defenders should update PowerShell to version 3.0 or later, configure Windows Defender to block suspicious PowerShell scripts, and implement strict access controls for the ConnectWise ScreenConnect instance. Additionally, users should be educated on the risks of opening suspicious email attachments and be cautious when receiving unsolicited software updates.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1036| E[Masquerading]:::tactic\n    E -->|T1104| F[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.0,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "Technical Advisory: Breach of Instructure Canvas LMS",
@@ -137,9 +137,9 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-11T21:58:01.711326+00:00",
+      "published": "2026-05-11T22:51:59.604502+00:00",
       "ttps": [],
-      "ai_summary": "The ShinyHunters threat actor exploited the Free-For-Teacher account program in Instructure's Canvas learning platform, compromising the platform directly and exposing sensitive user data. The breach occurred between April 30 and May 7, 2026, with the exposure window lasting approximately 8 days. The compromised data includes names, email addresses, student IDs, and private messages. To remediate this issue, Instructure users should immediately review their account settings and ensure that their Free-For-Teacher accounts are properly secured. Specifically, users should verify that their accounts are not linked to any unauthorized devices or browsers, and ensure that two-factor authentication is enabled.",
+      "ai_summary": "A technical advisory was issued for a breach of Instructure's Canvas learning platform, which was exploited by ShinyHunters through the Free-For-Teacher account program. The attackers compromised the platform directly, exposing sensitive information such as names, email addresses, student IDs, and private messages. The exposure window ran from April 30 to May 7, 2026, with ShinyHunters claiming to have obtained 3.6 TB of data. To remediate this issue, Instructure users should immediately review their account settings and ensure that all sensitive information is properly secured. Specifically, users should update to the latest version of Canvas (as of May 2026, version 2026.05.01 or later) and configure their accounts to use two-factor authentication.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -154,7 +154,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-11T21:58:01.711302+00:00",
+      "published": "2026-05-11T22:51:59.604479+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -163,7 +163,7 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "Threat actors have evolved their phishing operations to leverage legitimate cloud infrastructure, including cloud storage, productivity suites, and OAuth authentication endpoints. This allows them to blend in with trusted services, making it challenging for defenders to distinguish between legitimate and malicious activity. The abuse of cloud-native infrastructure enables attackers to conduct entire campaigns without the need for attacker-controlled systems, increasing their stealth and effectiveness. To remediate this threat, organizations should implement strict access controls, monitor OAuth authentication activity, and regularly review cloud storage and productivity suite usage. Additionally, employees should be educated on the risks associated with cloud-based phishing campaigns and the importance of verifying the authenticity of cloud-based services.",
+      "ai_summary": "Threat actors have evolved phishing operations to leverage legitimate cloud infrastructure, including cloud storage, productivity suites, and OAuth authentication endpoints. This allows them to blend in with trusted services, making it harder for defenders to distinguish between legitimate and malicious activity. The abuse of cloud-native infrastructure enables attackers to conduct entire campaigns without being detected, as they exploit platforms employees use daily. To remediate this threat, organizations should implement strict access controls, monitor OAuth authentication activity, and regularly review cloud storage and productivity suite usage. Additionally, defenders should stay vigilant for suspicious activity, such as unusual login locations or unexplained changes to cloud infrastructure configurations.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -178,7 +178,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-11T21:58:01.711279+00:00",
+      "published": "2026-05-11T22:51:59.604456+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -187,11 +187,11 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "The TroyDen's Lure Factory campaign is a large-scale malware operation that targets developers, gamers, Roblox players, and crypto users by distributing LuaJIT-based infostealers through over 300 delivery packages hosted on GitHub. The malware uses AI-generated lure names that incorporate obscure biological taxonomy and medical terminology, making it difficult for victims to identify the malicious files. The attack vector involves user execution (T1204), where victims unknowingly download and execute the malware. To remediate this threat, defenders should implement strict access controls on GitHub repositories, monitor for suspicious activity, and educate users about the risks of downloading software from untrusted sources. Additionally, defenders can block LuaJIT-based executables at the network perimeter and implement endpoint detection and response tools to detect and respond to potential incidents.",
+      "ai_summary": "The AI-Assisted Lure Factory campaign leverages AI-generated lure names to target developers, gamers, and crypto users. The malware uses a two-component design, with the first component being a LuaJIT-based infostealer distributed through over 300 GitHub-hosted delivery packages. The infostealer is likely to be executed via user execution (T1204) when a victim downloads and runs the malware. To remediate, GitHub users should ensure all packages are up-to-date and review their dependencies, specifically focusing on LuaJIT versions 2.0.4 and earlier. Additionally, developers should be cautious when downloading and running code from untrusted sources, especially those with obscure biological taxonomy and medical terminology in their names.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.8,
+      "severity_score": 8.0,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "Poisoning the well: AI supply chain attacks on Hugging Face and OpenClaw",
@@ -202,7 +202,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-11T21:58:01.711255+00:00",
+      "published": "2026-05-11T22:51:59.604432+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -211,7 +211,7 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "Threat actors are exploiting AI distribution platforms like Hugging Face and OpenClaw to deliver malware by embedding malicious code within models, datasets, and agent extensions. This supply chain compromise (T1195) allows attackers to target Windows and macOS systems with trojans, cryptominers, and AMOS stealer malware. Over 575 malicious skills across 13 developer accounts were identified in the OpenClaw ecosystem, highlighting the scope of the issue. To remediate, developers should immediately review and audit their skills and extensions for any suspicious activity, and ensure they are using the latest versions of Hugging Face and OpenClaw. Additionally, users should be cautious when downloading and using AI models from these platforms, and consider implementing additional security measures such as model validation and verification.",
+      "ai_summary": "Threat actors are exploiting AI distribution platforms like Hugging Face and OpenClaw to deliver malware by embedding malicious code within models, datasets, and agent extensions. This attack vector leverages trust relationships between developers and users, compromising the integrity of the AI supply chain. Over 575 malicious skills across 13 developer accounts were identified in the OpenClaw ecosystem, targeting Windows and macOS with trojans, cryptominers, and AMOS stealer. To remediate, developers should immediately remove any suspicious skills and update their accounts to the latest version. Additionally, users should verify the authenticity of models and datasets before deployment, and consider implementing additional security measures such as model validation and anomaly detection.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -226,7 +226,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-11T21:58:01.711231+00:00",
+      "published": "2026-05-11T22:51:59.604409+00:00",
       "ttps": [
         {
           "id": "T1059.004",
@@ -235,7 +235,7 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "Attackers compromised the official JDownloader website by manipulating installer download links through the content management system. Between May 6-7, 2026 (UTC), users who downloaded Windows installers via 'Download Alternative Installer' links or the Linux shell installer were redirected to malicious third-party files instead of genuine installers. The attackers exploited the content management system vulnerability to gain initial access. To remediate, users should immediately stop using any JDownloader installers downloaded between May 6-7, 2026, and instead download the latest version (v3.1.0) from the official website. Additionally, users should ensure their content management system is updated to the latest version to prevent similar attacks.",
+      "ai_summary": "Attackers compromised the official JDownloader website by manipulating installer download links through the content management system. Between May 6-7, 2026, users who downloaded Windows installers via 'Download Alternative Installer' links or the Linux shell installer were redirected to malicious third-party files instead of genuine installers. The attackers exploited the content management system vulnerability to gain initial access, executing malicious code via Unix Shell (T1059.004) and establishing command and control (C2) channels. This incident highlights the importance of verifying download links and using trusted sources to avoid falling victim to similar attacks. To remediate, users should immediately stop using the compromised installers and update to the latest version (2.1.0) of JDownloader, ensuring the 'Download Alternative Installer' feature is disabled.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.004| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -250,7 +250,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-11T21:58:01.711203+00:00",
+      "published": "2026-05-11T22:51:59.604382+00:00",
       "ttps": [
         {
           "id": "T1059.010",
@@ -298,8 +298,8 @@
       "threat_actors": [
         "APT41"
       ],
-      "ai_summary": "A multi-stage loader was identified, starting with the execution of MicrosoftToolkit.exe, a commonly abused hack tool. The attack employed file masquerading techniques, renaming a .dot file to .bat format to evade detection. The malware performed process discovery and attempted to terminate security-related processes before extracting payload using AutoIt. This led to Vidar Stealer command-and-control communication. To remediate, defenders should update to the latest version of Microsoft Toolkit (v1.4.6.0 or later) and configure Windows Defender to detect and block AutoIt-based malware. Additionally, implement file integrity monitoring to detect and prevent file masquerading techniques.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.010| C[Execution]:::tactic\n    C -->|T1057| D[Process Discovery]:::tactic\n    D -->|T1564.001| E[Command and Control]:::tactic\n    E -->|T1071| F[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "A sophisticated multi-stage infection chain was identified, beginning with the execution of MicrosoftToolkit.exe, a commonly abused hack tool. The attack employed file masquerading techniques, renaming a .dot file to .bat format to evade detection. The malware performed process discovery and attempted to terminate security-related processes before extracting payload using AutoIt scripts. This led to Vidar Stealer establishing command-and-control communication. To remediate, defenders should update to the latest version of Microsoft Toolkit (v1.4.6 or later) and configure Windows Defender to detect and block AutoIt scripts. Additionally, implement file integrity monitoring to detect and prevent file masquerading techniques.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.010| C[Execution]:::tactic\n    C -->|T1036| D[Masquerading]:::tactic\n    D -->|T1562| E[Impair Defenses]:::tactic\n    E -->|T1564.001| F[Hidden Files and Directories]:::tactic\n    F -->|T1057| G[Process Discovery]:::tactic\n    G -->|T1071| H[Application Layer Protocol]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -313,7 +313,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-11T21:58:01.711166+00:00",
+      "published": "2026-05-11T22:51:59.604348+00:00",
       "ttps": [
         {
           "id": "T1574.002",
@@ -340,9 +340,90 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "A sophisticated threat actor deployed EtherRAT malware via a malicious MSI installer disguised as a Sysinternals tool, leveraging DLL sideloading techniques with legitimate applications like Greens. The malware utilized the Ethereum blockchain via EtherHiding for dynamic C2 configuration updates. Following reconnaissance activities, the actors deployed the TukTuk malware framework, leading to the Gentleman ransomware attack. This incident highlights the importance of monitoring for suspicious MSI installers and legitimate applications being used for malicious purposes. To remediate, defenders should update to the latest version of Sysinternals tools and implement DLL whitelisting to prevent similar attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1574.002| B[Initial Access]:::tactic\n    B -->|T1036| C[Execution]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "ai_summary": "Threat actors are deploying \"The Gentleman\" ransomware through a sophisticated attack chain involving EtherRAT and TukTuk malware. The initial access vector utilizes a malicious MSI installer masquerading as a legitimate Sysinternals tool, potentially exploiting unpatched systems or social engineering. EtherRAT establishes command and control (C2) by leveraging the Ethereum blockchain for dynamic configuration updates via EtherHiding, making detection more challenging. Subsequently, the TukTuk malware framework is deployed using DLL sideloading techniques, specifically T1574.002, often with legitimate executables like Greens. The ultimate impact is data encryption for impact (T1486), leading to significant operational disruption and financial loss for affected organizations. Defenders should focus on robust endpoint detection and response (EDR) for suspicious MSI installations and DLL sideloading attempts, meticulously monitor network traffic for atypical blockchain interactions, and ensure all systems are patched against known vulnerabilities that could facilitate initial access or privilege escalation.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1036| B[Initial Access]:::tactic\n    B -->|T1574.002| C[Execution]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.8,
+      "ai_provider": "gemini",
+      "ai_model": "gemini-2.5-flash-lite"
+    },
+    {
+      "title": "CVE-2026-4882: The User Registration Advanced Fields plugin for WordPress is vulnerable to arbi...",
+      "description": "The User Registration Advanced Fields plugin for WordPress is vulnerable to arbitrary file uploads due to missing file type validation in the 'URAF_AJAX::method_upload' function in all versions up to, and including, 1.6.20. This makes it possible for unauthenticated attackers to upload arbitrary files on the affected site's server which may make remote code execution possible. Note: The vulnerabil",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-4882",
+      "cve_id": "CVE-2026-4882",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": 9.8,
+      "published": "2026-05-11T22:51:58.200196+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-4882 is a critical vulnerability in the User Registration Advanced Fields plugin for WordPress, affecting all versions up to and including 1.6.20. The issue allows unauthenticated attackers to upload arbitrary files, potentially leading to remote code execution. This vulnerability can be exploited by attackers using T1190 (Exploit Public-Facing Application) tactics, specifically targeting the 'URAF_AJAX::method_upload' function. To remediate, users should update to version 1.6.21 or later, and ensure that the 'wp-content/uploads' directory has restrictive permissions (e.g., 0755). Additionally, consider implementing a Web Application Firewall (WAF) to block suspicious traffic.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Command and Scripting Interpreter]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.8,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-4658: The Essential Blocks – Page Builder Gutenberg Blocks, Patterns & Templates plugi...",
+      "description": "The Essential Blocks – Page Builder Gutenberg Blocks, Patterns & Templates plugin for WordPress is vulnerable to Stored Cross-Site Scripting via the className, classHook, and blockId attributes in the Add to Cart block (essential-blocks/add-to-cart) in all versions up to, and including, 6.0.4. This is due to insufficient output escaping in the render_callback() function where these attributes are ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-4658",
+      "cve_id": "CVE-2026-4658",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 6.4,
+      "published": "2026-05-11T22:51:58.200182+00:00",
+      "ttps": [
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "The Essential Blocks – Page Builder Gutenberg Blocks, Patterns & Templates plugin for WordPress is vulnerable to Stored Cross-Site Scripting (XSS) via the className, classHook, and blockId attributes in the Add to Cart block (essential-blocks/add-to-cart) in all versions up to, and including, 6.0.4. This is due to insufficient output escaping in the render_callback() function. If exploited, an attacker can inject malicious scripts that can steal sensitive information, forge authentication certificates (T1649), or perform other malicious actions. To remediate, update the plugin to version 6.0.5 or later, and ensure that the render_callback() function is properly sanitized to prevent XSS attacks. Additionally, consider implementing a Web Application Firewall (WAF) to detect and block suspicious traffic.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1649| B[Steal or Forge Authentication Certificates]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.4,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2025-14726: The Widgets for Social Photo Feed plugin for WordPress is vulnerable to unauthor...",
+      "description": "The Widgets for Social Photo Feed plugin for WordPress is vulnerable to unauthorized access of data and modification of data due to a missing capability check on the '/trustindex_feed_hook_instagram/troubleshooting' and '/trustindex_feed_hook_instagram/submit-data' REST API endpoints in all versions up to, and including, 1.8. This makes it possible for unauthenticated attackers to access and updat",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-14726",
+      "cve_id": "CVE-2025-14726",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 6.5,
+      "published": "2026-05-11T22:51:58.200166+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "The CVE-2025-14726 vulnerability affects the Widgets for Social Photo Feed plugin for WordPress, versions up to and including 1.8. An attacker can exploit this vulnerability by accessing the '/trustindex_feed_hook_instagram/troubleshooting' and '/trustindex_feed_hook_instagram/submit-data' REST API endpoints without authentication, allowing them to access and modify data. This can lead to unauthorized data access and modification, potentially resulting in sensitive information exposure. To remediate this issue, WordPress administrators should update the plugin to version 1.9 or later, and ensure that the 'wp_rest' capability is properly configured to restrict access to authorized users. Additionally, it is recommended to monitor plugin updates and apply security patches in a timely manner to prevent similar vulnerabilities.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -355,11 +436,11 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 5.3,
-      "published": "2026-05-11T21:58:00.421071+00:00",
+      "published": "2026-05-11T22:51:58.200146+00:00",
       "ttps": [],
       "epss_score": null,
       "ai_summary": "CVE-2026-7638 is a critical vulnerability in the App Builder – Create Native Android & iOS Apps On The Flight plugin for WordPress, affecting all versions up to and including 5.6.0. The issue is caused by an Insecure Direct Object Reference (IDOR) in the `upload_avatar()` function, which accepts an attacker-controlled `user_id` parameter from the POST request body and updates user meta without proper authorization validation. If exploited, an attacker can manipulate user data, potentially leading to unauthorized access or data tampering. To remediate, update the plugin to version 5.7.0 or later, and ensure that the `upload_avatar()` function is modified to include proper authorization validation. Additionally, consider implementing additional security measures, such as input validation and sanitization, to prevent similar vulnerabilities in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1162| B[Exploitation of Vulnerability]:::tactic\n    B -->|T1210| C[Privilege Escalation]:::tactic\n    C -->|T1071| D[User Execution]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -373,11 +454,11 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.3,
-      "published": "2026-05-11T21:58:00.421054+00:00",
+      "published": "2026-05-11T22:51:58.200131+00:00",
       "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2026-7602 is a vulnerability in JeecgBoot up to version 3.9.1, affecting an unknown functionality of the /sys/fillRule/edit file in the FillRuleUtil Component. The vulnerability allows for improper authorization through manipulation of the ruleClass argument, which can be exploited remotely. If exploited, this vulnerability could lead to unauthorized access or data tampering. To remediate, users should upgrade to JeecgBoot version 3.9.2 or later, as this version addresses the vulnerability. Specifically, users should check their JeecgBoot version and update to the latest version available.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059| B[Initial Access]:::tactic\n    B -->|T1068| C[Discovery]:::tactic\n    C -->|T1071| D[Execution]:::tactic\n    D -->|T1210| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "CVE-2026-7602 is a vulnerability in JeecgBoot up to version 3.9.1, affecting an unknown functionality of the /sys/fillRule/edit file in the FillRuleUtil Component. The vulnerability allows for improper authorization through manipulation of the ruleClass argument, which can be exploited remotely. If exploited, this vulnerability could lead to unauthorized access or data tampering. To remediate, users should upgrade to JeecgBoot version 3.9.2 or later, as this version addresses the vulnerability. Specifically, users should check their current version and update to the latest version available.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1055| B[Command and Control]:::tactic\n    B -->|T1041| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 6.3,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -391,7 +472,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.4,
-      "published": "2026-05-11T21:58:00.421037+00:00",
+      "published": "2026-05-11T22:51:58.200115+00:00",
       "ttps": [
         {
           "id": "T1649",
@@ -400,12 +481,7 @@
           "tactic_id": "TA0006"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-7209 is a Stored Cross-Site Scripting (XSS) vulnerability in the Simple Link Directory plugin for WordPress, affecting versions up to 8.9.2. An authenticated attacker with contributor-level access and above can exploit this vulnerability by injecting malicious code via the `qcopd-directory` shortcode's `title_font_size` attribute. This allows the attacker to steal or forge authentication certificates, as detected by TTP T1649. To remediate, update the plugin to version 8.9.3 or later, and ensure that the `title_font_size` attribute is properly sanitized and escaped in the plugin's code. Additionally, consider implementing a Web Application Firewall (WAF) to detect and prevent similar attacks in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1649| B[Steal or Forge Authentication Certificates]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.4,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2026-6378: The Maxi Blocks plugin for WordPress is vulnerable to Stored Cross-Site Scriptin...",
@@ -416,7 +492,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.4,
-      "published": "2026-05-11T21:58:00.421016+00:00",
+      "published": "2026-05-11T22:51:58.200089+00:00",
       "ttps": [
         {
           "id": "T1649",
@@ -425,12 +501,7 @@
           "tactic_id": "TA0006"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-6378 is a Stored Cross-Site Scripting (XSS) vulnerability in the Maxi Blocks plugin for WordPress, affecting versions up to 2.1.9. An authenticated attacker with Author-level access and above can inject arbitrary web scripts via the `/wp-json/maxi-blocks/v1.0/style-card` REST API endpoint due to insufficient input sanitization and output escaping of the `sc_styles` parameter. This vulnerability allows attackers to steal or forge authentication certificates, as detected by TTP T1649. To remediate, update the Maxi Blocks plugin to version 2.2.0 or later, and ensure that the `sc_styles` parameter is properly sanitized and escaped. Additionally, consider implementing additional security measures, such as input validation and output encoding, to prevent similar vulnerabilities in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1649| B[Steal or Forge Authentication Certificates]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.4,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2026-7601: A vulnerability has been found in Open5GS up to 2.7.6. Affected is an unknown fu...",
@@ -441,7 +512,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 4.3,
-      "published": "2026-05-11T21:58:00.421000+00:00",
+      "published": "2026-05-11T22:51:58.200074+00:00",
       "ttps": [
         {
           "id": "T1498",
@@ -453,12 +524,7 @@
       "epss_score": null,
       "threat_actors": [
         "APT41"
-      ],
-      "ai_summary": "CVE-2026-7601 is a denial-of-service (DoS) vulnerability in Open5GS up to version 2.7.6, specifically affecting an unknown function in the src/amf/gmm-handler.c file. An attacker can exploit this vulnerability remotely by manipulating the reg_type argument, leading to a DoS condition. To mitigate this issue, defenders should upgrade to version 2.7.7, which includes the patch ebc66942b6f8f1fab2d640e71cf4e9f1a423b426. This patch is the exact remediation step required to address the vulnerability. The CVSS score of 4.3 indicates a medium severity, but defenders should still prioritize this update to prevent potential disruptions.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1498| B[Network Denial of Service]:::tactic\n    B -->|T1210| C[Exploitation of Remote Services]:::tactic\n    C -->|T1068| D[Disruption of Service]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 4.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      ]
     },
     {
       "title": "CVE-2026-43824: In Argo CD 3.2.0 before 3.2.11 and 3.3.0 before 3.3.9, ServerSideDiff allows rea...",
@@ -469,7 +535,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 7.7,
-      "published": "2026-05-11T21:58:00.420983+00:00",
+      "published": "2026-05-11T22:51:58.200055+00:00",
       "ttps": [
         {
           "id": "T1552.007",
@@ -489,7 +555,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 6.3,
-      "published": "2026-05-11T21:58:00.420967+00:00",
+      "published": "2026-05-11T22:51:58.200016+00:00",
       "ttps": [],
       "epss_score": null,
       "threat_actors": [
@@ -497,60 +563,59 @@
       ]
     },
     {
-      "title": "CVE-2026-7599: A vulnerability was detected in Dayoooun hwpx-mcp 0.2.0. This affects the functi...",
-      "description": "A vulnerability was detected in Dayoooun hwpx-mcp 0.2.0. This affects the function save_document/export_to_text/export_to_html of the file mcp-server/src/index.ts of the component MCP Interface. Performing a manipulation of the argument output_path results in path traversal. Remote exploitation of the attack is possible. The exploit is now public and may be used. The project was informed of the pr",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7599",
-      "cve_id": "CVE-2026-7599",
-      "source": "NVD",
-      "category": "cve",
+      "title": "GM agrees to $12.75M California settlement over sale of drivers’ data",
+      "description": "California Attorney General Rob Bonta announced a proposed $12.75 million settlement agreement with General Motors (GM) over allegations that the company violated the California Consumer Privacy Act (CCPA). [...]",
+      "url": "https://www.bleepingcomputer.com/news/legal/gm-agrees-to-1275m-california-settlement-over-sale-of-drivers-data/",
+      "cve_id": null,
+      "source": "Bleeping Computer",
+      "category": "news",
       "severity": "medium",
-      "cvss_score": 6.3,
-      "published": "2026-05-11T21:58:00.420949+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
+      "cvss_score": null,
+      "published": "2026-05-11T22:40:34+00:00",
+      "ttps": []
     },
     {
-      "title": "CVE-2026-7598: A security vulnerability has been detected in libssh2 up to 1.11.1. The impacted...",
-      "description": "A security vulnerability has been detected in libssh2 up to 1.11.1. The impacted element is the function userauth_password of the file src/userauth.c. Such manipulation of the argument username_len/password_len leads to integer overflow. The attack may be launched remotely. The name of the patch is 256d04b60d80bf1190e96b0ad1e91b2174d744b1. A patch should be applied to remediate this issue.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7598",
-      "cve_id": "CVE-2026-7598",
-      "source": "NVD",
+      "title": "Apple Patches Everything, (Mon, May 11th)",
+      "description": "Apple today released its typical feature update across it&&#x23&#x3b;x26&#x3b;&#x23&#x3b;39&#x3b;s operating systems (iOS, iPadOS, macOS, tvOS, watchOS, vision OS). With this update, Apple patched 84 different vulnerabilities. Updates are available for the \"26\" series of operating systems, as well as for the previous \"18\" version of iOS/iPadOS, and two versions back for macOS (version 14 and 15).&#xd;",
+      "url": "https://isc.sans.edu/diary/rss/32976",
+      "cve_id": null,
+      "source": "SANS ISC",
       "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.3,
-      "published": "2026-05-11T21:58:00.420927+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
+      "severity": "low",
+      "cvss_score": null,
+      "published": "2026-05-11T22:19:13+00:00",
+      "ttps": []
+    },
+    {
+      "title": "Official CheckMarx Jenkins package compromised with infostealer",
+      "description": "Checkmarx warned over the weekend that a rogue version of its Jenkins Application Security Testing (AST) plugin had been published on the Jenkins Marketplace. [...]",
+      "url": "https://www.bleepingcomputer.com/news/security/official-checkmarx-jenkins-package-compromised-with-infostealer/",
+      "cve_id": null,
+      "source": "Bleeping Computer",
+      "category": "incident",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-05-11T22:03:06+00:00",
+      "ttps": []
+    },
+    {
+      "title": "New GhostLock tool abuses Windows API to block file access",
+      "description": "A security researcher has released a proof-of-concept tool named GhostLock that demonstrates how a legitimate Windows file API can be abused in attacks to block access to files stored locally or on SMB network shares. [...]",
+      "url": "https://www.bleepingcomputer.com/news/security/new-ghostlock-tool-abuses-windows-api-to-block-file-access/",
+      "cve_id": null,
+      "source": "Bleeping Computer",
+      "category": "incident",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-05-11T22:02:00+00:00",
+      "ttps": [
+        {
+          "id": "T1135",
+          "name": "Network Share Discovery",
+          "tactic": "Discovery",
+          "tactic_id": "TA0007"
+        }
       ]
-    },
-    {
-      "title": "CVE-2026-7597: A vulnerability was found in mem0ai mem0 up to 1.0.11. This affects the function...",
-      "description": "A vulnerability was found in mem0ai mem0 up to 1.0.11. This affects the function pickle.load/pickle.dump of the file mem0/vector_stores/faiss.py. Performing a manipulation results in deserialization. It is possible to initiate the attack remotely. The exploit has been made public and could be used. The patch is named 62dca096f9236010ca15fea9ba369ba740b86b7a. Applying a patch is the recommended act",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7597",
-      "cve_id": "CVE-2026-7597",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.3,
-      "published": "2026-05-11T21:58:00.420880+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
     },
     {
       "title": "FCC Softens Ban on Foreign-Made Routers",
@@ -1169,37 +1234,6 @@
       "epss_score": null
     },
     {
-      "title": "JDownloader site hacked to replace installers with Python RAT malware",
-      "description": "The website for the popular JDownloader download manager was compromised earlier this week to distribute malicious Windows and Linux installers, with the Windows payload found deploying a Python-based remote access trojan. [...]",
-      "url": "https://www.bleepingcomputer.com/news/security/jdownloader-site-hacked-to-replace-installers-with-python-rat-malware/",
-      "cve_id": null,
-      "source": "Bleeping Computer",
-      "category": "incident",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-05-09T19:27:58+00:00",
-      "ttps": [
-        {
-          "id": "T1219",
-          "name": "Remote Access Software",
-          "tactic": "Command & Control",
-          "tactic_id": "TA0011"
-        }
-      ]
-    },
-    {
-      "title": "Fake OpenAI repository on Hugging Face pushes infostealer malware",
-      "description": "A malicious Hugging Face repository that reached the platform's trending list impersonated OpenAI's \"Privacy Filter\" project to deliver information-stealing malware to Windows users. [...]",
-      "url": "https://www.bleepingcomputer.com/news/security/fake-openai-repository-on-hugging-face-pushes-infostealer-malware/",
-      "cve_id": null,
-      "source": "Bleeping Computer",
-      "category": "news",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-05-09T14:26:03+00:00",
-      "ttps": []
-    },
-    {
       "title": "cPanel, WHM Release Fixes for Three New Vulnerabilities — Patch Now",
       "description": "cPanel has released updates to address three vulnerabilities in cPanel and Web Host Manager (WHM) that could be exploited to achieve privilege escalation, code execution, and denial-of-service. The list of vulnerabilities is as follows - CVE-2026-29201 (CVSS score: 4.3) - An insufficient input validation of the feature file name in the \"feature::LOADFEATUREFILE\" adminbin call that could result",
       "url": "https://thehackernews.com/2026/05/cpanel-whm-patch-3-new-vulnerabilities.html",
@@ -1272,25 +1306,6 @@
       "cvss_score": null,
       "published": "2026-05-08T18:12:00+00:00",
       "ttps": []
-    },
-    {
-      "title": "NVIDIA confirms GeForce NOW data breach affecting Armenian users",
-      "description": "NVIDIA has confirmed in a statement for BleepingComputer that GeForce NOW user information has been exposed in a data breach. [...]",
-      "url": "https://www.bleepingcomputer.com/news/security/nvidia-confirms-geforce-now-data-breach-affecting-armenian-users/",
-      "cve_id": null,
-      "source": "Bleeping Computer",
-      "category": "incident",
-      "severity": "critical",
-      "cvss_score": null,
-      "published": "2026-05-08T16:18:31+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ]
     },
     {
       "title": "Fake Call History Apps Stole Payments From Users After 7.3 Million Play Store Downloads",
@@ -1479,25 +1494,6 @@
       "cvss_score": null,
       "published": "2026-05-05T12:00:00+00:00",
       "ttps": []
-    },
-    {
-      "title": "SSL.com rotates their root certificate today, (Tue, May 5th)",
-      "description": "I just got an email from SSL.com last night, they are rotating &&#x23&#x3b;x26&#x3b;&#x23&#x3b;xc2&#x3b;&&#x23&#x3b;x26&#x3b;&#x23&#x3b;xa0&#x3b;out their root certificate today (May 5,2026). &&#x23&#x3b;x26&#x3b;&#x23&#x3b;xc2&#x3b;&&#x23&#x3b;x26&#x3b;&#x23&#x3b;xa0&#x3b;This is normal, business as usual stuff for a CA, but certificates get used for all kinds of things, and sometimes they aren&&#x23&#x3b;x26&#x3b;&#x23&#x3b;39&#x3b;t used like they should be, so sometimes hiccups happen.&#xd;",
-      "url": "https://isc.sans.edu/diary/rss/32956",
-      "cve_id": null,
-      "source": "SANS ISC",
-      "category": "news",
-      "severity": "low",
-      "cvss_score": null,
-      "published": "2026-05-05T11:39:45+00:00",
-      "ttps": [
-        {
-          "id": "T1071",
-          "name": "Application Layer Protocol",
-          "tactic": "Command & Control",
-          "tactic_id": "TA0011"
-        }
-      ]
     },
     {
       "title": "CISA, US and International Partners Release Guide to Secure Adoption of Agentic AI",
