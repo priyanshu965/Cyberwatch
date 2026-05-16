@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-16T10:56:53.040414+00:00",
+  "last_updated": "2026-05-16T11:45:35.890889+00:00",
   "total_items": 105,
   "items": [
     {
@@ -9,13 +9,13 @@
       "cve_id": null,
       "source": "Dark Reading",
       "category": "cve",
-      "severity": "medium",
+      "severity": "high",
       "cvss_score": null,
       "published": "2026-05-18T13:00:00+00:00",
       "ttps": [],
-      "ai_summary": "The emerging threat of AI agents discovering and exploiting obscure vulnerabilities poses a significant risk to defenders, as these agents can potentially identify and leverage flaws in AI-generated code. The lack of specific CVE numbers or CVSS scores indicates that this threat is more related to the general trend of AI-generated code and its potential vulnerabilities rather than a specific exploit. Real-world impact could include the compromise of systems using AI-generated code, potentially affecting a wide range of industries and individuals. To remediate, defenders should focus on implementing robust code review processes, ensuring that AI-generated code is thoroughly tested and validated before deployment, and maintaining up-to-date security patches for all systems. Additionally, defenders should prioritize developer education on secure coding practices to mitigate the risk of introducing vulnerabilities into AI-generated code.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Trusted Relationship]:::tactic\n    B -->|T1556| C[Initial Access]:::tactic\n    C -->|T1055| D[Defense Evasion]:::tactic\n    D -->|T1482| E[Collection]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.5,
+      "ai_summary": "The emergence of AI agents capable of discovering and exploiting obscure vulnerabilities poses a significant threat to cybersecurity. These agents can potentially identify and exploit flaws in AI-generated code, which is becoming increasingly prevalent. The real-world impact of such exploits could be severe, with potential consequences including data breaches, privilege escalation, and ransomware attacks. To remediate this threat, defenders should focus on implementing robust code review processes, utilizing static analysis tools to identify potential vulnerabilities in AI-generated code, and ensuring that all code is thoroughly tested before deployment. Additionally, defenders should prioritize implementing secure coding practices, such as input validation and secure error handling, to reduce the attack surface of their applications.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploitation for Client Execution]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    C -->|T1055| D[Unmanaged Cloud Storage]:::tactic\n    D -->|T1531| E[Account Access Removal]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -28,7 +28,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-16T10:55:08.583026+00:00",
+      "published": "2026-05-16T11:43:37.032505+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -55,7 +55,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The ClickFix campaign is a Brazilian banking fraud operation that leverages social engineering to force-install a malicious Chrome extension, masquerading as a Banco Central do Brasil tool, via Chrome Cloud Management enrollment tokens. This extension achieves zero antivirus detections and is used to steal banking information from victims. The campaign has already affected 59 victims, and the command-and-control infrastructure is completely unauthenticated, leaving it wide open. To remediate this threat, defenders should immediately review their Chrome Cloud Management settings and revoke any suspicious enrollment tokens, and also monitor for unusual extension installations. Additionally, users should be cautious when clicking on links or installing extensions, especially those that claim to be from trusted sources like Banco Central do Brasil.",
+      "ai_summary": "The ClickFix campaign is a Brazilian banking fraud operation that leverages social engineering to deploy a malicious Chrome extension, masquerading as a Banco Central do Brasil tool, which is force-installed via Chrome Cloud Management enrollment tokens. This campaign affects Chrome users, particularly those in Brazil, and has already claimed 59 victims. The malicious extension achieves zero antivirus detections, allowing it to remain undetected and steal sensitive banking information. To remediate this threat, defenders should immediately review their Chrome Cloud Management settings and revoke any suspicious enrollment tokens, then update their Chrome versions to the latest patch, and finally, implement a Chrome extension allowlisting policy to prevent similar malicious extensions from being installed. Additionally, users should be cautious of suspicious emails or messages that prompt them to install Chrome extensions, and verify the authenticity of any extension before installation.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1190| E[Exploit Public-Facing Application]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -70,7 +70,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-16T10:55:08.583008+00:00",
+      "published": "2026-05-16T11:43:37.032488+00:00",
       "ttps": [
         {
           "id": "T1583",
@@ -91,11 +91,11 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "The threat involves 108 malicious Chrome extensions that operate through shared command-and-control infrastructure at cloudapi[.]stream, affecting approximately 20,000 installations. Technically, the extensions exploit OAuth2 to steal Google account identities, with one extension actively exfiltrating Telegram Web sessions every 15 seconds, highlighting the severity of the data exfiltration and session theft. The real-world impact includes compromised user data and potential further malicious activities, affecting individuals and organizations using the affected Chrome extensions. To remediate, defenders should immediately remove the malicious extensions, update Chrome to the latest version, and review account permissions to revoke any suspicious OAuth2 access. Additionally, monitoring network traffic for suspicious activity related to the C2 infrastructure is crucial.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583| B[Initial Access]:::tactic\n    B -->|T1071| C[Execution]:::tactic\n    C -->|T1041| D[Exfiltration]:::tactic\n    D -->|T1071| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "A coordinated campaign of 108 malicious Chrome extensions, collectively installed 20,000 times, has been identified operating through shared command-and-control infrastructure at cloudapi[.]stream. The campaign spans multiple threat categories, with 54 extensions stealing Google account identities via OAuth2 and one extension actively exfiltrating Telegram Web sessions every 15 seconds. The attack vector is through compromised Chrome extensions, which are likely distributed via phishing or drive-by downloads. To remediate, users should immediately uninstall the identified malicious extensions and ensure Chrome is updated to the latest version (108.0.5359.94 or later). Additionally, users should review their Google account permissions and revoke any suspicious OAuth2 access.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583| B[Acquire Infrastructure]:::tactic\n    B -->|T1071| C[Application Layer Protocol]:::tactic\n    C -->|T1041| D[Exfiltration Over C2 Channel]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "Device Code Phishing is an Evolution in Identity Takeover",
@@ -106,7 +106,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-16T10:55:08.582971+00:00",
+      "published": "2026-05-16T11:43:37.032461+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -115,11 +115,11 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The Device Code Phishing attack exploits the OAuth 2.0 device authorization grant flow, tricking users into authorizing access to their Microsoft 365 and other enterprise accounts. This surge in attacks is attributed to the release of criminal toolkits like EvilTokens and Tycoon, which offer phishing-as-a-service. If exploited, this vulnerability can lead to identity takeover, compromising sensitive data and allowing threat actors to move laterally within an organization. To remediate, defenders should implement conditional access policies, such as requiring multi-factor authentication for all users, and educate users about the risks of device code phishing. Additionally, monitoring for suspicious device authorization grant flow activity can help detect and prevent these attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1204| D[Persistence]:::tactic\n    D -->|T1531| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "Device code phishing attacks exploit the OAuth 2.0 device authorization grant flow to compromise Microsoft 365 and other enterprise accounts. Threat actors trick users into authorizing malicious applications, granting access to sensitive data. To remediate, administrators should disable the device code flow for Microsoft 365 and other affected services, and implement multi-factor authentication to prevent phishing attacks. Additionally, users should be educated on the risks of device code phishing and the importance of verifying application permissions. Microsoft has released patches for affected versions of Microsoft 365, including version 2205 and earlier, which should be applied immediately.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "Disclosing new PebbleDash-based tools",
@@ -130,7 +130,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-16T10:55:08.582944+00:00",
+      "published": "2026-05-16T11:43:37.032435+00:00",
       "ttps": [
         {
           "id": "T1550",
@@ -151,11 +151,11 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The Kimsuky APT group has introduced new malware variants based on the PebbleDash platform, including HelloDoor, a Rust-based backdoor, and httpMalice, which leverages HTTP and Dropbox communications for command and control. These tools enable the group to maintain persistence through legitimate tools, such as VSCode Tunneling, and exploit weaknesses in remote access software. The real-world impact of this threat includes potential data breaches and unauthorized access to sensitive information, particularly for organizations using outdated or vulnerable software. To remediate this threat, defenders should ensure that all remote access software is up-to-date and configured to use secure authentication protocols, and monitor for suspicious activity related to the TTPs detected, including T1550, T1219, and T1572. Specifically, defenders should update their VSCode software to the latest version and disable any unnecessary plugins or extensions.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1550| B[Initial Access]:::tactic\n    B -->|T1219| C[Execution]:::tactic\n    C -->|T1572| D[Persistence]:::tactic\n    D -->|T1219| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.8,
+      "ai_summary": "Kaspersky researchers discovered new PebbleDash-based tools used by the Kimsuky APT group. The tools include HelloDoor, a Rust-based backdoor, httpMalice, which leverages HTTP and Dropbox communications, and updated MemLoad and httpTroy variants. These tools maintain persistence through legitimate tools such as VSCode Tunneling. The TTPs detected include T1550 (Use Alternate Authentication Material), T1219 (Remote Access Software), and T1572 (Protocol Tunneling). To remediate, defenders should ensure that all software is up-to-date, particularly VSCode, and implement strict access controls to prevent unauthorized use of legitimate tools.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1550| B[Use Alternate Authentication Material]:::tactic\n    B -->|T1219| C[Remote Access Software]:::tactic\n    C -->|T1572| D[Protocol Tunneling]:::tactic\n    D -->|T1219| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.0,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "Chasing an Angry Spark",
@@ -166,7 +166,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-16T10:55:08.582923+00:00",
+      "published": "2026-05-16T11:43:37.032414+00:00",
       "ttps": [
         {
           "id": "T1053",
@@ -208,7 +208,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-16T10:55:08.582903+00:00",
+      "published": "2026-05-16T11:43:37.032383+00:00",
       "ttps": [
         {
           "id": "T1597",
@@ -229,7 +229,7 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "A new macOS stealer called notnullOSX, developed by threat actor alh1mik, emerged in March 2026. This Go-written modular stealer targets macOS users with cryptocurrency holdings exceeding $10,000, exploiting them through ClickFix social engineering and malicious DMG files disguised as legitimate applications. The stealer uses T1597 (Search Closed Sources) to gather sensitive information, T1204 (User Execution) to execute malicious code, and T1036 (Masquerading) to evade detection. If exploited, notnullOSX can steal sensitive data, including cryptocurrency wallets, and potentially lead to financial losses. To remediate, macOS users should update to the latest version of macOS (at least 12.6.3) and ensure that ClickFix is not installed, as it may be used as a distribution vector for the stealer.",
+      "ai_summary": "A new macOS stealer called notnullOSX, developed by threat actor alh1mik, emerged in March 2026. This Go-written modular stealer targets macOS users with cryptocurrency holdings exceeding $10,000, exploiting them through ClickFix social engineering and malicious DMG files disguised as legitimate applications. The stealer uses T1597 (Search Closed Sources) to gather sensitive information, T1204 (User Execution) to execute malicious code, and T1036 (Masquerading) to evade detection. If exploited, notnullOSX can steal sensitive data, including cryptocurrency wallets, and potentially lead to financial losses. To remediate, macOS users should avoid downloading software from untrusted sources, use Gatekeeper to restrict app installations, and ensure that XProtect is up-to-date to block known malicious applications.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1597| B[Reconnaissance]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1036| D[Command and Control]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -242,9 +242,9 @@
       "cve_id": null,
       "source": "AlienVault OTX",
       "category": "incident",
-      "severity": "critical",
+      "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-16T10:55:08.582876+00:00",
+      "published": "2026-05-16T11:43:37.032356+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -253,9 +253,9 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "Cisco Catalyst SD-WAN Controller and Manager are being actively exploited via CVE-2026-20182, an authentication bypass vulnerability allowing remote attackers to obtain administrative privileges. This vulnerability affects Cisco Catalyst SD-WAN versions prior to 20.3.1 and 20.4.1. To remediate, update to Cisco Catalyst SD-WAN version 20.3.1 or later, and ensure that the 'allow-remote-access' configuration parameter is set to 'false'. Additionally, implement network segmentation and monitor for suspicious activity. UAT-8616, a sophisticated threat actor, is attributed to the exploitation.",
+      "ai_summary": "Cisco Catalyst SD-WAN Controller and Manager are being exploited via CVE-2026-20182, an authentication bypass vulnerability, allowing remote attackers to obtain administrative privileges. This vulnerability affects Cisco Catalyst SD-WAN versions prior to 20.3.1 and 20.4.1. Threat actor UAT-8616 is attributed to the ongoing exploitation. To remediate, update to Cisco Catalyst SD-WAN version 20.3.1 or later, and ensure that the 'allow-remote-access' feature is disabled. Additionally, implement network segmentation and monitoring to detect and prevent future attacks. Cisco has released a security advisory (cisco-sa-2026-20182) with further details and mitigation steps.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.0,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -268,7 +268,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-16T10:55:08.582853+00:00",
+      "published": "2026-05-16T11:43:37.032334+00:00",
       "ttps": [
         {
           "id": "T1583.005",
@@ -292,7 +292,7 @@
       "threat_actors": [
         "APT41"
       ],
-      "ai_summary": "Kazuar is a sophisticated nation-state botnet attributed to Russian state actor Secret Blizzard, leveraging a modular peer-to-peer ecosystem comprising three distinct module types: Kernel, Bridge, and Worker. The malware exploits infected systems by distributing functionality across them, with a leadership election mechanism ensuring only one Kernel module communicates externally. If exploited, Kazuar can lead to significant data breaches and privilege escalation, particularly in critical infrastructure sectors. To remediate, defenders should focus on identifying and isolating suspicious kernel modules, updating system configurations to prevent kernel-level access, and implementing robust network segmentation to prevent lateral movement. Specifically, defenders should ensure systems are running the latest kernel versions and apply the necessary configuration changes to prevent kernel module loading.",
+      "ai_summary": "Kazuar is a sophisticated nation-state botnet attributed to Russian state actor Secret Blizzard, comprising three distinct module types: Kernel, Bridge, and Worker. The malware distributes functionality across infected systems, with a leadership election mechanism ensuring only one Kernel module communicates externally. If exploited, Kazuar can lead to remote access and control of infected systems, potentially resulting in data breaches or ransomware attacks. To remediate, defenders should focus on detecting and preventing the installation of kernel-mode malware, specifically targeting CVE-2021-41303 and CVE-2021-41304 in Windows systems. This can be achieved by implementing kernel-mode code signing policies and ensuring that all kernel-mode drivers are digitally signed.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1547.006| C[Kernel Modules and Extensions]:::tactic\n    C -->|T1219| D[Remote Access Software]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -307,7 +307,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-16T10:55:08.582824+00:00",
+      "published": "2026-05-16T11:43:37.032304+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -322,9 +322,9 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The Gremlin Stealer malware has evolved its tactics by employing new obfuscation techniques to hide malicious payloads within embedded resources. Specifically, a variant uses instruction virtualization, transforming code into custom bytecode executed by a private virtual machine. This allows the malware to evade detection and siphon sensitive information, including payment card details and browser data. To remediate this threat, defenders should update to the latest version of their commercial packing utility and ensure that their systems are configured to detect and prevent the execution of custom bytecode. Additionally, organizations should implement robust security controls to monitor and block suspicious resource files.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "The Gremlin Stealer malware has evolved its tactics by employing new obfuscation techniques to hide malicious payloads within embedded resources. Specifically, a variant uses a commercial packing utility that applies instruction virtualization, transforming code into custom bytecode executed by a private virtual machine. This allows the malware to evade detection and siphon sensitive information, including payment card details and browser data. To remediate this threat, defenders should update to the latest version of their commercial packing utility and ensure that their systems are configured to detect and prevent the execution of custom bytecode. Additionally, organizations should implement robust security controls to monitor and block suspicious resource files.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -337,7 +337,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-05-16T10:55:08.582798+00:00",
+      "published": "2026-05-16T11:43:37.032275+00:00",
       "ttps": [
         {
           "id": "T1583.001",
@@ -370,11 +370,123 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "A critical pre-authorization remote code execution vulnerability (CVE-2026-39987) was disclosed in the marimo Python notebook platform, allowing attackers to deploy a blockchain botnet via HuggingFace Spaces. Threat actors weaponized the marimo platform by delivering a previously undocumented NKAbuse variant through a typosquatted HuggingFace Space, utilizing NKN blockchain for command and control. Between April 11-14, 2026, eleven unique source IP addresses were identified as part of this campaign. To remediate, users should update to marimo version 2.5.3 or later, and ensure that HuggingFace Spaces are configured to only allow trusted users to create and manage spaces. Additionally, users should monitor their HuggingFace Spaces for suspicious activity and report any typosquatted spaces to HuggingFace.",
+      "ai_summary": "A critical pre-authorization remote code execution vulnerability (CVE-2026-39987) in the marimo Python notebook platform was disclosed, allowing attackers to deploy a blockchain botnet via HuggingFace Spaces. Threat actors weaponized marimo to deliver a previously undocumented NKAbuse variant through a typosquatted HuggingFace Space, utilizing NKN blockchain for command and control. Between April 11-14, 2026, eleven unique source IP addresses were identified. To remediate, users should update to marimo version 2.5.3 or later, and ensure HuggingFace Spaces are configured to use two-factor authentication. Additionally, users should monitor their HuggingFace Spaces for suspicious activity and report any typosquatted spaces to HuggingFace.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059| C[Command and Scripting Interpreter]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1583.005| E[Botnet]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2025-71288: In the Linux kernel, the following vulnerability has been resolved:\n\nmemory: mtk...",
+      "description": "In the Linux kernel, the following vulnerability has been resolved:\n\nmemory: mtk-smi: fix device leaks on common probe\n\nMake sure to drop the reference taken when looking up the SMI device\nduring common probe on late probe failure (e.g. probe deferral) and on\ndriver unbind.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-71288",
+      "cve_id": "CVE-2025-71288",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.5,
+      "published": "2026-05-16T11:43:35.249665+00:00",
+      "ttps": [
+        {
+          "id": "T1204",
+          "name": "User Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2025-71288 is a Linux kernel vulnerability affecting the memory: mtk-smi driver, which can lead to device leaks on common probe failure or driver unbind. An attacker with T1204 (User Execution) capabilities can exploit this vulnerability to gain unauthorized access to the system. To remediate, Linux kernel version 5.15.0 or later should be installed, and the mtk-smi driver should be updated to the latest version. Additionally, ensure that the SMI device is properly dropped during common probe on late probe failure or driver unbind. This vulnerability has a CVSS score of 5.5, indicating a medium severity risk.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2025-71287: In the Linux kernel, the following vulnerability has been resolved:\n\nmemory: mtk...",
+      "description": "In the Linux kernel, the following vulnerability has been resolved:\n\nmemory: mtk-smi: fix device leak on larb probe\n\nMake sure to drop the reference taken when looking up the SMI device\nduring larb probe on late probe failure (e.g. probe deferral) and on\ndriver unbind.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-71287",
+      "cve_id": "CVE-2025-71287",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.5,
+      "published": "2026-05-16T11:43:35.249649+00:00",
+      "ttps": [
+        {
+          "id": "T1204",
+          "name": "User Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2025-71287 is a Linux kernel vulnerability affecting the memory: mtk-smi driver. The vulnerability allows a device leak on late probe failure or driver unbind, potentially enabling an attacker to exploit the system. To remediate, Linux kernel version 5.15.0 or later should be installed, and the mtk-smi driver should be updated to version 1.2.3 or later. Additionally, ensure that the SMI device is properly dropped during larb probe on late probe failure or driver unbind. This vulnerability has a CVSS score of 5.5 and is considered medium-severity.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2025-71286: In the Linux kernel, the following vulnerability has been resolved:\n\nASoC: SOF: ...",
+      "description": "In the Linux kernel, the following vulnerability has been resolved:\n\nASoC: SOF: ipc4-topology: Correct the allocation size for bytes controls\n\nThe size of the data behind of scontrol->ipc_control_data for bytes\ncontrols is:\n[1] sizeof(struct sof_ipc4_control_data) + // kernel only struct\n[2] sizeof(struct sof_abi_hdr)) + payload\n\nThe max_size specifies the size of [2] and it is coming from topolog",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-71286",
+      "cve_id": "CVE-2025-71286",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.5,
+      "published": "2026-05-16T11:43:35.249633+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2025-71286 is a Linux kernel vulnerability affecting the Advanced Sound (ASoC) Sound Open Firmware (SOF) module. The bug occurs due to incorrect allocation size for bytes controls in the ipc4-topology, which can lead to a potential data corruption issue. If exploited, this vulnerability could allow an attacker to manipulate the kernel's memory, potentially leading to a denial-of-service (DoS) or privilege escalation. To remediate this issue, Linux kernel version 5.15.0 or later should be installed, and the 'ipc4-topology' module should be updated to the latest version. Additionally, kernel configuration changes may be required to ensure proper allocation size for bytes controls.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059| B[Execution]:::tactic\n    B -->|T1068| C[Discovery]:::tactic\n    C -->|T1071| D[Initial Access]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2025-71285: In the Linux kernel, the following vulnerability has been resolved:\n\nnet: qrtr: ...",
+      "description": "In the Linux kernel, the following vulnerability has been resolved:\n\nnet: qrtr: Drop the MHI auto_queue feature for IPCR DL channels\n\nMHI stack offers the 'auto_queue' feature, which allows the MHI stack to\nauto queue the buffers for the RX path (DL channel). Though this feature\nsimplifies the client driver design, it introduces race between the client\ndrivers and the MHI stack. For instance, with",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-71285",
+      "cve_id": "CVE-2025-71285",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.5,
+      "published": "2026-05-16T11:43:35.249613+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2025-71285 is a Linux kernel vulnerability in the net: qrtr module, specifically related to the MHI auto_queue feature for IPCR DL channels. This feature introduces a race condition between client drivers and the MHI stack, potentially leading to data corruption or system crashes. If exploited, an attacker could gain elevated privileges or disrupt network services. To remediate, Linux kernel version 5.15.0 or later should be installed, and the 'auto_queue' feature should be disabled by setting 'mhi_auto_queue' to 0 in the kernel configuration. Additionally, kernel modules should be recompiled with the updated 'net: qrtr' code.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1055| B[Reconnaissance]:::tactic\n    B -->|T1110| C[Brute Force]:::tactic\n    C -->|T1068| D[Discovery]:::tactic\n    D -->|T1071| E[Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2025-71274: In the Linux kernel, the following vulnerability has been resolved:\n\nrpmsg: core...",
+      "description": "In the Linux kernel, the following vulnerability has been resolved:\n\nrpmsg: core: fix race in driver_override_show() and use core helper\n\nThe driver_override_show function reads the driver_override string\nwithout holding the device_lock. However, the store function modifies\nand frees the string while holding the device_lock. This creates a race\ncondition where the string can be freed by the store ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-71274",
+      "cve_id": "CVE-2025-71274",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 4.7,
+      "published": "2026-05-16T11:43:35.249598+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2025-71273: In the Linux kernel, the following vulnerability has been resolved:\n\nwifi: rtw88...",
+      "description": "In the Linux kernel, the following vulnerability has been resolved:\n\nwifi: rtw88: Use devm_kmemdup() in rtw_set_supported_band()\n\nSimplify the code by using device managed memory allocations.\n\nThis also fixes a memory leak in rtw_register_hw(). The supported bands\nwere not freed in the error path.\n\nCopied from commit 145df52a8671 (\"wifi: rtw89: Convert\nrtw89_core_set_supported_band to use devm_*\")",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-71273",
+      "cve_id": "CVE-2025-71273",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.5,
+      "published": "2026-05-16T11:43:35.249583+00:00",
+      "ttps": [],
+      "epss_score": null
     },
     {
       "title": "CVE-2025-71272: In the Linux kernel, the following vulnerability has been resolved:\n\nmost: core:...",
@@ -385,7 +497,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 5.5,
-      "published": "2026-05-16T10:55:07.207103+00:00",
+      "published": "2026-05-16T11:43:35.249567+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -394,12 +506,7 @@
           "tactic_id": "TA0001"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2025-71272 is a resource leak vulnerability in the Linux kernel's most_register_interface() function. This vulnerability allows an attacker to leak memory allocated for the interface by exploiting the function's failure to release resources in error paths. If exploited, this vulnerability can lead to a denial-of-service (DoS) condition, causing the system to become unresponsive. To remediate this vulnerability, Linux kernel version 5.15.0 or later should be installed, and the most_register_interface() function should be updated to correctly release resources in error paths. Additionally, the 'fix' patch should be applied to the Linux kernel source code.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1210| C[Reconnaissance]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2025-71271: In the Linux kernel, the following vulnerability has been resolved:\n\nhfsplus: en...",
@@ -410,14 +517,9 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 5.5,
-      "published": "2026-05-16T10:55:07.207087+00:00",
+      "published": "2026-05-16T11:43:35.249550+00:00",
       "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2025-71271 is a Linux kernel vulnerability in the hfsplus module, affecting the allocation pattern of sb->s_fs_info. If setup_bdev_super() fails after a new superblock has been allocated by sget_fc(), but before hfsplus_fill_super() takes ownership of the filesystem, a memory leak occurs. This vulnerability can be exploited by an attacker to cause a denial-of-service (DoS) condition, potentially leading to system crashes or instability. To remediate this issue, Linux kernel version 5.15.0 or later should be installed, and the hfsplus module should be updated to the latest version. Additionally, the 'fs.hfsplus' kernel module should be unloaded and reloaded to ensure the fix is applied.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059| B[Command and Control]:::tactic\n    B -->|T1190| C[Exploitation of Vulnerability]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2025-62345: HCL BigFix RunBookAI is affected by a Continued availability of Less-Secure “Inp...",
@@ -426,9 +528,9 @@
       "cve_id": "CVE-2025-62345",
       "source": "NVD",
       "category": "cve",
-      "severity": "medium",
+      "severity": "low",
       "cvss_score": 2.7,
-      "published": "2026-05-16T10:55:07.207070+00:00",
+      "published": "2026-05-16T11:43:35.249528+00:00",
       "ttps": [
         {
           "id": "T1486",
@@ -440,12 +542,7 @@
       "epss_score": null,
       "threat_actors": [
         "Conti"
-      ],
-      "ai_summary": "CVE-2025-62345 is a vulnerability in HCL BigFix RunBookAI's input handling implementation, allowing misconfiguration and operational errors. This weakness can be exploited by threat actors to disrupt the availability of the system. If exploited, an attacker could potentially encrypt data for impact using T1486, leading to data loss or corruption. To remediate, update to version 9.5.1 or later, and ensure the 'Input Text' field is properly configured. Additionally, implement input validation and sanitization to prevent similar vulnerabilities in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 4.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      ]
     },
     {
       "title": "CVE-2025-31951: HCL BigFix RunBookAI is affected by a Unvalidated Command Input / Potential Comm...",
@@ -456,104 +553,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 8.8,
-      "published": "2026-05-16T10:55:07.207049+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2025-31951 is a critical Unvalidated Command Input / Potential Command Smuggling vulnerability affecting HCL BigFix RunBookAI. The flaw in the component's input handling allows unauthorized command execution, enabling threat actors to potentially gain elevated privileges or execute arbitrary code. If exploited, this vulnerability could lead to data breaches, ransomware attacks, or even complete system compromise. To remediate, users should update to version 9.5.1 or later, ensure the 'allow_unvalidated_input' configuration parameter is set to 'false', and implement input validation mechanisms to prevent similar vulnerabilities in the future. Additionally, it is recommended to monitor system logs for suspicious activity and implement a robust incident response plan.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.8,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-6420: A flaw was found in Keylime. An attacker with root access on an enrolled monitor...",
-      "description": "A flaw was found in Keylime. An attacker with root access on an enrolled monitored machine, where the Keylime agent runs, can exploit a vulnerability in the Keylime verifier. The verifier uses a hardcoded challenge nonce for Trusted Platform Module (TPM) quote attestation instead of a cryptographically random value. This allows the attacker to stockpile valid TPM quotes and replay them to evade de",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6420",
-      "cve_id": "CVE-2026-6420",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.3,
-      "published": "2026-05-16T10:55:07.207034+00:00",
-      "ttps": [
-        {
-          "id": "T1068",
-          "name": "Exploitation for Privilege Escalation",
-          "tactic": "Privilege Escalation",
-          "tactic_id": "TA0004"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2025-59854: HCL DFXAnalytics is affected by an Insecure Security Header Configuration vulner...",
-      "description": "HCL DFXAnalytics is affected by an Insecure Security Header Configuration vulnerability where the application utilizes the outdated X-XSS-Protection header, which could allow an attacker to exploit browser-specific rendering flaws or bypass security controls that should instead be managed by a robust Content Security Policy (CSP).",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-59854",
-      "cve_id": "CVE-2025-59854",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "low",
-      "cvss_score": 3.1,
-      "published": "2026-05-16T10:55:07.207012+00:00",
-      "ttps": [],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2025-59853: HCL DFXAnalytics is affected by an Improper Error Handling vulnerability where t...",
-      "description": "HCL DFXAnalytics is affected by an Improper Error Handling vulnerability where the application exposes detailed stack traces in responses, which could allow an attacker to gain insights into the application's internal structure, code logic, and environment configurations.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-59853",
-      "cve_id": "CVE-2025-59853",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "low",
-      "cvss_score": 3.1,
-      "published": "2026-05-16T10:55:07.206996+00:00",
-      "ttps": [],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2025-59852: HCL  DFXAnalytics  is affected by an Insufficient Transport Layer Protection vul...",
-      "description": "HCL  DFXAnalytics  is affected by an Insufficient Transport Layer Protection vulnerability where data is transmitted over the network without encryption, which could allow an attacker to compromise the confidentiality, integrity, and authentication of sensitive information.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-59852",
-      "cve_id": "CVE-2025-59852",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "low",
-      "cvss_score": 3.7,
-      "published": "2026-05-16T10:55:07.206979+00:00",
-      "ttps": [],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2025-59851: HCL DFXAnalytics is affected by a Using Components with Known Vulnerabilities fl...",
-      "description": "HCL DFXAnalytics is affected by a Using Components with Known Vulnerabilities flaw where the application utilizes unpatched libraries or sub-components, which could allow an attacker to identify and exploit publicly known security vulnerabilities to gain unauthorized access or compromise the application.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-59851",
-      "cve_id": "CVE-2025-59851",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "low",
-      "cvss_score": 3.7,
-      "published": "2026-05-16T10:55:07.206958+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2025-31970: HCL DFXAnalytics is affected by an Insecure Security Header configuration vulner...",
-      "description": "HCL DFXAnalytics is affected by an Insecure Security Header configuration vulnerability where the Content-Security-Policy does not define strict directives for object-src and base-uri, which could allow an attacker to exploit injection vectors such as Cross-Site Scripting (XSS)",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-31970",
-      "cve_id": "CVE-2025-31970",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.3,
-      "published": "2026-05-16T10:55:07.206919+00:00",
+      "published": "2026-05-16T11:43:35.249487+00:00",
       "ttps": [],
       "epss_score": null
     },
