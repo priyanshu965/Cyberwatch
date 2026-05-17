@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-05-17T17:52:17.559384+00:00",
-  "total_items": 95,
+  "last_updated": "2026-05-17T18:56:14.384008+00:00",
+  "total_items": 105,
   "items": [
     {
       "title": "The Boring Stuff is Dangerous Now",
@@ -13,11 +13,396 @@
       "cvss_score": null,
       "published": "2026-05-18T13:00:00+00:00",
       "ttps": [],
-      "ai_summary": "The emergence of AI agents capable of discovering and exploiting obscure vulnerabilities poses a significant threat to cybersecurity. These agents can potentially identify flaws in AI-generated code, which is becoming increasingly prevalent due to the vast amounts of code being produced by developers. The real-world impact of such exploits could be severe, with potential consequences including data breaches, privilege escalation, and ransomware attacks. To remediate this threat, defenders should focus on implementing robust code review processes, utilizing static analysis tools to identify potential vulnerabilities in AI-generated code, and ensuring that all code is thoroughly tested before deployment. Additionally, defenders should prioritize developer education on secure coding practices to mitigate the risk of introducing vulnerabilities into AI-generated code.",
+      "ai_summary": "The emergence of AI agents capable of discovering and exploiting obscure vulnerabilities poses a significant threat to cybersecurity. These agents can potentially identify flaws in AI-generated code, which is becoming increasingly prevalent due to the rise of automated coding tools. The real-world impact of such exploits could be severe, with potential consequences including data breaches, privilege escalation, and ransomware attacks. To remediate this threat, defenders should focus on implementing robust code review processes, utilizing static analysis tools to identify potential vulnerabilities in AI-generated code, and ensuring that all code is thoroughly tested before deployment. Additionally, defenders should prioritize developer education on secure coding practices, emphasizing the importance of validating user input and implementing proper error handling to prevent exploitation.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Trusted Relationship]:::tactic\n    B -->|T1556| C[Initial Access]:::tactic\n    C -->|T1055| D[Defense Evasion]:::tactic\n    D -->|T1482| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
+    },
+    {
+      "title": "Chasing an Angry Spark",
+      "description": "In spring 2022, a highly sophisticated backdoor named AngrySpark was discovered on a single machine in the United Kingdom. The malware employed a three-stage architecture: a DLL masquerading as a Windows Task Scheduler component, a custom virtual machine interpreter running bytecode instructions, and a beacon that profiles systems while disguising C2 communications as PNG image requests. The malwa",
+      "url": "https://otx.alienvault.com/pulse/69df58b30a6bddb6a202695c",
+      "cve_id": null,
+      "source": "AlienVault OTX",
+      "category": "incident",
+      "severity": "high",
+      "cvss_score": null,
+      "published": "2026-05-17T18:54:19.638829+00:00",
+      "ttps": [
+        {
+          "id": "T1053",
+          "name": "Scheduled Task/Job",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1036",
+          "name": "Masquerading",
+          "tactic": "Defense Evasion",
+          "tactic_id": "TA0005"
+        },
+        {
+          "id": "T1071",
+          "name": "Application Layer Protocol",
+          "tactic": "Command & Control",
+          "tactic_id": "TA0011"
+        },
+        {
+          "id": "T1219",
+          "name": "Remote Access Software",
+          "tactic": "Command & Control",
+          "tactic_id": "TA0011"
+        }
+      ],
+      "ai_summary": "The AngrySpark backdoor, discovered in spring 2022, employs a sophisticated three-stage architecture to evade detection. It starts with a DLL masquerading as a Windows Task Scheduler component, utilizing T1036 (Masquerading) to blend in with legitimate system files. The malware then executes a custom virtual machine interpreter that runs bytecode instructions, potentially allowing for flexible and dynamic payload delivery, and communicates with its command and control server using T1071 (Application Layer Protocol), disguising its communications as PNG image requests. To defend against this threat, defenders should monitor for suspicious scheduled tasks and inspect Windows Task Scheduler components for anomalies, ensuring all systems are up-to-date and implementing robust network traffic inspection to detect and block unusual application layer protocol usage. Specific remediation steps include inspecting system files for unknown or modified DLLs, particularly those related to the Windows Task Scheduler, and configuring network intrusion detection systems to flag PNG requests that do not conform to standard image request patterns.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1053| B[Initial Access]:::tactic\n    B -->|T1036| C[Persistence]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1219| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
+    },
+    {
+      "title": "A new Mac stealer targeting $10K+ crypto wallets",
+      "description": "A sophisticated macOS stealer called notnullOSX emerged in March 2026, developed by threat actor alh1mik (formerly 0xFFF) who returned after a 2023 exit from underground forums. This Go-written modular stealer exclusively targets macOS users with cryptocurrency holdings exceeding $10,000. Distribution occurs through ClickFix social engineering and malicious DMG files disguised as legitimate applic",
+      "url": "https://otx.alienvault.com/pulse/69dfa7d6ed3496f811a87d22",
+      "cve_id": null,
+      "source": "AlienVault OTX",
+      "category": "incident",
+      "severity": "high",
+      "cvss_score": null,
+      "published": "2026-05-17T18:54:19.638810+00:00",
+      "ttps": [
+        {
+          "id": "T1597",
+          "name": "Search Closed Sources",
+          "tactic": "Reconnaissance",
+          "tactic_id": "TA0043"
+        },
+        {
+          "id": "T1204",
+          "name": "User Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1036",
+          "name": "Masquerading",
+          "tactic": "Defense Evasion",
+          "tactic_id": "TA0005"
+        }
+      ],
+      "ai_summary": "A new macOS stealer called notnullOSX, developed by threat actor alh1mik, emerged in March 2026. This Go-written modular stealer targets macOS users with cryptocurrency holdings exceeding $10,000, exploiting them through ClickFix social engineering and malicious DMG files disguised as legitimate applications. The stealer uses T1597 (Search Closed Sources) to gather sensitive information, T1204 (User Execution) to execute malicious code, and T1036 (Masquerading) to evade detection. If exploited, notnullOSX can steal sensitive data, including cryptocurrency wallets, and potentially lead to financial losses. To remediate, macOS users should update to the latest version of macOS and ensure that all software is up-to-date, including ClickFix. Additionally, users should be cautious when opening DMG files and avoid executing code from unknown sources.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1597| B[Reconnaissance]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1036| D[Command and Control]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "Ongoing exploitation of Cisco Catalyst SD-WAN vulnerabilities",
+      "description": "Cisco Talos tracks active exploitation of CVE-2026-20182, an authentication bypass vulnerability in Cisco Catalyst SD-WAN Controller and Manager, allowing remote attackers to obtain administrative privileges. The exploitation is attributed to UAT-8616, a sophisticated threat actor previously involved in similar attacks. Additionally, multiple threat clusters have been exploiting CVE-2026-20133, CV",
+      "url": "https://otx.alienvault.com/pulse/6a062c38dfdb5434bb2f0876",
+      "cve_id": null,
+      "source": "AlienVault OTX",
+      "category": "incident",
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-05-17T18:54:19.638784+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "ai_summary": "The ongoing exploitation of Cisco Catalyst SD-WAN vulnerabilities, specifically CVE-2026-20182, allows remote attackers to bypass authentication and obtain administrative privileges on affected Cisco Catalyst SD-WAN Controller and Manager systems. This vulnerability is being exploited by UAT-8616, a sophisticated threat actor, and multiple other threat clusters are also exploiting CVE-2026-20133. If exploited, this vulnerability can lead to a complete takeover of the SD-WAN infrastructure, allowing attackers to intercept and manipulate sensitive traffic. To remediate this vulnerability, defenders should immediately update their Cisco Catalyst SD-WAN Controller and Manager to the latest version, which includes patches for these vulnerabilities, and ensure that all administrative access is properly authenticated and authorized. Additionally, defenders should monitor their network traffic for suspicious activity and implement additional security controls, such as multi-factor authentication and network segmentation, to prevent lateral movement in case of a breach.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1566| C[Initial Access]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
+    },
+    {
+      "title": "Kazuar: Anatomy of a nation-state botnet",
+      "description": "Kazuar is a sophisticated malware attributed to Russian state actor Secret Blizzard, having evolved from a traditional backdoor into a highly modular peer-to-peer botnet ecosystem. The malware comprises three distinct module types—Kernel, Bridge, and Worker—that distribute functionality across infected systems. A leadership election mechanism ensures only one Kernel module communicates externally,",
+      "url": "https://otx.alienvault.com/pulse/6a062c383bdae760fc221b6f",
+      "cve_id": null,
+      "source": "AlienVault OTX",
+      "category": "incident",
+      "severity": "high",
+      "cvss_score": null,
+      "published": "2026-05-17T18:54:19.638760+00:00",
+      "ttps": [
+        {
+          "id": "T1583.005",
+          "name": "Botnet",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        },
+        {
+          "id": "T1547.006",
+          "name": "Kernel Modules and Extensions",
+          "tactic": "Persistence",
+          "tactic_id": "TA0003"
+        },
+        {
+          "id": "T1219",
+          "name": "Remote Access Software",
+          "tactic": "Command & Control",
+          "tactic_id": "TA0011"
+        }
+      ],
+      "threat_actors": [
+        "APT41"
+      ],
+      "ai_summary": "Kazuar is a sophisticated nation-state malware attributed to Russian state actor Secret Blizzard, comprising three distinct module types: Kernel, Bridge, and Worker. The malware has evolved from a traditional backdoor into a highly modular peer-to-peer botnet ecosystem, with a leadership election mechanism ensuring only one Kernel module communicates externally. If exploited, Kazuar can lead to significant real-world impact, including data breaches, privilege escalation, and potential ransomware attacks. To remediate, defenders should focus on identifying and isolating infected systems, then updating their kernel modules to the latest version (e.g., Windows 10 21H2 or later) and disabling any suspicious remote access software. Additionally, implementing robust network segmentation and monitoring can help detect and prevent future Kazuar infections.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1547.006| C[Kernel Modules and Extensions]:::tactic\n    C -->|T1219| D[Remote Access Software]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "Gremlin Stealer's Evolved Tactics: Hiding in Plain Sight With Resource Files",
+      "description": "This analysis examines new obfuscation techniques employed by Gremlin stealer malware to conceal malicious payloads within embedded resources. A variant protected by sophisticated commercial packing utility uses instruction virtualization, transforming code into custom bytecode executed by a private virtual machine. The malware siphons sensitive information including payment card details, browser ",
+      "url": "https://otx.alienvault.com/pulse/6a073a73501adf1f890b1a5e",
+      "cve_id": null,
+      "source": "AlienVault OTX",
+      "category": "incident",
+      "severity": "high",
+      "cvss_score": null,
+      "published": "2026-05-17T18:54:19.638734+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1027",
+          "name": "Obfuscated Files or Information",
+          "tactic": "Defense Evasion",
+          "tactic_id": "TA0005"
+        }
+      ],
+      "ai_summary": "The Gremlin Stealer malware has evolved its tactics by employing new obfuscation techniques to hide malicious payloads within embedded resources. Specifically, a variant uses a commercial packing utility that applies instruction virtualization, transforming code into custom bytecode executed by a private virtual machine. This allows the malware to evade detection and siphon sensitive information, including payment card details and browser data. To remediate this threat, defenders should update to the latest version of their commercial packing utility and ensure that their systems are configured to detect and prevent the execution of custom bytecode. Additionally, organizations should implement robust security controls to monitor and block suspicious resource files.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-39987 update: How attackers weaponized marimo to deploy a blockchain botnet via HuggingFace",
+      "description": "Three days after disclosure of a critical pre-authorization remote code execution vulnerability in the marimo Python notebook platform, multiple threat actors deployed malware hosted on HuggingFace Spaces. A previously undocumented NKAbuse variant was delivered through a typosquatted HuggingFace Space, utilizing NKN blockchain for command and control. Between April 11-14, 2026, eleven unique sourc",
+      "url": "https://otx.alienvault.com/pulse/69e09f9d80e986921250a6f3",
+      "cve_id": null,
+      "source": "AlienVault OTX",
+      "category": "incident",
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-05-17T18:54:19.638718+00:00",
+      "ttps": [
+        {
+          "id": "T1583.001",
+          "name": "Domains",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        },
+        {
+          "id": "T1583.005",
+          "name": "Botnet",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        },
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1071",
+          "name": "Application Layer Protocol",
+          "tactic": "Command & Control",
+          "tactic_id": "TA0011"
+        }
+      ],
+      "ai_summary": "A critical pre-authorization remote code execution vulnerability (CVE-2026-39987) in the marimo Python notebook platform was disclosed, allowing attackers to deploy a blockchain botnet via HuggingFace Spaces. Threat actors weaponized the marimo platform by delivering a previously undocumented NKAbuse variant through a typosquatted HuggingFace Space, utilizing NKN blockchain for command and control. Between April 11-14, 2026, eleven unique source IP addresses were identified as part of this campaign. To remediate, users should update to marimo version 2.5.3 or later, and ensure that HuggingFace Spaces are configured to only allow trusted users to create and manage Spaces. Additionally, users should monitor their HuggingFace Spaces for suspicious activity and report any typosquatted Spaces to HuggingFace.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059| C[Command and Scripting Interpreter]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1583.005| E[Botnet]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "Dissecting macOS intrusion from lure to compromise",
+      "description": "Microsoft Threat Intelligence uncovered a macOS-focused cyber campaign by North Korean threat actor Sapphire Sleet utilizing social engineering to compromise systems. The attack chain begins with a malicious AppleScript file disguised as a Zoom SDK update, which executes cascading payloads through curl-to-osascript chains. The campaign deploys multiple backdoors including com.apple.cli, services, ",
+      "url": "https://otx.alienvault.com/pulse/69e1f157d8f8bb7547f8c23f",
+      "cve_id": null,
+      "source": "AlienVault OTX",
+      "category": "incident",
+      "severity": "high",
+      "cvss_score": null,
+      "published": "2026-05-17T18:54:19.638689+00:00",
+      "ttps": [
+        {
+          "id": "T1059.002",
+          "name": "AppleScript",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1204",
+          "name": "User Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1036",
+          "name": "Masquerading",
+          "tactic": "Defense Evasion",
+          "tactic_id": "TA0005"
+        },
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        },
+        {
+          "id": "T1219",
+          "name": "Remote Access Software",
+          "tactic": "Command & Control",
+          "tactic_id": "TA0011"
+        }
+      ],
+      "threat_actors": [
+        "MSTIC"
+      ],
+      "ai_summary": "A North Korean threat actor, Sapphire Sleet, is using social engineering to compromise macOS systems. The attack begins with a malicious AppleScript file disguised as a Zoom SDK update, which executes cascading payloads through curl-to-osascript chains. This allows the attackers to deploy multiple backdoors, including com.apple.cli and services. To remediate, users should be cautious of unsolicited software updates and verify the authenticity of such updates. Specifically, users should ensure that their macOS systems are running the latest version of AppleScript and that any suspicious scripts are removed. Additionally, users should configure their systems to only allow trusted scripts to run.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1059.002| C[Execution]:::tactic\n    C -->|T1036| D[Masquerading]:::tactic\n    D -->|T1649| E[Steal or Forge Authentication Certificates]:::tactic\n    E -->|T1219| F[Remote Access Software]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "Untangling a Linux Incident With an OpenAI Twist",
+      "description": "A technology sector organization experienced a multi-actor compromise on a Linux endpoint where cryptominers were deployed and credential harvesting occurred. The incident became complex when the legitimate user attempted to troubleshoot suspected malicious activity using OpenAI's Codex AI agent while threat actors remained active on the system. The EDR agent was installed mid-compromise, limiting",
+      "url": "https://otx.alienvault.com/pulse/69e2417e5e4fdd5f16c75dbe",
+      "cve_id": null,
+      "source": "AlienVault OTX",
+      "category": "incident",
+      "severity": "high",
+      "cvss_score": null,
+      "published": "2026-05-17T18:54:19.638665+00:00",
+      "ttps": [
+        {
+          "id": "T1586.002",
+          "name": "Email Accounts",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        }
+      ],
+      "ai_summary": "The Linux incident involved a multi-actor compromise where threat actors deployed cryptominers and harvested credentials. The legitimate user attempted to troubleshoot the issue using OpenAI's Codex AI agent, but the EDR agent was installed mid-compromise, limiting its effectiveness. The incident highlights the challenges of detecting and responding to complex threats. To remediate, defenders should ensure the Linux endpoint is updated to the latest version, specifically Linux kernel 5.15.0-46-generic or later, and configure the EDR agent to monitor for suspicious activity. Additionally, users should be educated on the risks of using AI-powered tools in potentially compromised environments.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1586.002| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "Live off the Land? How About Bringing Your Own Island? An Overview of UNC1945",
+      "description": "UNC1945 compromised managed service providers to target organizations within financial and professional consulting industries through third-party network access. The actor demonstrated advanced capabilities across Oracle Solaris, Windows, and Linux systems, utilizing custom virtual machines pre-loaded with post-exploitation tools. Operations included exploiting CVE-2020-14871, a zero-day vulnerabi",
+      "url": "https://otx.alienvault.com/pulse/69e27cdab246855ebe2a067d",
+      "cve_id": null,
+      "source": "AlienVault OTX",
+      "category": "incident",
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-05-17T18:54:19.638636+00:00",
+      "ttps": [
+        {
+          "id": "T1199",
+          "name": "Trusted Relationship",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "ai_summary": "UNC1945, a sophisticated threat actor, compromised managed service providers to target organizations in the financial and professional consulting industries. The actor leveraged custom virtual machines pre-loaded with post-exploitation tools to exploit CVE-2020-14871, a zero-day vulnerability affecting Oracle Solaris, Windows, and Linux systems. This allowed the actor to gain initial access and execute malicious code, ultimately leading to command and control and impact. To remediate, organizations should ensure that all managed service providers are thoroughly vetted and monitored for suspicious activity. Additionally, all systems should be updated to the latest version of Oracle Solaris, Windows, and Linux, and any custom virtual machines should be thoroughly inspected for post-exploitation tools.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1199| B[Trusted Relationship]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "Tracking Mirai Variant Nexcorium: A Vulnerability-Driven IoT Botnet Campaign",
+      "description": "Nexcorium is a multi-architecture Mirai variant exploiting CVE-2024-3721 in TBK DVR devices to build a botnet for distributed denial-of-service attacks. The campaign, attributed to Nexus Team based on custom HTTP headers, uses OS command injection to deliver malware across ARM, MIPS, and x86-64 architectures. The malware implements multiple persistence mechanisms including init configuration, star",
+      "url": "https://otx.alienvault.com/pulse/69e2824d25c0dbc3e1de156b",
+      "cve_id": null,
+      "source": "AlienVault OTX",
+      "category": "incident",
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-05-17T18:54:19.638611+00:00",
+      "ttps": [
+        {
+          "id": "T1583.005",
+          "name": "Botnet",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        }
+      ],
+      "ai_summary": "The Nexcorium Mirai variant exploits CVE-2024-3721 in TBK DVR devices, affecting ARM, MIPS, and x86-64 architectures. This vulnerability allows for OS command injection, enabling the delivery of malware across multiple architectures. The campaign, attributed to Nexus Team, utilizes a botnet for distributed denial-of-service attacks. To remediate, defenders should update TBK DVR devices to version 3.5.2 or later, and ensure that the 'allow_os_command_injection' configuration option is disabled. Additionally, implementing a network segmentation strategy and monitoring for suspicious traffic can help prevent future attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-44243: GitPython is a python library used to interact with Git repositories. Prior to v...",
+      "description": "GitPython is a python library used to interact with Git repositories. Prior to version 3.1.48, a vulnerability in GitPython allows attackers who can supply a crafted reference path to an application using GitPython to write, overwrite, move, or delete files outside the repository’s .git directory via insufficient validation of reference paths in reference creation, rename, and delete operations. T",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44243",
+      "cve_id": "CVE-2026-44243",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.1,
+      "published": "2026-05-17T18:54:17.085927+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-44243 is a vulnerability in GitPython prior to version 3.1.48, allowing attackers to write, overwrite, move, or delete files outside the repository's .git directory via insufficient validation of reference paths in reference creation, rename, and delete operations. This vulnerability can be exploited by supplying a crafted reference path to an application using GitPython. If exploited, attackers can gain unauthorized access to sensitive files and data, potentially leading to data breaches or ransomware attacks. To remediate this vulnerability, update GitPython to version 3.1.48 or later, and ensure that all applications using GitPython are configured to validate reference paths properly. Additionally, consider implementing additional security measures, such as access controls and file system monitoring, to detect and prevent unauthorized file access.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-42284: GitPython is a python library used to interact with Git repositories. Prior to v...",
+      "description": "GitPython is a python library used to interact with Git repositories. Prior to version 3.1.47, _clone() validates multi_options as the original list, then executes shlex.split(\" \".join(multi_options)). A string like \"--branch main --config core.hooksPath=/x\" passes validation (starts with --branch), but after split becomes [\"--branch\", \"main\", \"--config\", \"core.hooksPath=/x\"]. Git applies the conf",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42284",
+      "cve_id": "CVE-2026-42284",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 8.1,
+      "published": "2026-05-17T18:54:17.085913+00:00",
+      "ttps": [
+        {
+          "id": "T1586.002",
+          "name": "Email Accounts",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-42284 is a vulnerability in GitPython prior to version 3.1.47, allowing an attacker to inject malicious Git configuration by manipulating the multi_options parameter in the _clone() function. This can lead to arbitrary code execution when a user interacts with a malicious Git repository. The vulnerability is exploitable via T1586.002 (Email Accounts) and affects users who have not updated to version 3.1.47 or later. To remediate, update to version 3.1.47 or later, and ensure that the Git configuration is properly sanitized. Users should also be cautious when interacting with untrusted Git repositories.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1586.002| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.1,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "CVE-2026-42215: GitPython is a python library used to interact with Git repositories. From versi...",
@@ -28,14 +413,14 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 8.8,
-      "published": "2026-05-17T17:49:57.889820+00:00",
+      "published": "2026-05-17T18:54:17.085898+00:00",
       "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2026-42215 is a vulnerability in the GitPython library, affecting versions 3.1.30 to 3.1.46, where the library fails to properly block dangerous Git options such as --upload-pack and --receive-pack when equivalent Python kwargs upload_pack and receive_pack are used. This allows an attacker to bypass the default security checks and potentially execute arbitrary code on the system. If exploited, this vulnerability could lead to a remote code execution (RCE) attack, allowing the attacker to gain control of the system and potentially steal sensitive data. To remediate this vulnerability, users should update to GitPython version 3.1.47 or later, and ensure that any applications using the library are properly validated to prevent attacker-controlled kwargs from being passed into Repo.clone_from(), Remote.fetch(), Remote.pull(), or Remote.push() methods.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploitation for Client Execution]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    C -->|T1082| D[System Information Discovery]:::tactic\n    D -->|T1490| E[Resource Hijacking]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.8,
+      "ai_summary": "CVE-2026-42215 is a vulnerability in GitPython, a Python library used to interact with Git repositories, affecting versions 3.1.30 to 3.1.47. An attacker can exploit this vulnerability by passing malicious kwargs to functions like Repo.clone_from(), Remote.fetch(), or Remote.pull(), allowing them to bypass Git's safety checks and execute arbitrary Git commands. This can lead to unauthorized access to sensitive data or code execution. To remediate, update GitPython to version 3.1.48 or later, and ensure that applications using GitPython do not pass untrusted kwargs to these functions. Developers should also review their code to ensure that they are not vulnerable to this issue.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1210| B[Reconnaissance]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "CVE-2026-42214: Notepad Next is a cross-platform, reimplementation of Notepad++. Prior to versio...",
@@ -44,9 +429,9 @@
       "cve_id": "CVE-2026-42214",
       "source": "NVD",
       "category": "cve",
-      "severity": "high",
+      "severity": "critical",
       "cvss_score": 7.8,
-      "published": "2026-05-17T17:49:57.889806+00:00",
+      "published": "2026-05-17T18:54:17.085869+00:00",
       "ttps": [
         {
           "id": "T1586.002",
@@ -56,11 +441,11 @@
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-42214 is a vulnerability in Notepad Next, a cross-platform reimplementation of Notepad++, where the detectLanguageFromExtension() function interpolates a file's extension directly into a Lua script without sanitization, allowing an attacker to craft a filename with a malicious Lua code extension that executes automatically when opened. This vulnerability affects Notepad Next versions prior to 0.14. If exploited, an attacker could potentially gain control over the victim's system, leading to data breaches, ransomware attacks, or other malicious activities. To remediate this vulnerability, users should update to Notepad Next version 0.14 or later, and ensure that all dependencies are up-to-date. Additionally, users should be cautious when opening files from untrusted sources, and consider implementing a Lua script sanitization mechanism to prevent similar attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1586.002| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "ai_summary": "CVE-2026-42214 is a critical vulnerability in Notepad Next prior to version 0.14, allowing an attacker to execute arbitrary Lua code by crafting a malicious file extension. This occurs due to the detectLanguageFromExtension() function's lack of sanitization, which directly interpolates the file extension into a Lua script. When a victim opens the malicious file in Notepad Next, the Lua code executes automatically, potentially leading to remote code execution (RCE). To remediate this issue, users should update to version 0.14 or later, and ensure that the Lua interpreter is not accessible to untrusted users. Additionally, administrators should consider disabling the Lua interpreter or restricting access to it. This vulnerability affects Notepad Next users who open files from untrusted sources, making it essential to exercise caution when opening files from unknown or unverified sources.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.0,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "CVE-2026-41906: FreeScout is a free help desk and shared inbox built with PHP's Laravel framewor...",
@@ -71,7 +456,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 7.1,
-      "published": "2026-05-17T17:49:57.889790+00:00",
+      "published": "2026-05-17T18:54:17.085854+00:00",
       "ttps": [
         {
           "id": "T1649",
@@ -80,12 +465,7 @@
           "tactic_id": "TA0006"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-41906 is a vulnerability in FreeScout, a free help desk and shared inbox built with PHP's Laravel framework, prior to version 1.8.214. An attacker with low-privileged agent access can exploit this vulnerability by forging a request to bind a visible conversation to a hidden customer, effectively stealing or forging authentication certificates via T1649. This can lead to unauthorized access to customer conversations and potentially sensitive information. To remediate, update to version 1.8.214 or later, and ensure that the backend conversation_change_customer action is properly configured to validate customer_email. Additionally, consider implementing additional authentication and authorization measures to prevent similar attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1649| B[Steal or Forge Authentication Certificates]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2026-41905: FreeScout is a free help desk and shared inbox built with PHP's Laravel framewor...",
@@ -96,7 +476,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 7.7,
-      "published": "2026-05-17T17:49:57.889775+00:00",
+      "published": "2026-05-17T18:54:17.085839+00:00",
       "ttps": [
         {
           "id": "T1649",
@@ -105,12 +485,7 @@
           "tactic_id": "TA0006"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-41905 is a vulnerability in FreeScout, a free help desk and shared inbox built with PHP's Laravel framework, prior to version 1.8.217. The issue arises from Helper::sanitizeRemoteUrl() following HTTP redirects via curlGetLastRedirectedUrl() and then re-validating the original URL instead of the final redirect destination. An attacker can supply any URL that passes the initial host check to redirect FreeScout to internal resources, allowing for potential data exfiltration or unauthorized access. To remediate, update to version 1.8.217 or later, and ensure that the Helper::sanitizeRemoteUrl() function is modified to validate the final redirect destination. This can be achieved by replacing the function with a more secure alternative, such as using the curl_getinfo() function to retrieve the final redirect URL.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1649| B[Steal or Forge Authentication Certificates]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2026-41904: FreeScout is a free help desk and shared inbox built with PHP's Laravel framewor...",
@@ -121,7 +496,7 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 7.6,
-      "published": "2026-05-17T17:49:57.889760+00:00",
+      "published": "2026-05-17T18:54:17.085820+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -136,12 +511,7 @@
           "tactic_id": "TA0006"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-41904 is a stored XSS vulnerability in FreeScout, a free help desk and shared inbox built with PHP's Laravel framework, affecting versions prior to 1.8.217. An attacker with updateAutoReply permission can store an XSS payload in the mailbox auto-reply message, which is then rendered unescaped in auto-reply emails sent to customers, allowing for potential code execution in the customer's webmail. This vulnerability can be exploited by threat actors to steal or forge authentication certificates, as indicated by the detected TTPs T1190 and T1649. To remediate, defenders should update FreeScout to version 1.8.217 or later and restrict updateAutoReply permissions to trusted users. Additionally, implementing a Content Security Policy (CSP) can help mitigate the impact of XSS attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1649| C[Steal or Forge Authentication Certificates]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "epss_score": null
     },
     {
       "title": "CVE-2026-41903: FreeScout is a free help desk and shared inbox built with PHP's Laravel framewor...",
@@ -152,7 +522,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 5.4,
-      "published": "2026-05-17T17:49:57.889744+00:00",
+      "published": "2026-05-17T18:54:17.085804+00:00",
       "ttps": [
         {
           "id": "T1649",
@@ -161,12 +531,7 @@
           "tactic_id": "TA0006"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-41903 is a vulnerability in FreeScout, a free help desk and shared inbox built with PHP's Laravel framework, prior to version 1.8.217. An attacker with the PERM_EDIT_USERS permission can exploit this vulnerability by sending a single POST request to read and modify the notification subscriptions of any other user, including admins. This allows for unauthorized access to sensitive information and potential lateral movement within the network. To remediate this vulnerability, update FreeScout to version 1.8.217 or later, and ensure that users with the PERM_EDIT_USERS permission are properly audited and monitored. Additionally, consider implementing additional security measures, such as two-factor authentication, to prevent unauthorized access.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1649| B[Steal or Forge Authentication Certificates]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.4,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2026-41902: FreeScout is a free help desk and shared inbox built with PHP's Laravel framewor...",
@@ -177,7 +542,7 @@
       "category": "cve",
       "severity": "critical",
       "cvss_score": 9.1,
-      "published": "2026-05-17T17:49:57.889724+00:00",
+      "published": "2026-05-17T18:54:17.085783+00:00",
       "ttps": [
         {
           "id": "T1649",
@@ -186,12 +551,7 @@
           "tactic_id": "TA0006"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-41902 is a critical vulnerability in FreeScout, a free help desk and shared inbox built with PHP's Laravel framework, prior to version 1.8.217. The /user-setup/{hash} endpoint accepts a 60-character random invite_hash to set a new user's password without any expiration check, allowing attackers to set a new user's password indefinitely. This vulnerability can be exploited by attackers to gain unauthorized access to the system, potentially leading to data breaches or ransomware attacks. To remediate this vulnerability, FreeScout users should update to version 1.8.217 or later, and ensure that the /user-setup/{hash} endpoint is properly configured to perform expiration checks on invite hashes. Additionally, users should implement measures to prevent realistic hash-leakage scenarios, such as forwarding invite emails or HTTP referrer leakage.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1649| B[Steal or Forge Authentication Certificates]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2026-41653: BentoPDF is a client-side PDF toolkit that is self hostable. Prior to version 2....",
@@ -202,67 +562,9 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": null,
-      "published": "2026-05-17T17:49:57.889707+00:00",
+      "published": "2026-05-17T18:54:17.085741+00:00",
       "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-41653 is a client-side cross-site scripting (XSS) vulnerability in BentoPDF prior to version 2.8.3. An attacker may exploit this vulnerability by injecting malicious JavaScript code in Markdown to PDF Tool, potentially leading to arbitrary code execution. This issue affects users who utilize self-hosted BentoPDF instances, particularly those who have not updated to version 2.8.3 or later. To remediate this vulnerability, users should update to BentoPDF version 2.8.3 or later, ensuring they apply the latest security patches. Additionally, it is recommended to implement Content Security Policy (CSP) to mitigate potential XSS attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-8081: A vulnerability has been found in router-for-me CLIProxyAPI 6.9.29. Affected by ...",
-      "description": "A vulnerability has been found in router-for-me CLIProxyAPI 6.9.29. Affected by this issue is some unknown functionality of the file internal/api/handlers/management/api_tools.go of the component API Interface. The manipulation of the argument url leads to server-side request forgery. Remote exploitation of the attack is possible. The exploit has been disclosed to the public and may be used. The v",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-8081",
-      "cve_id": "CVE-2026-8081",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.3,
-      "published": "2026-05-17T17:49:57.889685+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ],
-      "ai_summary": "CVE-2026-8081 is a server-side request forgery (SSRF) vulnerability in router-for-me CLIProxyAPI version 6.9.29. An attacker can exploit this vulnerability by manipulating the 'url' argument in the internal/api/handlers/management/api_tools.go file of the API Interface component. This allows for remote exploitation, and the exploit has been publicly disclosed. If exploited, an attacker could potentially gain unauthorized access to sensitive data or systems. To remediate this vulnerability, update to CLIProxyAPI version 6.9.30 or later, and ensure that the 'url' argument is properly validated and sanitized. Additionally, consider implementing additional security measures, such as web application firewalls or intrusion detection systems, to detect and prevent similar attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.3,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-37709: Insecure Permissions vulnerability in grokability snipe-it v.8.4.0 and before an...",
-      "description": "Insecure Permissions vulnerability in grokability snipe-it v.8.4.0 and before and fixed after 2026-03-10 commit 676a9958 allows a remote attacker to execute arbitrary code via the app/Http/Controllers/Api/UploadedFilesController.php component",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-37709",
-      "cve_id": "CVE-2026-37709",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.8,
-      "published": "2026-05-17T17:49:57.889642+00:00",
-      "ttps": [
-        {
-          "id": "T1649",
-          "name": "Steal or Forge Authentication Certificates",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-37709 is a critical Insecure Permissions vulnerability in grokability snipe-it v.8.4.0 and earlier. An attacker can exploit this vulnerability by sending a specially crafted HTTP request to the app/Http/Controllers/Api/UploadedFilesController.php component, allowing them to execute arbitrary code. This vulnerability affects all versions of snipe-it prior to 8.4.1, released on 2026-03-10. To remediate this issue, update to version 8.4.1 or later, and ensure that the 'UploadedFilesController' component is properly configured to restrict access to sensitive functionality. Additionally, ensure that authentication certificates are properly validated and not stolen or forged.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1649| B[Steal or Forge Authentication Certificates]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.8,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "Tycoon2FA hijacks Microsoft 365 accounts via device-code phishing",
@@ -271,7 +573,7 @@
       "cve_id": null,
       "source": "Bleeping Computer",
       "category": "incident",
-      "severity": "high",
+      "severity": "medium",
       "cvss_score": null,
       "published": "2026-05-17T14:43:10+00:00",
       "ttps": [
@@ -281,12 +583,7 @@
           "tactic": "Initial Access",
           "tactic_id": "TA0001"
         }
-      ],
-      "ai_summary": "The Tycoon2FA phishing kit exploits Microsoft 365 accounts via device-code phishing attacks, leveraging Trustifi click-tracking URLs to bypass security measures. This vulnerability affects Microsoft 365 users who fall victim to the phishing scam, potentially leading to unauthorized access to their accounts. To remediate this issue, Microsoft 365 administrators should disable Trustifi click-tracking URLs and implement additional security measures to prevent device-code phishing attacks. Specifically, administrators should update Microsoft 365 to version 2205 or later, which includes security patches to mitigate this vulnerability. Furthermore, users should be educated on the risks of device-code phishing and the importance of verifying the authenticity of Microsoft 365 login requests.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      ]
     },
     {
       "title": "NGINX CVE-2026-42945 Exploited in the Wild, Causing Worker Crashes and Possible RCE",
@@ -318,12 +615,7 @@
           "tactic_id": "TA0005"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "A newly disclosed security flaw, tracked as CVE-2026-42945 (CVSS score: 9.2), is a heap buffer overflow in ngx_http_rewrite_module affecting NGINX versions 0.6.27 through 1.30.0. This vulnerability is being actively exploited in the wild, causing worker crashes and possible Remote Code Execution (RCE). To mitigate this threat, NGINX administrators should immediately update to version 1.30.1 or later, and ensure that the ngx_http_rewrite_module is not loaded in configurations that do not require it. Additionally, it is recommended to enable the 'worker_rlimit_core' directive to prevent worker crashes from consuming excessive disk space. Furthermore, consider implementing a Web Application Firewall (WAF) to detect and prevent future exploitation attempts.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1203| C[Exploitation for Client Execution]:::tactic\n    C -->|T1550| D[Use Alternate Authentication Material]:::tactic\n    D -->|T1210| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "Grafana GitHub Token Breach Led to Codebase Download and Extortion Attempt",
@@ -342,12 +634,7 @@
           "tactic": "Reconnaissance",
           "tactic_id": "TA0043"
         }
-      ],
-      "ai_summary": "Grafana disclosed an unauthorized party obtained a GitHub token, granting access to the company's GitHub environment and allowing the download of its codebase. The breach occurred due to an unspecified vulnerability, and the attackers used T1589 (Gather Victim Identity Info) tactics to exploit the situation. Fortunately, no customer data or personal information was accessed, and there is no evidence of impact to customer systems or operations. To remediate, Grafana recommends verifying GitHub token permissions and revoking any unnecessary access. Additionally, users should ensure they are using the latest version of Grafana (v9.3.4 or later) and GitHub (v2.35.1 or later) to prevent similar incidents.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1589| B[Gather Victim Identity Info]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 4.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      ]
     },
     {
       "title": "Microsoft rejects critical Azure vulnerability report, no CVE issued",
@@ -356,15 +643,10 @@
       "cve_id": null,
       "source": "Bleeping Computer",
       "category": "cve",
-      "severity": "high",
+      "severity": "critical",
       "cvss_score": null,
       "published": "2026-05-16T20:55:44+00:00",
-      "ttps": [],
-      "ai_summary": "A critical Azure Backup for AKS vulnerability was allegedly rejected by Microsoft, with the company claiming no product changes were made despite a security researcher documenting a silent fix. The vulnerability, which has not been assigned a CVE, could potentially allow attackers to access sensitive data stored in Azure Backup for AKS. To remediate this issue, users should verify that their Azure Backup for AKS configuration is up-to-date, specifically checking for version 2022.11.01 or later, and ensure that the 'allowCrossNamespaceAccess' setting is disabled. Additionally, users should review their Azure Backup for AKS logs for any suspicious activity. It is also recommended to enable Azure Monitor for AKS to detect and respond to potential security threats.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ttps": []
     },
     {
       "title": "Funnel Builder Flaw Under Active Exploitation Enables WooCommerce Checkout Skimming",
@@ -1709,8 +1991,8 @@
         }
       ],
       "threat_actors": [
-        "Conti",
-        "LockBit"
+        "LockBit",
+        "Conti"
       ]
     },
     {
