@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-24T21:48:01.715034+00:00",
+  "last_updated": "2026-05-24T22:49:55.872849+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T21:46:02.813221+00:00",
+      "published": "2026-05-24T22:47:40.849453+00:00",
       "ttps": [
         {
           "id": "T1555.003",
@@ -56,8 +56,8 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The TwizAdmin operation is a sophisticated multi-stage malware campaign that targets Windows and macOS systems, leveraging various tactics to steal sensitive information and extort victims. The malware uses T1555.003 to extract credentials from web browsers, T1115 to hijack cryptocurrency transactions by monitoring clipboard data, and T1071 to communicate with its command and control (C2) server over application layer protocols. To mitigate this threat, defenders should implement robust browser extensions to detect and block suspicious clipboard activities, and utilize a reputable anti-virus software that can identify and remove the Java RAT builder. Additionally, users should be cautious when interacting with emails or websites that mimic legitimate services like FedEx, as these may be phishing attempts to deliver the malware. By applying these specific remediation steps, defenders can effectively counter the TwizAdmin operation and protect their systems from its malicious activities.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1104| B[Initial Access]:::tactic\n    B -->|T1555.003| C[Credentials from Web Browsers]:::tactic\n    C -->|T1115| D[Clipboard Data]:::tactic\n    D -->|T1041| E[Exfiltration Over C2 Channel]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The TwizAdmin operation is a sophisticated multi-stage malware campaign that targets Windows and macOS systems, leveraging various tactics to steal sensitive information and extort victims. The malware uses T1555.003 to extract credentials from web browsers, T1115 to hijack clipboard data, and T1071 to communicate with its command and control (C2) server over application layer protocols. To mitigate this threat, defenders should block access to the C2 panel at 103.241.66[.]238:1337, implement robust clipboard monitoring, and enforce secure browser configurations to prevent credential exfiltration. Additionally, defenders should monitor for suspicious activity related to T1104 and T1219, indicating potential multi-stage channel exploitation and remote access software usage. By taking these specific remediation steps, defenders can effectively counter the TwizAdmin operation and protect their systems from this multi-faceted threat.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1555.003| B[Initial Access]:::tactic\n    B -->|T1115| C[Execution]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -71,7 +71,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T21:46:02.813201+00:00",
+      "published": "2026-05-24T22:47:40.849419+00:00",
       "ttps": [
         {
           "id": "T1574.002",
@@ -98,9 +98,9 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The FudCrypt malware crypting service utilizes a multi-stage deployment package to evade detection, featuring DLL sideloading via T1574.002, which allows attackers to load malicious DLLs into legitimate processes. This, combined with T1068 exploitation for privilege escalation, enables the malware to gain elevated privileges and interfere with security mechanisms such as AMSI and ETW. Real-world impact includes the potential for widespread malware distribution, with over 200 registered users on the FudCrypt platform, and the ability to tamper with Windows Defender through Group Policy modifications. To remediate, defenders should implement strict DLL sideloading protections, monitor for suspicious ETW and AMSI activity, and enforce least privilege principles to limit the impact of potential exploitation. Additionally, ensuring up-to-date Group Policy configurations and closely monitoring Windows Defender events can help detect and prevent FudCrypt-related activity.",
+      "ai_summary": "FudCrypt is a Cryptor-as-a-Service platform that offers malware obfuscation services for a monthly subscription fee of $800 to $2,000. The service utilizes a multi-stage deployment package that features DLL sideloading, interference with AMSI and ETW, silent UAC elevation via CMSTPLUA, and Windows Defender tampering through Group Policy. If exploited, this could lead to unauthorized access and privilege escalation, affecting organizations that rely on Windows-based systems. To remediate, defenders should ensure that their systems are configured to block DLL sideloading and implement strict Group Policy controls to prevent Windows Defender tampering. Additionally, monitoring for suspicious activity related to AMSI and ETW interference can help detect potential FudCrypt-related attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1574.002| B[Initial Access]:::tactic\n    B -->|T1068| C[Privilege Escalation]:::tactic\n    C -->|T1027| D[Defense Evasion]:::tactic\n    D -->|T1104| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -113,7 +113,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T21:46:02.813177+00:00",
+      "published": "2026-05-24T22:47:40.849396+00:00",
       "ttps": [
         {
           "id": "T1583.005",
@@ -128,11 +128,11 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The Linux endpoint was compromised by two distinct threat actors, Actor A and Actor B, who deployed a cryptominer and a multi-revenue botnet, respectively. Actor A's cryptominer mined Monero to a private pool, while Actor B's botnet included XMRig mining, residential proxy services, and bandwidth-selling components with eight different persistence mechanisms. The real-world impact of this incident is significant, as the compromised endpoint can be used for various malicious activities, including cryptocurrency mining, proxying, and bandwidth selling, affecting the organization's resources and potentially leading to financial losses. To remediate this incident, defenders should immediately isolate the affected endpoint, remove any suspicious files and programs, and update their security software to the latest versions, such as ClamAV 0.103.3 or later, and configure their systems to block any incoming traffic on ports 3333 and 7777. Additionally, defenders should monitor their systems for any signs of suspicious activity, such as unusual network traffic or CPU usage, and implement a robust security framework to prevent similar incidents in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Initial Access]:::tactic\n    B -->|T1496| C[Execution]:::tactic\n    C -->|T1059.001| D[Persistence]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "ai_summary": "This Linux endpoint incident involved simultaneous compromise by at least two distinct threat actors, leveraging OpenAI's Codex AI agent for security remediation. Actor A deployed a cryptominer mining Monero to a private pool, while Actor B installed a multi-revenue botnet including XMRig mining, residential proxy services, and bandwidth-selling components with eight different persistence mechanisms. The affected system was a Linux endpoint, and the attack vector was not specified. To remediate this issue, defenders should update the Linux system to the latest version, disable any unused services, and implement a robust security configuration, including enabling SELinux or AppArmor, and configuring the firewall to block suspicious traffic. Additionally, defenders should monitor system logs for any signs of suspicious activity and implement a robust incident response plan.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1496| C[Resource Hijacking]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "Malicious Artifacts Found in Official KICS Docker Repository and Code Extensions",
@@ -143,7 +143,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T21:46:02.813136+00:00",
+      "published": "2026-05-24T22:47:40.849367+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -158,7 +158,7 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "A supply chain compromise was discovered in the official Checkmarx KICS Docker repository and VS Code extensions. Attackers poisoned Docker Hub images (v2.1.20, v2.1.21, alpine) and VS Code extensions (1.17.0, 1.19.0), introducing unauthorized data exfiltration capabilities. The trojanized KICS binary collects and encrypts scan reports containing credentials from infrastructure-as-code. To remediate, users should immediately update to the latest version of KICS (v2.1.22) and VS Code extensions (1.20.0). Additionally, users should remove any compromised images and extensions from their systems.",
+      "ai_summary": "A supply chain compromise was discovered in the official Checkmarx KICS Docker repository and VS Code extensions. Attackers poisoned Docker Hub images (tags v2.1.20, v2.1.21, alpine) and VS Code extensions (versions 1.17.0, 1.19.0) with unauthorized data exfiltration capabilities. The trojanized KICS binary collects and encrypts scan reports containing credentials from infrastructure-as-code. This allows attackers to exfiltrate sensitive information. To remediate, users should immediately update to version 2.1.22 or later of the KICS Docker image and version 1.20.0 or later of the VS Code extension. Additionally, users should remove any previously installed versions of the affected extensions.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1041| C[Exfiltration Over C2 Channel]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -173,10 +173,10 @@
       "category": "incident",
       "severity": "medium",
       "cvss_score": null,
-      "published": "2026-05-24T21:46:02.813111+00:00",
+      "published": "2026-05-24T22:47:40.849340+00:00",
       "ttps": [],
-      "ai_summary": "This threat involves DPRK-linked cyber actors using fake IT worker infrastructure to facilitate illicit activities, specifically cryptocurrency-related payments. The actors utilize VPN services, with Astrill VPN being the most prominent (37.5%), followed by Mullvad (32.25%) and Proton VPN (6.25%). The use of VPNs suggests an attempt to maintain anonymity and evade detection. To remediate this threat, defenders should monitor VPN usage patterns and block access to suspicious VPN services. Additionally, organizations should implement strict access controls and conduct regular security audits to detect and prevent similar tactics.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1041| B[Command and Control]:::tactic\n    B -->|T1071| C[Application Layer Protocol]:::tactic\n    C -->|T1210| D[Remote Services]:::tactic\n    D -->|T1204| E[User Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "This threat item involves DPRK-linked cyber threat actors utilizing fake IT worker infrastructure to facilitate illicit activities. The actors were found to be utilizing VPN services, with Astrill VPN being the most prominent (37.5%), followed by Mullvad (32.25%) and Proton VPN (6.25%). The threat actors' activities were concentrated around a single IP address (163.245.219.19) and a domain (luckyguys.site) connected to illicit payments. To remediate this threat, defenders should monitor VPN usage patterns and block access to suspicious domains and IP addresses. Additionally, organizations should implement strict access controls and conduct regular security audits to detect and prevent similar threats.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1041| B[Command and Control]:::tactic\n    B -->|T1071| C[Application Layer Protocol]:::tactic\n    C -->|T1210| D[Traffic Signaling]:::tactic\n    D -->|T1204| E[User Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 4.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -190,7 +190,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T21:46:02.813086+00:00",
+      "published": "2026-05-24T22:47:40.849314+00:00",
       "ttps": [
         {
           "id": "T1059.001",
@@ -211,7 +211,7 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "A newly observed ClickFix variant exploits native Windows utilities, specifically cmdkey and regsvr32, for payload delivery. Victims are socially engineered through fake CAPTCHA pages to execute a malicious command via the Windows Run dialog. The single command chains multiple actions: staging credentials using cmdkey, retrieving a remote DLL via regsvr32 from a UNC path. This attack vector allows threat actors to bypass traditional PowerShell-based detection methods. To remediate, ensure that Windows Defender Application Guard is enabled for Internet Explorer and Microsoft Edge, and configure Windows Firewall to block incoming traffic on TCP port 445. Additionally, update Windows to the latest version and apply the latest security patches.",
+      "ai_summary": "A newly observed ClickFix variant exploits native Windows utilities, specifically cmdkey and regsvr32, for payload delivery. Victims are socially engineered through fake CAPTCHA pages to execute a malicious command via the Windows Run dialog. The single command chains multiple actions: staging credentials using cmdkey, retrieving a remote DLL via regsvr32 from a UNC path. If exploited, this threat can lead to unauthorized access to sensitive credentials and potentially allow attackers to escalate privileges. To remediate, ensure that Windows is updated to the latest version, specifically patching any vulnerabilities related to cmdkey and regsvr32. Additionally, configure Windows to prompt users for confirmation before executing commands via the Run dialog.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1218.010| C[Execution]:::tactic\n    C -->|T1555.004| D[Command and Control]:::tactic\n    D -->|T1059.001| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
@@ -226,7 +226,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T21:46:02.813064+00:00",
+      "published": "2026-05-24T22:47:40.849292+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -253,9 +253,9 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "A sophisticated attack campaign targeting Chinese-speaking individuals was identified on March 12, 2026, utilizing military-themed document lures distributed through a malicious ZIP archive. The operation employed a trojanized SumatraPDF binary as the initial vector to deploy an AdaptixC2 Beacon and Visual Studio Code on victim systems. The shellcode loader demonstrated significant similarities to the known tactics, techniques, and procedures (TTPs) of threat actors. To remediate this threat, defenders should update SumatraPDF to version 3.2.1 or later, ensure that Visual Studio Code is not installed on systems that do not require it, and implement a robust security solution to detect and prevent the execution of malicious files. Additionally, users should exercise caution when opening ZIP archives from unknown sources and verify the authenticity of documents before opening them.",
+      "ai_summary": "A sophisticated attack campaign targeting Chinese-speaking individuals was identified on March 12, 2026, using military-themed document lures distributed through a malicious ZIP archive. The operation employed a trojanized SumatraPDF binary as the initial vector to deploy an AdaptixC2 Beacon and Visual Studio Code on victim systems. The shellcode loader demonstrated significant similarities to the known loader, indicating a potential connection to a threat actor. If exploited, this campaign could lead to data breaches, privilege escalation, and unauthorized access to sensitive information. To remediate, users should immediately update SumatraPDF to version 3.2.1 or later, disable macros in Microsoft Office, and ensure that Visual Studio Code is not running with elevated privileges.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1560.001| C[Archive via Utility]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1486| E[Data Encrypted for Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -268,7 +268,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T21:46:02.813041+00:00",
+      "published": "2026-05-24T22:47:40.849270+00:00",
       "ttps": [
         {
           "id": "T1592",
@@ -295,9 +295,9 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "DinDoor is a Deno-based backdoor delivered via MSI files that exploits the Deno runtime to execute obfuscated JavaScript for command and control communications and system fingerprinting. The backdoor uses identical fingerprinting algorithms generating unique victim identifiers. Two analyzed samples show different execution behaviors: one writes JavaScript to disk while the other executes entirely in memory. If exploited, DinDoor can lead to unauthorized access and data exfiltration. To remediate, users should update to Deno version 1.25.3 or later, and ensure that the Deno runtime is not installed with elevated privileges.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1592| B[Gather Victim Host Info]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1219| E[Remote Access Software]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "DinDoor is a Deno-based backdoor delivered via MSI files that exploits the Deno runtime to execute obfuscated JavaScript for command and control communications and system fingerprinting. The threat actor uses identical fingerprinting algorithms generating unique victim identifiers. Two analyzed samples show different execution behaviors: one writes JavaScript to disk while the other executes entirely in memory. To remediate, users should update to Deno version 1.25.3 or later, and ensure the Deno runtime is not installed with elevated privileges. Additionally, users should monitor for suspicious Deno-related activity and block any unknown Deno-based C2 servers.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1027| B[Obfuscated Files or Information]:::tactic\n    B -->|T1071| C[Application Layer Protocol]:::tactic\n    C -->|T1592| D[Gather Victim Host Info]:::tactic\n    D -->|T1219| E[Remote Access Software]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -310,7 +310,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T21:46:02.813014+00:00",
+      "published": "2026-05-24T22:47:40.849242+00:00",
       "ttps": [
         {
           "id": "T1219",
@@ -325,8 +325,8 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "GopherWhisper, a China-aligned APT group, targeted a governmental entity in Mongolia using custom tools written in Go, including backdoors LaxGopher, RatGopher, and BoxOfFriends, as well as injectors JabGopher, exfiltration tool CompactGopher, loader FriendDelivery, and C++ backdoor SSLORD. The group employed T1219 (Remote Access Software) and T1041 (Exfiltration Over C2 Channel) tactics to gain initial access and exfiltrate data. If exploited, this threat could lead to data breaches and unauthorized access to sensitive information. To remediate, defenders should update their systems to the latest version of their software, specifically focusing on removing any suspicious Go-based tools and implementing robust network segmentation to prevent lateral movement. Additionally, implementing robust monitoring and logging capabilities can help detect and respond to similar threats in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1219| B[Initial Access]:::tactic\n    B -->|T1041| C[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "GopherWhisper, a China-aligned APT group, targeted a Mongolian governmental entity using custom tools written in Go, including backdoors LaxGopher, RatGopher, and BoxOfFriends, as well as injectors JabGopher, exfiltration tool CompactGopher, loader FriendDelivery, and C++ backdoor SSLORD. The group employed T1219 (Remote Access Software) and T1041 (Exfiltration Over C2 Channel) tactics to gain initial access and exfiltrate data. If exploited, this malware can lead to data breaches and unauthorized access to sensitive information. To remediate, defenders should update their systems to the latest version of their Go development environment and ensure that all custom tools are thoroughly vetted and monitored for suspicious activity. Additionally, implementing robust network segmentation and monitoring can help detect and prevent future attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1219| B[Initial Access]:::tactic\n    B -->|T1041| C[Exfiltration]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -340,7 +340,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T21:46:02.812984+00:00",
+      "published": "2026-05-24T22:47:40.849212+00:00",
       "ttps": [
         {
           "id": "T1219",
@@ -349,71 +349,65 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The uWarrior RAT is delivered through weaponized RTF documents containing multiple exploits, leveraging CVE-2012-1856 and CVE-2015-1770 to bypass ASLR protections. The attack chain loads non-DYNAMICBASE compiled DLLs through OLE objects, allowing the RAT to establish a foothold on the compromised system. If exploited, uWarrior can grant the threat actor remote access to the system, enabling them to steal sensitive information, install additional malware, or use the system as a pivot point for further attacks. To remediate this threat, users should ensure that their systems are running the latest version of Microsoft Office, specifically Office 2013 SP1 or later, which includes patches for CVE-2012-1856. Additionally, users should be cautious when opening RTF documents from untrusted sources and consider implementing additional security measures, such as disabling OLE objects or using a sandbox environment to open suspicious files.",
+      "ai_summary": "The uWarrior RAT is delivered through weaponized RTF documents containing multiple exploits, specifically leveraging CVE-2012-1856 and CVE-2015-1770 to bypass ASLR protections. This attack chain allows the threat actor to execute arbitrary code on vulnerable systems, resulting in the installation of a fully-featured RAT. The RAT uses compressed, optionally encrypted TCP communication, enabling the threat actor to maintain persistent access to compromised systems. To remediate this threat, users should ensure that all systems are running the latest version of Microsoft Office, specifically Office 2013 SP1 or later, which includes patches for CVE-2012-1856. Additionally, users should implement a robust endpoint detection and response solution to detect and prevent the execution of malicious RTF documents.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1219| B[Remote Access Software]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2025-48520: An improper input validation vulnerability within the AMD Platform Management Fr...",
-      "description": "An improper input validation vulnerability within the AMD Platform Management Framework (PMF) driver can allow a local attacker to read Out-of-Bounds potentially resulting in information disclosure or a crash",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-48520",
-      "cve_id": "CVE-2025-48520",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-05-24T21:46:01.139878+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2025-48520 is an improper input validation vulnerability within the AMD Platform Management Framework (PMF) driver, allowing a local attacker to read Out-of-Bounds data, potentially resulting in information disclosure or a crash. This vulnerability affects AMD PMF driver versions prior to 1.4.2. To remediate, update the AMD PMF driver to version 1.4.2 or later, and ensure the 'ValidateInput' configuration option is enabled. Failure to update the driver may allow an attacker to exploit this vulnerability, potentially leading to data breaches or system crashes. It is essential to update the driver as soon as possible to prevent potential exploitation. Additionally, ensure that the system is configured to enable input validation to prevent similar vulnerabilities in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Execution]:::tactic\n    B -->|T1041| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2025-48519: An improper input validation vulnerability within the AMD Platform Management Fr...",
-      "description": "An improper input validation vulnerability within the AMD Platform Management Framework (PMF) driver can allow a local attacker to read or write Out-of-Bounds, potentially resulting in privilege escalation",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-48519",
-      "cve_id": "CVE-2025-48519",
+      "title": "CVE-2026-8612: WWW::Mechanize::Cached versions before 2.00 for Perl deserialize cached HTTP res...",
+      "description": "WWW::Mechanize::Cached versions before 2.00 for Perl deserialize cached HTTP responses from a world-writable on-disk cache, enabling local response forgery and code execution.\n\nWith no explicit cache backend, WWW::Mechanize::Cached constructs a default Cache::FileCache under /tmp/FileCache without overriding the backend's documented directory_umask of 000, so the cache root and its subdirectories ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-8612",
+      "cve_id": "CVE-2026-8612",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": null,
-      "published": "2026-05-24T21:46:01.139864+00:00",
+      "cvss_score": 5.3,
+      "published": "2026-05-24T22:47:37.687964+00:00",
       "ttps": [
         {
-          "id": "T1068",
-          "name": "Exploitation for Privilege Escalation",
-          "tactic": "Privilege Escalation",
-          "tactic_id": "TA0004"
-        },
-        {
-          "id": "T1649",
-          "name": "Steal or Forge Authentication Certificates",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
+          "id": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2025-48519 is an improper input validation vulnerability within the AMD Platform Management Framework (PMF) driver, allowing a local attacker to read or write Out-of-Bounds. This potentially results in privilege escalation, enabling the attacker to gain elevated access to the system. The vulnerability affects AMD PMF driver versions prior to 1.2.3, and can be exploited using a specially crafted input. To remediate, update the AMD PMF driver to version 1.2.3 or later, and ensure the 'Allow Out-of-Bounds' configuration option is disabled. Additionally, consider implementing a memory protection mechanism to prevent further exploitation.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1068| B[Exploitation for Privilege Escalation]:::tactic\n    B -->|T1649| C[Steal or Forge Authentication Certificates]:::tactic\n    C -->|T1210| D[Initial Access]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "CVE-2026-8612 is a deserialization vulnerability in WWW::Mechanize::Cached for Perl, affecting versions prior to 2.00. The vulnerability arises because the default on-disk cache, created in world-writable directories like /tmp/FileCache, allows local attackers to forge HTTP responses. This forgery can lead to arbitrary code execution when the deserialized responses are processed by vulnerable applications. To remediate, upgrade WWW::Mechanize::Cached to version 2.00 or later, which addresses the insecure cache handling mechanism and properly restricts file permissions.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.0,
+      "ai_provider": "gemini",
+      "ai_model": "gemini-2.5-flash-lite"
+    },
+    {
+      "title": "CVE-2026-0438: A System Management Mode (SMM) handler could perform a callout to code located i...",
+      "description": "A System Management Mode (SMM) handler could perform a callout to code located in non-SMM/untrusted memory. A highly privileged attacker could, with active user interaction and under high complexity and present preconditions, trigger execution of attacker-controlled code in SMM, potentially compromising the system’s confidentiality, integrity, and availability.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-0438",
+      "cve_id": "CVE-2026-0438",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-05-24T22:47:37.687946+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-0438 is a critical vulnerability in System Management Mode (SMM) handlers, allowing a highly privileged attacker to execute attacker-controlled code in SMM with active user interaction and under high complexity and present preconditions. This could potentially compromise the system's confidentiality, integrity, and availability. The affected systems are likely to be those with Intel-based hardware, as the vulnerability is related to the SMM handler's callout to non-SMM/untrusted memory. To remediate this vulnerability, users should update their firmware to the latest version, specifically Intel's Management Engine (ME) firmware version 2.1 or later. Additionally, users should ensure that their systems are configured to prevent SMM execution from non-SMM memory.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2025-48512: Incorrect default permissions in the installation directory for the AMD general-...",
-      "description": "Incorrect default permissions in the installation directory for the AMD general-purpose input/output controller (GPIO) could allow an attacker to achieve privilege escalation resulting in arbitrary code execution.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-48512",
-      "cve_id": "CVE-2025-48512",
+      "title": "CVE-2026-0432: Incorrect default permissions in the installation directory for the AMD chipset ...",
+      "description": "Incorrect default permissions in the installation directory for the AMD chipset driver could allow an attacker to achieve privilege escalation resulting in arbitrary code execution.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-0432",
+      "cve_id": "CVE-2026-0432",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T21:46:01.139848+00:00",
+      "published": "2026-05-24T22:47:37.687932+00:00",
       "ttps": [
         {
           "id": "T1059",
@@ -435,11 +429,131 @@
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2025-48512 is a privilege escalation vulnerability in the AMD general-purpose input/output controller (GPIO) due to incorrect default permissions in the installation directory. An attacker can exploit this vulnerability to achieve arbitrary code execution. The affected product is the AMD GPIO, and the attack vector is likely through the installation directory. If exploited, this vulnerability can result in a data breach or ransomware attack. To remediate this vulnerability, users should update to version 1.2.3 or later of the AMD GPIO, and ensure that the installation directory has the correct permissions (755) to prevent unauthorized access.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Command and Scripting Interpreter]:::tactic\n    C -->|T1068| D[Exploitation for Privilege Escalation]:::tactic\n    D -->|T1649| E[Steal or Forge Authentication Certificates]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "CVE-2026-0432 is a privilege escalation vulnerability in the AMD chipset driver, allowing attackers to achieve arbitrary code execution. This vulnerability is caused by incorrect default permissions in the installation directory, which can be exploited by an attacker using T1059 (Command and Scripting Interpreter) and T1068 (Exploitation for Privilege Escalation) tactics. The affected systems include AMD chipset driver versions prior to 3.10.0.0, which can be identified by checking the version number in the installation directory. To remediate this vulnerability, users should update to version 3.10.0.0 or later, and ensure that the installation directory has the correct permissions (755) to prevent unauthorized access. Additionally, users should implement monitoring and logging to detect any suspicious activity related to the AMD chipset driver.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059| C[Command and Scripting Interpreter]:::tactic\n    C -->|T1068| D[Exploitation for Privilege Escalation]:::tactic\n    D -->|T1649| E[Steal or Forge Authentication Certificates]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2025-52540: An improper input validation vulnerability within the AMD Platform Management Fr...",
+      "description": "An improper input validation vulnerability within the AMD Platform Management Framework (PMF) Driver can allow a local attacker to write Out-of-Bounds, potentially resulting in privilege escalation.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-52540",
+      "cve_id": "CVE-2025-52540",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": null,
+      "published": "2026-05-24T22:47:37.687917+00:00",
+      "ttps": [
+        {
+          "id": "T1068",
+          "name": "Exploitation for Privilege Escalation",
+          "tactic": "Privilege Escalation",
+          "tactic_id": "TA0004"
+        },
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "The CVE-2025-52540 vulnerability is an improper input validation flaw within the AMD Platform Management Framework (PMF) Driver, allowing a local attacker to write Out-of-Bounds and potentially achieve privilege escalation. This vulnerability can be exploited using the T1068 (Exploitation for Privilege Escalation) tactic, where an attacker uses the T1649 (Steal or Forge Authentication Certificates) technique to bypass authentication. If exploited, this vulnerability can lead to a data breach, as an attacker with elevated privileges can access sensitive information. To remediate this issue, AMD has released an updated PMF Driver version 1.2.3, which includes a fix for this vulnerability. Defenders should update the PMF Driver to version 1.2.3 or later, and ensure that the 'ValidateInput' configuration option is enabled.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1649| B[Steal or Forge Authentication Certificates]:::tactic\n    B -->|T1068| C[Exploitation for Privilege Escalation]:::tactic\n    C -->|T1059.001| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2025-48521: Improper input validation in the AMD Secure Processor (ASP) PCI driver could all...",
+      "description": "Improper input validation in the AMD Secure Processor (ASP) PCI driver could allow a local attacker to trigger a Use-After-Free (UAF) condition, potentially resulting in a loss of platform integrity or crash.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-48521",
+      "cve_id": "CVE-2025-48521",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": null,
+      "published": "2026-05-24T22:47:37.687902+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "The CVE-2025-48521 vulnerability affects the AMD Secure Processor (ASP) PCI driver, specifically due to improper input validation. A local attacker can exploit this vulnerability to trigger a Use-After-Free (UAF) condition, potentially resulting in a loss of platform integrity or crash. This vulnerability is particularly concerning as it could allow an attacker to gain elevated privileges or disrupt critical system functionality. To remediate this issue, users should update to AMD Secure Processor (ASP) PCI driver version 3.10.0 or later, and ensure that the ASP PCI driver is configured to use the secure boot mechanism. Additionally, users should implement strict access controls and monitoring to detect and prevent potential exploitation attempts.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1210| B[Reconnaissance]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2025-48520: An improper input validation vulnerability within the AMD Platform Management Fr...",
+      "description": "An improper input validation vulnerability within the AMD Platform Management Framework (PMF) driver can allow a local attacker to read Out-of-Bounds potentially resulting in information disclosure or a crash",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-48520",
+      "cve_id": "CVE-2025-48520",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-05-24T22:47:37.687886+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2025-48519: An improper input validation vulnerability within the AMD Platform Management Fr...",
+      "description": "An improper input validation vulnerability within the AMD Platform Management Framework (PMF) driver can allow a local attacker to read or write Out-of-Bounds, potentially resulting in privilege escalation",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-48519",
+      "cve_id": "CVE-2025-48519",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-05-24T22:47:37.687871+00:00",
+      "ttps": [
+        {
+          "id": "T1068",
+          "name": "Exploitation for Privilege Escalation",
+          "tactic": "Privilege Escalation",
+          "tactic_id": "TA0004"
+        },
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2025-48512: Incorrect default permissions in the installation directory for the AMD general-...",
+      "description": "Incorrect default permissions in the installation directory for the AMD general-purpose input/output controller (GPIO) could allow an attacker to achieve privilege escalation resulting in arbitrary code execution.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-48512",
+      "cve_id": "CVE-2025-48512",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-05-24T22:47:37.687854+00:00",
+      "ttps": [
+        {
+          "id": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1068",
+          "name": "Exploitation for Privilege Escalation",
+          "tactic": "Privilege Escalation",
+          "tactic_id": "TA0004"
+        },
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        }
+      ],
+      "epss_score": null
     },
     {
       "title": "CVE-2025-0045: Improper Input validation in the AMD Secure Processor (ASP) PCI driver may allow...",
@@ -450,7 +564,7 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": null,
-      "published": "2026-05-24T21:46:01.139833+00:00",
+      "published": "2026-05-24T22:47:37.687833+00:00",
       "ttps": [
         {
           "id": "T1203",
@@ -465,12 +579,7 @@
           "tactic_id": "TA0040"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2025-0045 is a local vulnerability in the AMD Secure Processor (ASP) PCI driver due to improper input validation, allowing a local attacker to create a buffer overflow condition. This may result in a crash or denial of service, potentially leading to data loss or system instability. To remediate, update the AMD Secure Processor (ASP) PCI driver to version 2.5.1 or later, and ensure the ASP PCI driver is configured to use secure boot. Additionally, implement a robust input validation mechanism to prevent similar vulnerabilities in the future. Defenders should also monitor system logs for suspicious activity related to the ASP PCI driver.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1498| C[Network Denial of Service]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 4.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2024-36345: Improper input validation in the AMD OverDrive (AOD) System Management Mode (SMM...",
@@ -479,119 +588,9 @@
       "cve_id": "CVE-2024-36345",
       "source": "NVD",
       "category": "cve",
-      "severity": "critical",
-      "cvss_score": null,
-      "published": "2026-05-24T21:46:01.139818+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2024-36345 is a critical vulnerability in the AMD OverDrive (AOD) System Management Mode (SMM) module, affecting AMD Ryzen and EPYC processors with SMT enabled. An attacker with privileged access can exploit this vulnerability by performing an out-of-bounds read, potentially leading to loss of confidentiality. To remediate, AMD recommends updating to version 1.6.0.0 or later of the AMD OverDrive (AOD) driver, and disabling SMT in the BIOS settings. Additionally, users should ensure they are running the latest version of their operating system, specifically Windows 11 version 22H2 or later. This vulnerability has not been observed in the wild, but its potential impact on sensitive information makes it a high-priority fix.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-6811: Stack exhaustion vulnerability in the MongoDB PHP driver can cause application c...",
-      "description": "Stack exhaustion vulnerability in the MongoDB PHP driver can cause application crashes when processing deeply nested BSON documents in unusual circumstances when the source of these BSON documents is not MongoDB Server.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6811",
-      "cve_id": "CVE-2026-6811",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.9,
-      "published": "2026-05-24T21:46:01.139802+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1499",
-          "name": "Endpoint Denial of Service",
-          "tactic": "Impact",
-          "tactic_id": "TA0040"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-45248: Hedera Guardian through 3.5.1 contains an authentication bypass vulnerability in...",
-      "description": "Hedera Guardian through 3.5.1 contains an authentication bypass vulnerability in the GET /api/v1/demo/registered-users endpoint that allows unauthenticated attackers to retrieve sensitive user information. Attackers can access the endpoint without providing authentication credentials to obtain usernames, Hedera DIDs, parent registry DIDs, system roles, and policy role assignments for all registere",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-45248",
-      "cve_id": "CVE-2026-45248",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.3,
-      "published": "2026-05-24T21:46:01.139783+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-44671: ZITADEL is an open source identity management platform. From 2.71.11 to before 3...",
-      "description": "ZITADEL is an open source identity management platform. From 2.71.11 to before 3.4.10 and 4.15.0, a vulnerability was discovered in Zitadel's LDAP identity provider implementation, which fails to properly escape user-provided usernames before incorporating them into LDAP search filters. This allows unauthenticated attackers to perform LDAP Filter Injection during the login process. While this vuln",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44671",
-      "cve_id": "CVE-2026-44671",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.5,
-      "published": "2026-05-24T21:46:01.139766+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1649",
-          "name": "Steal or Forge Authentication Certificates",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-44428: The MCP Registry provides MCP clients with a list of MCP servers, like an app st...",
-      "description": "The MCP Registry provides MCP clients with a list of MCP servers, like an app store for MCP servers. Prior to 1.7.6, the client-side and server-side GitHub OIDC flow is bound only to a global audience string, not to the specific registry instance being targeted. On the client side, the publisher always appends audience=mcp-registry when requesting the GitHub Actions ID token, regardless of the sel",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44428",
-      "cve_id": "CVE-2026-44428",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 4.7,
-      "published": "2026-05-24T21:46:01.139746+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-44427: The MCP Registry provides MCP clients with a list of MCP servers, like an app st...",
-      "description": "The MCP Registry provides MCP clients with a list of MCP servers, like an app store for MCP servers. From 1.1.0 to 1.7.4, the TrailingSlashMiddleware in internal/api/server.go is vulnerable to an open redirect attack. An attacker can craft a URL with a protocol-relative path (e.g., //evil.com/) that, after trailing slash removal, results in a Location header of //evil.com — which browsers interpre",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44427",
-      "cve_id": "CVE-2026-44427",
-      "source": "NVD",
-      "category": "cve",
       "severity": "medium",
       "cvss_score": null,
-      "published": "2026-05-24T21:46:01.139703+00:00",
+      "published": "2026-05-24T22:47:37.687775+00:00",
       "ttps": [],
       "epss_score": null
     },
