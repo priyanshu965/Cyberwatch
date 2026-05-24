@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-24T15:57:17.186505+00:00",
+  "last_updated": "2026-05-24T16:54:35.865497+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T15:55:14.593842+00:00",
+      "published": "2026-05-24T16:52:41.186558+00:00",
       "ttps": [
         {
           "id": "T1555.003",
@@ -56,8 +56,8 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The TwizAdmin operation is a sophisticated multi-stage malware campaign that targets Windows and macOS systems, leveraging various tactics to steal sensitive information and extort victims. The malware uses T1555.003 to extract credentials from web browsers, T1115 to hijack cryptocurrency clipboard data, and T1071 to communicate with its command and control (C2) server via application layer protocols. To mitigate this threat, defenders should block access to the C2 panel at 103.241.66[.]238:1337, implement robust browser credential storage, and use a reputable antivirus solution to detect and remove the malware. Additionally, users should be cautious when interacting with emails or websites that mimic legitimate services like FedEx, as these may be used as lures to distribute the malware. By taking these specific steps, defenders can reduce the risk of compromise and prevent the exfiltration of sensitive data via T1041.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1555.003| B[Initial Access]:::tactic\n    B -->|T1115| C[Execution]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1041| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The TwizAdmin operation is a sophisticated multi-stage malware campaign that targets Windows and macOS systems, leveraging various tactics to steal sensitive information and extort victims. The malware uses T1555.003 to extract credentials from web browsers, T1115 to hijack cryptocurrency clipboard data, and T1071 to communicate with its command and control (C2) server via application layer protocols. To mitigate this threat, defenders should implement robust browser extensions to detect and block suspicious clipboard activities, and utilize a reputable endpoint detection and response (EDR) solution to monitor for T1041 exfiltration attempts. Additionally, users should be cautious when interacting with emails or websites that mimic legitimate services like FedEx, as these may be phishing attempts to deliver the malware. By applying these specific remediation steps, defenders can reduce the risk of compromise and protect their systems from this multi-stage threat.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1555.003| B[Initial Access]:::tactic\n    B -->|T1115| C[Execution]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -71,7 +71,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T15:55:14.593822+00:00",
+      "published": "2026-05-24T16:52:41.186528+00:00",
       "ttps": [
         {
           "id": "T1574.002",
@@ -98,9 +98,9 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The FudCrypt malware crypting service utilizes a multi-stage deployment package to evade detection, featuring DLL sideloading via T1574.002, which allows attackers to load malicious DLLs into legitimate processes. This, combined with T1068 exploitation for privilege escalation, enables the malware to gain elevated privileges and interfere with security mechanisms such as AMSI and ETW. Real-world impact includes the potential for widespread malware distribution, with over 200 registered users on the FudCrypt platform, and the ability to tamper with Windows Defender through Group Policy modifications. To remediate, defenders should implement strict DLL sideloading protections, monitor for suspicious ETW and AMSI activity, and enforce least privilege principles to prevent silent UAC elevation via CMSTPLUA. Additionally, ensuring up-to-date Group Policy configurations and closely monitoring Windows Defender for any signs of tampering can help mitigate the threat.",
+      "ai_summary": "FudCrypt is a Cryptor-as-a-Service platform that offers malware obfuscation services, utilizing techniques such as DLL sideloading and AMSI interference to evade detection. The service is capable of silent UAC elevation via CMSTPLUA and Windows Defender tampering through Group Policy, allowing for elevated privileges and persistence on compromised systems. Real-world impact includes the potential for widespread malware distribution, with over 200 registered users on the service, and the ability to bypass security controls. To remediate, defenders should implement robust DLL sideloading detection, monitor for suspicious Group Policy changes, and ensure that Windows Defender is configured to prevent tampering. Additionally, defenders should prioritize patching and hardening of systems to prevent exploitation for privilege escalation via T1068.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1574.002| B[Initial Access]:::tactic\n    B -->|T1068| C[Privilege Escalation]:::tactic\n    C -->|T1027| D[Defense Evasion]:::tactic\n    D -->|T1104| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -113,7 +113,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T15:55:14.593798+00:00",
+      "published": "2026-05-24T16:52:41.186504+00:00",
       "ttps": [
         {
           "id": "T1583.005",
@@ -128,9 +128,9 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "This Linux incident involved simultaneous compromise by at least two threat actors, leveraging OpenAI's Codex AI agent for security remediation. Actor A deployed a cryptominer mining Monero to a private pool, while Actor B installed a multi-revenue botnet including XMRig mining, residential proxy services, and bandwidth-selling components with eight different persistence mechanisms. The affected system was a Linux endpoint, and the attack vector is unknown. To remediate, defenders should update to the latest version of the Linux distribution, disable any suspicious services, and remove any unauthorized software. Additionally, users should ensure that the OpenAI Codex AI agent is not being used to mask malicious activity.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1583.005| D[Command and Control]:::tactic\n    D -->|T1496| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "ai_summary": "This Linux endpoint incident involved simultaneous compromise by at least two distinct threat actors, leveraging OpenAI's Codex AI agent for security remediation. Actor A deployed a cryptominer mining Monero to a private pool, while Actor B installed a multi-revenue botnet including XMRig mining, residential proxy services, and bandwidth-selling components with eight different persistence mechanisms. The affected system was a Linux endpoint, and the attack vector was not specified. To remediate, defenders should update to the latest version of the Linux distribution, disable any unused services, and implement a robust security monitoring solution. Additionally, consider implementing AI-powered security tools to detect and respond to similar incidents in the future.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1496| C[Resource Hijacking]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -143,7 +143,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T15:55:14.593770+00:00",
+      "published": "2026-05-24T16:52:41.186475+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -158,7 +158,7 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "A supply chain compromise was discovered in the official Checkmarx KICS Docker repository and VS Code extensions, affecting versions v2.1.20, v2.1.21, and alpine of the Docker images, as well as versions 1.17.0 and 1.19.0 of the VS Code extensions. The attackers introduced unauthorized data exfiltration capabilities, allowing the trojanized KICS binary to collect and encrypt scan reports containing credentials from infrastructure-as-code. This vulnerability allows attackers to steal sensitive information, potentially leading to data breaches and unauthorized access. To remediate, users should immediately update to version v2.1.22 of the Docker image and version 1.20.0 of the VS Code extension. Additionally, it is recommended to review and update all infrastructure-as-code configurations to prevent further unauthorized access.",
+      "ai_summary": "A supply chain compromise was discovered in the official Checkmarx KICS Docker repository and VS Code extensions, affecting versions v2.1.20, v2.1.21, and alpine of the Docker images, as well as versions 1.17.0 and 1.19.0 of the VS Code extensions. The attackers introduced unauthorized data exfiltration capabilities, allowing the trojanized KICS binary to collect and encrypt scan reports containing credentials from infrastructure-as-code. This vulnerability allows attackers to steal sensitive information, potentially leading to data breaches and unauthorized access. To remediate, users should immediately update to version v2.1.22 of the Docker image and version 1.20.0 of the VS Code extension. Additionally, it is recommended to review and update any infrastructure-as-code configurations to prevent further exploitation.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1041| C[Exfiltration Over C2 Channel]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -171,13 +171,13 @@
       "cve_id": null,
       "source": "AlienVault OTX",
       "category": "incident",
-      "severity": "low",
+      "severity": "medium",
       "cvss_score": null,
-      "published": "2026-05-24T15:55:14.593744+00:00",
+      "published": "2026-05-24T16:52:41.186448+00:00",
       "ttps": [],
-      "ai_summary": "This threat involves DPRK-linked cyber actors using fake IT worker infrastructure to facilitate illicit activities. The actors utilize VPN services, with Astrill VPN being the most prominent (37.5%), followed by Mullvad (32.25%) and Proton VPN (6.25%). The use of VPNs suggests an attempt to mask the actors' true IP addresses and locations. The actors' activities were concentrated around a single IP address (163.245.219.19) over a 30-day period. To remediate, defenders should monitor VPN usage patterns and block access to suspicious IP addresses and domains, such as luckyguys.site. Additionally, organizations should educate employees on the risks of using VPN services and the importance of verifying the authenticity of IT workers.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1041| B[Command and Control]:::tactic\n    B -->|T1071| C[Application Layer Protocol]:::tactic\n    C -->|T1204| D[User Execution]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 2.5,
+      "ai_summary": "This DPRK-linked threat actor uses fake IT worker infrastructure to conduct malicious activities. The actor was identified through a cryptocurrency researcher's investigation of a domain connected to illicit payments. The threat actor's network activity was characterized by concentrated VPN usage patterns, with Astrill VPN, Mullvad, and Proton VPN being the most prominent. If exploited, this threat actor could gain unauthorized access to systems, potentially leading to data breaches or ransomware attacks. To remediate, defenders should block traffic to the identified IP address (163.245.219.19) and ensure that VPN usage is monitored and restricted to authorized personnel.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -190,7 +190,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T15:55:14.593719+00:00",
+      "published": "2026-05-24T16:52:41.186423+00:00",
       "ttps": [
         {
           "id": "T1059.001",
@@ -211,9 +211,9 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "A newly observed ClickFix variant exploits native Windows utilities, specifically cmdkey and regsvr32, for payload delivery. Victims are socially engineered through fake CAPTCHA pages to execute a malicious command via the Windows Run dialog. The single command chains multiple actions: staging credentials using cmdkey, retrieving a remote DLL via regsvr32 from a UNC path. If exploited, this variant can lead to unauthorized access to sensitive information and potential data breaches. To remediate, ensure that Windows is updated to the latest version, specifically patching the vulnerable cmdkey and regsvr32 utilities. Additionally, implement strict access controls and monitoring for suspicious activity in the Windows Credential Manager.",
+      "ai_summary": "A newly observed ClickFix variant exploits native Windows utilities, specifically cmdkey and regsvr32, for payload delivery. Victims are socially engineered through fake CAPTCHA pages to execute a malicious command via the Windows Run dialog. The single command chains multiple actions: staging credentials using cmdkey, retrieving a remote DLL via regsvr32 from a UNC path. This variant abuses native Windows tools, making it difficult to detect using traditional PowerShell-based detection methods. To remediate, ensure that Windows Defender Application Guard is enabled, and configure Windows Firewall to block access to cmdkey and regsvr32 from UNC paths. Additionally, implement a robust CAPTCHA solution to prevent social engineering attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1218.010| C[Execution]:::tactic\n    C -->|T1555.004| D[Command and Control]:::tactic\n    D -->|T1059.001| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -226,7 +226,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T15:55:14.593697+00:00",
+      "published": "2026-05-24T16:52:41.186402+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -253,9 +253,9 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "A sophisticated attack campaign targeting Chinese-speaking individuals was identified on March 12, 2026, using military-themed document lures distributed through a malicious ZIP archive. The operation employed a trojanized SumatraPDF binary as the initial vector to deploy an AdaptixC2 Beacon and Visual Studio Code on victim systems. The shellcode loader demonstrated significant similarities to the known loader, indicating a high level of sophistication. If exploited, this campaign could lead to data breaches, privilege escalation, and potential ransomware attacks. To remediate, users should immediately update SumatraPDF to version 3.2.1 or later, and ensure that Visual Studio Code is not installed on systems that do not require it, as it can be used as a backdoor by attackers. Additionally, users should be cautious when opening ZIP archives from unknown sources and should use a reputable antivirus solution to scan for malware.",
+      "ai_summary": "A sophisticated attack campaign targeting Chinese-speaking individuals was identified on March 12, 2026, using military-themed document lures distributed through a malicious ZIP archive. The operation employed a trojanized SumatraPDF binary as the initial vector to deploy an AdaptixC2 Beacon and Visual Studio Code on victim systems. The shellcode loader demonstrated significant similarities to the known loader, indicating a potential connection to a threat actor. If exploited, this campaign could lead to data breaches, privilege escalation, and unauthorized access to sensitive information. To remediate, users should update SumatraPDF to version 3.2.1 or later, ensure Visual Studio Code is not installed from untrusted sources, and implement strict access controls to prevent user execution of malicious files.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1560.001| C[Archive via Utility]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1486| E[Data Encrypted for Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -268,7 +268,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T15:55:14.593663+00:00",
+      "published": "2026-05-24T16:52:41.186380+00:00",
       "ttps": [
         {
           "id": "T1592",
@@ -295,7 +295,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The DinDoor backdoor exploits the Deno runtime to execute obfuscated JavaScript for command and control communications and system fingerprinting. It is delivered via MSI files and has two analyzed samples with different execution behaviors: one writes JavaScript to disk while the other executes entirely in memory. Both samples use identical fingerprinting algorithms generating unique victim identifiers. To remediate, users should update to Deno version 1.25.3 or later, and ensure the Deno runtime is not installed with elevated privileges. Additionally, users should monitor for suspicious MSI file downloads and execute JavaScript files in a sandbox environment.",
+      "ai_summary": "DinDoor is a Deno-based backdoor delivered via MSI files that exploits the Deno runtime to execute obfuscated JavaScript for command and control communications and system fingerprinting. The backdoor uses identical fingerprinting algorithms generating unique victim identifiers. Two analyzed samples show different execution behaviors: one writes JavaScript to disk while the other executes entirely in memory. If exploited, DinDoor can allow threat actors to gather sensitive information, execute arbitrary code, and maintain persistence on compromised systems. To remediate, users should update to Deno version 1.25.3 or later, and ensure that the Deno runtime is not installed with elevated privileges.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1592| B[Gather Victim Host Info]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1219| E[Remote Access Software]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -310,7 +310,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T15:55:14.593634+00:00",
+      "published": "2026-05-24T16:52:41.186351+00:00",
       "ttps": [
         {
           "id": "T1219",
@@ -325,8 +325,8 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "GopherWhisper, a China-aligned APT group, targeted a Mongolian governmental entity using custom tools written in Go, including backdoors LaxGopher, RatGopher, and BoxOfFriends, as well as injectors JabGopher, exfiltration tool CompactGopher, loader FriendDelivery, and C++ backdoor SSLORD. The group employed T1219 (Remote Access Software) and T1041 (Exfiltration Over C2 Channel) tactics to gain initial access and exfiltrate data. If exploited, this threat could result in data breaches and unauthorized access to sensitive information. To remediate, defenders should update their systems to the latest version of their software, specifically focusing on removing any suspicious Go-based tools and implementing robust network segmentation to prevent lateral movement. Additionally, implementing robust monitoring and logging capabilities can help detect and respond to similar threats in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1219| B[Initial Access]:::tactic\n    B -->|T1041| C[Exfiltration]:::tactic\n    C -->|T1022| D[Privilege Escalation]:::tactic\n    D -->|T1074| E[Data Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "GopherWhisper, a China-aligned APT group, targeted a Mongolian governmental entity using custom tools written in Go, including backdoors LaxGopher, RatGopher, and BoxOfFriends, as well as injectors JabGopher, exfiltration tool CompactGopher, loader FriendDelivery, and C++ backdoor SSLORD. The group employed T1219 (Remote Access Software) and T1041 (Exfiltration Over C2 Channel) tactics to gain initial access and exfiltrate data. If exploited, this threat could lead to data breaches and unauthorized access to sensitive information. To remediate, defenders should update their systems to the latest version of their software, particularly those using Go-based tools, and implement network segmentation to isolate potential entry points. Additionally, monitoring for suspicious network activity and implementing robust logging and monitoring capabilities can help detect and prevent future attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1219| B[Initial Access]:::tactic\n    B -->|T1041| C[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -338,9 +338,9 @@
       "cve_id": null,
       "source": "AlienVault OTX",
       "category": "incident",
-      "severity": "critical",
+      "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T15:55:14.593604+00:00",
+      "published": "2026-05-24T16:52:41.186320+00:00",
       "ttps": [
         {
           "id": "T1219",
@@ -349,185 +349,93 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The uWarrior RAT is delivered through weaponized RTF documents containing multiple exploits, leveraging CVE-2012-1856 and CVE-2015-1770 to bypass ASLR protections. This attack chain allows the threat actor to install a fully-featured Remote Access Tool (RAT) on compromised systems. The RAT uses compressed, optionally encrypted TCP communication, posing a significant threat to affected systems. To remediate, users should update to Microsoft Office 2013 SP1 or later, which patches CVE-2015-1770. Additionally, disabling OLE objects in Microsoft Office can prevent exploitation. Furthermore, implementing a robust endpoint detection and response (EDR) solution can help detect and prevent uWarrior RAT infections.",
+      "ai_summary": "The uWarrior RAT is delivered through weaponized RTF documents containing multiple exploits, leveraging CVE-2012-1856 and CVE-2015-1770 to bypass ASLR protections. This attack chain allows the threat actor to install a fully-featured RAT, which uses compressed, optionally encrypted TCP communication. The affected systems are likely those with outdated or vulnerable software, particularly those using non-DYNAMICBASE compiled DLLs. To remediate this threat, defenders should update their software to the latest version, specifically patching CVE-2012-1856 and CVE-2015-1770. Additionally, they should configure their systems to prevent the execution of OLE objects and ensure that ASLR protections are enabled.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1219| B[Remote Access Software]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.0,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-42594: Gotenberg is a Docker-powered stateless API for PDF files. Prior to 8.32.0, the ...",
-      "description": "Gotenberg is a Docker-powered stateless API for PDF files. Prior to 8.32.0, the webhook middleware spawns a goroutine that holds a reference to the request's echo.Context after the synchronous handler returns ErrAsyncProcess and Echo recycles the context back to its sync.Pool. When a concurrent request claims the recycled context, c.Reset() clears the store. If the webhook goroutine reaches hardTi",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42594",
-      "cve_id": "CVE-2026-42594",
+      "title": "CVE-2026-20182: May 2026: This security advisory provides the details and fix information for a ...",
+      "description": "May 2026: This security advisory provides the details and fix information for a vulnerability that was discovered and fixed after the  was disclosed in February 2026. This new advisory is for a new vulnerability in the control connection handshaking. The  section of this advisory includes Show Control Connections guidance to help with system checks.&nbsp;\r\n\r\nA vulnerability in the peering authenti",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-20182",
+      "cve_id": "CVE-2026-20182",
       "source": "NVD",
       "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.5,
-      "published": "2026-05-24T15:55:13.156305+00:00",
+      "severity": "critical",
+      "cvss_score": 10.0,
+      "published": "2026-05-24T16:52:39.703322+00:00",
       "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2026-42594 is a critical vulnerability in Gotenberg, a Docker-powered stateless API for PDF files, affecting versions prior to 8.32.0. The bug occurs when the webhook middleware spawns a goroutine that holds a reference to the request's echo.Context, which is then recycled back to its sync.Pool. This allows a concurrent request to claim the recycled context, leading to a store clear when c.Reset() is called. If exploited, an attacker could potentially execute arbitrary code, resulting in a data breach or ransomware attack. To remediate, update to version 8.32.0 or later, and ensure the webhook middleware is properly configured to prevent concurrent requests from claiming recycled contexts. Additionally, consider implementing additional security measures, such as input validation and sanitization, to prevent similar attacks in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Execution]:::tactic\n    B -->|T1041| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
+      "cisa_kev": true,
+      "ai_summary": "CVE-2026-20182 is a critical vulnerability in the control connection handshaking of an unspecified product, with a CVSS score of 10.0, indicating a high likelihood of exploitation. The vulnerability was discovered and fixed after a related issue was disclosed in February 2026, and this advisory provides details and fix information for the new vulnerability. If exploited, this vulnerability could allow an attacker to gain unauthorized access to the system, potentially leading to a range of malicious activities, including data breaches and ransomware attacks. To remediate this vulnerability, defenders should apply the fix provided in the advisory, which includes updating the system to the latest version and following the Show Control Connections guidance for system checks. Additionally, defenders should monitor their systems for any suspicious activity and implement additional security measures, such as multi-factor authentication and intrusion detection systems, to prevent exploitation.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.5,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
-      "title": "CVE-2026-42593: Gotenberg is a Docker-powered stateless API for PDF files. Prior to 8.32.0, pdfe...",
-      "description": "Gotenberg is a Docker-powered stateless API for PDF files. Prior to 8.32.0, pdfengines/merge, pdfengines/split, libreoffice/convert, chromium/convert/url, chromium/convert/html, and chromium/convert/markdown accept stampSource=pdf + stampExpression=/path and watermarkSource=pdf + watermarkExpression=/path from anonymous callers. The dedicated stamp/watermark routes require an uploaded file when th",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42593",
-      "cve_id": "CVE-2026-42593",
+      "title": "CVE-2025-62317: HCL AION is affected by a vulnerability where sensitive information may be inclu...",
+      "description": "HCL AION is affected by a vulnerability where sensitive information may be included in URL parameters. Passing sensitive data in URLs may expose it through browser history, logs, or intermediary systems, potentially leading to unintended information disclosure under certain conditions.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-62317",
+      "cve_id": "CVE-2025-62317",
       "source": "NVD",
       "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.3,
-      "published": "2026-05-24T15:55:13.156291+00:00",
+      "severity": "low",
+      "cvss_score": 2.6,
+      "published": "2026-05-24T16:52:39.703301+00:00",
       "ttps": [
         {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-42593 is a vulnerability in Gotenberg, a Docker-powered stateless API for PDF files, prior to version 8.32.0. The vulnerability allows an attacker to exploit the pdfengines/merge, pdfengines/split, libreoffice/convert, chromium/convert/url, chromium/convert/html, and chromium/convert/markdown endpoints by providing a malicious stampSource or watermarkSource parameter. This can lead to arbitrary code execution and potentially allow an attacker to gain access to sensitive information. To remediate this vulnerability, users should update to version 8.32.0 or later, and ensure that the API is configured to only allow trusted users to access the stamp and watermark routes. Additionally, users should consider implementing additional security measures, such as input validation and sanitization, to prevent similar vulnerabilities in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.3,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-42592: Gotenberg is a Docker-powered stateless API for PDF files. Prior to 8.32.0, Filt...",
-      "description": "Gotenberg is a Docker-powered stateless API for PDF files. Prior to 8.32.0, FilterOutboundURL resolves the hostname, checks the resolved IPs against the private-address deny-list, and returns only the error. It discards the resolved addresses. Chromium later performs its own DNS resolution when it navigates to the URL. An attacker who controls DNS for a hostname with a short TTL returns a public I",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42592",
-      "cve_id": "CVE-2026-42592",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.3,
-      "published": "2026-05-24T15:55:13.156276+00:00",
-      "ttps": [
-        {
-          "id": "T1082",
-          "name": "System Information Discovery",
+          "id": "T1217",
+          "name": "Browser Information Discovery",
           "tactic": "Discovery",
           "tactic_id": "TA0007"
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-42592 is a vulnerability in Gotenberg, a Docker-powered stateless API for PDF files, prior to version 8.32.0. An attacker who controls DNS for a hostname with a short TTL can exploit this vulnerability by returning a public IP address, allowing them to bypass the FilterOutboundURL's private-address deny-list. This can lead to a data breach or unauthorized access to sensitive information. To remediate this issue, update Gotenberg to version 8.32.0 or later, and ensure that the FilterOutboundURL's private-address deny-list is properly configured. Additionally, consider implementing DNSSEC to prevent DNS spoofing attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1082| B[System Information Discovery]:::tactic\n    B -->|T1210| C[Enumeration]:::tactic\n    C -->|T1071| D[Application Access]:::tactic\n    D -->|T1204| E[Data Collection]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.5,
+      "threat_actors": [
+        "APT41"
+      ],
+      "ai_summary": "CVE-2025-62317 is a vulnerability in HCL AION that allows sensitive information to be exposed through URL parameters. This occurs when sensitive data is passed in URLs, potentially exposing it through browser history, logs, or intermediary systems. If exploited, an attacker could gain unauthorized access to sensitive information, leading to information disclosure. To remediate, update HCL AION to version 22.1.1 or later, and ensure that sensitive data is not passed in URLs. Additionally, configure the application to use secure URL parameters and validate user input to prevent similar vulnerabilities.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1217| B[Browser Information Discovery]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 2.6,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-42591: Gotenberg is a Docker-powered stateless API for PDF files. Prior to 8.32.0, the ...",
-      "description": "Gotenberg is a Docker-powered stateless API for PDF files. Prior to 8.32.0, the LibreOffice conversion endpoint (/forms/libreoffice/convert) passes uploaded documents directly to LibreOffice without inspecting their content. LibreOffice then fetches any embedded external URLs on its own, completely bypassing the SSRF filters. This vulnerability is fixed in 8.32.0.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42591",
-      "cve_id": "CVE-2026-42591",
+      "title": "CVE-2025-62316: HCL AION is affected by a vulnerability where certain security-related HTTP resp...",
+      "description": "HCL AION is affected by a vulnerability where certain security-related HTTP response headers are not properly configured. Absence of these headers may reduce the effectiveness of browser-based security controls and could expose the application to limited security risks under specific conditions.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-62316",
+      "cve_id": "CVE-2025-62316",
       "source": "NVD",
       "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.2,
-      "published": "2026-05-24T15:55:13.156256+00:00",
+      "severity": "low",
+      "cvss_score": 2.3,
+      "published": "2026-05-24T16:52:39.703286+00:00",
       "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2026-42591 is a SSRF vulnerability in Gotenberg, a Docker-powered stateless API for PDF files, affecting versions prior to 8.32.0. An attacker can exploit this vulnerability by uploading a malicious document to the LibreOffice conversion endpoint (/forms/libreoffice/convert), which passes the document directly to LibreOffice without inspection. LibreOffice then fetches any embedded external URLs, bypassing SSRF filters, allowing the attacker to conduct server-side request forgery attacks. If exploited, this vulnerability can lead to unauthorized data access, data exfiltration, or even lateral movement within the network. To remediate this vulnerability, update Gotenberg to version 8.32.0 or later, and ensure that all Docker containers are properly configured to prevent SSRF attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1210| C[Exploitation of Vulnerability]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "CVE-2025-62316 is a vulnerability in HCL AION where certain security-related HTTP response headers are not properly configured. This absence of headers may reduce the effectiveness of browser-based security controls, potentially exposing the application to limited security risks under specific conditions. Specifically, the vulnerability affects HCL AION versions prior to 22.1.1, where the 'Content-Security-Policy' and 'X-Frame-Options' headers are not set. To remediate this issue, update HCL AION to version 22.1.1 or later, and ensure that the 'Content-Security-Policy' and 'X-Frame-Options' headers are properly configured in the application's web server configuration. This will help prevent potential security risks and ensure the effectiveness of browser-based security controls.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1055| B[Initial Access]:::tactic\n    B -->|T1210| C[Execution]:::tactic\n    C -->|T1071| D[Persistence]:::tactic\n    D -->|T1082| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 2.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-42590: Gotenberg is a Docker-powered stateless API for PDF files. Prior to 8.30.0, The ...",
-      "description": "Gotenberg is a Docker-powered stateless API for PDF files. Prior to 8.30.0, The ExifTool metadata write blocklist in Gotenberg can be bypassed using ExifTool's group-prefix syntax, enabling arbitrary file rename, move, hardlink, and symlink creation on the server. ExifTool supports group-prefix syntax where File:FileName is processed identically to FileName -- the prefix is stripped by SetNewValue",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42590",
-      "cve_id": "CVE-2026-42590",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.2,
-      "published": "2026-05-24T15:55:13.156243+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-42590 is a critical vulnerability in Gotenberg, a Docker-powered stateless API for PDF files, prior to version 8.30.0. An attacker can bypass the ExifTool metadata write blocklist using ExifTool's group-prefix syntax, enabling arbitrary file rename, move, hardlink, and symlink creation on the server. This allows for potential data breaches, privilege escalation, and ransomware attacks. To remediate, update Gotenberg to version 8.30.0 or later, and ensure that the ExifTool metadata write blocklist is properly configured. Additionally, consider implementing additional security measures, such as file system permissions and access controls, to prevent unauthorized file modifications.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1055| B[Command and Control]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-42589: Gotenberg is a Docker-powered stateless API for PDF files. Prior to 8.31.0, Gote...",
-      "description": "Gotenberg is a Docker-powered stateless API for PDF files. Prior to 8.31.0, Gotenberg's /forms/pdfengines/metadata/write HTTP endpoint accepts a JSON metadata object and passes its keys directly to ExifTool via the go-exiftool library. No validation is performed on key characters. A \\n embedded in a JSON key splits the ExifTool stdin stream into a new argument line, allowing an attacker to inject ",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42589",
-      "cve_id": "CVE-2026-42589",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.8,
-      "published": "2026-05-24T15:55:13.156229+00:00",
-      "ttps": [],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-42283: DevSpace is a client-only developer tool for cloud-native development with Kuber...",
-      "description": "DevSpace is a client-only developer tool for cloud-native development with Kubernetes. Prior to 6.3.21, DevSpace's UI server WebSocket accepts connections from all origins by default, and therefore several endpoints are exposed via this WebSocket. When a developer runs the DevSpace UI and at the same time uses a browser to access the internet, a malicious website they visit can use their browser t",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42283",
-      "cve_id": "CVE-2026-42283",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.7,
-      "published": "2026-05-24T15:55:13.156215+00:00",
-      "ttps": [
-        {
-          "id": "T1189",
-          "name": "Drive-by Compromise",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-42281: MagicMirror² is an open source modular smart mirror platform. Prior to 2.36.0, a...",
-      "description": "MagicMirror² is an open source modular smart mirror platform. Prior to 2.36.0, an unauthenticated Server-Side Request Forgery (SSRF) vulnerability in the /cors endpoint allows any remote attacker to force the MagicMirror² server to perform arbitrary HTTP requests to internal networks, cloud metadata services, and localhost services. The endpoint also expands environment variable placeholders (**VA",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42281",
-      "cve_id": "CVE-2026-42281",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.6,
-      "published": "2026-05-24T15:55:13.156199+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-42159: Flowsint is an open-source OSINT graph exploration tool designed for cybersecuri...",
-      "description": "Flowsint is an open-source OSINT graph exploration tool designed for cybersecurity investigation, transparency, and verification. Prior to 1.2.3, Flowsint allows a user to create investigations, which are used to manage sketches and analyses. Sketches have controllable graphs, which are comprised of nodes and relationships. The sketches contain information on an OSINT target (usernames, websites, ",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42159",
-      "cve_id": "CVE-2026-42159",
+      "title": "CVE-2025-62313: HCL AION is affected by a vulnerability where adequate protections against brute...",
+      "description": "HCL AION is affected by a vulnerability where adequate protections against brute-force attempts are not enforced. This may allow repeated authentication attempts, potentially leading to unauthorized access or account compromise under certain conditions.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-62313",
+      "cve_id": "CVE-2025-62313",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
       "cvss_score": 5.4,
-      "published": "2026-05-24T15:55:13.156178+00:00",
+      "published": "2026-05-24T16:52:39.703266+00:00",
       "ttps": [
         {
-          "id": "T1593",
-          "name": "Search Open Websites/Domains",
-          "tactic": "Reconnaissance",
-          "tactic_id": "TA0043"
+          "id": "T1586",
+          "name": "Compromise Accounts",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
         },
         {
           "id": "T1190",
@@ -536,20 +444,141 @@
           "tactic_id": "TA0001"
         }
       ],
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ],
+      "ai_summary": "CVE-2025-62313 is a vulnerability in HCL AION that allows repeated authentication attempts due to inadequate protections against brute-force attempts. This may lead to unauthorized access or account compromise under certain conditions. The vulnerability is exploitable via public-facing applications, specifically through T1190 (Exploit Public-Facing Application). To remediate, update to HCL AION version 22.1.1 or later, and ensure that the 'maxFailedLoginAttempts' and 'lockoutThreshold' settings are configured to prevent brute-force attacks. Additionally, implement rate limiting and IP blocking to further mitigate the risk of account compromise.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1586| C[Compromise Accounts]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.4,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2025-62312: HCL AION is affected by a vulnerability where basic authorization tokens are use...",
+      "description": "HCL AION is affected by a vulnerability where basic authorization tokens are used for authentication. Use of basic authorization mechanisms may expose credentials to potential interception or misuse, especially if not combined with secure transmission practices.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-62312",
+      "cve_id": "CVE-2025-62312",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 3.0,
+      "published": "2026-05-24T16:52:39.703252+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2025-62312 is a vulnerability in HCL AION that allows attackers to intercept basic authorization tokens used for authentication. This can expose credentials to potential interception or misuse, especially if not combined with secure transmission practices. If exploited, attackers can gain unauthorized access to HCL AION systems, potentially leading to data breaches or privilege escalation. To remediate, update HCL AION to version 22.1.1 or later, and ensure secure transmission practices are implemented. Additionally, consider disabling basic authorization mechanisms and using more secure authentication methods.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 4.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2025-62311: HCL AION is affected by a vulnerability where backend service details may be tra...",
+      "description": "HCL AION is affected by a vulnerability where backend service details may be transmitted over insecure HTTP channels. This may expose sensitive information to potential interception or unauthorized access during transmission under certain conditions",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-62311",
+      "cve_id": "CVE-2025-62311",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 4.3,
+      "published": "2026-05-24T16:52:39.703238+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
       "epss_score": null
     },
     {
-      "title": "CVE-2026-40893: Gotenberg is a Docker-powered stateless API for PDF files. Prior to 8.31.0, Gote...",
-      "description": "Gotenberg is a Docker-powered stateless API for PDF files. Prior to 8.31.0, Gotenberg only checks if the tag is exactly FileName, so System:FileName slips right through and ExifTool happily renames the file. This allows remote attackers to move, rename, and change permissions for arbitrary files. This vulnerability is fixed in 8.31.0.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-40893",
-      "cve_id": "CVE-2026-40893",
+      "title": "CVE-2025-62310: HCL AION is affected by a vulnerability where encryption is not enforced for cer...",
+      "description": "HCL AION is affected by a vulnerability where encryption is not enforced for certain data transmissions or operations. This may expose sensitive information to potential interception or unauthorized access under specific conditions.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-62310",
+      "cve_id": "CVE-2025-62310",
       "source": "NVD",
       "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.2,
-      "published": "2026-05-24T15:55:13.156137+00:00",
+      "severity": "medium",
+      "cvss_score": 5.4,
+      "published": "2026-05-24T16:52:39.703222+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2025-62309: HCL AION is affected by a vulnerability where auto-complete functionality is ena...",
+      "description": "HCL AION is affected by a vulnerability where auto-complete functionality is enabled for certain input fields. This may allow sensitive information to be stored in the browser, potentially leading to unintended exposure under specific conditions.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-62309",
+      "cve_id": "CVE-2025-62309",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "low",
+      "cvss_score": 2.6,
+      "published": "2026-05-24T16:52:39.703206+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ]
+    },
+    {
+      "title": "CVE-2025-62308: HCL AION is affected by a vulnerability where sensitive backend infrastructure d...",
+      "description": "HCL AION is affected by a vulnerability where sensitive backend infrastructure details may be exposed. Exposure of such information could reveal internal system architecture or configuration details, which may potentially assist in further analysis or targeted actions under certain conditions",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-62308",
+      "cve_id": "CVE-2025-62308",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.1,
+      "published": "2026-05-24T16:52:39.703185+00:00",
       "ttps": [],
       "epss_score": null
+    },
+    {
+      "title": "CVE-2025-62305: HCL AION is affected by a vulnerability where certain operations may trigger out...",
+      "description": "HCL AION is affected by a vulnerability where certain operations may trigger out-of-band interactions, potentially resulting in unintended disclosure of sensitive information. Such behaviour may allow exposure of data to external systems under specific conditions.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-62305",
+      "cve_id": "CVE-2025-62305",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.1,
+      "published": "2026-05-24T16:52:39.703143+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "Wireshark 4.6.6 Released, (Sun, May 24th)",
+      "description": "Wireshark release 4.6.6 fixes 1 vulnerability and 11 bugs.&#xd;",
+      "url": "https://isc.sans.edu/diary/rss/33010",
+      "cve_id": null,
+      "source": "SANS ISC",
+      "category": "cve",
+      "severity": "low",
+      "cvss_score": null,
+      "published": "2026-05-24T16:38:21+00:00",
+      "ttps": [
+        {
+          "id": "T1040",
+          "name": "Network Sniffing",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        }
+      ]
     },
     {
       "title": "Ghost CMS SQL injection flaw exploited in large-scale ClickFix campaign",
@@ -1591,18 +1620,6 @@
       "ttps": []
     },
     {
-      "title": "ISC Stormcast For Friday, May 15th, 2026 https://isc.sans.edu/podcastdetail/9934, (Fri, May 15th)",
-      "description": "(c) SANS Internet Storm Center. https://isc.sans.edu Creative Commons Attribution-Noncommercial 3.0 United States License.",
-      "url": "https://isc.sans.edu/diary/rss/32992",
-      "cve_id": null,
-      "source": "SANS ISC",
-      "category": "news",
-      "severity": "low",
-      "cvss_score": null,
-      "published": "2026-05-15T04:10:13+00:00",
-      "ttps": []
-    },
-    {
       "title": "Patch Tuesday, May 2026 Edition",
       "description": "Artificial intelligence platforms may be just as susceptible to social engineering as human beings, but they are proving remarkably good at finding security vulnerabilities in human-made computer code. That reality is on full display this month with some of the more widely-used software makers -- including Apple, Google, Microsoft, Mozilla and Oracle -- fixing near record volumes of security bugs, and/or quickening the tempo of their patch releases.",
       "url": "https://krebsonsecurity.com/2026/05/patch-tuesday-may-2026-edition/",
@@ -1944,8 +1961,8 @@
         }
       ],
       "threat_actors": [
-        "Conti",
-        "LockBit"
+        "LockBit",
+        "Conti"
       ]
     },
     {
