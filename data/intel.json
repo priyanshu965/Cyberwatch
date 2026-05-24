@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-24T13:03:04.654155+00:00",
+  "last_updated": "2026-05-24T14:57:09.034413+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T13:01:18.888820+00:00",
+      "published": "2026-05-24T14:55:22.664131+00:00",
       "ttps": [
         {
           "id": "T1555.003",
@@ -56,7 +56,7 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The TwizAdmin operation is a sophisticated multi-stage malware campaign that targets Windows and macOS systems, leveraging various tactics to steal sensitive information and extort victims. The malware uses a combination of techniques, including clipboard hijacking to steal cryptocurrency, BIP-39 seed phrase theft, and browser credential exfiltration, to compromise victim systems. The operation is managed via a FastAPI-based panel with a license key system, allowing attackers to customize and control the malware. To remediate this threat, defenders should implement robust clipboard monitoring and filtering, utilize browser extensions that encrypt and protect sensitive data, and ensure all systems are updated with the latest security patches. Additionally, defenders should block access to the exposed C2 panel at 103.241.66[.]238:1337 to prevent further exploitation.",
+      "ai_summary": "The TwizAdmin operation is a sophisticated multi-stage malware campaign that targets Windows and macOS systems, leveraging various techniques such as cryptocurrency clipboard hijacking, BIP-39 seed phrase theft, and browser credential exfiltration. The malware uses a Java RAT builder and a FastAPI-based panel with a license key system for management, and has been observed using FedEx and other themes for phishing. To exploit this vulnerability, attackers use T1555.003 to steal credentials from web browsers, T1115 to hijack clipboard data, and T1071 to communicate over application layer protocols. Defenders can remediate this threat by implementing specific security controls such as input validation, secure coding practices, and regular security audits, and updating their systems to the latest versions, such as ensuring all browsers are updated to the latest patch levels. Additionally, defenders should monitor for suspicious activity related to the exposed C2 panel at 103.241.66[.]238:1337.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1555.003| B[Initial Access]:::tactic\n    B -->|T1115| C[Execution]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -71,7 +71,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T13:01:18.888801+00:00",
+      "published": "2026-05-24T14:55:22.664111+00:00",
       "ttps": [
         {
           "id": "T1574.002",
@@ -98,7 +98,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The FudCrypt malware crypting service utilizes a multi-stage deployment package to evade detection, featuring DLL sideloading via T1574.002, which allows attackers to load malicious DLLs into legitimate processes. This, combined with T1068 exploitation for privilege escalation, enables the malware to gain elevated privileges and interfere with security mechanisms such as AMSI and ETW. Real-world impact includes the potential for widespread malware distribution, with over 200 registered users on the FudCrypt platform, and the ability to tamper with Windows Defender through Group Policy modifications. To remediate, defenders should implement strict DLL loading policies, monitor for suspicious ETW and AMSI activity, and ensure that Group Policy settings are regularly audited and updated, specifically focusing on CMSTPLUA and Windows Defender configurations.",
+      "ai_summary": "The FudCrypt malware crypting service utilizes a multi-stage deployment package to evade detection, featuring DLL sideloading via T1574.002, which allows attackers to load malicious DLLs into legitimate processes. This, combined with T1068 exploitation for privilege escalation, enables the malware to gain elevated privileges and interfere with security mechanisms such as AMSI and ETW. Real-world impact includes the potential for widespread malware distribution, with over 200 registered users of the FudCrypt service, affecting various organizations and individuals. To remediate, defenders should implement specific measures such as monitoring for suspicious DLL loading, restricting privileges, and ensuring up-to-date Windows Defender configurations, specifically focusing on Group Policy settings to prevent tampering. Additionally, defenders should be aware of the T1027 obfuscated files or information tactic used by FudCrypt to hide its malicious activities.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1574.002| B[Initial Access]:::tactic\n    B -->|T1068| C[Privilege Escalation]:::tactic\n    C -->|T1027| D[Defense Evasion]:::tactic\n    D -->|T1104| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
@@ -113,7 +113,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T13:01:18.888777+00:00",
+      "published": "2026-05-24T14:55:22.664087+00:00",
       "ttps": [
         {
           "id": "T1583.005",
@@ -128,9 +128,9 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The Linux endpoint was compromised by two distinct threat actors, Actor A and Actor B, who deployed a cryptominer and a multi-revenue botnet, respectively. Actor A's cryptominer mined Monero to a private pool, while Actor B's botnet included XMRig mining, residential proxy services, and bandwidth-selling components with eight different persistence mechanisms. The real-world impact of this incident is significant, as the compromised endpoint can be used for various malicious activities, including cryptocurrency mining, proxying, and bandwidth selling, affecting the organization's resources and potentially leading to financial losses. To remediate this incident, defenders should immediately isolate the affected endpoint, remove any suspicious files and programs, and update their security software to the latest versions, such as ClamAV 0.103.4 or later, and configure their systems to prevent similar attacks, including disabling any unnecessary services and restricting access to sensitive areas of the system. Additionally, defenders should monitor their systems for any signs of suspicious activity, such as unusual network traffic or CPU usage, and implement a robust incident response plan to quickly respond to similar incidents in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Initial Access]:::tactic\n    B -->|T1496| C[Execution]:::tactic\n    C -->|T1059.001| D[Persistence]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "The Linux endpoint was compromised by two distinct threat actors, Actor A and Actor B, who deployed a cryptominer and a multi-revenue botnet, respectively. Actor A's cryptominer mined Monero to a private pool, while Actor B's botnet included XMRig mining, residential proxy services, and bandwidth-selling components with eight different persistence mechanisms. The real-world impact of this incident is significant, as it highlights the risks of relying on AI agents like OpenAI's Codex for security remediation, and the importance of implementing robust security measures to prevent such compromises. To remediate this incident, defenders should immediately isolate the affected endpoint, remove any suspicious files and programs, and update their security software to the latest versions, such as ClamAV 0.103.3 or later. Additionally, defenders should implement a robust monitoring system to detect and respond to similar incidents in the future.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Initial Access]:::tactic\n    B -->|T1496| C[Execution]:::tactic\n    C -->|T1059.001| D[Persistence]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -143,7 +143,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T13:01:18.888749+00:00",
+      "published": "2026-05-24T14:55:22.664043+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -158,8 +158,8 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "The Checkmarx KICS supply chain compromise involves malicious artifacts in official Docker Hub images (tags v2.1.20, v2.1.21, alpine) and VS Code extensions (versions 1.17.0, 1.19.0), allowing attackers to exfiltrate credentials from infrastructure-as-code scan reports. The trojanized KICS binary collects and encrypts sensitive data, which is then transmitted over a command and control channel, as indicated by the detected TTP T1041. To mitigate this threat, defenders should immediately remove and replace affected Docker images and VS Code extensions with clean versions, and rotate any potentially exposed credentials. Additionally, monitoring network traffic for suspicious activity related to the compromised KICS binary is crucial. Users of the affected Docker images and VS Code extensions should also verify the integrity of their scan reports and infrastructure-as-code configurations.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1041| C[Exfiltration]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1195| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Checkmarx KICS supply chain compromise involves malicious artifacts in official Docker Hub images (tags v2.1.20, v2.1.21, alpine) and VS Code extensions (versions 1.17.0, 1.19.0), allowing attackers to exfiltrate encrypted scan reports containing credentials from infrastructure-as-code. This vulnerability is attributed to a supply chain compromise (T1195) and enables data exfiltration over a C2 channel (T1041). If exploited, this could lead to unauthorized access to sensitive infrastructure credentials, affecting organizations using the compromised KICS versions. To remediate, defenders should immediately update to a version outside the affected range (e.g., v2.1.22 or later) and remove any installed VS Code extensions with versions 1.17.0 or 1.19.0. Additionally, users should verify the integrity of their KICS installations and scan reports to detect any potential data exfiltration.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Exfiltration]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -173,10 +173,10 @@
       "category": "incident",
       "severity": "medium",
       "cvss_score": null,
-      "published": "2026-05-24T13:01:18.888714+00:00",
+      "published": "2026-05-24T14:55:22.664017+00:00",
       "ttps": [],
-      "ai_summary": "The threat involves a DPRK-linked fake IT worker infrastructure, identified through the domain luckyguys[.]site, which is connected to illicit cryptocurrency payments. Analysis of network activity from IP 163.245.219[.]19 over 30 days revealed a high concentration of VPN usage, with Astrill VPN, Mullvad, and Proton VPN being the most prominent. This suggests that the threat actors are attempting to mask their location and identity. To mitigate this threat, defenders should monitor for unusual VPN usage patterns, particularly from American and Latvian residents, and implement geo-IP blocking for high-risk countries. Additionally, cryptocurrency exchanges and related services should enhance their anti-money laundering (AML) and know-your-customer (KYC) protocols to prevent illicit transactions.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1071| B[Command and Control]:::tactic\n    B -->|T1190| C[Execution]:::tactic\n    C -->|T1041| D[Exfiltration]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The threat involves a DPRK-linked fake IT worker infrastructure, where malicious actors utilize VPN services to conceal their network activity. Analysis of 30 days of network activity associated with IP 163.245.219[.]19 revealed a high concentration of Astrill VPN, Mullvad, and Proton VPN usage. If exploited, this could lead to unauthorized access to sensitive information and financial systems, particularly affecting cryptocurrency researchers and American and Latvian residents. To remediate, defenders should implement robust network monitoring and VPN traffic analysis, focusing on suspicious activity from IP 163.245.219[.]19 and domains like luckyguys[.]site. Additionally, updating VPN software to the latest versions, such as Astrill VPN 3.1.0, Mullvad 2022.4, and Proton VPN 2.3.1, can help mitigate potential vulnerabilities.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1071| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1021| D[Persistence]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 6.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -190,7 +190,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T13:01:18.888689+00:00",
+      "published": "2026-05-24T14:55:22.663990+00:00",
       "ttps": [
         {
           "id": "T1059.001",
@@ -211,7 +211,7 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "A newly observed ClickFix variant exploits native Windows utilities, specifically cmdkey and regsvr32, for payload delivery. Victims are socially engineered through fake CAPTCHA pages to execute a malicious command via the Windows Run dialog. The single command chains multiple actions: staging credentials using cmdkey, retrieving a remote DLL via regsvr32 from a UNC path. This attack vector allows threat actors to bypass traditional PowerShell-based detection methods. To remediate, ensure that Windows Defender Application Guard is enabled, and configure Windows Firewall to block incoming traffic on the UNC path used for DLL retrieval. Additionally, update Windows to the latest version, specifically KB5006674 or later, to patch the vulnerability.",
+      "ai_summary": "A newly observed ClickFix variant exploits native Windows utilities, specifically cmdkey and regsvr32, for payload delivery. Victims are socially engineered through fake CAPTCHA pages to execute a malicious command via the Windows Run dialog. The single command chains multiple actions: staging credentials using cmdkey, retrieving a remote DLL via regsvr32 from a UNC path. This attack vector allows threat actors to bypass traditional PowerShell-based detection methods. To remediate, ensure that Windows Defender Application Guard is enabled for Internet Explorer and Microsoft Edge, and configure Windows Firewall to block incoming connections to the UNC path used for DLL retrieval. Additionally, implement a robust CAPTCHA solution to prevent social engineering attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1218.010| C[Execution]:::tactic\n    C -->|T1555.004| D[Command and Control]:::tactic\n    D -->|T1059.001| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -226,7 +226,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T13:01:18.888668+00:00",
+      "published": "2026-05-24T14:55:22.663969+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -253,9 +253,9 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "A sophisticated attack campaign targeting Chinese-speaking individuals was identified on March 12, 2026, utilizing military-themed document lures distributed through a malicious ZIP archive. The operation employed a trojanized SumatraPDF binary as the initial vector to deploy an AdaptixC2 Beacon and Visual Studio Code on victim systems. The shellcode loader demonstrated significant similarities to the known loader, indicating a high level of sophistication. If exploited, this campaign could lead to data breaches, privilege escalation, and potential ransomware attacks. To remediate, users should update SumatraPDF to version 3.2.1 or later, ensure Visual Studio Code is not installed from untrusted sources, and implement strict access controls to prevent user execution of malicious files.",
+      "ai_summary": "A sophisticated attack campaign targeting Chinese-speaking individuals was identified on March 12, 2026, using military-themed document lures distributed through a malicious ZIP archive. The operation employed a trojanized SumatraPDF binary as the initial vector to deploy an AdaptixC2 Beacon and Visual Studio Code on victim systems. The shellcode loader demonstrated significant similarities to the known loader, indicating a high level of sophistication. If exploited, this campaign could lead to data breaches, privilege escalation, and potential ransomware attacks. To remediate, users should immediately update SumatraPDF to version 3.2.1 or later, and ensure that Visual Studio Code is not installed from untrusted sources. Additionally, users should be cautious when opening ZIP archives from unknown sources and avoid executing files from untrusted locations.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1560.001| C[Archive via Utility]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1486| E[Data Encrypted for Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -268,7 +268,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T13:01:18.888647+00:00",
+      "published": "2026-05-24T14:55:22.663947+00:00",
       "ttps": [
         {
           "id": "T1592",
@@ -295,8 +295,8 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The DinDoor backdoor exploits the Deno runtime to execute obfuscated JavaScript for command and control communications and system fingerprinting. Affected systems include Windows devices running Deno versions prior to 1.25.0, which can be exploited via MSI files. If exploited, DinDoor can write JavaScript to disk or execute entirely in memory, allowing threat actors to gather victim host information, obfuscate files, and establish remote access. To remediate, users should update to Deno version 1.25.0 or later, and ensure that the Deno runtime is not installed on vulnerable systems. Additionally, users should monitor for suspicious MSI files and JavaScript execution.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1592| B[Gather Victim Host Info]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1219| E[Remote Access Software]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The DinDoor backdoor exploits the Deno runtime to deliver obfuscated JavaScript for command and control communications and system fingerprinting. It is delivered via MSI files and has been observed in two different execution behaviors: one writes JavaScript to disk while the other executes entirely in memory. Both samples use identical fingerprinting algorithms generating unique victim identifiers. To remediate, users should update to Deno version 1.25.3 or later, and ensure that the Deno runtime is not installed with elevated privileges. Additionally, users should monitor for suspicious MSI files and JavaScript execution in memory.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1027| B[Obfuscated Files or Information]:::tactic\n    B -->|T1071| C[Application Layer Protocol]:::tactic\n    C -->|T1592| D[Gather Victim Host Info]:::tactic\n    D -->|T1219| E[Remote Access Software]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -310,7 +310,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T13:01:18.888618+00:00",
+      "published": "2026-05-24T14:55:22.663918+00:00",
       "ttps": [
         {
           "id": "T1219",
@@ -340,7 +340,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T13:01:18.888588+00:00",
+      "published": "2026-05-24T14:55:22.663886+00:00",
       "ttps": [
         {
           "id": "T1219",
@@ -349,22 +349,171 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The uWarrior RAT is delivered through weaponized RTF documents containing multiple exploits, specifically leveraging CVE-2012-1856 and CVE-2015-1770. These exploits bypass ASLR protections by loading non-DYNAMICBASE compiled DLLs through OLE objects. If exploited, uWarrior grants the threat actor remote access to the compromised system, allowing for potential data exfiltration or lateral movement. To remediate, users should update their Microsoft Office software to version 2013 SP1 or later, which includes patches for CVE-2012-1856. Additionally, users should ensure that their systems are running Windows 10 or later, which includes improved ASLR protections.",
+      "ai_summary": "The uWarrior RAT is delivered through weaponized RTF documents containing multiple exploits, specifically leveraging CVE-2012-1856 and CVE-2015-1770. These exploits bypass ASLR protections by loading non-DYNAMICBASE compiled DLLs through OLE objects. If exploited, the attack chain allows the threat actor to establish a fully-featured Remote Access Tool (RAT) with compressed, optionally encrypted TCP communication capabilities. To remediate, users should update their Microsoft Office software to versions 2013 SP1 or later, and ensure that ASLR protections are enabled. Additionally, users should implement a robust endpoint detection and response (EDR) solution to detect and prevent RAT activity.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1219| B[Remote Access Software]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-1630: WEBCON BPS is vulnerable to Reflected XSS via one of parameters used by \"/openin...",
-      "description": "WEBCON BPS is vulnerable to Reflected XSS via one of parameters used by \"/openinmobileapp\" endpoint. An attacker can send a specially crafted URL that, when opened by an authenticated user, results in arbitrary JavaScript execution in the victim's browser.\n\nThis issue was fixed in versions 2026.1.3.109 and 2025.2.1.293.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-1630",
-      "cve_id": "CVE-2026-1630",
+      "title": "CVE-2026-41933: Vvveb before 1.0.8.3 contains a directory listing information disclosure vulnera...",
+      "description": "Vvveb before 1.0.8.3 contains a directory listing information disclosure vulnerability that allows unauthenticated attackers to enumerate files and directories by accessing multiple paths lacking proper index directives in .htaccess files. Attackers can access directories such as admin asset paths, plugins, themes, and media folders to view filenames, file sizes, modification timestamps, and unren",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41933",
+      "cve_id": "CVE-2026-41933",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.3,
+      "published": "2026-05-24T14:55:21.051772+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1083",
+          "name": "File and Directory Discovery",
+          "tactic": "Discovery",
+          "tactic_id": "TA0007"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-41933 is a directory listing information disclosure vulnerability in Vvveb before 1.0.8.3. Unauthenticated attackers can exploit this vulnerability by accessing multiple paths lacking proper index directives in .htaccess files, allowing them to enumerate files and directories. This can lead to sensitive information disclosure, including admin asset paths, plugins, themes, and media folders. To remediate this vulnerability, update Vvveb to version 1.0.8.3 or later, and ensure that all .htaccess files have proper index directives. Additionally, consider implementing web application firewalls (WAFs) to block unauthorized access to sensitive directories.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1083| C[File and Directory Discovery]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-41932: Vvveb before 1.0.8.3 contains a stored cross-site scripting vulnerability in the...",
+      "description": "Vvveb before 1.0.8.3 contains a stored cross-site scripting vulnerability in the customer signup flow where the Signup::addUser() controller copies raw POST username values into the display_name field before sanitization occurs. Attackers can submit HTML and script markup in the username field during signup, which gets stripped from the username column but persisted verbatim in the display_name co",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41932",
+      "cve_id": "CVE-2026-41932",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 6.1,
+      "published": "2026-05-24T14:55:21.051757+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-41932 is a stored cross-site scripting (XSS) vulnerability in Vvveb before 1.0.8.3. Attackers can submit HTML and script markup in the username field during signup, which gets persisted verbatim in the display_name column. This allows attackers to inject malicious scripts that can be executed by other users, potentially leading to session hijacking or data tampering. To remediate, update to Vvveb 1.0.8.3 or later, and ensure the display_name field is properly sanitized. Additionally, consider implementing a Content Security Policy (CSP) to restrict the types of scripts that can be executed by the application.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Cross-Site Scripting]:::tactic\n    B -->|T1210| C[Web Shell]:::tactic\n    C -->|T1071| D[File and Directory Discovery]:::tactic\n    D -->|T1083| E[File and Directory Discovery]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.1,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-24712: Northern.tech CFEngine Enterprise and Community before 3.21.8, 3.24.3, and 3.27....",
+      "description": "Northern.tech CFEngine Enterprise and Community before 3.21.8, 3.24.3, and 3.27.0 allows Command injection.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-24712",
+      "cve_id": "CVE-2026-24712",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
+      "cvss_score": 7.3,
+      "published": "2026-05-24T14:55:21.051742+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-24712 is a command injection vulnerability in Northern.tech CFEngine Enterprise and Community before 3.21.8, 3.24.3, and 3.27.0. An attacker can exploit this vulnerability by injecting malicious commands, potentially leading to unauthorized access, data tampering, or system compromise. To remediate this issue, update to CFEngine Enterprise 3.21.8 or later, or CFEngine Community 3.24.3 or later. Additionally, ensure that the 'cf-agent' service is running with restricted privileges and configure the 'cfengine.conf' file to disable unnecessary features. This vulnerability affects systems running CFEngine Enterprise or Community, and exploitation can result in significant data breaches or system compromise.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-24711: Northern.tech CFEngine Enterprise before 3.21.8, 3.24.3, and 3.27.0 has Incorrec...",
+      "description": "Northern.tech CFEngine Enterprise before 3.21.8, 3.24.3, and 3.27.0 has Incorrect Access Control.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-24711",
+      "cve_id": "CVE-2026-24711",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.3,
+      "published": "2026-05-24T14:55:21.051719+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-24711 is a vulnerability in Northern.tech CFEngine Enterprise before 3.21.8, 3.24.3, and 3.27.0, allowing an attacker to exploit incorrect access control. This vulnerability can be exploited through network access, allowing an attacker to execute arbitrary code. If exploited, this vulnerability can lead to remote code execution, potentially allowing an attacker to gain elevated privileges. To remediate this vulnerability, update to version 3.21.9 or later, or apply the patch provided by Northern.tech. Additionally, ensure that the 'allow_anybody' configuration option is set to 'false'.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Execution]:::tactic\n    B -->|T1041| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.3,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-24710: Northern.tech CFEngine Enterprise before 3.21.8, 3.24.3, and 3.27.0 allows XSS....",
+      "description": "Northern.tech CFEngine Enterprise before 3.21.8, 3.24.3, and 3.27.0 allows XSS.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-24710",
+      "cve_id": "CVE-2026-24710",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 6.1,
+      "published": "2026-05-24T14:55:21.051704+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-24710 is a cross-site scripting (XSS) vulnerability in Northern.tech CFEngine Enterprise before versions 3.21.8, 3.24.3, and 3.27.0. An attacker can exploit this vulnerability by crafting a malicious URL that, when accessed by an authenticated user, injects arbitrary JavaScript code into the user's session. This allows the attacker to steal sensitive information, such as session tokens or credentials, or perform other malicious actions. To remediate this vulnerability, update to version 3.21.8 or later, or apply the patch provided by Northern.tech. Additionally, ensure that the 'allow_url_include' configuration option is set to 'off' in the CFEngine Enterprise configuration file.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.1,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-21730: Verba is affected by a Stored Cross-Site Scripting (XSS) vulnerability within it...",
+      "description": "Verba is affected by a Stored Cross-Site Scripting (XSS) vulnerability within its login logging mechanism. When an unauthenticated remote attacker attempts to log in using an incorrect username and password combination, the supplied username value is recorded in the application logs. Due to lack of input sanitization, an attacker can inject a malicious XSS payload into the username field.\nThis pay",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-21730",
+      "cve_id": "CVE-2026-21730",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
       "cvss_score": null,
-      "published": "2026-05-24T13:01:16.971920+00:00",
+      "published": "2026-05-24T14:55:21.051688+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2025-69443: Remote Code Execution in coleam00 Archon 0.1.0. A crafted HTML page, when access...",
+      "description": "Remote Code Execution in coleam00 Archon 0.1.0. A crafted HTML page, when accessed by a victim, can execute commands, run prompts on behalf of the user, control the Archon UI features, and steal all Archon information available on the UI including API keys.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-69443",
+      "cve_id": "CVE-2025-69443",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 6.3,
+      "published": "2026-05-24T14:55:21.051672+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2025-62628: Unsafe OpenSSL initialization within some AMD optional tools may allow a local u...",
+      "description": "Unsafe OpenSSL initialization within some AMD optional tools may allow a local user-privileged attacker to inject a malicious DLL, potentially resulting in arbitrary code execution.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-62628",
+      "cve_id": "CVE-2025-62628",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-05-24T14:55:21.051654+00:00",
       "ttps": [
         {
           "id": "T1059",
@@ -373,95 +522,18 @@
           "tactic_id": "TA0002"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-1630 is a Reflected Cross-Site Scripting (XSS) vulnerability in WEBCON BPS, affecting versions prior to 2026.1.3.109 and 2025.2.1.293. An attacker can craft a malicious URL that, when opened by an authenticated user, executes arbitrary JavaScript in the victim's browser. This allows for potential session hijacking, data theft, or other malicious activities. To remediate, update to version 2026.1.3.109 or 2025.2.1.293, and ensure the '/openinmobileapp' endpoint is properly validated to prevent similar attacks. Additionally, consider implementing Content Security Policy (CSP) to mitigate XSS risks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Command and Scripting Interpreter]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
-      "title": "CVE-2025-15025: Authorization bypass through User-Controlled key vulnerability in Yordam Informa...",
-      "description": "Authorization bypass through User-Controlled key vulnerability in Yordam Information Technology Consulting, Training and Electronic Systems Industry and Trade Inc. Library Automation System allows Exploitation of Trusted Identifiers.\n\nThis issue affects Library Automation System: from v.21.6 before v.22.1.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-15025",
-      "cve_id": "CVE-2025-15025",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.8,
-      "published": "2026-05-24T13:01:16.971905+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2025-15025 is a critical authorization bypass vulnerability in Yordam Information Technology Consulting's Library Automation System, affecting versions 21.6 to 22.0. An attacker can exploit this issue by manipulating user-controlled keys, allowing them to bypass trusted identifiers and gain unauthorized access. This vulnerability has a CVSS score of 8.8, indicating a high severity. To remediate, users should update to version 22.1 or later, and ensure that the 'key validation' feature is enabled in the system configuration. Additionally, administrators should review and restrict access to sensitive areas of the system to prevent potential exploitation.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.8,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-6008: Authorization bypass through User-Controlled key vulnerability in Im Park Inform...",
-      "description": "Authorization bypass through User-Controlled key vulnerability in Im Park Information Technology, Electronics, Press, Publishing and Advertising, Education Ltd. Co. DijiDemi allows Privilege Abuse.\n\nThis issue affects DijiDemi: from v4.5.12.1 before v4.5.13.0.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6008",
-      "cve_id": "CVE-2026-6008",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.8,
-      "published": "2026-05-24T13:01:16.971889+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-6008 is a User-Controlled key authorization bypass vulnerability in Im Park Information Technology's DijiDemi product, affecting versions prior to 4.5.13.0. This flaw allows Privilege Abuse, enabling attackers to bypass security checks and access unauthorized data or functionality. If exploited, an attacker could potentially gain elevated privileges, leading to data breaches or other malicious activities. To remediate this issue, users should update to DijiDemi version 4.5.13.0 or later, ensuring they apply the latest security patches and configuration changes. Additionally, it is recommended to implement strict access controls and monitor system activity for suspicious behavior.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1210| B[Reconnaissance]:::tactic\n    B -->|T1057| C[Collection]:::tactic\n    C -->|T1069| D[Privilege Abuse]:::tactic\n    D -->|T1071| E[Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.8,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-5798: Unsafe object reference (IDOR) in Stel Order v3.25.1 and earlier versions, speci...",
-      "description": "Unsafe object reference (IDOR) in Stel Order v3.25.1 and earlier versions, specifically in the ‘/app/FrontController’ endpoint, through manipulation of the ‘employeeID’ parameter. An authenticated attacker could exploit this vulnerability to access information about any employee (first names, last names, roles, job titles, and vacation records, among others) by modifying that identifier in request",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-5798",
-      "cve_id": "CVE-2026-5798",
+      "title": "CVE-2025-62625: Improper privilege management in the KVM key download component could allow an a...",
+      "description": "Improper privilege management in the KVM key download component could allow an attacker to swap tokens and download sensitive keys, potentially resulting in unauthorized access to privileged resources and loss of confidentiality.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-62625",
+      "cve_id": "CVE-2025-62625",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
       "cvss_score": null,
-      "published": "2026-05-24T13:01:16.971870+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-5798 is an unsafe object reference (IDOR) vulnerability in Stel Order v3.25.1 and earlier versions. An authenticated attacker can exploit this vulnerability by manipulating the 'employeeID' parameter in the '/app/FrontController' endpoint to access sensitive information about any employee, including first names, last names, roles, job titles, and vacation records. This vulnerability allows for information disclosure, which can be used for reconnaissance or to gather sensitive information. To remediate this vulnerability, update to Stel Order version 3.25.2 or later, and ensure that the 'employeeID' parameter is properly validated and sanitized in the '/app/FrontController' endpoint. Additionally, consider implementing additional security measures, such as access controls and auditing, to prevent unauthorized access to sensitive information.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1552| B[Initial Access]:::tactic\n    B -->|T1553| C[Execution]:::tactic\n    C -->|T1027| D[Command and Control]:::tactic\n    D -->|T1491| E[Resource Development]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-5790: Stored Cross-Site Scripting (XSS) in Stel Order v3.25.1 and earlier, located at ...",
-      "description": "Stored Cross-Site Scripting (XSS) in Stel Order v3.25.1 and earlier, located at the ‘/app/FrontController’ endpoint via the ‘legalName’ and ‘employeeID’ parameters. The lack of proper input sanitization allows an attacker to inject malicious code that is persistently stored in the database. When other users or administrators access the affected sections, the code executes in their browsers, enabli",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-5790",
-      "cve_id": "CVE-2026-5790",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": null,
-      "published": "2026-05-24T13:01:16.971847+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-5790 is a stored Cross-Site Scripting (XSS) vulnerability in Stel Order v3.25.1 and earlier. The vulnerability is located at the '/app/FrontController' endpoint via the 'legalName' and 'employeeID' parameters. An attacker can inject malicious code that is persistently stored in the database, which executes in the browsers of other users or administrators when they access the affected sections. This allows for potential data theft, session hijacking, or other malicious activities. To remediate, update to Stel Order v3.25.2 or later, and ensure proper input sanitization is implemented for the 'legalName' and 'employeeID' parameters.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-4031: The Database Backup for WordPress plugin for WordPress is vulnerable to authoriz...",
-      "description": "The Database Backup for WordPress plugin for WordPress is vulnerable to authorization bypass in all versions up to, and including, 2.5.2. This is due to the plugin not restricting access to the wp_db_temp_dir parameter, which controls where database backups are written. This makes it possible for unauthenticated attackers to send a request to wp-cron.php with a poisoned wp_db_temp_dir value pointi",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-4031",
-      "cve_id": "CVE-2026-4031",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.5,
-      "published": "2026-05-24T13:01:16.971827+00:00",
+      "published": "2026-05-24T14:55:21.051633+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -473,35 +545,15 @@
       "epss_score": null
     },
     {
-      "title": "CVE-2026-4030: The Database Backup for WordPress plugin for WordPress is vulnerable to unauthor...",
-      "description": "The Database Backup for WordPress plugin for WordPress is vulnerable to unauthorized arbitrary file read and deletion in all versions up to, and including, 2.5.2. This is due to the plugin not properly enforcing the return value of its authorization check combined with a user-controlled backup directory parameter. This makes it possible for unauthenticated attackers to read and delete arbitrary fi",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-4030",
-      "cve_id": "CVE-2026-4030",
+      "title": "CVE-2025-62619: Missing authentication in the KVM key download endpoint could allow an unauthent...",
+      "description": "Missing authentication in the KVM key download endpoint could allow an unauthenticated attacker with knowledge of the exposed URL to retrieve sensitive keys, potentially leading to loss of confidentiality.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-62619",
+      "cve_id": "CVE-2025-62619",
       "source": "NVD",
       "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.1,
-      "published": "2026-05-24T13:01:16.971810+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-4029: The Database Backup for WordPress plugin for WordPress is vulnerable to unauthor...",
-      "description": "The Database Backup for WordPress plugin for WordPress is vulnerable to unauthorized database export in all versions up to, and including, 2.5.2. This is due to the plugin not properly enforcing the return value of its authorization check. This makes it possible for unauthenticated attackers to export database tables, leading to Sensitive Information Exposure. Note: This vulnerability is only expl",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-4029",
-      "cve_id": "CVE-2026-4029",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.5,
-      "published": "2026-05-24T13:01:16.971792+00:00",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-05-24T14:55:21.051589+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -516,29 +568,29 @@
       ]
     },
     {
-      "title": "CVE-2026-43644: podinfo through 6.11.2 contains a reflected cross-site scripting vulnerability i...",
-      "description": "podinfo through 6.11.2 contains a reflected cross-site scripting vulnerability in the /echo and /api/echo endpoints where the echoHandler writes request body content directly to the response without setting explicit Content-Type or X-Content-Type-Options headers. Attackers can craft cross-origin HTML pages with auto-submitting forms containing script payloads in the request body, which are served ",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-43644",
-      "cve_id": "CVE-2026-43644",
-      "source": "NVD",
+      "title": "Ghost CMS SQL injection flaw exploited in large-scale ClickFix campaign",
+      "description": "A large-scale campaign is exploiting a critical SQL injection vulnerability (CVE-2026-26980) in Ghost CMS to inject malicious JavaScript code that triggers ClickFix attack flows. [...]",
+      "url": "https://www.bleepingcomputer.com/news/security/ghost-cms-sql-injection-flaw-exploited-in-large-scale-clickfix-campaign/",
+      "cve_id": "CVE-2026-26980",
+      "source": "Bleeping Computer",
       "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.4,
-      "published": "2026-05-24T13:01:16.971769+00:00",
-      "ttps": [],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2025-12008: Authorization bypass through User-Controlled key vulnerability in APPYAP Technol...",
-      "description": "Authorization bypass through User-Controlled key vulnerability in APPYAP Technology and Information Inc. Yaay Social Media App allows Accessing Functionality Not Properly Constrained by ACLs.\n\nThis issue affects Yaay Social Media App: from 3.8.0 through 24102025.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-12008",
-      "cve_id": "CVE-2025-12008",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.8,
-      "published": "2026-05-24T13:01:16.971724+00:00",
-      "ttps": [],
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-05-24T14:12:32+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1059.007",
+          "name": "JavaScript",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        }
+      ],
       "epss_score": null
     },
     {
@@ -1304,31 +1356,6 @@
       "ttps": []
     },
     {
-      "title": "Google accidentally exposed details of unfixed Chromium flaw",
-      "description": "Google has accidentally leaked details about an unfixed issue in Chromium that keeps JavaScript running in the background even when the browser is closed, allowing remote code execution on the device. [...]",
-      "url": "https://www.bleepingcomputer.com/news/security/google-accidentally-exposed-details-of-unfixed-chromium-flaw/",
-      "cve_id": null,
-      "source": "Bleeping Computer",
-      "category": "incident",
-      "severity": "critical",
-      "cvss_score": null,
-      "published": "2026-05-21T18:13:50+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1059",
-          "name": "Command and Scripting Interpreter",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ]
-    },
-    {
       "title": "AI Agents Are Shifting Identity Security Budget Dynamics",
       "description": "AI agent projects are proliferating throughout the enterprise, and those AI agent identities require management, security, and governance. New Omdia research shows the AI agent identity budget dynamics are very different than traditional IAM projects.",
       "url": "https://www.darkreading.com/identity-access-management-security/shifting-budget-dynamics-identity-security-ai-agents",
@@ -1933,8 +1960,8 @@
         }
       ],
       "threat_actors": [
-        "Conti",
-        "LockBit"
+        "LockBit",
+        "Conti"
       ]
     },
     {
