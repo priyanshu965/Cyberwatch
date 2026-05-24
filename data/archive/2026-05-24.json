@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-05-24T17:55:06.947712+00:00",
+  "last_updated": "2026-05-24T19:04:20.160915+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T17:53:06.234901+00:00",
+      "published": "2026-05-24T19:02:24.596874+00:00",
       "ttps": [
         {
           "id": "T1555.003",
@@ -56,8 +56,8 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The TwizAdmin operation is a sophisticated multi-stage malware campaign that targets Windows and macOS systems, leveraging various tactics to steal sensitive information and extort victims. The malware uses a combination of techniques, including clipboard hijacking to steal cryptocurrency, BIP-39 seed phrase theft, and browser credential exfiltration, as well as a ransomware module. The attackers utilize a FastAPI-based panel with a license key system to manage their Java RAT builder, allowing for remote access and control. To remediate this threat, defenders should block access to the exposed C2 panel at 103.241.66[.]238:1337 and implement robust credential management practices, such as using password managers and enabling two-factor authentication. Additionally, users should be cautious when interacting with emails or websites that may be used as part of the phishing campaign, such as those masquerading as FedEx communications.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1071| B[Initial Access]:::tactic\n    B -->|T1555.003| C[Credentials from Web Browsers]:::tactic\n    C -->|T1115| D[Clipboard Data]:::tactic\n    D -->|T1041| E[Exfiltration Over C2 Channel]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The TwizAdmin operation is a sophisticated multi-stage malware campaign that targets Windows and macOS systems, leveraging various tactics to steal sensitive information and extort victims. The malware uses T1555.003 to extract credentials from web browsers, T1115 to hijack clipboard data, and T1071 to communicate with its command and control (C2) server over application layer protocols. To mitigate this threat, defenders should block access to the C2 panel at 103.241.66[.]238:1337, implement robust browser extensions to detect and prevent credential exfiltration, and use a reputable anti-virus software to detect and remove the Java RAT. Additionally, users should be cautious when interacting with emails or websites that mimic legitimate services like FedEx, as these may be used as lures to distribute the malware. By taking these specific steps, defenders can reduce the risk of compromise and prevent the TwizAdmin operation from succeeding.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1071| B[Initial Access]:::tactic\n    B -->|T1555.003| C[Credentials from Web Browsers]:::tactic\n    C -->|T1115| D[Collection]:::tactic\n    D -->|T1041| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -71,7 +71,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T17:53:06.234879+00:00",
+      "published": "2026-05-24T19:02:24.596855+00:00",
       "ttps": [
         {
           "id": "T1574.002",
@@ -98,9 +98,9 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The FudCrypt malware crypting service utilizes a multi-stage deployment package to evade detection, featuring DLL sideloading via T1574.002, which allows attackers to load malicious DLLs into legitimate processes. This, combined with T1068 exploitation for privilege escalation, enables the malware to gain elevated privileges and interfere with security mechanisms such as AMSI and ETW. Real-world impact includes the potential for widespread malware distribution, with over 200 registered customers on the FudCrypt platform, affecting various Windows systems. To remediate, defenders should implement strict Group Policy controls, monitor for suspicious CMSTPLUA activity, and ensure Windows Defender is configured to detect and block malicious DLLs, specifically targeting versions prior to Windows 10 20H2. Additionally, network traffic should be monitored for signs of T1104 multi-stage channels and T1027 obfuscated files or information.",
+      "ai_summary": "FudCrypt is a Cryptor-as-a-Service platform that offers malware obfuscation services, utilizing techniques such as DLL sideloading and AMSI interference to evade detection. The service is capable of silent UAC elevation via CMSTPLUA and Windows Defender tampering through Group Policy, allowing for elevated privileges and persistence on compromised systems. Real-world impact includes the potential for widespread malware distribution, with over 200 registered users on the service, and the ability to bypass security controls. To remediate, defenders should implement robust DLL sideloading detection, monitor for suspicious Group Policy changes, and ensure that Windows Defender is configured to prevent tampering. Additionally, defenders should prioritize patching and updating systems to prevent exploitation of known vulnerabilities, such as those exploited by T1068.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1574.002| B[Initial Access]:::tactic\n    B -->|T1068| C[Privilege Escalation]:::tactic\n    C -->|T1027| D[Defense Evasion]:::tactic\n    D -->|T1104| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -113,7 +113,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T17:53:06.234848+00:00",
+      "published": "2026-05-24T19:02:24.596831+00:00",
       "ttps": [
         {
           "id": "T1583.005",
@@ -128,11 +128,11 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "This Linux incident involved simultaneous compromise by at least two distinct threat actors, leveraging OpenAI's Codex AI agent for security remediation. Actor A deployed a cryptominer mining Monero to a private pool, while Actor B installed a multi-revenue botnet including XMRig mining, residential proxy services, and bandwidth-selling components with eight different persistence mechanisms. The affected system was a Linux endpoint, and the attack vector is unknown. To remediate, defenders should update to the latest version of the Linux distribution, disable any unused services, and implement a robust security information and event management (SIEM) system to detect and respond to future threats. Additionally, consider implementing a more secure alternative to OpenAI's Codex AI agent.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Botnet]:::tactic\n    B -->|T1496| C[Resource Hijacking]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Linux endpoint was compromised by two distinct threat actors, Actor A and Actor B, who deployed a cryptominer and a multi-revenue botnet, respectively. Actor A's cryptominer mined Monero to a private pool, while Actor B's botnet included XMRig mining, residential proxy services, and bandwidth-selling components with eight different persistence mechanisms. The real-world impact of this incident is significant, as it highlights the risks of relying on AI agents for security remediation and the potential for multiple threat actors to compromise a single endpoint. To remediate this threat, defenders should implement specific security measures, such as monitoring for unusual network activity, updating their Linux distributions to the latest versions, and configuring their systems to prevent unauthorized access. Additionally, defenders should consider implementing a robust threat detection and response strategy to identify and mitigate potential threats in a timely manner.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Initial Access]:::tactic\n    B -->|T1496| C[Execution]:::tactic\n    C -->|T1059.001| D[Persistence]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "Malicious Artifacts Found in Official KICS Docker Repository and Code Extensions",
@@ -143,7 +143,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T17:53:06.234791+00:00",
+      "published": "2026-05-24T19:02:24.596802+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -158,8 +158,8 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "A supply chain compromise was discovered in the official Checkmarx KICS Docker repository and VS Code extensions, affecting versions v2.1.20, v2.1.21, and alpine of the Docker images, as well as versions 1.17.0 and 1.19.0 of the VS Code extensions. The attackers introduced unauthorized data exfiltration capabilities, allowing the trojanized KICS binary to collect and encrypt scan reports containing credentials from infrastructure-as-code. This vulnerability allows attackers to steal sensitive information, potentially leading to data breaches and unauthorized access. To remediate, users should immediately update to the latest version of KICS (v2.1.22 or later) and remove any affected VS Code extensions. Additionally, users should review their Docker images and VS Code extensions for any signs of tampering.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1041| C[Exfiltration Over C2 Channel]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "A supply chain compromise was discovered in the official KICS Docker repository and VS Code extensions, affecting versions 2.1.20, 2.1.21, and alpine of the Docker images, as well as versions 1.17.0 and 1.19.0 of the VS Code extensions. The attackers introduced unauthorized data exfiltration capabilities, allowing the trojanized KICS binary to collect and encrypt scan reports containing credentials from infrastructure-as-code. This vulnerability allows attackers to steal sensitive information, potentially leading to data breaches and unauthorized access. To remediate, users should immediately update to version 2.1.22 of the Docker image and version 1.20.0 of the VS Code extension. Additionally, users should review their infrastructure-as-code configurations for any potential security risks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1041| C[Exfiltration Over C2 Channel]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -171,13 +171,13 @@
       "cve_id": null,
       "source": "AlienVault OTX",
       "category": "incident",
-      "severity": "low",
+      "severity": "medium",
       "cvss_score": null,
-      "published": "2026-05-24T17:53:06.234765+00:00",
+      "published": "2026-05-24T19:02:24.596776+00:00",
       "ttps": [],
-      "ai_summary": "This threat item involves DPRK-linked cyber threat actors using fake IT worker infrastructure to facilitate illicit payments. The actors were found to be utilizing VPN services, with Astrill VPN being the most prominent (37.5%), followed by Mullvad (32.25%) and Proton VPN (6.25%). The investigation revealed concentrated VPN usage patterns from a single IP address (163.245.219.19) over a 30-day period. This suggests a coordinated effort to maintain anonymity and evade detection. To remediate this threat, defenders should monitor VPN usage patterns and block access to known malicious VPN services, specifically Astrill, Mullvad, and Proton VPN, and implement strict access controls to prevent unauthorized VPN usage.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1041| B[Command and Control]:::tactic\n    B -->|T1071| C[Instrumentation]:::tactic\n    C -->|T1216| D[Data Encrypted]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 3.5,
+      "ai_summary": "This threat item involves DPRK-linked cyber threat actors using fake IT worker infrastructure to facilitate illicit payments. The actors were found to be using VPN services such as Astrill, Mullvad, and Proton VPN, with Astrill being the most prominent. The investigation revealed concentrated VPN usage patterns from a single IP address, 163.245.219.19, over a 30-day period. This type of activity is likely used to mask the actors' true identities and locations. To remediate this threat, defenders should monitor VPN usage patterns and block access to known malicious VPN services, specifically Astrill, Mullvad, and Proton VPN, and implement strict access controls to prevent unauthorized VPN usage.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1041| B[Command and Control]:::tactic\n    B -->|T1071| C[Instrumentation]:::tactic\n    C -->|T1219| D[Remote Services]:::tactic\n    D -->|T1204| E[User Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 4.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -190,7 +190,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T17:53:06.234738+00:00",
+      "published": "2026-05-24T19:02:24.596751+00:00",
       "ttps": [
         {
           "id": "T1059.001",
@@ -211,7 +211,7 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "A newly observed ClickFix variant exploits native Windows utilities, specifically cmdkey and regsvr32, for payload delivery. Victims are socially engineered through fake CAPTCHA pages to execute a malicious command via the Windows Run dialog. The command chains multiple actions: staging credentials using cmdkey, retrieving a remote DLL via regsvr32 from a UNC path. This variant abuses native Windows tools, making it difficult to detect using traditional security software. To remediate, ensure Windows Update is enabled and the latest patches are applied, specifically targeting the Windows Run dialog and cmdkey utility. Additionally, configure Windows Defender to monitor and block suspicious registry modifications.",
+      "ai_summary": "This threat exploits a ClickFix variant that socially engineers victims through fake CAPTCHA pages to execute a malicious command via the Windows Run dialog. The command chains multiple actions: staging credentials using cmdkey, retrieving a remote DLL via regsvr32 from a UNC path. If exploited, this threat can lead to remote DLL injection and potential privilege escalation. To remediate, ensure that Windows Defender Application Guard is enabled for Internet Explorer and Microsoft Edge, and configure Windows to prevent the execution of scripts in the Windows Run dialog. Additionally, update Windows to the latest version and apply the latest security patches.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1218.010| C[Execution]:::tactic\n    C -->|T1555.004| D[Command and Control]:::tactic\n    D -->|T1059.001| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -226,7 +226,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T17:53:06.234684+00:00",
+      "published": "2026-05-24T19:02:24.596730+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -253,9 +253,9 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "A sophisticated attack campaign targeting Chinese-speaking individuals was identified on March 12, 2026, using military-themed document lures distributed through a malicious ZIP archive. The operation employed a trojanized SumatraPDF binary as the initial vector to deploy an AdaptixC2 Beacon and Visual Studio Code on victim systems. The shellcode loader demonstrated significant similarities to the known tactics, techniques, and procedures (TTPs) of threat actors. To remediate this threat, defenders should update SumatraPDF to version 3.2.1 or later, ensure that Visual Studio Code is not installed on systems that do not require it, and implement a robust endpoint detection and response (EDR) solution to detect and prevent the execution of malicious binaries. Additionally, users should exercise caution when opening ZIP archives from unknown sources and verify the authenticity of document lures before execution.",
+      "ai_summary": "A sophisticated attack campaign targeting Chinese-speaking individuals was identified on March 12, 2026, using military-themed document lures distributed through a malicious ZIP archive. The operation employed a trojanized SumatraPDF binary as the initial vector to deploy an AdaptixC2 Beacon and Visual Studio Code on victim systems. The shellcode loader demonstrated significant similarities to the known loader, indicating a high level of sophistication. If exploited, this campaign could lead to data breaches, privilege escalation, and potential ransomware attacks. To remediate, users should immediately update SumatraPDF to version 3.2.1 or later, and ensure that Visual Studio Code is not installed from untrusted sources. Additionally, users should be cautious when opening ZIP archives from unknown sources and should use a reputable antivirus solution to scan for malware.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1560.001| C[Archive via Utility]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1486| E[Data Encrypted for Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -268,7 +268,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T17:53:06.234657+00:00",
+      "published": "2026-05-24T19:02:24.596694+00:00",
       "ttps": [
         {
           "id": "T1592",
@@ -295,8 +295,8 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "DinDoor is a Deno-based backdoor delivered via MSI files that exploits the Deno runtime to execute obfuscated JavaScript for command and control communications and system fingerprinting. The backdoor uses identical fingerprinting algorithms generating unique victim identifiers. Two analyzed samples show different execution behaviors: one writes JavaScript to disk while the other executes entirely in memory. If exploited, DinDoor can lead to unauthorized access and data exfiltration. To remediate, users should update Deno to version 1.25.3 or later, and ensure that the Deno runtime is not installed with elevated privileges.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1592| B[Gather Victim Host Info]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1219| E[Remote Access Software]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The DinDoor backdoor exploits the Deno runtime to execute obfuscated JavaScript for command and control communications and system fingerprinting. It is delivered via MSI files and has two analyzed samples with different execution behaviors: one writes JavaScript to disk while the other executes entirely in memory. Both samples use identical fingerprinting algorithms generating unique victim identifiers. To remediate, users should update to Deno version 1.25.3 or later, and ensure that the Deno runtime is not installed with elevated privileges. Additionally, users should monitor for suspicious MSI files and JavaScript execution in memory.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1027| B[Obfuscated Files or Information]:::tactic\n    B -->|T1071| C[Application Layer Protocol]:::tactic\n    C -->|T1592| D[Gather Victim Host Info]:::tactic\n    D -->|T1219| E[Remote Access Software]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
@@ -310,7 +310,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T17:53:06.234623+00:00",
+      "published": "2026-05-24T19:02:24.596666+00:00",
       "ttps": [
         {
           "id": "T1219",
@@ -325,9 +325,9 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "GopherWhisper, a China-aligned APT group, targeted a Mongolian governmental entity with custom Go-written malware, including backdoors LaxGopher, RatGopher, and BoxOfFriends, as well as injectors JabGopher, exfiltration tool CompactGopher, loader FriendDelivery, and C++ backdoor SSLORD. The group employed T1219 (Remote Access Software) and T1041 (Exfiltration Over C2 Channel) tactics to gain access and exfiltrate data. If exploited, this malware can lead to unauthorized access, data theft, and potential disruption of critical infrastructure. To remediate, defenders should update their systems to the latest version of their operating system and software, and implement robust network segmentation and monitoring to detect and prevent similar attacks. Additionally, organizations should consider implementing Go-based malware detection and prevention measures.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1219| B[Initial Access]:::tactic\n    B -->|T1041| C[Command and Control]:::tactic\n    C -->|T1056| D[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "ai_summary": "GopherWhisper, a China-aligned APT group, targeted a Mongolian governmental entity using custom tools written in Go, including backdoors LaxGopher, RatGopher, and BoxOfFriends, as well as injectors JabGopher, exfiltration tool CompactGopher, loader FriendDelivery, and C++ backdoor SSLORD. The group employed T1219 (Remote Access Software) and T1041 (Exfiltration Over C2 Channel) tactics to gain access and exfiltrate data. If exploited, this threat could lead to data breaches and unauthorized access to sensitive information. To remediate, defenders should update their systems to the latest version of their software, specifically focusing on removing any suspicious Go-based tools and implementing robust network segmentation to prevent lateral movement. Additionally, implementing regular security audits and monitoring for unusual network activity can help detect and prevent similar threats.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1219| B[Initial Access]:::tactic\n    B -->|T1041| C[Command and Control]:::tactic\n    C -->|T1022| D[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -340,7 +340,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-05-24T17:53:06.234581+00:00",
+      "published": "2026-05-24T19:02:24.596637+00:00",
       "ttps": [
         {
           "id": "T1219",
@@ -349,180 +349,252 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The uWarrior RAT is delivered through weaponized RTF documents containing multiple exploits, leveraging CVE-2012-1856 and CVE-2015-1770 to bypass ASLR protections. The attack chain loads non-DYNAMICBASE compiled DLLs through OLE objects, allowing the RAT to establish a foothold on the compromised system. If exploited, uWarrior can grant the threat actor remote access to the system, enabling them to steal sensitive information or conduct further malicious activities. To remediate this threat, users should update their Microsoft Office software to version 2013 SP1 or later, which includes a patch for CVE-2012-1856. Additionally, users should ensure that their systems are running Windows 10 or later, which includes improved ASLR protections.",
+      "ai_summary": "The uWarrior RAT is delivered through weaponized RTF documents containing multiple exploits, specifically leveraging CVE-2012-1856 and CVE-2015-1770. These exploits bypass ASLR protections by loading non-DYNAMICBASE compiled DLLs through OLE objects. If exploited, the attack chain allows the threat actor to establish a fully-featured Remote Access Tool (RAT) with compressed, optionally encrypted TCP communication capabilities. To remediate, users should ensure their systems are updated to the latest version of Microsoft Office, specifically Office 2013 SP1 or later, and configure the Office application to block OLE objects. Additionally, users should implement a robust endpoint detection and response (EDR) solution to detect and prevent RAT activity.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1219| B[Remote Access Software]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-44520: Docling-Graph turns documents into validated Pydantic objects, then builds a dir...",
-      "description": "Docling-Graph turns documents into validated Pydantic objects, then builds a directed knowledge graph with explicit semantic relationships. Prior to 1.5.1, the URLInputHandler class in docling_graph/core/input/handlers.py makes HTTP requests to user-supplied URLs without validating whether the target resolves to a private, loopback, or link-local IP address. The URLValidator only checks for a vali",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44520",
-      "cve_id": "CVE-2026-44520",
+      "title": "CVE-2026-44522: Note Mark is an open-source note-taking application. From 0.13.0 to before 0.19....",
+      "description": "Note Mark is an open-source note-taking application. From 0.13.0 to before 0.19.4, the Note Mark application allows authenticated users to upload assets to notes via POST /api/notes/{noteID}/assets, where the asset filename is provided through the X-Name HTTP request header. This value is stored directly in the database without any sanitization or validation - no path separator filtering, no direc",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44522",
+      "cve_id": "CVE-2026-44522",
       "source": "NVD",
       "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.7,
-      "published": "2026-05-24T17:53:04.814133+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-44520 is a medium-severity vulnerability in Docling-Graph, a library that converts documents into validated Pydantic objects and builds a directed knowledge graph. The vulnerability, prior to version 1.5.1, allows an attacker to exploit the URLInputHandler class in docling_graph/core/input/handlers.py, which makes HTTP requests to user-supplied URLs without validating the target IP address. This can lead to a potential information disclosure or even a denial-of-service attack if the target URL is malicious. To remediate this issue, users should update to version 1.5.1 or later, and ensure that the URLValidator is properly configured to check for private, loopback, and link-local IP addresses. Additionally, users should review their code and ensure that they are not using the vulnerable URLInputHandler class.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploitation of Vulnerability]:::tactic\n    B -->|T1210| C[Reconnaissance]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.7,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-44283: etcd is a distributed key-value store for the data of a distributed system. Prio...",
-      "description": "etcd is a distributed key-value store for the data of a distributed system. Prior to 3.4.44, 3.5.30, and 3.6.11, a vulnerability in etcd allows read access via PrevKv, or lease attachment in Put requests within transaction operations, to bypass RBAC authorization checks. An authenticated user without sufficient read or lease-related permissions may be able to access unauthorized data or attach lea",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44283",
-      "cve_id": "CVE-2026-44283",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 0.0,
-      "published": "2026-05-24T17:53:04.814119+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-44283 is a vulnerability in etcd, a distributed key-value store, affecting versions prior to 3.4.44, 3.5.30, and 3.6.11. The flaw allows authenticated users without sufficient read or lease-related permissions to access unauthorized data or attach leases via PrevKv or Put requests within transaction operations, bypassing RBAC authorization checks. This could lead to data breaches or unauthorized access to sensitive information. To remediate, update etcd to version 3.4.44 or later, 3.5.30 or later, or 3.6.11 or later. Additionally, ensure proper configuration of RBAC authorization checks to prevent similar attacks. This vulnerability is considered high-severity due to its potential impact on data integrity and confidentiality.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1210| B[Reconnaissance]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-42897: Improper neutralization of input during web page generation ('cross-site scripti...",
-      "description": "Improper neutralization of input during web page generation ('cross-site scripting') in Microsoft Exchange Server allows an unauthorized attacker to perform spoofing over a network.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42897",
-      "cve_id": "CVE-2026-42897",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.1,
-      "published": "2026-05-24T17:53:04.814104+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "cisa_kev": true,
-      "ai_summary": "CVE-2026-42897 is a critical vulnerability in Microsoft Exchange Server, allowing an unauthorized attacker to perform spoofing over a network through improper neutralization of input during web page generation, specifically cross-site scripting. This vulnerability affects Microsoft Exchange Server 2019 and 2016, with a CVSS score of 8.1. To remediate, update to Microsoft Exchange Server 2019 CU11 or later, or Microsoft Exchange Server 2016 CU23 or later. Additionally, configure the 'X-XSS-Protection' header to '1; mode=block' in the web.config file. This vulnerability can be exploited by an attacker to perform phishing attacks, leading to potential data breaches and reputational damage.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.1,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-42598: Pode is a Cross-Platform PowerShell web framework for creating REST APIs, Web Si...",
-      "description": "Pode is a Cross-Platform PowerShell web framework for creating REST APIs, Web Sites, and TCP/SMTP servers. From 2.4.0, to before 2.13.0, when requesting content from a Static Route, it was possible to request paths such as http://localhost:8080/c:/Windows/System32/drivers/etc/hosts and have the contents returned. This vulnerability is fixed in 2.13.0.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42598",
-      "cve_id": "CVE-2026-42598",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
+      "severity": "critical",
       "cvss_score": null,
-      "published": "2026-05-24T17:53:04.814087+00:00",
+      "published": "2026-05-24T19:02:23.105562+00:00",
       "ttps": [
         {
-          "id": "T1059.001",
-          "name": "PowerShell",
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-44522 is a critical vulnerability in Note Mark, an open-source note-taking application, affecting versions 0.13.0 to 0.19.4. The vulnerability allows authenticated users to upload assets to notes via a POST request, where the asset filename is provided through the X-Name HTTP request header. This value is stored directly in the database without sanitization or validation, making it susceptible to path traversal attacks. If exploited, an attacker can potentially read or write arbitrary files on the system, leading to data breaches or privilege escalation. To remediate, update to version 0.19.4 or later, and ensure the X-Name header is properly sanitized and validated.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-41315: mdserver-web is a simple Linux panel. From 0.18.0 to 0.18.4, mdserver-web has a ...",
+      "description": "mdserver-web is a simple Linux panel. From 0.18.0 to 0.18.4, mdserver-web has a front-end unauthorized remote command execution vulnerability. Due to the lack of authentication on the /modify_crond and /start_task interfaces, it is possible to modify the default built-in scheduled tasks and start them, achieving RCE.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41315",
+      "cve_id": "CVE-2026-41315",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-05-24T19:02:23.105547+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1053",
+          "name": "Scheduled Task/Job",
           "tactic": "Execution",
           "tactic_id": "TA0002"
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-42598 is a cross-platform PowerShell web framework vulnerability in Pode, affecting versions 2.4.0 to 2.13.0. An attacker can exploit this vulnerability by requesting specific paths, such as http://localhost:8080/c:/Windows/System32/drivers/etc/hosts, to retrieve sensitive information. This vulnerability allows for information disclosure, potentially leading to lateral movement and privilege escalation. To remediate, update Pode to version 2.13.0 or later. Additionally, ensure that all static routes are properly configured to prevent unauthorized access. This vulnerability is fixed in Pode 2.13.0, and users should update their installations as soon as possible.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Execution]:::tactic\n    B -->|T1210| C[Reconnaissance]:::tactic\n    C -->|T1071| D[Resource Development]:::tactic\n    D -->|T1190| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.0,
+      "ai_summary": "CVE-2026-41315 is a remote command execution (RCE) vulnerability in mdserver-web, a simple Linux panel, affecting versions 0.18.0 to 0.18.4. The vulnerability arises from the lack of authentication on the /modify_crond and /start_task interfaces, allowing attackers to modify default scheduled tasks and execute them. If exploited, this vulnerability enables RCE, putting Linux systems at risk of data breaches, privilege escalation, and other malicious activities. To remediate, users should update to version 0.18.5 or later, and ensure that the /modify_crond and /start_task interfaces are properly secured. Additionally, it is recommended to implement authentication mechanisms to prevent unauthorized access to these interfaces.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1053| C[Scheduled Task/Job]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-42572: Hatchet is a platform for orchestrating background tasks, AI agents, and durable...",
-      "description": "Hatchet is a platform for orchestrating background tasks, AI agents, and durable workflows at scale. Prior to 0.83.39, a missing authorization directive on the GET /api/v1/stable/dags/tasks endpoint caused Hatchet's tenant-membership check to be skipped for this route. A user authenticated to any tenant on the same Hatchet instance could query the endpoint with another tenant's UUID and a DAG UUID",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42572",
-      "cve_id": "CVE-2026-42572",
+      "title": "CVE-2026-38740: Foscam VD1 Video Doorbell before V5.3.13_1072 is vulnerable to Cleartext Transmi...",
+      "description": "Foscam VD1 Video Doorbell before V5.3.13_1072 is vulnerable to Cleartext Transmission of Sensitive Information. The device transmits sensitive Session Description Protocol (SDP), including ICE credentials and candidates, in cleartext over network interfaces. An attacker with network visibility can intercept these credentials to hijack media streams or authenticate to Foscam's TURN/relay infrastruc",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-38740",
+      "cve_id": "CVE-2026-38740",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
       "cvss_score": 5.3,
-      "published": "2026-05-24T17:53:04.814070+00:00",
-      "ttps": [],
+      "published": "2026-05-24T19:02:23.105532+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        },
+        {
+          "id": "T1016",
+          "name": "System Network Configuration Discovery",
+          "tactic": "Discovery",
+          "tactic_id": "TA0007"
+        }
+      ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-42572 is a missing authorization vulnerability in Hatchet's GET /api/v1/stable/dags/tasks endpoint, affecting versions prior to 0.83.39. An authenticated user can exploit this by querying the endpoint with another tenant's UUID and a DAG UUID, allowing them to bypass tenant-membership checks. This could lead to unauthorized access to sensitive data or task execution. To remediate, update to version 0.83.39 or later, and ensure that the tenant-membership check is enabled for the affected endpoint. Additionally, consider implementing additional authentication and authorization mechanisms to prevent similar vulnerabilities in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1055| B[Command and Control]:::tactic\n    B -->|T1210| C[Exploitation of Remote Services]:::tactic\n    C -->|T1071| D[Application Access]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.3,
+      "ai_summary": "CVE-2026-38740 is a vulnerability in Foscam VD1 Video Doorbell devices prior to version V5.3.13_1072. The issue allows an attacker with network visibility to intercept sensitive Session Description Protocol (SDP) information, including ICE credentials and candidates, which can be used to hijack media streams or authenticate to Foscam's TURN/relay infrastructure. This vulnerability can be exploited using T1190 (Exploit Public-Facing Application) and T1649 (Steal or Forge Authentication Certificates) tactics. To remediate, update the device to version V5.3.13_1072 or later, and ensure that network interfaces are configured to use encryption. Additionally, implement network monitoring to detect and prevent unauthorized access to sensitive information. This vulnerability has a CVSS score of 5.3 and a severity score of 4.0 due to its limited scope and the need for network visibility to exploit.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1649| C[Steal or Forge Authentication Certificates]:::tactic\n    C -->|T1016| D[System Network Configuration Discovery]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 4.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-42334: Mongoose is a MongoDB object modeling tool designed to work in an asynchronous e...",
-      "description": "Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. Prior to 6.13.9, 7.8.9, 8.22.1, and 9.1.6, a vulnerability allows bypassing Mongoose’s sanitizeFilter query sanitization mechanism via the $nor operator. When sanitizeFilter is enabled, Mongoose wraps query operators in $eq to neutralize them. However, prior to the fix, $nor was not included in the set of l",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42334",
-      "cve_id": "CVE-2026-42334",
+      "title": "CVE-2026-27886: Strapi is an open source headless content management system. Strapi versions sta...",
+      "description": "Strapi is an open source headless content management system. Strapi versions starting in 4.0.0 and prior to 5.37.0 did not sufficiently sanitize query parameters when filtering content via relational fields. An unauthenticated attacker could use the `where` query parameter on any publicly-accessible content-type with an `updatedBy` (or other admin-relation) field to perform a boolean-oracle attack",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-27886",
+      "cve_id": "CVE-2026-27886",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
       "cvss_score": 7.5,
-      "published": "2026-05-24T17:53:04.814056+00:00",
-      "ttps": [],
-      "epss_score": null
+      "published": "2026-05-24T19:02:23.105512+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-27886 is a critical vulnerability in Strapi versions 4.0.0 to 5.37.0, where an unauthenticated attacker can perform a boolean-oracle attack by manipulating the `where` query parameter on publicly-accessible content-types with admin-relation fields. This allows the attacker to extract sensitive information, potentially leading to data breaches or privilege escalation. To remediate, update to Strapi version 5.37.0 or later, and ensure that the `updatedBy` field is properly sanitized. Additionally, restrict access to content-types and fields to prevent unauthorized queries. This vulnerability was detected via TTP T1190 (Exploit Public-Facing Application).",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-41888: Distribution is a toolkit to pack, ship, store, and deliver container content. P...",
-      "description": "Distribution is a toolkit to pack, ship, store, and deliver container content. Prior to 3.1.1, tag deletion via the DELETE /v2/<name>/manifests/<tag> endpoint bypasses the storage.delete.enabled: false configuration, allowing any API client to remove tags from repositories even when the operator has explicitly disabled deletion. This vulnerability is fixed in 3.1.1.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41888",
-      "cve_id": "CVE-2026-41888",
+      "title": "CVE-2026-27680: Due to improper input handling under certain conditions, SAP NetWeaver Applicati...",
+      "description": "Due to improper input handling under certain conditions, SAP NetWeaver Application Server ABAP allows an attacker to inject custom Cascading Style Sheets (CSS) data into a web page served by the application. When a user accesses or clicks the affected page, the injected CSS is executed. As a result, the issue has a low impact on confidentiality, while integrity and availability are not impacted.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-27680",
+      "cve_id": "CVE-2026-27680",
       "source": "NVD",
       "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.5,
-      "published": "2026-05-24T17:53:04.814041+00:00",
+      "severity": "low",
+      "cvss_score": 3.1,
+      "published": "2026-05-24T19:02:23.105498+00:00",
       "ttps": [],
-      "epss_score": null
+      "epss_score": null,
+      "ai_summary": "CVE-2026-27680 is a low-impact vulnerability in SAP NetWeaver Application Server ABAP due to improper input handling, allowing an attacker to inject custom Cascading Style Sheets (CSS) data into a web page. This issue has a low impact on confidentiality, while integrity and availability are not impacted. To remediate, SAP NetWeaver Application Server ABAP version 7.50 and earlier should be updated to version 7.50 SP 18 or later, or version 7.52 and earlier should be updated to version 7.52 SP 3 or later. Additionally, ensure that the SAP Web Dispatcher is configured to block access to the affected page. This will prevent the injected CSS from being executed when a user accesses or clicks the affected page.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Web Application Attacks]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 3.1,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-41615: Exposure of sensitive information to an unauthorized actor in Microsoft Authenti...",
-      "description": "Exposure of sensitive information to an unauthorized actor in Microsoft Authenticator allows an unauthorized attacker to disclose information over a network.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41615",
-      "cve_id": "CVE-2026-41615",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.6,
-      "published": "2026-05-24T17:53:04.814024+00:00",
-      "ttps": [],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2025-15024: Improper Control of Generation of Code ('Code Injection') vulnerability in Yorda...",
-      "description": "Improper Control of Generation of Code ('Code Injection') vulnerability in Yordam Information Technology Consulting, Training and Electronic Systems Industry and Trade Inc. Library Automation System allows Remote Code Inclusion.\n\nThis issue affects Library Automation System: from v.19.5 before v.22.1.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-15024",
-      "cve_id": "CVE-2025-15024",
+      "title": "CVE-2026-23998: Fleet is open source device management software. Prior to version 4.81.0, a vuln...",
+      "description": "Fleet is open source device management software. Prior to version 4.81.0, a vulnerability in Fleet’s Windows MDM management endpoint could allow requests to be processed without proper client certificate validation. In certain circumstances, this could allow an attacker to impersonate an enrolled Windows device and retrieve sensitive configuration data. Fleet’s Windows MDM management endpoint reli",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-23998",
+      "cve_id": "CVE-2026-23998",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 8.8,
-      "published": "2026-05-24T17:53:04.814003+00:00",
+      "cvss_score": 7.5,
+      "published": "2026-05-24T19:02:23.105483+00:00",
       "ttps": [
         {
-          "id": "T1055",
-          "name": "Process Injection",
-          "tactic": "Privilege Escalation",
-          "tactic_id": "TA0004"
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
         }
       ],
       "epss_score": null
     },
     {
-      "title": "CVE-2025-15023: Incorrect Authorization vulnerability in Yordam Information Technology Consultin...",
-      "description": "Incorrect Authorization vulnerability in Yordam Information Technology Consulting, Training and Electronic Systems Industry and Trade Inc. Library Automation System allows Exploiting Incorrectly Configured Access Control Security Levels.\n\nThis issue affects Library Automation System: from v.19.5 before v.22.1.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-15023",
-      "cve_id": "CVE-2025-15023",
+      "title": "CVE-2026-22707: Strapi is an open source headless content management system. In Strapi versions ...",
+      "description": "Strapi is an open source headless content management system. In Strapi versions prior to 5.33.3, the Upload plugin's Content API endpoints did not enforce the administrator-configured MIME type restrictions (`plugin.upload.security.allowedTypes` and `deniedTypes`). The same restrictions were correctly enforced on the Admin Panel upload path. The upload plugin's `enforceUploadSecurity` security che",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-22707",
+      "cve_id": "CVE-2026-22707",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.4,
+      "published": "2026-05-24T19:02:23.105469+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1219",
+          "name": "Remote Access Software",
+          "tactic": "Command & Control",
+          "tactic_id": "TA0011"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-22706: Strapi is an open source headless content management system. In Strapi versions ...",
+      "description": "Strapi is an open source headless content management system. In Strapi versions prior to 5.33.3, changing or resetting a user's password did not invalidate the user's existing refresh-token sessions by default. The refresh-token invalidation step in the users-permissions and admin authentication controllers was conditional on a caller-supplied `deviceId`. When a password change or reset request di",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-22706",
+      "cve_id": "CVE-2026-22706",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 6.5,
+      "published": "2026-05-24T19:02:23.105454+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-22599: Strapi is an open source headless content management system. In versions on the ...",
+      "description": "Strapi is an open source headless content management system. In versions on the 4.x branch prior to 4.26.1 and on the 5.x branch prior to 5.33.2, a database-query injection vulnerability existed in the Strapi Content-Type Builder write API. An authenticated administrator could inject arbitrary database statements through the `column.defaultTo` attribute when creating or modifying a content type. S",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-22599",
+      "cve_id": "CVE-2026-22599",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 8.8,
-      "published": "2026-05-24T17:53:04.813962+00:00",
-      "ttps": [],
+      "cvss_score": 7.2,
+      "published": "2026-05-24T19:02:23.105432+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2025-64526: Strapi is an open source headless content management system. In Strapi versions ...",
+      "description": "Strapi is an open source headless content management system. In Strapi versions prior to 5.45.0, the rate-limit middleware in the users-permissions plugin derived its rate-limit key in part from `ctx.request.body.email`, including on routes whose body schema does not contain an `email` field (`/auth/local`, `/auth/reset-password`, `/auth/change-password`). An unauthenticated attacker could include",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-64526",
+      "cve_id": "CVE-2025-64526",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.3,
+      "published": "2026-05-24T19:02:23.105384+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
       "epss_score": null
     },
     {
@@ -1925,8 +1997,8 @@
         }
       ],
       "threat_actors": [
-        "LockBit",
-        "Conti"
+        "Conti",
+        "LockBit"
       ]
     },
     {
