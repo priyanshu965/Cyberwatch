@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-06T17:01:22.911437+00:00",
+  "last_updated": "2026-06-06T18:09:15.489306+00:00",
   "total_items": 105,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-06T16:59:33.148758+00:00",
+      "published": "2026-06-06T18:07:20.054365+00:00",
       "ttps": [
         {
           "id": "T1059.001",
@@ -26,9 +26,9 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "The ClickFix Deno Abuse to CastleRAT threat involves a social engineering chain that tricks victims into executing an MSI file, which stages PowerShell and installs Deno to run attacker-controlled JavaScript. This JavaScript then downloads a portable Python runtime and an encrypted container, which is later decrypted to reveal a 64-bit Windows PE payload, identified as CastleRAT. The real-world impact of this threat includes the potential for unauthorized access and control of compromised systems, with affected parties likely including individual users and organizations that have fallen victim to the social engineering campaign. To remediate this threat, defenders should block the execution of unknown or untrusted MSI files, restrict PowerShell usage to only trusted scripts, and implement Deno runtime restrictions to prevent the execution of malicious JavaScript code. Additionally, defenders should monitor for suspicious activity related to portable Python runtimes and encrypted containers, and update their antivirus software to detect and block the CastleRAT payload.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1218| D[Signed Binary Proxy Execution]:::tactic\n    D -->|T1490| E[General Collection]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "ai_summary": "The ClickFix Deno Abuse to CastleRAT threat involves a social engineering chain that tricks victims into executing an MSI file, which stages PowerShell and installs Deno to run attacker-controlled JavaScript. This JavaScript then downloads a portable Python runtime and an encrypted container, which is later decrypted to reveal a 64-bit Windows PE payload, identified as CastleRAT. The real-world impact of this threat includes the potential for unauthorized access and control of compromised systems, with affected parties likely including individual users and organizations that have fallen victim to the social engineering campaign. To remediate this threat, defenders should block the execution of unknown MSI files, restrict PowerShell usage to only trusted scripts, and monitor for suspicious Deno and Python runtime activity. Additionally, implementing robust email and web filters can help prevent the initial social engineering vector, and ensuring all systems are up-to-date with the latest security patches can reduce the attack surface.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1190| D[Execution]:::tactic\n    D -->|T1210| E[Collection]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.8,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -41,7 +41,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-06T16:59:33.148734+00:00",
+      "published": "2026-06-06T18:07:20.054340+00:00",
       "ttps": [
         {
           "id": "T1583.001",
@@ -74,7 +74,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The ClickFix phishing campaign utilizes typosquatted domains to impersonate job platforms like LinkedIn and Indeed, distributing fake CAPTCHA pages through Google Ads. This multi-stage attack leverages the legacy Finger protocol and native Windows utilities, tricking victims into executing commands that deploy portable Python runtimes, such as CPython or IronPython, to deliver a Python-based Remote Access Trojan (RAT). The real-world impact of this campaign includes unauthorized access to victim systems, potential data breaches, and lateral movement within compromised networks. To remediate, defenders should block traffic to known typosquatted domains, restrict the use of native Windows utilities, and implement robust CAPTCHA verification processes. Additionally, monitoring for suspicious Python runtime executions and network activity can help detect and respond to this threat.",
+      "ai_summary": "The ClickFix phishing campaign utilizes typosquatted domains to impersonate job platforms like LinkedIn and Indeed, distributing fake CAPTCHA pages via Google Ads to trick victims into executing malicious commands. This multi-stage attack leverages the legacy Finger protocol and native Windows utilities to deploy portable Python runtimes, such as CPython or IronPython, which deliver a Python-based Remote Access Trojan (RAT). If exploited, victims may experience unauthorized access to their systems, allowing threat actors to manipulate data, install additional malware, or establish persistence. To remediate, defenders should block traffic to known typosquatted domains, restrict the use of native Windows utilities, and implement robust CAPTCHA verification processes. Additionally, users should be cautious when interacting with job platform websites and verify the authenticity of CAPTCHA pages to avoid falling victim to this campaign.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1104| C[Execution]:::tactic\n    C -->|T1134| D[Persistence]:::tactic\n    D -->|T1219| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
@@ -89,7 +89,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-06T16:59:33.148712+00:00",
+      "published": "2026-06-06T18:07:20.054317+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -128,9 +128,9 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The Operation TaxShadow campaign involves a multi-stage malware attack that begins with tax-themed phishing emails, leveraging social engineering tactics to trick victims into executing the malware. The emails, which impersonate Indian and Japanese government authorities, contain ZIP archives with three staged payloads, utilizing T1566 phishing and T1204 user execution techniques. If successfully exploited, the malware can impair defenses using T1562 and encrypt data for impact via T1486, resulting in significant financial and data losses for affected individuals and organizations. To remediate, defenders should implement robust email filtering, educate users on phishing detection, and ensure all systems are up-to-date with the latest security patches, specifically focusing on mitigating T1104 multi-stage channels and T1560.001 archive via utility vulnerabilities. Additionally, defenders should monitor for suspicious activity related to trusted third-party email delivery services and tax-themed phishing emails.",
+      "ai_summary": "Operation TaxShadow is a sophisticated multi-stage malware campaign that targets victims through tax-themed phishing emails impersonating Indian and Japanese government authorities, leveraging social engineering and trusted third-party email delivery services to distribute ZIP archives containing three staged payloads. The malware implements advanced evasion techniques, including DLL hijacking and in-memory execution, to evade detection. If exploited, the malware can lead to data encryption and potential financial loss for individuals and businesses, particularly those in the targeted regions. To remediate, defenders should implement email filters to block suspicious tax-themed emails, ensure all systems are updated with the latest security patches, and use anti-virus software with behavioral detection capabilities to identify and block the malware. Additionally, users should be educated on how to identify and report phishing emails, and organizations should consider implementing a security awareness training program.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1562| D[Defense Evasion]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -143,7 +143,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-06T16:59:33.148686+00:00",
+      "published": "2026-06-06T18:07:20.054289+00:00",
       "ttps": [
         {
           "id": "T1598.004",
@@ -182,11 +182,11 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The Pink extortion group, tracked as cluster CL-CRI-1147, utilizes voice phishing and fake IT helpdesk impersonation to compromise organizations, stealing employee credentials and bypassing multi-factor authentication. This allows them to exfiltrate data from cloud storage platforms like SharePoint and OneDrive, which they then threaten to leak unless ransom demands are met. The attack vector involves spearphishing voice calls, classified as T1598.004, and phishing attempts, classified as T1566, to initially gain access. To defend against this, organizations should implement strict verification processes for helpdesk requests, utilize anti-phishing solutions, and ensure all employees are trained to identify and report suspicious calls. Additionally, implementing a least privilege access model and regularly reviewing access tokens can help mitigate the impact of such attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1598.004| B[Initial Access]:::tactic\n    B -->|T1566| C[Execution]:::tactic\n    C -->|T1134| D[Privilege Escalation]:::tactic\n    D -->|T1041| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "ai_summary": "The Pink extortion group, tracked as cluster CL-CRI-1147, employs voice phishing and fake IT helpdesk impersonation to compromise organizations. The attackers use T1598.004 (Spearphishing Voice) to trick employees into divulging credentials, which they then bypass multi-factor authentication to access. The gang exfiltrates data from cloud storage platforms like SharePoint and OneDrive using T1213 (Data from Information Repositories) and T1041 (Exfiltration Over C2 Channel). To prevent this, organizations should implement robust phishing detection and prevention tools, enforce strict access controls, and regularly monitor cloud storage for suspicious activity. Specifically, administrators should ensure that all employees are using up-to-date versions of Microsoft Office and OneDrive, and that SharePoint is configured to require multi-factor authentication for all users.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1598.004| B[Initial Access]:::tactic\n    B -->|T1134| C[Execution]:::tactic\n    C -->|T1213| D[Exfiltration]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "Matryoshka #3/3: Gamaredon's Gammasteel Infostealer",
@@ -197,13 +197,13 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-06T16:59:33.148663+00:00",
+      "published": "2026-06-06T18:07:20.054261+00:00",
       "ttps": [],
-      "ai_summary": "The Gamaredon group, also known as UAC-0010 or Armagedon, has been observed deploying the Gammasteel infostealer in advanced espionage operations targeting Ukrainian government, military, and critical infrastructure entities. This malware operates almost entirely from memory, utilizing Windows DPAPI encryption to conceal its activities, and stores 71 distinct payload functions within the HKCU\\Printers registry key. If successfully exploited, this could lead to significant data breaches and compromise of sensitive information, affecting not only the targeted organizations but also potentially their partners and affiliates. To mitigate this threat, defenders should implement robust memory-based malware detection tools, monitor registry key modifications, and enforce strict access controls to sensitive data, ensuring that all systems are up-to-date with the latest security patches and configurations. Additionally, network traffic should be closely monitored for suspicious activity, with a focus on identifying and blocking potential command and control communications.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1055| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1005| D[Persistence]:::tactic\n    D -->|T1021| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "Gamaredon's Gammasteel Infostealer, a sophisticated stealer, targets Ukrainian government, military, and critical infrastructure. The malware operates almost entirely from memory using Windows DPAPI encryption and stores 71 distinct payload functions in the HKCU\\Printers registry key. If exploited, the malware can steal sensitive information, including login credentials and system data. To remediate, defenders should ensure Windows systems are updated to the latest version, specifically Windows 10 21H2 or later, and configure the registry to remove the HKCU\\Printers key. Additionally, implement memory-based detection and response capabilities to identify and contain the malware.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "Malware Bypasses Browser Application-Bound Encryption Protections",
@@ -214,11 +214,11 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-06T16:59:33.148648+00:00",
+      "published": "2026-06-06T18:07:20.054245+00:00",
       "ttps": [],
-      "ai_summary": "Remus, a 64-bit information-stealing malware, has emerged as a variant of the notorious Lumma Stealer. This sophisticated malware bypasses browser application-bound encryption protections, allowing it to steal sensitive information. The malware was first seen in test builds in September 2025 and has been used in live campaigns since February 2026. To remediate this threat, users should ensure they are running the latest version of their browser, specifically version 96.0.4664.110 or later, and enable browser application-bound encryption protections. Additionally, users should be cautious when downloading and installing software from untrusted sources.",
+      "ai_summary": "A sophisticated 64-bit information-stealing malware named Remus has emerged, bypassing browser application-bound encryption protections. Remus is a direct evolution of the notorious Lumma Stealer, with test builds appearing in September 2025 and live campaigns starting February 2026. This advanced variant employs innovative techniques, including injecting malicious code into browser processes. If exploited, Remus can steal sensitive information, posing a significant threat to users. To remediate, users should ensure their browsers are updated to the latest version, specifically Chrome 96.0.4664.110 or later, and enable Enhanced Protection Mode. Additionally, users should be cautious when downloading and installing software from untrusted sources.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -231,7 +231,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-06T16:59:33.148625+00:00",
+      "published": "2026-06-06T18:07:20.054221+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -252,7 +252,7 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "Operation Silent Rotor is a sophisticated spear phishing campaign targeting professionals in the Eurasian unmanned aviation sector. The attack delivers malicious archives containing Rust-based executables disguised as legitimate documents from the Russian Aeronautical Information Center. If exploited, the malware can lead to data encryption and impact the aviation sector's operations. To remediate, organizations should implement robust email filtering and antivirus solutions, specifically targeting Rust-based malware. Additionally, professionals in the sector should be cautious of suspicious emails and verify the authenticity of documents before opening them.",
+      "ai_summary": "Operation Silent Rotor is a sophisticated spear phishing campaign targeting professionals in the Eurasian unmanned aviation sector, timed to coincide with the XIII Eurasian International Forum 'Unmanned Aviation 2026' in Moscow. The attack delivers malicious archives containing Rust-based executables disguised as legitimate documents from the Russian Aeronautical Information Center. If exploited, the malware can lead to data breaches and unauthorized access to sensitive information. To remediate, aviation professionals should be cautious of suspicious emails and attachments, especially those from unknown senders. Specifically, users should update their email clients to the latest version, enable two-factor authentication, and configure their email filters to block suspicious senders.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1036| C[Execution]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -267,7 +267,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-06T16:59:33.148600+00:00",
+      "published": "2026-06-06T18:07:20.054195+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -288,9 +288,9 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "The ClickFix campaign leverages social engineering tactics to distribute infostealers targeting macOS users. Attackers host malicious Terminal commands on blog sites and content platforms, disguised as troubleshooting advice for macOS issues. These commands download infostealers including Macsync, Shub Stealer, and AMOS, which exfiltrate sensitive information. To remediate, macOS users should avoid executing Terminal commands from untrusted sources and instead use official Apple troubleshooting resources. Additionally, users should ensure their systems are running the latest version of macOS (at least 12.6) and have the XProtect malware removal tool enabled.",
+      "ai_summary": "The ClickFix campaign leverages social engineering tactics to distribute infostealers targeting macOS users through fake system utility lures. Attackers host malicious Terminal commands on blog sites and content platforms, disguised as troubleshooting advice for macOS issues. These commands download infostealers including Macsync, Shub Stealer, and AMOS, which exfiltrate sensitive information. To remediate, macOS users should avoid executing Terminal commands from untrusted sources and ensure that their system is running the latest version of macOS (Catalina or later). Additionally, users should install anti-virus software and keep it up-to-date, specifically the XProtect component which is responsible for detecting and blocking malicious software on macOS.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1041| D[Exfiltration Over C2 Channel]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "severity_score": 7.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -303,7 +303,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-06-06T16:59:33.148570+00:00",
+      "published": "2026-06-06T18:07:20.054165+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -324,7 +324,7 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "A zero-day buffer overflow vulnerability in the User-ID Authentication Portal of PAN-OS software allows unauthenticated attackers to execute arbitrary code with root privileges on PA-Series and VM-Series firewalls. The vulnerability, which has been exploited since April 9, 2026, by a likely state-sponsored threat cluster, can be exploited by injecting shellcode into nginx. This results in remote code execution, enabling attackers to gain full control over the affected firewalls. To remediate this issue, PAN-OS administrators should immediately update to PAN-OS 10.2.3 or later, and ensure that the User-ID Authentication Portal is disabled until the update is applied. Additionally, it is recommended to enable logging and monitoring to detect any potential exploitation attempts.",
+      "ai_summary": "A zero-day buffer overflow vulnerability in the User-ID Authentication Portal of PAN-OS software (CVE N/A) allows unauthenticated attackers to execute arbitrary code with root privileges on PA-Series and VM-Series firewalls. This vulnerability can be exploited by injecting shellcode into nginx, as observed in limited exploitation starting April 9, 2026, by a likely state-sponsored threat cluster. To remediate, PAN-OS administrators should upgrade to PAN-OS 10.2.3 or later, and ensure that the User-ID Authentication Portal is disabled on non-production firewalls. Additionally, enable logging and monitoring to detect potential exploitation attempts. It is also recommended to implement a web application firewall (WAF) to block suspicious traffic.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Command and Scripting Interpreter]:::tactic\n    C -->|T1203| D[Exploitation for Client Execution]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.5,
       "ai_provider": "groq",
@@ -339,7 +339,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-06T16:59:33.148547+00:00",
+      "published": "2026-06-06T18:07:20.054139+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -354,163 +354,146 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "Operation GriefLure is a sophisticated spear phishing campaign targeting senior executives of Viettel Group and St. Luke's Medical Center. The attackers weaponized authentic legal documents from a genuine data breach dispute involving a Vietnamese citizen and Viettel, alongside fabricated whistleblower complaints. The phishing emails were sent via T1566 (Phishing) and T1204 (User Execution) tactics, aiming to trick victims into executing malicious attachments or clicking on malicious links. If exploited, this campaign could lead to data breaches, privilege escalation, and potential ransomware attacks. To remediate, defenders should implement robust email filtering, educate users on phishing tactics, and ensure software updates, particularly for Microsoft Office, are applied to versions 2013 and later, as these are the most vulnerable.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "Operation GriefLure is a sophisticated spear phishing campaign targeting senior executives of Viettel Group and St. Luke's Medical Center. The attackers weaponized authentic legal documents from a genuine data breach dispute involving a Vietnamese citizen and Viettel, alongside fabricated whistleblower complaints. This campaign leverages T1566 (Phishing) and T1204 (User Execution) tactics to gain initial access. If exploited, the attackers could potentially gain sensitive information or execute malicious code on compromised systems. To remediate, defenders should implement robust email filtering and user education on phishing tactics, specifically focusing on spear phishing campaigns using authentic documents.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-42459: free5GC is an open-source implementation of the 5G core network. Prior to 4.2.2,...",
-      "description": "free5GC is an open-source implementation of the 5G core network. Prior to 4.2.2, the free5GC UDM component fails to validate the supi path parameter in six GET handlers of the nudm-sdm (Subscriber Data Management) service. An unauthenticated attacker can inject control characters into the SUPI parameter, causing UDM to forward a malformed request to UDR and return a 500 Internal Server Error respo",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42459",
-      "cve_id": "CVE-2026-42459",
+      "title": "CVE-2026-44460: FileRise is a self-hosted web-based file manager with multi-file upload, editing...",
+      "description": "FileRise is a self-hosted web-based file manager with multi-file upload, editing, and batch operations. Prior to 3.12.0, /api/totp_setup.php is callable from a session that has only passed the password check (state pending_login_user). When the target account already has TOTP configured, the endpoint decrypts and returns the user's existing TOTP secret inside the QR PNG instead of refusing or gene",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44460",
+      "cve_id": "CVE-2026-44460",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 7.5,
-      "published": "2026-06-06T16:59:31.519048+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
+      "cvss_score": 7.4,
+      "published": "2026-06-06T18:07:18.473398+00:00",
+      "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2026-42459 is a critical vulnerability in the free5GC UDM component, affecting versions prior to 4.2.2. An unauthenticated attacker can inject control characters into the SUPI parameter, causing UDM to forward a malformed request to UDR and return a 500 Internal Server Error response. This can lead to a denial-of-service (DoS) condition, impacting the entire 5G core network. To remediate, update the free5GC UDM component to version 4.2.2 or later, and ensure that the supi path parameter is properly validated in the nudm-sdm service. Additionally, implement input validation and sanitization measures to prevent similar attacks in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "CVE-2026-44460 is a vulnerability in FileRise, a self-hosted web-based file manager, affecting versions prior to 3.12.0. The issue arises from the /api/totp_setup.php endpoint being callable from a session that has only passed the password check, allowing an attacker to decrypt and obtain the user's existing TOTP secret. If exploited, this vulnerability could lead to unauthorized access to sensitive information, potentially allowing attackers to gain elevated privileges or conduct further attacks. To remediate, users should update to version 3.12.0 or later, ensuring that the password check is properly implemented. Additionally, it is recommended to enable two-factor authentication (2FA) to provide an extra layer of security.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-42083: free5GC is an open-source implementation of the 5G core network. Prior to 4.2.2,...",
-      "description": "free5GC is an open-source implementation of the 5G core network. Prior to 4.2.2, PCF Npcf_SMPolicyControl missing authentication middleware allows unauthenticated access to SM policy handlers and disclosure of subscriber SUPI. In NewServer(), the smPolicyGroup route group is created and routes are applied without attaching the router authorization middleware. In contrast, other PCF service groups ",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42083",
-      "cve_id": "CVE-2026-42083",
+      "title": "CVE-2026-44378: Botan is a C++ cryptography library. Prior to 3.12.0, certain patterns of indefi...",
+      "description": "Botan is a C++ cryptography library. Prior to 3.12.0, certain patterns of indefinite length encodings in BER data could cause quadratic behavior in the parser, resulting in a denial of service. Such BER encodings were accepted even in structures which are required to be encoded as DER, which prohibits indefinite length encodings. This vulnerability is fixed in 3.12.0.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44378",
+      "cve_id": "CVE-2026-44378",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 8.2,
-      "published": "2026-06-06T16:59:31.519034+00:00",
+      "cvss_score": 7.5,
+      "published": "2026-06-06T18:07:18.473383+00:00",
       "ttps": [
         {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
+          "id": "T1498",
+          "name": "Network Denial of Service",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-42083 is a critical vulnerability in the free5GC open-source implementation of the 5G core network prior to version 4.2.2. The vulnerability, detected as T1190 (Exploit Public-Facing Application), allows unauthenticated access to SM policy handlers and disclosure of subscriber SUPI due to missing authentication middleware in the PCF Npcf_SMPolicyControl service. If exploited, this vulnerability can lead to sensitive information disclosure and potential lateral movement within the network. To remediate this vulnerability, free5GC users should update to version 4.2.2 or later, and ensure that the router authorization middleware is properly attached to the smPolicyGroup route group. Additionally, users should implement network segmentation and monitoring to detect and prevent potential exploitation attempts.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1210| C[Initial Access]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "ai_summary": "CVE-2026-44378 is a denial-of-service vulnerability in Botan, a C++ cryptography library, prior to version 3.12.0. The vulnerability occurs when the library parses certain patterns of indefinite length encodings in BER data, causing quadratic behavior and resulting in a denial of service. This issue affects systems using Botan for cryptographic operations, potentially leading to service disruptions and data loss. To remediate, update to version 3.12.0 or later, and ensure that all dependent applications are also updated to a secure version. Additionally, consider implementing additional security measures, such as input validation and sanitization, to prevent similar attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1498| B[Network Denial of Service]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-42082: free5GC is an open-source implementation of the 5G core network. Prior to 4.2.2,...",
-      "description": "free5GC is an open-source implementation of the 5G core network. Prior to 4.2.2, the AMF in Free5GC does not enforce the concurrent security procedure rules defined in 3GPP TS 33.501 §6.9.5.1. The AMF does not check for ongoing N2 handover procedures before initiating a NAS Security Mode Command, and vice versa. This can lead to mismatches between NAS and AS security contexts in the network and th",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42082",
-      "cve_id": "CVE-2026-42082",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 3.7,
-      "published": "2026-06-06T16:59:31.519019+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ],
-      "ai_summary": "CVE-2026-42082 is a vulnerability in the free5GC open-source implementation of the 5G core network, affecting versions prior to 4.2.2. The AMF component fails to enforce concurrent security procedure rules, leading to mismatches between NAS and AS security contexts. If exploited, this vulnerability can result in unauthorized access to sensitive network information and potential data breaches. To remediate, update the free5GC version to 4.2.2 or later, and ensure that the AMF component is configured to enforce the concurrent security procedure rules defined in 3GPP TS 33.501 §6.9.5.1. Additionally, implement network segmentation and monitoring to detect and respond to potential security incidents.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1210| C[Reconnaissance]:::tactic\n    C -->|T1078| D[Collecting Information]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-42081: free5GC is an open-source implementation of the 5G core network. Prior to 4.2.2,...",
-      "description": "free5GC is an open-source implementation of the 5G core network. Prior to 4.2.2, the AMF in Free5GC does not verify the UE Security Capabilities received in NGAP PathSwitchRequest messages against its locally stored values, as mandated by 3GPP TS 33.501 §6.7.3.1. A malicious gNB can overwrite the AMF's stored UE security capabilities with arbitrary values, which are then propagated in PathSwitchRe",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42081",
-      "cve_id": "CVE-2026-42081",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.1,
-      "published": "2026-06-06T16:59:31.519000+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-42081 is a vulnerability in the free5GC open-source implementation of the 5G core network prior to version 4.2.2. An attacker can exploit this vulnerability by sending a malicious NGAP PathSwitchRequest message to the AMF, which does not verify the UE Security Capabilities. This allows the attacker to overwrite the AMF's stored UE security capabilities with arbitrary values, enabling them to propagate malicious data. If exploited, this vulnerability can lead to unauthorized access to sensitive information and potential disruption of 5G network services. To remediate this vulnerability, update the free5GC version to 4.2.2 or later, and ensure that the AMF verifies UE Security Capabilities against locally stored values.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.1,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-38945: Command injection in Raynet rvia version 12.6 Update 8 and previous versions all...",
-      "description": "Command injection in Raynet rvia version 12.6 Update 8 and previous versions allows adversaries to execute arbitrary code via a crafted path that matches the improperly terminated search criteria of rvia's Java search using the find command.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-38945",
-      "cve_id": "CVE-2026-38945",
+      "title": "CVE-2026-44346: BentoML is a Python library for building online serving systems optimized for AI...",
+      "description": "BentoML is a Python library for building online serving systems optimized for AI apps and model inference. Prior to 1.4.39, a malicious bentofile.yaml containing a newline-injected value in envs[*].name produces unquoted RUN directives in the BentoML-generated Dockerfile. When the victim runs bentoml containerize on the imported bento, those RUN directives execute on the host during docker build. ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44346",
+      "cve_id": "CVE-2026-44346",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 7.8,
-      "published": "2026-06-06T16:59:31.518985+00:00",
-      "ttps": [
-        {
-          "id": "T1083",
-          "name": "File and Directory Discovery",
-          "tactic": "Discovery",
-          "tactic_id": "TA0007"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-38945 is a command injection vulnerability in Raynet rvia version 12.6 Update 8 and previous versions. Adversaries can exploit this vulnerability by crafting a path that matches the improperly terminated search criteria of rvia's Java search using the find command, allowing them to execute arbitrary code. This vulnerability affects systems running rvia version 12.6 Update 8 and previous versions. To remediate this vulnerability, users should update to rvia version 12.6 Update 9 or later, and ensure that the 'find' command is properly sanitized in the Java search functionality. Additionally, users should review their system's configuration to ensure that the 'find' command is not being used in a way that allows for command injection.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1083| B[File and Directory Discovery]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.8,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-38931: A stored cross-site scripting (XSS) vulnerability in the /admin/config-module.ph...",
-      "description": "A stored cross-site scripting (XSS) vulnerability in the /admin/config-module.php component of creatorsofcode simplephp GitHub commit 5184cff (Latest as of 2026-02-27) via injecting a crafted payload.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-38931",
-      "cve_id": "CVE-2026-38931",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.4,
-      "published": "2026-06-06T16:59:31.518971+00:00",
+      "cvss_score": 8.8,
+      "published": "2026-06-06T18:07:18.473367+00:00",
       "ttps": [],
-      "epss_score": null
+      "epss_score": null,
+      "ai_summary": "CVE-2026-44346 is a critical vulnerability in BentoML, a Python library for building online serving systems optimized for AI apps and model inference. Prior to version 1.4.39, a malicious bentofile.yaml file can inject unquoted RUN directives in the BentoML-generated Dockerfile, allowing attackers to execute arbitrary commands on the host during docker build. This vulnerability can be exploited by an attacker who has access to the bentoml containerize command, allowing them to execute malicious code on the host. To remediate this vulnerability, users should upgrade to BentoML version 1.4.39 or later, and ensure that the bentofile.yaml file is properly validated and sanitized. Additionally, users should ensure that the Docker build process is run in a secure environment, such as a Docker buildkit, to prevent arbitrary command execution.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.8,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-38930: OpenRapid RapidCMS v1.3.1 was discovered to contain an authentication bypass in ...",
-      "description": "OpenRapid RapidCMS v1.3.1 was discovered to contain an authentication bypass in the /template/default/menu.php component. This vulnerability is exploited via injecting a crafted SQL payload into the name cookie parameter.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-38930",
-      "cve_id": "CVE-2026-38930",
+      "title": "CVE-2026-44345: BentoML is a Python library for building online serving systems optimized for AI...",
+      "description": "BentoML is a Python library for building online serving systems optimized for AI apps and model inference. Prior to 1.4.39, src/bentoml/_internal/container/frontend/dockerfile/templates/base_v2.j2 interpolates docker.base_image raw with no escaping, newline filtering, or validation. A malicious bento.yaml with a multi-line docker.base_image value smuggles arbitrary Dockerfile directives into the g",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44345",
+      "cve_id": "CVE-2026-44345",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": 8.8,
+      "published": "2026-06-06T18:07:18.473350+00:00",
+      "ttps": [
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-44345 is a critical vulnerability in BentoML, a Python library for building online serving systems optimized for AI apps and model inference. Prior to version 1.4.39, BentoML's base_v2.j2 template interpolates docker.base_image raw with no escaping, newline filtering, or validation, allowing a malicious bento.yaml to smuggle arbitrary Dockerfile directives into the generated Dockerfile. This can lead to arbitrary code execution and privilege escalation. To remediate, update BentoML to version 1.4.39 or later, and ensure that the base_v2.j2 template is properly validated and sanitized. Additionally, consider implementing additional security measures, such as Dockerfile validation and authentication certificate verification, to prevent similar attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1649| B[Steal or Forge Authentication Certificates]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-42553: Cinny is a Matrix client. Prior to 4.10.3, A remote authenticated attacker who s...",
+      "description": "Cinny is a Matrix client. Prior to 4.10.3, A remote authenticated attacker who shares a room with a victim and has permissions to create room emotes (for example in a DM) can cause the victim's client to send their Matrix access token to an attacker-controlled server. This occurs when the victim opens the emoji or sticker picker for the room containing a malicious emote pack. This is caused by an ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42553",
+      "cve_id": "CVE-2026-42553",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": null,
+      "published": "2026-06-06T18:07:18.473332+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-42553 is a remote code execution vulnerability in Cinny, a Matrix client, prior to version 4.10.3. An authenticated attacker can exploit this vulnerability by sharing a malicious room emote pack with a victim, causing the victim's client to send their Matrix access token to an attacker-controlled server. This occurs when the victim opens the emoji or sticker picker for the room containing the malicious emote pack. To remediate this vulnerability, update Cinny to version 4.10.3 or later, and ensure that only trusted users have permissions to create room emotes. Additionally, users should be cautious when opening the emoji or sticker picker in rooms shared with untrusted users.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-42328: go-ipld-prime is an implementation of the InterPlanetary Linked Data (IPLD) spec...",
+      "description": "go-ipld-prime is an implementation of the InterPlanetary Linked Data (IPLD) spec interfaces, a batteries-included codec implementations of IPLD for CBOR and JSON, and tooling for basic operations on IPLD objects. Prior to 0.23.0, the DAG-CBOR and DAG-JSON decoders recurse on each nested map or list without a depth limit. A payload containing deeply nested collections causes the decoder to recurse ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42328",
+      "cve_id": "CVE-2026-42328",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": 6.5,
-      "published": "2026-06-06T16:59:31.518957+00:00",
+      "cvss_score": 6.2,
+      "published": "2026-06-06T18:07:18.473312+00:00",
+      "ttps": [
+        {
+          "id": "T1550",
+          "name": "Use Alternate Authentication Material",
+          "tactic": "Defense Evasion",
+          "tactic_id": "TA0005"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-38808: SQL Injection vulnerability in uzy-ssm-mall v1.1.0 allows a remote attacker to o...",
+      "description": "SQL Injection vulnerability in uzy-ssm-mall v1.1.0 allows a remote attacker to obtain sensitive information via the ProductMapper.xml and /OrderUtil.java components",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-38808",
+      "cve_id": "CVE-2026-38808",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.3,
+      "published": "2026-06-06T18:07:18.473294+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -522,15 +505,15 @@
       "epss_score": null
     },
     {
-      "title": "CVE-2025-70116: A NULL pointer dereference in GPAC MP4Box: when parsing certain truncated MP4 fi...",
-      "description": "A NULL pointer dereference in GPAC MP4Box: when parsing certain truncated MP4 files, an unknown/invalid stsd entry can result in missing descriptor fields (e.g., codec/mime/profile strings). gf_media_map_esd then calls strlen() on a NULL pointer, triggering a crash (ASan SEGV).",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-70116",
-      "cve_id": "CVE-2025-70116",
+      "title": "CVE-2026-38807: Insecure Permissions vulnerability in kvf-admin v1.0.0 allows a remote attacker ...",
+      "description": "Insecure Permissions vulnerability in kvf-admin v1.0.0 allows a remote attacker to escalate privileges via the UserController.java component",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-38807",
+      "cve_id": "CVE-2026-38807",
       "source": "NVD",
       "category": "cve",
-      "severity": "medium",
-      "cvss_score": 4.3,
-      "published": "2026-06-06T16:59:31.518942+00:00",
+      "severity": "high",
+      "cvss_score": 8.8,
+      "published": "2026-06-06T18:07:18.473276+00:00",
       "ttps": [
         {
           "id": "T1649",
@@ -542,55 +525,29 @@
       "epss_score": null
     },
     {
-      "title": "CVE-2025-68712: SpSoft AppLock (com.sp.protector.free) 7.9.40 for Android allows a local attacke...",
-      "description": "SpSoft AppLock (com.sp.protector.free) 7.9.40 for Android allows a local attacker with physical access to bypass fingerprint or PIN authentication. Although the app integrates Android's biometric mechanisms, the lock is implemented with a custom overlay that fails to consistently enforce authentication. By navigating cascading interface flows - insecure navigation through exposed routes facilitate",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-68712",
-      "cve_id": "CVE-2025-68712",
+      "title": "CVE-2025-69600: Command injection in Raynet rvia RayVentory Scan Engine 12.6 Update 8 and previo...",
+      "description": "Command injection in Raynet rvia RayVentory Scan Engine 12.6 Update 8 and previous versions allows adversaries to execute commands via getconfig, upload, inventory, and oracle options.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-69600",
+      "cve_id": "CVE-2025-69600",
       "source": "NVD",
       "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.5,
-      "published": "2026-06-06T16:59:31.518922+00:00",
-      "ttps": [
-        {
-          "id": "T1592",
-          "name": "Gather Victim Host Info",
-          "tactic": "Reconnaissance",
-          "tactic_id": "TA0043"
-        },
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1187",
-          "name": "Forced Authentication",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        }
-      ],
+      "severity": "high",
+      "cvss_score": 7.8,
+      "published": "2026-06-06T18:07:18.473254+00:00",
+      "ttps": [],
       "epss_score": null
     },
     {
-      "title": "CVE-2022-41656: Missing Authorization vulnerability in Bizswoop Account Manager for WooCommerce ...",
-      "description": "Missing Authorization vulnerability in Bizswoop Account Manager for WooCommerce allows Exploiting Incorrectly Configured Access Control Security Levels.\n\nThis issue affects Account Manager for WooCommerce: from n/a through 2.1.2.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-41656",
-      "cve_id": "CVE-2022-41656",
+      "title": "CVE-2025-67903: Northern.tech Mender Client 5 before 5.0.4 allows a Cryptographic signature veri...",
+      "description": "Northern.tech Mender Client 5 before 5.0.4 allows a Cryptographic signature verification bypass.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-67903",
+      "cve_id": "CVE-2025-67903",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": 4.3,
-      "published": "2026-06-06T16:59:31.518885+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
+      "cvss_score": 5.3,
+      "published": "2026-06-06T18:07:18.473214+00:00",
+      "ttps": [],
       "epss_score": null
     },
     {
@@ -1400,8 +1357,8 @@
         }
       ],
       "threat_actors": [
-        "APT41",
-        "Conti"
+        "Conti",
+        "APT41"
       ]
     },
     {
@@ -1898,8 +1855,8 @@
         }
       ],
       "threat_actors": [
-        "LockBit",
-        "Conti"
+        "Conti",
+        "LockBit"
       ]
     },
     {
