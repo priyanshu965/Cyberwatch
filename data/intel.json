@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-07T17:07:26.415621+00:00",
+  "last_updated": "2026-06-07T19:08:19.985857+00:00",
   "total_items": 100,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-07T17:05:40.105407+00:00",
+      "published": "2026-06-07T19:06:37.538567+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -50,9 +50,9 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The Operation TaxShadow campaign involves a multi-stage malware attack that begins with phishing emails, leveraging social engineering tactics to impersonate government authorities from India and Japan, with the goal of distributing ZIP archives containing three staged payloads. The attack vector involves T1566 phishing, where victims are tricked into executing the malware, which then uses T1204 user execution to run its payloads. The malware employs advanced evasion techniques, including DL, to impair defenses as described in T1562, and utilizes T1560.001 to archive its components via utility programs. To defend against this threat, it is recommended to implement email filters that can detect and block phishing attempts, and to educate users about the risks of opening suspicious emails and attachments, specifically looking out for tax-themed phishing emails. Additionally, ensuring that all systems are updated with the latest security patches and using anti-malware software that can detect and remove the malware is crucial.",
+      "ai_summary": "The Operation TaxShadow campaign involves a sophisticated multi-stage malware attack that targets victims through tax-themed phishing emails, impersonating Indian and Japanese government authorities. The attack vector involves social engineering and the distribution of ZIP archives containing three staged payloads, leveraging trusted third-party email delivery services. If exploited, the malware can impair defenses, encrypt data for impact, and execute multi-stage channels, ultimately leading to data breaches and financial loss for affected individuals and organizations. To remediate, defenders should implement email filters to block suspicious tax-themed emails, ensure all systems are updated with the latest security patches, and use anti-virus software with advanced threat detection capabilities. Additionally, users should be educated on identifying and reporting phishing attempts, and organizations should regularly back up sensitive data to prevent losses in case of an attack.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1562| D[Defense Evasion]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -65,7 +65,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-07T17:05:40.105382+00:00",
+      "published": "2026-06-07T19:06:37.538544+00:00",
       "ttps": [
         {
           "id": "T1598.004",
@@ -104,8 +104,8 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The Pink extortion group, tracked as cluster CL-CRI-1147, utilizes voice phishing and fake IT helpdesk impersonation to compromise organizations, specifically targeting employee credentials through T1598.004 Spearphishing Voice and T1566 Phishing tactics. Once credentials are obtained, the group bypasses multi-factor authentication and exfiltrates data from cloud storage platforms like SharePoint and OneDrive using T1134 Access Token Manipulation and T1213 Data from Information Repositories. The stolen data is then exfiltrated over a command and control channel via T1041 Exfiltration Over C2 Channel, and in some cases, encrypted for impact using T1486 Data Encrypted for Impact, with ransom demands set within a 72-hour deadline. To remediate, defenders should implement strict verification processes for helpdesk requests, utilize anti-phishing training for employees, and ensure all cloud storage platforms are configured with the latest security patches and access controls, such as enabling two-factor authentication and regularly reviewing access logs.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1598.004| B[Initial Access]:::tactic\n    B -->|T1566| C[Execution]:::tactic\n    C -->|T1134| D[Persistence]:::tactic\n    D -->|T1041| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Pink extortion group, tracked as cluster CL-CRI-1147, utilizes voice phishing and fake IT helpdesk impersonation to compromise organizations, stealing employee credentials and bypassing multi-factor authentication. This allows them to exfiltrate data from cloud storage platforms like SharePoint and OneDrive, which they then use to threaten organizations unless ransom demands are met within a 72-hour deadline. The attack vector involves T1598.004 Spearphishing Voice and T1566 Phishing tactics to initially gain access. To remediate, defenders should implement strict verification processes for helpdesk requests, utilize anti-phishing solutions, and enforce regular credential rotations, specifically focusing on employees with access to sensitive cloud storage data. Additionally, ensuring all cloud storage platforms are configured to require multi-factor authentication and monitoring for suspicious access token manipulation, such as T1134, can help mitigate the threat.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1598.004| C[Execution]:::tactic\n    C -->|T1134| D[Privilege Escalation]:::tactic\n    D -->|T1041| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -119,10 +119,10 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-07T17:05:40.105359+00:00",
+      "published": "2026-06-07T19:06:37.538521+00:00",
       "ttps": [],
-      "ai_summary": "The Gamaredon group, also known as UAC-0010 or Armagedon, has been observed deploying GammaSteel, a sophisticated infostealer that operates primarily from memory. This malware utilizes Windows DPAPI encryption and stores 71 distinct payload functions in the HKCU\\Printers registry key, making it a formidable tool for espionage operations. The real-world impact of GammaSteel includes the potential compromise of sensitive information from Ukrainian government, military, and critical infrastructure entities. To remediate this threat, defenders should implement robust memory-based malware detection capabilities and monitor the HKCU\\Printers registry key for suspicious activity. Additionally, defenders should prioritize network segmentation and access control to limit the potential spread of the malware in the event of a breach.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1055| B[Initial Access]:::tactic\n    B -->|T1021| C[Execution]:::tactic\n    C -->|T1112| D[Persistence]:::tactic\n    D -->|T1082| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Gamaredon group, also known as UAC-0010 or Armagedon, has been observed deploying GammaSteel, a sophisticated infostealer malware, as part of their advanced espionage operations targeting Ukrainian government, military, and critical infrastructure. GammaSteel operates almost entirely from memory, utilizing Windows DPAPI encryption to store its payload, and stores 71 distinct payload functions in the HKCU\\Printers registry key. If exploited, this malware can lead to significant data breaches, compromising sensitive information from the targeted entities. To remediate this threat, defenders should implement memory-based malware detection tools and monitor the HKCU\\Printers registry key for suspicious activity, while also ensuring that all systems are configured to restrict access to sensitive data. Additionally, defenders should prioritize network segmentation and implement strict access controls to limit the spread of the malware in case of an infection.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1055| B[Initial Access]:::tactic\n    B -->|T1021| C[Execution]:::tactic\n    C -->|T1112| D[Persistence]:::tactic\n    D -->|T1204| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -136,11 +136,11 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-07T17:05:40.105341+00:00",
+      "published": "2026-06-07T19:06:37.538502+00:00",
       "ttps": [],
-      "ai_summary": "The Remus malware is a 64-bit information-stealing variant that has evolved from the Lumma Stealer, with test builds appearing in September 2025 and live campaigns starting February 2026. This malware bypasses browser application-bound encryption protections, allowing it to steal sensitive information from affected systems. The real-world impact of this malware includes the potential for widespread data breaches, with users of affected browsers being the primary targets. To remediate this threat, defenders should implement specific configuration changes, such as disabling any unnecessary browser extensions and ensuring that all browser software is updated to the latest version, for example, updating to Chrome version 113.0.5672.63 or later. Additionally, network traffic monitoring and incident response plans should be put in place to quickly respond to any potential security incidents.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1189| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1021| D[Persistence]:::tactic\n    D -->|T1531| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "ai_summary": "The Remus malware is a 64-bit information-stealing variant that has evolved from the Lumma Stealer, with test builds appearing in September 2025 and live campaigns starting in February 2026. This malware bypasses browser application-bound encryption protections, allowing it to steal sensitive information from affected systems. The real-world impact of this malware includes the potential for widespread data breaches, with users of affected browsers being the primary targets. To remediate this threat, defenders should implement specific security controls such as monitoring for unusual browser behavior and updating browser extensions to the latest versions, specifically ensuring that any browser-based encryption tools are updated to versions released after February 2026. Additionally, network traffic monitoring should be implemented to detect and block any suspicious communication with command and control servers.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -153,7 +153,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-07T17:05:40.105318+00:00",
+      "published": "2026-06-07T19:06:37.538480+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -174,8 +174,8 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The Operation Silent Rotor campaign involves a sophisticated spear phishing attack, utilizing T1566 phishing tactics, targeting professionals in the Eurasian unmanned aviation sector. The attack delivers malicious archives containing Rust-based executables disguised as legitimate documents from the Russian Aeronautical Information Center, leveraging T1036 masquerading techniques. If exploited, the malware can lead to T1486 data encryption for impact, resulting in potential data breaches and system compromise. To remediate, defenders should implement robust email filtering, educate users on identifying phishing attempts, and ensure all systems are up-to-date with the latest security patches. Additionally, network traffic monitoring should be implemented to detect and block suspicious activity, specifically focusing on the Eurasian unmanned aviation sector ahead of the XIII Eurasian International Forum 'Unmanned Aviation 2026' in Moscow.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1036| C[Persistence]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Operation Silent Rotor campaign involves a sophisticated spear phishing attack, utilizing T1566 phishing tactics, targeting professionals in the Eurasian unmanned aviation sector. The malicious archives, containing Rust-based executables, are disguised as legitimate documents from the Russian Aeronautical Information Center, leveraging T1036 masquerading techniques. If exploited, the malware displays aviation-themed decoy content, while in the background, it encrypts data for impact, as indicated by T1486. To remediate, defenders should implement robust email filtering, educate users about phishing attacks, and ensure all systems are up-to-date with the latest security patches. Specifically, defenders should configure their email clients to block archives from unknown sources and use antivirus software capable of detecting Rust-based malware.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1059| D[Execution]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -189,7 +189,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-07T17:05:40.105293+00:00",
+      "published": "2026-06-07T19:06:37.538456+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -210,11 +210,11 @@
           "tactic_id": "TA0010"
         }
       ],
-      "ai_summary": "Threat actors are leveraging ClickFix-style social engineering tactics to distribute infostealers targeting macOS users through fake system utility lures. The attackers host malicious Terminal commands on blog sites and content platforms, disguised as troubleshooting advice for macOS issues. When executed, these commands download infostealers including Macsync, Shub Stealer, and AMOS, which exfiltrate sensitive information. To remediate, macOS users should be cautious when executing Terminal commands from untrusted sources and ensure that their system is running the latest version of macOS. Additionally, users should verify the authenticity of system utility lures before execution. Furthermore, defenders can implement security controls to monitor and block suspicious Terminal command execution.",
+      "ai_summary": "The ClickFix campaign is a social engineering tactic that targets macOS users by disguising malicious Terminal commands as troubleshooting advice for macOS issues on blog sites and content platforms. These commands, when executed, download infostealers such as Macsync, Shub Stealer, and AMOS, which then exfiltrate sensitive information. The attack vector involves user execution (T1204) of the malicious commands, which masquerade (T1036) as legitimate system utilities. To remediate, defenders should block access to known malicious blog sites and content platforms, and implement strict execution controls on macOS systems to prevent unauthorized Terminal commands. Additionally, users should be educated to verify the authenticity of system utility advice before executing any commands.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1036| C[Masquerading]:::tactic\n    C -->|T1041| D[Exfiltration Over C2 Channel]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
+      "severity_score": 7.8,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "Threat Brief: Exploitation of PAN-OS Captive Portal Zero-Day for Unauthenticated Remote Code Execution",
@@ -225,7 +225,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-06-07T17:05:40.105266+00:00",
+      "published": "2026-06-07T19:06:37.538430+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -246,7 +246,7 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "A zero-day buffer overflow vulnerability in the User-ID Authentication Portal of PAN-OS software (CVE N/A) allows unauthenticated attackers to execute arbitrary code with root privileges on PA-Series and VM-Series firewalls. This vulnerability can be exploited by injecting shellcode into nginx, as observed in limited exploitation starting April 9, 2026, by a likely state-sponsored threat cluster. To remediate, PAN-OS administrators should update to PAN-OS 10.2.3 or later, and ensure that the User-ID Authentication Portal is disabled or configured to use a secure authentication method. Additionally, enable logging and monitoring to detect potential exploitation attempts. It is also recommended to implement a web application firewall (WAF) to block potential attacks.",
+      "ai_summary": "A zero-day buffer overflow vulnerability in the User-ID Authentication Portal of PAN-OS software (CVE N/A) allows unauthenticated attackers to execute arbitrary code with root privileges on PA-Series and VM-Series firewalls. This vulnerability can be exploited by injecting shellcode into nginx, as observed in limited exploitation starting April 9, 2026, by a likely state-sponsored threat cluster. To remediate, PAN-OS administrators should update to PAN-OS 10.2.3 or later, and ensure that the User-ID Authentication Portal is disabled or configured to use a secure authentication method. Additionally, enable logging and monitoring to detect potential exploitation attempts. It is also recommended to implement a web application firewall (WAF) to block suspicious traffic.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Command and Scripting Interpreter]:::tactic\n    C -->|T1203| D[Exploitation for Client Execution]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.5,
       "ai_provider": "groq",
@@ -261,7 +261,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-07T17:05:40.105251+00:00",
+      "published": "2026-06-07T19:06:37.538414+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -276,7 +276,7 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "Operation GriefLure is a sophisticated spear phishing campaign targeting senior executives of Viettel Group and St. Luke's Medical Center. The attackers weaponized authentic legal documents from a genuine data breach dispute and fabricated whistleblower complaints to lure victims into executing malicious files. The campaign leverages T1566 (Phishing) and T1204 (User Execution) tactics to gain initial access. To remediate, organizations should implement robust email filtering and user education on suspicious documents and attachments. Specifically, Viettel Group and St. Luke's Medical Center should update their email security software to the latest version, such as Microsoft 365 Defender, and configure it to block suspicious attachments and URLs.",
+      "ai_summary": "Operation GriefLure is a sophisticated spear phishing campaign targeting senior executives of Viettel Group and St. Luke's Medical Center. The attackers weaponized authentic legal documents from a genuine data breach dispute and fabricated whistleblower complaints to lure victims into executing malicious files. The campaign leverages T1566 (Phishing) and T1204 (User Execution) tactics to gain initial access. To remediate, users should be cautious when opening attachments or clicking links from unknown senders, especially those related to sensitive or confidential information. Organizations should also implement robust email filtering and user education to prevent similar attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -291,7 +291,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-07T17:05:40.105228+00:00",
+      "published": "2026-06-07T19:06:37.538392+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -300,7 +300,7 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "The AI-Assisted Lure Factory campaign leverages AI-generated lure names to target developers, gamers, and crypto users, distributing LuaJIT-based infostealers through over 300 delivery packages on GitHub. The malware employs a two-component design, with the first component being a LuaJIT-based loader that downloads and executes the second component, an infostealer. If exploited, the infostealer can steal sensitive information, including login credentials and cryptocurrency wallets. To remediate, GitHub users should review their repositories for suspicious packages and remove any malicious ones. Additionally, developers should be cautious when downloading packages from untrusted sources and ensure they have the latest version of LuaJIT installed, specifically version 2.1.0-beta3 or later, which includes security patches for the vulnerability.",
+      "ai_summary": "The AI-Assisted Lure Factory campaign leverages AI-generated lure names to target developers, gamers, and crypto users. The malware uses a two-component design, with the first component being a LuaJIT-based infostealer distributed through over 300 delivery packages on GitHub. The infostealer is likely to be executed via user execution (T1204) when a victim downloads and runs the malware. To remediate, developers and gamers should avoid downloading and running unknown packages from GitHub, and ensure that all software is up-to-date, specifically LuaJIT versions prior to 2.1.0-beta3. Additionally, users should be cautious of lure names incorporating biological taxonomy and medical terminology, as these may be used to trick victims into downloading the malware. Furthermore, users should implement robust security measures, such as anti-virus software and a firewall, to prevent the malware from establishing a command and control (C2) channel.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -315,7 +315,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-07T17:05:40.105195+00:00",
+      "published": "2026-06-07T19:06:37.538359+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -324,83 +324,77 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "Threat actors have evolved their phishing operations to leverage legitimate cloud infrastructure, including cloud storage, productivity suites, and OAuth authentication endpoints. This allows them to blend in with trusted services, making it challenging for defenders to distinguish between legitimate and malicious activity. The abuse of cloud-native infrastructure enables attackers to conduct entire campaigns without the need for attacker-controlled systems, increasing their stealth and effectiveness. To remediate this threat, organizations should implement strict access controls, monitor OAuth authentication activity, and regularly review cloud storage and productivity suite usage. Additionally, employees should be educated on the risks of cloud-based phishing and the importance of verifying the authenticity of cloud-based services.",
+      "ai_summary": "Threat actors have evolved their phishing operations to leverage legitimate cloud infrastructure, including cloud storage, productivity suites, and OAuth authentication endpoints. This allows them to blend in with trusted services, making it difficult for defenders to distinguish between legitimate and malicious activity. The abuse of cloud-native infrastructure enables attackers to conduct entire campaigns without the need for attacker-controlled systems, increasing their operational security and reducing the risk of detection. To remediate this threat, defenders should ensure that cloud storage and productivity suite configurations are up-to-date, with specific attention to OAuth authentication endpoint settings. Additionally, implementing robust monitoring and detection capabilities to identify suspicious activity within cloud infrastructure is crucial.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-44461: Zed is a code editor. Prior to 0.227.1, Zed builds SSH/WSL remote commands as a ...",
-      "description": "Zed is a code editor. Prior to 0.227.1, Zed builds SSH/WSL remote commands as a shell command string that starts with exec env ..., but environment variable keys are inserted without shell quoting or validation. If an attacker can control an environment variable key (for example via project terminal settings), shell expansions in the key (such as $(...)) are evaluated by the remote shell when a te",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44461",
-      "cve_id": "CVE-2026-44461",
+      "title": "CVE-2026-45041: RustFS is a distributed object storage system built in Rust. Prior to 1.0.0-beta...",
+      "description": "RustFS is a distributed object storage system built in Rust. Prior to 1.0.0-beta.2, crates/appauth/src/token.rs ships a 2048-bit RSA private key as a string constant named TEST_PRIVATE_KEY and uses it in production via parse_license() to \"verify\" license tokens. Because the key is embedded in every published source release and binary, anyone who can read the repository or extract it from the binar",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-45041",
+      "cve_id": "CVE-2026-45041",
       "source": "NVD",
       "category": "cve",
       "severity": "critical",
-      "cvss_score": 8.6,
-      "published": "2026-06-07T17:05:38.387147+00:00",
+      "cvss_score": null,
+      "published": "2026-06-07T19:06:35.831051+00:00",
       "ttps": [
         {
-          "id": "T1059.004",
-          "name": "Unix Shell",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
+          "id": "T1586.002",
+          "name": "Email Accounts",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        },
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1552.004",
+          "name": "Private Keys",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-44461 is a critical vulnerability in Zed code editor prior to version 0.227.1. The vulnerability allows an attacker to inject shell commands via unquoted environment variable keys, which are then evaluated by the remote shell. This can lead to remote code execution and potentially allow an attacker to gain access to sensitive data or take control of the system. To remediate this issue, users should update to version 0.227.1 or later, and ensure that project terminal settings do not allow arbitrary environment variable keys. Additionally, users should be cautious when using project terminal settings and ensure that they do not contain any malicious code.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.004| B[Command and Control]:::tactic\n    B -->|T1059.004| C[Execution]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.0,
+      "ai_summary": "CVE-2026-45041 is a critical vulnerability in RustFS prior to 1.0.0-beta.2, where a 2048-bit RSA private key is embedded in every published source release and binary. This allows anyone who can read the repository or extract it from the binary to obtain the private key, enabling them to forge license tokens and gain unauthorized access. The vulnerability is exploitable via T1190 (Exploit Public-Facing Application) and T1552.004 (Private Keys). To remediate, update to RustFS 1.0.0-beta.2 or later, and ensure that the TEST_PRIVATE_KEY constant is removed from the source code. Additionally, consider rotating any existing private keys used for license verification.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1552.004| C[Private Keys]:::tactic\n    C -->|T1586.002| D[Email Accounts]:::tactic\n    D -->|T1552.004| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-41185: When Calico is configured with the Azure IPAM plugin, the Calico CNI binary muta...",
-      "description": "When Calico is configured with the Azure IPAM plugin, the Calico CNI binary mutates the incoming CNI configuration to attach subnet information before delegating to the IPAM plugin. After mutating, the Azure IPAM helper logs the entire unmarshaled configuration map (stdinData) at INFO level to /var/log/calico/cni/cni.log on every CNI ADD and DEL invocation — once per pod scheduled or terminated on",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41185",
-      "cve_id": "CVE-2026-41185",
+      "title": "CVE-2026-45040: RustFS is a distributed object storage system built in Rust. Prior to 1.0.0-beta...",
+      "description": "RustFS is a distributed object storage system built in Rust. Prior to 1.0.0-beta.2, RustFS suffers from sensitive information leakage in log outputs. When the server is run with RUST_LOG=debug sensitive credentials including SessionToken (JWT), SecretAccessKey, and full JWT claims are printed in plaintext to the server logs. This vulnerability is fixed in 1.0.0-beta.2.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-45040",
+      "cve_id": "CVE-2026-45040",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": 6.5,
-      "published": "2026-06-07T17:05:38.387132+00:00",
+      "cvss_score": null,
+      "published": "2026-06-07T19:06:35.831038+00:00",
       "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2026-41185 is a medium-severity vulnerability in Calico's Azure IPAM plugin, affecting versions prior to 3.21.0.1. When Calico is configured with the Azure IPAM plugin, an attacker can exploit this vulnerability by manipulating the CNI configuration to inject malicious subnet information. This can lead to unauthorized access to Azure resources, potentially resulting in data breaches or privilege escalation. To remediate this issue, Calico users should upgrade to version 3.21.0.1 or later, and ensure that the Azure IPAM plugin is properly configured to prevent CNI configuration manipulation. Additionally, administrators should review the CNI log files at /var/log/calico/cni/cni.log for suspicious activity.",
+      "ai_summary": "CVE-2026-45040 is a sensitive information leakage vulnerability in RustFS, a distributed object storage system built in Rust. Prior to version 1.0.0-beta.2, RustFS logs sensitive credentials, including SessionToken (JWT), SecretAccessKey, and full JWT claims, in plaintext when run with RUST_LOG=debug. This vulnerability allows an attacker to obtain sensitive information, potentially leading to unauthorized access or data breaches. To remediate, update to RustFS version 1.0.0-beta.2 or later, and ensure that the RUST_LOG environment variable is not set to debug. Additionally, consider implementing logging best practices, such as logging sensitive information securely or masking it in logs.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-41184: In Calico, the install-cni init container logs the rendered CNI configuration to...",
-      "description": "In Calico, the install-cni init container logs the rendered CNI configuration to standard output. When the configuration template uses the __SERVICEACCOUNT_TOKEN__ placeholder (Canal/Flannel-Calico deployments), the installer substitutes the live Kubernetes ServiceAccount bearer token before logging, exposing the token to any authenticated user with pods/log permission in the namespace with calico",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41184",
-      "cve_id": "CVE-2026-41184",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.5,
-      "published": "2026-06-07T17:05:38.387115+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-41184 is a medium-severity vulnerability in Calico, a network policy and network security solution for Kubernetes. The vulnerability occurs when the install-cni init container logs the rendered CNI configuration to standard output, exposing the Kubernetes ServiceAccount bearer token to any authenticated user with pods/log permission in the namespace with calico. This allows an attacker to obtain sensitive information, potentially leading to unauthorized access to the cluster. To remediate this issue, users should update to Calico version 3.24.0 or later, which addresses this vulnerability. Additionally, users should ensure that the calico namespace has restricted permissions to prevent unauthorized access.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1053| B[Initial Access]:::tactic\n    B -->|T1068| C[Discovery]:::tactic\n    C -->|T1071| D[Execution]:::tactic\n    D -->|T1082| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 6.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-41160: EspoCRM is an open source customer relationship management application. Prior to...",
-      "description": "EspoCRM is an open source customer relationship management application. Prior to 9.3.5, a business logic flaw (Broken Access Control) in EspoCRM 9.3.3 allows low-privileged users to pin arbitrary notes without having the required edit permissions for the parent object. Due to a \"write first, authorize later\" execution flaw in the backend API, even though the server correctly returns a 403 Forbidde",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41160",
-      "cve_id": "CVE-2026-41160",
+      "title": "CVE-2026-45039: RustFS is a distributed object storage system built in Rust. Prior to 1.0.0-beta...",
+      "description": "RustFS is a distributed object storage system built in Rust. Prior to 1.0.0-beta.2, the internode RPC layer authenticates every request with an HMAC-SHA256 signature using a shared secret. The function that produces this secret, get_shared_secret() in crates/ecstore/src/rpc/http_auth.rs, falls back to the public, source-tree-embedded DEFAULT_SECRET_KEY = \"rustfsadmin\" when neither the RUSTFS_RPC_S",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-45039",
+      "cve_id": "CVE-2026-45039",
       "source": "NVD",
       "category": "cve",
-      "severity": "medium",
-      "cvss_score": 4.3,
-      "published": "2026-06-07T17:05:38.387095+00:00",
+      "severity": "critical",
+      "cvss_score": 9.8,
+      "published": "2026-06-07T19:06:35.831023+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -410,102 +404,47 @@
         }
       ],
       "epss_score": null,
-      "ai_summary": "CVE-2026-41160 is a Broken Access Control vulnerability in EspoCRM 9.3.3 prior to version 9.3.5. An attacker can exploit this vulnerability by pinning arbitrary notes without having the required edit permissions for the parent object. This flaw occurs due to a 'write first, authorize later' execution flaw in the backend API, which returns a 403 Forbidden response. If exploited, this vulnerability can lead to unauthorized data modification and potential data breaches. To remediate this issue, update EspoCRM to version 9.3.5 or later, and ensure that the 'pin note' functionality is restricted to authorized users with the required permissions.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 4.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-41141: EspoCRM is an open source customer relationship management application. Prior to...",
-      "description": "EspoCRM is an open source customer relationship management application. Prior to 9.3.5, the POST /api/v1/EmailTemplate/:id/prepare endpoint accepts an emailAddress parameter and resolves the owning entity (Contact, Lead, Account, or User) without performing an ACL check. An authenticated user with EmailTemplate read permission can extract all field values of any entity by supplying the target's em",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41141",
-      "cve_id": "CVE-2026-41141",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.5,
-      "published": "2026-06-07T17:05:38.387080+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ],
-      "ai_summary": "CVE-2026-41141 is a vulnerability in EspoCRM prior to version 9.3.5, allowing an authenticated user with EmailTemplate read permission to extract all field values of any entity by supplying the target's email address. This is due to the POST /api/v1/EmailTemplate/:id/prepare endpoint not performing an ACL check. An attacker can exploit this vulnerability by sending a crafted request to the endpoint, resulting in sensitive information disclosure. To remediate this issue, update EspoCRM to version 9.3.5 or later, and ensure that the EmailTemplate read permission is properly configured. Additionally, consider implementing additional security measures, such as input validation and sanitization, to prevent similar attacks.",
+      "ai_summary": "CVE-2026-45039 is a critical vulnerability in RustFS, a distributed object storage system built in Rust, prior to version 1.0.0-beta.2. The issue lies in the internode RPC layer's authentication mechanism, which uses an HMAC-SHA256 signature with a shared secret. The get_shared_secret() function falls back to a hardcoded default secret key, \"rustfsadmin\", when no other secret is provided. This allows an attacker to exploit the vulnerability by sending a malicious request with a forged signature, potentially leading to remote code execution. To remediate, users should update to version 1.0.0-beta.2 or later, and ensure that the RUSTFS_RPC_SECRET environment variable is set to a unique secret key.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.5,
+      "severity_score": 9.8,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-38707: A command injection vulnerability exists in the IPSec VPN feature of InHand Netw...",
-      "description": "A command injection vulnerability exists in the IPSec VPN feature of InHand Networks IR302 firmware V3.5.108, IR305 firmware V1.0.118, IR315 firmware V1.0.118, IR615 firmware V1.0.118, and earlier versions. Attackers can exploit this vulnerability to obtain ROOT privileges on remote target devices.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-38707",
-      "cve_id": "CVE-2026-38707",
+      "title": "CVE-2026-44394: An issue was discovered in OpenStack Keystone before 29.0.2. The Keystone federa...",
+      "description": "An issue was discovered in OpenStack Keystone before 29.0.2. The Keystone federated token rescoping mechanism does not propagate the original token's expiry to the newly issued token. When a federated user rescopes a token via POST /v3/auth/tokens, the handle_scoped_token() function in the mapped authentication plugin returns response data without an expires_at value. The token provider falls back",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44394",
+      "cve_id": "CVE-2026-44394",
       "source": "NVD",
       "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.8,
-      "published": "2026-06-07T17:05:38.387065+00:00",
-      "ttps": [],
-      "epss_score": null
+      "severity": "medium",
+      "cvss_score": 6.0,
+      "published": "2026-06-07T19:06:35.831005+00:00",
+      "ttps": [
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-44394 is a vulnerability in OpenStack Keystone before 29.0.2, allowing an attacker to steal or forge authentication certificates via the federated token rescoping mechanism. When a federated user rescopes a token, the Keystone server fails to propagate the original token's expiry to the newly issued token, resulting in a token with an indefinite lifespan. This allows an attacker to obtain a valid token with an extended expiry period, potentially leading to unauthorized access to OpenStack resources. To remediate this issue, administrators should upgrade to OpenStack Keystone 29.0.2 or later, and ensure that the mapped authentication plugin is configured to include the expires_at value in the response data. Additionally, users should be cautious when rescoping tokens via the POST /v3/auth/tokens endpoint, as this vulnerability can be exploited to obtain a valid token with an extended expiry period.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1649| B[Steal or Forge Authentication Certificates]:::tactic\n    B -->|T1210| C[Exploit Public-Facing Application]:::tactic\n    C -->|T1078| D[Valid Accounts]:::tactic\n    D -->|T1078| E[Privilege Escalation]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-38704: A command injection vulnerability exists in the WireGuard VPN feature of InHand ...",
-      "description": "A command injection vulnerability exists in the WireGuard VPN feature of InHand Networks IR302 firmware V3.5.108, IR305 firmware V1.0.118, IR315 firmware V1.0.118, IR615 firmware V1.0.118, and earlier versions. Attackers can exploit this vulnerability to obtain ROOT privileges on remote target devices.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-38704",
-      "cve_id": "CVE-2026-38704",
+      "title": "CVE-2026-43979: Local Deep Research is an AI-powered research assistant for deep, iterative rese...",
+      "description": "Local Deep Research is an AI-powered research assistant for deep, iterative research. Prior to 1.6.0, PDFService._markdown_to_html() constructs an HTML document by interpolating user-controlled values — specifically title (sourced from research.title or research.query) and metadata key-value pairs — directly into an f-string without any HTML escaping. An authenticated attacker can craft a research",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-43979",
+      "cve_id": "CVE-2026-43979",
       "source": "NVD",
       "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.8,
-      "published": "2026-06-07T17:05:38.387051+00:00",
-      "ttps": [],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-38703: A command injection vulnerability exists in the ZeroTier VPN feature of InHand N...",
-      "description": "A command injection vulnerability exists in the ZeroTier VPN feature of InHand Networks IR302 firmware V3.5.108, IR305 firmware V1.0.118, IR315 firmware V1.0.118, IR615 firmware V1.0.118, and earlier versions. Attackers can exploit this vulnerability to obtain ROOT privileges on remote target devices.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-38703",
-      "cve_id": "CVE-2026-38703",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.8,
-      "published": "2026-06-07T17:05:38.387035+00:00",
-      "ttps": [],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-38702: A command injection vulnerability exists in the Admin Access feature of InHand N...",
-      "description": "A command injection vulnerability exists in the Admin Access feature of InHand Networks IR302 firmware V3.5.108, IR305 firmware V1.0.118, IR315 firmware V1.0.118, IR615 firmware V1.0.118, and earlier versions. Attackers can exploit this vulnerability to obtain ROOT privileges on remote target devices.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-38702",
-      "cve_id": "CVE-2026-38702",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.8,
-      "published": "2026-06-07T17:05:38.387015+00:00",
-      "ttps": [],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-24444: SDMC NE6037 cable modem routers running firmware 7.1.6.0.25 and 7.1.6.1.9_B9 con...",
-      "description": "SDMC NE6037 cable modem routers running firmware 7.1.6.0.25 and 7.1.6.1.9_B9 contain a hardcoded password vulnerability in the web management interface recovery endpoints (mgmt.php, npcmd.php) that allows unauthenticated attackers to gain root access by submitting the hardcoded credential to the recovery endpoint via HTTP. Attackers can leverage this hardcoded password to enable filtered SSH and T",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-24444",
-      "cve_id": "CVE-2026-24444",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.8,
-      "published": "2026-06-07T17:05:38.386971+00:00",
+      "severity": "medium",
+      "cvss_score": 5.0,
+      "published": "2026-06-07T19:06:35.830990+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -514,16 +453,120 @@
           "tactic_id": "TA0001"
         },
         {
-          "id": "T1068",
-          "name": "Exploitation for Privilege Escalation",
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-43979 is a vulnerability in Local Deep Research, an AI-powered research assistant, prior to version 1.6.0. The issue arises from the PDFService._markdown_to_html() function, which constructs an HTML document by interpolating user-controlled values into an f-string without HTML escaping. An authenticated attacker can exploit this by crafting a research title or metadata key-value pair to inject malicious HTML, potentially leading to cross-site scripting (XSS) attacks. If exploited, this vulnerability could allow an attacker to steal or forge authentication certificates (T1649) and exploit public-facing applications (T1190). To remediate, update to version 1.6.0 or later, and ensure that any custom research titles or metadata key-value pairs are properly sanitized and escaped.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1649| B[Steal or Forge Authentication Certificates]:::tactic\n    B -->|T1190| C[Exploit Public-Facing Application]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-43000: An issue was discovered in OpenStack Keystone before 29.0.2. When combined with ...",
+      "description": "An issue was discovered in OpenStack Keystone before 29.0.2. When combined with an application credential impersonation vulnerability, an attacker with the member role on a project can escalate to admin by chaining unrestricted application credentials with Keystone trusts. The impersonated token carries the victim's identity, which passes the trustor validation check. Keystone then validates the d",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-43000",
+      "cve_id": "CVE-2026-43000",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 6.0,
+      "published": "2026-06-07T19:06:35.830970+00:00",
+      "ttps": [
+        {
+          "id": "T1134",
+          "name": "Access Token Manipulation",
           "tactic": "Privilege Escalation",
           "tactic_id": "TA0004"
         },
         {
-          "id": "T1552",
-          "name": "Unsecured Credentials",
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
           "tactic": "Credential Access",
           "tactic_id": "TA0006"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-42999: An issue was discovered in OpenStack Keystone before 29.0.2. The Keystone RBAC p...",
+      "description": "An issue was discovered in OpenStack Keystone before 29.0.2. The Keystone RBAC policy enforcer in enforce_call unconditionally merges the raw JSON request body into the policy enforcement dictionary via policy_dict.update(json_input.copy()), overwriting trusted target data that was previously set from database lookups. Because flask.request.get_json is called with force=True, this works regardless",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42999",
+      "cve_id": "CVE-2026-42999",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 6.0,
+      "published": "2026-06-07T19:06:35.830955+00:00",
+      "ttps": [
+        {
+          "id": "T1586.002",
+          "name": "Email Accounts",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        },
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-42998: An issue was discovered in OpenStack Keystone before 29.0.2. The Keystone applic...",
+      "description": "An issue was discovered in OpenStack Keystone before 29.0.2. The Keystone application credential authentication plugin does not verify that the user supplied in the authentication request matches the owner of the application credential. An attacker can authenticate with their own application credential ID and secret while specifying a different user's name and domain in the request body. Keystone ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-42998",
+      "cve_id": "CVE-2026-42998",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 6.0,
+      "published": "2026-06-07T19:06:35.830940+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-30761: An arbitrary file upload vulnerability in the pages/admin.uploadmapimg.php compo...",
+      "description": "An arbitrary file upload vulnerability in the pages/admin.uploadmapimg.php component of SourceBans Material Admin v1.1.6 allows attackers to execute arbitrary code via uploading a crafted image file.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-30761",
+      "cve_id": "CVE-2026-30761",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.3,
+      "published": "2026-06-07T19:06:35.830921+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-30760: An issue in SourceBans Material Admin before v.1.1.6 (3ecd95e) allows attackers ...",
+      "description": "An issue in SourceBans Material Admin before v.1.1.6 (3ecd95e) allows attackers to manipulate arbitrary user data in the web app via a crafted XAJAX call.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-30760",
+      "cve_id": "CVE-2026-30760",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.3,
+      "published": "2026-06-07T19:06:35.830883+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
         }
       ],
       "epss_score": null
@@ -1771,8 +1814,8 @@
         }
       ],
       "threat_actors": [
-        "Conti",
-        "LockBit"
+        "LockBit",
+        "Conti"
       ]
     },
     {
