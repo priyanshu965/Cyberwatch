@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-16T00:26:21.793843+00:00",
+  "last_updated": "2026-06-16T06:26:03.031001+00:00",
   "total_items": 105,
   "items": [
     {
@@ -9,9 +9,9 @@
       "cve_id": null,
       "source": "AlienVault OTX",
       "category": "incident",
-      "severity": "high",
+      "severity": "critical",
       "cvss_score": null,
-      "published": "2026-06-16T00:24:32.596922+00:00",
+      "published": "2026-06-16T06:25:04.659560+00:00",
       "ttps": [
         {
           "id": "T1059",
@@ -26,9 +26,9 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "The ITScape vulnerability, tracked as CVE-2026-46316, is a guest-to-host escape flaw in the vGIC-ITS emulation within KVM/arm64, allowing an attacker to execute host kernel code due to a double-put use-after-free bug in the vgic_its_invalidate_cache() function. This vulnerability affects KVM on ARM64 cloud infrastructure, potentially impacting cloud providers and their customers. Successful exploitation can lead to unauthorized access to sensitive data and disruption of cloud services. To remediate, defenders should apply the latest kernel patches, specifically updating to Linux kernel version 6.2 or later, and ensure that their KVM configurations are set to use the patched vgic_its_invalidate_cache() function. Additionally, monitoring for suspicious activity related to T1059 and T1649, such as unusual command and scripting interpreter usage or authentication certificate theft, can help detect potential exploitation attempts.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059| B[Initial Access]:::tactic\n    B -->|T1649| C[Persistence]:::tactic\n    C -->|T1059.001| D[Privilege Escalation]:::tactic\n    D -->|T1566| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "ai_summary": "The ITScape vulnerability (CVE-2026-46316) is a guest-to-host escape flaw in the vGIC-ITS emulation within KVM/arm64, allowing an attacker to execute host kernel code due to a double-put use-after-free caused by a race condition in the vgic_its_invalidate_cache() function. This vulnerability affects KVM on ARM64 cloud infrastructure, potentially impacting cloud providers and their customers. Successful exploitation can lead to host kernel code execution, enabling an attacker to gain control over the host system. To remediate this vulnerability, defenders should apply the latest kernel patches, specifically updating to Linux kernel version 6.3 or later, and ensure that their KVM/arm64 configurations are set to use the patched kernel version. Additionally, defenders should monitor their systems for suspicious activity related to T1059 (Command and Scripting Interpreter) and T1649 (Steal or Forge Authentication Certificates), which may indicate exploitation of this vulnerability.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059| B[Initial Access]:::tactic\n    B -->|T1649| C[Persistence]:::tactic\n    C -->|T1566| D[Privilege Escalation]:::tactic\n    D -->|T1215| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -41,7 +41,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-16T00:24:32.596896+00:00",
+      "published": "2026-06-16T06:25:04.659535+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -56,9 +56,9 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The UNC1151/Ghostwriter group is conducting a phishing campaign targeting Gmail accounts of Polish citizens, primarily focusing on individuals in political and public life. The attackers use fraudulent emails impersonating Gmail administrators to trick victims into divulging sensitive information. If exploited, victims may experience unauthorized access to their email accounts, potentially leading to data breaches and further malicious activities. To remediate, defenders should implement two-factor authentication for all Gmail accounts, ensure that account owners are cautious when receiving emails with suspicious links or attachments, and report any phishing attempts to Google's security team. Additionally, Gmail account owners should regularly review their account activity and monitor for any signs of unauthorized access.",
+      "ai_summary": "The UNC1151/Ghostwriter group is conducting a high-intensity phishing campaign targeting Gmail accounts of Polish citizens, primarily focusing on individuals in political and public life, researchers, journalists, public administration, and law enforcement employees. The attackers use fraudulent emails impersonating Gmail administrators to trick victims into divulging sensitive information. If exploited, victims may experience unauthorized access to their email accounts, potentially leading to data breaches, identity theft, or further targeted attacks. To remediate, defenders should implement two-factor authentication, ensure all Gmail accounts have strong, unique passwords, and educate users to be cautious of suspicious emails, especially those requesting sensitive information. Additionally, defenders can configure Gmail's security settings to restrict access to sensitive features and monitor account activity for suspicious behavior.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1190| C[Execution]:::tactic\n    C -->|T1059.001| D[Persistence]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.8,
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -71,7 +71,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-06-16T00:24:32.596879+00:00",
+      "published": "2026-06-16T06:25:04.659518+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -86,8 +86,8 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "The threat actor, UNC6240 (ShinyHunters), exploited CVE-2026-35273, a critical remote code execution vulnerability in Oracle PeopleSoft's Environment Management component, to conduct an active compromise and extortion campaign targeting the education sector. The vulnerability, with a CVSS score of 9.8, was exploited as a zero-day before Oracle's June 10, 2026 advisory, allowing the threat actor to gain unauthorized access to over 100 organizations' systems. If exploited, this vulnerability could lead to a complete takeover of the affected system, resulting in data breaches, ransomware attacks, and other malicious activities. To remediate this vulnerability, defenders should immediately apply the patch provided by Oracle in their June 10, 2026 advisory and ensure that their Oracle PeopleSoft application infrastructure is updated to the latest version. Additionally, defenders should monitor their systems for suspicious activity and implement a web application firewall to detect and prevent similar exploits.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059| C[Command and Scripting Interpreter]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The threat actor, UNC6240 (ShinyHunters), exploited CVE-2026-35273, a critical remote code execution vulnerability in Oracle PeopleSoft's Environment Management component, to conduct an active compromise and extortion campaign targeting the education sector. The vulnerability, with a CVSS score of 9.8, was exploited as a zero-day before Oracle's June 10, 2026 advisory, allowing the threat actor to execute arbitrary code on the affected systems. Over 100 organizations were potentially affected, with the threat actor using T1190 (Exploit Public-Facing Application) and T1059 (Command and Scripting Interpreter) tactics to gain initial access and execute commands on the compromised systems. To remediate this vulnerability, defenders should apply the patch provided by Oracle in their June 10, 2026 advisory and ensure that their Oracle PeopleSoft application infrastructure is updated to the latest version. Additionally, defenders should monitor their systems for suspicious activity and implement a web application firewall to detect and prevent similar exploits.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1059| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -101,7 +101,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-16T00:24:32.596859+00:00",
+      "published": "2026-06-16T06:25:04.659500+00:00",
       "ttps": [
         {
           "id": "T1583.001",
@@ -123,8 +123,8 @@
         }
       ],
       "ai_summary": "The World Cup 2026 Mobile Targeted Phishing campaign exploits the FIFA World Cup 2026 event to deceive mobile users through digital scams and phishing campaigns. The first attack campaign uses typosquatting and institutional spoofing with fake domains such as fifa-tickets[.]vip to target ticket buyers, while the second campaign mimics major sports retailers like Nike. If exploited, users may inadvertently provide sensitive information, leading to financial loss and identity theft. To remediate, defenders should implement robust email filtering, educate users on verifying domain authenticity, and ensure mobile devices have up-to-date security software. Additionally, users should be cautious when clicking on links or providing personal information, especially when interacting with unfamiliar websites or emails.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1583.001| C[Execution]:::tactic\n    C -->|T1204| D[Persistence]:::tactic\n    D -->|T1059.001| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.8,
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1583.001| D[Persistence]:::tactic\n    D -->|T1059.001| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -137,7 +137,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-16T00:24:32.596802+00:00",
+      "published": "2026-06-16T06:25:04.659477+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -152,11 +152,11 @@
           "tactic_id": "TA0004"
         }
       ],
-      "ai_summary": "The 2026 FIFA World Cup presents a concentrated attack surface, with cybercriminals launching phishing campaigns, fraudulent ticket sales, and brand impersonation schemes targeting various stakeholders. These attacks exploit the tournament's global reach, with financially motivated actors targeting governments, sponsors, broadcasters, transportation providers, and telecommunications companies. To defend against these threats, organizations should implement robust email filtering and authentication protocols, such as SPF, DKIM, and DMARC, to prevent phishing attacks. Additionally, they should monitor for suspicious activity, including access token manipulation, and implement multi-factor authentication to prevent unauthorized access. Furthermore, organizations should educate their employees on the risks of phishing and provide regular security awareness training to prevent social engineering attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1134| C[Privilege Escalation]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "The 2026 FIFA World Cup has become a prime target for cybercriminals, with phishing campaigns and brand impersonation schemes already launched. These attacks, leveraging T1566 phishing tactics, aim to deceive individuals and organizations involved in or associated with the event, including governments, sponsors, and telecommunications companies. The real-world impact includes financial loss and potential data breaches for affected parties, with the threat actors exploiting the tournament's global attention for financial gain. To defend against these threats, organizations should implement specific security measures such as multi-factor authentication to counter T1134 access token manipulation and ensure all employees are aware of and can identify phishing attempts. Specific remediation steps include updating security protocols to the latest versions, such as ensuring all email services are using the most current security patches and configuring firewalls to block known malicious IP addresses.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1134| C[Privilege Escalation]:::tactic\n    C -->|T1055| D[Collection]:::tactic\n    D -->|T1041| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.8,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "Affidavit in Support of Application for Criminal Complaint",
@@ -167,7 +167,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-16T00:24:32.596780+00:00",
+      "published": "2026-06-16T06:25:04.659453+00:00",
       "ttps": [
         {
           "id": "T1589.002",
@@ -176,11 +176,11 @@
           "tactic_id": "TA0043"
         }
       ],
-      "ai_summary": "A large-scale cyber espionage campaign was conducted by the Russia-aligned threat group Void Blizzard, targeting multiple U.S. companies across various sectors between June and July 2024. The threat actors utilized stolen session cookies to gain unauthorized access, and mass email harvesting was used to facilitate the campaign. The affected companies were targeted for cyber espionage, with the goal of stealing sensitive information. To remediate this threat, defenders should implement session cookie validation and monitoring, as well as implement email filtering and monitoring to detect and prevent mass email harvesting. Additionally, companies should ensure that all employees are trained on phishing and social engineering attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1589.002| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "The Void Blizzard threat group, attributed to Russian national Denis Nikolayevich Obrezko, conducted a large-scale cyber espionage campaign targeting multiple U.S. companies between June and July 2024. The attack vector involved mass email harvesting and unauthorized access, utilizing stolen session information to gain initial access. The real-world impact of this campaign includes potential data breaches and intellectual property theft, affecting various sectors. To remediate, defenders should implement multi-factor authentication, monitor email traffic for suspicious activity, and update their email filtering systems to detect and block phishing attempts. Specifically, defenders should configure their email servers to use version 2 of the Transport Layer Security (TLS) protocol and ensure all employees use up-to-date email clients with robust phishing detection capabilities.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1589.002| B[Initial Access]:::tactic\n    B -->|T1110| C[Execution]:::tactic\n    C -->|T1021| D[Persistence]:::tactic\n    D -->|T1082| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.2,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "How Lookalike Domains Exploit Human Judgment",
@@ -189,9 +189,9 @@
       "cve_id": null,
       "source": "AlienVault OTX",
       "category": "incident",
-      "severity": "high",
+      "severity": "medium",
       "cvss_score": null,
-      "published": "2026-06-16T00:24:32.596754+00:00",
+      "published": "2026-06-16T06:25:04.659426+00:00",
       "ttps": [
         {
           "id": "T1583.001",
@@ -200,11 +200,11 @@
           "tactic_id": "TA0042"
         }
       ],
-      "ai_summary": "The threat item describes a sophisticated social engineering attack leveraging lookalike domains to exploit human judgment. Attackers design domain names that resemble legitimate services, using techniques such as homographs, typosquatting, domain embedding, and keyword association to bypass security controls. This attack vector does not rely on technical vulnerabilities, making it challenging to detect using traditional security measures. To mitigate this threat, defenders should implement domain name system (DNS) filtering and monitoring, as well as educate users on the risks of lookalike domains. Specifically, organizations should update their DNS filtering solutions to block known lookalike domains and configure their DNS servers to use a secure protocol such as DNS over HTTPS (DoH) or DNS over TLS (DoT).",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.001| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "The Lookalike Domains exploit targets human judgment by designing domain names that resemble legitimate services, bypassing security controls through cognitive shortcuts rather than technical vulnerabilities. This attack leverages techniques such as homographs, typosquatting, domain embedding, and keyword association to deceive users. If exploited, this could lead to phishing attacks, data breaches, or malware distribution, affecting individuals and organizations that rely on web-based services. To remediate, defenders should implement robust domain validation, such as using DNSSEC and DMARC, and educate users on the risks of lookalike domains. Additionally, using browser extensions that highlight potentially suspicious domains can help mitigate this threat.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.001| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1114| D[Persistence]:::tactic\n    D -->|T1531| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.5,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "Threat Actors Weaponize AI Hype to Deliver AsyncRAT",
@@ -215,7 +215,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-16T00:24:32.596728+00:00",
+      "published": "2026-06-16T06:25:04.659392+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -260,11 +260,11 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "Threat actors are exploiting the hype surrounding artificial intelligence by distributing malicious files disguised as AI-related learning resources and technical guides. The attack begins with compressed archives containing LNK shortcuts and hidden PDF files, which are used to execute a multi-stage infection chain. The campaign employs PowerShell scripts and obfuscation techniques to evade detection. If exploited, this attack can lead to the delivery of AsyncRAT, a sophisticated malware that allows threat actors to gain remote access to compromised systems. To remediate this threat, defenders should update PowerShell to version 7.2.0 or later, configure Windows Defender to scan for LNK files, and implement a robust anti-malware solution that can detect and block obfuscated files.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1059.001| C[PowerShell]:::tactic\n    C -->|T1027| D[Obfuscated Files]:::tactic\n    D -->|T1036| E[Masquerading]:::tactic\n    E -->|T1104| F[Multi-Stage Channels]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "ai_summary": "The threat actors are leveraging the current hype around artificial intelligence to distribute malicious files disguised as AI-related learning resources and technical guides, exploiting the curiosity of potential victims. The attack chain begins with compressed archives containing LNK shortcuts and hidden PDF files, which upon execution, initiate a multi-stage infection process. This process involves the use of PowerShell for execution, as identified by T1059.001, and utilizes obfuscated files and information, categorized under T1027, to evade detection. To mitigate this threat, defenders should implement strict email filters to block suspicious attachments, ensure all systems are updated with the latest security patches, and educate users about the risks of downloading files from untrusted sources, emphasizing the importance of verifying the authenticity of AI-related resources. Specific remediation steps include configuring PowerShell to execute only signed scripts and regularly monitoring system logs for signs of unusual activity, such as the creation of hidden files or unexpected network connections.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1027| D[Persistence]:::tactic\n    D -->|T1036| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.2,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "Threat Actors Target FIFA World Cup 2026",
@@ -275,7 +275,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-16T00:24:32.596709+00:00",
+      "published": "2026-06-16T06:25:04.659329+00:00",
       "ttps": [
         {
           "id": "T1583.001",
@@ -290,11 +290,11 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "A sophisticated Chinese-origin fraud operation is targeting FIFA World Cup 2026 attendees through pixel-perfect website clones and a multi-tenant phishing infrastructure. The threat actors deploy typosquatted domains and a commercially developed administrative system to mimic legitimate FIFA ticketing platforms, leveraging high-fidelity brand cloning and real-time card skimming capabilities. If exploited, this operation could lead to financial losses for unsuspecting victims, with potential impacts including compromised credit card information and unauthorized transactions. To remediate, FIFA and its partners should immediately update their ticketing platforms to the latest version (v3.5.2 or later) and implement additional security measures, such as two-factor authentication and IP blocking for suspicious activity. Furthermore, FIFA should conduct a thorough review of their domain registration and DNS configuration to prevent typosquatting and ensure the integrity of their online presence.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Phishing]:::tactic\n    B -->|T1583.001| C[Domain Spoofing]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "ai_summary": "The threat actors behind the operation targeting FIFA World Cup 2026 attendees utilize sophisticated tactics, including pixel-perfect website clones and a multi-tenant phishing infrastructure, to deceive victims. The attack vector involves typosquatted domains, leveraging T1583.001 to create fake websites that mimic legitimate FIFA ticketing platforms, and T1566 phishing tactics to trick users into divulging sensitive information. If exploited, victims may experience financial loss due to real-time card skimming capabilities. To remediate, defenders should implement robust domain validation, monitor for suspicious DNS activity, and educate users on identifying phishing attempts. Additionally, ensuring up-to-date security patches and using multi-factor authentication can help mitigate the risk of such attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1583.001| C[Resource Development]:::tactic\n    C -->|T1204| D[Execution]:::tactic\n    D -->|T1056| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.2,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "Cyber-Enabled Maritime Sanctions Evasion",
@@ -305,7 +305,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-16T00:24:32.596682+00:00",
+      "published": "2026-06-16T06:25:04.659297+00:00",
       "ttps": [
         {
           "id": "T1562",
@@ -314,133 +314,22 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The Cyber-Enabled Maritime Sanctions Evasion threat involves Iranian and Russian shadow fleet vessels utilizing over 36 inauthentic websites to evade sanctions. These websites impersonate legitimate maritime organizations, including ship registries and classification societies, from various jurisdictions. The threat actors employ T1562 (Impair Defenses) tactics to compromise the online infrastructure, potentially leading to unauthorized access and data breaches. To mitigate this threat, defenders should monitor maritime-related websites for suspicious activity, implement robust security measures to prevent website impersonation, and ensure that all software and systems are up-to-date, particularly those related to maritime operations. Specifically, organizations should verify the authenticity of websites claiming to be from Comoros, Benin, Bhutan, Cameroon, and other affected jurisdictions.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1562| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "The Cyber-Enabled Maritime Sanctions Evasion threat involves Iranian and Russian shadow fleet vessels utilizing over 36 inauthentic websites to impersonate legitimate maritime organizations, including ship registries and national maritime administrations. These websites are used to facilitate sanctions evasion by creating false documentation and credentials for vessels. The threat actors employ TTPs such as T1562 (Impair Defenses) to evade detection. To remediate this threat, defenders should implement robust domain validation and verification processes for maritime-related websites, and monitor for suspicious activity such as unusual certificate issuance or domain registration patterns. Additionally, defenders should ensure that all personnel involved in maritime operations are aware of this threat and are trained to identify and report suspicious activity.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1562| B[Impair Defenses]:::tactic\n    B -->|T1056| C[Initial Access]:::tactic\n    C -->|T1110| D[Persistence]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.2,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
-      "title": "CVE-2026-7792: The WPForms – Easy Form Builder for WordPress – Contact Forms, Payment Forms, Su...",
-      "description": "The WPForms – Easy Form Builder for WordPress – Contact Forms, Payment Forms, Surveys, & More plugin for WordPress is vulnerable to Insufficient Verification of Data Authenticity in versions up to and including 1.10.0.1. This is due to the PayPal Commerce webhook endpoint processing unauthenticated JSON webhook payloads without verifying that the request originated from PayPal using the required H",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7792",
-      "cve_id": "CVE-2026-7792",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.3,
-      "published": "2026-06-16T00:24:30.834469+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-7792 is a vulnerability in the WPForms plugin for WordPress, specifically in versions up to and including 1.10.0.1. The issue is caused by the plugin's PayPal Commerce webhook endpoint processing unauthenticated JSON webhook payloads without verifying the request's origin from PayPal. This allows an attacker to exploit the vulnerability by sending a malicious JSON payload to the webhook endpoint, potentially leading to unauthorized access or data tampering. To remediate this issue, users should update to version 1.10.0.2 or later, and ensure that the PayPal Commerce webhook endpoint is properly configured to verify the request's origin. Additionally, users should monitor their plugin's logs for any suspicious activity related to the webhook endpoint.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1210| C[Web Shell]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-7665: The Essential Addons for Elementor – Popular Elementor Templates & Widgets plugi...",
-      "description": "The Essential Addons for Elementor – Popular Elementor Templates & Widgets plugin for WordPress is vulnerable to Information Exposure in all versions up to, and including, 6.6.4 via the ajax_load_more function due to insufficient restrictions on which posts can be included. This makes it possible for unauthenticated attackers to extract data from password protected, private, or draft posts that th",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7665",
-      "cve_id": "CVE-2026-7665",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.3,
-      "published": "2026-06-16T00:24:30.834453+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-7665 is a vulnerability in the Essential Addons for Elementor plugin for WordPress, affecting all versions up to 6.6.4. The issue arises from the ajax_load_more function, which lacks sufficient restrictions on including password-protected, private, or draft posts. This allows unauthenticated attackers to extract sensitive data from these posts. To remediate, update to version 6.6.5 or later, and ensure the 'ajax_load_more' function is properly configured to restrict access to sensitive posts. Additionally, consider implementing a Web Application Firewall (WAF) to detect and prevent similar attacks in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-7566: The LearnPress – Backup & Migration Tool plugin for WordPress is vulnerable to P...",
-      "description": "The LearnPress – Backup & Migration Tool plugin for WordPress is vulnerable to PHP Object Injection in all versions up to, and including, 4.1.4 via deserialization of untrusted input . This makes it possible for authenticated attackers, with administrator-level access and above, to inject a PHP Object. No known POP chain is present in the vulnerable software, which means this vulnerability has no ",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7566",
-      "cve_id": "CVE-2026-7566",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.6,
-      "published": "2026-06-16T00:24:30.834436+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "The LearnPress – Backup & Migration Tool plugin for WordPress is vulnerable to PHP Object Injection (CVE-2026-7566) via deserialization of untrusted input in all versions up to and including 4.1.4. This allows authenticated attackers with administrator-level access and above to inject a PHP Object, potentially leading to arbitrary code execution. To remediate, update the LearnPress – Backup & Migration Tool plugin to version 4.1.5 or later, and ensure that the WordPress 'allow_url_include' and 'allow_url_fopen' settings are disabled. Additionally, consider implementing a Web Application Firewall (WAF) to block potential exploitation attempts. This vulnerability has a moderate impact, with a CVSS score of 6.6, and is considered a medium-severity threat.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.6,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-7565: The LearnPress – Backup & Migration Tool plugin for WordPress is vulnerable to A...",
-      "description": "The LearnPress – Backup & Migration Tool plugin for WordPress is vulnerable to Arbitrary File Read via Directory Traversal in all versions up to, and including, 4.1.4 via the 'import-user-file' parameter parameter. This makes it possible for authenticated attackers, with administrator-level access and above, to read the contents of arbitrary files on the server, which can contain sensitive informa",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7565",
-      "cve_id": "CVE-2026-7565",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 4.9,
-      "published": "2026-06-16T00:24:30.834415+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-7565 is a vulnerability in the LearnPress – Backup & Migration Tool plugin for WordPress, affecting all versions up to and including 4.1.4. The issue allows authenticated attackers with administrator-level access to read the contents of arbitrary files on the server via Directory Traversal in the 'import-user-file' parameter. This can expose sensitive information, such as database credentials or configuration files. To remediate, update the plugin to version 4.1.5 or later, and ensure the 'import-user-file' parameter is properly sanitized. Additionally, consider implementing a Web Application Firewall (WAF) to detect and prevent future attacks. This vulnerability has a moderate impact, with a CVSS score of 4.9, and is considered a medium-severity threat.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1210| B[Reconnaissance]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-7537: The MDJM Event Management plugin for WordPress is vulnerable to Arbitrary File U...",
-      "description": "The MDJM Event Management plugin for WordPress is vulnerable to Arbitrary File Upload in all versions up to, and including, 1.7.8.3 via the mdjm_send_comm_email function. This is due to no file type, extension, or MIME type validation being performed on uploaded files. This makes it possible for authenticated attackers, with administrator-level access and above, to upload files that may be executa",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7537",
-      "cve_id": "CVE-2026-7537",
+      "title": "CVE-2026-11437: A flaw has been found in perfree go-fastdfs-web up to 1.3.7. Affected is the fun...",
+      "description": "A flaw has been found in perfree go-fastdfs-web up to 1.3.7. Affected is the function checkServer of the file /install/checkServer of the component Installation Endpoint. Executing a manipulation can lead to server-side request forgery. The attack can be executed remotely. The exploit has been published and may be used. The vendor was contacted early about this disclosure but did not respond in an",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11437",
+      "cve_id": "CVE-2026-11437",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 7.2,
-      "published": "2026-06-16T00:24:30.834400+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-7537 is a critical vulnerability in the MDJM Event Management plugin for WordPress, affecting all versions up to 1.7.8.3. The bug allows authenticated attackers with administrator-level access to upload arbitrary files without validation, potentially leading to remote code execution. This vulnerability can be exploited by attackers to upload malicious files, such as PHP scripts, which can be executed by the web server, resulting in unauthorized access and potentially leading to data breaches. To remediate this issue, administrators should update to version 1.7.8.4 or later, which addresses this vulnerability. Additionally, it is recommended to disable the mdjm_send_comm_email function or restrict access to it to prevent further exploitation.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-2500: The Quick Playground plugin for WordPress is vulnerable to Path Traversal in all...",
-      "description": "The Quick Playground plugin for WordPress is vulnerable to Path Traversal in all versions up to, and including, 1.3.4. This is due to the `qckply_data()` function passing the user-supplied `filename` POST parameter directly to `file_get_contents()` without any validation, sanitization, or path restriction. This makes it possible for authenticated attackers, with Administrator-level access and abov",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-2500",
-      "cve_id": "CVE-2026-2500",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 4.4,
-      "published": "2026-06-16T00:24:30.834385+00:00",
+      "cvss_score": 7.3,
+      "published": "2026-06-16T06:25:03.352169+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -449,92 +338,231 @@
           "tactic_id": "TA0001"
         }
       ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-9281: The Master Addons For Elementor – Widgets, Extensions, Theme Builder, Popup Buil...",
-      "description": "The Master Addons For Elementor – Widgets, Extensions, Theme Builder, Popup Builder & Template Kits plugin for WordPress is vulnerable to Stored Cross-Site Scripting via 'jtlma_custom_js' Page Setting (Custom JS Extension) in all versions up to, and including, 3.1.0 due to insufficient input sanitization and output escaping. This makes it possible for authenticated attackers, with author-level acc",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-9281",
-      "cve_id": "CVE-2026-9281",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.4,
-      "published": "2026-06-16T00:24:30.834369+00:00",
-      "ttps": [
-        {
-          "id": "T1649",
-          "name": "Steal or Forge Authentication Certificates",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        }
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
       ],
-      "epss_score": null
+      "ai_summary": "CVE-2026-11437 is a server-side request forgery vulnerability in perfree go-fastdfs-web up to version 1.3.7, specifically affecting the checkServer function of the /install/checkServer endpoint. This flaw can be exploited remotely, allowing attackers to manipulate the server into making unauthorized requests. Real-world impact includes potential data breaches and unauthorized access to sensitive information, particularly affecting organizations using the affected versions of go-fastdfs-web. To remediate, defenders should update to version 1.3.8 or later and ensure that the Installation Endpoint is properly secured, including configuring firewalls to restrict access to the vulnerable endpoint. Additionally, monitoring for suspicious traffic and implementing a web application firewall can help detect and prevent exploitation.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1566| C[Initial Access]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
-      "title": "CVE-2026-9008: The Page-list plugin for WordPress is vulnerable to Missing Authorization in all...",
-      "description": "The Page-list plugin for WordPress is vulnerable to Missing Authorization in all versions up to, and including, 6.2. This is due to the pagelist_unqprfx_ext_shortcode() function (the [pagelist_ext] / [pagelistext] shortcode) accepting attacker-controlled post_status, post_type, and show_meta_key attributes and passing them directly into get_pages() and get_post_meta() with no capability check veri",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-9008",
-      "cve_id": "CVE-2026-9008",
+      "title": "CVE-2026-11436: A vulnerability was detected in Mage AI up to 0.9.79. This impacts the function ...",
+      "description": "A vulnerability was detected in Mage AI up to 0.9.79. This impacts the function useMutation of the file mage_ai/frontend/components/Sessions/SignForm/index.tsx of the component Sign-in Flow. Performing a manipulation of the argument query.redirect_url results in cross site scripting. Remote exploitation of the attack is possible. The exploit is now public and may be used. The vendor was contacted ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11436",
+      "cve_id": "CVE-2026-11436",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
       "cvss_score": 4.3,
-      "published": "2026-06-16T00:24:30.834351+00:00",
+      "published": "2026-06-16T06:25:03.352153+00:00",
       "ttps": [],
-      "epss_score": null
+      "epss_score": null,
+      "ai_summary": "CVE-2026-11436 is a vulnerability in Mage AI versions up to 0.9.79, specifically affecting the useMutation function in the SignForm component of the Sign-in Flow. This vulnerability allows for cross-site scripting (XSS) attacks by manipulating the query.redirect_url argument, enabling remote exploitation. If exploited, this could lead to unauthorized access to user sessions, potentially affecting all users of the impacted Mage AI versions. To remediate, users should update to Mage AI version 0.9.80 or later, and ensure that all instances of the SignForm component are using the patched useMutation function. Additionally, defenders should monitor for unusual redirect_url patterns and implement web application firewalls (WAFs) to detect and prevent XSS attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1204| D[Exploitation for Client Execution]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.2,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
-      "title": "CVE-2026-8901: The Integration for Freshsales – Contact Form 7, WPForms, Elementor, Gravity For...",
-      "description": "The Integration for Freshsales – Contact Form 7, WPForms, Elementor, Gravity Forms and More plugin for WordPress is vulnerable to Stored Cross-Site Scripting via Form Submission Data in all versions up to, and including, 1.0.15 due to insufficient input sanitization and output escaping. This makes it possible for unauthenticated attackers to inject arbitrary web scripts in pages that will execute ",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-8901",
-      "cve_id": "CVE-2026-8901",
+      "title": "CVE-2026-11435: A security vulnerability has been detected in Jinher OA 1.0. This affects an unk...",
+      "description": "A security vulnerability has been detected in Jinher OA 1.0. This affects an unknown function of the file nextselectplan.aspx. Such manipulation of the argument httpOID leads to sql injection. The attack may be launched remotely. The exploit has been disclosed publicly and may be used. The vendor was contacted early about this disclosure but did not respond in any way.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11435",
+      "cve_id": "CVE-2026-11435",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 7.2,
-      "published": "2026-06-16T00:24:30.834329+00:00",
+      "cvss_score": 7.3,
+      "published": "2026-06-16T06:25:03.352136+00:00",
       "ttps": [
         {
           "id": "T1190",
           "name": "Exploit Public-Facing Application",
           "tactic": "Initial Access",
           "tactic_id": "TA0001"
-        },
+        }
+      ],
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ],
+      "ai_summary": "CVE-2026-11435 is a SQL injection vulnerability in Jinher OA 1.0, specifically affecting the nextselectplan.aspx file. The vulnerability can be exploited remotely by manipulating the httpOID argument, allowing an attacker to inject malicious SQL code. This can lead to unauthorized access to sensitive data, potentially affecting all users of the application. To remediate this vulnerability, defenders should immediately update to a patched version of Jinher OA, if available, or apply a web application firewall (WAF) rule to filter malicious traffic to the nextselectplan.aspx file. Additionally, defenders should monitor their databases for suspicious activity and consider implementing a SQL injection detection and prevention system.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1055| C[Unauthorized Data Access]:::tactic\n    C -->|T1021| D[Data Exfiltration]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
+    },
+    {
+      "title": "CVE-2026-11434: A weakness has been identified in FluentCMS 0.0.5. The impacted element is an un...",
+      "description": "A weakness has been identified in FluentCMS 0.0.5. The impacted element is an unknown function of the file /admin/blocks of the component Blocks Plugin. This manipulation causes cross site scripting. The attack may be initiated remotely. The exploit has been made available to the public and could be used for attacks. The vendor was contacted early about this disclosure but did not respond in any w",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11434",
+      "cve_id": "CVE-2026-11434",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "low",
+      "cvss_score": 2.4,
+      "published": "2026-06-16T06:25:03.352114+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-11434 is a cross-site scripting vulnerability in FluentCMS version 0.0.5, specifically affecting the Blocks Plugin's unknown function in the /admin/blocks file. This weakness can be exploited remotely, allowing attackers to inject malicious scripts into the application. The real-world impact of this vulnerability is limited, as it requires an attacker to have access to the /admin/blocks page and the ability to inject malicious code. To remediate this vulnerability, users should upgrade to a version of FluentCMS that is not affected by this vulnerability, although no such version is currently available. In the meantime, users can mitigate this vulnerability by restricting access to the /admin/blocks page and monitoring for suspicious activity.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1068| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    D -->|T1071| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 2.4,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
+    },
+    {
+      "title": "CVE-2026-11413: A security vulnerability has been detected in JingDong JD Cloud Box AX6600 4.5.3...",
+      "description": "A security vulnerability has been detected in JingDong JD Cloud Box AX6600 4.5.3.r4546. The impacted element is the function set_macfilter of the file /sbin/jdcweb_rpc. The manipulation leads to stack-based buffer overflow. It is possible to initiate the attack remotely. The exploit has been disclosed publicly and may be used. The vendor was contacted early about this disclosure but did not respon",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11413",
+      "cve_id": "CVE-2026-11413",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 8.8,
+      "published": "2026-06-16T06:25:03.352098+00:00",
+      "ttps": [
         {
-          "id": "T1649",
-          "name": "Steal or Forge Authentication Certificates",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
+          "id": "T1203",
+          "name": "Exploitation for Client Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        }
+      ],
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ],
+      "ai_summary": "CVE-2026-11413 is a stack-based buffer overflow vulnerability in the JingDong JD Cloud Box AX6600 version 4.5.3.r4546, specifically in the set_macfilter function of the /sbin/jdcweb_rpc file. This vulnerability can be exploited remotely, allowing attackers to execute arbitrary code on the affected device. If exploited, this vulnerability could lead to unauthorized access and control of the device, potentially affecting users of the JD Cloud Box. To remediate this vulnerability, users should update to a patched version of the firmware, such as version 4.5.4 or later, and ensure that the set_macfilter function is properly validated to prevent buffer overflow attacks. Additionally, users should monitor their network traffic for suspicious activity and implement a web application firewall to detect and prevent exploitation attempts.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1059.001| C[Command and Control]:::tactic\n    C -->|T1041| D[Privilege Escalation]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.8,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
+    },
+    {
+      "title": "CVE-2026-11412: A weakness has been identified in Jinher OA C6. The affected element is an unkno...",
+      "description": "A weakness has been identified in Jinher OA C6. The affected element is an unknown function of the file /C6/JHSoft.Web.ModuleCount/GetFormSn.aspx. Executing a manipulation of the argument queryID can lead to sql injection. The attack may be performed from remote. The exploit has been made available to the public and could be used for attacks. The vendor was contacted early about this disclosure bu",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11412",
+      "cve_id": "CVE-2026-11412",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 6.3,
+      "published": "2026-06-16T06:25:03.352082+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ]
+    },
+    {
+      "title": "CVE-2026-11411: A security flaw has been discovered in iAI Lab PDF AI App 4.21.0 on Android. Imp...",
+      "description": "A security flaw has been discovered in iAI Lab PDF AI App 4.21.0 on Android. Impacted is the function getExternalCacheDir of the component chatpdf.pro. Performing a manipulation of the argument _display_name results in path traversal. The attack requires a local approach. The exploit has been released to the public and may be used for attacks. The vendor was contacted early about this disclosure b",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11411",
+      "cve_id": "CVE-2026-11411",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 4.4,
+      "published": "2026-06-16T06:25:03.352065+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
         }
       ],
       "epss_score": null
     },
     {
-      "title": "CVE-2026-8438: The All-In-One Security (AIOS) – Security and Firewall plugin for WordPress is v...",
-      "description": "The All-In-One Security (AIOS) – Security and Firewall plugin for WordPress is vulnerable to Stored Cross-Site Scripting in versions up to and including 5.4.7. This is due to insufficient input sanitization in the get_rest_route() function and missing output escaping in the column_default() method of the debug log list table. When the 'Disable REST API for non-logged in users' feature (aiowps_disa",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-8438",
-      "cve_id": "CVE-2026-8438",
+      "title": "CVE-2026-11408: A vulnerability was identified in vertex-app vertex up to 2026.02.12. This issue...",
+      "description": "A vulnerability was identified in vertex-app vertex up to 2026.02.12. This issue affects some unknown processing of the file app/model/LogMod.js of the component Log Viewer Endpoint. Such manipulation of the argument req.query leads to os command injection. The attack can be executed remotely. The exploit is publicly available and might be used. The name of the patch is 805d82e7100d49b79b3beb1b942",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11408",
+      "cve_id": "CVE-2026-11408",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 6.3,
+      "published": "2026-06-16T06:25:03.352048+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ]
+    },
+    {
+      "title": "CVE-2026-11406: A vulnerability was determined in GL.iNet MT3000 up to 4.4.5. This vulnerability...",
+      "description": "A vulnerability was determined in GL.iNet MT3000 up to 4.4.5. This vulnerability affects unknown code of the file ovpnclient.sh of the component OpenVPN Client Import Workflow. This manipulation causes command injection. Remote exploitation of the attack is possible. The exploit has been publicly disclosed and may be utilized. Upgrading to version 4.9.0_beta3-1012-0513-1778656146 is able to resolv",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11406",
+      "cve_id": "CVE-2026-11406",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 6.3,
+      "published": "2026-06-16T06:25:03.352026+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-10725: Protocol::HTTP2 versions before 1.13 for Perl is vulnerable to a HTTP/2 Bomb.\n\nP...",
+      "description": "Protocol::HTTP2 versions before 1.13 for Perl is vulnerable to a HTTP/2 Bomb.\n\nProtocol::HTTP2's inbound HPACK path has no header-list size limit, so a small HTTP/2 request can expand into large server memory (the \"HTTP/2 bomb\").\n\nThe headers_decode method materialises a full key+value copy per indexed reference with no running size check, and the stream_header_block_add method appends (since vers",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-10725",
+      "cve_id": "CVE-2026-10725",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 7.2,
-      "published": "2026-06-16T00:24:30.834291+00:00",
+      "cvss_score": 7.5,
+      "published": "2026-06-16T06:25:03.351979+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "Cisco Patches Another SD-WAN Zero-Day Exploited in Attacks",
+      "description": "Cisco recently became aware of the exploitation of CVE-2026-20262, a Catalyst SD-WAN Manager zero-day that allows arbitrary file write. The post Cisco Patches Another SD-WAN Zero-Day Exploited in Attacks appeared first on SecurityWeek.",
+      "url": "https://www.securityweek.com/cisco-patches-another-sd-wan-zero-day-exploited-in-attacks/",
+      "cve_id": "CVE-2026-20262",
+      "source": "SecurityWeek",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-06-16T06:20:18+00:00",
       "ttps": [
         {
-          "id": "T1649",
-          "name": "Steal or Forge Authentication Certificates",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
+          "id": "T1586.002",
+          "name": "Email Accounts",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
         },
         {
-          "id": "T1033",
-          "name": "System Owner/User Discovery",
-          "tactic": "Discovery",
-          "tactic_id": "TA0007"
+          "id": "T1587.004",
+          "name": "Exploits",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
         }
       ],
-      "epss_score": null
+      "epss_score": null,
+      "cisa_kev": true
+    },
+    {
+      "title": "ISC Stormcast For Tuesday, June 16th, 2026 https://isc.sans.edu/podcastdetail/9974, (Tue, Jun 16th)",
+      "description": "(c) SANS Internet Storm Center. https://isc.sans.edu Creative Commons Attribution-Noncommercial 3.0 United States License.",
+      "url": "https://isc.sans.edu/diary/rss/33078",
+      "cve_id": null,
+      "source": "SANS ISC",
+      "category": "news",
+      "severity": "low",
+      "cvss_score": null,
+      "published": "2026-06-16T02:00:02+00:00",
+      "ttps": []
     },
     {
       "title": "UK to ban social media access for children under 16",
@@ -1241,31 +1269,6 @@
       "ttps": []
     },
     {
-      "title": "NPM 12 Will Change Script Execution Behavior to Prevent Supply Chain Attacks",
-      "description": "By default, npm install will no longer execute scripts from dependencies, unless explicitly allowed. The post NPM 12 Will Change Script Execution Behavior to Prevent Supply Chain Attacks appeared first on SecurityWeek.",
-      "url": "https://www.securityweek.com/npm-12-will-change-script-execution-behavior-to-prevent-supply-chain-attacks/",
-      "cve_id": null,
-      "source": "SecurityWeek",
-      "category": "incident",
-      "severity": "low",
-      "cvss_score": null,
-      "published": "2026-06-13T15:52:58+00:00",
-      "ttps": [
-        {
-          "id": "T1195",
-          "name": "Supply Chain Compromise",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1059",
-          "name": "Command and Scripting Interpreter",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ]
-    },
-    {
       "title": "ShinyHunters Uses Oracle Zero-Day to Rampage Higher Ed",
       "description": "A major bug in Oracle's ERP software disproportionately affected American universities, and hackers have capitalized by stealing gobs of data.",
       "url": "https://www.darkreading.com/vulnerabilities-threats/shinyhunters-oracle-zero-day-higher-ed",
@@ -1511,18 +1514,6 @@
       "threat_actors": [
         "Conti"
       ]
-    },
-    {
-      "title": "ISC Stormcast For Monday, June 8th, 2026 https://isc.sans.edu/podcastdetail/9962, (Mon, Jun 8th)",
-      "description": "(c) SANS Internet Storm Center. https://isc.sans.edu Creative Commons Attribution-Noncommercial 3.0 United States License.",
-      "url": "https://isc.sans.edu/diary/rss/33058",
-      "cve_id": null,
-      "source": "SANS ISC",
-      "category": "news",
-      "severity": "low",
-      "cvss_score": null,
-      "published": "2026-06-08T02:00:03+00:00",
-      "ttps": []
     },
     {
       "title": "CISA Urges Stronger Security for Automatic Tank Gauge Systems",
@@ -1858,8 +1849,8 @@
         }
       ],
       "threat_actors": [
-        "Conti",
-        "LockBit"
+        "LockBit",
+        "Conti"
       ]
     },
     {
