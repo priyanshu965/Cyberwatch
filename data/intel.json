@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-06-18T05:29:28.784737+00:00",
-  "total_items": 105,
+  "last_updated": "2026-06-18T10:06:16.122138+00:00",
+  "total_items": 95,
   "items": [
     {
       "title": "Potemkin Loader & RMMProject The Anatomy of a ClickFix Attack",
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-18T05:28:30.376843+00:00",
+      "published": "2026-06-18T10:05:18.091055+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -44,8 +44,8 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The ClickFix social engineering attack exploited an unmonitored endpoint, leading to a multi-stage intrusion that affected over 11 hosts. The infection chain began with a malicious HTA payload that silently installed an MSI package containing Potemkin, a custom loader with a deterministic Domain Generation Algorithm (DGA). This delivered RMMProject, a 4.4 MB Lua-scriptable Remote Access Trojan (RAT) that featured browser credential theft with Chrome App-Bound Encryption. To remediate, defenders should immediately block all HTA files at the email gateway and web proxy levels, and implement a software restriction policy to prevent the execution of unauthorized MSI packages. Additionally, defenders should update their Chrome browser to the latest version and ensure that all Chrome extensions are verified and up-to-date.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[Initial Access]:::tactic\n    B -->|T1104| C[Execution]:::tactic\n    C -->|T1219| D[Persistence]:::tactic\n    D -->|T1555.003| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The ClickFix social engineering attack exploited an unmonitored endpoint, leading to a multi-stage intrusion affecting over 11 hosts. The infection chain began with a malicious HTA payload that silently installed an MSI package containing Potemkin, a custom loader with a deterministic DGA, which delivered RMMProject, a 4.4 MB Lua-scriptable RAT. This RAT featured browser credential theft with Chrome App-Bound Encryption, highlighting the real-world impact of credential compromise. To remediate, defenders should implement robust endpoint monitoring, restrict user execution of unknown files, and enforce secure browser configurations, such as disabling Chrome's App-Bound Encryption feature. Additionally, defenders should prioritize network traffic monitoring for suspicious DGA patterns and restrict remote access software usage to trusted sources only.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1104| C[Multi-Stage Channels]:::tactic\n    C -->|T1219| D[Remote Access Software]:::tactic\n    D -->|T1555.003| E[Credentials from Web Browsers]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -59,7 +59,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-18T05:28:30.376816+00:00",
+      "published": "2026-06-18T10:05:18.091028+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -86,8 +86,8 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The attackers exploited the Microsoft Teams relay infrastructure to conceal their command-and-control traffic, utilizing a custom Go-based remote access trojan known as Backdoor.Turn. This technique leveraged anonymous Teams visitor tokens and TURN relay servers to mask malicious communications as legitimate Microsoft traffic, allowing the attackers to remain hidden. The DragonForce ransomware was deployed against a major U.S. services firm, resulting in a significant intrusion. To remediate this threat, defenders should implement strict traffic monitoring and filtering, specifically targeting unusual patterns of Microsoft Teams traffic, and ensure that all remote access software is up-to-date and configured to use secure protocols. Additionally, defenders should consider implementing a security information and event management (SIEM) system to detect and respond to similar threats in the future.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1071| C[Application Layer Protocol]:::tactic\n    C -->|T1219| D[Remote Access Software]:::tactic\n    D -->|T1486| E[Data Encrypted for Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The attackers utilized a custom Go-based remote access trojan, Backdoor.Turn, to conceal their command-and-control traffic within Microsoft Teams relay infrastructure, leveraging anonymous Teams visitor tokens and TURN relay servers to mask malicious communications as legitimate Microsoft traffic. This novel technique was used to deploy DragonForce ransomware against a major U.S. services firm, resulting in a prolonged intrusion. The attackers exploited public-facing applications, specifically targeting the Microsoft Teams infrastructure, to gain initial access and establish a remote access channel. To remediate this threat, defenders should implement strict access controls for Microsoft Teams, including validating visitor tokens and monitoring TURN relay server activity for suspicious patterns, and update their security software to detect and block Backdoor.Turn. Additionally, defenders should apply network traffic monitoring and filtering rules to detect and block malicious communications that may be masquerading as legitimate Microsoft traffic.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1071| C[Execution]:::tactic\n    C -->|T1219| D[Persistence]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -101,7 +101,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-18T05:28:30.376798+00:00",
+      "published": "2026-06-18T10:05:18.091010+00:00",
       "ttps": [
         {
           "id": "T1586",
@@ -122,9 +122,9 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The BlueKit Phishing-as-a-Service (PhaaS) platform poses a significant threat to various organizations, including banks, cloud services, cryptocurrency exchanges, and global brands, by offering 87 ready-made phishing kits. These kits enable threat actors to compromise accounts through phishing attacks, leveraging tactics such as T1586 (Compromise Accounts) and T1078 (Valid Accounts), with the initial access often gained through T1566 (Phishing). If exploited, this can lead to unauthorized access to sensitive information, financial loss, and reputational damage, affecting both individuals and businesses. To remediate, defenders should implement robust email filtering solutions, conduct regular security awareness training for employees, and enforce multi-factor authentication (MFA) for all users, particularly those with privileged access. Additionally, monitoring for suspicious account activity and implementing a robust incident response plan can help mitigate the impact of such attacks.",
+      "ai_summary": "The BlueKit Phishing-as-a-Service (PhaaS) platform poses a significant threat to various organizations, including banks, cloud services, cryptocurrency exchanges, and global brands, by offering 87 ready-made phishing kits. These kits enable threat actors to compromise accounts through credential harvesting and session hijacking, leveraging tactics such as phishing (T1566) and utilizing valid accounts (T1078) to gain unauthorized access. The real-world impact of BlueKit's operations can result in financial loss, data breaches, and compromised sensitive information for individuals and businesses. To remediate this threat, defenders should implement robust email filtering solutions, conduct regular security awareness training for employees, and enforce multi-factor authentication (MFA) for all users. Additionally, monitoring for suspicious account activity and implementing a robust incident response plan can help mitigate the effects of a BlueKit phishing campaign.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1078| C[Execution]:::tactic\n    C -->|T1586| D[Impact]:::tactic\n    D -->|T1078| E[Persistence]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -137,7 +137,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-18T05:28:30.376772+00:00",
+      "published": "2026-06-18T10:05:18.090983+00:00",
       "ttps": [
         {
           "id": "T1059",
@@ -158,7 +158,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The newly identified APT-Q-27 sample utilizes a valid digital signature from a Chinese technology company to evade detection, employing a dropper that communicates with command and control infrastructure to retrieve an extension-based module list. This campaign exploits DLL Side-Loading techniques through a legitimate Tencent-signed executable, achieving code execution and potentially leading to unauthorized access and data breaches. The attack chain involves the use of Command and Scripting Interpreter (T1059) and Application Layer Protocol (T1071) tactics, highlighting the need for defenders to monitor network traffic and system calls closely. To remediate, defenders should implement strict validation of digital signatures, monitor for unusual executable behavior, and ensure that all software is updated to the latest versions, particularly focusing on Tencent and other potentially vulnerable applications. Specific remediation steps include configuring endpoint detection and response tools to flag DLL Side-Loading attempts and regularly reviewing command and control infrastructure communications to identify potential security breaches.",
+      "ai_summary": "The newly identified APT-Q-27 sample utilizes a valid digital signature from a Chinese technology company to evade detection, exploiting DLL Side-Loading techniques through a legitimate Tencent-signed executable. This attack chain employs a dropper that retrieves an extension-based module list from command and control infrastructure, leveraging T1059 Command and Scripting Interpreter and T1574.002 DLL Side-Loading techniques. If exploited, this vulnerability could lead to code execution and potentially significant real-world impact, such as data breaches or ransomware attacks, affecting organizations that rely on the compromised software. To remediate, defenders should implement strict validation of digital signatures, monitor for suspicious activity related to the Tencent-signed executable, and ensure that all software is configured to prevent DLL Side-Loading. Additionally, defenders should prioritize network traffic monitoring for unusual application layer protocol activity, as indicated by T1071.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059| B[Initial Access]:::tactic\n    B -->|T1574.002| C[Execution]:::tactic\n    C -->|T1071| D[Persistence]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
@@ -173,7 +173,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-18T05:28:30.376750+00:00",
+      "published": "2026-06-18T10:05:18.090955+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -188,7 +188,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The suspected China-linked threat actor utilized the TencShell malware, a previously undocumented Go-based implant derived from the open-source Rshell C2 framework, to target a global manufacturer. The attack vector involved exploiting public-facing applications, as indicated by the detection of TTP T1190, and leveraging application layer protocols, as seen with T1071. If successfully exploited, this could lead to unauthorized access and control of the targeted systems, potentially disrupting the manufacturer's operations and affecting their supply chain. To remediate, defenders should implement robust network traffic monitoring, focusing on unusual application layer protocol activity, and ensure all public-facing applications are thoroughly reviewed for vulnerabilities. Additionally, implementing a zero-trust model and regularly updating security protocols can help mitigate such threats.",
+      "ai_summary": "The suspected China-linked threat actor utilized the undocumented TencShell malware, a Go-based implant derived from the open-source Rshell C2 framework, to target a global manufacturer. The attack involved exploiting public-facing applications, as indicated by the detection of TTP T1190, and leveraging application layer protocols, as seen in TTP T1071. If successfully exploited, this could lead to unauthorized access and potential data breaches, affecting the confidentiality and integrity of the manufacturer's data. To remediate, defenders should implement robust network traffic monitoring, focusing on unusual patterns and connections, and ensure all public-facing applications are thoroughly reviewed for potential vulnerabilities. Additionally, implementing a web application firewall (WAF) and regularly updating network protocols can help mitigate such threats.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1071| C[Execution]:::tactic\n    C -->|T1041| D[Persistence]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
@@ -203,7 +203,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-18T05:28:30.376733+00:00",
+      "published": "2026-06-18T10:05:18.090936+00:00",
       "ttps": [
         {
           "id": "T1583.001",
@@ -224,8 +224,8 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The recent supply chain attack on Mastra npm packages has compromised over 140 packages, including @mastra/core, which has over 918K weekly downloads. The attack was carried out by injecting a typosquatted dependency called easy-day-js, which executes during npm install via a postinstall hook, deploying a two-stage payload. The first stage of the payload is responsible for setting up the environment, while the second stage carries out the malicious activities. To remediate this threat, developers should remove the easy-day-js dependency from their projects and update their npm packages to the latest versions. Additionally, developers should also review their package.json files for any suspicious dependencies and update their npm install scripts to exclude the postinstall hook.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1583.001| C[Initial Access]:::tactic\n    C -->|T1608| D[Stage Capabilities]:::tactic\n    D -->|T1059.001| E[Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The recent supply chain attack on Mastra npm packages has compromised over 140 packages, including @mastra/core, which has over 918K weekly downloads. The attack injects a malicious dependency called easy-day-js, which executes during npm install via a postinstall hook, deploying a two-stage payload. This attack is attributed to a coordinated effort by a single npm account, which published malicious versions within a short timeframe, leveraging T1583.001 for domain manipulation, T1608 for staging capabilities, and T1195 for supply chain compromise. To remediate, defenders should immediately remove the easy-day-js dependency from their projects, update @mastra/core to a version prior to the compromise, and monitor for suspicious activity. Additionally, developers should verify the integrity of their dependencies and implement robust validation mechanisms to prevent similar attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1583.001| C[Domain Manipulation]:::tactic\n    C -->|T1608| D[Stage Capabilities]:::tactic\n    D -->|T1059.001| E[Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -239,7 +239,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-18T05:28:30.376700+00:00",
+      "published": "2026-06-18T10:05:18.090908+00:00",
       "ttps": [
         {
           "id": "T1588",
@@ -261,11 +261,11 @@
         }
       ],
       "threat_actors": [
-        "LockBit",
-        "BlackCat"
+        "BlackCat",
+        "LockBit"
       ],
-      "ai_summary": "The INC ransomware-as-a-service operation has evolved significantly, claiming over 800 victims since 2023, and has become one of the most active groups in 2026. The group's Windows and Linux/ESXi encryptors have been rewritten in Rust, allowing for cross-platform development and increased analysis complexity. If exploited, victims can expect their data to be encrypted, leading to significant disruption and potential financial loss. To remediate, defenders should ensure all systems are up-to-date, implement a robust backup strategy, and consider implementing a security information and event management (SIEM) system to detect and respond to potential incidents. Additionally, defenders should prioritize patching any vulnerabilities that could be exploited by the T1588 and T1529 tactics, and ensure that all systems are configured to prevent unauthorized shutdown or reboot.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1588| B[Obtain Capabilities]:::tactic\n    B -->|T1529| C[System Shutdown/Reboot]:::tactic\n    C -->|T1486| D[Data Encrypted for Impact]:::tactic\n    D -->|T1059.001| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The INC ransomware-as-a-service operation has evolved significantly, claiming over 800 victims since 2023, and has become one of the most active groups in 2026. The group's Windows and Linux/ESXi encryptors have been rewritten in Rust, allowing for cross-platform development and increased analysis complexity. If exploited, victims can expect their data to be encrypted, leading to significant disruption and potential financial loss. To remediate, defenders should ensure all systems are up-to-date, with specific focus on patching any vulnerabilities related to T1588, and implement a robust backup strategy to mitigate the impact of T1486. Additionally, defenders should monitor for suspicious activity related to T1529, such as unexpected system shutdowns or reboots, and have an incident response plan in place.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1588| B[Obtain Capabilities]:::tactic\n    B -->|T1486| C[Data Encrypted for Impact]:::tactic\n    C -->|T1529| D[System Shutdown/Reboot]:::tactic\n    D --> E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -279,7 +279,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-18T05:28:30.376679+00:00",
+      "published": "2026-06-18T10:05:18.090884+00:00",
       "ttps": [
         {
           "id": "T1583",
@@ -288,9 +288,9 @@
           "tactic_id": "TA0042"
         }
       ],
-      "ai_summary": "The AryStinger botnet has compromised over 4,300 legacy routers and NAS devices worldwide, primarily targeting D-Link routers with RTL819X chips. The malware exploits vulnerabilities from 2013-2025, allowing hackers to build a global attack proxy infrastructure. If exploited, affected devices can be used for malicious activities such as reconnaissance and attacks on other networks. To remediate, defenders should immediately update their router firmware to the latest version, change default passwords, and disable remote management. Additionally, network administrators should implement robust network segmentation and monitoring to detect and respond to potential attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583| B[Acquire Infrastructure]:::tactic\n    B -->|T1041| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    D -->|T1566| E[Initial Access]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "ai_summary": "The AryStinger botnet has compromised over 4,300 legacy routers and NAS devices worldwide, primarily targeting D-Link routers with RTL819X chips. The malware exploits vulnerabilities from 2013-2025, allowing attackers to build a global attack proxy infrastructure. If exploited, affected devices can be used for malicious activities such as reconnaissance and attacks on other networks. To remediate, defenders should immediately update their router firmware to the latest version, change default passwords, and disable remote management. Additionally, network administrators should block incoming traffic on ports 80 and 443 to prevent AryStinger's communication via HTTP/HTTPS.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583| B[Acquire Infrastructure]:::tactic\n    B -->|T1190| C[Exploitation for Client Execution]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1566| E[Initial Access]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -303,7 +303,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-18T05:28:30.376652+00:00",
+      "published": "2026-06-18T10:05:18.090852+00:00",
       "ttps": [
         {
           "id": "T1583.001",
@@ -336,7 +336,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The ClickFix campaign utilizes AI-powered website builders to create typosquatting domains, impersonating a Brazilian bank, to deliver SmartRAT, a PowerShell-based banking trojan. This campaign employs social engineering tactics, presenting victims with fake CAPTCHA and BSOD screens, tricking them into executing malicious PowerShell commands. The attack vector involves the use of T1059.001, where PowerShell is used to execute malicious commands, and T1071, which enables application layer protocol manipulation. To remediate this threat, defenders should implement robust input validation and sanitization, restrict PowerShell execution to only trusted sources, and monitor for suspicious network activity, particularly focusing on encrypted communication channels. Additionally, users should be educated on identifying and avoiding typosquatting domains and suspicious CAPTCHA prompts.",
+      "ai_summary": "The ClickFix campaign utilizes AI-powered website builders to create typosquatting domains, specifically targeting a Brazilian bank, to deliver SmartRAT, a PowerShell-based banking trojan. This campaign employs social engineering tactics, presenting victims with fake CAPTCHA and BSOD screens, to trick them into executing malicious PowerShell commands, leveraging T1059.001. The SmartRAT trojan enables encrypted C2 communication, allowing threat actors to maintain persistence and exfiltrate sensitive data. To remediate, defenders should implement PowerShell Constrained Language mode, restrict PowerShell execution policies to signed scripts only, and monitor for unusual application layer protocol activity, such as T1071. Additionally, defenders should block known typosquatting domains and implement robust DNS filtering to prevent T1583.001.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.001| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1573| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
@@ -351,7 +351,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-18T05:28:30.376617+00:00",
+      "published": "2026-06-18T10:05:18.090806+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -366,236 +366,86 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The Shai-Hulud copycat worm has infected the npm package chalk-tempalte, leveraging the same tactics as the original worm that was open-sourced by its creators just five days prior. This threat actor has also published three additional malicious npm packages, @deadcode09284814/axios-util, axois-utils, and color-style-utils, which contain infostealer code and have collectively received 2,678 weekly downloads. The attack vector involves exploiting public-facing applications (T1190) and compromising software dependencies (T1195.001), allowing the threat actor to potentially steal sensitive information from affected systems. To remediate, defenders should immediately remove the infected packages and update their dependencies to the latest versions, ensuring that all packages are verified through npm audit and npm install with the --audit flag. Additionally, developers should prioritize secure coding practices and regularly monitor their package dependencies for suspicious activity.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1195.001| C[Execution]:::tactic\n    C -->|T1059.001| D[Persistence]:::tactic\n    D -->|T1021| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Shai-Hulud copycat worm has infected the npm package chalk-tempalte, leveraging the same tactics as the original worm that was open-sourced by its creators. This threat actor has also published three additional malicious npm packages, @deadcode09284814/axios-util, axois-utils, and color-style-utils, which contain infostealer code and have collectively received 2,678 weekly downloads. The attack vector involves exploiting public-facing applications and compromising software dependencies, as indicated by the detected TTPs T1190 and T1195.001. To remediate this threat, defenders should immediately remove the affected packages from their projects and update their package.json files to exclude these dependencies, ensuring they are using secure and verified packages. Additionally, developers should implement robust dependency management and monitoring to detect and respond to similar threats in the future.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1195.001| C[Compromise Software Dependencies]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
     {
-      "title": "CVE-2026-3238: A flaw was found in Samba’s WINS server component when running as an Active Dire...",
-      "description": "A flaw was found in Samba’s WINS server component when running as an Active Directory Domain Controller. The WINS protocol handlers for certain request types did not properly validate incoming packets, allowing an unauthenticated remote attacker to trigger a NULL pointer dereference and crash the WINS service using specially crafted UDP packets.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-3238",
-      "cve_id": "CVE-2026-3238",
-      "source": "NVD",
+      "title": "F5 Patches Critical, High-Severity NGINX Vulnerabilities",
+      "description": "Critical flaws in NGINX could allow remote, unauthenticated attackers to cause a restart and potentially execute arbitrary code. The post F5 Patches Critical, High-Severity NGINX Vulnerabilities appeared first on SecurityWeek.",
+      "url": "https://www.securityweek.com/f5-patches-critical-high-severity-nginx-vulnerabilities/",
+      "cve_id": null,
+      "source": "SecurityWeek",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 7.5,
-      "published": "2026-06-18T05:28:28.827638+00:00",
+      "cvss_score": null,
+      "published": "2026-06-18T09:39:24+00:00",
       "ttps": [
         {
           "id": "T1190",
           "name": "Exploit Public-Facing Application",
           "tactic": "Initial Access",
           "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1505",
-          "name": "Server Software Component",
-          "tactic": "Persistence",
-          "tactic_id": "TA0003"
         }
       ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-3238 is a vulnerability in Samba's WINS server component that can be exploited by an unauthenticated remote attacker to crash the WINS service using specially crafted UDP packets. The vulnerability is caused by the WINS protocol handlers not properly validating incoming packets for certain request types, leading to a NULL pointer dereference. This vulnerability affects Samba versions prior to 4.18.0 and can be exploited by sending a malicious UDP packet to the WINS server, resulting in a denial-of-service (DoS) condition. To remediate this vulnerability, defenders should update their Samba installations to version 4.18.0 or later and ensure that the WINS server component is properly configured to validate incoming packets. Additionally, defenders can implement network segmentation and firewall rules to limit access to the WINS server and reduce the attack surface.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1505| C[Server Software Component]:::tactic\n    C -->|T1190| D[Initial Access]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The F5 patches address critical and high-severity vulnerabilities in NGINX, which could allow remote, unauthenticated attackers to cause a restart and potentially execute arbitrary code. The vulnerabilities are exploited through the T1190 tactic, where public-facing applications are targeted. If exploited, this could lead to a denial-of-service condition, with potential for arbitrary code execution, affecting organizations using vulnerable NGINX versions. To remediate, defenders should apply the latest F5 patches and ensure NGINX is updated to a version that is not vulnerable to these issues. Additionally, implementing a web application firewall (WAF) can help detect and prevent such attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploitation]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
+    },
+    {
+      "title": "SailPoint to Acquire Entro in Reported $200 Million Deal",
+      "description": "Israel-based Entro specializes in non-human identity and credential security solutions, and it will enable SailPoint to enhance its products. The post SailPoint to Acquire Entro in Reported $200 Million Deal appeared first on SecurityWeek.",
+      "url": "https://www.securityweek.com/sailpoint-to-acquire-entro-in-reported-200-million-deal/",
+      "cve_id": null,
+      "source": "SecurityWeek",
+      "category": "news",
+      "severity": "low",
+      "cvss_score": null,
+      "published": "2026-06-18T08:36:42+00:00",
+      "ttps": [],
+      "ai_summary": "This cybersecurity news item does not describe a specific vulnerability or exploit, but rather a business acquisition. SailPoint's acquisition of Entro, an Israel-based company specializing in non-human identity and credential security solutions, is reported to be worth $200 million. The deal is expected to enhance SailPoint's products, but no technical details or specific security implications are mentioned. As there is no vulnerability or exploit to remediate, defenders do not need to take specific actions in response to this news item. However, organizations using SailPoint or Entro products should monitor the integration process for any potential security changes or updates.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|None| B[No TTPs]:::tactic\n    B -->|None| C[No Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 1.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
+    },
+    {
+      "title": "Kodak Admits Data Breach After ShinyHunters Hack Claims",
+      "description": "Kodak told SecurityWeek it believes there is no threat to its systems or operations as a result of the cybersecurity incident. The post Kodak Admits Data Breach After ShinyHunters Hack Claims appeared first on SecurityWeek.",
+      "url": "https://www.securityweek.com/kodak-admits-data-breach-after-shinyhunters-hack-claims/",
+      "cve_id": null,
+      "source": "SecurityWeek",
+      "category": "incident",
+      "severity": "high",
+      "cvss_score": null,
+      "published": "2026-06-18T07:18:51+00:00",
+      "ttps": [],
+      "ai_summary": "The Kodak data breach, claimed by the ShinyHunters hacking group, has resulted in an undisclosed amount of sensitive data being compromised. Although the exact technical details of the breach are not available, it is clear that the attackers were able to gain unauthorized access to Kodak's systems, potentially through social engineering or exploitation of a vulnerability. The real-world impact of this breach could be significant, as it may have exposed customer or employee personal data, potentially leading to identity theft or other malicious activities. To remediate this type of incident, defenders should ensure that all systems and data are properly secured, including implementing robust access controls, encrypting sensitive data, and regularly monitoring for suspicious activity. Additionally, Kodak should consider conducting a thorough investigation and notifying affected parties as necessary.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1615| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
     {
-      "title": "CVE-2026-11499: A vulnerability was determined in Tenda HG7HG9 and HG10 300001138_en_xpon. This ...",
-      "description": "A vulnerability was determined in Tenda HG7HG9 and HG10 300001138_en_xpon. This affects the function formDOMAINBLK of the file /boaform/formDOMAINBLK. Executing a manipulation of the argument blkDomain can lead to stack-based buffer overflow. The attack may be performed from remote.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11499",
-      "cve_id": "CVE-2026-11499",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.8,
-      "published": "2026-06-18T05:28:28.827621+00:00",
-      "ttps": [
-        {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ],
-      "ai_summary": "CVE-2026-11499 is a high-severity vulnerability in Tenda HG7HG9 and HG10 300001138_en_xpon routers, specifically affecting the formDOMAINBLK function in the /boaform/formDOMAINBLK file. The vulnerability can be exploited via a stack-based buffer overflow by manipulating the blkDomain argument, allowing for remote code execution. If exploited, this vulnerability could allow an attacker to gain control of the affected router, potentially leading to data breaches, network compromise, or other malicious activities. To remediate this vulnerability, users should update their Tenda HG7HG9 and HG10 routers to the latest firmware version, which should include patches for CVE-2026-11499. Additionally, users can mitigate the risk by disabling remote access to the router and limiting access to the network.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
-    },
-    {
-      "title": "CVE-2026-11498: A vulnerability was found in Tenda HG7HG9 and HG10 300001138_en_xpon. Affected b...",
-      "description": "A vulnerability was found in Tenda HG7HG9 and HG10 300001138_en_xpon. Affected by this issue is the function asp_voip_OtherSet of the file /boaform/voip_other_set of the component Web Management Interface. Performing a manipulation of the argument funckey_transfer results in stack-based buffer overflow. The attack is possible to be carried out remotely.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11498",
-      "cve_id": "CVE-2026-11498",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 8.8,
-      "published": "2026-06-18T05:28:28.827604+00:00",
-      "ttps": [
-        {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-11498 is a stack-based buffer overflow vulnerability in the Tenda HG7HG9 and HG10 300001138_en_xpon routers, specifically in the asp_voip_OtherSet function of the Web Management Interface. This vulnerability can be exploited remotely by manipulating the funckey_transfer argument, allowing an attacker to execute arbitrary code on the device. If exploited, this vulnerability could allow an attacker to gain control of the router, potentially leading to data breaches or disruption of network services. To remediate this vulnerability, users should update their firmware to the latest version, which can be found on the Tenda website, and ensure that the Web Management Interface is only accessible from trusted IP addresses. Additionally, users can mitigate the risk of exploitation by disabling remote management and using strong passwords for administrative accounts.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1190| C[Exploitation for Privilege Escalation]:::tactic\n    C -->|T1068| D[Exploitation for Persistence]:::tactic\n    D -->|T1072| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.2,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
-    },
-    {
-      "title": "CVE-2026-11497: A vulnerability has been found in D-Link DCS-5615 1.01.00. Affected by this vuln...",
-      "description": "A vulnerability has been found in D-Link DCS-5615 1.01.00. Affected by this vulnerability is an unknown functionality of the file /etc/conf.d/boa/boa.conf of the component Boa Webserver. Such manipulation leads to least privilege violation. The attack can be executed remotely. The exploit has been disclosed to the public and may be used.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11497",
-      "cve_id": "CVE-2026-11497",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.3,
-      "published": "2026-06-18T05:28:28.827584+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ],
-      "ai_summary": "CVE-2026-11497 is a vulnerability in the D-Link DCS-5615 1.01.00 device, specifically affecting the Boa Webserver component. The vulnerability is located in the /etc/conf.d/boa/boa.conf file and can be exploited remotely, leading to a least privilege violation. If exploited, this vulnerability could allow an attacker to gain unauthorized access to the device, potentially affecting users who rely on the device for network connectivity. To remediate this vulnerability, users should update their device to the latest firmware version, which is not yet specified, and ensure that the Boa Webserver is properly configured to prevent remote exploitation. Additionally, users can mitigate the risk by restricting access to the device and implementing network segmentation to limit the attack surface.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploitation for Client Execution]:::tactic\n    B -->|T1210| C[Exploitation of Remote Services]:::tactic\n    C -->|T1550| D[Credential Access]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.3,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
-    },
-    {
-      "title": "CVE-2026-11495: A vulnerability was detected in CodeAstro Ingredients Stock Management System 1....",
-      "description": "A vulnerability was detected in CodeAstro Ingredients Stock Management System 1.0. This impacts an unknown function of the file /Ingredients-Stock/add_stock.php. The manipulation of the argument ID results in sql injection. The attack may be launched remotely. The exploit is now public and may be used.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11495",
-      "cve_id": "CVE-2026-11495",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 6.3,
-      "published": "2026-06-18T05:28:28.827569+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-11495 is a SQL injection vulnerability in the CodeAstro Ingredients Stock Management System version 1.0, specifically affecting the /Ingredients-Stock/add_stock.php file. The vulnerability can be exploited remotely by manipulating the 'ID' argument, allowing an attacker to inject malicious SQL code. If exploited, this vulnerability could lead to unauthorized data access, modification, or deletion, potentially affecting businesses that rely on this system for inventory management. To remediate this vulnerability, users should update to a patched version of the system, if available, or apply a web application firewall (WAF) rule to filter malicious traffic to the affected endpoint. Additionally, implementing input validation and sanitization for the 'ID' argument in the add_stock.php file can help prevent SQL injection attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.2,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
-    },
-    {
-      "title": "CVE-2026-11494: A security vulnerability has been detected in TOTOLINK AC1200 T8 4.1.5cu.8611. T...",
-      "description": "A security vulnerability has been detected in TOTOLINK AC1200 T8 4.1.5cu.8611. This affects an unknown function of the file /etc/vsftpd.conf of the component vsftpd. The manipulation leads to least privilege violation. The attack may be initiated remotely. The exploit has been disclosed publicly and may be used.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11494",
-      "cve_id": "CVE-2026-11494",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 4.3,
-      "published": "2026-06-18T05:28:28.827552+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ]
-    },
-    {
-      "title": "CVE-2026-11493: A weakness has been identified in Tenda AC15 15.03.05.19. The impacted element i...",
-      "description": "A weakness has been identified in Tenda AC15 15.03.05.19. The impacted element is an unknown function of the file /etc_ro/smb.conf of the component Samba. Executing a manipulation can lead to weak password requirements. The attack is only possible within the local network. A high complexity level is associated with this attack. The exploitability is regarded as difficult. The exploit has been made",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11493",
-      "cve_id": "CVE-2026-11493",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.0,
-      "published": "2026-06-18T05:28:28.827536+00:00",
-      "ttps": [
-        {
-          "id": "T1110.001",
-          "name": "Password Guessing",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        }
-      ],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ]
-    },
-    {
-      "title": "CVE-2026-11492: A security flaw has been discovered in D-Link DIR-823G 1.0.2B05. The affected el...",
-      "description": "A security flaw has been discovered in D-Link DIR-823G 1.0.2B05. The affected element is an unknown function of the file /etc/vsftpd.conf of the component vsftpd. Performing a manipulation results in least privilege violation. The attack can be initiated remotely. The exploit has been released to the public and may be used for attacks.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11492",
-      "cve_id": "CVE-2026-11492",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 4.3,
-      "published": "2026-06-18T05:28:28.827519+00:00",
-      "ttps": [],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-11491: A vulnerability was identified in CodeAstro Human Resource Management System 1.0...",
-      "description": "A vulnerability was identified in CodeAstro Human Resource Management System 1.0. Impacted is an unknown function of the file /notice/All_notice of the component Notice Board Management. Such manipulation of the argument Notice Title with the input <svg onload=\"alert('Stored XSS Triggered by Ashik Mohamed')\"> as part of POST leads to cross site scripting. It is possible to launch the attack remote",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11491",
-      "cve_id": "CVE-2026-11491",
-      "source": "NVD",
-      "category": "cve",
+      "title": "EU Gets a Head Start in Developing 6G Network Security",
+      "description": "&quot;Shield-6G&quot; will combine AI threat detection, digital twins, honeypots, and more, to help carriers protect 6G networks against the threats of tomorrow.",
+      "url": "https://www.darkreading.com/cybersecurity-operations/eu-6g-network-security",
+      "cve_id": null,
+      "source": "Dark Reading",
+      "category": "news",
       "severity": "low",
-      "cvss_score": 2.4,
-      "published": "2026-06-18T05:28:28.827498+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ]
-    },
-    {
-      "title": "CVE-2026-11490: A vulnerability was determined in code-projects Online Music Site 1.0. This issu...",
-      "description": "A vulnerability was determined in code-projects Online Music Site 1.0. This issue affects some unknown processing of the file /Frontend/Search.php. This manipulation of the argument Category causes sql injection. It is possible to initiate the attack remotely. The exploit has been publicly disclosed and may be utilized.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11490",
-      "cve_id": "CVE-2026-11490",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.3,
-      "published": "2026-06-18T05:28:28.827456+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
+      "cvss_score": null,
+      "published": "2026-06-18T07:00:00+00:00",
+      "ttps": [],
+      "ai_summary": "The development of 6G network security, specifically the 'Shield-6G' project, aims to integrate AI threat detection, digital twins, and honeypots to protect against future threats. This initiative is crucial as 6G networks will likely introduce new vulnerabilities and expand the attack surface. Although no specific CVE numbers or CVSS scores are available, the proactive approach to securing 6G networks is commendable. To prepare for the potential threats, carriers and network operators should focus on implementing robust security protocols, such as intrusion detection systems and regular network audits. By doing so, they can ensure a more secure 6G network infrastructure, reducing the risk of exploitation and data breaches.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 2.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "ISC Stormcast For Thursday, June 18th, 2026 https://isc.sans.edu/podcastdetail/9978, (Thu, Jun 18th)",
@@ -607,7 +457,12 @@
       "severity": "low",
       "cvss_score": null,
       "published": "2026-06-18T02:00:02+00:00",
-      "ttps": []
+      "ttps": [],
+      "ai_summary": "The provided threat item does not contain specific technical details about a vulnerability or exploit, such as a CVE number or affected product/version, making it challenging to provide a detailed technical breakdown. However, it appears to be related to a news item or podcast from the SANS Internet Storm Center. Given the lack of specific information, the real-world impact and threat actor attribution cannot be determined. For general security best practices, defenders should ensure their systems and software are up-to-date, but without specific details, no targeted remediation steps can be recommended. Defenders should monitor reputable sources for updates on potential threats and adjust their security posture accordingly.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1071| B[Initial Access]:::tactic\n    B -->|T1059| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 1.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
       "title": "The Behavior of Coordinated SSH Brute Force Attacks over the last three months &#x5b;Guest Diary&#x5d;, (Wed, Jun 17th)",
@@ -1156,34 +1011,6 @@
       "ttps": []
     },
     {
-      "title": "Chrome and Firefox Updated to Patch Critical, High-Severity Vulnerabilities",
-      "description": "The browser updates address multiple memory safety bugs that could potentially lead to remote code execution. The post Chrome and Firefox Updated to Patch Critical, High-Severity Vulnerabilities appeared first on SecurityWeek.",
-      "url": "https://www.securityweek.com/chrome-and-firefox-updated-to-patch-critical-high-severity-vulnerabilities/",
-      "cve_id": null,
-      "source": "SecurityWeek",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": null,
-      "published": "2026-06-17T08:21:05+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1059",
-          "name": "Command and Scripting Interpreter",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
-      "threat_actors": [
-        "APT41"
-      ]
-    },
-    {
       "title": "UK Social Media Ban for Minors Has Privacy Experts Worried",
       "description": "The UK will ban adolescents under 16 years old from user-to-user social media platforms, despite age verification issues and privacy concerns.",
       "url": "https://www.darkreading.com/cyber-risk/uk-social-media-ban-privacy-experts-worried",
@@ -1234,18 +1061,6 @@
       ]
     },
     {
-      "title": "Joomla, LiteSpeed Vulnerabilities Exploited in Attacks",
-      "description": "The flaws allow attackers to execute arbitrary PHP code and gain root privileges on shared hosting servers. The post Joomla, LiteSpeed Vulnerabilities Exploited in Attacks appeared first on SecurityWeek.",
-      "url": "https://www.securityweek.com/joomla-litespeed-vulnerabilities-exploited-in-attacks/",
-      "cve_id": null,
-      "source": "SecurityWeek",
-      "category": "cve",
-      "severity": "low",
-      "cvss_score": null,
-      "published": "2026-06-17T07:28:20+00:00",
-      "ttps": []
-    },
-    {
       "title": "Kodak confirms data breach claimed by ShinyHunters extortion gang",
       "description": "Kodak has confirmed that it's working with external cybersecurity experts to investigate a security breach after hackers gained access to some of the company's data. [...]",
       "url": "https://www.bleepingcomputer.com/news/security/kodak-confirms-data-breach-claimed-by-shinyhunters-extortion-gang/",
@@ -1255,18 +1070,6 @@
       "severity": "high",
       "cvss_score": null,
       "published": "2026-06-17T07:07:56+00:00",
-      "ttps": []
-    },
-    {
-      "title": "3 Recently Patched Fortinet FortiSandbox Vulnerabilities in Hacker Crosshairs",
-      "description": "SOCRadar has detected 30,000 compromised Fortinet firewalls that expose networks to hacking. The post 3 Recently Patched Fortinet FortiSandbox Vulnerabilities in Hacker Crosshairs appeared first on SecurityWeek.",
-      "url": "https://www.securityweek.com/3-recently-patched-fortinet-fortisandbox-vulnerabilities-in-hacker-crosshairs/",
-      "cve_id": null,
-      "source": "SecurityWeek",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-06-17T06:53:58+00:00",
       "ttps": []
     },
     {
@@ -1527,25 +1330,6 @@
           "name": "Network Denial of Service",
           "tactic": "Impact",
           "tactic_id": "TA0040"
-        }
-      ]
-    },
-    {
-      "title": "Copilot 'SearchLeak' Attack Allows 1-Click Data Theft",
-      "description": "The critical, three-stage attack is now patched, but it's part of a new group of AI prompt-injection issues that use hidden URLs and other variables.",
-      "url": "https://www.darkreading.com/application-security/copilot-searchleak-attack-1-click-data-theft",
-      "cve_id": null,
-      "source": "Dark Reading",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": null,
-      "published": "2026-06-15T19:27:48+00:00",
-      "ttps": [
-        {
-          "id": "T1041",
-          "name": "Exfiltration Over C2 Channel",
-          "tactic": "Exfiltration",
-          "tactic_id": "TA0010"
         }
       ]
     },
@@ -1992,8 +1776,8 @@
         }
       ],
       "threat_actors": [
-        "LockBit",
-        "Conti"
+        "Conti",
+        "LockBit"
       ]
     },
     {
