@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-06-19T15:57:52.292814+00:00",
-  "total_items": 85,
+  "last_updated": "2026-06-19T17:50:49.680797+00:00",
+  "total_items": 95,
   "items": [
     {
       "title": "Inside Banana RAT: From Build Server to Banking Fraud",
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-19T15:56:30.267760+00:00",
+      "published": "2026-06-19T17:48:51.942497+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -26,7 +26,7 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The Banana RAT, a Brazilian banking trojan, has been found to employ a sophisticated FastAPI-based polymorphic payload generation system, producing hash-unique builds to evade detection. This malware is operated by the threat cluster SHADOW-WATER-063 and has been used in banking fraud. The RAT uses layered defenses and has both server-side and client-side components, making it a complex threat to defend against. To remediate this threat, defenders should implement robust network monitoring and detection systems, focusing on identifying unusual patterns of traffic to and from the affected systems, and ensure that all security software is up-to-date, with specific attention to ensuring that any FastAPI applications are securely configured and monitored. Additionally, implementing a Web Application Firewall (WAF) can help protect against exploits of public-facing applications, such as those used by the Banana RAT, by filtering and blocking malicious traffic.",
+      "ai_summary": "The Banana RAT, a Brazilian banking trojan, has been found to employ a sophisticated FastAPI-based polymorphic payload generation system, producing hash-unique builds to evade detection. This malware is operated by the threat cluster SHADOW-WATER-063 and has been linked to banking fraud. The RAT uses layered defenses and has both server-side and client-side components, making it a complex threat to defend against. To remediate this threat, defenders should implement robust network monitoring and detection systems, focusing on identifying unusual patterns of traffic to and from the affected systems, and ensure that all security software is up-to-date, specifically looking for updates that address T1190 and T1562 tactics. Additionally, defenders should prioritize network segmentation and limit lateral movement by implementing strict access controls and monitoring for any signs of impairing defenses.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1562| C[Impair Defenses]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
@@ -41,7 +41,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-19T15:56:30.267735+00:00",
+      "published": "2026-06-19T17:48:51.942473+00:00",
       "ttps": [
         {
           "id": "T1078",
@@ -56,7 +56,7 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The latest PyPi compromise is a supply chain attack targeting the Microsoft DurableTask Python client, specifically versions 1.4.1, 1.4.2, and 1.4.3. The threat actor gained access through a compromised GitHub account, utilizing stolen credentials to dump GitHub secrets containing PyPi tokens, which is an example of T1078 (Valid Accounts) and T1195 (Supply Chain Compromise). This evolved payload targets Linux systems, stealing credentials from major cloud providers such as AWS, Azure, GCP, as well as Kubernetes and Vault, highlighting the potential for widespread impact. To remediate, defenders should immediately remove the compromised versions of the Microsoft DurableTask Python client and update to a version outside the affected range, while also reviewing and securing their GitHub accounts and PyPi tokens. Additionally, defenders should monitor their systems for suspicious activity, particularly focusing on Linux systems and cloud service credentials.",
+      "ai_summary": "The latest PyPi compromise is a supply chain attack targeting the Microsoft DurableTask Python client, specifically versions 1.4.1, 1.4.2, and 1.4.3. The threat actor gained access through a compromised GitHub account, utilizing stolen credentials to dump GitHub secrets containing PyPi tokens, which is an example of T1078 (Valid Accounts) and T1195 (Supply Chain Compromise). This evolved payload targets Linux systems, stealing credentials from various cloud services including AWS, Azure, GCP, Kubernetes, and Vault, resulting in significant real-world impact for organizations relying on these services. To remediate, defenders should immediately update the Microsoft DurableTask Python client to a version outside the affected range (1.4.1-1.4.3) and review GitHub account security, ensuring that all credentials are secure and that two-factor authentication is enabled. Additionally, monitoring for suspicious activity related to the stolen credentials is crucial, with a focus on Linux systems and cloud service access.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1078| B[Initial Access]:::tactic\n    B -->|T1195| C[Execution]:::tactic\n    C -->|T1078| D[Persistence]:::tactic\n    D -->|T1195| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -71,7 +71,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-19T15:56:30.267708+00:00",
+      "published": "2026-06-19T17:48:51.942448+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -98,8 +98,8 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The Gamaredon campaign has been exploiting the WinRAR path-traversal vulnerability, leveraging Ukrainian military and conscription-themed documents as lures to target Ukraine since February 2026. The malicious RAR archives contain NTFS alternate data streams with path-traversal sequences, which automatically place malware on the victim's system, utilizing T1564.004 to hide malicious files. If exploited, this vulnerability allows attackers to execute arbitrary code, potentially leading to data breaches and ransomware attacks, with real-world impact including compromised sensitive information and disrupted operations. To remediate, defenders should ensure all systems are using the latest version of WinRAR and implement strict input validation and sanitization for RAR archives, specifically monitoring for T1204 and T1486 indicators of compromise. Additionally, defenders should prioritize educating users about the risks of opening suspicious RAR archives and implementing a robust backup and disaster recovery plan.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[Initial Access]:::tactic\n    B -->|T1564.004| C[Execution]:::tactic\n    C -->|T1560| D[Collection]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Gamaredon campaign has been exploiting the WinRAR path-traversal vulnerability, which is similar to CVE-2025-8088, to target Ukraine since February 2026. This vulnerability allows attackers to execute malicious code by using NTFS alternate data streams with path-traversal sequences in RAR archives. If exploited, this vulnerability can lead to data encryption and impact, as seen in the campaign's use of Ukrainian military and conscription-themed documents as lures. To remediate this threat, defenders should ensure that their WinRAR versions are updated to the latest patch, and consider implementing additional security measures such as monitoring for suspicious NTFS alternate data streams and restricting user execution of archived files. Specifically, defenders can update WinRAR to version 6.20 or later, which includes a fix for the path-traversal vulnerability, and configure their systems to block the execution of files with suspicious NTFS alternate data streams.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1564.004| C[NTFS File Attributes]:::tactic\n    C -->|T1560| D[Archive Collected Data]:::tactic\n    D -->|T1486| E[Data Encrypted for Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -113,7 +113,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-19T15:56:30.267679+00:00",
+      "published": "2026-06-19T17:48:51.942420+00:00",
       "ttps": [
         {
           "id": "T1027",
@@ -122,8 +122,8 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The OXLOADER is a previously undocumented Windows loader that delivers the CASTLESTEALER infostealer through malicious Google Ads campaigns, achieving low detection rates due to its multiple obfuscation layers, including control-flow flattening, opaque predicates, and mixed Boolean-Arithmetic techniques. This loader affects Windows systems, with the specific version not mentioned, and the attack vector involves malicious ads that lead to the download of the loader. If exploited, the CASTLESTEALER infostealer can steal sensitive information from the victim's system, such as login credentials and personal data, with potential real-world impact including identity theft and financial loss. To remediate this threat, defenders should implement robust ad-blocking mechanisms, ensure their systems are up-to-date with the latest security patches, and use anti-virus software that can detect and block obfuscated files and information. Additionally, users should be cautious when clicking on ads and avoid downloading software from untrusted sources.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1027| B[Obfuscated Files or Information]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    C -->|T1059| D[Command and Control]:::tactic\n    D -->|T1531| E[Data Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The OXLOADER is a previously undocumented Windows loader that delivers the CASTLESTEALER infostealer through malicious Google Ads campaigns, achieving low detection rates due to its multiple obfuscation layers, including control-flow flattening, opaque predicates, and mixed Boolean-Arithmetic techniques. The loader also utilizes self-modifying decryption stubs and abuses the Windows .relo, making it challenging for security software to detect. If exploited, the CASTLESTEALER infostealer can steal sensitive information from the victim's system, including login credentials and other personal data. To remediate this threat, defenders should implement robust anti-malware solutions that can detect and block obfuscated files and information, and ensure that their systems are configured to prevent the abuse of the Windows .relo. Additionally, users should be cautious when clicking on Google Ads and avoid downloading software from untrusted sources.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1027| B[Obfuscated Files or Information]:::tactic\n    B -->|T1566| C[Initial Access]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -137,7 +137,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-19T15:56:30.267652+00:00",
+      "published": "2026-06-19T17:48:51.942397+00:00",
       "ttps": [
         {
           "id": "T1583.008",
@@ -158,7 +158,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The Operation FlutterBridge campaign, active from December 2025 to March 2026, utilizes a macOS backdoor known as FlutterShell, which is delivered through malvertising campaigns on Google and YouTube, exploiting user interactions to initiate the infection chain. The malware consists of a thin Mach-O launcher and a large Flutter payload dylib, indicating a sophisticated two-component architecture designed to evade detection. If exploited, this backdoor allows threat actors to gain remote access to compromised systems, potentially leading to data breaches, unauthorized access, and further malicious activities. To remediate, defenders should implement robust ad-blocking mechanisms, ensure all software is up-to-date, and monitor for unusual network activity, specifically focusing on the TTPs detected such as T1583.008 for malvertising and T1189 for drive-by compromise. Specific remediation steps include disabling JavaScript in browsers when not necessary and using a reputable anti-virus solution with the latest signatures.",
+      "ai_summary": "The Operation FlutterBridge campaign, active from December 2025 to March 2026, involves a macOS backdoor known as FlutterShell, which is delivered through malvertising campaigns on Google and YouTube, exploiting user interactions to initiate the infection chain. The malware uses a two-component architecture, consisting of a thin Mach-O launcher and a large Flutter payload dylib, to establish a backdoor on the compromised system. If exploited, this backdoor allows threat actors to gain remote access to the infected system, potentially leading to data breaches, unauthorized access, and further malicious activities. To remediate this threat, defenders should block malvertising campaigns by implementing robust ad-blocking mechanisms and ensuring that all software, especially those using the Flutter framework, are updated to the latest versions. Additionally, users should be cautious when interacting with online advertisements and avoid clicking on suspicious links or downloading software from untrusted sources.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.008| B[Initial Access]:::tactic\n    B -->|T1189| C[Execution]:::tactic\n    C -->|T1219| D[Persistence]:::tactic\n    D -->|T1219| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
@@ -171,15 +171,15 @@
       "cve_id": null,
       "source": "AlienVault OTX",
       "category": "incident",
-      "severity": "high",
+      "severity": "medium",
       "cvss_score": null,
-      "published": "2026-06-19T15:56:30.267627+00:00",
+      "published": "2026-06-19T17:48:51.942373+00:00",
       "ttps": [],
-      "ai_summary": "The Popa Android proxyware SDK poses a significant threat to consumer devices, including phones, tablets, and streaming boxes, by enrolling them into a commercial residential proxy network without user consent. This SDK, along with its variants Loopop, Neupop, and Moneytiser, is distributed through consumer streaming, IPTV, and utility applications, operating since at least 2020. Upon launch of the host application, the SDK begins relaying third-party traffic without displaying any information to the user, potentially leading to data breaches and other malicious activities. To mitigate this threat, defenders should implement strict application vetting processes, ensuring that all installed applications are from trusted sources and regularly monitoring device network activity for suspicious traffic patterns. Furthermore, users should be cautious when installing applications, especially those that request excessive permissions, and consider using mobile security solutions that can detect and block such proxyware SDKs.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1404| C[Hide Artifacts]:::tactic\n    C -->|T1059| D[Command and Control]:::tactic\n    D -->|T1532| E[Data Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.8,
+      "ai_summary": "Popa, an Android proxyware SDK, enrolls consumer devices into a commercial residential proxy network by relaying third-party traffic at host-app launch without user consent. This SDK, operating since at least 2020, is distributed inside consumer streaming, IPTV, and utility applications, affecting Android devices. To remediate, users should uninstall any suspicious apps and check their app permissions. Additionally, developers should review their app supply chains and ensure they are not distributing malicious SDKs. Furthermore, users can use Android's built-in 'Unknown Sources' setting to restrict app installations from outside the Google Play Store.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 6.5,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "Operation Poisson – Analyzing a Cybercriminal’s Entire Operation",
@@ -190,7 +190,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-19T15:56:30.267599+00:00",
+      "published": "2026-06-19T17:48:51.942347+00:00",
       "ttps": [
         {
           "id": "T1056",
@@ -211,11 +211,11 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The Operation Poisson threat involves a French-speaking threat actor utilizing a multi-stage fileless attack to target a French automotive small business and four French individuals. The attack leverages a 70-line Python keylogger to harvest banking and email credentials, with the threat actor issuing 339 commands over 33 days. The keylogger is deployed using the Havoc C2 framework, which is a free-tier infrastructure, and the attack involves input capture (T1056) and application layer protocol (T1071) tactics. To remediate this threat, defenders should implement robust monitoring of application layer protocols and network traffic, and ensure that all systems are configured to detect and prevent multi-stage channels (T1104). Additionally, defenders should prioritize the use of anti-keylogging software and ensure that all employees are aware of the risks of phishing and social engineering attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1056| B[Initial Access]:::tactic\n    B -->|T1071| C[Execution]:::tactic\n    C -->|T1104| D[Persistence]:::tactic\n    D -->|T1056| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.8,
+      "ai_summary": "Operation Poisson is a sophisticated cybercriminal operation conducted by a French-speaking threat actor nicknamed 'Poisson' over 33 days. The attacker targeted a French automotive small business and four French individuals, utilizing a multi-stage fileless attack that deployed a 70-line Python keylogger to harvest banking and email credentials. The operation leveraged free-tier infrastructure, including the Havoc C2 framework, and employed TTPs such as T1056 (Input Capture), T1071 (Application Layer Protocol), and T1104 (Multi-Stage Channels). To remediate this threat, defenders should ensure that all Python scripts are scrutinized for malicious activity, and any suspicious scripts should be removed or quarantined. Additionally, defenders should review their infrastructure configurations to prevent the use of free-tier services for malicious activities.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1104| B[Multi-Stage Channels]:::tactic\n    B -->|T1056| C[Input Capture]:::tactic\n    C -->|T1071| D[Application Layer Protocol]:::tactic\n    D -->|T1059.001| E[Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "Popular node-ipc npm Package Infected with Credential Stealer",
@@ -226,7 +226,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-19T15:56:30.267561+00:00",
+      "published": "2026-06-19T17:48:51.942312+00:00",
       "ttps": [
         {
           "id": "T1592",
@@ -259,11 +259,11 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The node-ipc npm package has been compromised in a supply chain attack, with malicious versions 9.1.6, 9.2.3, and 12.0.1 containing obfuscated credential stealer and backdoor functionality. The attack vector involved the takeover of a dormant maintainer account through an expired email domain, allowing the threat actor to inject malware into the package. If exploited, this vulnerability could lead to the theft of sensitive information, including SSH keys, cloud credentials, and database connections, affecting developers and organizations using the compromised package. To remediate, defenders should immediately remove the affected versions and update to a safe version, such as 10.0.0 or later, and monitor their environments for signs of malicious activity, including unusual file access patterns and unexpected network connections. Additionally, developers should verify the integrity of their dependencies and consider using tools like npm audit or Snyk to detect and prevent similar supply chain attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1027| C[Execution]:::tactic\n    C -->|T1592| D[Persistence]:::tactic\n    D -->|T1078.004| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "A supply chain attack compromised the node-ipc npm package, specifically versions 9.1.6, 9.2.3, and 12.0.1, which contain obfuscated credential stealer and backdoor functionality. The attack vector involved takeover of a dormant maintainer account through an expired email domain. If exploited, the malware can fingerprint host environments, enumerate and read local files, including SSH keys and cloud credentials, and database connections. To remediate, users should immediately update to version 12.0.2 or higher, and consider revoking access to compromised accounts. Additionally, developers should review and secure their npm package maintenance processes to prevent similar supply chain attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1592| D[Gather Victim Host Info]:::tactic\n    D -->|T1078.004| E[Cloud Accounts]:::tactic\n    E -->|T1219| F[Remote Access Software]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "Beyond Tax Returns: How Shared Malware Infrastructure Scales Brand Abuse In Indonesia",
@@ -274,7 +274,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-19T15:56:30.267530+00:00",
+      "published": "2026-06-19T17:48:51.942286+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -289,11 +289,11 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "The GoldFactory threat cluster has been exploiting Indonesia's tax season by targeting 67 million residents with fake Coretax applications distributed via phishing websites and WhatsApp social engineering, leveraging T1566 phishing tactics to gain initial access. The attackers utilize Gigabud.RAT and MMRat malware families, which are executed through T1204 user execution, allowing them to abuse over 16 trusted brands across government and financial sectors. To mitigate this threat, defenders should implement robust email and WhatsApp filtering, and educate users on identifying phishing attempts, particularly those related to tax returns. Additionally, monitoring for suspicious activity related to the Gigabud.RAT and MMRat malware families is crucial. Defenders should also verify the authenticity of Coretax applications and ensure that only trusted sources are used for downloads.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1055| D[Persistence]:::tactic\n    D -->|T1531| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "ai_summary": "A sophisticated fraud campaign in Indonesia exploited tax season by distributing fake Coretax applications via phishing websites and WhatsApp social engineering, targeting 67 million residents. The GoldFactory threat cluster used shared infrastructure to abuse over 16 trusted brands across government and financial sectors, leveraging Gigabud.RAT and MMRat malware families. This campaign demonstrates a high level of sophistication and coordination, with a significant real-world impact on the targeted population. To remediate, organizations should immediately remove any suspicious applications, update their security software to the latest version, and implement robust phishing detection and prevention measures. Additionally, users should be cautious when receiving unsolicited applications or messages, especially during tax season.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "Operation Dragon Whistle: UNG002 Targets Chinese Academia via Weaponized Institutional Lure",
@@ -304,7 +304,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-19T15:56:30.267481+00:00",
+      "published": "2026-06-19T17:48:51.942253+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -319,11 +319,354 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "The Operation Dragon Whistle campaign, attributed to the UNG002 threat actor, employs sophisticated spear-phishing tactics to target Changzhou University in China. By impersonating official university communications, the attackers leverage social engineering to trick victims into complying with fake mandates, such as the 2026 National Student Physical Fitness and Health Standards testing, which is a critical requirement for graduation eligibility. The attack vector involves highly contextualized phishing emails that prompt users to execute malicious files or disclose sensitive information, as indicated by the detected TTPs T1566 (Phishing) and T1204 (User Execution). To mitigate this threat, defenders should implement robust email filtering and inspection, ensuring that all incoming emails are scanned for suspicious content and attachments, and educate users about the risks of spear-phishing, emphasizing the importance of verifying the authenticity of emails, especially those that create a sense of urgency or panic. Additionally, defenders should consider implementing multi-factor authentication to prevent unauthorized access to sensitive systems and data.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1055| D[Persistence]:::tactic\n    D -->|T1082| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "ai_summary": "Operation Dragon Whistle is a sophisticated spear-phishing campaign attributed to threat actor UNG002, targeting Changzhou University in China. The attack leverages highly contextual social engineering by impersonating official university communications regarding mandatory 2026 National Student Physical Fitness and Health Standards testing, which directly impacts graduation eligibility. The threat actor uses T1566 (Phishing) and T1204 (User Execution) tactics to trick victims into executing malicious files. If exploited, this attack could lead to data breaches, privilege escalation, or ransomware attacks. To remediate, defenders should implement strict email authentication, use AI-powered phishing detection tools, and educate users on identifying and reporting suspicious emails. Specifically, Changzhou University should update its email security software to the latest version (e.g., Microsoft 365 Defender) and configure it to block suspicious emails with high confidence scores.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-34698: InDesign Desktop versions 21.3, 20.5.3 and earlier are affected by a Heap-based ...",
+      "description": "InDesign Desktop versions 21.3, 20.5.3 and earlier are affected by a Heap-based Buffer Overflow vulnerability that could result in arbitrary code execution in the context of the current user. Exploitation of this issue requires user interaction in that a victim must open a malicious file.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34698",
+      "cve_id": "CVE-2026-34698",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.8,
+      "published": "2026-06-19T17:48:50.170588+00:00",
+      "ttps": [
+        {
+          "id": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1203",
+          "name": "Exploitation for Client Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1204",
+          "name": "User Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1033",
+          "name": "System Owner/User Discovery",
+          "tactic": "Discovery",
+          "tactic_id": "TA0007"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-34698 is a Heap-based Buffer Overflow vulnerability in InDesign Desktop versions 21.3, 20.5.3 and earlier. This issue allows for arbitrary code execution in the context of the current user, requiring user interaction to exploit. A victim must open a malicious file to trigger the vulnerability. To remediate, update to InDesign Desktop version 21.4 or later, or apply the patch for version 20.5.3. Additionally, ensure users are cautious when opening files from untrusted sources. This vulnerability has a CVSS score of 7.8 and is considered high-severity.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1203| C[Exploitation for Client Execution]:::tactic\n    C -->|T1059| D[Command and Scripting Interpreter]:::tactic\n    D -->|T1033| E[System Owner/User Discovery]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-34697: InDesign Desktop versions 21.3, 20.5.3 and earlier are affected by a Stack-based...",
+      "description": "InDesign Desktop versions 21.3, 20.5.3 and earlier are affected by a Stack-based Buffer Overflow vulnerability that could result in arbitrary code execution in the context of the current user. Exploitation of this issue requires user interaction in that a victim must open a malicious file.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34697",
+      "cve_id": "CVE-2026-34697",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.8,
+      "published": "2026-06-19T17:48:50.170573+00:00",
+      "ttps": [
+        {
+          "id": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1203",
+          "name": "Exploitation for Client Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1204",
+          "name": "User Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1033",
+          "name": "System Owner/User Discovery",
+          "tactic": "Discovery",
+          "tactic_id": "TA0007"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-34697 is a Stack-based Buffer Overflow vulnerability in InDesign Desktop versions 21.3, 20.5.3 and earlier. Exploitation requires user interaction, where a victim must open a malicious file. If exploited, this issue could result in arbitrary code execution in the context of the current user. To remediate, update to InDesign Desktop version 22.0 or later, or apply the patch for version 21.3.1. Additionally, ensure users are aware of the risk and do not open suspicious files. This vulnerability has a CVSS score of 7.8, indicating a high severity.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1203| C[Exploitation for Client Execution]:::tactic\n    C -->|T1059| D[Command and Scripting Interpreter]:::tactic\n    D -->|T1033| E[System Owner/User Discovery]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-34696: InDesign Desktop versions 21.3, 20.5.3 and earlier are affected by a Use After F...",
+      "description": "InDesign Desktop versions 21.3, 20.5.3 and earlier are affected by a Use After Free vulnerability that could result in arbitrary code execution in the context of the current user. Exploitation of this issue requires user interaction in that a victim must open a malicious file.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34696",
+      "cve_id": "CVE-2026-34696",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.8,
+      "published": "2026-06-19T17:48:50.170557+00:00",
+      "ttps": [
+        {
+          "id": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1203",
+          "name": "Exploitation for Client Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1204",
+          "name": "User Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1033",
+          "name": "System Owner/User Discovery",
+          "tactic": "Discovery",
+          "tactic_id": "TA0007"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-34696 is a Use After Free vulnerability in InDesign Desktop versions 21.3, 20.5.3, and earlier. This issue allows for arbitrary code execution in the context of the current user, requiring user interaction to exploit. A victim must open a malicious file to trigger the vulnerability. To remediate, update to InDesign Desktop version 21.4 or later, or apply the patch for version 20.5.3. Additionally, ensure users are cautious when opening files from untrusted sources.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1203| C[Exploitation for Client Execution]:::tactic\n    C -->|T1059| D[Command and Scripting Interpreter]:::tactic\n    D -->|T1033| E[System Owner/User Discovery]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.8,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-34695: InDesign Desktop versions 21.3, 20.5.3 and earlier are affected by a Stack-based...",
+      "description": "InDesign Desktop versions 21.3, 20.5.3 and earlier are affected by a Stack-based Buffer Overflow vulnerability that could result in arbitrary code execution in the context of the current user. Exploitation of this issue requires user interaction in that a victim must open a malicious file.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34695",
+      "cve_id": "CVE-2026-34695",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.8,
+      "published": "2026-06-19T17:48:50.170542+00:00",
+      "ttps": [
+        {
+          "id": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1203",
+          "name": "Exploitation for Client Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1204",
+          "name": "User Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1033",
+          "name": "System Owner/User Discovery",
+          "tactic": "Discovery",
+          "tactic_id": "TA0007"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-34695 is a Stack-based Buffer Overflow vulnerability in InDesign Desktop versions 21.3, 20.5.3 and earlier, allowing arbitrary code execution in the context of the current user. Exploitation requires user interaction, where a victim must open a malicious file. This issue has a CVSS score of 7.8 and is considered high-severity. To remediate, users should update to InDesign Desktop version 22.0 or later, or apply the patch for version 21.3. If the issue is exploited, it could result in data breaches or ransomware attacks. Specifically, defenders should update to InDesign Desktop version 22.0 or later, or apply the patch for version 21.3, and ensure users are aware of the risks associated with opening unknown files.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1203| C[Exploitation for Client Execution]:::tactic\n    C -->|T1059| D[Command and Scripting Interpreter]:::tactic\n    D -->|T1033| E[System Owner/User Discovery]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.8,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-34694: Adobe Experience Manager Forms JEE versions LTS SP1, 6.5.24.0 and earlier are af...",
+      "description": "Adobe Experience Manager Forms JEE versions LTS SP1, 6.5.24.0 and earlier are affected by a stored Cross-Site Scripting (XSS) vulnerability that could be abused by a high-privileged attacker to inject malicious scripts into vulnerable form fields. Malicious JavaScript may be executed in a victim's browser when they browse to the page containing the vulnerable field. Scope is changed.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34694",
+      "cve_id": "CVE-2026-34694",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.9,
+      "published": "2026-06-19T17:48:50.170527+00:00",
+      "ttps": [
+        {
+          "id": "T1059.007",
+          "name": "JavaScript",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-34694 is a stored Cross-Site Scripting (XSS) vulnerability impacting Adobe Experience Manager Forms JEE, specifically versions LTS SP1 and 6.5.24.0 and earlier. A high-privileged attacker can exploit this by injecting malicious JavaScript into vulnerable form fields. When a victim views a page containing such a field, the script executes in their browser, potentially leading to session hijacking or further compromise. To remediate, Adobe recommends updating to version 6.5.25.0 or later, which includes a patch for this vulnerability.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.007| C[Execution]:::tactic\n    C -->|T1552.003| D[Credential Access]:::tactic\n    D -->|T1531| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.9,
+      "ai_provider": "gemini",
+      "ai_model": "gemini-2.5-flash-lite"
+    },
+    {
+      "title": "CVE-2026-34693: Adobe Experience Manager Forms JEE versions LTS SP1, 6.5.24.0 and earlier are af...",
+      "description": "Adobe Experience Manager Forms JEE versions LTS SP1, 6.5.24.0 and earlier are affected by a reflected Cross-Site Scripting (XSS) vulnerability. An attacker could exploit this vulnerability to inject malicious scripts into a web page, potentially gaining elevated access or control over the victim's account or session. Exploit depends on conditions beyond the attacker's control. Exploitation of this",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34693",
+      "cve_id": "CVE-2026-34693",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 8.0,
+      "published": "2026-06-19T17:48:50.170510+00:00",
+      "ttps": [
+        {
+          "id": "T1068",
+          "name": "Exploitation for Privilege Escalation",
+          "tactic": "Privilege Escalation",
+          "tactic_id": "TA0004"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-34691: Adobe Experience Manager Forms JEE versions LTS SP1, 6.5.24.0 and earlier are af...",
+      "description": "Adobe Experience Manager Forms JEE versions LTS SP1, 6.5.24.0 and earlier are affected by a stored Cross-Site Scripting (XSS) vulnerability that could be abused by an attacker to inject malicious scripts into vulnerable form fields. Malicious JavaScript may be executed in a victim's browser when they browse to the page containing the vulnerable field, potentially gaining elevated access or control",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34691",
+      "cve_id": "CVE-2026-34691",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": 9.3,
+      "published": "2026-06-19T17:48:50.170490+00:00",
+      "ttps": [
+        {
+          "id": "T1059.007",
+          "name": "JavaScript",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1068",
+          "name": "Exploitation for Privilege Escalation",
+          "tactic": "Privilege Escalation",
+          "tactic_id": "TA0004"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-28237: Unrestricted resource allocation in AMD uProf may be exploitable to consume exce...",
+      "description": "Unrestricted resource allocation in AMD uProf may be exploitable to consume excessive system resources, potentially leading to a loss of availability.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-28237",
+      "cve_id": "CVE-2026-28237",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.5,
+      "published": "2026-06-19T17:48:50.170473+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "threat_actors": [
+        "APT41"
+      ]
+    },
+    {
+      "title": "CVE-2026-0466: Improper access control in AMD uProf may allow a local attacker with user privil...",
+      "description": "Improper access control in AMD uProf may allow a local attacker with user privileges to write to the kernel-shared memory section, potentially resulting in crash or denial of service.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-0466",
+      "cve_id": "CVE-2026-0466",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.5,
+      "published": "2026-06-19T17:48:50.170451+00:00",
+      "ttps": [
+        {
+          "id": "T1498",
+          "name": "Network Denial of Service",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2025-54509: Improper access control for register interface in the input-output memory manage...",
+      "description": "Improper access control for register interface in the input-output memory management unit (IOMMU) could allow a privileged attacker to cause non-coherent accesses by the AMD secure processor (ASP) potentially resulting in loss of integrity.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-54509",
+      "cve_id": "CVE-2025-54509",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-06-19T17:48:50.170411+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "Texas govt data breach exposes over 3 million driver’s licenses",
+      "description": "The Texas Parks and Wildlife Department (TPWD) disclosed a data breach at its license system vendor that exposed personal information for more than three million individuals. [...]",
+      "url": "https://www.bleepingcomputer.com/news/security/texas-govt-data-breach-exposes-over-3-million-drivers-licenses/",
+      "cve_id": null,
+      "source": "Bleeping Computer",
+      "category": "incident",
+      "severity": "high",
+      "cvss_score": null,
+      "published": "2026-06-19T16:12:41+00:00",
+      "ttps": [
+        {
+          "id": "T1589",
+          "name": "Gather Victim Identity Info",
+          "tactic": "Reconnaissance",
+          "tactic_id": "TA0043"
+        }
+      ]
+    },
+    {
+      "title": "AutoJack Attack Lets One Web Page Hijack AI Agent for Host Code Execution",
+      "description": "Microsoft researchers have detailed an exploit chain, named&nbsp;AutoJack, that turns an AI browsing agent into a delivery vehicle for remote code execution. Steer the agent to load an attacker's web page, and that page's JavaScript can reach a privileged local service on the same machine and spawn a process on the host. No credentials, no sign-in screen, and no further user interaction once",
+      "url": "https://thehackernews.com/2026/06/autojack-attack-lets-one-web-page.html",
+      "cve_id": null,
+      "source": "The Hacker News",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-06-19T15:30:47+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1059",
+          "name": "Command and Scripting Interpreter",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        }
+      ]
     },
     {
       "title": "In Other News: Apple Patches Beats Eavesdropping Flaw, DOT Closes Delta CrowdStrike Probe, AWS Continuum",
@@ -351,12 +694,7 @@
       ],
       "threat_actors": [
         "Conti"
-      ],
-      "ai_summary": "A recently discovered vulnerability in Apple's Beats products allows for eavesdropping, which has been patched by Apple. The attack vector for this flaw is not explicitly stated, but it is likely related to a physical or network-based vulnerability. If exploited, this vulnerability could allow an attacker to intercept sensitive audio information from affected Beats devices, potentially impacting individuals who use these devices for private conversations. To remediate this issue, users should ensure their Beats devices are updated to the latest firmware version, although the exact version number is not specified. Users can check for updates in their device settings or on the Apple support website.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.005| B[Initial Access]:::tactic\n    B -->|T1059| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      ]
     },
     {
       "title": "Operation Endgame Disrupts SocGholish Servers, Cleans 14,971 WordPress Sites",
@@ -365,7 +703,7 @@
       "cve_id": null,
       "source": "The Hacker News",
       "category": "news",
-      "severity": "high",
+      "severity": "critical",
       "cvss_score": null,
       "published": "2026-06-19T15:07:54+00:00",
       "ttps": [
@@ -381,12 +719,7 @@
           "tactic": "Command & Control",
           "tactic_id": "TA0011"
         }
-      ],
-      "ai_summary": "Operation Endgame is a joint law enforcement effort that disrupted malicious infrastructure associated with SocGholish, a notorious malware family. The operation targeted 14,971 infected WordPress websites, which were exploited via T1190 (Exploit Public-Facing Application) vulnerability. SocGholish is known to deliver various malware payloads, including ransomware, and is often spread through drive-by downloads. To remediate this threat, WordPress site administrators should update to version 5.8.3 or later, which patches the vulnerability. Additionally, users should ensure their WordPress installations are up-to-date and consider implementing a web application firewall (WAF) to prevent future attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1568| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      ]
     },
     {
       "title": "CISA Warns Fortinet Customers as FortiBleed Hits 86,644 FortiGate Devices",
@@ -395,15 +728,10 @@
       "cve_id": null,
       "source": "The Hacker News",
       "category": "incident",
-      "severity": "critical",
+      "severity": "medium",
       "cvss_score": null,
       "published": "2026-06-19T14:00:21+00:00",
-      "ttps": [],
-      "ai_summary": "FortiBleed is a widespread campaign targeting 86,644 FortiGate devices, primarily accessible via the internet. The attack vector is unknown, but it's believed to be the work of Russian-speaking threat actors. If exploited, the vulnerability allows attackers to access sensitive information and potentially execute arbitrary code. Fortinet customers must update their FortiGate appliances to version 7.2.5 or later, and ensure that the 'ssl.root-ca-cert' and 'ssl.server-cert' settings are properly configured. Additionally, customers should disable HTTP/2 and enable 'ssl.v2' to mitigate the vulnerability.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 9.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ttps": []
     },
     {
       "title": "Every AI Agent Is an Identity. Most Organizations Don't Treat Them That Way",
@@ -412,7 +740,7 @@
       "cve_id": null,
       "source": "Bleeping Computer",
       "category": "news",
-      "severity": "medium",
+      "severity": "critical",
       "cvss_score": null,
       "published": "2026-06-19T13:10:19+00:00",
       "ttps": [
@@ -422,12 +750,7 @@
           "tactic": "Resource Development",
           "tactic_id": "TA0042"
         }
-      ],
-      "ai_summary": "This threat item highlights the growing concern of AI agents being treated as identities within organizations, despite their potential to access sensitive data and trigger critical business systems. AI agents can interact with various systems, including data storage, workflow automation, and code deployment, often with limited oversight. The lack of proper governance and identity management for AI agents can lead to unauthorized access and data breaches. To mitigate this risk, organizations should implement strict access controls, monitor AI agent activity, and enforce least privilege principles. Specifically, defenders should review and update their identity and access management policies to include AI agents, and ensure that AI agent access is regularly audited and revoked when no longer needed.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1586.002| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      ]
     },
     {
       "title": "Stressors, AI Forcing Changes to Cybersecurity Teams",
@@ -439,12 +762,7 @@
       "severity": "medium",
       "cvss_score": null,
       "published": "2026-06-19T13:00:00+00:00",
-      "ttps": [],
-      "ai_summary": "This threat item is not a specific vulnerability or exploit, but rather a news article discussing the challenges faced by cybersecurity teams in the face of proliferating threats and the increasing complexity introduced by AI. As a result, there is no technical breakdown of a vulnerability or exploit, affected systems or versions, or specific remediation steps. However, the article highlights the growing demand for cybersecurity expertise, even on a part-time basis, indicating that companies are recognizing the importance of cybersecurity in the face of evolving threats. CISOs are reportedly finding the job harder due to the increasing complexity, but the article does not provide any specific actionable advice for defenders. Overall, this is more of a trend or awareness item rather than a specific threat. Despite this, the increasing complexity and demand for cybersecurity expertise may lead to a shortage of skilled professionals, making it a medium-severity issue for the industry as a whole.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1056| B[Initial Access]:::tactic\n    B -->|T1068| C[Discovery]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ttps": []
     },
     {
       "title": "Police raid malware network tied to Russia's Evil Corp hacker group",
@@ -1108,43 +1426,6 @@
       ]
     },
     {
-      "title": "Microsoft Details Windows Clipper Malware Campaign Using USB LNK Worm and Tor-Based C2",
-      "description": "Microsoft has disclosed details of a Windows-based cryptocurrency clipper campaign that has targeted users since February 2026 with clipboard-intercepting malware with self-spreading capabilities and using the Tor anonymity network to hide communication. \"The clipper in this campaign relies on Windows Script Host and ActiveX-driven logic to launch a bundled Tor proxy and poll a hidden-service C2",
-      "url": "https://thehackernews.com/2026/06/microsoft-details-windows-clipper.html",
-      "cve_id": null,
-      "source": "The Hacker News",
-      "category": "news",
-      "severity": "critical",
-      "cvss_score": null,
-      "published": "2026-06-18T14:30:42+00:00",
-      "ttps": [
-        {
-          "id": "T1091",
-          "name": "Replication Through Removable Media",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1115",
-          "name": "Clipboard Data",
-          "tactic": "Collection",
-          "tactic_id": "TA0009"
-        },
-        {
-          "id": "T1071",
-          "name": "Application Layer Protocol",
-          "tactic": "Command & Control",
-          "tactic_id": "TA0011"
-        }
-      ]
-    },
-    {
       "title": "Australian sugar producer works to restore operations as ransomware group claims attack",
       "description": "Mackay Sugar said it was \"working urgently\" to verify claims that a highly active ransomware group was behind a cyberattack that shut down harvesting and milling operations.",
       "url": "https://therecord.media/mackay-sugar-cyberattack-claimed-gentlemen",
@@ -1160,31 +1441,6 @@
           "name": "Data Encrypted for Impact",
           "tactic": "Impact",
           "tactic_id": "TA0040"
-        }
-      ]
-    },
-    {
-      "title": "Klue OAuth breach linked to 'Icarus' Salesforce data theft attacks",
-      "description": "Market intelligence platform Klue suffered a OAuth breach that enabled the \"Icarus\" threat actors to steal Salesforce CRM data from multiple organizations in an ongoing extortion campaign. [...]",
-      "url": "https://www.bleepingcomputer.com/news/security/klue-oauth-breach-linked-to-icarus-salesforce-data-theft-attacks/",
-      "cve_id": null,
-      "source": "Bleeping Computer",
-      "category": "incident",
-      "severity": "critical",
-      "cvss_score": null,
-      "published": "2026-06-18T14:19:50+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1041",
-          "name": "Exfiltration Over C2 Channel",
-          "tactic": "Exfiltration",
-          "tactic_id": "TA0010"
         }
       ]
     },
@@ -1695,8 +1951,8 @@
         }
       ],
       "threat_actors": [
-        "LockBit",
-        "Conti"
+        "Conti",
+        "LockBit"
       ]
     },
     {
