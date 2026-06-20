@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-06-20T05:04:20.729661+00:00",
-  "total_items": 80,
+  "last_updated": "2026-06-20T08:41:34.766235+00:00",
+  "total_items": 95,
   "items": [
     {
       "title": "Inside Banana RAT: From Build Server to Banking Fraud",
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-20T05:03:21.964427+00:00",
+      "published": "2026-06-20T08:40:22.632330+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -26,8 +26,8 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The Banana RAT, a Brazilian banking trojan, has been found to employ a sophisticated FastAPI-based polymorphic payload generation system, producing hash-unique builds to evade detection. This malware is operated by the threat cluster SHADOW-WATER-063 and has been linked to banking fraud. The RAT uses layered defenses and can impair system defenses through T1562 tactics, making it challenging to detect and mitigate. To remediate, defenders should implement robust network monitoring, focusing on unusual traffic patterns and inspecting for signs of T1190 exploit attempts against public-facing applications. Additionally, ensuring all security software is up-to-date and configuring systems to restrict unnecessary outbound connections can help mitigate the threat.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1562| D[Defense Evasion]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Banana RAT, a Brazilian banking trojan, has been found to employ a sophisticated FastAPI-based polymorphic payload generation system, producing hash-unique builds to evade detection. This malware is operated by the threat cluster SHADOW-WATER-063 and has been linked to banking fraud. The RAT uses layered defenses and has both server-side and client-side components, making it a complex threat to mitigate. To defend against this threat, organizations should implement robust network monitoring and detection systems, focusing on identifying unusual patterns of behavior that may indicate the presence of the Banana RAT. Specific remediation steps include configuring firewalls to block suspicious traffic and updating security software to include signatures for the Banana RAT's polymorphic payloads.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1562| C[Impair Defenses]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -41,7 +41,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-20T05:03:21.964403+00:00",
+      "published": "2026-06-20T08:40:22.632307+00:00",
       "ttps": [
         {
           "id": "T1078",
@@ -56,7 +56,7 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The latest PyPi compromise is a supply chain attack targeting the Microsoft DurableTask Python client, specifically versions 1.4.1, 1.4.2, and 1.4.3. The threat actor gained access through a compromised GitHub account, utilizing stolen credentials to dump GitHub secrets containing PyPi tokens, which is an example of T1078 (Valid Accounts) and T1195 (Supply Chain Compromise). This evolved payload targets Linux systems, stealing credentials from various cloud services including AWS, Azure, GCP, Kubernetes, and Vault, resulting in significant real-world impact for organizations relying on these services. To remediate, defenders should immediately update the Microsoft DurableTask Python client to a version outside the affected range (1.4.1-1.4.3) and review GitHub account security, ensuring that all credentials are secure and that two-factor authentication is enabled. Additionally, monitoring for suspicious activity related to the stolen credentials is crucial, such as unusual login attempts from unfamiliar locations or devices.",
+      "ai_summary": "The latest PyPi compromise is a supply chain attack targeting the Microsoft DurableTask Python client, specifically versions 1.4.1, 1.4.2, and 1.4.3. The threat actor gained access through a compromised GitHub account, utilizing stolen credentials to dump GitHub secrets containing PyPi tokens, which is an example of T1078 (Valid Accounts) and T1195 (Supply Chain Compromise). This attack can lead to the theft of credentials from major cloud providers such as AWS, Azure, GCP, as well as Kubernetes and Vault, resulting in significant real-world impact. To remediate, defenders should immediately update to a version outside the affected range and review their GitHub account security, ensuring that all secrets and credentials are securely stored and monitored. Additionally, implementing multi-factor authentication and regularly auditing account access can help prevent similar attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1078| B[Initial Access]:::tactic\n    B -->|T1195| C[Execution]:::tactic\n    C -->|T1078| D[Persistence]:::tactic\n    D -->|T1195| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -71,7 +71,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-20T05:03:21.964376+00:00",
+      "published": "2026-06-20T08:40:22.632281+00:00",
       "ttps": [
         {
           "id": "T1204",
@@ -98,8 +98,8 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The Gamaredon campaign has been exploiting the WinRAR path-traversal vulnerability, leveraging Ukrainian military and conscription-themed documents as lures to target Ukraine since February 2026. The malicious RAR archives contain NTFS alternate data streams with path-traversal sequences, which automatically place malware on the victim's system, utilizing T1204 user execution and T1564.004 NTFS file attributes. If exploited, this vulnerability allows attackers to encrypt data for impact, as seen in T1486, and potentially collect sensitive information, as indicated by T1560 archive collected data. To remediate, defenders should ensure all systems are using the latest version of WinRAR, and implement robust email filtering to block malicious RAR archives, as well as monitor for suspicious NTFS alternate data streams. Additionally, defenders should prioritize user education to prevent user execution of malicious files.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1564.004| C[NTFS File Attributes]:::tactic\n    C -->|T1560| D[Archive Collected Data]:::tactic\n    D -->|T1486| E[Data Encrypted for Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Gamaredon campaign has been exploiting the WinRAR path-traversal vulnerability, leveraging Ukrainian military and conscription-themed documents as lures to target Ukraine since February 2026. The malicious RAR archives contain NTFS alternate data streams with path-traversal sequences, which automatically place malware on the victim's system, utilizing T1564.004 to hide malicious files. If exploited, this vulnerability allows attackers to execute arbitrary code, potentially leading to data breaches and ransomware attacks, with real-world impact including compromised sensitive information and disrupted operations. To remediate, defenders should ensure all systems are using the latest version of WinRAR and implement robust email filtering to block malicious attachments, specifically configuring email clients to restrict execution of RAR archives from untrusted sources. Additionally, monitoring for suspicious NTFS file attributes and archive collection activities can help detect potential exploitation attempts.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[Execution]:::tactic\n    B -->|T1564.004| C[Defense Evasion]:::tactic\n    C -->|T1560| D[Collection]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -113,7 +113,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-20T05:03:21.964347+00:00",
+      "published": "2026-06-20T08:40:22.632252+00:00",
       "ttps": [
         {
           "id": "T1027",
@@ -122,8 +122,8 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The OXLOADER is a previously undocumented Windows loader that delivers the CASTLESTEALER infostealer through malicious Google Ads campaigns, achieving low detection rates due to its multiple obfuscation layers, including control-flow flattening and opaque predicates. This loader affects Windows systems, with the exact version not specified, and can lead to significant real-world impact, such as data breaches and financial loss, as the CASTLESTEALER infostealer can steal sensitive information. To remediate this threat, defenders should implement robust anti-malware solutions that can detect and block obfuscated files and information, and ensure that their systems are configured to prevent the abuse of the Windows .relo feature. Additionally, users should be cautious when clicking on Google Ads and verify the legitimacy of the ads before interacting with them. The threat actor behind OXLOADER is unknown, but their use of advanced obfuscation techniques suggests a high level of sophistication.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1027| B[Obfuscated Files or Information]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    C -->|T1059.001| D[Command and Control]:::tactic\n    D -->|T1531| E[Data Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The OXLOADER is a previously undocumented Windows loader that delivers the CASTLESTEALER infostealer through malicious Google Ads campaigns, achieving low detection rates due to its multiple obfuscation layers, including control-flow flattening, opaque predicates, and mixed Boolean-Arithmetic techniques. The loader also utilizes self-modifying decryption stubs and abuses the Windows .reloc section, making it challenging for security software to detect. If exploited, this loader can lead to the installation of the CASTLESTEALER infostealer, which can result in the theft of sensitive information, such as login credentials and personal data. To remediate this threat, defenders should implement robust anti-malware solutions that can detect and block obfuscated files and information, and ensure that their systems are configured to prevent the execution of unknown or untrusted files. Additionally, users should be cautious when clicking on ads, especially those from unfamiliar sources, and should keep their software and operating systems up-to-date with the latest security patches.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1027| B[Obfuscated Files or Information]:::tactic\n    B -->|T1204| C[User Execution]:::tactic\n    C -->|T1059| D[Command and Control]:::tactic\n    D -->|T1531| E[Data Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -137,7 +137,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-20T05:03:21.964323+00:00",
+      "published": "2026-06-20T08:40:22.632228+00:00",
       "ttps": [
         {
           "id": "T1583.008",
@@ -158,9 +158,9 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The Operation FlutterBridge campaign, active from December 2025 to March 2026, involves the FlutterShell macOS backdoor, which is delivered through malvertising campaigns on Google and YouTube, exploiting user interactions to compromise systems. This campaign is identified as cluster CL-CRI-1089 and utilizes a two-component architecture consisting of a thin Mach-O launcher and a large Flutter payload dylib, allowing for remote access and control. The threat actors behind this campaign leverage T1583.008 (Malvertising) and T1189 (Drive-by Compromise) to gain initial access, followed by the use of T1219 (Remote Access Software) for persistence and further exploitation. To remediate, defenders should block malvertising campaigns, implement robust ad-blocking mechanisms, and regularly inspect system logs for signs of unauthorized access, specifically focusing on unusual Mach-O launcher and dylib activities. Furthermore, ensuring all software and operating systems are up-to-date, particularly focusing on security patches related to web browsers and their components, is crucial.",
+      "ai_summary": "Operation FlutterBridge involves the FlutterShell macOS backdoor, which was active from December 2025 to March 2026, and is identified as cluster CL-CRI-1089. The threat actors used malvertising campaigns on Google and YouTube to deliver malware, employing a two-component architecture consisting of a thin Mach-O launcher and a large Flutter payload dylib. If exploited, this backdoor allows for remote access to compromised systems, potentially leading to data breaches and other malicious activities, with real-world impact seen in various incidents where users were affected by the malvertising campaigns. To remediate, defenders should block the known malvertising domains and update their systems to the latest security patches, specifically ensuring that their macOS systems are running the latest version of the operating system and have the latest security updates installed. Additionally, users should be cautious when clicking on ads and should use ad-blocking software to reduce the risk of drive-by compromise.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583.008| B[Initial Access]:::tactic\n    B -->|T1189| C[Execution]:::tactic\n    C -->|T1219| D[Persistence]:::tactic\n    D -->|T1219| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -173,11 +173,11 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-20T05:03:21.964295+00:00",
+      "published": "2026-06-20T08:40:22.632205+00:00",
       "ttps": [],
-      "ai_summary": "The Popa Android proxyware SDK poses a significant threat to consumer devices, including phones, tablets, and streaming boxes, by enrolling them into a commercial residential proxy network without user consent. This SDK, along with its variants Loopop, Neupop, and Moneytiser, has been operating since at least 2020 and is distributed through various consumer streaming, IPTV, and utility applications. Once installed, the SDK begins relaying third-party traffic at host-app launch, potentially leading to data breaches, privacy violations, and other malicious activities. To mitigate this threat, defenders should implement strict app vetting processes, monitor network traffic for suspicious activity, and ensure that all devices have up-to-date security software installed. Additionally, users should be cautious when installing new apps, especially those from unknown sources, and review app permissions carefully to prevent unauthorized access to their devices.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1404| C[Hide In Plain Sight]:::tactic\n    C -->|T1059| D[Command and Control]:::tactic\n    D -->|T1532| E[Data Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "The Popa Android proxyware SDK poses a significant threat to consumer devices, including phones, tablets, and streaming boxes, by enrolling them into a commercial residential proxy network without user consent. This SDK, along with its variants Loopop, Neupop, and Moneytiser, is distributed through various consumer streaming, IPTV, and utility applications, operating stealthily since at least 2020. Upon launch of the host application, Popa begins relaying third-party traffic without displaying any information to the user, potentially leading to data breaches and other malicious activities. To mitigate this threat, defenders should inspect their applications for any signs of Popa or its variants and remove them immediately. Additionally, users should be cautious when installing new applications, especially those from untrusted sources, and regularly monitor their device's network activity for suspicious behavior.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1204| B[User Execution]:::tactic\n    B -->|T1059| C[Command and Control]:::tactic\n    C -->|T1071| D[Application Window Discovery]:::tactic\n    D -->|T1112| E[Data Staging]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -190,7 +190,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-20T05:03:21.964270+00:00",
+      "published": "2026-06-20T08:40:22.632179+00:00",
       "ttps": [
         {
           "id": "T1056",
@@ -211,8 +211,8 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The Operation Poisson threat involves a French-speaking threat actor utilizing a multi-stage fileless attack to target a French automotive small business and four French individuals. The attacker deployed a 70-line Python keylogger to harvest banking and email credentials, leveraging the Havoc C2 framework and free-tier infrastructure. The attack vector involved input capture (T1056) and application layer protocol (T1071) tactics, with a focus on multi-stage channels (T1104) to maintain persistence. To remediate, defenders should implement robust input validation and monitoring, restrict access to sensitive applications, and regularly inspect network traffic for suspicious activity. Specifically, defenders should update their security information and event management (SIEM) systems to detect and alert on potential keylogger activity, and ensure all employees are using two-factor authentication for email and banking services.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1056| B[Initial Access]:::tactic\n    B -->|T1071| C[Execution]:::tactic\n    C -->|T1104| D[Persistence]:::tactic\n    D -->|T1056| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Operation Poisson threat involves a French-speaking threat actor utilizing a multi-stage fileless attack to target a French automotive small business and four French individuals. The attacker deployed a 70-line Python keylogger to harvest banking and email credentials, leveraging the Havoc C2 framework and free-tier infrastructure. The attack vector involved input capture (T1056) and application layer protocol (T1071) tactics, with the threat actor using multi-stage channels (T1104) to maintain access. To remediate this threat, defenders should implement robust input validation and monitoring, as well as application layer protocol inspection, and ensure that all systems are configured to detect and prevent multi-stage channel attacks. Specifically, defenders should update their security information and event management (SIEM) systems to detect T1056 and T1071 activity, and implement a web application firewall (WAF) to inspect and block suspicious application layer protocol traffic.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1056| B[Initial Access]:::tactic\n    B -->|T1071| C[Execution]:::tactic\n    C -->|T1104| D[Persistence]:::tactic\n    D -->|T1071| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.8,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -226,7 +226,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-20T05:03:21.964212+00:00",
+      "published": "2026-06-20T08:40:22.632143+00:00",
       "ttps": [
         {
           "id": "T1592",
@@ -259,8 +259,8 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The node-ipc npm package has been compromised in a supply chain attack, with malicious versions 9.1.6, 9.2.3, and 12.0.1 containing obfuscated credential stealer and backdoor functionality. The attack vector involved the takeover of a dormant maintainer account through an expired email domain, allowing the threat actor to inject malware into the package. If exploited, this vulnerability could lead to the theft of sensitive credentials, including SSH keys, cloud credentials, and database connections, affecting developers and organizations that have installed the compromised package. To remediate, defenders should immediately remove the affected versions and update to a safe version, such as 10.0.0 or later, and monitor their environments for signs of malicious activity, including unusual network traffic or file access patterns. Additionally, developers should review their dependency chains and ensure that all dependencies are up-to-date and from trusted sources.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1592| C[Discovery]:::tactic\n    C -->|T1027| D[Defense Evasion]:::tactic\n    D -->|T1078.004| E[Collection]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The node-ipc npm package has been compromised in a supply chain attack, with malicious versions 9.1.6, 9.2.3, and 12.0.1 containing obfuscated credential stealer and backdoor functionality. The attack vector involved the takeover of a dormant maintainer account through an expired email domain, allowing the threat actor to inject malicious code into the package. If exploited, this vulnerability could lead to the theft of sensitive information, including SSH keys, cloud credentials, and database connections, affecting developers and organizations using the compromised package. To remediate, defenders should immediately remove the affected versions and update to a safe version, such as 10.0.0 or later, and monitor their environments for signs of malicious activity. Additionally, developers should verify the integrity of their dependencies and consider using tools like npm audit or snyk to detect potential vulnerabilities.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Supply Chain Compromise]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1592| D[Gather Victim Host Info]:::tactic\n    D -->|T1078.004| E[Cloud Accounts]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -274,7 +274,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-20T05:03:21.964186+00:00",
+      "published": "2026-06-20T08:40:22.632117+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -289,7 +289,7 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "The GoldFactory threat cluster has been exploiting Indonesia's tax season by targeting 67 million residents with fake Coretax applications distributed via phishing websites and WhatsApp social engineering, leveraging the T1566 phishing tactic to gain initial access. The attackers utilized the Gigabud.RAT and MMRat malware families, which were executed through user interaction as described in T1204, to compromise victim devices. If exploited, victims may experience financial fraud and identity theft, with the attackers potentially gaining access to sensitive information. To remediate, defenders should implement robust email and WhatsApp filtering, and educate users on identifying phishing attempts, specifically warning them against interacting with suspicious Coretax applications. Additionally, defenders should monitor for unusual network activity and implement endpoint detection and response tools to identify and block the Gigabud.RAT and MMRat malware families.",
+      "ai_summary": "The GoldFactory threat cluster has been exploiting Indonesia's tax season by targeting 67 million residents with fake Coretax applications distributed via phishing websites and WhatsApp social engineering, leveraging T1566 phishing tactics to gain initial access. The attackers utilize Gigabud.RAT and MMRat malware families, which are executed through T1204 user execution, allowing them to abuse over 16 trusted brands across government and financial sectors. If exploited, victims may experience financial loss, identity theft, and compromised sensitive information. To remediate, defenders should implement robust email and WhatsApp filters to detect phishing attempts, and educate users to verify the authenticity of Coretax applications before installation. Additionally, defenders should monitor for suspicious activity related to the Gigabud.RAT and MMRat malware families and block associated IOCs.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
@@ -304,7 +304,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-20T05:03:21.964151+00:00",
+      "published": "2026-06-20T08:40:22.632084+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -319,22 +319,172 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "The Operation Dragon Whistle campaign, attributed to threat actor UNG002, employs sophisticated spear-phishing tactics to target Changzhou University in China. By impersonating official university communications regarding the 2026 National Student Physical Fitness and Health Standards testing, UNG002 leverages highly contextual social engineering to trick victims into executing malicious code, potentially impacting graduation eligibility. The attack vector involves phishing emails (T1566) that rely on user execution (T1204) to initiate the exploit. To defend against this threat, institutions should implement robust email filtering and employee education programs, focusing on verifying the authenticity of emails, especially those that create a sense of urgency or importance. Specific remediation steps include configuring email clients to flag emails with spoofed sender addresses and training staff to recognize and report suspicious communications.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1055| D[Persistence]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "ai_summary": "The Operation Dragon Whistle campaign, attributed to the UNG002 threat actor, employs sophisticated spear-phishing tactics to target Changzhou University in China. By impersonating official university communications, the attackers leverage social engineering to trick victims into complying with fake mandates related to the 2026 National Student Physical Fitness and Health Standards testing, which is a critical requirement for graduation eligibility. The attack vector involves highly contextualized phishing emails, classified as T1566, which are designed to deceive even cautious individuals. To defend against this threat, it is essential to implement robust email filtering solutions and conduct regular security awareness training for students and staff, emphasizing the importance of verifying the authenticity of emails, especially those that create a sense of urgency or panic. Furthermore, institutions should consider implementing multi-factor authentication to add an extra layer of security, making it more difficult for attackers to gain unauthorized access even if credentials are compromised.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1055| D[Persistence]:::tactic\n    D -->|T1082| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
     {
-      "title": "CVE-2026-3326: The Xstore WordPress theme before 9.7.3 does not properly sanitise and escape a ...",
-      "description": "The Xstore WordPress theme before 9.7.3 does not properly sanitise and escape a parameter before using it in a SQL statement via an AJAX action available to unauthenticated users, leading to a SQL injection",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-3326",
-      "cve_id": "CVE-2026-3326",
+      "title": "CVE-2025-71330: image-size through 2.0.2 contains a denial of service vulnerability that allows ...",
+      "description": "image-size through 2.0.2 contains a denial of service vulnerability that allows remote attackers to permanently block the Node.js event loop by supplying a specially crafted ICNS image buffer. Attackers can craft an ICNS buffer containing valid magic bytes and a zero-valued entry length field to trigger an infinite loop in the ICNS parser, as the offset is never incremented when the entry length f",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-71330",
+      "cve_id": "CVE-2025-71330",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 8.6,
-      "published": "2026-06-20T05:03:20.485282+00:00",
+      "cvss_score": 7.5,
+      "published": "2026-06-20T08:40:21.078042+00:00",
+      "ttps": [
+        {
+          "id": "T1498",
+          "name": "Network Denial of Service",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2025-71330 is a denial of service vulnerability in the image-size library through version 2.0.2, which can be exploited by remote attackers to permanently block the Node.js event loop. This is achieved by supplying a specially crafted ICNS image buffer with valid magic bytes and a zero-valued entry length field, triggering an infinite loop in the ICNS parser. The real-world impact of this vulnerability includes the potential for attackers to disrupt services that rely on the image-size library, affecting users who depend on these services. To remediate this vulnerability, defenders should update the image-size library to version 2.0.3 or later, and ensure that all dependent applications are updated to use the patched library. Additionally, defenders can implement network traffic monitoring to detect and block suspicious ICNS image buffers.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1498| B[Denial of Service]:::tactic\n    B -->|T1566| C[Initial Access]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
+    },
+    {
+      "title": "CVE-2025-71329: image-size through 2.0.2 contains a denial of service vulnerability that allows ...",
+      "description": "image-size through 2.0.2 contains a denial of service vulnerability that allows remote attackers to permanently block the Node.js event loop by supplying a specially crafted image buffer with a zero-valued size field in a recognized box-type. Attackers can trigger an infinite loop in the JXL or HEIF image parsers by providing a crafted image containing a box with a size of zero, causing the offset",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-71329",
+      "cve_id": "CVE-2025-71329",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.5,
+      "published": "2026-06-20T08:40:21.078028+00:00",
+      "ttps": [
+        {
+          "id": "T1498",
+          "name": "Network Denial of Service",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2025-71329 is a denial of service vulnerability in the image-size library through version 2.0.2, which can be exploited by remote attackers to permanently block the Node.js event loop. This is achieved by supplying a specially crafted image buffer with a zero-valued size field in a recognized box-type, triggering an infinite loop in the JXL or HEIF image parsers. The real-world impact of this vulnerability includes the potential for attackers to cause a denial of service, making affected systems unavailable. To remediate this vulnerability, defenders should update the image-size library to version 2.0.3 or later, and ensure that all dependent applications are also updated to use the patched library. Additionally, defenders can implement network traffic filtering to detect and block malicious image files that may be used to exploit this vulnerability.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1498| B[Denial of Service]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
+    },
+    {
+      "title": "CVE-2024-58350: Ghidra before 11.2 contains a use after free vulnerability in the Sleigh backend...",
+      "description": "Ghidra before 11.2 contains a use after free vulnerability in the Sleigh backend caused by undefined static initialization order of the SleighArchitecture::translators and XmlArchitectureCapability singletons. Attackers can trigger an infinite loop or denial of service during shutdown by exploiting the unsafe destruction order that causes iteration over deallocated memory.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-58350",
+      "cve_id": "CVE-2024-58350",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 2.9,
+      "published": "2026-06-20T08:40:21.078014+00:00",
+      "ttps": [
+        {
+          "id": "T1203",
+          "name": "Exploitation for Client Execution",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1498",
+          "name": "Network Denial of Service",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
+        },
+        {
+          "id": "T1529",
+          "name": "System Shutdown/Reboot",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2024-58350 is a use after free vulnerability in Ghidra before version 11.2, specifically in the Sleigh backend. This vulnerability allows attackers to trigger an infinite loop or denial of service during shutdown by exploiting the unsafe destruction order that causes iteration over deallocated memory. The attack vector is exploitation for client execution (T1203) and network denial of service (T1498). To remediate, Ghidra users should update to version 11.2 or later. Specifically, users should download the latest version from the official website and follow the installation instructions. Additionally, users should ensure that their Ghidra configuration is set to properly handle shutdown and deallocation of memory.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1498| C[Network Denial of Service]:::tactic\n    C -->|T1529| D[System Shutdown/Reboot]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 4.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-24067: Slate Digital Connect 1.37.0 for macOS installs a privileged helper tool, com.sl...",
+      "description": "Slate Digital Connect 1.37.0 for macOS installs a privileged helper tool, com.slatedigital.connect.privileged.helper.tool, which exposes the XPC service com.slatedigital.connect.privileged.helper.tool2. The helper validates connecting XPC clients by obtaining the client's process identifier and using it to retrieve code-signing information for the process. This PID-based client validation is subje",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-24067",
+      "cve_id": "CVE-2026-24067",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": 8.4,
+      "published": "2026-06-20T08:40:21.077999+00:00",
+      "ttps": [
+        {
+          "id": "T1559.003",
+          "name": "XPC Services",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-24067 is a critical vulnerability in Slate Digital Connect 1.37.0 for macOS, allowing an attacker to exploit the XPC service com.slatedigital.connect.privileged.helper.tool2. The vulnerability occurs due to the PID-based client validation, which can be bypassed by an attacker. If exploited, this vulnerability can lead to arbitrary code execution with elevated privileges. To remediate, users should update to Slate Digital Connect 1.38.0 or later, which addresses this issue. Additionally, users should ensure that the com.slatedigital.connect.privileged.helper.tool is removed from the system. This can be done by running the command 'sudo rm /Library/Privileged HelperTools/com.slatedigital.connect.privileged.helper.tool' in the Terminal.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1559.003| B[XPC Services]:::tactic\n    B -->|T1210| C[Exploitation of Vulnerability]:::tactic\n    C -->|T1212| D[User Execution]:::tactic\n    D -->|T1204| E[Code Execution]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 9.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-24066: Slate Digital Connect 1.37.0 for macOS installs a privileged helper tool, com.sl...",
+      "description": "Slate Digital Connect 1.37.0 for macOS installs a privileged helper tool, com.slatedigital.connect.privileged.helper.tool, which exposes the XPC service com.slatedigital.connect.privileged.helper.tool2. The helper validates connecting XPC clients by checking only the subject.OU value of the client's signing certificate and does not verify that the certificate chains to a trusted code-signing autho",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-24066",
+      "cve_id": "CVE-2026-24066",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 8.4,
+      "published": "2026-06-20T08:40:21.077984+00:00",
+      "ttps": [
+        {
+          "id": "T1559.003",
+          "name": "XPC Services",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-24066 is a high-severity vulnerability in Slate Digital Connect 1.37.0 for macOS, allowing an attacker to exploit the XPC service com.slatedigital.connect.privileged.helper.tool2. The vulnerability occurs due to the helper tool's failure to verify the certificate chain of connecting XPC clients, making it susceptible to man-in-the-middle attacks. An attacker can exploit this vulnerability by creating a malicious XPC client with a forged certificate, allowing them to execute arbitrary code with elevated privileges. To remediate this vulnerability, users should update to Slate Digital Connect 1.38.0 or later, which includes a fix for this issue. Additionally, users should ensure that their macOS system is configured to only allow XPC services from trusted sources.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1559.003| B[XPC Services]:::tactic\n    B -->|T1210| C[Exploitation of Vulnerability]:::tactic\n    C -->|T1071| D[Application Access]:::tactic\n    D -->|T1212| E[Privilege Escalation]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2026-11859: An HTML injection vulnerability in the \"fetch links\" email sent by Thinkst Appli...",
+      "description": "An HTML injection vulnerability in the \"fetch links\" email sent by Thinkst Applied Research Canarytokens, enabling Interface Manipulation, Cross-Site Scripting (XSS) in emails clients that render HTML emails.\n\n\nThis issue affects Canarytokens: from Docker tag sha-c0f3cf142 before sha-08c3f93d, from Git commit c0f3cf142 before 08c3f93d.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11859",
+      "cve_id": "CVE-2026-11859",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-06-20T08:40:21.077968+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-3018: The Newsletters plugin for WordPress is vulnerable to time-based SQL Injection v...",
+      "description": "The Newsletters plugin for WordPress is vulnerable to time-based SQL Injection via the ‘wpmlsubscriber_id’ parameter in all versions up to, and including, 4.13 due to insufficient escaping on the user supplied parameter and lack of sufficient preparation on the existing SQL query.  This makes it possible for unauthenticated attackers to append additional SQL queries into already existing queries t",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-3018",
+      "cve_id": "CVE-2026-3018",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.5,
+      "published": "2026-06-20T08:40:21.077951+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -349,134 +499,18 @@
           "tactic_id": "TA0006"
         }
       ],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ],
-      "ai_summary": "CVE-2026-3326 is a SQL injection vulnerability in the Xstore WordPress theme, affecting versions prior to 9.7.3. The vulnerability arises from inadequate sanitization and escaping of a parameter used in a SQL statement via an AJAX action, which is accessible to unauthenticated users. This allows an attacker to inject malicious SQL code, potentially leading to unauthorized data access, modification, or deletion. To remediate this vulnerability, users should update to Xstore WordPress theme version 9.7.3 or later, and ensure that all plugins and themes are up-to-date. Additionally, defenders can implement Web Application Firewalls (WAFs) to detect and prevent SQL injection attacks, and regularly monitor database logs for suspicious activity.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1649| C[Steal or Forge Authentication Certificates]:::tactic\n    C -->|T1055| D[Unauthorized Data Access]:::tactic\n    D -->|T1078| E[Data Modification or Deletion]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "epss_score": null
     },
     {
-      "title": "CVE-2026-29116: A vulnerability has been found in some Dahua products could\nallow an unauthentic...",
-      "description": "A vulnerability has been found in some Dahua products could\nallow an unauthenticated remote attacker to send a specially crafted packet,\ntriggering an exception that causes the system to reboot unexpectedly,\nresulting in a denial of service.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-29116",
-      "cve_id": "CVE-2026-29116",
+      "title": "CVE-2026-11853: Debusine is an integrated solution to build, distribute and maintain a Debian-ba...",
+      "description": "Debusine is an integrated solution to build, distribute and maintain a Debian-based distribution. Debian source packages (.dsc) and upload artifacts (.changes) are manifest files that name the files that make up the artifact. The parser used to read these files in Debusine accepted arbitrary fully user-controlled paths. The mergeuploads task could be abused to create arbitrary symbolic links on a ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11853",
+      "cve_id": "CVE-2026-11853",
       "source": "NVD",
       "category": "cve",
-      "severity": "high",
-      "cvss_score": null,
-      "published": "2026-06-20T05:03:20.485236+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1498",
-          "name": "Network Denial of Service",
-          "tactic": "Impact",
-          "tactic_id": "TA0040"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-29116 is a vulnerability in certain Dahua products that allows an unauthenticated remote attacker to send a specially crafted packet, triggering an exception that causes the system to reboot unexpectedly, resulting in a denial of service. The attack vector involves exploiting public-facing applications, as indicated by TTP T1190, and can lead to network denial of service, as seen in T1498. If exploited, this vulnerability can cause significant disruptions to affected systems, potentially impacting surveillance and security operations. To remediate this vulnerability, defenders should ensure that their Dahua products are updated to the latest firmware version, and consider implementing network segmentation and traffic filtering to limit the attack surface. Additionally, defenders should monitor their systems for signs of unexpected reboots or network disruptions, which could indicate a potential exploit attempt.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1498| C[Impact]:::tactic\n    C -->|T1498| D[Denial of Service]:::tactic\n    D -->|T1498| E[Persistence]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.8,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
-    },
-    {
-      "title": "CVE-2026-29115: A vulnerability has been found in some Dahua products could allow an authenticat...",
-      "description": "A vulnerability has been found in some Dahua products could allow an authenticated remote attacker to send a specially crafted packet, triggering an exception that causes the system to reboot unexpectedly, resulting in a denial of service.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-29115",
-      "cve_id": "CVE-2026-29115",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": null,
-      "published": "2026-06-20T05:03:20.485222+00:00",
-      "ttps": [
-        {
-          "id": "T1498",
-          "name": "Network Denial of Service",
-          "tactic": "Impact",
-          "tactic_id": "TA0040"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-29115 is a vulnerability in certain Dahua products that allows an authenticated remote attacker to send a specially crafted packet, triggering an exception that causes the system to reboot unexpectedly, resulting in a denial of service. The attack vector involves exploiting the vulnerability through a network interface, potentially affecting Dahua products with outdated firmware. If exploited, this vulnerability could lead to significant disruptions in surveillance and security systems, particularly in industries that rely heavily on these products, such as law enforcement and retail. To remediate this vulnerability, defenders should update their Dahua products to the latest firmware version, ensuring that all devices are running with the most current security patches. Specifically, users should check for firmware updates on the Dahua website and apply the updates as soon as possible to prevent potential exploitation.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1498| B[Denial of Service]:::tactic\n    B -->|T1566| C[Initial Access]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.8,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
-    },
-    {
-      "title": "CVE-2026-29114: A vulnerability has been found in some Dahua products. An attacker\nmay obtain th...",
-      "description": "A vulnerability has been found in some Dahua products. An attacker\nmay obtain the device’s CA root certificate. If that CA is installed and\ntrusted on client systems, the attacker could issue fraudulent certificates\ntrusted by those clients and undermine the certificate trust chain.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-29114",
-      "cve_id": "CVE-2026-29114",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": null,
-      "published": "2026-06-20T05:03:20.485207+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-29114 is a vulnerability in certain Dahua products that allows an attacker to obtain the device's CA root certificate. If the CA is installed and trusted on client systems, the attacker can issue fraudulent certificates that are trusted by those clients, undermining the certificate trust chain. This vulnerability affects Dahua products, specifically those with outdated firmware versions, and can be exploited via an unspecified attack vector. To remediate this vulnerability, defenders should update their Dahua products to the latest firmware version and ensure that the CA root certificate is not installed on client systems. Additionally, defenders should monitor their systems for suspicious certificate activity and implement a certificate validation process to prevent fraudulent certificates from being trusted.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Trusted Relationship]:::tactic\n    B -->|T1552| C[Credential Access]:::tactic\n    C -->|T1021| D[Remote Services]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
-    },
-    {
-      "title": "CVE-2026-11815: An attacker who intercepts and tampers with traffic between the client applicati...",
-      "description": "An attacker who intercepts and tampers with traffic between the client application and the API Gateway server could potentially deserialize arbitrary objects. This vulnerability could lead to broken security expectations or remote code execution.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11815",
-      "cve_id": "CVE-2026-11815",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": null,
-      "published": "2026-06-20T05:03:20.485190+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1059",
-          "name": "Command and Scripting Interpreter",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ],
-      "ai_summary": "CVE-2026-11815 is a vulnerability in the API Gateway server that allows an attacker to deserialize arbitrary objects by intercepting and tampering with traffic between the client application and the server. This could lead to broken security expectations or remote code execution, affecting users of the client application. The attack vector involves exploiting the vulnerability in the API Gateway server, potentially allowing an attacker to execute arbitrary code or commands on the server. To remediate this vulnerability, defenders should update their API Gateway server to the latest version, which includes patches for CVE-2026-11815, and ensure that all client applications are configured to use secure communication protocols, such as HTTPS, to prevent tampering with traffic. Additionally, defenders should monitor their network traffic for signs of exploitation and implement a web application firewall to detect and prevent potential attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1059| C[Execution]:::tactic\n    C -->|T1059.001| D[Persistence]:::tactic\n    D -->|T1190| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
-    },
-    {
-      "title": "CVE-2026-10846: NLnet Labs ldns 1.2.0 up to and including versions 1.9.0, when used in applicati...",
-      "description": "NLnet Labs ldns 1.2.0 up to and including versions 1.9.0, when used in applications as (stub) resolver over UDP, lacks matching the query destination address and port with the response source address and port. Furthermore not the query ID, neither the question of the query is matched with that of the response. This makes applications, that use ldns for (stub) resolver functionality over UDP, vulne",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-10846",
-      "cve_id": "CVE-2026-10846",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.5,
-      "published": "2026-06-20T05:03:20.485173+00:00",
+      "severity": "medium",
+      "cvss_score": 6.5,
+      "published": "2026-06-20T08:40:21.077935+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -488,67 +522,41 @@
       "epss_score": null
     },
     {
-      "title": "CVE-2026-26241: A buffer overflow vulnerability has been reported to affect File Station 5. The ...",
-      "description": "A buffer overflow vulnerability has been reported to affect File Station 5. The remote attackers can then exploit the vulnerability to modify memory or crash processes.\n\nWe have already fixed the vulnerability in the following version:\nFile Station 5 5.5.6.5243 and later",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-26241",
-      "cve_id": "CVE-2026-26241",
+      "title": "CVE-2026-11852: Debusine is an integrated solution to build, distribute and maintain a Debian-ba...",
+      "description": "Debusine is an integrated solution to build, distribute and maintain a Debian-based distribution. Files managed by debusine are organized into artifacts. The endpoints that create and delete relationships between artifacts enforced no permissions checks beyond being able to see the artifacts in question.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11852",
+      "cve_id": "CVE-2026-11852",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 6.5,
+      "published": "2026-06-20T08:40:21.077914+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2025-6254: The Doctreat Core plugin for WordPress is vulnerable to Privilege Escalation in ...",
+      "description": "The Doctreat Core plugin for WordPress is vulnerable to Privilege Escalation in all versions up to, and including, 1.6.8. This is due to the doctreat_process_registration() function not properly restricting the roles that a user can register with. This makes it possible for unauthenticated attackers to register as an administrator user.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-6254",
+      "cve_id": "CVE-2025-6254",
       "source": "NVD",
       "category": "cve",
       "severity": "critical",
-      "cvss_score": 9.1,
-      "published": "2026-06-20T05:03:20.485157+00:00",
+      "cvss_score": 9.8,
+      "published": "2026-06-20T08:40:21.077871+00:00",
       "ttps": [
         {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-26240: A buffer overflow vulnerability has been reported to affect File Station 5. The ...",
-      "description": "A buffer overflow vulnerability has been reported to affect File Station 5. The remote attackers can then exploit the vulnerability to modify memory or crash processes.\n\nWe have already fixed the vulnerability in the following version:\nFile Station 5 5.5.6.5243 and later",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-26240",
-      "cve_id": "CVE-2026-26240",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 9.1,
-      "published": "2026-06-20T05:03:20.485141+00:00",
-      "ttps": [
-        {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-11837: A local privilege escalation vulnerability was found in the ansible.posix author...",
-      "description": "A local privilege escalation vulnerability was found in the ansible.posix authorized_key module. The module's keyfile() function uses os.chown() instead of os.lchown() and opens files without O_NOFOLLOW when managing SSH authorized keys. An unprivileged local user can pre-stage symbolic links in their ~/.ssh directory to redirect file ownership changes to arbitrary system paths when an operator ru",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11837",
-      "cve_id": "CVE-2026-11837",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.3,
-      "published": "2026-06-20T05:03:20.485120+00:00",
-      "ttps": [
-        {
-          "id": "T1072",
-          "name": "Software Deployment Tools",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        },
-        {
-          "id": "T1098.004",
-          "name": "SSH Authorized Keys",
-          "tactic": "Persistence",
-          "tactic_id": "TA0003"
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
         },
         {
           "id": "T1068",
@@ -556,26 +564,6 @@
           "tactic": "Privilege Escalation",
           "tactic_id": "TA0004"
         },
-        {
-          "id": "T1649",
-          "name": "Steal or Forge Authentication Certificates",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2025-8444: The Animation Addons for Elementor – GSAP Powered Elementor Addons & Website Tem...",
-      "description": "The Animation Addons for Elementor – GSAP Powered Elementor Addons & Website Templates plugin for WordPress is vulnerable to DOM-Based Stored Cross-Site Scripting via the multiple parameters in all versions up to, and including, 2.6.7 due to insufficient input sanitization and output escaping. This makes it possible for authenticated attackers, with Contributor-level access and above, to inject ar",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-8444",
-      "cve_id": "CVE-2025-8444",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.4,
-      "published": "2026-06-20T05:03:20.485079+00:00",
-      "ttps": [
         {
           "id": "T1649",
           "name": "Steal or Forge Authentication Certificates",
@@ -814,6 +802,25 @@
       "ttps": []
     },
     {
+      "title": "Police raid malware network tied to Russia's Evil Corp hacker group",
+      "description": "An international operation targeted the SocGholish botnet, which has been linked to the Russia-based cybercrime group Evil Corp.",
+      "url": "https://therecord.media/socgholish-botnet-disrupted",
+      "cve_id": null,
+      "source": "TheRecord Media",
+      "category": "incident",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-06-19T12:57:00+00:00",
+      "ttps": [
+        {
+          "id": "T1583.005",
+          "name": "Botnet",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        }
+      ]
+    },
+    {
       "title": "Webinar: How attackers bypass MFA and how defenders can respond",
       "description": "Modern phishing attacks, including Device Code phishing, can undermine MFA protections and grant attackers access to corporate accounts without stealing passwords. This webinar explores how behavioral AI can help security teams detect compromised accounts faster and automate response workflows. [...]",
       "url": "https://www.bleepingcomputer.com/news/security/webinar-how-attackers-bypass-mfa-and-how-defenders-can-respond/",
@@ -890,6 +897,25 @@
           "name": "Exfiltration Over C2 Channel",
           "tactic": "Exfiltration",
           "tactic_id": "TA0010"
+        }
+      ]
+    },
+    {
+      "title": "UK's information commissioner resigns over ‘inappropriate humour’",
+      "description": "Writing on LinkedIn, Edwards said that while he has not agreed with how the investigation into him has been conducted, he has come to accept that his position “has become untenable.”",
+      "url": "https://therecord.media/uk-information-commissioner-resigns-over-inappropriate-humor",
+      "cve_id": null,
+      "source": "TheRecord Media",
+      "category": "news",
+      "severity": "high",
+      "cvss_score": null,
+      "published": "2026-06-19T11:12:00+00:00",
+      "ttps": [
+        {
+          "id": "T1586.002",
+          "name": "Email Accounts",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
         }
       ]
     },
@@ -1002,6 +1028,25 @@
           "name": "Social Media Accounts",
           "tactic": "Resource Development",
           "tactic_id": "TA0042"
+        }
+      ]
+    },
+    {
+      "title": "eBanking Phishing Delivered Through IPv4-Mapped IPv6 Address, (Fri, Jun 19th)",
+      "description": "I detected an interesting phishing email this morning. It targets a major Belgian bank:&#xd;",
+      "url": "https://isc.sans.edu/diary/rss/33090",
+      "cve_id": null,
+      "source": "SANS ISC",
+      "category": "news",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-06-19T08:37:34+00:00",
+      "ttps": [
+        {
+          "id": "T1566",
+          "name": "Phishing",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
         }
       ]
     },
@@ -1164,6 +1209,25 @@
       "ttps": []
     },
     {
+      "title": "Bulgaria allowed surveillance tech firm to sell products to repressive regimes, report says",
+      "description": "The nonprofit Human Rights Watch obtained export licensing records covering 2018 through 2023, which show the Bulgarian government allowed the surveillance firm Circles to peddle the tech to law enforcement and intelligence agencies in several countries known for human rights abuses.",
+      "url": "https://therecord.media/bulgaria-allowed-surveillance-tech-firm-to-sell-to-repressive-regimes-report",
+      "cve_id": null,
+      "source": "TheRecord Media",
+      "category": "news",
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-06-18T19:30:00+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ]
+    },
+    {
       "title": "Operation Escaneo Signals Shift in LatAm Threat Landscape",
       "description": "The threat group's curious business model may combine opportunistic monetization alongside intel collection, without much coordination between the two.",
       "url": "https://www.darkreading.com/cybersecurity-operations/operation-escaneo-signals-shift-latam-threat-landscape",
@@ -1318,6 +1382,25 @@
       ]
     },
     {
+      "title": "Australian sugar producer works to restore operations as ransomware group claims attack",
+      "description": "Mackay Sugar said it was \"working urgently\" to verify claims that a highly active ransomware group was behind a cyberattack that shut down harvesting and milling operations.",
+      "url": "https://therecord.media/mackay-sugar-cyberattack-claimed-gentlemen",
+      "cve_id": null,
+      "source": "TheRecord Media",
+      "category": "incident",
+      "severity": "high",
+      "cvss_score": null,
+      "published": "2026-06-18T14:20:00+00:00",
+      "ttps": [
+        {
+          "id": "T1486",
+          "name": "Data Encrypted for Impact",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
+        }
+      ]
+    },
+    {
       "title": "Accenture to Acquire Majority Stake in Dragos, All of runZero, NetRise in $4.1 Billion OT Cybersecurity Push",
       "description": "The deal values industrial cybersecurity giant Dragos at $3.25 billion, and runZero and NetRise will operate under Dragos. The post Accenture to Acquire Majority Stake in Dragos, All of runZero, NetRise in $4.1 Billion OT Cybersecurity Push appeared first on SecurityWeek.",
       "url": "https://www.securityweek.com/accenture-to-acquire-majority-stake-in-dragos-all-of-runzero-netrise-in-4-1-billion-ot-cybersecurity-push/",
@@ -1373,6 +1456,43 @@
       "ttps": []
     },
     {
+      "title": "ISC Stormcast For Thursday, June 18th, 2026 https://isc.sans.edu/podcastdetail/9978, (Thu, Jun 18th)",
+      "description": "(c) SANS Internet Storm Center. https://isc.sans.edu Creative Commons Attribution-Noncommercial 3.0 United States License.",
+      "url": "https://isc.sans.edu/diary/rss/33088",
+      "cve_id": null,
+      "source": "SANS ISC",
+      "category": "news",
+      "severity": "low",
+      "cvss_score": null,
+      "published": "2026-06-18T02:00:02+00:00",
+      "ttps": []
+    },
+    {
+      "title": "The Behavior of Coordinated SSH Brute Force Attacks over the last three months &#x5b;Guest Diary&#x5d;, (Wed, Jun 17th)",
+      "description": "&#x5b;This is a Guest Diary by Adam Nason, an ISC intern as part of the SANS.edu BACS program&#x5d;&#xd;",
+      "url": "https://isc.sans.edu/diary/rss/33086",
+      "cve_id": null,
+      "source": "SANS ISC",
+      "category": "incident",
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-06-18T01:49:29+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1110",
+          "name": "Brute Force",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        }
+      ]
+    },
+    {
       "title": "INC Ransomware Thrives by Mastering the Basics",
       "description": "And one of those basics is focusing on sectors where a ransomware disruption creates immediate pressure to pay up, like with healthcare.",
       "url": "https://www.darkreading.com/cyberattacks-data-breaches/inc-ransomware-thrives-by-mastering-the-basics",
@@ -1390,6 +1510,30 @@
           "tactic_id": "TA0040"
         }
       ]
+    },
+    {
+      "title": "Hostile states behind three-quarters of attacks on Britain's critical infrastructure, cyber chief warns",
+      "description": "NCSC CEO Richard Horne warned that “kinetic targeting in any conflict tomorrow will be based on intelligence gathered today” and that nation-state adversaries were “prepositioning” throughout British critical infrastructure.",
+      "url": "https://therecord.media/britain-nation-state-cyberattacks-richard-horne-rusi",
+      "cve_id": null,
+      "source": "TheRecord Media",
+      "category": "incident",
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-06-17T17:55:00+00:00",
+      "ttps": []
+    },
+    {
+      "title": "The browser blind spot: Why your security tool may not be blocking what you think it is &#x5b;Guest Diary&#x5d;, (Wed, Jun 17th)",
+      "description": "&#x5b;This is a guest diary submitted by Varun Murdula&#x5d;&#xd;",
+      "url": "https://isc.sans.edu/diary/rss/33084",
+      "cve_id": null,
+      "source": "SANS ISC",
+      "category": "news",
+      "severity": "low",
+      "cvss_score": null,
+      "published": "2026-06-17T16:01:33+00:00",
+      "ttps": []
     },
     {
       "title": "Sweeping Credential-Harvesting Heist Compromises 30K+ Fortinet Devices",
@@ -1421,6 +1565,97 @@
           "tactic_id": "TA0006"
         }
       ]
+    },
+    {
+      "title": "ISC Stormcast For Wednesday, June 17th, 2026 https://isc.sans.edu/podcastdetail/9976, (Wed, Jun 17th)",
+      "description": "(c) SANS Internet Storm Center. https://isc.sans.edu Creative Commons Attribution-Noncommercial 3.0 United States License.",
+      "url": "https://isc.sans.edu/diary/rss/33082",
+      "cve_id": null,
+      "source": "SANS ISC",
+      "category": "news",
+      "severity": "low",
+      "cvss_score": null,
+      "published": "2026-06-17T02:00:04+00:00",
+      "ttps": []
+    },
+    {
+      "title": "From a VHDX File to a Remcos RAT, (Tue, Jun 16th)",
+      "description": "Yesterday, a reader reported to us a malicious ZIP archive (SHA256: a0104921a2d37ab87482ac9a9f5c3713479c118846c3e999178e75b81620c094&#x5b;1&#x5d;). Once unzipped, it contains a VHDX file that discloses a malicious JavaScript after being mounted (which is automatic on modern Windows OSs):&#xd;",
+      "url": "https://isc.sans.edu/diary/rss/33080",
+      "cve_id": null,
+      "source": "SANS ISC",
+      "category": "news",
+      "severity": "low",
+      "cvss_score": null,
+      "published": "2026-06-16T07:09:13+00:00",
+      "ttps": [
+        {
+          "id": "T1059.007",
+          "name": "JavaScript",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1560.001",
+          "name": "Archive via Utility",
+          "tactic": "Collection",
+          "tactic_id": "TA0009"
+        },
+        {
+          "id": "T1486",
+          "name": "Data Encrypted for Impact",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
+        }
+      ]
+    },
+    {
+      "title": "ISC Stormcast For Tuesday, June 16th, 2026 https://isc.sans.edu/podcastdetail/9974, (Tue, Jun 16th)",
+      "description": "(c) SANS Internet Storm Center. https://isc.sans.edu Creative Commons Attribution-Noncommercial 3.0 United States License.",
+      "url": "https://isc.sans.edu/diary/rss/33078",
+      "cve_id": null,
+      "source": "SANS ISC",
+      "category": "news",
+      "severity": "low",
+      "cvss_score": null,
+      "published": "2026-06-16T02:00:02+00:00",
+      "ttps": []
+    },
+    {
+      "title": "Evil MSI Background: BASE64 Statistical Analysis, (Mon, Jun 15th)",
+      "description": "I like it when a fellow handler posts a diary entry about images with malicious content. Last one is Xavier: \"The Evil MSI Background is Back&#x21;\".&#xd;",
+      "url": "https://isc.sans.edu/diary/rss/33072",
+      "cve_id": null,
+      "source": "SANS ISC",
+      "category": "news",
+      "severity": "low",
+      "cvss_score": null,
+      "published": "2026-06-15T07:16:00+00:00",
+      "ttps": []
+    },
+    {
+      "title": "ISC Stormcast For Monday, June 15th, 2026 https://isc.sans.edu/podcastdetail/9972, (Mon, Jun 15th)",
+      "description": "(c) SANS Internet Storm Center. https://isc.sans.edu Creative Commons Attribution-Noncommercial 3.0 United States License.",
+      "url": "https://isc.sans.edu/diary/rss/33076",
+      "cve_id": null,
+      "source": "SANS ISC",
+      "category": "news",
+      "severity": "low",
+      "cvss_score": null,
+      "published": "2026-06-15T02:00:02+00:00",
+      "ttps": []
+    },
+    {
+      "title": "ISC Stormcast For Friday, June 12th, 2026 https://isc.sans.edu/podcastdetail/9970, (Fri, Jun 12th)",
+      "description": "(c) SANS Internet Storm Center. https://isc.sans.edu Creative Commons Attribution-Noncommercial 3.0 United States License.",
+      "url": "https://isc.sans.edu/diary/rss/33074",
+      "cve_id": null,
+      "source": "SANS ISC",
+      "category": "news",
+      "severity": "low",
+      "cvss_score": null,
+      "published": "2026-06-12T12:30:10+00:00",
+      "ttps": []
     },
     {
       "title": "Who Runs the Ransomware Group ‘The Gentlemen?’",
@@ -1672,8 +1907,8 @@
         }
       ],
       "threat_actors": [
-        "Conti",
-        "LockBit"
+        "LockBit",
+        "Conti"
       ]
     },
     {
