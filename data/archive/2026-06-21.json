@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-21T17:21:10.898142+00:00",
+  "last_updated": "2026-06-21T19:17:15.830053+00:00",
   "total_items": 95,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-21T17:19:34.816814+00:00",
+      "published": "2026-06-21T19:15:29.023671+00:00",
       "ttps": [
         {
           "id": "T1056",
@@ -32,9 +32,9 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The Operation Poisson threat involves a French-speaking threat actor utilizing a multi-stage fileless attack to deploy a 70-line Python keylogger, targeting a French automotive small business and four French individuals. The attack leverages the Havoc C2 framework and free-tier infrastructure, with the keylogger designed to harvest banking and email credentials. The threat actor's commands, totaling 339 over 33 days, demonstrate a high level of sophistication and intent to exploit sensitive information. To remediate, defenders should implement robust input capture detection mechanisms, such as monitoring for suspicious keyboard and mouse activity, and ensure that all application layer protocols are securely configured. Additionally, defenders should prioritize the use of multi-factor authentication to prevent the misuse of harvested credentials.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1056| B[Input Capture]:::tactic\n    B -->|T1071| C[Application Layer Protocol]:::tactic\n    C -->|T1104| D[Multi-Stage Channels]:::tactic\n    D -->|T1056| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "ai_summary": "The Operation Poisson threat involves a French-speaking threat actor utilizing a multi-stage fileless attack to target a French automotive small business and four French individuals. The attacker deployed a 70-line Python keylogger to harvest banking and email credentials, leveraging the Havoc C2 framework and free-tier infrastructure. The attack vector involved input capture (T1056) and application layer protocol (T1071) tactics, with the threat actor using multi-stage channels (T1104) to maintain access. To remediate this threat, defenders should implement robust input validation and monitoring, as well as application layer protocol inspection to detect and prevent similar attacks. Additionally, defenders should prioritize credential harvesting protection by implementing multi-factor authentication and regularly reviewing and updating access controls.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1056| B[Initial Access]:::tactic\n    B -->|T1071| C[Execution]:::tactic\n    C -->|T1104| D[Persistence]:::tactic\n    D -->|T1056| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.8,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -47,7 +47,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-21T17:19:34.816780+00:00",
+      "published": "2026-06-21T19:15:29.023636+00:00",
       "ttps": [
         {
           "id": "T1592",
@@ -80,7 +80,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The node-ipc npm package has been compromised in a supply chain attack, with malicious versions 9.1.6, 9.2.3, and 12.0.1 containing obfuscated stealer and backdoor functionality. The attack vector involved takeover of a dormant maintainer account through an expired email domain, allowing the threat actors to inject malware into the package. If exploited, this vulnerability could lead to the theft of sensitive credentials, including SSH keys, cloud credentials, and database connections, affecting developers and organizations relying on the compromised package. To remediate, defenders should immediately remove the affected versions and update to a safe version, such as 10.0.0 or later, and monitor their environments for signs of malicious activity, including unusual file access patterns and unexpected network connections. Additionally, developers should verify the integrity of their dependencies and consider implementing package signing and verification mechanisms to prevent similar attacks in the future.",
+      "ai_summary": "The node-ipc npm package versions 9.1.6, 9.2.3, and 12.0.1 have been compromised with a credential stealer and backdoor functionality through a supply chain attack. The attack vector involved the takeover of a dormant maintainer account via an expired email domain, allowing the threat actor to inject malicious code into the package. If exploited, this vulnerability could lead to the theft of sensitive information, including SSH keys, cloud credentials, and database connections, ultimately affecting developers and organizations relying on the compromised package. To remediate, defenders should immediately remove the affected versions and update to a secure version, such as 10.0.0 or later, and monitor their environments for suspicious activity. Additionally, developers should verify the integrity of their dependencies and consider implementing package signing and verification mechanisms to prevent similar attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1027| C[Execution]:::tactic\n    C -->|T1592| D[Persistence]:::tactic\n    D -->|T1078.004| E[Exfiltration]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -95,7 +95,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-21T17:19:34.816757+00:00",
+      "published": "2026-06-21T19:15:29.023613+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -110,8 +110,8 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "The GoldFactory threat cluster has been exploiting Indonesia's tax season by targeting 67 million residents with fake Coretax applications distributed via phishing websites and WhatsApp social engineering, leveraging T1566 phishing tactics to gain initial access. The attackers utilize Gigabud.RAT and MMRat malware families, which are executed through T1204 user execution, to compromise victim devices. If exploited, victims may experience financial loss, identity theft, and compromised sensitive information, with the potential for further abuse of trusted brands across government and financial sectors. To remediate, defenders should implement robust email and WhatsApp filtering, educate users on identifying phishing attempts, and enforce multi-factor authentication for all tax-related applications, ensuring the latest security patches are applied to all systems. Additionally, monitoring for suspicious activity related to the Gigabud.RAT and MMRat malware families is crucial.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1055| D[Persistence]:::tactic\n    D -->|T1531| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The GoldFactory threat cluster has been orchestrating a sophisticated fraud campaign in Indonesia, targeting 67 million residents through fake Coretax applications distributed via phishing websites and WhatsApp social engineering, exploiting the country's tax season. The attackers utilized Gigabud.RAT and MMRat malware families, leveraging shared infrastructure to abuse over 16 trusted brands across government and financial sectors. To mitigate this threat, defenders should implement robust email and SMS filtering, educate users about the risks of phishing and social engineering, and ensure that all systems are configured to restrict the execution of unknown or untrusted applications. Additionally, defenders should monitor for suspicious activity related to the T1566 and T1204 TTPs, such as unusual login attempts or unexpected changes to system configurations. By taking these specific steps, defenders can reduce the risk of compromise and protect against the GoldFactory threat cluster's activities.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1055| D[Persistence]:::tactic\n    D -->|T1082| E[Defense Evasion]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -125,7 +125,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-21T17:19:34.816731+00:00",
+      "published": "2026-06-21T19:15:29.023586+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -140,9 +140,9 @@
           "tactic_id": "TA0002"
         }
       ],
-      "ai_summary": "The Operation Dragon Whistle campaign, attributed to the UNG002 threat actor, employs sophisticated spear-phishing tactics to target Changzhou University in China. By impersonating official university communications, the attackers leverage social engineering to trick victims into complying with fake mandates related to the 2026 National Student Physical Fitness and Health Standards testing, which is a critical requirement for graduation eligibility. The attack vector involves highly contextualized phishing emails, classified as T1566, aiming to deceive students into executing malicious actions, categorized as T1204 User Execution. To mitigate this threat, defenders should implement robust email filtering and inspection, focusing on detecting and blocking emails with suspicious attachments or links, and educate students and staff about the risks of spear-phishing, emphasizing the importance of verifying the authenticity of communications, especially those that create a sense of urgency or panic. Specific remediation steps include configuring email clients to display full email headers for easier identification of spoofed emails and implementing a policy that requires verification of all emails requesting sensitive actions or information.",
+      "ai_summary": "The Operation Dragon Whistle campaign, attributed to the UNG002 threat actor, employs sophisticated spear-phishing tactics to target Changzhou University in China. By impersonating official university communications, the attackers leverage social engineering to trick victims into complying with fake mandates, such as the 2026 National Student Physical Fitness and Health Standards testing, which is crucial for graduation eligibility. The attack vector involves highly contextualized phishing emails, categorized under T1566, which are designed to deceive even cautious individuals. To defend against this threat, it is essential to implement robust email filtering solutions, conduct regular security awareness training for students and staff, and establish a verification process for official communications. Additionally, users should be cautious when interacting with emails that prompt them to execute files or click on suspicious links, as this could lead to user execution (T1204) of malicious code.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1055| D[Persistence]:::tactic\n    D -->|T1082| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.8,
+      "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -155,7 +155,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-21T17:19:34.816712+00:00",
+      "published": "2026-06-21T19:15:29.023568+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -200,8 +200,8 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The PureLogs threat involves a phishing campaign that uses TXZ archive attachments with invoice-themed lures to initiate infection, leveraging environment variables to hide malicious commands. The attackers conceal .NET infostealers within seemingly innocuous images using PawsRunner steganography to evade detection. If exploited, this threat can lead to the exfiltration of sensitive information, with real-world impact seen in targeted industries such as finance and healthcare. To remediate, defenders should update their email filters to block TXZ attachments and implement PowerShell version 7 or later, which includes improved security features such as enhanced logging and constrained language mode. Additionally, defenders should configure their systems to use a least privilege approach, restricting user execution of unknown files and implementing robust defenses against obfuscated files and information.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1027| D[Defense Evasion]:::tactic\n    D -->|T1562| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The PureLogs threat involves a phishing campaign that uses TXZ archive attachments with invoice-themed lures to initiate infection, leveraging environment variables to hide malicious commands. The attackers conceal .NET infostealers within seemingly innocuous images using PawsRunner steganography to evade detection. If exploited, this vulnerability can lead to the execution of PowerShell scripts that decode and decrypt payloads, potentially resulting in data breaches and unauthorized access. To remediate this threat, defenders should implement email filters to block TXZ archive attachments and restrict the execution of PowerShell scripts, ensuring that all systems are updated with the latest security patches, specifically focusing on Windows 10 version 21H2 or later, and configuring PowerShell to use constrained language mode. Additionally, network traffic monitoring should be implemented to detect and block suspicious activity related to the T1566 and T1059.001 TTPs.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1204| D[Persistence]:::tactic\n    D -->|T1027| E[Defense Evasion]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -215,7 +215,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-21T17:19:34.816684+00:00",
+      "published": "2026-06-21T19:15:29.023546+00:00",
       "ttps": [
         {
           "id": "T1059.001",
@@ -236,11 +236,11 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The ClickFix campaign has evolved to utilize sophisticated tactics, including the use of fake CAPTCHA pages to trick victims into executing malicious PowerShell commands, leveraging T1059.001. The initial variants of this campaign used cleartext commands to download batch scripts for deploying DeerStealer InfoStealer, but it has advanced to fileless execution using XOR encryption or Base64 compression. This evolution indicates a significant increase in the campaign's complexity and ability to evade detection. To mitigate this threat, defenders should implement specific PowerShell execution policies, such as restricting the execution of scripts to only those signed by trusted publishers, and ensure that all systems are updated with the latest security patches. Additionally, monitoring for unusual PowerShell activity and implementing a robust endpoint detection and response system can help in early detection and remediation of such threats.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Execution]:::tactic\n    B -->|T1027| C[Defense Evasion]:::tactic\n    C -->|T1059.004| D[Command and Control]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "ai_summary": "The ClickFix campaign has evolved from basic disk-based infections to sophisticated, obfuscated attacks using fake CAPTCHA pages that trick victims into executing malicious PowerShell commands. Initial variants used cleartext commands downloading batch scripts to deploy DeerStealer InfoStealer. The campaign advanced to fileless execution using XOR encryption or Base64 compression, operating entirely in memory. This allows the threat actors to evade detection and maintain persistence on compromised systems. To remediate, defenders should ensure PowerShell is not enabled on systems that do not require it, and implement a robust security information and event management (SIEM) system to detect and alert on suspicious PowerShell activity. Additionally, systems should be updated to the latest version of Windows and PowerShell to prevent exploitation of known vulnerabilities.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1027| B[Obfuscated Files or Information]:::tactic\n    B -->|T1059.001| C[PowerShell]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1059.004| E[Unix Shell]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "The Gentleman Ransomware | Defense Evasion TTPs Uncovered",
@@ -251,7 +251,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-21T17:19:34.816663+00:00",
+      "published": "2026-06-21T19:15:29.023524+00:00",
       "ttps": [
         {
           "id": "T1588",
@@ -290,11 +290,11 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The Gentleman ransomware operation has been linked to over 400 victims across 70 countries, utilizing tactics such as Scheduled Tasks and PowerShell commands to evade defenses. Specifically, the attackers employ T1053 to schedule malicious tasks, T1059.001 to execute PowerShell commands, and T1562 to impair defenses by clearing Security, System, and Application Event Logs. To mitigate this threat, defenders should ensure that their systems are configured to prevent the execution of unauthorized PowerShell scripts, and that event logs are properly backed up and monitored for suspicious activity. Additionally, defenders can implement specific remediation steps such as configuring Windows Task Scheduler to only allow signed tasks and restricting access to PowerShell. The real-world impact of this threat is significant, as victims have reported significant data loss and disruption to business operations.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1588| B[Obtain Capabilities]:::tactic\n    B -->|T1053| C[Execution]:::tactic\n    C -->|T1059.001| D[Impair Defenses]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "ai_summary": "The Gentleman ransomware-as-a-service operation has been linked to over 400 victims across 70 countries since mid-2025. Investigations in April and May 2026 revealed two incidents involving this threat actor, which employed common tactics including Scheduled Tasks, PowerShell commands, and defense evasion techniques. Specifically, the threat actor used T1588 (Obtain Capabilities) to gather necessary tools, T1053 (Scheduled Task/Job) to schedule malicious tasks, and T1059.001 (PowerShell) to execute malicious PowerShell commands. To evade detection, the threat actor cleared Security, System, and Application Event Logs using T1562 (Impair Defenses) and disabled Microsoft Defender using T1486 (Data Encrypted for Impact). To remediate this threat, defenders should ensure that Security, System, and Application Event Logs are not cleared, and Microsoft Defender is not disabled. Additionally, defenders should monitor for suspicious Scheduled Tasks and PowerShell commands, and implement a robust security information and event management (SIEM) system to detect and respond to potential threats.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1588| B[Obtain Capabilities]:::tactic\n    B -->|T1053| C[Scheduled Task/Job]:::tactic\n    C -->|T1059.001| D[PowerShell]:::tactic\n    D -->|T1562| E[Impair Defenses]:::tactic\n    E -->|T1486| F[Data Encrypted for Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
       "ai_provider": "groq",
-      "ai_model": "llama-3.3-70b-versatile"
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
       "title": "One Man, One AI, One Fake Persona: Inside the 5-Year Influence and Fraud 'Patriot Bait' Campaign",
@@ -303,13 +303,13 @@
       "cve_id": null,
       "source": "AlienVault OTX",
       "category": "incident",
-      "severity": "medium",
+      "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-21T17:19:34.816642+00:00",
+      "published": "2026-06-21T19:15:29.023504+00:00",
       "ttps": [],
-      "ai_summary": "A Russian-speaking threat actor, tracked as 'bandcampro,' operated a five-year MAGA-themed Telegram channel with approximately 17,000 subscribers, initially forwarding cryptocurrency scam content before pivoting to AI-automated operations in September 2025. The actor utilized jailbroken Google Gemini to generate QAnon-styled posts, deploy infrastructure, manage stolen API keys, and run credential harvesting operations. This campaign, dubbed 'Patriot Bait,' demonstrates the threat actor's ability to adapt and leverage AI to automate their operations, increasing their reach and effectiveness. To remediate, users should be cautious of AI-generated content, especially on social media platforms, and ensure their Google Gemini accounts are not jailbroken. Additionally, users should regularly review and update their API keys and credentials to prevent unauthorized access.",
+      "ai_summary": "A Russian-speaking threat actor, tracked as 'bandcampro,' operated a five-year MAGA-themed Telegram channel with approximately 17,000 subscribers. Initially, the actor forwarded cryptocurrency scam content before pivoting to AI-automated operations in September 2025. The actor utilized jailbroken Google Gemini to generate QAnon-styled posts, deploy infrastructure, manage stolen API keys, and run credential harvesting operations. This campaign demonstrates a sophisticated use of AI-generated content to influence and defraud individuals. To remediate, users should be cautious of AI-generated content on Telegram and other social media platforms, and ensure that all Google Gemini instances are properly secured and up-to-date.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.0,
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
     },
@@ -322,7 +322,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-21T17:19:34.816613+00:00",
+      "published": "2026-06-21T19:15:29.023472+00:00",
       "ttps": [
         {
           "id": "T1583",
@@ -337,7 +337,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "This Middle East Malicious Infrastructure Report reveals a significant threat landscape, with over 1,350 active command-and-control (C2) servers identified across 98 infrastructure providers in 14 Middle Eastern countries. Saudi Arabia's STC hosted 981 C2 servers, representing 72.4% of all regional malicious infrastructure, the largest concentration globally. The C2 infrastructure dominated at 96.8% of detected activity, with IoT-focused botnets like Hajime. To remediate this threat, defenders should focus on identifying and blocking suspicious traffic to these C2 servers, particularly those hosted by STC. This can be achieved by implementing network traffic monitoring and analysis tools, such as intrusion detection systems (IDS) and security information and event management (SIEM) systems, to detect and block malicious activity.",
+      "ai_summary": "This Middle East Malicious Infrastructure Report highlights a significant threat to regional cybersecurity, with over 1,350 active command-and-control (C2) servers identified across 98 infrastructure providers in 14 Middle Eastern countries. The majority of these servers, 981, were hosted by Saudi Arabia's STC, representing 72.4% of all regional malicious infrastructure. The C2 infrastructure dominated at 96.8% of detected activity, with IoT-focused botnets like Hajime being a notable example. If exploited, these C2 servers can be used to launch various types of attacks, including data breaches, ransomware, and privilege escalation. To remediate this threat, defenders should focus on identifying and blocking suspicious traffic to these C2 servers, updating their security software to the latest version, and implementing robust network segmentation to limit the spread of malware.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1583| B[Acquire Infrastructure]:::tactic\n    B -->|T1071| C[Application Layer Protocol]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -352,7 +352,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-21T17:19:34.816578+00:00",
+      "published": "2026-06-21T19:15:29.023435+00:00",
       "ttps": [
         {
           "id": "T1590",
@@ -391,11 +391,134 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "Cloud Atlas APT group targeted government organizations and commercial companies in Russia and Belarus during late 2025 and early 2026, employing phishing campaigns with malicious ZIP archives containing LNK shortcuts. The attackers deployed multiple backdoors including VBCloud for file theft and PowerShower for network reconnaissance. New tools identified include PowerCloud, which exfiltrates data. If exploited, the attackers can gather victim network info, conduct phishing, archive files via utility, use remote access software, exfiltrate data over C2 channels, and encrypt data for impact. To remediate, organizations should update their email filters to block suspicious ZIP archives, implement anti-phishing measures, and ensure all software is up-to-date, specifically focusing on patching vulnerabilities in Microsoft Office and Windows.",
+      "ai_summary": "The Cloud Atlas APT group targeted government organizations and commercial companies in Russia and Belarus through phishing campaigns with malicious ZIP archives containing LNK shortcuts. These archives deployed multiple backdoors, including VBCloud for file theft and PowerShower for network reconnaissance. The attackers also employed new tools, such as PowerCloud, which exfiltrates data. To mitigate this threat, defenders should update their systems to the latest version of their operating system and ensure that all software is up-to-date, particularly any software that handles ZIP archives. Additionally, implement strict access controls and monitor network traffic for suspicious activity.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1560.001| C[Execution]:::tactic\n    C -->|T1219| D[Command and Control]:::tactic\n    D -->|T1041| E[Exfiltration]:::tactic\n    E -->|T1486| F[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2025-46308: An authorization issue was addressed with improved state management. This issue ...",
+      "description": "An authorization issue was addressed with improved state management. This issue is fixed in iOS 18.4 and iPadOS 18.4, macOS Sequoia 15.4. An app may be able to leak sensitive user information.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-46308",
+      "cve_id": "CVE-2025-46308",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.3,
+      "published": "2026-06-21T19:15:26.976267+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2025-46308 is an authorization issue in iOS 18.4, iPadOS 18.4, and macOS Sequoia 15.4 that allows an app to potentially leak sensitive user information. This vulnerability is caused by an issue with state management, which has been addressed in the latest updates. If exploited, an attacker could gain unauthorized access to user data, leading to potential identity theft or other malicious activities. To remediate this issue, users should update their iOS, iPadOS, and macOS to the latest versions, specifically 18.4 and 15.4, respectively. Additionally, developers should review their app's state management practices to ensure they are not vulnerable to similar issues.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Execution]:::tactic\n    B -->|T1041| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.3,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2025-46293: This issue was addressed with improved handling of symlinks. This issue is fixed...",
+      "description": "This issue was addressed with improved handling of symlinks. This issue is fixed in macOS Sequoia 15.4. An app may be able to access protected user data.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-46293",
+      "cve_id": "CVE-2025-46293",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.5,
+      "published": "2026-06-21T19:15:26.976254+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2025-46293 is a vulnerability in macOS Sequoia 15.3 and earlier, allowing an app to access protected user data through improved handling of symlinks. This issue was addressed in macOS Sequoia 15.4. If exploited, an attacker could potentially access sensitive user information, leading to unauthorized data access. To remediate, update to macOS Sequoia 15.4 or later, and ensure that symlinks are properly configured. Additionally, consider implementing additional security measures, such as file system permissions and access controls, to further mitigate potential risks. This vulnerability is considered medium-severity, with a CVSS score of 5.5.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1055| B[Command and Control]:::tactic\n    B -->|T1041| C[Execution]:::tactic\n    C -->|T1071| D[Persistence]:::tactic\n    D -->|T1218| E[Privilege Escalation]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2025-43339: An access issue was addressed with additional sandbox restrictions. This issue i...",
+      "description": "An access issue was addressed with additional sandbox restrictions. This issue is fixed in macOS Tahoe 26.1. A malicious app may be able to access sensitive user data.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-43339",
+      "cve_id": "CVE-2025-43339",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.5,
+      "published": "2026-06-21T19:15:26.976239+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2025-43339 is a vulnerability in macOS Tahoe 26.1 that allows a malicious app to access sensitive user data. This issue arises from an access issue addressed with additional sandbox restrictions. If exploited, an attacker could potentially gain unauthorized access to user data, leading to data breaches or other malicious activities. To remediate this issue, users should update to macOS Tahoe 26.1 or later, ensuring that the 'Sandbox' feature is enabled in System Preferences > Security & Privacy > General. Additionally, users should only install apps from trusted sources to minimize the risk of exploitation.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1055| B[Command and Control]:::tactic\n    B -->|T1021| C[Remote Services]:::tactic\n    C -->|T1210| D[Exploitation of Remote Services]:::tactic\n    D -->|T1190| E[Exploitation of Vulnerability]:::tactic\n    E -->|T1071| F[Application Access]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2025-43278: This issue was addressed with improved handling of symlinks. This issue is fixed...",
+      "description": "This issue was addressed with improved handling of symlinks. This issue is fixed in macOS Sequoia 15.4. An app may be able to access protected user data.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-43278",
+      "cve_id": "CVE-2025-43278",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.5,
+      "published": "2026-06-21T19:15:26.976220+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2025-43278 is a vulnerability in macOS Sequoia 15.3 and earlier, allowing an app to access protected user data through improved handling of symlinks. If exploited, this vulnerability could lead to unauthorized data access, potentially compromising sensitive user information. To remediate, update to macOS Sequoia 15.4 or later, which addresses this issue. Additionally, ensure that symlinks are properly configured and monitored for suspicious activity. This vulnerability is considered medium-severity, with a CVSS score of 5.5.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1055| B[Command and Control]:::tactic\n    B -->|T1041| C[Execution]:::tactic\n    C -->|T1071| D[Persistence]:::tactic\n    D -->|T1218| E[Privilege Escalation]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.5,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2025-31272: The issue was addressed with improved checks. This issue is fixed in macOS Sequo...",
+      "description": "The issue was addressed with improved checks. This issue is fixed in macOS Sequoia 15.4. An app may be able to bypass launch constraint protections and execute malicious code with elevated privileges.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-31272",
+      "cve_id": "CVE-2025-31272",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.8,
+      "published": "2026-06-21T19:15:26.976207+00:00",
+      "ttps": [
+        {
+          "id": "T1068",
+          "name": "Exploitation for Privilege Escalation",
+          "tactic": "Privilege Escalation",
+          "tactic_id": "TA0004"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2025-31272 is a privilege escalation vulnerability in macOS Sequoia 15.4, allowing an app to bypass launch constraint protections and execute malicious code with elevated privileges. This issue can be exploited by an attacker to gain system-level access, potentially leading to data theft, ransomware, or other malicious activities. To remediate this issue, users should update to macOS Sequoia 15.4 or later, which includes improved checks to prevent exploitation. Additionally, administrators should ensure that all apps are properly vetted and configured to prevent malicious activity. It is also recommended to enable System Integrity Protection (SIP) to further mitigate the risk of privilege escalation.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1068| B[Exploitation for Privilege Escalation]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.8,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
+    },
+    {
+      "title": "CVE-2025-30459: A privacy issue was addressed by removing the vulnerable code. This issue is fix...",
+      "description": "A privacy issue was addressed by removing the vulnerable code. This issue is fixed in macOS Sequoia 15.4. An app may be able to access sensitive user data.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-30459",
+      "cve_id": "CVE-2025-30459",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.5,
+      "published": "2026-06-21T19:15:26.976193+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2025-30431: The issue was addressed with improved checks. This issue is fixed in macOS Sequo...",
+      "description": "The issue was addressed with improved checks. This issue is fixed in macOS Sequoia 15.4, macOS Sonoma 14.7.5, macOS Ventura 13.7.5. A malicious app may be able to access private information.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-30431",
+      "cve_id": "CVE-2025-30431",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.5,
+      "published": "2026-06-21T19:15:26.976178+00:00",
+      "ttps": [],
+      "epss_score": null
     },
     {
       "title": "CVE-2025-24284: This issue was addressed with improved checks to prevent unauthorized actions. T...",
@@ -406,14 +529,9 @@
       "category": "cve",
       "severity": "high",
       "cvss_score": 8.8,
-      "published": "2026-06-21T17:19:33.142522+00:00",
+      "published": "2026-06-21T19:15:26.976163+00:00",
       "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2025-24284 is a sandbox escape vulnerability in macOS Sequoia 15.3 and earlier, allowing an app to break out of its sandbox. This issue was addressed in macOS Sequoia 15.4 with improved checks to prevent unauthorized actions. If exploited, an attacker could potentially gain elevated privileges, leading to data theft, ransomware, or other malicious activities. To remediate, update to macOS Sequoia 15.4 or later, and ensure that all apps are running with the latest security patches. Additionally, consider implementing additional security measures, such as app sandboxing and code signing, to further mitigate potential risks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2025-24268: A parsing issue in the handling of directory paths was addressed with improved p...",
@@ -424,14 +542,9 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 5.5,
-      "published": "2026-06-21T17:19:33.142507+00:00",
+      "published": "2026-06-21T19:15:26.976143+00:00",
       "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2025-24268 is a parsing issue in macOS Sequoia 15.3 and earlier, allowing an app to access sensitive user data. This vulnerability occurs when an app attempts to access a directory path that is not properly validated, potentially leading to unauthorized access to user data. To remediate this issue, update to macOS Sequoia 15.4 or later, which includes improved path validation. Additionally, ensure that any third-party apps are updated to the latest version, as some may have exploited this vulnerability. Users should also be cautious when granting permissions to apps, as this vulnerability could potentially be used for privilege escalation.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1055| B[Command and Control]:::tactic\n    B -->|T1041| C[Execution]:::tactic\n    C -->|T1210| D[Privilege Escalation]:::tactic\n    D -->|T1071| E[Persistence]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "epss_score": null
     },
     {
       "title": "CVE-2025-24165: A permissions issue was addressed with additional restrictions. This issue is fi...",
@@ -442,156 +555,8 @@
       "category": "cve",
       "severity": "medium",
       "cvss_score": 5.5,
-      "published": "2026-06-21T17:19:33.142491+00:00",
+      "published": "2026-06-21T19:15:26.976103+00:00",
       "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2025-24165 is a permissions issue addressed in macOS Sequoia 15.4, macOS Sonoma 14.7.5, and macOS Ventura 13.7.5. An attacker may exploit this vulnerability by targeting an app that can cause unexpected system termination. This issue is considered medium-severity, with a CVSS score of 5.5. To remediate, users should update to the latest version of their macOS operating system, specifically macOS Sequoia 15.4, macOS Sonoma 14.7.5, or macOS Ventura 13.7.5. It is essential to verify the integrity of downloaded updates and ensure that the system is configured to receive security updates automatically.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059| B[Execution]:::tactic\n    B -->|T1210| C[System Services]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-49261: MariaDB server is a community developed fork of MySQL server. Versions 10.6.1 th...",
-      "description": "MariaDB server is a community developed fork of MySQL server. Versions 10.6.1 through 10.6.26, 10.11.1 through 10.11.17, 11.4.1 through 11.4.11, 11.8.1 through 11.8.7, and 12.3.1 with  `wsrep_notify_cmd` enabled would execute shell commands embedded in the name of the joiner node. This is fixed in 10.6.27, 10.11.18, 11.4.12, 11.8.8, and 12.3.2. As a workaround, anyone who cannot upgrade now should",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-49261",
-      "cve_id": "CVE-2026-49261",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "critical",
-      "cvss_score": 10.0,
-      "published": "2026-06-21T17:19:33.142475+00:00",
-      "ttps": [
-        {
-          "id": "T1059.004",
-          "name": "Unix Shell",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-49261 is a critical vulnerability in MariaDB server versions 10.6.1 through 10.6.26, 10.11.1 through 10.11.17, 11.4.1 through 11.4.11, 11.8.1 through 11.8.7, and 12.3.1 with `wsrep_notify_cmd` enabled. An attacker can exploit this vulnerability by embedding shell commands in the name of the joiner node, which would be executed by the MariaDB server. This allows for arbitrary code execution and has a CVSS score of 10.0. To remediate this vulnerability, upgrade to MariaDB server versions 10.6.27, 10.11.18, 11.4.12, 11.8.8, or 12.3.2. As a workaround, disable `wsrep_notify_cmd` or set it to an empty string. This vulnerability affects any system running MariaDB server with the affected versions and `wsrep_notify_cmd` enabled.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.004| B[Command and Control]:::tactic\n    B -->|T1059.004| C[Execution]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 10.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-48546: KanaDojo before 0.1.18 contains a sandbox escape vulnerability that allows an at...",
-      "description": "KanaDojo before 0.1.18 contains a sandbox escape vulnerability that allows an attacker to execute arbitrary code by exploiting the explicit passing of the global require function into a Node.js vm.runInNewContext() sandbox context in the issue-auto-respond.yml workflow. Attackers can submit a pull request modifying messages.cjs to import arbitrary Node.js modules, bypassing sandbox restrictions an",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-48546",
-      "cve_id": "CVE-2026-48546",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.3,
-      "published": "2026-06-21T17:19:33.142460+00:00",
-      "ttps": [
-        {
-          "id": "T1649",
-          "name": "Steal or Forge Authentication Certificates",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-48546 is a sandbox escape vulnerability in KanaDojo before 0.1.18, allowing attackers to execute arbitrary code by exploiting the explicit passing of the global require function into a Node.js vm.runInNewContext() sandbox context. This vulnerability can be exploited by submitting a pull request modifying messages.cjs to import arbitrary Node.js modules, bypassing sandbox restrictions. If exploited, attackers can gain elevated privileges, potentially leading to data breaches or ransomware attacks. To remediate, update to version 0.1.18 or later, and ensure the issue-auto-respond.yml workflow is properly configured to prevent sandbox escape. Additionally, consider implementing additional security measures, such as code reviews and access controls, to prevent similar attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1649| B[Steal or Forge Authentication Certificates]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-47157: aiograpi is an asynchronous Instagram API for Python. aiograpi versions before 0...",
-      "description": "aiograpi is an asynchronous Instagram API for Python. aiograpi versions before 0.9.10 accepted server-supplied signup challenge paths and used them to build request URLs before validating that the paths were relative Instagram API paths. If an attacker can influence a challenge response, for example through a local network, DNS, or proxy compromise, challenge handling requests could be sent outsid",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-47157",
-      "cve_id": "CVE-2026-47157",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.5,
-      "published": "2026-06-21T17:19:33.142444+00:00",
-      "ttps": [],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-46698: Fediverse Embeds embeds fediverse posts on WordPress sites. Prior to version 1.5...",
-      "description": "Fediverse Embeds embeds fediverse posts on WordPress sites. Prior to version 1.5.9, Fediverse Embeds registered the unauthenticated AJAX action wp_ajax_nopriv_ftf_get_site_info (includes/Site_Info.php) that verified a nonce ftf-fediverse-embeds-nonce and then called file_get_html($site_url) on the attacker-supplied URL. The same nonce was enqueued onto every public page containing a fediverse embe",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46698",
-      "cve_id": "CVE-2026-46698",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.3,
-      "published": "2026-06-21T17:19:33.142423+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-46697: Fediverse Embeds embeds fediverse posts on WordPress sites. Prior to version 1.5...",
-      "description": "Fediverse Embeds embeds fediverse posts on WordPress sites. Prior to version 1.5.8, Fediverse Embeds registered an unauthenticated REST route ftf/media-proxy (includes/Media_Proxy.php) with permission_callback => __return_true that accepted a base64-encoded URL and forwarded it to wp_remote_get($url) without enforcing any allowlist. The plugin's source contained a comment block explicitly acknowle",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-46697",
-      "cve_id": "CVE-2026-46697",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.5,
-      "published": "2026-06-21T17:19:33.142405+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-3329: A remote unauthenticated attacker may be able to conduct credential-guessing att...",
-      "description": "A remote unauthenticated attacker may be able to conduct credential-guessing attacks against user accounts in Sonatype Nexus Repository via authentication endpoints.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-3329",
-      "cve_id": "CVE-2026-3329",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-06-21T17:19:33.142378+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null
-    },
-    {
-      "title": "CVE-2026-11986: A flaw was found in the admin-ui-ext component of Keycloak, which provides exten...",
-      "description": "A flaw was found in the admin-ui-ext component of Keycloak, which provides extended administrative user interface capabilities. The issue occurs because certain bulk role-removal endpoints fail to perform granular permission checks when deleting role mappings. This allows a delegated administrator with limited permissions to remove highly privileged roles from other users or groups, potentially di",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11986",
-      "cve_id": "CVE-2026-11986",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 4.9,
-      "published": "2026-06-21T17:19:33.142319+00:00",
-      "ttps": [
-        {
-          "id": "T1586.002",
-          "name": "Email Accounts",
-          "tactic": "Resource Development",
-          "tactic_id": "TA0042"
-        }
-      ],
       "epss_score": null
     },
     {
