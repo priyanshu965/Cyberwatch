@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-06-25T03:35:40.396849+00:00",
+  "last_updated": "2026-06-25T07:35:36.622170+00:00",
   "total_items": 95,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-25T03:34:23.246431+00:00",
+      "published": "2026-06-25T07:34:32.620292+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -20,7 +20,7 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The observed phishing campaign utilizes ScreenConnect to deliver a Remote Monitoring and Management (RMM) payload, leveraging DocuSign as a common theme to trick victims into opening malicious emails. The attack vector involves phishing emails (T1566) that aim to gain initial access to the victim's system. If exploited, this could lead to unauthorized access and control of the victim's system, potentially affecting individuals and organizations that use DocuSign services. To remediate, defenders should implement robust email filtering, educate users about phishing attacks, and ensure that all systems are up-to-date with the latest security patches. Additionally, monitoring for suspicious activity related to ScreenConnect and RMM tools is crucial.",
+      "ai_summary": "The observed phishing campaign utilizes ScreenConnect to deliver a Remote Monitoring and Management (RMM) payload, leveraging DocuSign as a common theme to trick victims into opening malicious emails. The attack vector involves phishing emails with embedded URLs that, when clicked, initiate the download of the RMM payload. If exploited, this could lead to unauthorized access and control of the victim's system, potentially affecting various organizations and individuals who use DocuSign services. To remediate, defenders should implement email filters to block suspicious URLs and attachments, and educate users about the risks of phishing emails, especially those masquerading as legitimate services like DocuSign. Additionally, ensuring all systems are up-to-date with the latest security patches and using anti-virus software can help mitigate the risk of such attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.5,
       "ai_provider": "groq",
@@ -35,7 +35,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-25T03:34:23.246410+00:00",
+      "published": "2026-06-25T07:34:32.620271+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -44,9 +44,9 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The EvilTokens phishing kit exploits Microsoft's legitimate device login flow through OAuth device-code phishing, utilizing AES-GCM encryption to conceal its attack components, making it challenging for traditional static URL analysis to detect. This sophisticated kit targets organizations primarily in the United States, allowing threat actors to gain account access without directly stealing passwords. The real-world impact of this exploit includes unauthorized access to sensitive information and potential lateral movement within an organization's network. To remediate this threat, defenders should implement OAuth device-code phishing detection mechanisms and monitor for suspicious login activity, specifically focusing on Microsoft device login flows. Additionally, educating users about the risks of OAuth phishing and the importance of verifying the authenticity of login requests can help prevent successful attacks.",
+      "ai_summary": "The EvilTokens phishing kit exploits Microsoft's legitimate device login flow through OAuth device-code phishing, utilizing AES-GCM encryption to conceal critical components of its attack. This creates visibility gaps for traditional static URL analysis, making it challenging for defenders to detect. The kit primarily targets organizations in the United States, and if exploited, it can lead to unauthorized account access without directly stealing passwords. To remediate this threat, defenders should implement OAuth device-code phishing detection mechanisms and monitor for suspicious login activity, particularly from unfamiliar locations or devices. Additionally, educating users about the risks of OAuth phishing and the importance of verifying the authenticity of login requests can help prevent successful attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1204| D[Persistence]:::tactic\n    D -->|T1550| E[Defense Evasion]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -59,7 +59,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-25T03:34:23.246394+00:00",
+      "published": "2026-06-25T07:34:32.620254+00:00",
       "ttps": [
         {
           "id": "T1583",
@@ -86,7 +86,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The Sidewinder APT group has been observed utilizing a malicious document, No.9374.docx with the hash value 64f2681ad0940e6c2c9c76e6834117bf, as a lure mechanism to gain initial access to victim systems. This document is likely used in spearphishing attacks, where the attacker sends the malicious document as an attachment to the target, exploiting their trust to execute the malicious code. The real-world impact of this exploit includes the potential for data breaches, unauthorized access, and lateral movement within the network. To remediate this threat, defenders should block the domain update[.]ms-office[.]app at the network perimeter and implement robust email filtering to detect and prevent spearphishing attempts. Additionally, educating users about the risks of opening suspicious attachments and implementing a robust endpoint detection and response system can help mitigate the threat.",
+      "ai_summary": "The Sidewinder APT group has been observed utilizing a malicious document named No.9374.docx with the hash value 64f2681ad0940e6c2c9c76e6834117bf as a lure mechanism to gain initial access. This document is used in spearphishing attacks, leveraging T1566.001, where the victim is tricked into opening the malicious attachment, leading to user execution (T1204) of the malware. The command and control operations are supported by the infrastructure including the domain update[.]ms-office[.]app, which is an example of acquiring infrastructure (T1583) for malicious purposes. To mitigate this threat, defenders should block access to the known C2 domain update[.]ms-office[.]app and implement application layer protocol filtering (T1071) to detect and prevent similar communications. Additionally, educating users about the risks of opening attachments from unknown sources is crucial, as well as ensuring that all systems are up-to-date with the latest security patches and using anti-virus software that can detect the specific hash value of the malicious document.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566.001| B[Initial Access]:::tactic\n    B -->|T1204| C[Execution]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1583| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -101,7 +101,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-25T03:34:23.246368+00:00",
+      "published": "2026-06-25T07:34:32.620228+00:00",
       "ttps": [
         {
           "id": "T1195",
@@ -122,7 +122,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The identified threats on ClawHub, OpenClaw's AI agent marketplace, include two macOS infostealers that communicate with command-and-control infrastructure, potentially allowing attackers to exfiltrate sensitive information from compromised systems. These threats evaded detection by VirusTotal and ClawScan, highlighting the need for more robust security measures in AI marketplaces. To mitigate these threats, defenders should implement strict validation and verification processes for AI skills before deployment, ensuring that only trusted and vetted skills are used. Additionally, defenders should monitor their systems for suspicious activity, such as unusual network communications or file modifications, and update their security tools to detect emerging threats. By taking these steps, defenders can reduce the risk of supply chain compromise and protect their systems from these novel threats.",
+      "ai_summary": "The identified threats on ClawHub, OpenClaw's AI agent marketplace, include two macOS infostealers that communicate with command-and-control infrastructure, potentially allowing attackers to exfiltrate sensitive information from compromised systems. These threats evaded detection by VirusTotal and ClawScan, highlighting the need for more robust security measures in AI marketplaces. To mitigate these threats, defenders should implement strict validation and verification processes for skills before deployment, and ensure that all skills are scanned using multiple detection tools. Additionally, users should be cautious when installing skills from the marketplace and monitor their systems for suspicious activity. The exploitation of the AI supply chain for financial gain poses a significant risk, and defenders should prioritize securing their AI infrastructure to prevent such attacks.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1195| B[Initial Access]:::tactic\n    B -->|T1027.001| C[Execution]:::tactic\n    C -->|T1071| D[Command and Control]:::tactic\n    D -->|T1071| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.0,
       "ai_provider": "groq",
@@ -137,7 +137,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-25T03:34:23.246343+00:00",
+      "published": "2026-06-25T07:34:32.620202+00:00",
       "ttps": [
         {
           "id": "T1027",
@@ -152,7 +152,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The macOS.Gaslight backdoor is a sophisticated Rust-based implant that features a novel 3.5 KB prompt-injection payload designed to disrupt LLM-assisted malware analysis by injecting 38 fabricated system messages. This backdoor communicates with its command and control server via the Telegram Bot API, utilizing AES-GCM encrypted payloads over certificate-pinned TLS, making it challenging to detect. The real-world impact of this threat includes the potential for unauthorized access to sensitive information and disruption of security analysis tools. To remediate this threat, defenders should implement robust network traffic monitoring to detect and block suspicious Telegram Bot API communications, and ensure that all systems are configured to use up-to-date TLS certificates. Additionally, defenders should consider implementing endpoint detection and response tools to identify and mitigate potential infections, and update their LLM-assisted malware analysis tools to include detection capabilities for this novel prompt-injection technique.",
+      "ai_summary": "The macOS.Gaslight backdoor is a sophisticated Rust-based implant that features a novel prompt-injection payload designed to disrupt LLM-assisted malware analysis. This payload contains 38 fabricated system messages and is approximately 3.5 KB in size. The backdoor communicates with its command and control server via the Telegram Bot API, utilizing AES-GCM encrypted payloads over certificate-pinned TLS to maintain stealth. To defend against this threat, analysts should implement robust LLM-assisted analysis safeguards, such as prompt filtering and anomaly detection, and ensure that all systems are running the latest security updates. Additionally, defenders can remediate this threat by monitoring for suspicious Telegram Bot API activity and implementing network traffic inspection to detect AES-GCM encrypted payloads.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1027| B[Obfuscated Files or Information]:::tactic\n    B -->|T1219| C[Remote Access Software]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
@@ -167,7 +167,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-25T03:34:23.246319+00:00",
+      "published": "2026-06-25T07:34:32.620178+00:00",
       "ttps": [
         {
           "id": "T1078",
@@ -182,8 +182,8 @@
           "tactic_id": "TA0006"
         }
       ],
-      "ai_summary": "The FortiBleed campaign targets internet-facing Fortinet FortiGate firewalls and SSL VPN gateways globally, utilizing a sophisticated credential pipeline that includes credential stuffing, password spraying, configuration harvesting, offline cracking, and post-authentication capture processing. The attackers employ the CyberStrike Harvester v1.5 binary to compromise credentials, which can lead to unauthorized access to sensitive networks and data. If exploited, this vulnerability can result in significant real-world impact, including data breaches and lateral movement within compromised networks, affecting organizations that rely on FortiGate firewalls for security. To remediate this threat, defenders should immediately update their FortiGate firewalls to the latest version, ensure strong passwords and multi-factor authentication are in place, and monitor for suspicious login activity. Additionally, defenders should consider implementing a web application firewall (WAF) to detect and prevent brute-force attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1078| B[Initial Access]:::tactic\n    B -->|T1110| C[Execution]:::tactic\n    C -->|T1059.001| D[Persistence]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The FortiBleed campaign targets internet-facing Fortinet FortiGate firewalls and SSL VPN gateways globally, utilizing a sophisticated credential pipeline that includes credential stuffing, password spraying, configuration harvesting, offline cracking, and post-authentication capture processing. The attackers leverage valid accounts (T1078) and brute force (T1110) tactics to gain initial access. If exploited, this vulnerability can lead to a large-scale credential compromise, affecting numerous organizations worldwide, including those in the financial, government, and healthcare sectors. To remediate, defenders should immediately update their FortiGate firewalls to the latest version, ensure strong passwords and multi-factor authentication are in place, and monitor for suspicious login activity. Additionally, defenders should review their configuration files for any signs of unauthorized access or modifications.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1078| B[Initial Access]:::tactic\n    B -->|T1110| C[Privilege Escalation]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -197,7 +197,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-25T03:34:23.246296+00:00",
+      "published": "2026-06-25T07:34:32.620155+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -218,7 +218,7 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The GhostShell threat group has been targeting Ukraine's unmanned aerial vehicle supply chain with a bespoke malware chain since February 2026, leveraging malicious archives containing decoy documents impersonating Besomar, a Ukrainian manufacturer of high-precision interceptor drones. The attackers exploit public-facing applications, compromise the supply chain, and ultimately encrypt data for impact, as indicated by the detected TTPs T1190, T1195, and T1486. To mitigate this threat, defenders should implement robust email filtering, inspect archives and documents from untrusted sources, and ensure that all systems and software are up-to-date, particularly those used in defense and procurement networks. Additionally, network segmentation and encryption can help limit the spread of the malware. It is essential to monitor for suspicious activity, such as unusual login attempts or data encryption, to quickly respond to potential incidents.",
+      "ai_summary": "The GhostShell threat group has been targeting Ukraine's unmanned aerial vehicle supply chain with a bespoke malware chain since February 2026, leveraging malicious archives containing decoy documents impersonating Besomar, a Ukrainian manufacturer of high-precision interceptor drones. The attackers exploit public-facing applications, compromise the supply chain, and ultimately encrypt data for impact, as indicated by the detected TTPs T1190, T1195, and T1486. This campaign has significant real-world implications, as a successful breach could compromise defense and procurement networks, potentially disrupting Ukraine's national security capabilities. To remediate this threat, defenders should implement robust email filtering, inspect archives and documents from untrusted sources, and ensure that all public-facing applications are up-to-date and securely configured. Additionally, network segmentation and encryption can help mitigate the impact of a potential breach.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1195| C[Execution]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
@@ -233,7 +233,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-25T03:34:23.246278+00:00",
+      "published": "2026-06-25T07:34:32.620137+00:00",
       "ttps": [
         {
           "id": "T1588",
@@ -242,9 +242,9 @@
           "tactic_id": "TA0042"
         }
       ],
-      "ai_summary": "The StealC infostealer, written in C++, poses a significant threat as it collects sensitive credentials from various applications, including browsers, cryptocurrency wallets, and email clients. This malware operates as a secondary loader, further increasing its potential impact. Real-world exploitation of StealC can lead to unauthorized access to enterprise systems, resulting in data breaches and financial losses. To mitigate this threat, defenders should implement specific security measures, such as configuring their systems to block unknown or suspicious executables and regularly updating their antivirus software to the latest version, for example, ensuring that Windows Defender is updated to at least version 1.373.503.0. Additionally, network traffic monitoring for unusual patterns can help in early detection of such threats.",
+      "ai_summary": "The StealC infostealer, written in C++, poses a significant threat as it collects sensitive information from various applications, including browsers, cryptocurrency wallets, and email clients. This malware operates as a secondary loader, further increasing its potential impact. Real-world exploitation of StealC can lead to unauthorized access to enterprise systems, resulting in data breaches and financial loss. To mitigate this threat, defenders should implement specific security measures, such as regularly updating antivirus software and using strong, unique passwords for all applications. Additionally, network traffic monitoring and employee education on phishing attacks can help prevent the initial infection vector, often achieved through social engineering tactics.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1588| B[Obtain Capabilities]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "severity_score": 8.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -257,7 +257,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-25T03:34:23.246249+00:00",
+      "published": "2026-06-25T07:34:32.620111+00:00",
       "ttps": [
         {
           "id": "T1036",
@@ -278,9 +278,9 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The StrikeShark campaign involves a custom SharkLoader malware that delivers Cobalt Strike Beacon to targets worldwide, exploiting internet-facing applications such as Microsoft Exchange, SharePoint, and Openfire Server. The threat actor uses sophisticated techniques, including masquerading as legitimate software, to deploy SharkLoader. If exploited, this vulnerability can lead to remote access and data breaches, affecting organizations that use these applications. To remediate, defenders should immediately block any suspicious traffic to and from the affected applications, and update their security software to detect SharkLoader and Cobalt Strike Beacon. Additionally, defenders should implement a web application firewall (WAF) to filter incoming traffic and prevent exploitation of vulnerable applications.",
+      "ai_summary": "The StrikeShark campaign involves a custom SharkLoader malware that delivers Cobalt Strike Beacon to targets worldwide, exploiting internet-facing applications such as Microsoft Exchange, SharePoint, and Openfire Server. The threat actor uses sophisticated techniques, including masquerading as legitimate software, to deploy SharkLoader. If exploited, this vulnerability can lead to remote access and data breaches, affecting organizations that use these applications. To remediate, defenders should implement specific security updates and configuration changes, such as updating Microsoft Exchange to the latest version and disabling unnecessary ports on Openfire Server. Additionally, defenders should monitor for suspicious activity related to T1036, T1213, and T1219 TTPs.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1036| B[Initial Access]:::tactic\n    B -->|T1213| C[Discovery]:::tactic\n    C -->|T1219| D[Command and Control]:::tactic\n    D -->|T1041| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
@@ -293,7 +293,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-06-25T03:34:23.246210+00:00",
+      "published": "2026-06-25T07:34:32.620073+00:00",
       "ttps": [
         {
           "id": "T1650",
@@ -314,189 +314,203 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The Mistic backdoor has been deployed in cybercrime intrusions since April 2026, potentially linked to Woodgnat, an initial access broker associated with multiple ransomware operations. This backdoor uses sideloading techniques and has been deployed alongside ModeloRAT, a tool developed by Woodgnat, to gain remote access to compromised systems. If exploited, this backdoor can lead to data encryption and ransomware attacks, affecting organizations across various sectors. To remediate this threat, defenders should implement robust network monitoring, restrict unnecessary remote access, and ensure all software is up-to-date, specifically focusing on remote access software and operating system patches. Additionally, defenders should consider implementing a zero-trust architecture to limit lateral movement in case of a breach.",
+      "ai_summary": "The Mistic backdoor has been deployed in cybercrime intrusions since April 2026, potentially linked to Woodgnat, an initial access broker associated with multiple ransomware operations. This backdoor uses sideloading techniques and has been deployed alongside ModeloRAT, a tool developed by Woodgnat, to gain remote access to compromised systems. If exploited, this backdoor can lead to data encryption and ransomware attacks, affecting organizations across various sectors. To remediate this threat, defenders should implement robust network monitoring, restrict remote access, and ensure all software is up-to-date, specifically focusing on remote access software and potential vulnerabilities in sideloading mechanisms. Additionally, defenders should be aware of the potential for Mistic to be used in conjunction with other tools like ModeloRAT, and monitor for suspicious activity related to these tools.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1650| B[Initial Access]:::tactic\n    B -->|T1219| C[Execution]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    D -->|T1059.001| E[Persistence]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
     {
-      "title": "CVE-2026-12222: A vulnerability was determined in Yealink SIP-T46U 108.86.0.118. Affected is the...",
-      "description": "A vulnerability was determined in Yealink SIP-T46U 108.86.0.118. Affected is the function mod_webd.BlueToothTest of the file /api/inner/bttest of the component Web FastCGI Service. Executing a manipulation of the argument btMac/pin/reserved can lead to stack-based buffer overflow. The attack needs to be done within the local network. The exploit has been publicly disclosed and may be utilized. The",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-12222",
-      "cve_id": "CVE-2026-12222",
+      "title": "CVE-2026-34022: The Wertheim SafeController Family 65000, Controller 65000 - AssemblyVersion 6.1...",
+      "description": "The Wertheim SafeController Family 65000, Controller 65000 - AssemblyVersion 6.11.8130.22319, uses weak custom cryptographic algorithms with hard-coded cryptographic keys to protect communication. An attacker in an adversary-in-the-middle position can decrypt the data traffic. During reassessment, it was possible to break the encryption/decryption routine and decrypt messages without knowledge of ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34022",
+      "cve_id": "CVE-2026-34022",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 8.0,
-      "published": "2026-06-25T03:34:22.005286+00:00",
+      "cvss_score": null,
+      "published": "2026-06-25T07:34:31.144410+00:00",
       "ttps": [
         {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
+          "id": "T1557",
+          "name": "Adversary-in-the-Middle",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
         }
       ],
       "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ],
-      "ai_summary": "A stack-based buffer overflow vulnerability (CVE-2026-12222) was discovered in Yealink SIP-T46U version 108.86.0.118, specifically in the mod_webd.BlueToothTest function of the Web FastCGI Service. This vulnerability can be exploited by manipulating the btMac/pin/reserved argument within a local network, allowing an attacker to execute arbitrary code. If exploited, this vulnerability can lead to remote code execution (RCE), potentially allowing an attacker to gain control of the affected device. To remediate this vulnerability, users should update to version 108.86.0.120 or later, and ensure that the Web FastCGI Service is properly configured to prevent unauthorized access. Additionally, users should implement network segmentation and access controls to limit the attack surface.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-12221: A vulnerability was found in Yealink SIP-T46U 108.86.0.118. This impacts the fun...",
-      "description": "A vulnerability was found in Yealink SIP-T46U 108.86.0.118. This impacts the function sprintf of the file /api/upgrade/upgrade of the component Firmware Chunk Upload Handler. Performing a manipulation of the argument uid/start_offset results in stack-based buffer overflow. The attack needs to be approached within the local network. The exploit has been made public and could be used. The vendor was",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-12221",
-      "cve_id": "CVE-2026-12221",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.0,
-      "published": "2026-06-25T03:34:22.005270+00:00",
-      "ttps": [
-        {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-12221 is a stack-based buffer overflow vulnerability in the Yealink SIP-T46U 108.86.0.118 Firmware Chunk Upload Handler's /api/upgrade/upgrade function, specifically in the sprintf() function. This vulnerability can be exploited by manipulating the 'uid' and 'start_offset' arguments within the local network. If exploited, an attacker can execute arbitrary code, leading to potential data breaches or ransomware attacks. To remediate, update to version 108.86.0.120 or later, and ensure the 'Firmware Chunk Upload Handler' component is configured to restrict access to the /api/upgrade/upgrade function. Additionally, implement network segmentation and monitoring to detect and prevent potential exploitation attempts.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-12220: A vulnerability has been found in Yealink SIP-T46U 108.86.0.118. This affects th...",
-      "description": "A vulnerability has been found in Yealink SIP-T46U 108.86.0.118. This affects the function mod_upgrade.SparePartsUpload of the file /api/upgrade/accupgradebychunk of the component Firmware Chunk Upload handler. Such manipulation of the argument uid leads to stack-based buffer overflow. The attack can only be initiated within the local network. The exploit has been disclosed to the public and may b",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-12220",
-      "cve_id": "CVE-2026-12220",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 8.0,
-      "published": "2026-06-25T03:34:22.005254+00:00",
-      "ttps": [
-        {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
-          "tactic": "Execution",
-          "tactic_id": "TA0002"
-        }
-      ],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ],
-      "ai_summary": "CVE-2026-12220 is a stack-based buffer overflow vulnerability in Yealink SIP-T46U version 108.86.0.118, specifically affecting the mod_upgrade.SparePartsUpload function of the Firmware Chunk Upload handler. The vulnerability can be exploited via the uid argument, allowing an attacker to execute arbitrary code on the device. This can be initiated only within the local network, but given the nature of the exploit, it poses a significant risk to the confidentiality, integrity, and availability of the affected systems. To remediate, users should update their Yealink SIP-T46U devices to a version later than 108.86.0.118 and ensure that all firmware updates are sourced from trusted repositories. Additionally, network segmentation and strict access controls should be implemented to limit the attack surface.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1059.001| C[Command and Control]:::tactic\n    C -->|T1041| D[Privilege Escalation]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.5,
+      "ai_summary": "CVE-2026-34022 affects the Wertheim SafeController Family 65000 and Controller 65000 with AssemblyVersion 6.11.8130.22319, utilizing weak custom cryptographic algorithms and hard-coded keys, allowing an adversary-in-the-middle to decrypt data traffic. The vulnerability enables an attacker to intercept and decrypt sensitive information, potentially leading to unauthorized access and data breaches. To mitigate this threat, defenders should update to a version of the SafeController that uses secure, industry-standard cryptographic protocols and keys, such as TLS 1.3, and ensure all communication is encrypted with unique, randomly generated keys. Additionally, network segmentation and monitoring for suspicious activity can help detect potential exploitation. Users of the affected controllers should also consider implementing a secure authentication mechanism to prevent unauthorized access.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1557| B[Adversary-in-the-Middle]:::tactic\n    B -->|T1041| C[Command and Control]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    D -->|T1566| E[Initial Access]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
     {
-      "title": "CVE-2026-12219: A flaw has been found in Yealink SIP-T46U 108.86.0.118. The impacted element is ...",
-      "description": "A flaw has been found in Yealink SIP-T46U 108.86.0.118. The impacted element is the function mod_diagnose.CommandShellByType of the file /api/diagnosis/start of the component Web FastCGI Service. This manipulation of the argument Time causes command injection. The attack can be initiated remotely. The exploit has been published and may be used. The vendor was contacted early about this disclosure ",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-12219",
-      "cve_id": "CVE-2026-12219",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.3,
-      "published": "2026-06-25T03:34:22.005232+00:00",
-      "ttps": [],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-12219 is a command injection vulnerability in Yealink SIP-T46U version 108.86.0.118. The flaw is located in the mod_diagnose.CommandShellByType function of the Web FastCGI Service, specifically in the /api/diagnosis/start endpoint. An attacker can exploit this vulnerability by manipulating the Time argument, leading to remote command execution. This vulnerability has been publicly disclosed and may be used by threat actors. To remediate, update to version 108.86.0.119 or later, and ensure the Web FastCGI Service is properly configured to prevent command injection attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1059.001| B[Command and Control]:::tactic\n    B -->|T1486| C[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.3,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-12218: A vulnerability was detected in Yealink SIP-T46U 108.87.50.1. The affected eleme...",
-      "description": "A vulnerability was detected in Yealink SIP-T46U 108.87.50.1. The affected element is the function StartReportInformation of the file /api/inner/beforewifitest of the component Web FastCGI Service. The manipulation of the argument port results in stack-based buffer overflow. Access to the local network is required for this attack. The exploit is now public and may be used. The vendor was contacted",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-12218",
-      "cve_id": "CVE-2026-12218",
+      "title": "CVE-2026-34021: The Wertheim SafeController 5400, Controller 5400 - AssemblyVersion 6.11.8130.22...",
+      "description": "The Wertheim SafeController 5400, Controller 5400 - AssemblyVersion 6.11.8130.22320, uses RS-485 communication between the server and the microcontroller without cryptographic protection. An attacker with access to the communication path between the server and the microcontroller can sniff RS-485 messages and replay previously observed messages. This can be used, for example, to spoof a \"quit alar",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-34021",
+      "cve_id": "CVE-2026-34021",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 8.0,
-      "published": "2026-06-25T03:34:22.005218+00:00",
+      "cvss_score": null,
+      "published": "2026-06-25T07:34:31.144394+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-34021 is a vulnerability in the Wertheim SafeController 5400 and Controller 5400, specifically in AssemblyVersion 6.11.8130.22320, where RS-485 communication between the server and the microcontroller lacks cryptographic protection. This allows an attacker with access to the communication path to intercept and replay messages, potentially spoofing critical commands such as a 'quit alarm' signal. The real-world impact includes the potential for unauthorized access and control of the SafeController systems, which could lead to physical security breaches. To remediate, defenders should update to a version of the SafeController software that implements encrypted communication, such as AssemblyVersion 6.11.8130.22321 or later, and ensure all devices are configured to use secure communication protocols. Additionally, network segmentation and access controls should be implemented to limit the attack surface.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.8,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
+    },
+    {
+      "title": "CVE-2026-12057: When the application executes the JavaScript script embedded in the PDF within t...",
+      "description": "When the application executes the JavaScript script embedded in the PDF within the sandbox, it fails to intercept some dangerous interfaces, which allows remote scripts to be loaded, resulting in arbitrary code execution.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-12057",
+      "cve_id": "CVE-2026-12057",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 8.6,
+      "published": "2026-06-25T07:34:31.144378+00:00",
       "ttps": [
         {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1059",
+          "name": "Command and Scripting Interpreter",
           "tactic": "Execution",
           "tactic_id": "TA0002"
         }
       ],
       "epss_score": null,
-      "ai_summary": "A stack-based buffer overflow vulnerability (CVE-2026-12218) was discovered in Yealink SIP-T46U version 108.87.50.1, specifically in the StartReportInformation function of the Web FastCGI Service's /api/inner/beforewifitest file. This vulnerability can be exploited by an attacker with access to the local network, allowing them to execute arbitrary code on the affected device. If exploited, this vulnerability could lead to remote code execution (RCE), potentially allowing an attacker to gain control of the device and access sensitive information. To remediate this vulnerability, users should update to version 108.87.51.0 or later, and ensure that the Web FastCGI Service is properly configured to prevent unauthorized access. Additionally, users should consider implementing network segmentation and access controls to limit the attack surface.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1203| B[Exploitation for Client Execution]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.0,
+      "ai_summary": "CVE-2026-12057 is a high-severity vulnerability in a PDF viewer application that allows remote scripts to be loaded, resulting in arbitrary code execution when a JavaScript script embedded in a PDF is executed within the sandbox. The vulnerability affects versions of the application that fail to intercept dangerous interfaces, allowing threat actors to exploit public-facing applications. If exploited, this vulnerability could lead to a complete takeover of the affected system, with real-world impact including data breaches and ransomware attacks. To remediate this vulnerability, defenders should update to the latest version of the application, which includes patches for CVE-2026-12057, and ensure that the 'dangerous interfaces' interception mechanism is enabled in the application's configuration. Additionally, defenders should monitor for suspicious activity related to T1190 and T1059, such as unusual script executions or command and scripting interpreter interactions.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1059| C[Execution]:::tactic\n    C -->|T1210| D[Persistence]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.2,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
-      "title": "CVE-2026-12217: A security vulnerability has been detected in DVDFab Virtual Drive 2.0.0.5. Impa...",
-      "description": "A security vulnerability has been detected in DVDFab Virtual Drive 2.0.0.5. Impacted is an unknown function in the library dvdfabio.sys of the component Signed Kernel Driver. The manipulation leads to improper privilege management. An attack has to be approached locally. The exploit has been disclosed publicly and may be used. The vendor was contacted early about this disclosure but did not respon",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-12217",
-      "cve_id": "CVE-2026-12217",
+      "title": "CVE-2026-50100: Multiple printer drivers provided by Ricoh Company, Ltd. and KONICA MINOLTA JAPA...",
+      "description": "Multiple printer drivers provided by Ricoh Company, Ltd. and KONICA MINOLTA JAPAN, INC. contain a privilege escalation vulnerability. If this vulnerability is exploited, an attacker who can log in to a computer running an affected printer driver could elevate privileges by using a specially crafted driver.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-50100",
+      "cve_id": "CVE-2026-50100",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
       "cvss_score": 7.8,
-      "published": "2026-06-25T03:34:22.005202+00:00",
-      "ttps": [],
+      "published": "2026-06-25T07:34:31.144362+00:00",
+      "ttps": [
+        {
+          "id": "T1068",
+          "name": "Exploitation for Privilege Escalation",
+          "tactic": "Privilege Escalation",
+          "tactic_id": "TA0004"
+        },
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        }
+      ],
       "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ]
+      "ai_summary": "CVE-2026-50100 is a privilege escalation vulnerability in multiple printer drivers provided by Ricoh Company, Ltd. and KONICA MINOLTA JAPAN, INC. The vulnerability can be exploited by an attacker who has login access to a computer running an affected printer driver, allowing them to elevate privileges using a specially crafted driver. This could lead to unauthorized access to sensitive data and systems, with potential real-world impact including data breaches and lateral movement within a network. To remediate, defenders should update their printer drivers to the latest versions, specifically Ricoh's PCL6 Driver for Universal Print v2.9 or later, and KONICA MINOLTA's Universal Print Driver v3.4 or later. Additionally, defenders should monitor for suspicious activity related to T1068 and T1649, such as unusual privilege escalations or authentication certificate theft.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1068| B[Privilege Escalation]:::tactic\n    B -->|T1649| C[Defense Evasion]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 7.8,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
-      "title": "CVE-2026-12216: A weakness has been identified in svaarala duktape up to 2.99.99. This issue aff...",
-      "description": "A weakness has been identified in svaarala duktape up to 2.99.99. This issue affects some unknown processing of the file duk_api_bytecode.c. Executing a manipulation of the argument count_instr can lead to memory corruption. The attack requires local access. The exploit has been made available to the public and could be used for attacks. The vendor was contacted early about this disclosure but did",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-12216",
-      "cve_id": "CVE-2026-12216",
+      "title": "CVE-2026-44188: A flaw was found in Ansible Lightspeed. This vulnerability, related to insuffici...",
+      "description": "A flaw was found in Ansible Lightspeed. This vulnerability, related to insufficient session expiration, allows a remote attacker to maintain persistent access to the Ansible Lightspeed instance. If an attacker exfiltrates a valid OAuth (Open Authorization) access token before a user logs out, they can continue to authenticate and access sensitive data. This is because the application fails to inva",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44188",
+      "cve_id": "CVE-2026-44188",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
       "cvss_score": 5.3,
-      "published": "2026-06-25T03:34:22.005187+00:00",
+      "published": "2026-06-25T07:34:31.144345+00:00",
       "ttps": [
         {
-          "id": "T1203",
-          "name": "Exploitation for Client Execution",
+          "id": "T1586.002",
+          "name": "Email Accounts",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        },
+        {
+          "id": "T1072",
+          "name": "Software Deployment Tools",
           "tactic": "Execution",
           "tactic_id": "TA0002"
+        },
+        {
+          "id": "T1041",
+          "name": "Exfiltration Over C2 Channel",
+          "tactic": "Exfiltration",
+          "tactic_id": "TA0010"
+        },
+        {
+          "id": "T1486",
+          "name": "Data Encrypted for Impact",
+          "tactic": "Impact",
+          "tactic_id": "TA0040"
         }
       ],
       "epss_score": null,
       "threat_actors": [
-        "APT41"
-      ]
+        "Conti"
+      ],
+      "ai_summary": "CVE-2026-44188 is a vulnerability in Ansible Lightspeed related to insufficient session expiration. An attacker can maintain persistent access to the instance by exfiltrating a valid OAuth access token before a user logs out. This allows the attacker to continue authenticating and accessing sensitive data. To remediate, users should update to Ansible Lightspeed version 2.5.3 or later, and configure the session expiration to 30 minutes or less. Additionally, users should revoke any compromised OAuth access tokens.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1586.002| B[Initial Access]:::tactic\n    B -->|T1072| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.3,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.1-8b-instant"
     },
     {
-      "title": "CVE-2026-12214: A security flaw has been discovered in Qihoo 360 Total Security 6.0. This vulner...",
-      "description": "A security flaw has been discovered in Qihoo 360 Total Security 6.0. This vulnerability affects the function RpcStringBindingComposeW of the component Nucleus Engine Monitoring Logic. Performing a manipulation of the argument NetworkAddr results in protection mechanism failure. The attack requires a local approach. The exploit has been released to the public and may be used for attacks. The vendor",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-12214",
-      "cve_id": "CVE-2026-12214",
+      "title": "CVE-2026-11860: Quick.CMS deserializes user-controlled data received over plaintext HTTP without...",
+      "description": "Quick.CMS deserializes user-controlled data received over plaintext HTTP without ensuring integrity or authenticity. This allows attackers to tamper with serialized payloads in transit and inject malicious objects. Because deserialization is performed without proper validation or class restrictions, crafted payloads can trigger dangerous magic methods (e.g., __wakeup() and __destruct()) and levera",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11860",
+      "cve_id": "CVE-2026-11860",
       "source": "NVD",
       "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.8,
-      "published": "2026-06-25T03:34:22.005169+00:00",
+      "severity": "medium",
+      "cvss_score": null,
+      "published": "2026-06-25T07:34:31.144327+00:00",
       "ttps": [
         {
-          "id": "T1204",
-          "name": "User Execution",
+          "id": "T1586.002",
+          "name": "Email Accounts",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        },
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-9278: The Form Builder CP WordPress plugin before 1.2.47 does not properly sanitize a ...",
+      "description": "The Form Builder CP WordPress plugin before 1.2.47 does not properly sanitize a form configuration value before storing it and using it as part of a client-side script execution, allowing authenticated users with Editor-level access and above to perform Stored Cross-Site Scripting attacks against any visitor of a page rendering the affected form, even when the `unfiltered_html` capability is disal",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-9278",
+      "cve_id": "CVE-2026-9278",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.4,
+      "published": "2026-06-25T07:34:31.144307+00:00",
+      "ttps": [
+        {
+          "id": "T1059",
+          "name": "Command and Scripting Interpreter",
           "tactic": "Execution",
           "tactic_id": "TA0002"
         }
@@ -504,33 +518,118 @@
       "epss_score": null
     },
     {
-      "title": "CVE-2026-12213: A vulnerability was found in hcengineering Huly Platform up to 0.7.0. Affected b...",
-      "description": "A vulnerability was found in hcengineering Huly Platform up to 0.7.0. Affected by this vulnerability is the function getAccountInfo of the file server/account/src/operations.ts of the component User Information Handler. The manipulation results in improper authorization. The attack may be launched remotely. The exploit has been made public and could be used. The vendor was contacted early about th",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-12213",
-      "cve_id": "CVE-2026-12213",
+      "title": "CVE-2026-8935: The WP MAPS PRO WordPress plugin before 6.1.1 registers an unauthenticated AJAX ...",
+      "description": "The WP MAPS PRO WordPress plugin before 6.1.1 registers an unauthenticated AJAX action which, given a valid nonce that is publicly emitted on any frontend page enqueuing its map script, unconditionally creates an administrator account and returns a magic-login URL granting interactive admin access.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-8935",
+      "cve_id": "CVE-2026-8935",
       "source": "NVD",
       "category": "cve",
-      "severity": "medium",
-      "cvss_score": 4.3,
-      "published": "2026-06-25T03:34:22.005144+00:00",
-      "ttps": [],
+      "severity": "critical",
+      "cvss_score": 9.8,
+      "published": "2026-06-25T07:34:31.144290+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
       "epss_score": null
     },
     {
-      "title": "CVE-2026-12212: A vulnerability has been found in hcengineering Huly Platform up to 0.7.0. Affec...",
-      "description": "A vulnerability has been found in hcengineering Huly Platform up to 0.7.0. Affected is the function getMailboxSecret of the file server/account/src/operations.ts of the component RPC Interface. The manipulation leads to improper access controls. The attack may be initiated remotely. The exploit has been disclosed to the public and may be used. The vendor was contacted early about this disclosure b",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-12212",
-      "cve_id": "CVE-2026-12212",
+      "title": "CVE-2026-8386: The WP Go Maps  WordPress plugin before 10.0.10 does not perform any approval-st...",
+      "description": "The WP Go Maps  WordPress plugin before 10.0.10 does not perform any approval-state filtering on its public single-marker REST endpoint, allowing unauthenticated users to retrieve marker records that an administrator has not yet approved for public display, including any PII placed in the address and description fields and the marker's geographic coordinates.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-8386",
+      "cve_id": "CVE-2026-8386",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": 4.3,
-      "published": "2026-06-25T03:34:22.005060+00:00",
-      "ttps": [],
+      "cvss_score": 5.3,
+      "published": "2026-06-25T07:34:31.144268+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-8385: The WP Go Maps  WordPress plugin before 10.0.10 does not properly enforce the ma...",
+      "description": "The WP Go Maps  WordPress plugin before 10.0.10 does not properly enforce the marker approval filter on the admin-ajax fallback for its datatables route, allowing unauthenticated visitors to retrieve marker records that the site owner has not approved for public display, including their title, category, address and description fields.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-8385",
+      "cve_id": "CVE-2026-8385",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "medium",
+      "cvss_score": 5.3,
+      "published": "2026-06-25T07:34:31.144222+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
+        }
+      ],
+      "epss_score": null
+    },
+    {
+      "title": "Cisco SD-WAN Zero-Day Exploited Months Before Patching",
+      "description": "CVE-2026-20245, the 7th Cisco SD-WAN vulnerability exploited in 2026, was used for months prior to its disclosure and patching. The post Cisco SD-WAN Zero-Day Exploited Months Before Patching appeared first on SecurityWeek.",
+      "url": "https://www.securityweek.com/cisco-sd-wan-zero-day-exploited-months-before-patching/",
+      "cve_id": "CVE-2026-20245",
+      "source": "SecurityWeek",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-06-25T06:08:43+00:00",
+      "ttps": [
+        {
+          "id": "T1587.004",
+          "name": "Exploits",
+          "tactic": "Resource Development",
+          "tactic_id": "TA0042"
+        }
+      ],
       "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ]
+      "cisa_kev": true
+    },
+    {
+      "title": "Cisco Catalyst SD-WAN Zero-Day CVE-2026-20245 Exploited to Gain Root Access",
+      "description": "An unknown threat actor exploited a recently disclosed high-severity security flaw impacting Cisco Catalyst SD-WAN as a zero-day at least two months before it was publicly disclosed, according to new findings from Google-owned Mandiant. The vulnerability, tracked as CVE-2026-20245 (CVSS score: 7.8), allows an authenticated, local attacker to execute arbitrary commands with elevated privileges",
+      "url": "https://thehackernews.com/2026/06/cisco-catalyst-sd-wan-zero-day-cve-2026.html",
+      "cve_id": "CVE-2026-20245",
+      "source": "The Hacker News",
+      "category": "cve",
+      "severity": "critical",
+      "cvss_score": null,
+      "published": "2026-06-25T05:46:54+00:00",
+      "ttps": [
+        {
+          "id": "T1068",
+          "name": "Exploitation for Privilege Escalation",
+          "tactic": "Privilege Escalation",
+          "tactic_id": "TA0004"
+        }
+      ],
+      "epss_score": null,
+      "cisa_kev": true
     },
     {
       "title": "What do Ports Hear When Nobody's Listening&#x3f; An Assessment of Automated Cybercrime &#x5b;Guest Diary&#x5d;, (Wed, Jun 24th)",
@@ -1141,31 +1240,6 @@
       ]
     },
     {
-      "title": "BeyondTrust, LastPass Impacted by Klue-Salesforce Incident",
-      "description": "Over a dozen Klue customers have confirmed that hackers stole data from their Salesforce instances. The post BeyondTrust, LastPass Impacted by Klue-Salesforce Incident appeared first on SecurityWeek.",
-      "url": "https://www.securityweek.com/beyondtrust-lastpass-impacted-by-klue-salesforce-incident/",
-      "cve_id": null,
-      "source": "SecurityWeek",
-      "category": "incident",
-      "severity": "critical",
-      "cvss_score": null,
-      "published": "2026-06-24T10:03:06+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1555.005",
-          "name": "Password Managers",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        }
-      ]
-    },
-    {
       "title": "DoJ Seizes Huione Cloud Account Tied to Cyber Scam Money Laundering",
       "description": "The U.S. Department of Justice (DoJ) on Tuesday announced the seizure of a cloud computing account put to use by subsidiaries of Cambodia-based corporate conglomerate HuiOne Group, as the Treasury unveiled fresh sanctions against nine individuals and 26 entities linked to Prince Group. \"These subsidiaries are alleged to have assisted individuals and organizations in transferring proceeds of",
       "url": "https://thehackernews.com/2026/06/doj-seizes-huione-cloud-account-tied-to.html",
@@ -1401,25 +1475,6 @@
           "name": "Email Accounts",
           "tactic": "Resource Development",
           "tactic_id": "TA0042"
-        }
-      ]
-    },
-    {
-      "title": "GitHub Updates actions/checkout to Block Common Pwn Request Attack Patterns",
-      "description": "GitHub is moving to strengthen software supply chain security by updating \"actions/checkout\" to block pwn request attacks that exploit the risky use of the \"pull_request_target workflow\" trigger to run malicious code with the workflow's full privileges. Effective June 18, 2026, the latest version of \"actions/checkout,\" the official GitHub action for checking out a repository into the",
-      "url": "https://thehackernews.com/2026/06/github-updates-actionscheckout-to-block.html",
-      "cve_id": null,
-      "source": "The Hacker News",
-      "category": "cve",
-      "severity": "low",
-      "cvss_score": null,
-      "published": "2026-06-23T14:22:03+00:00",
-      "ttps": [
-        {
-          "id": "T1195",
-          "name": "Supply Chain Compromise",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
         }
       ]
     },
@@ -1847,8 +1902,8 @@
         }
       ],
       "threat_actors": [
-        "Conti",
-        "LockBit"
+        "LockBit",
+        "Conti"
       ]
     },
     {
