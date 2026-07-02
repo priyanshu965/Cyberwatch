@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-02T02:15:59.445764+00:00",
+  "last_updated": "2026-07-02T06:31:51.112883+00:00",
   "total_items": 95,
   "items": [
     {
@@ -11,7 +11,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-07-02T02:14:37.078922+00:00",
+      "published": "2026-07-02T06:30:52.886884+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -26,8 +26,8 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The threat actor exploited CVE-2026-48558, a critical authentication bypass vulnerability in SimpleHelp RMM software, to gain unauthorized technician access. This vulnerability allows attackers to bypass authentication mechanisms, potentially leading to a full system compromise. The real-world impact of this exploit includes the deployment of two previously undocumented malware samples: TaskWeaver and Djinn Stealer. To remediate this vulnerability, defenders should immediately update SimpleHelp RMM software to the latest version and ensure that all technician accounts have strong passwords and multi-factor authentication enabled. Additionally, defenders should monitor for suspicious activity related to TaskWeaver and Djinn Stealer, such as unusual network communications or file modifications.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1055| D[Unmanaged Application Execution]:::tactic\n    D -->|T1071| E[Application Layer Protocol]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The threat actor exploited CVE-2026-48558, a critical authentication bypass vulnerability in SimpleHelp RMM software, to gain unauthorized technician access. This vulnerability allows attackers to bypass authentication mechanisms, potentially leading to a full system compromise. The real-world impact of this exploit includes the deployment of two previously undocumented malware samples: TaskWeaver and Djinn Stealer. To remediate this vulnerability, defenders should immediately update SimpleHelp RMM software to the latest version and ensure that all technician accounts have strong passwords and multi-factor authentication enabled. Additionally, defenders should monitor for suspicious activity related to the T1027 and T1190 tactics, such as unusual network traffic or obfuscated files.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1027| C[Obfuscated Files or Information]:::tactic\n    C -->|T1055| D[Unscheduled Task]:::tactic\n    D -->|T1078| E[Valid Accounts]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.0,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -41,7 +41,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-07-02T02:14:37.078906+00:00",
+      "published": "2026-07-02T06:30:52.886867+00:00",
       "ttps": [
         {
           "id": "T1505.003",
@@ -62,7 +62,7 @@
           "tactic_id": "TA0005"
         }
       ],
-      "ai_summary": "The Defence Impairment Olympics threat involves a sophisticated attack sequence that begins with the exploitation of a vulnerable Adobe ColdFusion server, where a steganographically hidden webshell is deployed, classified as T1505.003. The threat actor then executes extensive enumeration commands to gather information about the target system, utilizing obfuscated files or information, categorized as T1027. To evade detection, the actor employs various defence impairment techniques, including disabling IIS logging, tampering with Microsoft Defender, and timestomping file metadata, which falls under T1070. To remediate this threat, defenders should immediately update their Adobe ColdFusion servers to the latest version, ensure IIS logging is enabled, and monitor for suspicious activity. Additionally, defenders should verify the integrity of their Microsoft Defender installations and ensure Sysmon and File monitoring tools are running and properly configured.",
+      "ai_summary": "The Defence Impairment Olympics threat involves a sophisticated attack sequence that begins with the exploitation of a vulnerable Adobe ColdFusion server, where a steganographically hidden webshell is deployed, classified as T1505.003. The threat actor then executes extensive enumeration commands to gather information about the system, utilizing obfuscated files or information, categorized as T1027. The attack involves defence impairment techniques, including disabling IIS logging, tampering with Microsoft Defender, and timestomping file metadata, with the goal of evading detection, which aligns with T1070. To remediate, defenders should immediately update their Adobe ColdFusion servers to the latest version, ensure IIS logging is enabled, and verify Microsoft Defender configurations. Additionally, monitoring for suspicious activity, such as unusual file modifications or network communications, is crucial.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1505.003| B[Initial Access]:::tactic\n    B -->|T1027| C[Execution]:::tactic\n    C -->|T1070| D[Defence Evasion]:::tactic\n    D -->|T1070| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
@@ -77,7 +77,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-07-02T02:14:37.078877+00:00",
+      "published": "2026-07-02T06:30:52.886840+00:00",
       "ttps": [
         {
           "id": "T1134",
@@ -86,7 +86,7 @@
           "tactic_id": "TA0004"
         }
       ],
-      "ai_summary": "The ToddyCat APT group has developed a sophisticated tool called Umbrij to compromise Gmail corporate accounts through OAuth token theft, exploiting Chromium-based browsers by launching them in headless mode with remote debugging enabled. This utilizes the Shadow Token via Remote Debug (STRD) technique, allowing for automated access token manipulation as identified by TTP T1134. If exploited, this could lead to unauthorized access to sensitive corporate emails, potentially affecting businesses that rely on Gmail for communication. To remediate, defenders should ensure that all Chromium-based browsers are updated to the latest version and that remote debugging is disabled by default, with specific configuration changes including setting the 'remote-debugging-address' flag to '0.0.0.0' and ensuring that the '--headless' flag is not used in conjunction with '--remote-debugging-port'. Additionally, monitoring for unusual browser activity and implementing two-factor authentication for Gmail accounts can help mitigate the risk of OAuth token theft.",
+      "ai_summary": "The ToddyCat APT group has developed a sophisticated tool called Umbrij to compromise Gmail corporate accounts through OAuth token theft, exploiting Chromium-based browsers by launching them in headless mode with remote debugging enabled. This utilizes the Shadow Token via Remote Debug (STRD) technique, allowing for the automation of the entire attack chain, including copying user profiles and launching browsers with debug mode enabled. If exploited, this vulnerability could lead to unauthorized access to sensitive information, with potential targets including corporate entities and individuals with high-value Gmail accounts. To remediate this threat, defenders should ensure that all Chromium-based browsers are updated to the latest version and that remote debugging is disabled by default, with specific configuration changes including setting the 'remote-debugging-port' flag to a non-default value. Additionally, defenders should monitor for suspicious activity related to OAuth token manipulation, such as unusual login locations or access patterns.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1134| B[Access Token Manipulation]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
@@ -101,7 +101,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-07-02T02:14:37.078852+00:00",
+      "published": "2026-07-02T06:30:52.886815+00:00",
       "ttps": [
         {
           "id": "T1574.002",
@@ -116,8 +116,8 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The Mustang Panda threat actor has been observed conducting two concurrent espionage campaigns targeting Indian government entities and hydropower infrastructure between May and June 2026. The campaigns utilized DLL sideloading via legitimate executables to deploy newly identified malware, including SHARDLOADER, MINIRECON, and ZOHOMURK, with MINIRECON representing an evolution of Toneshell featuring WebSocket-based command-and-control capabilities. If exploited, these campaigns could lead to unauthorized access and data exfiltration, affecting sensitive government and energy sector information. To remediate, defenders should implement robust application whitelisting, monitor for suspicious DLL loading, and ensure up-to-date endpoint security solutions are in place. Additionally, network traffic should be inspected for unusual WebSocket communications to detect potential command-and-control activity.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1574.002| B[Defense Evasion]:::tactic\n    B -->|T1071| C[Command and Control]:::tactic\n    C -->|T1041| D[Execution]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Mustang Panda threat actor has been observed conducting two concurrent espionage campaigns targeting Indian government entities and hydropower infrastructure between May and June 2026. The campaigns leveraged DLL sideloading via legitimate executables to deploy newly identified malware, including SHARDLOADER, MINIRECON, and ZOHOMURK. MINIRECON is an evolution of Toneshell with WebSocket-based command-and-control capabilities, allowing for more stealthy and efficient communication. To mitigate these threats, defenders should implement robust application whitelisting, monitor for suspicious DLL loading, and restrict unnecessary network protocols, such as WebSockets. Additionally, defenders should prioritize patching and updating their systems, focusing on securing legitimate executables that can be exploited for DLL sideloading.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1574.002| B[Initial Access]:::tactic\n    B -->|T1071| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -131,7 +131,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-07-02T02:14:37.078829+00:00",
+      "published": "2026-07-02T06:30:52.886790+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -146,7 +146,7 @@
           "tactic_id": "TA0011"
         }
       ],
-      "ai_summary": "The BTMOB Android remote access trojan is a stealthy malware that has evolved from the SpySolr malware, posing significant threats to Android devices. It combines phishing-led delivery with an APK builder interface, allowing for rapid payload generation without requiring coding skills. The malware is distributed through fake app stores that impersonate streaming services, cryptocurrency platforms, and government agencies, making it a significant threat to users who may unknowingly download the malicious app. To remediate this threat, defenders should implement strict app installation policies, only allowing apps from trusted sources such as the Google Play Store, and regularly monitor device activity for suspicious behavior. Additionally, users should be cautious when clicking on links or downloading apps from unknown sources, and should keep their devices and apps up to date with the latest security patches.",
+      "ai_summary": "The BTMOB Android remote access trojan is a stealthy malware that has evolved from the SpySolr malware, posing significant threats to Android devices. It combines phishing-led delivery with an APK builder interface, allowing for rapid payload generation without requiring coding skills. The malware is distributed through fake app stores that impersonate streaming services, cryptocurrency platforms, and government agencies, making it a highly deceptive and effective threat. To mitigate this threat, defenders should implement robust phishing detection and prevention measures, such as educating users on how to identify suspicious emails and apps, and utilizing anti-malware software that can detect and block APK builder interfaces. Additionally, defenders should ensure that all Android devices are running the latest version of the operating system, specifically Android 11 or later, and have the Google Play Protect feature enabled to scan for and remove malicious apps.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1219| C[Execution]:::tactic\n    C -->|T1059.001| D[Persistence]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.2,
       "ai_provider": "groq",
@@ -161,7 +161,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-07-02T02:14:37.078805+00:00",
+      "published": "2026-07-02T06:30:52.886765+00:00",
       "ttps": [
         {
           "id": "T1566",
@@ -176,8 +176,8 @@
           "tactic_id": "TA0004"
         }
       ],
-      "ai_summary": "The ValleyRAT infection campaigns utilize two primary attack vectors: fake installers and malicious email-based campaigns, with a significant increase in detection volume from May 2025 to 2026. The fake installer attacks primarily target Chinese-speaking users, employing advanced techniques such as Pool Party Variant 7 process injection and BYOVD methods. If exploited, these attacks can lead to unauthorized access and potential data breaches, affecting individuals and organizations alike. To remediate, defenders should implement robust email filtering and user education on identifying phishing attempts, as well as ensuring up-to-date anti-virus software and monitoring for suspicious process activity. Specific remediation steps include configuring email clients to block attachments with suspicious extensions and implementing a network traffic monitoring system to detect and block malicious communications.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1055| C[Privilege Escalation]:::tactic\n    C -->|T1055| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The ValleyRAT infection campaigns utilize two primary attack vectors: fake installers and malicious email-based campaigns. The fake installer attacks target Chinese-speaking users, leveraging advanced techniques such as Pool Party Variant 7 process injection and BYOVD methods, which enable the threat actors to evade detection and inject malicious code into legitimate processes. The malicious email campaigns, on the other hand, employ phishing tactics (T1566) to trick users into installing the ValleyRAT malware. To remediate these threats, defenders should implement robust email filtering solutions, conduct regular security awareness training for users, and ensure that all systems are configured to restrict the execution of unsigned code. Additionally, defenders can monitor for suspicious process injection activity (T1055) and block known ValleyRAT command and control domains.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1566| B[Initial Access]:::tactic\n    B -->|T1055| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 7.8,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -191,7 +191,7 @@
       "category": "incident",
       "severity": "critical",
       "cvss_score": null,
-      "published": "2026-07-02T02:14:37.078780+00:00",
+      "published": "2026-07-02T06:30:52.886730+00:00",
       "ttps": [
         {
           "id": "T1587.004",
@@ -206,8 +206,8 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The Gentlemen ransomware group has been observed utilizing a zero-day exploit in a bring-your-own-vulnerable-driver (BYOVD) attack to disable endpoint detection and response (EDR) systems. This sophisticated exploit leverages an obscure third-party driver named ktapi.sys from Kontron, allowing the attackers to bypass security protections and gain unauthorized access to targeted systems. The exploit chains multiple vulnerabilities, ultimately leading to the encryption of sensitive data, as indicated by the detection of TTPs T1587.004 (Exploits) and T1486 (Data Encrypted for Impact). To remediate this threat, defenders should immediately remove or update the vulnerable ktapi.sys driver to a version that is not susceptible to the zero-day exploit, and ensure that all EDR systems are configured to detect and prevent BYOVD attacks. Additionally, defenders should implement robust network segmentation and access controls to limit the spread of the ransomware in the event of a successful exploit.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1587.004| B[Exploitation]:::tactic\n    B -->|T1059.001| C[Privilege Escalation]:::tactic\n    C -->|T1486| D[Impact]:::tactic\n    D -->|T1566| E[Initial Access]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "ai_summary": "The Gentlemen ransomware group has been observed utilizing a zero-day exploit in a bring-your-own-vulnerable-driver (BYOVD) attack to disable endpoint detection and response (EDR) systems. This sophisticated exploit leverages an obscure third-party driver named ktapi.sys from Kontron, allowing the attackers to bypass security protections and ultimately encrypt data for impact. The attack vector involves exploiting the vulnerability in the ktapi.sys driver to gain initial access, followed by execution and command and control tactics. To remediate this threat, defenders should immediately remove or update the vulnerable ktapi.sys driver to the latest version and ensure all EDR systems are configured to detect and prevent BYOVD attacks. Additionally, implementing a robust patch management process and regularly monitoring for suspicious activity can help prevent similar attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1587.004| B[Exploitation]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 9.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
@@ -221,7 +221,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-07-02T02:14:37.078763+00:00",
+      "published": "2026-07-02T06:30:52.886667+00:00",
       "ttps": [
         {
           "id": "T1588",
@@ -263,7 +263,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-07-02T02:14:37.078735+00:00",
+      "published": "2026-07-02T06:30:52.886639+00:00",
       "ttps": [
         {
           "id": "T1027.006",
@@ -290,7 +290,7 @@
           "tactic_id": "TA0040"
         }
       ],
-      "ai_summary": "The Gamaredon group, operated by Russia's FSB, has been conducting long-term intrusion operations targeting Ukrainian government, military, and critical infrastructure entities. The infection chain utilizes HTML smuggling with weaponized xHTML files, delivering RAR archives that exploit a vulnerability to extract HTA files into Windows Startup directories. If exploited, this could lead to significant data breaches and disruption of critical infrastructure, affecting various government and military organizations. To remediate, defenders should immediately inspect Windows Startup directories for suspicious HTA files and update their systems to prevent exploitation of the vulnerability, specifically ensuring that all systems are configured to restrict the execution of HTA files from untrusted sources. Additionally, implementing robust email filters to block HTML smuggling attempts and conducting regular security audits can help prevent such intrusions.",
+      "ai_summary": "The Gamaredon group, operated by Russia's FSB, has been conducting long-term intrusion operations targeting Ukrainian government, military, and critical infrastructure entities. The infection chain utilizes HTML smuggling with weaponized xHTML files, delivering RAR archives that exploit a vulnerability to extract HTA files into Windows Startup directories. If exploited, this could lead to data encryption and potential disruption of critical infrastructure, affecting various government and military organizations. To remediate, defenders should implement strict email filters to block suspicious HTML attachments, ensure all systems are updated with the latest security patches, and monitor for unusual HTA file executions in Startup directories. Additionally, network traffic should be monitored for signs of data encryption and exfiltration, such as unusual archive file transfers or Mshta executions.",
       "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1027.006| B[Initial Access]:::tactic\n    B -->|T1218.005| C[Execution]:::tactic\n    C -->|T1560| D[Collection]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
       "severity_score": 8.5,
       "ai_provider": "groq",
@@ -305,7 +305,7 @@
       "category": "incident",
       "severity": "high",
       "cvss_score": null,
-      "published": "2026-07-02T02:14:37.078707+00:00",
+      "published": "2026-07-02T06:30:52.886610+00:00",
       "ttps": [
         {
           "id": "T1650",
@@ -320,172 +320,47 @@
           "tactic_id": "TA0001"
         }
       ],
-      "ai_summary": "The DriveSurge threat actor utilizes a Pay-Per-Install model to deliver malware at scale, compromising thousands of legitimate websites and leveraging zTDS to silently redirect visitors to malicious content. This campaign employs drive-by attacks, specifically T1189, to infect victims' systems, often through FakeUpdates campaigns that mimic browser update prompts for 11 different browsers. The real-world impact of this threat includes the potential for widespread malware distribution, with victims possibly experiencing data breaches, ransomware attacks, or other malicious activities. To remediate this threat, defenders should implement robust web application firewalls, ensure all software is up-to-date, and utilize browser extensions that can detect and block malicious redirects. Additionally, network traffic monitoring and incident response plans should be in place to quickly identify and respond to potential compromises.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1650| B[Initial Access]:::tactic\n    B -->|T1189| C[Execution]:::tactic\n    C -->|T1059| D[Persistence]:::tactic\n    D -->|T1566| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 8.2,
+      "ai_summary": "The DriveSurge threat actor utilizes a Pay-Per-Install model to deliver malware at scale, compromising thousands of legitimate websites and leveraging zTDS to silently redirect visitors to malicious content. The attack vector involves drive-by compromise, where victims are redirected to fake update campaigns impersonating browser update prompts for 11 different browsers, potentially leading to the installation of malware. If exploited, victims may experience unauthorized access to their systems, data breaches, or ransomware attacks. To remediate, defenders should implement robust web application firewalls, ensure all software is up-to-date, and configure browsers to only allow updates from trusted sources. Additionally, network traffic monitoring should be implemented to detect and block suspicious redirects to malicious content.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1650| B[Initial Access]:::tactic\n    B -->|T1189| C[Execution]:::tactic\n    C -->|T1204| D[Persistence]:::tactic\n    D -->|T1531| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.5,
       "ai_provider": "groq",
       "ai_model": "llama-3.3-70b-versatile"
     },
     {
-      "title": "CVE-2026-7859: The Motors  WordPress plugin before 1.4.110 does not have proper authorisation a...",
-      "description": "The Motors  WordPress plugin before 1.4.110 does not have proper authorisation and CSRF checks on one of its AJAX actions, allowing unauthenticated attackers to modify arbitrary post metadata, such as the gallery, featured image and, on WooCommerce sites, product prices.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-7859",
-      "cve_id": "CVE-2026-7859",
+      "title": "CVE-2026-12580: EasyFlow .NET developed by Digiwin has a Stored Cross-Site Scripting vulnerabili...",
+      "description": "EasyFlow .NET developed by Digiwin has a Stored Cross-Site Scripting vulnerability, allowing authenticated remote attackers to inject persistent JavaScript code executed in users' browsers upon page load.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-12580",
+      "cve_id": "CVE-2026-12580",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": 5.3,
-      "published": "2026-07-02T02:14:35.392563+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
+      "cvss_score": 5.4,
+      "published": "2026-07-02T06:30:51.213712+00:00",
+      "ttps": [],
       "epss_score": null,
-      "ai_summary": "CVE-2026-7859 is a vulnerability in the Motors WordPress plugin before version 1.4.110, allowing unauthenticated attackers to modify arbitrary post metadata, including gallery, featured image, and product prices on WooCommerce sites. This is due to the plugin's lack of proper authorization and CSRF checks on one of its AJAX actions. To exploit this vulnerability, an attacker would need to send a malicious AJAX request to the affected plugin, which would then allow them to modify the post metadata. To remediate this issue, users should update the Motors WordPress plugin to version 1.4.110 or later, and ensure that the 'wp_ajax_motors_save_post' action is properly secured with authorization and CSRF checks. Additionally, users should review their post metadata for any suspicious changes.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.5,
+      "ai_summary": "CVE-2026-12580 is a Stored Cross-Site Scripting vulnerability in EasyFlow .NET developed by Digiwin, allowing authenticated remote attackers to inject persistent JavaScript code executed in users' browsers upon page load. The vulnerability affects EasyFlow .NET and can be exploited by sending a crafted request to the affected system. If exploited, this vulnerability can lead to unauthorized access to sensitive data, session hijacking, and other malicious activities. To remediate this vulnerability, users should update to the latest version of EasyFlow .NET and ensure that all input fields are properly sanitized to prevent code injection. Additionally, users can configure their web application firewalls to detect and prevent XSS attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1059.003| C[Execution]:::tactic\n    C -->|T1061| D[Persistence]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.4,
       "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
-      "title": "CVE-2026-6858: The Transbank Webpay WordPress plugin before 1.14.0 does not sanitize and escape...",
-      "description": "The Transbank Webpay WordPress plugin before 1.14.0 does not sanitize and escape logs to be displayed, allowing unauthenticated users to perform Stored XSS attacks against logged in administrator",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6858",
-      "cve_id": "CVE-2026-6858",
+      "title": "CVE-2025-4994: The SafeLine SL6 and SL6+ devices integrated into elevator emergency intercom sy...",
+      "description": "The SafeLine SL6 and SL6+ devices integrated into elevator emergency intercom systems are vulnerable to an authentication bypass. This vulnerability allows attackers to bypass authentication requirements and access the device's configuration service via the Bluetooth Low Energy (BLE) interface. Consequently, an attacker within wireless range can gain unauthorized administrative access to the devic",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-4994",
+      "cve_id": "CVE-2025-4994",
       "source": "NVD",
       "category": "cve",
       "severity": "high",
-      "cvss_score": 7.1,
-      "published": "2026-07-02T02:14:35.392548+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1649",
-          "name": "Steal or Forge Authentication Certificates",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-6858 is a Stored XSS vulnerability in the Transbank Webpay WordPress plugin before version 1.14.0. An attacker can exploit this vulnerability by crafting malicious logs that are displayed to logged-in administrators, allowing them to steal or forge authentication certificates (T1649) and potentially gain unauthorized access to the system (T1190). If exploited, this vulnerability can lead to privilege escalation and data breach. To remediate this issue, update the Transbank Webpay WordPress plugin to version 1.14.0 or later, and ensure that all administrators' accounts are secured with strong passwords and two-factor authentication. Additionally, consider implementing a web application firewall (WAF) to detect and prevent future XSS attacks.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1649| C[Steal or Forge Authentication Certificates]:::tactic\n    C -->|T1059.001| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-4259: The ultimate-woocommerce-auction-pro WordPress plugin through 2.4.5 does not san...",
-      "description": "The ultimate-woocommerce-auction-pro WordPress plugin through 2.4.5 does not sanitise and escape a parameter before outputting it back in the page, leading to a Reflected Cross-Site Scripting which could be used against high privilege users such as admin",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-4259",
-      "cve_id": "CVE-2026-4259",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "high",
-      "cvss_score": 7.1,
-      "published": "2026-07-02T02:14:35.392533+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1649",
-          "name": "Steal or Forge Authentication Certificates",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        }
-      ],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ],
-      "ai_summary": "CVE-2026-4259 is a Reflected Cross-Site Scripting (XSS) vulnerability in the Ultimate-WooCommerce-Auction-Pro WordPress plugin through version 2.4.5. An attacker can exploit this vulnerability by crafting a malicious URL that injects JavaScript code into the page, which can be used to steal sensitive information or take control of high-privilege user accounts, such as admin. To remediate this vulnerability, update the Ultimate-WooCommerce-Auction-Pro plugin to version 2.4.6 or later, and ensure that all users, especially high-privilege users, use strong, unique passwords and enable two-factor authentication. Additionally, consider implementing a web application firewall (WAF) to detect and block suspicious traffic. It is also recommended to monitor user accounts for any suspicious activity and to regularly review plugin updates to ensure that all plugins are up-to-date.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1649| C[Steal or Forge Authentication Certificates]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 7.5,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-4110: The ultimate-woocommerce-auction-pro WordPress plugin through 2.4.5 does not san...",
-      "description": "The ultimate-woocommerce-auction-pro WordPress plugin through 2.4.5 does not sanitise and escape a parameter before outputting it back in the page, leading to a Reflected Cross-Site Scripting which could be used against high privilege users such as admin",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-4110",
-      "cve_id": "CVE-2026-4110",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 6.1,
-      "published": "2026-07-02T02:14:35.392518+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        },
-        {
-          "id": "T1649",
-          "name": "Steal or Forge Authentication Certificates",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        }
-      ],
-      "epss_score": null,
-      "threat_actors": [
-        "APT41"
-      ],
-      "ai_summary": "CVE-2026-4110 is a Reflected Cross-Site Scripting (XSS) vulnerability in the Ultimate-WooCommerce-Auction-Pro WordPress plugin through version 2.4.5. An attacker can exploit this vulnerability by crafting a malicious URL that injects JavaScript code, which is then executed by high-privilege users such as administrators. This could lead to unauthorized access, data tampering, or even complete takeover of the WordPress site. To remediate this issue, update the Ultimate-WooCommerce-Auction-Pro plugin to version 2.4.6 or later, and ensure that all users, especially administrators, use a secure and unique password. Additionally, consider implementing a Web Application Firewall (WAF) to detect and block suspicious traffic.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1649| C[Steal or Forge Authentication Certificates]:::tactic\n    C -->|T1059.001| D[Execution]:::tactic\n    D -->|T1041| E[Command and Control]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 6.1,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-10530: The Pie Register  WordPress plugin before 3.8.4.10 does not use sufficiently ran...",
-      "description": "The Pie Register  WordPress plugin before 3.8.4.10 does not use sufficiently random values when generating its account verification tokens, allowing unauthenticated attackers to predict a valid token and activate an account without access to the associated email inbox.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-10530",
-      "cve_id": "CVE-2026-10530",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
-      "cvss_score": 5.3,
-      "published": "2026-07-02T02:14:35.392503+00:00",
-      "ttps": [
-        {
-          "id": "T1190",
-          "name": "Exploit Public-Facing Application",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
-      "epss_score": null,
-      "ai_summary": "CVE-2026-10530 is a vulnerability in the Pie Register WordPress plugin before version 3.8.4.10. The issue lies in the plugin's account verification token generation, which uses insufficiently random values. This allows unauthenticated attackers to predict a valid token and activate an account without access to the associated email inbox. To remediate, update the plugin to version 3.8.4.10 or later. Specifically, users should navigate to their WordPress dashboard, click on 'Plugins', select 'Installed Plugins', and then click 'Update' next to 'Pie Register'. Alternatively, users can manually delete the plugin and reinstall the latest version. It is also recommended to enable two-factor authentication for added security.",
-      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
-      "severity_score": 5.3,
-      "ai_provider": "groq",
-      "ai_model": "llama-3.1-8b-instant"
-    },
-    {
-      "title": "CVE-2026-6645: An insecure process execution vulnerability exists in the pc-printer-updater.exe...",
-      "description": "An insecure process execution vulnerability exists in the pc-printer-updater.exe component of the PaperCut Print Deploy Client for Windows. The application, which typically operates with high-level system privileges, attempts to perform an internal validation check by invoking a secondary system utility using an unqualified file reference.\n\n\n\nBecause the application does not specify an absolute pa",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-6645",
-      "cve_id": "CVE-2026-6645",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
       "cvss_score": null,
-      "published": "2026-07-02T02:14:35.392486+00:00",
+      "published": "2026-07-02T06:30:51.213673+00:00",
       "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
         {
           "id": "T1068",
           "name": "Exploitation for Privilege Escalation",
@@ -493,38 +368,143 @@
           "tactic_id": "TA0004"
         }
       ],
-      "epss_score": null
+      "epss_score": null,
+      "ai_summary": "CVE-2025-4994 is a vulnerability in the SafeLine SL6 and SL6+ devices, which are integrated into elevator emergency intercom systems, allowing attackers to bypass authentication requirements and access the device's configuration service via the Bluetooth Low Energy (BLE) interface. The attack vector involves exploiting the vulnerability to gain unauthorized administrative access to the device, potentially allowing attackers to modify configuration settings or disrupt emergency services. To exploit this vulnerability, an attacker would need to be within wireless range of the device and use the T1190 tactic to exploit the public-facing application, followed by T1068 for privilege escalation. To remediate this vulnerability, defenders should ensure that all SafeLine SL6 and SL6+ devices are updated to the latest firmware version and that BLE interfaces are disabled or restricted to authorized devices only. Additionally, defenders should monitor for suspicious activity on the devices and implement additional security controls, such as encryption and secure authentication mechanisms.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1068| C[Exploitation for Privilege Escalation]:::tactic\n    C -->|T1552| D[Unattended Execution]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.0,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
     },
     {
-      "title": "CVE-2026-8918: A permissive list of allowed inputs in ASUS Armoury Crate allows a local adminis...",
-      "description": "A permissive list of allowed inputs in ASUS Armoury Crate allows a local administrator to perform arbitrary memory read/write operations or cause a system crash (BSOD) by bypassing the validation mechanism.Refer to the '\nSecurity Update for Armoury Crate App ' section on the ASUS Security Advisory for more information.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-8918",
-      "cve_id": "CVE-2026-8918",
+      "title": "CVE-2023-45796: A stored cross-site scripting vulnerability in the Runtime component of Pilz PAS...",
+      "description": "A stored cross-site scripting vulnerability in the Runtime component of Pilz PASvisu before 1.14.1 and PMI v8xx up to and including 2.0.33992 allows a low-privileged remote unauthenticated attacker to manipulate process data with potential impact on integrity and/or availability.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-45796",
+      "cve_id": "CVE-2023-45796",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 8.1,
+      "published": "2026-07-02T06:30:51.213657+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2023-45796 is a stored cross-site scripting vulnerability in the Runtime component of Pilz PASvisu before version 1.14.1 and PMI v8xx up to and including version 2.0.33992. This vulnerability allows a low-privileged remote unauthenticated attacker to manipulate process data, potentially impacting the integrity and/or availability of the system. If exploited, this vulnerability could lead to unauthorized access and modification of sensitive process data, affecting industries that rely on Pilz PASvisu and PMI v8xx, such as manufacturing and automation. To remediate this vulnerability, defenders should update Pilz PASvisu to version 1.14.1 or later and PMI v8xx to a version later than 2.0.33992, and ensure that all related components and plugins are also updated to the latest versions. Additionally, defenders should monitor system logs for suspicious activity and implement a web application firewall to detect and prevent potential XSS attacks.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Exploit Public-Facing Application]:::tactic\n    B -->|T1059.001| C[Execution]:::tactic\n    C -->|T1041| D[Command and Control]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.1,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
+    },
+    {
+      "title": "CVE-2023-45795: A cross-site scripting vulnerability in the Builder Component of Pilz PASvisu be...",
+      "description": "A cross-site scripting vulnerability in the Builder Component of Pilz PASvisu before 1.14.1 allows a local unauthenticated attacker to inject malicious javascript and gain full control over the device.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-45795",
+      "cve_id": "CVE-2023-45795",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.8,
+      "published": "2026-07-02T06:30:51.213636+00:00",
+      "ttps": [
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "tactic": "Initial Access",
+          "tactic_id": "TA0001"
+        },
+        {
+          "id": "T1059.007",
+          "name": "JavaScript",
+          "tactic": "Execution",
+          "tactic_id": "TA0002"
+        }
+      ],
+      "epss_score": null,
+      "ai_summary": "CVE-2023-45795 is a cross-site scripting vulnerability in the Builder Component of Pilz PASvisu versions prior to 1.14.1, allowing a local unauthenticated attacker to inject malicious JavaScript and gain full control over the device. The attack vector involves exploiting the vulnerability through a public-facing application, as indicated by TTP T1190, and utilizing JavaScript for execution, as seen in T1059.007. If exploited, this vulnerability could lead to significant control over affected devices, potentially disrupting operations and compromising data. To remediate, defenders should update Pilz PASvisu to version 1.14.1 or later and ensure that all instances are properly configured to prevent unauthorized access. Additionally, monitoring for suspicious JavaScript activity can help in early detection of potential exploitation attempts.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1059.007| C[Execution]:::tactic\n    C -->|T1204| D[Persistence]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 8.2,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
+    },
+    {
+      "title": "CVE-2026-54665: Apache NiFi 0.0.1 through 2.9.0 support building qualified URLs from one of seve...",
+      "description": "Apache NiFi 0.0.1 through 2.9.0 support building qualified URLs from one of several HTTP request headers that provide an alternative to the standard Host header without validating the values provided. Apache NiFi 1.6.0 introduced a configurable application property to restrict values provided in the HTTP Host header, but did not apply the validation to alternative Proxy and Forwarded headers. The ",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-54665",
+      "cve_id": "CVE-2026-54665",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-07-02T02:14:35.392471+00:00",
+      "cvss_score": 5.3,
+      "published": "2026-07-02T06:30:51.213621+00:00",
+      "ttps": [],
+      "epss_score": null,
+      "ai_summary": "CVE-2026-54665 is a vulnerability in Apache NiFi versions 0.0.1 through 2.9.0 that allows an attacker to build qualified URLs from unvalidated HTTP request headers, potentially leading to security issues. The vulnerability arises from the lack of validation of alternative Proxy and Forwarded headers, which can be exploited to manipulate the URL. If exploited, this vulnerability could allow an attacker to conduct phishing attacks or redirect users to malicious websites, affecting users of Apache NiFi. To remediate this vulnerability, users should upgrade to Apache NiFi version 2.10.0 or later, and configure the application property to restrict values provided in the HTTP Host header. Additionally, users should ensure that their proxy and forwarded headers are properly validated to prevent exploitation.",
+      "workflow_graph": "graph LR\n    A([Threat Actor]):::actor -->|T1190| B[Initial Access]:::tactic\n    B -->|T1202| C[Execution]:::tactic\n    C -->|T1557| D[Persistence]:::tactic\n    D -->|T1486| E[Impact]:::tactic\n    classDef actor fill:#1a0e2e,stroke:#a78bfa,color:#c9d8e8,font-weight:bold\n    classDef tactic fill:#0d2038,stroke:#4da6ff,color:#c9d8e8",
+      "severity_score": 5.3,
+      "ai_provider": "groq",
+      "ai_model": "llama-3.3-70b-versatile"
+    },
+    {
+      "title": "CVE-2026-44914: Apache NiFi 1.12.0 through 2.9.0 are missing authorization when replacing Proces...",
+      "description": "Apache NiFi 1.12.0 through 2.9.0 are missing authorization when replacing Process Groups that include extension components with specific Required Permissions based on the Restricted annotation. The Restricted annotation indicates additional privileges required, but framework authorization did not check restricted status when handling requests to replace Process Groups. The missing authorization pe",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44914",
+      "cve_id": "CVE-2026-44914",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.2,
+      "published": "2026-07-02T06:30:51.213604+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2026-44913: Improper escaping of database table names in the CaptureChangeMySQL Processor in...",
+      "description": "Improper escaping of database table names in the CaptureChangeMySQL Processor included with Apache NiFi 1.2.0 through 2.9.0 allows for injecting SQL commands using crafted naming. Manual quoted boundaries added in Apache NiFi 1.8.0 narrowed the scope of potential injection options, but did not cover additional strategies. Apache NiFi installations that do not use the CaptureChangeMySQL Processor a",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44913",
+      "cve_id": "CVE-2026-44913",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 7.2,
+      "published": "2026-07-02T06:30:51.213589+00:00",
       "ttps": [
         {
-          "id": "T1078.003",
-          "name": "Local Accounts",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
+          "id": "T1649",
+          "name": "Steal or Forge Authentication Certificates",
+          "tactic": "Credential Access",
+          "tactic_id": "TA0006"
         }
       ],
       "epss_score": null
     },
     {
-      "title": "CVE-2026-11748: A vulnerability has been identified in centraldogma-server-auth-shiro versions p...",
-      "description": "A vulnerability has been identified in centraldogma-server-auth-shiro versions prior to 0.84.0, where the SearchFirstActiveDirectoryRealm substitutes the login username into an LDAP search filter without neutralizing LDAP filter metacharacters, allowing an unauthenticated attacker to manipulate the filter to cause authentication confusion and enumerate the directory structure.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11748",
-      "cve_id": "CVE-2026-11748",
+      "title": "CVE-2026-44911: Authorization handling for component configuration verification requests in Apac...",
+      "description": "Authorization handling for component configuration verification requests in Apache NiFi 1.15.0 through 2.9.0 allows clients with read access to submit proposed configuration properties. The proposed properties override current configuration, enabling users with read access to invoke predefined verification methods with alternative settings. Apache NiFi installations that do not implement different",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44911",
+      "cve_id": "CVE-2026-44911",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-07-02T02:14:35.392454+00:00",
+      "cvss_score": 6.3,
+      "published": "2026-07-02T06:30:51.213571+00:00",
+      "ttps": [],
+      "epss_score": null
+    },
+    {
+      "title": "CVE-2025-66336: Apache Doris MCP Server contains a SQL injection vulnerability in a metadata que...",
+      "description": "Apache Doris MCP Server contains a SQL injection vulnerability in a metadata query path. A user-controlled database name is directly interpolated into a SQL query, and the query is executed without passing the caller's authorization context. This may allow an authenticated attacker, or an anonymous attacker if authentication is disabled, to bypass SQL security validation and access metadata outsid",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-66336",
+      "cve_id": "CVE-2025-66336",
+      "source": "NVD",
+      "category": "cve",
+      "severity": "high",
+      "cvss_score": 8.1,
+      "published": "2026-07-02T06:30:51.213549+00:00",
       "ttps": [
         {
           "id": "T1190",
@@ -536,50 +516,29 @@
       "epss_score": null
     },
     {
-      "title": "CVE-2026-11746: A vulnerability has been identified in centraldogma-server versions prior to 0.8...",
-      "description": "A vulnerability has been identified in centraldogma-server versions prior to 0.84.0, where enabling ZooKeeper replication without setting replication.secret causes the server to silently fall back to a hard-coded, publicly known secret. This default credential authenticates the embedded ZooKeeper ensemble, allowing an attacker with network access to read the full replication log or join the quorum",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11746",
-      "cve_id": "CVE-2026-11746",
+      "title": "CVE-2025-62198: An authenticated user can perform XSS.\n\nThis issue affects Apache Atlas versions...",
+      "description": "An authenticated user can perform XSS.\n\nThis issue affects Apache Atlas versions 2.4.0 and earlier.\n\nUsers are recommended to upgrade to version 2.5.0, which fixes the issue.",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-62198",
+      "cve_id": "CVE-2025-62198",
       "source": "NVD",
       "category": "cve",
       "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-07-02T02:14:35.392433+00:00",
-      "ttps": [
-        {
-          "id": "T1078.001",
-          "name": "Default Accounts",
-          "tactic": "Initial Access",
-          "tactic_id": "TA0001"
-        }
-      ],
+      "cvss_score": 5.4,
+      "published": "2026-07-02T06:30:51.213504+00:00",
+      "ttps": [],
       "epss_score": null
     },
     {
-      "title": "CVE-2026-11745: A vulnerability has been identified in centraldogma-server-mirror-git versions p...",
-      "description": "A vulnerability has been identified in centraldogma-server-mirror-git versions prior to 0.84.0, where the Git mirror SSH client does not verify remote host keys for git+ssh:// connections, allowing an on-path attacker to perform man-in-the-middle attacks and compromise mirrored repositories.",
-      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-11745",
-      "cve_id": "CVE-2026-11745",
-      "source": "NVD",
-      "category": "cve",
-      "severity": "medium",
+      "title": "Medtronic notifies customers impacted by ShinyHunters data breach",
+      "description": "Healthcare device firm Medtronic is notifying affected customers about a data breach that exposed their personal data to an unauthorized third party. [...]",
+      "url": "https://www.bleepingcomputer.com/news/security/medtronic-notifies-customers-impacted-by-shinyhunters-data-breach/",
+      "cve_id": null,
+      "source": "Bleeping Computer",
+      "category": "incident",
+      "severity": "high",
       "cvss_score": null,
-      "published": "2026-07-02T02:14:35.392389+00:00",
-      "ttps": [
-        {
-          "id": "T1040",
-          "name": "Network Sniffing",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        },
-        {
-          "id": "T1557",
-          "name": "Adversary-in-the-Middle",
-          "tactic": "Credential Access",
-          "tactic_id": "TA0006"
-        }
-      ],
-      "epss_score": null
+      "published": "2026-07-02T04:25:42+00:00",
+      "ttps": []
     },
     {
       "title": "ISC Stormcast For Thursday, July 2nd, 2026 https://isc.sans.edu/podcastdetail/9992, (Thu, Jul 2nd)",
@@ -1166,18 +1125,6 @@
       "severity": "medium",
       "cvss_score": null,
       "published": "2026-07-01T10:00:00+00:00",
-      "ttps": []
-    },
-    {
-      "title": "Amazon fined $2.25M for withholding evidence from fraud victims",
-      "description": "The U.S. Federal Trade Commission (FTC) says Amazon will pay a $2.25 million civil penalty to settle charges that it blocked identity theft victims' access to transaction records. [...]",
-      "url": "https://www.bleepingcomputer.com/news/security/amazon-fined-225m-for-withholding-evidence-from-fraud-victims/",
-      "cve_id": null,
-      "source": "Bleeping Computer",
-      "category": "news",
-      "severity": "medium",
-      "cvss_score": null,
-      "published": "2026-07-01T09:43:27+00:00",
       "ttps": []
     },
     {
@@ -1826,8 +1773,8 @@
         }
       ],
       "threat_actors": [
-        "Conti",
-        "LockBit"
+        "LockBit",
+        "Conti"
       ]
     },
     {
