@@ -949,13 +949,14 @@ def fetch_fedora() -> list[dict]:
         data = make_request("https://bodhi.fedoraproject.org/updates/?limit=10&status=stable&type=security")
         if data:
             for update in data.get("updates", [])[:MAX_ITEMS_PER_SOURCE]:
-                title = update.get("title", update.get("updateid", "Fedora Update"))
+                alias = update.get("alias", update.get("updateid", ""))
+                title = update.get("title", alias or "Fedora Update")
                 desc = update.get("notes", "")[:400]
                 pub = parse_date(update.get("date_submitted", ""))
                 items.append({
                     "title": f"Fedora: {title[:100]}",
                     "description": clean_html(desc) or f"Fedora security update",
-                    "url": f"https://bodhi.fedoraproject.org/updates/{title}",
+                    "url": f"https://bodhi.fedoraproject.org/updates/{alias}",
                     "cve_id": extract_cve_id(title + " " + desc), "source": "Fedora",
                     "category": "advisory", "severity": infer_severity(title, "medium"),
                     "cvss_score": None, "published": pub,
