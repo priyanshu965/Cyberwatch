@@ -111,6 +111,8 @@ All settings in `scripts/config.py` are overridable via environment variables:
 | `SMTP_HOST` | — | SMTP server (for email alerts) |
 | `SMTP_TO` | — | Recipient address (for email alerts) |
 | `ALERT_SEVERITIES` | `critical,high` | Minimum severity for alerting |
+| `THREATFOX_API_KEY` | — | API key for ThreatFox IOCs |
+| `MB_API_KEY` | — | API key for MalwareBazaar |
 | `PRIORITY_CVSS_WEIGHT` | `40` | CVSS weight in priority score |
 | `PRIORITY_EPSS_WEIGHT` | `40` | EPSS weight in priority score |
 | `PRIORITY_KEV_BONUS` | `20` | CISA KEV flat bonus |
