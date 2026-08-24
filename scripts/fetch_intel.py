@@ -65,6 +65,11 @@ try:
 except Exception:
     GeoIP = None
     collect_attacker_infrastructure = None
+try:
+    from sectors import annotate_sectors, SECTOR_LABELS
+except Exception:
+    annotate_sectors = None
+    SECTOR_LABELS = {}
 
 # ── MITRE ATT&CK full database ────────────────────────────────────────────────
 try:
@@ -1536,6 +1541,7 @@ def fetch_ransomware_live() -> list[dict]:
                 "cvss_score": None, "published": parse_date(when),
                 "iocs": {},
                 "threat_actors_hint": [group] if group else [],
+                "sector_hint": activity if activity and activity != "Not Found" else None,
             })
     except Exception as e:
         log.warning(f"Ransomware.live failed: {e}")
@@ -2644,6 +2650,16 @@ def main():
     new_count = mark_new_since_last(all_items)
     log.info(f"  Flagged {new_count} items as new since last run")
 
+    # ── Sector segregation (confidence-laddered; see sectors.py) ────────────
+    sector_breakdown = {}
+    if annotate_sectors:
+        try:
+            sector_breakdown = annotate_sectors(all_items)
+            log.info(f"  Tagged sectors on {sum(sector_breakdown.values())} items "
+                     f"across {len(sector_breakdown)} sectors")
+        except Exception as e:
+            log.warning(f"Sector tagging failed: {e}")
+
     # ── AI Enrichment ──────────────────────────────────────────────────────
     try:
         all_items = enrich_with_ai(all_items)
@@ -2686,6 +2702,8 @@ def main():
         "source_breakdown": dict(source_counter.most_common()),
         "source_health": source_health,
         "attack_map": attack_map,
+        "sector_breakdown": sector_breakdown,
+        "sector_labels": SECTOR_LABELS,
         "items": all_items,
     }
 

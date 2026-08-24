@@ -67,7 +67,7 @@ const store = {
   watchlist: [], watchlistOnly: false, stack: [],
   dismissed: new Set(), starred: new Set(), showDismissed: false,
   lastVisit: null, stamp: null,
-  mapCat: null,
+  mapCat: null, sector: null,
 };
 
 // ─── Safe DOM helpers ─────────────────────────────────────────────────────────
@@ -320,6 +320,9 @@ function applyFilters() {
 
   if (store.severity) {
     list = list.filter((i) => (i.severity || '').toLowerCase() === store.severity);
+  }
+  if (store.sector) {
+    list = list.filter((i) => i.sector === store.sector);
   }
   if (q) {
     list = list.filter((i) => (
@@ -697,6 +700,7 @@ function renderSidebar() {
   renderSeverityChart();
   renderSourceList();
   renderCategoryList();
+  renderSectorList();
   renderSourceHealth();
   renderWatchlist();
   renderStack();
@@ -783,6 +787,43 @@ function renderCategoryList() {
     row.dataset.filter = name;
     row.appendChild(el('span', 'cat-name', name));
     row.appendChild(el('span', 'cat-count', String(value)));
+    host.appendChild(row);
+  });
+}
+
+function renderSectorList() {
+  const host = $('sector-list');
+  if (!host) return;
+  const labels = (store.meta && store.meta.sector_labels) || {};
+  // Count sectors over the whole feed, and note whether any tag was explicit.
+  const counts = {};
+  const hasExplicit = {};
+  store.items.forEach((i) => {
+    if (!i.sector) return;
+    counts[i.sector] = (counts[i.sector] || 0) + 1;
+    if (i.sector_confidence === 'explicit') hasExplicit[i.sector] = true;
+  });
+  host.replaceChildren();
+  const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+  if (!entries.length) {
+    host.appendChild(el('p', 'sector-empty', 'No sectors identified in this run.'));
+    return;
+  }
+  entries.forEach(([sector, value]) => {
+    const row = el('button', `sector-row${store.sector === sector ? ' active' : ''}`);
+    row.type = 'button';
+    row.dataset.sector = sector;
+    row.appendChild(el('span', 'sector-name', labels[sector] || sector));
+    const meta = el('span', 'sector-meta');
+    // A small mark distinguishes source-confirmed sectors from keyword guesses.
+    if (hasExplicit[sector]) {
+      const dot = el('span', 'sector-explicit');
+      dot.title = 'Includes source-confirmed items';
+      dot.textContent = '●';
+      meta.appendChild(dot);
+    }
+    meta.appendChild(el('span', 'sector-count', String(value)));
+    row.appendChild(meta);
     host.appendChild(row);
   });
 }
@@ -1691,6 +1732,17 @@ function initEvents() {
 
     const catRow = t.closest('.cat-row');
     if (catRow) { store.filter = catRow.dataset.filter; update(); return; }
+
+    const sectorRow = t.closest('.sector-row');
+    if (sectorRow) {
+      const sec = sectorRow.dataset.sector;
+      store.sector = store.sector === sec ? null : sec;
+      if (store.filter === 'map' || store.filter === 'matrix' || store.filter === 'trends') {
+        store.filter = 'all';
+      }
+      update();
+      return;
+    }
 
     const actor = t.closest('.threat-actor-badge');
     if (actor) { store.query = actor.dataset.actor; store.filter = 'all'; update(); return; }
