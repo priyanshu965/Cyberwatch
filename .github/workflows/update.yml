@@ -15,7 +15,6 @@
 #   GROQ_API_KEY      ← Groq (failover AI)    https://console.groq.com
 #   VULNCHECK_API_KEY ← VulnCheck KEV superset (optional, free)
 #   OTX_API_KEY       ← AlienVault OTX (optional)
-#   BOT_PAT           ← Classic PAT with 'repo' scope (bypasses branch protection)
 #
 # NOTE: CISA Vulnrichment (SSVC) and the EPSS bulk corpus need no key at all.
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -34,6 +33,7 @@ jobs:
 
     permissions:
       contents: read      # nothing is committed back - see "Persist state" below
+      issues:   write     # file a pipeline-failure issue (uses GITHUB_TOKEN)
       pages: write        # publish the dashboard + data as a Pages deployment
       id-token: write     # OIDC token actions/deploy-pages exchanges
 
@@ -201,7 +201,7 @@ jobs:
         if: failure()
         id: existing
         env:
-          GH_TOKEN: ${{ secrets.BOT_PAT }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           COUNT=$(gh issue list --repo "${{ github.repository }}" \
                     --label pipeline-failure --state open --limit 1 --json number \
@@ -212,7 +212,7 @@ jobs:
         if: failure() && steps.existing.outputs.count == '0'
         uses: dacbd/create-issue-action@v2
         with:
-          token: ${{ secrets.BOT_PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           labels: pipeline-failure
           title: "🚨 Pipeline failure — ${{ github.run_id }}"
           body: |
