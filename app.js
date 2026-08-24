@@ -67,6 +67,7 @@ const store = {
   watchlist: [], watchlistOnly: false, stack: [],
   dismissed: new Set(), starred: new Set(), showDismissed: false,
   lastVisit: null, stamp: null,
+  mapCat: null,
 };
 
 // ─── Safe DOM helpers ─────────────────────────────────────────────────────────
@@ -1139,9 +1140,207 @@ function showMatrixView() {
   });
 }
 
+// --- Attacker map (Phase 02) ------------------------------------------------
+// A symbol map of CURRENT ATTACKER INFRASTRUCTURE by country of origin, not a
+// real-time animation of attacks in flight (we own no sensors). Circles sit at
+// country centroids on an equirectangular projection, sized by attacker count
+// and coloured by category. The ranked table beside the map is the real,
+// accessible content and works with no SVG at all.
+
+// 121 country centroids [lat, lon] for the attacker symbol map.
+const MAP_CENTROIDS = {
+  US:[38,-97], CN:[35,105], RU:[61,90], DE:[51,10], NL:[52.3,5.5], FR:[46,2],
+  GB:[54,-2], IN:[21,78], BR:[-10,-55], KR:[36.5,128], JP:[36,138], VN:[16,108],
+  ID:[-5,120], IR:[32,53], UA:[49,32], SG:[1.35,103.8], CA:[56,-106], TW:[23.7,121],
+  TR:[39,35], IT:[42.8,12.8], ES:[40,-4], PL:[52,19], TH:[15,101], HK:[22.3,114.2],
+  RO:[46,25], MX:[23,-102], AU:[-25,133], PH:[13,122], SE:[62,15], BG:[42.7,25.5],
+  AR:[-38,-63], ZA:[-29,24], CO:[4,-73], PK:[30,70], BD:[24,90], EG:[27,30],
+  MY:[4,102], NG:[9,8], IL:[31,35], CZ:[49.8,15.5], FI:[64,26], CH:[47,8],
+  AT:[47.5,14], BE:[50.6,4.6], DK:[56,10], NO:[62,10], IE:[53,-8], PT:[39.5,-8],
+  GR:[39,22], HU:[47,20], KZ:[48,68], SA:[24,45], AE:[24,54], CL:[-30,-71],
+  PE:[-10,-76], VE:[8,-66], MA:[32,-6], KE:[1,38], LT:[56,24], LV:[57,25],
+  EE:[59,26], RS:[44,21], SK:[48.7,19.5], SI:[46,15], HR:[45.1,15.5], MD:[47,28.5],
+  BY:[53,28], GE:[42,43.5], AM:[40,45], AZ:[40.5,47.5], UZ:[41,64], LK:[7,81],
+  NP:[28,84], MM:[22,96], KH:[13,105], LA:[18,105], EC:[-2,-78], BO:[-17,-65],
+  PY:[-23,-58], UY:[-33,-56], DO:[19,-70.7], GT:[15.7,-90], CR:[10,-84], PA:[9,-80],
+  IQ:[33,44], JO:[31,36], LB:[33.8,35.8], KW:[29.3,47.6], QA:[25.3,51.2], OM:[21,57],
+  BH:[26,50.5], TN:[34,9], DZ:[28,3], LY:[27,17], SD:[15,30], ET:[8,38],
+  TZ:[-6,35], UG:[1,32], GH:[8,-1], CI:[7.5,-5.5], CM:[6,12], AO:[-12,17],
+  MZ:[-18,35], ZM:[-15,28], ZW:[-19,29], MG:[-19,46], LU:[49.8,6.1], IS:[65,-18],
+  MT:[35.9,14.4], CY:[35,33], MK:[41.6,21.7], AL:[41,20], BA:[44,18], ME:[42.7,19.4],
+  XK:[42.6,20.9], MN:[46,105], BN:[4.5,114.7], TL:[-8.8,125.7], FJ:[-17.7,178], PG:[-6,147],
+  NZ:[-42,174],
+};
+
+// Five nominal attack categories need five separable hues. Categorical set,
+// deliberately distinct from the ordinal severity ramp and the single nominal
+// accent used elsewhere. Every mark also carries a legend entry.
+const ATTACK_COLORS = {
+  web_attackers: '#e0653f', intruders: '#d6454f', scanners: '#3f9dd4',
+  ddos_attackers: '#9b6dd6', anonymizers: '#3fae8c',
+};
+const ATTACK_ORDER = ['web_attackers', 'intruders', 'scanners', 'ddos_attackers', 'anonymizers'];
+
+function project(lat, lon, w, h) {
+  return [((Number(lon) + 180) / 360) * w, ((90 - Number(lat)) / 180) * h];
+}
+
+function attackMapData() {
+  return (store.meta && store.meta.attack_map) || null;
+}
+
+function showMapView() {
+  hideAllViews();
+  const host = $('map-view');
+  if (!host) return;
+  host.style.display = 'block';
+  host.replaceChildren();
+
+  const data = attackMapData();
+  if (!data || !data.countries || !data.countries.length) {
+    host.appendChild(el('p', 'chart-empty', 'No attacker-infrastructure data in the current run.'));
+    return;
+  }
+
+  const head = el('div', 'map-head');
+  head.appendChild(el('h2', 'map-title', 'Attacker infrastructure by origin'));
+  head.appendChild(el('p', 'map-sub',
+    data.distinct_ips.toLocaleString() + ' distinct hosts across ' +
+    data.countries.length + ' countries. Origin of scanning, brute-force, ' +
+    'amplification and anonymity infrastructure, not attacks in flight.'));
+  host.appendChild(head);
+
+  const toggles = el('div', 'map-toggles');
+  const allBtn = el('button', 'map-toggle' + (store.mapCat === null ? ' active' : ''), 'All');
+  allBtn.type = 'button';
+  allBtn.addEventListener('click', () => { store.mapCat = null; showMapView(); });
+  toggles.appendChild(allBtn);
+  ATTACK_ORDER.forEach((cat) => {
+    const n = data.totals[cat] || 0;
+    const b = el('button', 'map-toggle' + (store.mapCat === cat ? ' active' : ''));
+    b.type = 'button';
+    const dot = el('span', 'map-dot');
+    dot.style.background = ATTACK_COLORS[cat];
+    b.appendChild(dot);
+    b.appendChild(el('span', 'map-toggle-label',
+      (data.category_labels[cat] || cat) + ' (' + n.toLocaleString() + ')'));
+    b.addEventListener('click', () => {
+      store.mapCat = store.mapCat === cat ? null : cat;
+      showMapView();
+    });
+    toggles.appendChild(b);
+  });
+  host.appendChild(toggles);
+
+  const grid = el('div', 'map-grid');
+  grid.appendChild(buildSymbolMap(data));
+  grid.appendChild(buildCountryTable(data));
+  host.appendChild(grid);
+
+  const prov = el('details', 'map-prov');
+  prov.appendChild(el('summary', 'map-prov-summary',
+    'Sources \u2014 ' + (data.sources || []).filter((s) => s.status === 'ok').length + ' feeds'));
+  const list = el('div', 'map-prov-list');
+  (data.sources || []).forEach((s) => {
+    const row = el('div', 'map-prov-row');
+    row.appendChild(el('span', 'map-prov-feed', s.feed));
+    row.appendChild(el('span', 'map-prov-rows',
+      s.status === 'ok' ? s.rows.toLocaleString() + ' rows' : 'unavailable'));
+    list.appendChild(row);
+  });
+  prov.appendChild(list);
+  if (data.attribution) prov.appendChild(el('p', 'map-attribution', data.attribution));
+  host.appendChild(prov);
+}
+
+function countForCountry(c) {
+  return store.mapCat ? (c.by_category[store.mapCat] || 0) : c.total;
+}
+
+function buildSymbolMap(data) {
+  const W = 1000, H = 500;
+  const wrap = el('div', 'map-canvas');
+  const svg = svgEl('svg', {
+    viewBox: '0 0 ' + W + ' ' + H, class: 'symbol-map',
+    role: 'img', 'aria-label': 'World map of attacker origin countries',
+  });
+  for (let lon = -180; lon <= 180; lon += 30) {
+    const p = project(0, lon, W, H);
+    svg.appendChild(svgEl('line', { x1: p[0], y1: 0, x2: p[0], y2: H, class: 'map-grid-line' }));
+  }
+  for (let lat = -60; lat <= 60; lat += 30) {
+    const p = project(lat, 0, W, H);
+    svg.appendChild(svgEl('line', { x1: 0, y1: p[1], x2: W, y2: p[1], class: 'map-grid-line' }));
+  }
+
+  const plotted = data.countries
+    .map((c) => ({ c: c, v: countForCountry(c) }))
+    .filter((d) => d.v > 0 && MAP_CENTROIDS[d.c.cc]);
+  const max = Math.max(1, ...plotted.map((d) => d.v));
+  const R_MIN = 3, R_MAX = 34;
+
+  plotted.sort((a, b) => b.v - a.v).forEach((d) => {
+    const cen = MAP_CENTROIDS[d.c.cc];
+    const p = project(cen[0], cen[1], W, H);
+    const r = R_MIN + Math.sqrt(d.v / max) * (R_MAX - R_MIN);
+    const color = store.mapCat ? ATTACK_COLORS[store.mapCat] : dominantColor(d.c);
+    const circle = svgEl('circle', {
+      cx: p[0].toFixed(1), cy: p[1].toFixed(1), r: r.toFixed(1),
+      class: 'map-bubble', fill: color,
+    });
+    const title = svgEl('title', {});
+    title.textContent = d.c.name + ': ' + d.v.toLocaleString() +
+      (store.mapCat ? ' ' + data.category_labels[store.mapCat] : ' total');
+    circle.appendChild(title);
+    svg.appendChild(circle);
+  });
+  wrap.appendChild(svg);
+  return wrap;
+}
+
+function dominantColor(c) {
+  let best = null, bestN = -1;
+  ATTACK_ORDER.forEach((cat) => {
+    const n = c.by_category[cat] || 0;
+    if (n > bestN) { bestN = n; best = cat; }
+  });
+  return ATTACK_COLORS[best] || SERIES_1;
+}
+
+function buildCountryTable(data) {
+  const wrap = el('div', 'map-table-wrap');
+  const rows = data.countries
+    .map((c) => ({ c: c, v: countForCountry(c) }))
+    .filter((d) => d.v > 0)
+    .sort((a, b) => b.v - a.v)
+    .slice(0, 25);
+  const max = Math.max(1, ...rows.map((d) => d.v));
+
+  const table = el('table', 'map-table');
+  table.appendChild(el('caption', 'map-table-caption',
+    store.mapCat ? 'Top origins \u2014 ' + data.category_labels[store.mapCat]
+                 : 'Top origins \u2014 all categories'));
+  rows.forEach((d, i) => {
+    const tr = el('tr', 'map-row');
+    tr.appendChild(el('td', 'map-rank', String(i + 1)));
+    tr.appendChild(el('td', 'map-cc', d.c.cc));
+    tr.appendChild(el('td', 'map-name', d.c.name));
+    const barTd = el('td', 'map-bar-cell');
+    const bar = el('div', 'map-bar');
+    bar.style.width = ((d.v / max) * 100) + '%';
+    bar.style.background = store.mapCat ? ATTACK_COLORS[store.mapCat] : dominantColor(d.c);
+    barTd.appendChild(bar);
+    tr.appendChild(barTd);
+    tr.appendChild(el('td', 'map-val', d.v.toLocaleString()));
+    table.appendChild(tr);
+  });
+  wrap.appendChild(table);
+  return wrap;
+}
+
 // ─── View switching ───────────────────────────────────────────────────────────
 function hideAllViews() {
-  ['loading-state', 'error-state', 'cards-container', 'matrix-view', 'trends-view', 'no-results']
+  ['loading-state', 'error-state', 'cards-container', 'matrix-view', 'trends-view', 'map-view', 'no-results']
     .forEach((id) => { const n = $(id); if (n) n.style.display = 'none'; });
 }
 
@@ -1164,6 +1363,7 @@ function showError(message) {
 function renderAll() {
   if (store.filter === 'matrix') { showMatrixView(); return; }
   if (store.filter === 'trends') { showTrendsView(); return; }
+  if (store.filter === 'map') { showMapView(); return; }
   showContent();
   renderBrief();
   renderCards();

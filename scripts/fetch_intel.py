@@ -57,6 +57,15 @@ except ImportError:
     _cspec.loader.exec_module(_cmod)
     CONFIG = _cmod.CONFIG
 
+# Attacker-map modules. Optional: the core feed pipeline stays importable and
+# runnable even if these are missing or their extra deps are unavailable.
+try:
+    from geoip import GeoIP
+    from attacker_feeds import collect_attacker_infrastructure
+except Exception:
+    GeoIP = None
+    collect_attacker_infrastructure = None
+
 # ── MITRE ATT&CK full database ────────────────────────────────────────────────
 try:
     from mitre_ttps import MITRE_TECHNIQUES, TACTIC_ORDER, map_ttps
@@ -2459,6 +2468,21 @@ def main():
             pass
     log.info(f"API phase complete — {len(all_items)} items so far")
 
+    # ── Attacker map (independent of items; aggregated server-side) ─────────
+    # Fetches the attacker-infrastructure feeds, geolocates every IP against the
+    # DB-IP corpus, and collapses ~160k addresses into a per-country/category
+    # summary. The IPs never leave this process — only the counts do.
+    attack_map = None
+    if collect_attacker_infrastructure and CONFIG.enable_attacker_map:
+        try:
+            geo = GeoIP.load() if GeoIP else None
+            attack_map = collect_attacker_infrastructure(geo)
+            if attack_map:
+                log.info(f"✓ Attacker map: {attack_map['distinct_ips']} IPs across "
+                         f"{len(attack_map['countries'])} countries")
+        except Exception as e:
+            log.error(f"Attacker map generation failed: {e}")
+
     # ── Roll up source health ───────────────────────────────────────────────
     # Replaces the append-only source_health_history.jsonl, which had grown to
     # 1.8 MB, was committed on every one of 24 daily runs, and was fetched in
@@ -2661,6 +2685,7 @@ def main():
         "brief": daily_brief,
         "source_breakdown": dict(source_counter.most_common()),
         "source_health": source_health,
+        "attack_map": attack_map,
         "items": all_items,
     }
 
