@@ -1533,9 +1533,99 @@ function buildKevVelocity(kevDaily) {
   return figure;
 }
 
+// --- Geopolitical dashboard (Phase 05) --------------------------------------
+// Suspected actor ORIGIN crossed with target country and target sector.
+// Attribution is contested and frequently wrong, so this view is deliberately
+// cautious: every origin is labelled suspected/attributed, every one shows its
+// source, and no confidence percentage is ever invented.
+
+function geoData() {
+  return (store.meta && store.meta.geopolitics) || null;
+}
+
+function confidencePill(conf) {
+  const pill = el('span', 'geo-pill geo-' + conf, conf);
+  return pill;
+}
+
+function showGeopolView() {
+  hideAllViews();
+  const host = $('geopol-view');
+  if (!host) return;
+  host.style.display = 'block';
+  host.replaceChildren();
+
+  const g = geoData();
+  if (!g || !g.suspected_origins || !g.suspected_origins.length) {
+    host.appendChild(el('h2', 'ls-title', 'Geopolitical view'));
+    host.appendChild(el('p', 'chart-empty',
+      'No attributed activity in the current run. This view fills as items ' +
+      'with a known actor arrive.'));
+    return;
+  }
+
+  host.appendChild(el('h2', 'ls-title', 'Geopolitical view'));
+  host.appendChild(el('p', 'ls-sub', g.disclaimer || ''));
+
+  const labels = (store.meta && store.meta.sector_labels) || {};
+
+  // Suspected-origin cards: each names its actors, its targets and its source.
+  const wrap = el('div', 'geo-origins');
+  g.suspected_origins.forEach((o) => {
+    const card = el('div', 'geo-card');
+    const head = el('div', 'geo-card-head');
+    head.appendChild(el('span', 'geo-cc', o.cc));
+    head.appendChild(el('span', 'geo-country', o.country));
+    head.appendChild(confidencePill(o.confidence));
+    head.appendChild(el('span', 'geo-count', o.count + ' item' + (o.count === 1 ? '' : 's')));
+    card.appendChild(head);
+
+    card.appendChild(el('div', 'geo-actors', 'Actors: ' + o.actors.join(', ')));
+
+    const sectors = Object.entries(o.by_sector || {}).sort((a, b) => b[1] - a[1]);
+    if (sectors.length) {
+      card.appendChild(el('div', 'geo-line',
+        'Targets sectors: ' + sectors.map((s) => (labels[s[0]] || s[0]) + ' (' + s[1] + ')').join(', ')));
+    }
+    const targets = Object.entries(o.by_target || {}).sort((a, b) => b[1] - a[1]);
+    if (targets.length) {
+      card.appendChild(el('div', 'geo-line',
+        'Targets countries: ' + targets.map((tt) => tt[0] + ' (' + tt[1] + ')').join(', ')));
+    }
+    if (o.sources && o.sources.length) {
+      const src = el('details', 'geo-src');
+      src.appendChild(el('summary', 'geo-src-sum', 'Attribution source'));
+      o.sources.forEach((s) => src.appendChild(el('div', 'geo-src-row', s)));
+      card.appendChild(src);
+    }
+    wrap.appendChild(card);
+  });
+  host.appendChild(wrap);
+
+  // Per-actor attribution ledger, so the provenance of every claim is visible.
+  if (g.attributions && g.attributions.length) {
+    const led = el('details', 'geo-ledger');
+    led.appendChild(el('summary', 'geo-ledger-sum',
+      'Attribution ledger \u2014 ' + g.attributions.length + ' actors'));
+    const table = el('table', 'geo-table');
+    g.attributions.forEach((a) => {
+      const tr = el('tr', 'geo-trow');
+      tr.appendChild(el('td', 'geo-td-actor', a.actor));
+      tr.appendChild(el('td', 'geo-td-cc', a.cc + ' ' + a.country));
+      const cd = el('td', 'geo-td-conf');
+      cd.appendChild(confidencePill(a.confidence));
+      tr.appendChild(cd);
+      tr.appendChild(el('td', 'geo-td-src', a.source));
+      table.appendChild(tr);
+    });
+    led.appendChild(table);
+    host.appendChild(led);
+  }
+}
+
 // ─── View switching ───────────────────────────────────────────────────────────
 function hideAllViews() {
-  ['loading-state', 'error-state', 'cards-container', 'matrix-view', 'trends-view', 'map-view', 'landscape-view', 'no-results']
+  ['loading-state', 'error-state', 'cards-container', 'matrix-view', 'trends-view', 'map-view', 'landscape-view', 'geopol-view', 'no-results']
     .forEach((id) => { const n = $(id); if (n) n.style.display = 'none'; });
 }
 
@@ -1560,6 +1650,7 @@ function renderAll() {
   if (store.filter === 'trends') { showTrendsView(); return; }
   if (store.filter === 'map') { showMapView(); return; }
   if (store.filter === 'landscape') { showLandscapeView(); return; }
+  if (store.filter === 'geopol') { showGeopolView(); return; }
   showContent();
   renderBrief();
   renderCards();

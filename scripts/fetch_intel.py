@@ -70,6 +70,10 @@ try:
 except Exception:
     annotate_sectors = None
     SECTOR_LABELS = {}
+try:
+    from geopolitics import build_geopolitics
+except Exception:
+    build_geopolitics = None
 
 # ── MITRE ATT&CK full database ────────────────────────────────────────────────
 try:
@@ -2660,6 +2664,16 @@ def main():
         except Exception as e:
             log.warning(f"Sector tagging failed: {e}")
 
+    # ── Geopolitics (suspected actor origin × target; see geopolitics.py) ───
+    geopolitics = None
+    if build_geopolitics:
+        try:
+            geopolitics = build_geopolitics(all_items)
+            log.info(f"  Geopolitics: {len(geopolitics['suspected_origins'])} origins, "
+                     f"{len(geopolitics['attributions'])} attributed actors")
+        except Exception as e:
+            log.warning(f"Geopolitics build failed: {e}")
+
     # ── AI Enrichment ──────────────────────────────────────────────────────
     try:
         all_items = enrich_with_ai(all_items)
@@ -2704,6 +2718,7 @@ def main():
         "attack_map": attack_map,
         "sector_breakdown": sector_breakdown,
         "sector_labels": SECTOR_LABELS,
+        "geopolitics": geopolitics,
         "items": all_items,
     }
 
