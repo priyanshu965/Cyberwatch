@@ -1379,9 +1379,163 @@ function buildCountryTable(data) {
   return wrap;
 }
 
+// --- Threat landscape (Phase 04) --------------------------------------------
+// A "what's the situation right now" overview, composed from data we already
+// hold: the current feed (severity/KEV/PoC, sectors, attacker map) plus the
+// 30-day archive rollup (actor momentum, technique frequency). No new fetch
+// beyond trends.json, which the Trends view already loads.
+
+function statTile(label, value, sub) {
+  const tile = el('div', 'ls-tile');
+  tile.appendChild(el('div', 'ls-tile-val', String(value)));
+  tile.appendChild(el('div', 'ls-tile-label', label));
+  if (sub) tile.appendChild(el('div', 'ls-tile-sub', sub));
+  return tile;
+}
+
+async function showLandscapeView() {
+  hideAllViews();
+  const host = $('landscape-view');
+  if (!host) return;
+  host.style.display = 'block';
+  host.replaceChildren(el('p', 'chart-empty', 'Composing landscape\u2026'));
+
+  if (!store.trends) {
+    try {
+      const resp = await fetch(TRENDS_URL, { cache: 'no-cache' });
+      if (resp.ok) store.trends = await resp.json();
+    } catch (_) { /* trends are optional here */ }
+  }
+  const t = store.trends || {};
+  const items = store.items || [];
+  host.replaceChildren();
+
+  host.appendChild(el('h2', 'ls-title', 'Threat landscape'));
+  host.appendChild(el('p', 'ls-sub',
+    'A snapshot of the current run set against the last ' +
+    (t.days_covered || 0) + ' days of history.'));
+
+  // Headline stat row, all from the current feed.
+  const kev = items.filter((i) => i.cisa_kev).length;
+  const urgent = items.filter((i) => i.priority_label === 'urgent').length;
+  const withPoc = items.filter((i) => i.has_poc).length;
+  const sectored = items.filter((i) => i.sector).length;
+  const am = store.meta && store.meta.attack_map;
+  const tiles = el('div', 'ls-tiles');
+  tiles.appendChild(statTile('Items this run', items.length));
+  tiles.appendChild(statTile('Urgent', urgent, 'patch now'));
+  tiles.appendChild(statTile('In CISA KEV', kev, 'actively exploited'));
+  tiles.appendChild(statTile('Public PoC', withPoc));
+  tiles.appendChild(statTile('Sector-tagged', sectored));
+  if (am) tiles.appendChild(statTile('Attacker hosts', am.distinct_ips.toLocaleString(), 'across ' + am.countries.length + ' countries'));
+  host.appendChild(tiles);
+
+  const grid = el('div', 'chart-grid-layout');
+
+  // Actor momentum (rising / cooling) from the archive split-half comparison.
+  grid.appendChild(buildActorMomentum(t.top_actors || []));
+
+  // Technique frequency as a ranked bar (distinct from the flat ATT&CK matrix).
+  grid.appendChild(buildBarChart('ATT&CK techniques (30d)', t.top_ttps || [], 'id', 'count'));
+
+  // Sector heat: current feed first, falling back to archive totals.
+  grid.appendChild(buildSectorHeat(items, t.sector_totals || {}));
+
+  // KEV velocity: how many actively-exploited items per day.
+  grid.appendChild(buildKevVelocity(t.kev_daily || []));
+
+  host.appendChild(grid);
+}
+
+function buildActorMomentum(actors) {
+  const figure = el('figure', 'chart-figure');
+  figure.appendChild(el('figcaption', 'chart-title', 'Threat-actor momentum (30d)'));
+  if (!actors.length) {
+    figure.appendChild(el('p', 'chart-empty', 'No actor history yet'));
+    return figure;
+  }
+  const max = Math.max(1, ...actors.map((a) => a.count || 0));
+  const list = el('div', 'bar-list');
+  actors.slice(0, 8).forEach((a) => {
+    const line = el('div', 'bar-row');
+    const name = el('span', 'bar-name', a.name);
+    line.appendChild(name);
+    const track = el('span', 'bar-track');
+    const fill = el('span', 'bar-fill');
+    fill.style.width = (((a.count || 0) / max) * 100) + '%';
+    fill.style.background = SERIES_1;
+    track.appendChild(fill);
+    line.appendChild(track);
+    const arrow = a.momentum === 'rising' ? '\u25B2' : a.momentum === 'cooling' ? '\u25BC' : '\u2013';
+    const cls = a.momentum === 'rising' ? 'ls-rising' : a.momentum === 'cooling' ? 'ls-cooling' : 'ls-steady';
+    const val = el('span', 'bar-val ' + cls, arrow + ' ' + (a.count || 0));
+    val.title = a.momentum + ' (recent ' + (a.recent || 0) + ' vs prior ' + (a.prior || 0) + ')';
+    line.appendChild(val);
+    list.appendChild(line);
+  });
+  figure.appendChild(list);
+  return figure;
+}
+
+function buildSectorHeat(items, archiveTotals) {
+  const figure = el('figure', 'chart-figure');
+  figure.appendChild(el('figcaption', 'chart-title', 'Targeted sectors'));
+  const labels = (store.meta && store.meta.sector_labels) || {};
+  const counts = {};
+  items.forEach((i) => { if (i.sector) counts[i.sector] = (counts[i.sector] || 0) + 1; });
+  let source = counts;
+  if (!Object.keys(counts).length && Object.keys(archiveTotals).length) source = archiveTotals;
+  const rows = Object.entries(source).map((e) => ({ name: labels[e[0]] || e[0], count: e[1] }))
+    .sort((a, b) => b.count - a.count);
+  if (!rows.length) {
+    figure.appendChild(el('p', 'chart-empty', 'No sectors identified yet'));
+    return figure;
+  }
+  const max = Math.max(1, ...rows.map((r) => r.count));
+  const list = el('div', 'bar-list');
+  rows.slice(0, 10).forEach((r) => {
+    const line = el('div', 'bar-row');
+    line.appendChild(el('span', 'bar-name', r.name));
+    const track = el('span', 'bar-track');
+    const fill = el('span', 'bar-fill');
+    fill.style.width = ((r.count / max) * 100) + '%';
+    fill.style.background = SERIES_1;
+    track.appendChild(fill);
+    line.appendChild(track);
+    line.appendChild(el('span', 'bar-val', String(r.count)));
+    list.appendChild(line);
+  });
+  figure.appendChild(list);
+  return figure;
+}
+
+function buildKevVelocity(kevDaily) {
+  const figure = el('figure', 'chart-figure');
+  figure.appendChild(el('figcaption', 'chart-title', 'Actively-exploited (KEV) per day'));
+  if (!kevDaily.length) {
+    figure.appendChild(el('p', 'chart-empty', 'No KEV history yet'));
+    return figure;
+  }
+  const W = 520, H = 140, PAD = 24;
+  const max = Math.max(1, ...kevDaily.map((d) => d.kev));
+  const svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, class: 'ls-spark', role: 'img',
+    'aria-label': 'KEV items per day' });
+  const bw = (W - PAD * 2) / kevDaily.length;
+  kevDaily.forEach((d, i) => {
+    const h = (d.kev / max) * (H - PAD * 2);
+    svg.appendChild(svgEl('rect', {
+      x: (PAD + i * bw).toFixed(1), y: (H - PAD - h).toFixed(1),
+      width: Math.max(1, bw - 1).toFixed(1), height: h.toFixed(1),
+      class: 'ls-kev-bar',
+    }));
+  });
+  figure.appendChild(svg);
+  return figure;
+}
+
 // ─── View switching ───────────────────────────────────────────────────────────
 function hideAllViews() {
-  ['loading-state', 'error-state', 'cards-container', 'matrix-view', 'trends-view', 'map-view', 'no-results']
+  ['loading-state', 'error-state', 'cards-container', 'matrix-view', 'trends-view', 'map-view', 'landscape-view', 'no-results']
     .forEach((id) => { const n = $(id); if (n) n.style.display = 'none'; });
 }
 
@@ -1405,6 +1559,7 @@ function renderAll() {
   if (store.filter === 'matrix') { showMatrixView(); return; }
   if (store.filter === 'trends') { showTrendsView(); return; }
   if (store.filter === 'map') { showMapView(); return; }
+  if (store.filter === 'landscape') { showLandscapeView(); return; }
   showContent();
   renderBrief();
   renderCards();
