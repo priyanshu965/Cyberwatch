@@ -3039,9 +3039,12 @@ async function openCveModal(cveId) {
       a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
       links.appendChild(a);
     };
-    xref('NVD', `https://nvd.nist.gov/vuln/detail/${cveId}`);
-    xref('MITRE', `https://www.cve.org/CVERecord?id=${cveId}`);
-    xref('Vulnrichment', `https://github.com/cisagov/vulnrichment/search?q=${cveId}`);
+    // Encoded, not interpolated raw: cveId originates in feed data, and an
+    // unencoded value can bend the path or query even though the origin is fixed.
+    const cveParam = encodeURIComponent(cveId);
+    xref('NVD', `https://nvd.nist.gov/vuln/detail/${cveParam}`);
+    xref('MITRE', `https://www.cve.org/CVERecord?id=${cveParam}`);
+    xref('Vulnrichment', `https://github.com/cisagov/vulnrichment/search?q=${cveParam}`);
     if (local?.poc_url && safeUrl(local.poc_url)) xref('Public PoC', safeUrl(local.poc_url));
     body.appendChild(el('div', 'modal-section-title', 'References'));
     body.appendChild(links);
