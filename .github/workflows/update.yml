@@ -141,6 +141,12 @@ jobs:
           ALERT_MIN_PRIORITY: ${{ vars.ALERT_MIN_PRIORITY }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           DASHBOARD_URL: ${{ vars.DASHBOARD_URL }}
+          # CASM: your own estate. Without these the exposure and attack-surface
+          # checks have nothing to look at and silently do nothing.
+          MY_DOMAINS:    ${{ vars.MY_DOMAINS }}
+          DARKWEB_WATCH: ${{ vars.DARKWEB_WATCH }}
+          # Own-estate findings stay off the public site unless this is set.
+          PUBLISH_OWN_ESTATE: ${{ vars.PUBLISH_OWN_ESTATE }}
         run: |
           python scripts/fetch_intel.py
 
