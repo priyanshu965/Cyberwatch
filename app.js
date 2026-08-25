@@ -1088,6 +1088,18 @@ async function showTrendsView() {
 }
 
 // ─── ATT&CK matrix ────────────────────────────────────────────────────────────
+// --- ATT&CK matrix ----------------------------------------------------------
+// Laid out as the kill chain actually runs: tactics left to right in canonical
+// ATT&CK order, techniques stacked beneath, cells heat-shaded by how often the
+// current feed touches them. The point is to see WHERE in the chain this run's
+// activity concentrates, which an alphabetical grid of equal-weight boxes
+// cannot show.
+
+function tacticOrder() {
+  const shipped = (store.meta && store.meta.tactic_order) || [];
+  return shipped.length ? shipped.map((t) => t.name) : [];
+}
+
 function showMatrixView() {
   hideAllViews();
   const host = $('matrix-view');
@@ -1109,25 +1121,115 @@ function showMatrixView() {
   const grid = $('matrix-grid');
   if (!grid) return;
   grid.replaceChildren();
+
+  const legend = $('matrix-legend-host');
+  if (legend) legend.replaceChildren();
+
   if (!tactics.size) {
     grid.appendChild(el('p', 'chart-empty', 'No techniques mapped in the current feed.'));
     return;
   }
-  [...tactics.entries()].forEach(([tactic, ids]) => {
+
+  // Order columns by the canonical kill chain; anything unrecognised trails.
+  const canonical = tacticOrder();
+  const present = [...tactics.keys()];
+  const ordered = canonical.filter((n) => tactics.has(n))
+    .concat(present.filter((n) => !canonical.includes(n)).sort());
+
+  const allCounts = Object.values(counts);
+  const max = Math.max(1, ...allCounts);
+  const totalHits = allCounts.reduce((s, n) => s + n, 0);
+
+  // ---- summary strip: what the chain actually looks like this run ----------
+  if (legend) {
+    const sum = el('div', 'mx-summary');
+    sum.appendChild(mxStat(Object.keys(counts).length, 'techniques observed'));
+    sum.appendChild(mxStat(ordered.length, 'of ' + (canonical.length || 14) + ' tactics touched'));
+    sum.appendChild(mxStat(totalHits, 'technique mentions'));
+    const hottest = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
+    if (hottest) {
+      sum.appendChild(mxStat(hottest[0], 'most-mapped', names[hottest[0]]));
+    }
+    legend.appendChild(sum);
+
+    // Kill-chain ribbon: every canonical tactic, lit where this run has data.
+    const chain = el('div', 'mx-chain');
+    (canonical.length ? canonical : ordered).forEach((name, i) => {
+      const seg = el('div', 'mx-chain-seg' + (tactics.has(name) ? ' lit' : ''));
+      const n = tactics.has(name)
+        ? [...tactics.get(name)].reduce((s, id) => s + counts[id], 0) : 0;
+      seg.style.setProperty('--seg-heat', tactics.has(name)
+        ? String(Math.min(1, n / Math.max(1, totalHits / 3))) : '0');
+      seg.appendChild(el('span', 'mx-chain-name', name));
+      seg.appendChild(el('span', 'mx-chain-n', n ? String(n) : '·'));
+      seg.title = name + (n ? ': ' + n + ' mention' + (n === 1 ? '' : 's') : ': not seen this run');
+      chain.appendChild(seg);
+      if (i < (canonical.length ? canonical.length : ordered.length) - 1) {
+        chain.appendChild(el('span', 'mx-chain-link', ''));
+      }
+    });
+    legend.appendChild(chain);
+
+    const scale = el('div', 'mx-scale');
+    scale.appendChild(el('span', 'mx-scale-label', 'Fewer'));
+    const ramp = el('span', 'mx-scale-ramp');
+    for (let i = 1; i <= 5; i++) {
+      const sw = el('span', 'mx-scale-sw');
+      sw.style.background = mxHeat(i / 5);
+      ramp.appendChild(sw);
+    }
+    scale.appendChild(ramp);
+    scale.appendChild(el('span', 'mx-scale-label', 'More items mapped'));
+    scale.appendChild(el('span', 'mx-scale-hint', 'Click a technique to filter the feed'));
+    legend.appendChild(scale);
+  }
+
+  // ---- the matrix ----------------------------------------------------------
+  ordered.forEach((tactic) => {
+    const ids = tactics.get(tactic);
     const col = el('div', 'tactic-col');
-    col.appendChild(el('div', 'tactic-header', tactic));
-    [...ids].sort().forEach((id) => {
+    const colTotal = [...ids].reduce((s, id) => s + counts[id], 0);
+
+    const header = el('div', 'tactic-header');
+    header.appendChild(el('span', 'tactic-name', tactic));
+    header.appendChild(el('span', 'tactic-count', String(colTotal)));
+    col.appendChild(header);
+
+    [...ids].sort((a, b) => counts[b] - counts[a]).forEach((id) => {
       const n = counts[id];
-      const cell = el('button', `tech-cell ${n >= 3 ? 'active-high' : 'active-med'}`);
+      const heat = n / max;
+      const cell = el('button', 'tech-cell');
       cell.type = 'button';
       cell.dataset.technique = id;
-      cell.title = `${id} — ${names[id]} (${n} item${n === 1 ? '' : 's'})`;
+      cell.style.background = mxHeat(heat);
+      cell.style.setProperty('--cell-heat', heat.toFixed(3));
+      if (heat > 0.66) cell.classList.add('is-hot');
+      cell.title = id + ' — ' + names[id] + ' (' + n + ' item' + (n === 1 ? '' : 's') + ')';
       cell.appendChild(el('span', 'tech-id', id));
+      cell.appendChild(el('span', 'tech-name', names[id] || ''));
       cell.appendChild(el('span', 'tech-count', String(n)));
+      const bar = el('span', 'tech-bar');
+      bar.style.width = (heat * 100) + '%';
+      cell.appendChild(bar);
       col.appendChild(cell);
     });
     grid.appendChild(col);
   });
+}
+
+function mxStat(value, label, sub) {
+  const s = el('div', 'mx-stat');
+  s.appendChild(el('span', 'mx-stat-val', String(value)));
+  s.appendChild(el('span', 'mx-stat-label', label));
+  if (sub) s.appendChild(el('span', 'mx-stat-sub', sub));
+  return s;
+}
+
+// Sequential single-hue ramp. Heat is ORDINAL (few -> many), so it takes one
+// hue with rising lightness/alpha rather than a categorical set.
+function mxHeat(t) {
+  const a = 0.10 + Math.min(1, Math.max(0, t)) * 0.72;
+  return 'rgba(0, 173, 216, ' + a.toFixed(3) + ')';
 }
 
 // --- Attacker map -----------------------------------------------------------
@@ -1858,6 +1960,10 @@ function buildCountryTable(data) {
 // 30-day archive rollup (actor momentum, technique frequency). No new fetch
 // beyond trends.json, which the Trends view already loads.
 
+// --- Threat landscape -------------------------------------------------------
+// Every panel states what it shows and what the number means. A chart with no
+// axis, no units and no explanation is decoration, not information.
+
 function statTile(label, value, sub) {
   const tile = el('div', 'ls-tile');
   tile.appendChild(el('div', 'ls-tile-val', String(value)));
@@ -1866,12 +1972,22 @@ function statTile(label, value, sub) {
   return tile;
 }
 
+// A framed panel: title, one line of plain English, then the visual.
+function lsPanel(title, explainer) {
+  const fig = el('figure', 'ls-panel');
+  const head = el('figcaption', 'ls-panel-head');
+  head.appendChild(el('span', 'ls-panel-title', title));
+  if (explainer) head.appendChild(el('span', 'ls-panel-explain', explainer));
+  fig.appendChild(head);
+  return fig;
+}
+
 async function showLandscapeView() {
   hideAllViews();
   const host = $('landscape-view');
   if (!host) return;
   host.style.display = 'block';
-  host.replaceChildren(el('p', 'chart-empty', 'Composing landscape\u2026'));
+  host.replaceChildren(el('p', 'chart-empty', 'Composing landscape…'));
 
   if (!store.trends) {
     try {
@@ -1885,125 +2001,238 @@ async function showLandscapeView() {
 
   host.appendChild(el('h2', 'ls-title', 'Threat landscape'));
   host.appendChild(el('p', 'ls-sub',
-    'A snapshot of the current run set against the last ' +
-    (t.days_covered || 0) + ' days of history.'));
+    'This run, set against the last ' + (t.days_covered || 0) + ' days of history.'));
 
-  // Headline stat row, all from the current feed.
   const kev = items.filter((i) => i.cisa_kev).length;
   const urgent = items.filter((i) => i.priority_label === 'urgent').length;
   const withPoc = items.filter((i) => i.has_poc).length;
   const sectored = items.filter((i) => i.sector).length;
   const am = store.meta && store.meta.attack_map;
+
   const tiles = el('div', 'ls-tiles');
   tiles.appendChild(statTile('Items this run', items.length));
-  tiles.appendChild(statTile('Urgent', urgent, 'patch now'));
-  tiles.appendChild(statTile('In CISA KEV', kev, 'actively exploited'));
-  tiles.appendChild(statTile('Public PoC', withPoc));
-  tiles.appendChild(statTile('Sector-tagged', sectored));
-  if (am) tiles.appendChild(statTile('Attacker hosts', am.distinct_ips.toLocaleString(), 'across ' + am.countries.length + ' countries'));
+  tiles.appendChild(statTile('Urgent', urgent, 'patch within 24h'));
+  tiles.appendChild(statTile('In CISA KEV', kev, 'confirmed exploited'));
+  tiles.appendChild(statTile('Public PoC', withPoc, 'exploit code exists'));
+  tiles.appendChild(statTile('Sector-tagged', sectored, 'target identified'));
+  if (am) {
+    tiles.appendChild(statTile('Attacker hosts', am.distinct_ips.toLocaleString(),
+      'across ' + am.countries.length + ' countries'));
+  }
   host.appendChild(tiles);
 
-  const grid = el('div', 'chart-grid-layout');
-
-  // Actor momentum (rising / cooling) from the archive split-half comparison.
-  grid.appendChild(buildActorMomentum(t.top_actors || []));
-
-  // Technique frequency as a ranked bar (distinct from the flat ATT&CK matrix).
-  grid.appendChild(buildBarChart('ATT&CK techniques (30d)', t.top_ttps || [], 'id', 'count'));
-
-  // Sector heat: current feed first, falling back to archive totals.
-  grid.appendChild(buildSectorHeat(items, t.sector_totals || {}));
-
-  // KEV velocity: how many actively-exploited items per day.
+  const grid = el('div', 'ls-grid');
   grid.appendChild(buildKevVelocity(t.kev_daily || []));
-
+  grid.appendChild(buildActorMomentum(t.top_actors || []));
+  grid.appendChild(buildSectorHeat(items, t.sector_totals || {}));
+  grid.appendChild(buildTechniqueRank(t.top_ttps || []));
   host.appendChild(grid);
 }
 
-function buildActorMomentum(actors) {
-  const figure = el('figure', 'chart-figure');
-  figure.appendChild(el('figcaption', 'chart-title', 'Threat-actor momentum (30d)'));
-  if (!actors.length) {
-    figure.appendChild(el('p', 'chart-empty', 'No actor history yet'));
-    return figure;
+// ---- KEV velocity: a real chart, with axes, a mean, and a stated meaning ----
+function buildKevVelocity(kevDaily) {
+  const fig = lsPanel('Actively-exploited items per day',
+    'Items in CISA’s Known Exploited Vulnerabilities catalogue. These are ' +
+    'confirmed exploited in the wild, so the line is the volume of things that ' +
+    'genuinely warrant same-day action.');
+  if (!kevDaily.length) {
+    fig.appendChild(el('p', 'chart-empty', 'No KEV history yet — this builds from the daily archive.'));
+    return fig;
   }
-  const max = Math.max(1, ...actors.map((a) => a.count || 0));
-  const list = el('div', 'bar-list');
-  actors.slice(0, 8).forEach((a) => {
-    const line = el('div', 'bar-row');
-    const name = el('span', 'bar-name', a.name);
-    line.appendChild(name);
-    const track = el('span', 'bar-track');
-    const fill = el('span', 'bar-fill');
-    fill.style.width = (((a.count || 0) / max) * 100) + '%';
-    fill.style.background = SERIES_1;
-    track.appendChild(fill);
-    line.appendChild(track);
-    const arrow = a.momentum === 'rising' ? '\u25B2' : a.momentum === 'cooling' ? '\u25BC' : '\u2013';
-    const cls = a.momentum === 'rising' ? 'ls-rising' : a.momentum === 'cooling' ? 'ls-cooling' : 'ls-steady';
-    const val = el('span', 'bar-val ' + cls, arrow + ' ' + (a.count || 0));
-    val.title = a.momentum + ' (recent ' + (a.recent || 0) + ' vs prior ' + (a.prior || 0) + ')';
-    line.appendChild(val);
-    list.appendChild(line);
+
+  const vals = kevDaily.map((d) => d.kev);
+  const max = Math.max(1, ...vals);
+  const mean = vals.reduce((s, v) => s + v, 0) / vals.length;
+  const latest = vals[vals.length - 1];
+  // Compare the last week against the week before it, so the callout is a real
+  // trend and not the noise between two adjacent days.
+  const wk = Math.min(7, Math.floor(vals.length / 2));
+  const recent = vals.slice(-wk).reduce((s, v) => s + v, 0) / Math.max(1, wk);
+  const prior = vals.slice(-wk * 2, -wk).reduce((s, v) => s + v, 0) / Math.max(1, wk);
+  const delta = prior ? ((recent - prior) / prior) * 100 : 0;
+
+  const call = el('div', 'ls-callout');
+  const cv = el('div', 'ls-callout-main');
+  cv.appendChild(el('span', 'ls-callout-num', String(latest)));
+  cv.appendChild(el('span', 'ls-callout-unit', 'latest day'));
+  call.appendChild(cv);
+  const trendCls = delta > 5 ? 'ls-up' : delta < -5 ? 'ls-down' : 'ls-flat';
+  const arrow = delta > 5 ? '▲' : delta < -5 ? '▼' : '–';
+  const tr = el('div', 'ls-callout-trend ' + trendCls);
+  tr.appendChild(el('span', 'ls-trend-arrow', arrow));
+  tr.appendChild(el('span', 'ls-trend-text',
+    (delta === 0 ? 'level' : Math.abs(delta).toFixed(0) + '% ' + (delta > 0 ? 'higher' : 'lower')) +
+    ' than the previous ' + wk + ' days'));
+  call.appendChild(tr);
+  call.appendChild(el('div', 'ls-callout-mean', 'Daily average ' + mean.toFixed(1)));
+  fig.appendChild(call);
+
+  const W = 560, H = 180;
+  const PAD = { top: 14, right: 14, bottom: 28, left: 34 };
+  const plotW = W - PAD.left - PAD.right;
+  const plotH = H - PAD.top - PAD.bottom;
+  const svg = svgEl('svg', {
+    viewBox: '0 0 ' + W + ' ' + H, class: 'ls-chart',
+    role: 'img', 'aria-label': 'KEV items per day over ' + kevDaily.length + ' days',
   });
-  figure.appendChild(list);
-  return figure;
+
+  // y gridlines + labels, so bar heights are readable as numbers.
+  const ticks = [0, Math.round(max / 2), max];
+  ticks.forEach((v) => {
+    const y = PAD.top + plotH - (v / max) * plotH;
+    svg.appendChild(svgEl('line', {
+      x1: PAD.left, y1: y.toFixed(1), x2: W - PAD.right, y2: y.toFixed(1), class: 'ls-grid',
+    }));
+    const lab = svgEl('text', {
+      x: PAD.left - 6, y: (y + 3).toFixed(1), class: 'ls-axis', 'text-anchor': 'end',
+    });
+    lab.textContent = String(v);
+    svg.appendChild(lab);
+  });
+
+  const bw = plotW / kevDaily.length;
+  kevDaily.forEach((d, i) => {
+    const h = (d.kev / max) * plotH;
+    const rect = svgEl('rect', {
+      x: (PAD.left + i * bw).toFixed(1), y: (PAD.top + plotH - h).toFixed(1),
+      width: Math.max(1, bw - 1.5).toFixed(1), height: Math.max(0, h).toFixed(1),
+      class: 'ls-kev-bar' + (i === kevDaily.length - 1 ? ' is-latest' : ''),
+    });
+    const ttl = svgEl('title', {});
+    ttl.textContent = d.date + ': ' + d.kev + ' KEV item' + (d.kev === 1 ? '' : 's');
+    rect.appendChild(ttl);
+    svg.appendChild(rect);
+  });
+
+  // Mean line, labelled — turns "some bars" into "above or below normal".
+  const my = PAD.top + plotH - (mean / max) * plotH;
+  svg.appendChild(svgEl('line', {
+    x1: PAD.left, y1: my.toFixed(1), x2: W - PAD.right, y2: my.toFixed(1), class: 'ls-mean',
+  }));
+  const ml = svgEl('text', {
+    x: W - PAD.right, y: (my - 5).toFixed(1), class: 'ls-mean-label', 'text-anchor': 'end',
+  });
+  ml.textContent = 'avg ' + mean.toFixed(1);
+  svg.appendChild(ml);
+
+  // x axis: first and last date, so the window is explicit.
+  const first = svgEl('text', { x: PAD.left, y: H - 8, class: 'ls-axis' });
+  first.textContent = kevDaily[0].date;
+  svg.appendChild(first);
+  const lastT = svgEl('text', { x: W - PAD.right, y: H - 8, class: 'ls-axis', 'text-anchor': 'end' });
+  lastT.textContent = kevDaily[kevDaily.length - 1].date;
+  svg.appendChild(lastT);
+
+  fig.appendChild(svg);
+  return fig;
 }
 
+// ---- actor momentum --------------------------------------------------------
+function buildActorMomentum(actors) {
+  const fig = lsPanel('Threat-actor momentum',
+    'Days each actor appeared over the window. The arrow compares the recent ' +
+    'half against the earlier half, so it reads as rising or cooling rather ' +
+    'than just a total.');
+  if (!actors.length) {
+    fig.appendChild(el('p', 'chart-empty', 'No actor history yet.'));
+    return fig;
+  }
+  const max = Math.max(1, ...actors.map((a) => a.count || 0));
+  const list = el('div', 'ls-bars');
+  actors.slice(0, 8).forEach((a) => {
+    const row = el('div', 'ls-bar-row');
+    row.appendChild(el('span', 'ls-bar-name', a.name));
+    const track = el('span', 'ls-bar-track');
+    const fill = el('span', 'ls-bar-fill');
+    fill.style.width = (((a.count || 0) / max) * 100) + '%';
+    fill.style.background = a.momentum === 'rising' ? '#e0653f'
+      : a.momentum === 'cooling' ? '#3fae8c' : SERIES_1;
+    track.appendChild(fill);
+    row.appendChild(track);
+    const cls = a.momentum === 'rising' ? 'ls-up' : a.momentum === 'cooling' ? 'ls-down' : 'ls-flat';
+    const arrow = a.momentum === 'rising' ? '▲' : a.momentum === 'cooling' ? '▼' : '–';
+    const val = el('span', 'ls-bar-val ' + cls, arrow + ' ' + (a.count || 0) + 'd');
+    val.title = a.momentum + ' — ' + (a.recent || 0) + ' days recently vs ' +
+      (a.prior || 0) + ' days before';
+    row.appendChild(val);
+    list.appendChild(row);
+  });
+  fig.appendChild(list);
+  return fig;
+}
+
+// ---- sector heat -----------------------------------------------------------
 function buildSectorHeat(items, archiveTotals) {
-  const figure = el('figure', 'chart-figure');
-  figure.appendChild(el('figcaption', 'chart-title', 'Targeted sectors'));
+  const fig = lsPanel('Targeted sectors',
+    'Which industries this run’s items are aimed at. Tagged from the source ' +
+    'where it names a victim sector, inferred from the text otherwise.');
   const labels = (store.meta && store.meta.sector_labels) || {};
   const counts = {};
   items.forEach((i) => { if (i.sector) counts[i.sector] = (counts[i.sector] || 0) + 1; });
-  let source = counts;
-  if (!Object.keys(counts).length && Object.keys(archiveTotals).length) source = archiveTotals;
-  const rows = Object.entries(source).map((e) => ({ name: labels[e[0]] || e[0], count: e[1] }))
+  let source = counts, scope = 'this run';
+  if (!Object.keys(counts).length && Object.keys(archiveTotals).length) {
+    source = archiveTotals; scope = 'last 30 days';
+  }
+  const rows = Object.entries(source)
+    .map((e) => ({ key: e[0], name: labels[e[0]] || e[0], count: e[1] }))
     .sort((a, b) => b.count - a.count);
   if (!rows.length) {
-    figure.appendChild(el('p', 'chart-empty', 'No sectors identified yet'));
-    return figure;
+    fig.appendChild(el('p', 'chart-empty', 'No sectors identified yet.'));
+    return fig;
   }
+  const total = rows.reduce((s, r) => s + r.count, 0);
   const max = Math.max(1, ...rows.map((r) => r.count));
-  const list = el('div', 'bar-list');
-  rows.slice(0, 10).forEach((r) => {
-    const line = el('div', 'bar-row');
-    line.appendChild(el('span', 'bar-name', r.name));
-    const track = el('span', 'bar-track');
-    const fill = el('span', 'bar-fill');
+  const list = el('div', 'ls-bars');
+  rows.slice(0, 9).forEach((r) => {
+    const row = el('div', 'ls-bar-row is-click');
+    row.dataset.sector = r.key;
+    row.appendChild(el('span', 'ls-bar-name', r.name));
+    const track = el('span', 'ls-bar-track');
+    const fill = el('span', 'ls-bar-fill');
     fill.style.width = ((r.count / max) * 100) + '%';
     fill.style.background = SERIES_1;
     track.appendChild(fill);
-    line.appendChild(track);
-    line.appendChild(el('span', 'bar-val', String(r.count)));
-    list.appendChild(line);
+    row.appendChild(track);
+    const pct = ((r.count / total) * 100).toFixed(0);
+    const val = el('span', 'ls-bar-val', r.count + ' · ' + pct + '%');
+    val.title = r.count + ' of ' + total + ' tagged items (' + scope + ')';
+    row.appendChild(val);
+    list.appendChild(row);
   });
-  figure.appendChild(list);
-  return figure;
+  fig.appendChild(list);
+  fig.appendChild(el('p', 'ls-foot', total + ' tagged items · ' + scope));
+  return fig;
 }
 
-function buildKevVelocity(kevDaily) {
-  const figure = el('figure', 'chart-figure');
-  figure.appendChild(el('figcaption', 'chart-title', 'Actively-exploited (KEV) per day'));
-  if (!kevDaily.length) {
-    figure.appendChild(el('p', 'chart-empty', 'No KEV history yet'));
-    return figure;
+// ---- technique frequency ---------------------------------------------------
+function buildTechniqueRank(ttps) {
+  const fig = lsPanel('ATT&CK techniques',
+    'How often each technique was mapped over the window. The matrix shows ' +
+    'where in the kill chain these sit.');
+  if (!ttps.length) {
+    fig.appendChild(el('p', 'chart-empty', 'No technique history yet.'));
+    return fig;
   }
-  const W = 520, H = 140, PAD = 24;
-  const max = Math.max(1, ...kevDaily.map((d) => d.kev));
-  const svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, class: 'ls-spark', role: 'img',
-    'aria-label': 'KEV items per day' });
-  const bw = (W - PAD * 2) / kevDaily.length;
-  kevDaily.forEach((d, i) => {
-    const h = (d.kev / max) * (H - PAD * 2);
-    svg.appendChild(svgEl('rect', {
-      x: (PAD + i * bw).toFixed(1), y: (H - PAD - h).toFixed(1),
-      width: Math.max(1, bw - 1).toFixed(1), height: h.toFixed(1),
-      class: 'ls-kev-bar',
-    }));
+  const max = Math.max(1, ...ttps.map((t) => t.count || 0));
+  const list = el('div', 'ls-bars');
+  ttps.slice(0, 8).forEach((t) => {
+    const row = el('div', 'ls-bar-row');
+    const name = el('span', 'ls-bar-name', t.id);
+    name.title = t.name || t.id;
+    row.appendChild(name);
+    const track = el('span', 'ls-bar-track');
+    const fill = el('span', 'ls-bar-fill');
+    fill.style.width = (((t.count || 0) / max) * 100) + '%';
+    fill.style.background = SERIES_1;
+    track.appendChild(fill);
+    row.appendChild(track);
+    const val = el('span', 'ls-bar-val', String(t.count || 0));
+    val.title = (t.name || '') + ' — mapped on ' + (t.count || 0) + ' days';
+    row.appendChild(val);
+    list.appendChild(row);
   });
-  figure.appendChild(svg);
-  return figure;
+  fig.appendChild(list);
+  return fig;
 }
 
 // --- Geopolitical dashboard (Phase 05) --------------------------------------
@@ -2611,6 +2840,15 @@ function initEvents() {
           || store.filter === 'geopol') {
         store.filter = 'all';
       }
+      update();
+      return;
+    }
+
+    const lsSector = t.closest('.ls-bar-row.is-click');
+    if (lsSector && lsSector.dataset.sector) {
+      const s = lsSector.dataset.sector;
+      store.sector = store.sector === s ? null : s;
+      store.filter = 'all';
       update();
       return;
     }

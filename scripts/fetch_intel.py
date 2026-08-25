@@ -2797,6 +2797,9 @@ def main():
         "attack_map": attack_map,
         "sector_breakdown": sector_breakdown,
         "sector_labels": SECTOR_LABELS,
+        # Canonical ATT&CK kill-chain order, so the matrix can lay tactics out
+        # left-to-right as the framework intends instead of alphabetically.
+        "tactic_order": TACTIC_ORDER,
         "geopolitics": geopolitics,
         "provenance_breakdown": provenance_breakdown,
         "provenance_labels": PROVENANCE_LABELS,
