@@ -63,7 +63,7 @@ const store = {
   watchlist: [], watchlistOnly: false, stack: [],
   dismissed: new Set(), starred: new Set(), showDismissed: false,
   lastVisit: null, stamp: null,
-  mapCat: null, sector: null, provenance: null, humanOnly: false,
+  mapCat: null, sector: null, mapPaused: false, provenance: null, humanOnly: false,
   notes: {},
 };
 
@@ -302,6 +302,8 @@ function applyFilters() {
     list = list.filter(matchesStack);
   } else if (store.filter === 'starred') {
     list = list.filter((i) => store.starred.has(i._key));
+  } else if (store.filter === 'urgent') {
+    list = list.filter((i) => i.priority_label === 'urgent');
   } else if (store.filter === 'exploited') {
     list = list.filter((i) => i.cisa_kev || i.ssvc_exploitation === 'active' || i.has_poc);
   } else if (CATEGORIES.includes(store.filter)) {
@@ -1353,8 +1355,50 @@ function shadeFor(value, max, baseColor) {
   return { fill: baseColor, opacity: 0.15 + t * 0.75 };
 }
 
+// --- LIVE threat map -------------------------------------------------------
+// Combines what the three reference maps each do well:
+//   Radware    -> Top Origins / Top Targets rails beside the map
+//   Check Point-> a live scrolling event ticker
+//   Kaspersky  -> a running odometer and per-category toggles
+//
+// HONESTY: we own no sensors, so there is no packet telemetry to stream. Both
+// ENDPOINTS of every arc are real - origins are the geolocated attacker hosts
+// observed in the feeds, targets are the countries actually named as targeted
+// in reporting (geopolitics.target_countries). Only the PAIRING is sampled from
+// those real distributions, and the header says so. When no target data exists
+// we animate origin pulses only, rather than invent a destination.
+
+let mapRaf = null;          // animation frame handle, so views can cancel it
+let mapArcs = [];           // in-flight arcs
+let mapEventSeq = 0;
+let mapCounter = 0;
+
+function stopMapAnimation() {
+  if (mapRaf !== null) { cancelAnimationFrame(mapRaf); mapRaf = null; }
+  mapArcs = [];
+}
+
+function prefersReducedMotion() {
+  return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+// Weighted pick from [{w, ...}] using the real counts as weights.
+function weightedPick(rows) {
+  const total = rows.reduce((s, r) => s + r.w, 0);
+  if (total <= 0) return null;
+  let r = Math.random() * total;
+  for (const row of rows) { r -= row.w; if (r <= 0) return row; }
+  return rows[rows.length - 1];
+}
+
+function mapCentroid(cc) {
+  if (!WORLD_PATHS[cc]) return null;
+  return pathBBoxCenter(WORLD_PATHS[cc]);
+}
+
 function showMapView() {
   hideAllViews();
+  stopMapAnimation();
   const host = $('map-view');
   if (!host) return;
   host.style.display = 'block';
@@ -1363,19 +1407,41 @@ function showMapView() {
   const data = attackMapData();
   if (!data || !data.countries || !data.countries.length) {
     host.appendChild(el('h2', 'map-title', 'Threat map'));
-    host.appendChild(el('p', 'chart-empty',
-      'No attacker-infrastructure data in the current run.'));
+    host.appendChild(el('p', 'chart-empty', 'No attacker-infrastructure data in the current run.'));
     return;
   }
 
-  const head = el('div', 'map-head');
-  head.appendChild(el('h2', 'map-title', 'Attacker infrastructure by origin'));
-  head.appendChild(el('p', 'map-sub',
-    data.distinct_ips.toLocaleString() + ' distinct hosts across ' +
-    data.countries.length + ' countries. Where scanning, brute-force, ' +
-    'amplification and anonymity infrastructure is currently hosted.'));
-  host.appendChild(head);
+  // ---- command bar ---------------------------------------------------------
+  const bar = el('div', 'lm-bar');
+  const live = el('div', 'lm-live');
+  live.appendChild(el('span', 'lm-dot'));
+  live.appendChild(el('span', 'lm-live-label', 'LIVE REPLAY'));
+  bar.appendChild(live);
 
+  const odo = el('div', 'lm-odo');
+  odo.appendChild(el('span', 'lm-odo-label', 'HOSTS OBSERVED'));
+  const odoVal = el('span', 'lm-odo-val', '0');
+  odoVal.id = 'lm-odo-val';
+  odo.appendChild(odoVal);
+  bar.appendChild(odo);
+
+  const controls = el('div', 'lm-controls');
+  const pause = el('button', 'lm-btn', store.mapPaused ? '▶ Play' : '⏸ Pause');
+  pause.type = 'button';
+  pause.addEventListener('click', () => {
+    store.mapPaused = !store.mapPaused;
+    showMapView();
+  });
+  controls.appendChild(pause);
+  bar.appendChild(controls);
+  host.appendChild(bar);
+
+  host.appendChild(el('p', 'lm-honesty',
+    'Replay of observed attacker infrastructure and reported targeting. ' +
+    'Origins and targets are real; the pairing is sampled from those distributions. ' +
+    'This is not live packet telemetry.'));
+
+  // ---- category toggles ----------------------------------------------------
   const toggles = el('div', 'map-toggles');
   const allBtn = el('button', 'map-toggle' + (store.mapCat === null ? ' active' : ''), 'All');
   allBtn.type = 'button';
@@ -1383,13 +1449,14 @@ function showMapView() {
   toggles.appendChild(allBtn);
   ATTACK_ORDER.forEach((cat) => {
     const n = data.totals[cat] || 0;
+    if (!n) return;
     const b = el('button', 'map-toggle' + (store.mapCat === cat ? ' active' : ''));
     b.type = 'button';
     const dot = el('span', 'map-dot');
     dot.style.background = ATTACK_COLORS[cat];
     b.appendChild(dot);
     b.appendChild(el('span', 'map-toggle-label',
-      (data.category_labels[cat] || cat) + ' (' + n.toLocaleString() + ')'));
+      (data.category_labels[cat] || cat) + ' ' + n.toLocaleString()));
     b.addEventListener('click', () => {
       store.mapCat = store.mapCat === cat ? null : cat;
       showMapView();
@@ -1398,11 +1465,14 @@ function showMapView() {
   });
   host.appendChild(toggles);
 
-  const grid = el('div', 'map-grid');
-  grid.appendChild(buildChoropleth(data));
-  grid.appendChild(buildCountryTable(data));
+  // ---- three-column command layout ----------------------------------------
+  const grid = el('div', 'lm-grid');
+  grid.appendChild(buildOriginTargetRail(data));
+  grid.appendChild(buildLiveMap(data));
+  grid.appendChild(buildTicker());
   host.appendChild(grid);
 
+  // ---- provenance ----------------------------------------------------------
   const prov = el('details', 'map-prov');
   prov.appendChild(el('summary', 'map-prov-summary',
     'Sources — ' + (data.sources || []).filter((s) => s.status === 'ok').length + ' feeds'));
@@ -1417,11 +1487,84 @@ function showMapView() {
   prov.appendChild(list);
   if (data.attribution) prov.appendChild(el('p', 'map-attribution', data.attribution));
   host.appendChild(prov);
+
+  startMapAnimation(data);
 }
 
-function buildChoropleth(data) {
+// ---- left rail: top origins + top targets ---------------------------------
+function buildOriginTargetRail(data) {
+  const rail = el('div', 'lm-rail');
+
+  const origins = data.countries
+    .map((c) => ({ c: c, v: countForCountry(c) }))
+    .filter((d) => d.v > 0)
+    .sort((a, b) => b.v - a.v)
+    .slice(0, 10);
+
+  rail.appendChild(railPanel('TOP ORIGINS', origins.map((d) => ({
+    cc: d.c.cc, name: d.c.name, v: d.v,
+    color: store.mapCat ? ATTACK_COLORS[store.mapCat] : dominantColor(d.c),
+  })), 'hosts'));
+
+  const targets = targetRows();
+  if (targets.length) {
+    rail.appendChild(railPanel('TOP REPORTED TARGETS', targets.map((t) => ({
+      cc: t.cc, name: t.name, v: t.v, color: '#3f9dd4',
+    })), 'mentions'));
+  }
+  return rail;
+}
+
+// Real reported targets, from country extraction over the feed.
+function targetRows() {
+  const g = (store.meta && store.meta.geopolitics) || {};
+  const tc = g.target_countries || {};
+  return Object.entries(tc)
+    .map((e) => ({ cc: e[0], name: countryNameFor(e[0]), v: e[1] }))
+    .sort((a, b) => b.v - a.v)
+    .slice(0, 10);
+}
+
+function countryNameFor(cc) {
+  const am = attackMapData();
+  if (am) {
+    const hit = am.countries.find((c) => c.cc === cc);
+    if (hit) return hit.name;
+  }
+  return cc;
+}
+
+function railPanel(title, rows, unit) {
+  const panel = el('div', 'lm-panel');
+  panel.appendChild(el('div', 'lm-panel-title', title));
+  if (!rows.length) {
+    panel.appendChild(el('p', 'lm-panel-empty', 'No data'));
+    return panel;
+  }
+  const max = Math.max(1, ...rows.map((r) => r.v));
+  rows.forEach((r, i) => {
+    const row = el('div', 'lm-row');
+    row.appendChild(el('span', 'lm-row-rank', String(i + 1)));
+    row.appendChild(el('span', 'lm-row-cc', r.cc));
+    row.appendChild(el('span', 'lm-row-name', r.name));
+    const track = el('span', 'lm-row-track');
+    const fill = el('span', 'lm-row-fill');
+    fill.style.width = ((r.v / max) * 100) + '%';
+    fill.style.background = r.color;
+    track.appendChild(fill);
+    row.appendChild(track);
+    const val = el('span', 'lm-row-val', r.v.toLocaleString());
+    val.title = r.v.toLocaleString() + ' ' + unit;
+    row.appendChild(val);
+    panel.appendChild(row);
+  });
+  return panel;
+}
+
+// ---- centre: the animated map --------------------------------------------
+function buildLiveMap(data) {
   const W = 1000, H = 500;
-  const wrap = el('div', 'map-canvas');
+  const wrap = el('div', 'lm-canvas');
 
   const byCc = {};
   data.countries.forEach((c) => { byCc[c.cc] = c; });
@@ -1429,11 +1572,11 @@ function buildChoropleth(data) {
   const max = Math.max(1, ...values);
 
   const svg = svgEl('svg', {
-    viewBox: '0 0 ' + W + ' ' + H, class: 'world-map',
-    role: 'img', 'aria-label': 'World choropleth of attacker origin countries',
+    viewBox: '0 0 ' + W + ' ' + H, class: 'world-map lm-map',
+    role: 'img', 'aria-label': 'Animated world map of attacker origins and reported targets',
   });
+  svg.id = 'lm-svg';
 
-  // Ocean backdrop + a faint graticule for orientation.
   svg.appendChild(svgEl('rect', { x: 0, y: 0, width: W, height: H, class: 'map-ocean' }));
   for (let lon = -180; lon <= 180; lon += 30) {
     const x = ((lon + 180) / 360) * W;
@@ -1445,57 +1588,34 @@ function buildChoropleth(data) {
   }
 
   const landGroup = svgEl('g', { class: 'map-land-group' });
-  const hot = [];   // top origins get a pulse marker
-
   Object.keys(WORLD_PATHS).forEach((cc) => {
     const country = byCc[cc];
     const value = country ? countForCountry(country) : 0;
-    const attrs = { d: WORLD_PATHS[cc], class: 'map-country' };
-    const shade = value ? shadeFor(value, max, store.mapCat
-      ? ATTACK_COLORS[store.mapCat] : dominantColor(country)) : null;
-    const path = svgEl('path', attrs);
-    if (shade) {
+    const path = svgEl('path', { d: WORLD_PATHS[cc], class: 'map-country' });
+    if (value) {
+      const shade = shadeFor(value, max, store.mapCat
+        ? ATTACK_COLORS[store.mapCat] : dominantColor(country));
       path.setAttribute('fill', shade.fill);
       path.setAttribute('fill-opacity', shade.opacity.toFixed(3));
       path.classList.add('has-data');
       path.dataset.cc = cc;
       const title = svgEl('title', {});
-      title.textContent = country.name + ': ' + value.toLocaleString() +
-        (store.mapCat ? ' ' + data.category_labels[store.mapCat] : ' hosts');
+      title.textContent = country.name + ': ' + value.toLocaleString() + ' hosts';
       path.appendChild(title);
-      hot.push({ cc: cc, value: value, country: country });
     }
     landGroup.appendChild(path);
   });
   svg.appendChild(landGroup);
 
-  // Live pulse on the five heaviest origins. Purely decorative reinforcement of
-  // a value already encoded by shade, and suppressed under reduced-motion.
-  hot.sort((a, b) => b.value - a.value).slice(0, 5).forEach((h) => {
-    const box = pathBBoxCenter(WORLD_PATHS[h.cc]);
-    if (!box) return;
-    const g = svgEl('g', { class: 'map-pulse-group' });
-    const ring = svgEl('circle', {
-      cx: box[0].toFixed(1), cy: box[1].toFixed(1), r: 3, class: 'map-pulse',
-    });
-    ring.style.stroke = store.mapCat ? ATTACK_COLORS[store.mapCat] : dominantColor(h.country);
-    const core = svgEl('circle', {
-      cx: box[0].toFixed(1), cy: box[1].toFixed(1), r: 1.8, class: 'map-pulse-core',
-    });
-    core.style.fill = store.mapCat ? ATTACK_COLORS[store.mapCat] : dominantColor(h.country);
-    g.appendChild(ring);
-    g.appendChild(core);
-    svg.appendChild(g);
-  });
+  // Layers the animation writes into.
+  svg.appendChild(svgEl('g', { id: 'lm-arc-layer', class: 'lm-arc-layer' }));
+  svg.appendChild(svgEl('g', { id: 'lm-pulse-layer', class: 'lm-pulse-layer' }));
 
   wrap.appendChild(svg);
 
-  // A readout that updates on hover, so the map is interrogable rather than
-  // just decorative.
   const readout = el('div', 'map-readout');
   readout.appendChild(el('span', 'map-readout-hint', 'Hover a country for detail'));
   wrap.appendChild(readout);
-
   svg.addEventListener('mouseover', (ev) => {
     const cc = ev.target && ev.target.dataset && ev.target.dataset.cc;
     if (!cc || !byCc[cc]) return;
@@ -1503,17 +1623,186 @@ function buildChoropleth(data) {
     readout.replaceChildren();
     readout.appendChild(el('span', 'map-readout-cc', c.cc));
     readout.appendChild(el('span', 'map-readout-name', c.name));
-    const parts = ATTACK_ORDER
-      .filter((cat) => c.by_category[cat])
-      .map((cat) => (data.category_labels[cat] || cat) + ' ' + c.by_category[cat].toLocaleString());
+    const parts = ATTACK_ORDER.filter((cat) => c.by_category[cat])
+      .map((cat) => (c.by_category[cat]).toLocaleString() + ' ' + (data.category_labels[cat] || cat));
     readout.appendChild(el('span', 'map-readout-detail',
       c.total.toLocaleString() + ' hosts · ' + parts.join(' · ')));
   });
   svg.addEventListener('mouseleave', () => {
     readout.replaceChildren(el('span', 'map-readout-hint', 'Hover a country for detail'));
   });
-
   return wrap;
+}
+
+// ---- right rail: live event ticker ----------------------------------------
+function buildTicker() {
+  const panel = el('div', 'lm-ticker');
+  panel.appendChild(el('div', 'lm-panel-title', 'EVENT STREAM'));
+  const list = el('div', 'lm-ticker-list');
+  list.id = 'lm-ticker-list';
+  panel.appendChild(list);
+  return panel;
+}
+
+function pushTickerRow(ev) {
+  const list = $('lm-ticker-list');
+  if (!list) return;
+  const row = el('div', 'lm-tick');
+  const dot = el('span', 'lm-tick-dot');
+  dot.style.background = ATTACK_COLORS[ev.cat] || '#3f9dd4';
+  row.appendChild(dot);
+  const body = el('span', 'lm-tick-body');
+  body.appendChild(el('span', 'lm-tick-src', ev.from));
+  body.appendChild(el('span', 'lm-tick-arrow', ev.to ? '→' : ''));
+  if (ev.to) body.appendChild(el('span', 'lm-tick-dst', ev.to));
+  row.appendChild(body);
+  row.appendChild(el('span', 'lm-tick-cat', ev.label));
+  list.insertBefore(row, list.firstChild);
+  while (list.children.length > 14) list.removeChild(list.lastChild);
+  requestAnimationFrame(() => row.classList.add('lm-tick-in'));
+}
+
+// ---- the animation loop ---------------------------------------------------
+function startMapAnimation(data) {
+  const reduced = prefersReducedMotion();
+  mapCounter = 0;
+
+  // Origin weights come straight from the observed host counts.
+  const originRows = data.countries
+    .map((c) => ({ w: countForCountry(c), cc: c.cc, name: c.name, country: c }))
+    .filter((r) => r.w > 0 && WORLD_PATHS[r.cc]);
+
+  const targets = targetRows().filter((t) => WORLD_PATHS[t.cc]);
+  const targetRowsW = targets.map((t) => ({ w: t.v, cc: t.cc, name: t.name }));
+
+  // Category weights, so the stream mirrors the real category mix.
+  const catRows = ATTACK_ORDER
+    .map((cat) => ({ w: (data.totals[cat] || 0), cat: cat }))
+    .filter((r) => r.w > 0);
+
+  const odo = $('lm-odo-val');
+  const target = data.distinct_ips || 0;
+
+  // Odometer counts up to the real observed total, then holds.
+  let odoShown = 0;
+  const odoStep = Math.max(1, Math.round(target / 90));
+
+  if (reduced || store.mapPaused) {
+    if (odo) odo.textContent = target.toLocaleString();
+    // Still show a static sample in the ticker so the panel is not empty.
+    for (let i = 0; i < 6; i++) spawnEvent(originRows, targetRowsW, catRows, data, true);
+    return;
+  }
+
+  let last = 0;
+  let acc = 0;
+  const step = (ts) => {
+    if (!last) last = ts;
+    // Browsers pause rAF while the tab is hidden, so the first frame back can
+    // carry a dt of many seconds. Clamp it, or every in-flight arc completes at
+    // once and the odometer jumps.
+    const dt = Math.min(120, ts - last);
+    last = ts;
+
+    if (odo && odoShown < target) {
+      odoShown = Math.min(target, odoShown + odoStep);
+      odo.textContent = odoShown.toLocaleString();
+    }
+
+    acc += dt;
+    if (acc > 420) {                       // a new event roughly twice a second
+      acc = 0;
+      spawnEvent(originRows, targetRowsW, catRows, data, false);
+    }
+    advanceArcs(dt);
+    mapRaf = requestAnimationFrame(step);
+  };
+  mapRaf = requestAnimationFrame(step);
+}
+
+function spawnEvent(originRows, targetRowsW, catRows, data, staticOnly) {
+  const origin = weightedPick(originRows);
+  if (!origin) return;
+  const catRow = store.mapCat ? { cat: store.mapCat } : weightedPick(catRows);
+  const cat = catRow ? catRow.cat : ATTACK_ORDER[0];
+  const dest = targetRowsW.length ? weightedPick(targetRowsW) : null;
+
+  pushTickerRow({
+    from: origin.cc, to: dest && dest.cc !== origin.cc ? dest.cc : null,
+    cat: cat, label: (data.category_labels[cat] || cat),
+  });
+  mapCounter += 1;
+
+  if (staticOnly) return;
+
+  const a = mapCentroid(origin.cc);
+  if (!a) return;
+  const b = dest && dest.cc !== origin.cc ? mapCentroid(dest.cc) : null;
+  const color = ATTACK_COLORS[cat] || '#3f9dd4';
+
+  if (b) {
+    addArc(a, b, color);
+  } else {
+    addPulse(a, color);        // no real target: radiate at the origin only
+  }
+}
+
+function addArc(a, b, color) {
+  const layer = $('lm-arc-layer');
+  if (!layer) return;
+  // Quadratic bezier bowed perpendicular to the chord, so arcs read as flight
+  // paths rather than straight lines.
+  const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2;
+  const dx = b[0] - a[0], dy = b[1] - a[1];
+  const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+  const bow = Math.min(120, dist * 0.32);
+  const cx = mx - (dy / dist) * bow;
+  const cy = my + (dx / dist) * bow;
+  const d = 'M' + a[0].toFixed(1) + ',' + a[1].toFixed(1) +
+            ' Q' + cx.toFixed(1) + ',' + cy.toFixed(1) +
+            ' ' + b[0].toFixed(1) + ',' + b[1].toFixed(1);
+
+  const path = svgEl('path', { d: d, class: 'lm-arc', fill: 'none' });
+  path.style.stroke = color;
+  layer.appendChild(path);
+  const len = path.getTotalLength ? path.getTotalLength() : dist * 1.4;
+  const head = Math.max(28, len * 0.22);
+  path.style.strokeDasharray = head + ' ' + (len + head);
+  path.style.strokeDashoffset = String(head);
+
+  mapArcs.push({ path: path, len: len, head: head, t: 0, dur: 1500, dest: b, color: color });
+  if (mapArcs.length > 18) {
+    const old = mapArcs.shift();
+    if (old.path.parentNode) old.path.parentNode.removeChild(old.path);
+  }
+}
+
+function advanceArcs(dt) {
+  for (let i = mapArcs.length - 1; i >= 0; i--) {
+    const arc = mapArcs[i];
+    arc.t += dt;
+    const p = Math.min(1, arc.t / arc.dur);
+    arc.path.style.strokeDashoffset = String(arc.head - p * (arc.len + arc.head));
+    arc.path.style.opacity = String(p < 0.85 ? 1 : (1 - p) / 0.15);
+    if (p >= 1) {
+      if (arc.path.parentNode) arc.path.parentNode.removeChild(arc.path);
+      addPulse(arc.dest, arc.color);         // impact ring at the target
+      mapArcs.splice(i, 1);
+    }
+  }
+}
+
+function addPulse(pt, color) {
+  const layer = $('lm-pulse-layer');
+  if (!layer || !pt) return;
+  const ring = svgEl('circle', {
+    cx: pt[0].toFixed(1), cy: pt[1].toFixed(1), r: 2, class: 'lm-impact',
+  });
+  ring.style.stroke = color;
+  layer.appendChild(ring);
+  // Self-removing: the CSS animation runs once, then we clean up.
+  setTimeout(() => { if (ring.parentNode) ring.parentNode.removeChild(ring); }, 1400);
+  while (layer.children.length > 40) layer.removeChild(layer.firstChild);
 }
 
 // Cheap centroid of a path's extent, for placing the pulse markers. Parsing the
@@ -1927,6 +2216,9 @@ function exportNotes() {
 
 // ─── View switching ───────────────────────────────────────────────────────────
 function hideAllViews() {
+  // The map runs a rAF loop; leaving the view must stop it or it burns CPU
+  // in the background forever.
+  if (typeof stopMapAnimation === 'function') stopMapAnimation();
   ['loading-state', 'error-state', 'cards-container', 'matrix-view', 'trends-view', 'map-view', 'landscape-view', 'geopol-view', 'no-results']
     .forEach((id) => { const n = $(id); if (n) n.style.display = 'none'; });
 }
@@ -1961,6 +2253,13 @@ function renderAll() {
 }
 
 function syncControls() {
+  document.querySelectorAll('.stat-pill.is-clickable').forEach((p) => {
+    const w = p.dataset.stat;
+    const active = w === 'urgent' ? store.filter === 'urgent'
+      : w === 'total' ? (store.filter === 'all' && !store.severity && !store.sector && !store.query)
+      : store.severity === w;
+    p.classList.toggle('is-active', !!active);
+  });
   document.querySelectorAll('.filter-btn').forEach((b) => {
     b.classList.toggle('active', b.dataset.filter === store.filter);
   });
@@ -2277,6 +2576,28 @@ function initEvents() {
 
     const srcRow = t.closest('.src-row');
     if (srcRow) { store.query = srcRow.dataset.source; update(); return; }
+
+    const statPill = t.closest('.stat-pill.is-clickable');
+    if (statPill) {
+      const which = statPill.dataset.stat;
+      if (which === 'total') {
+        store.filter = 'all'; store.severity = null; store.sector = null;
+        store.query = ''; store.watchlistOnly = false;
+      } else if (which === 'urgent') {
+        // Urgent is a priority band, not a severity, so it filters differently.
+        store.filter = store.filter === 'urgent' ? 'all' : 'urgent';
+        store.severity = null;
+      } else {
+        store.severity = store.severity === which ? null : which;
+        if (store.filter === 'matrix' || store.filter === 'trends'
+            || store.filter === 'map' || store.filter === 'landscape'
+            || store.filter === 'geopol') {
+          store.filter = 'all';
+        }
+      }
+      update();
+      return;
+    }
 
     const catRow = t.closest('.cat-row');
     if (catRow) { store.filter = catRow.dataset.filter; update(); return; }
