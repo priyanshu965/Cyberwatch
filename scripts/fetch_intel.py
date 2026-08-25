@@ -75,6 +75,11 @@ try:
 except Exception:
     build_geopolitics = None
 try:
+    from darkweb import fetch_leak_site_posts, build_darkweb_summary
+except Exception:
+    fetch_leak_site_posts = None
+    build_darkweb_summary = None
+try:
     from provenance import (annotate_provenance, PROVENANCE_LABELS,
                             PROVENANCE_NOTES, PROVENANCE_ORDER)
 except Exception:
@@ -2497,6 +2502,9 @@ API_SOURCES = [
     ("Ransomware.live", fetch_ransomware_live),
 ]
 
+if fetch_leak_site_posts:
+    API_SOURCES.append(("RansomLook", fetch_leak_site_posts))
+
 def _median_age_days(items: list[dict]) -> float | None:
     """Median age of an item batch, in days. None when nothing parses."""
     now = datetime.now(timezone.utc)
@@ -2602,6 +2610,18 @@ def main():
                          f"{len(attack_map['countries'])} countries")
         except Exception as e:
             log.error(f"Attacker map generation failed: {e}")
+
+    # ── Dark-web leak-site rollup ──────────────────────────────────────────
+    darkweb = None
+    if build_darkweb_summary:
+        try:
+            darkweb = build_darkweb_summary()
+            if darkweb:
+                log.info(f"✓ Dark web: {darkweb['recent_posts']} recent posts across "
+                         f"{darkweb['distinct_groups_active']} groups, "
+                         f"{darkweb['tracked_leak_sites']} leak sites tracked")
+        except Exception as e:
+            log.warning(f"Dark-web summary failed: {e}")
 
     # ── Roll up source health ───────────────────────────────────────────────
     # Replaces the append-only source_health_history.jsonl, which had grown to
@@ -2835,6 +2855,7 @@ def main():
         "source_breakdown": dict(source_counter.most_common()),
         "source_health": source_health,
         "attack_map": attack_map,
+        "darkweb": darkweb,
         "sector_breakdown": sector_breakdown,
         "sector_labels": SECTOR_LABELS,
         # Canonical ATT&CK kill-chain order, so the matrix can lay tactics out

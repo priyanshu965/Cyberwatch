@@ -2026,6 +2026,8 @@ async function showLandscapeView() {
   grid.appendChild(buildActorMomentum(t.top_actors || []));
   grid.appendChild(buildSectorHeat(items, t.sector_totals || {}));
   grid.appendChild(buildTechniqueRank(t.top_ttps || []));
+  const dw = buildDarkWeb();
+  if (dw) grid.appendChild(dw);
   host.appendChild(grid);
 }
 
@@ -2201,6 +2203,46 @@ function buildSectorHeat(items, archiveTotals) {
   });
   fig.appendChild(list);
   fig.appendChild(el('p', 'ls-foot', total + ' tagged items · ' + scope));
+  return fig;
+}
+
+// ---- dark web: ransomware leak-site activity -------------------------------
+function buildDarkWeb() {
+  const d = store.meta && store.meta.darkweb;
+  if (!d) return null;
+  const fig = lsPanel('Dark web — leak-site activity',
+    'Ransomware crews post victims to their own Tor leak sites. A listing is ' +
+    'the crew’s claim, not a confirmed breach.');
+
+  const row = el('div', 'ls-callout');
+  const main = el('div', 'ls-callout-main');
+  main.appendChild(el('span', 'ls-callout-num', String(d.recent_posts)));
+  main.appendChild(el('span', 'ls-callout-unit', 'recent listings'));
+  row.appendChild(main);
+  row.appendChild(el('div', 'ls-callout-mean',
+    d.distinct_groups_active + ' groups active · ' +
+    d.tracked_leak_sites.toLocaleString() + ' sites tracked'));
+  fig.appendChild(row);
+
+  const rows = d.most_active || [];
+  if (rows.length) {
+    const max = Math.max(1, ...rows.map((r) => r.posts));
+    const list = el('div', 'ls-bars');
+    rows.slice(0, 6).forEach((r) => {
+      const line = el('div', 'ls-bar-row');
+      line.appendChild(el('span', 'ls-bar-name', r.group));
+      const track = el('span', 'ls-bar-track');
+      const fill = el('span', 'ls-bar-fill');
+      fill.style.width = ((r.posts / max) * 100) + '%';
+      fill.style.background = '#d6454f';
+      track.appendChild(fill);
+      line.appendChild(track);
+      line.appendChild(el('span', 'ls-bar-val', String(r.posts)));
+      list.appendChild(line);
+    });
+    fig.appendChild(list);
+  }
+  if (d.collection_note) fig.appendChild(el('p', 'ls-foot', d.collection_note));
   return fig;
 }
 
